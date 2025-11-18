@@ -5,6 +5,7 @@
   <title>Estudio Tienda Nube – Landing</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="Diseñamos y optimizamos tiendas Tienda Nube a medida para tu marca." />
+ 
   <style>
     :root{
       --azul:#0056ff;
@@ -348,9 +349,96 @@
         grid-template-columns:1fr;
       }
     }
-  </style>
+/* ==== REVEAL ON SCROLL ==== */
+.reveal{
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity .6s ease, transform .6s ease;
+}
+
+.reveal-visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ==== BOTÓN FLOTANTE WHATSAPP ==== */
+.whatsapp-float{
+  position:fixed;
+  right:16px;
+  bottom:16px;
+  z-index:40;
+  background:#25D366;
+  color:#fff;
+  padding:10px 16px;
+  border-radius:999px;
+  font-size:14px;
+  font-weight:600;
+  box-shadow:0 10px 25px rgba(0,0,0,.35);
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.whatsapp-float span{
+  font-size:18px;
+}
+
+/* ==== EXTRA MOBILE TUNING ==== */
+@media (max-width:480px){
+  header{
+    padding:16px 0 40px;
+  }
+  .section,
+  .section-dark,
+  .contact-section{
+    padding:40px 0;
+  }
+  .hero{
+    gap:20px;
+  }
+  .hero-card{
+    margin-top:4px;
+  }
+  .whatsapp-float{
+    right:12px;
+    bottom:12px;
+    padding:9px 14px;
+    font-size:13px;
+  }
+}
+
+    <a
+  href="https://wa.me/5491159288093?text=Hola%20Sofi%2C%20vengo%20de%20la%20landing%20de%20Tienda%20Nube%20y%20quiero%20una%20consultor%C3%ADa."
+  class="whatsapp-float"
+  target="_blank"
+  rel="noopener"
+>
+  <span>💬</span>
+  WhatsApp
+</a>
+   </style>
 </head>
-<body>
+  
+<script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const reveals = document.querySelectorAll('.reveal');
+
+        const observer = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('reveal-visible');
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        reveals.forEach(el => observer.observe(el));
+      });
+    </script>
+
+  <body>
 
 <header>
   <div class="header-inner">
@@ -532,27 +620,34 @@
           </p>
         </div>
 
-        <form>
-          <div>
-            <label>Nombre y marca</label>
-            <input type="text" placeholder="Ej: Manuel · VIA SHOP" />
-          </div>
-          <div>
-            <label>Email</label>
-            <input type="email" placeholder="tu@correo.com" />
-          </div>
-          <div>
-            <label>Instagram o sitio actual</label>
-            <input type="text" placeholder="@tumarca o URL" />
-          </div>
-          <div>
-            <label>Contanos brevemente qué necesitás</label>
-            <textarea placeholder="Ej: ya tengo tienda en Tienda Nube pero necesito ordenarla y dejarla lista para campañas."></textarea>
-          </div>
-          <button type="submit" class="btn-primary" style="width:100%;justify-content:center;display:flex;">
-            Enviar consulta
-          </button>
-        </form>
+        <form action="mailto:manuelingjbl@gmail.com" method="POST" enctype="text/plain">
+  <input type="hidden" name="subject" value="Consulta desde landing VIA STUDIO+" />
+
+  <div>
+    <label>Nombre y marca</label>
+    <input type="text" name="nombre_marca" placeholder="Ej: Manuel · VIA SHOP" required />
+  </div>
+
+  <div>
+    <label>Email</label>
+    <input type="email" name="email" placeholder="tu@correo.com" required />
+  </div>
+
+  <div>
+    <label>Instagram o sitio actual</label>
+    <input type="text" name="instagram_sitio" placeholder="@tumarca o URL" />
+  </div>
+
+  <div>
+    <label>Contanos brevemente qué necesitás</label>
+    <textarea name="mensaje" placeholder="Ej: ya tengo tienda en Tienda Nube pero necesito ordenarla y dejarla lista para campañas." required></textarea>
+  </div>
+
+  <button type="submit" class="btn-primary" style="width:100%;justify-content:center;display:flex;">
+    Enviar consulta
+  </button>
+</form>
+
       </div>
 
       <div class="footer">
