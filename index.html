@@ -32,148 +32,221 @@
     }
 
     /* HEADER */
-    header{
-      background:linear-gradient(135deg,#00184a,var(--azul));
-      color:#fff;
-      padding:20px 0 56px;
-      position:relative;
-      overflow:hidden;
-    }
-    header::after{
-      content:"";
-      position:absolute;
-      inset:-40%;
-      background:url("https://images.pexels.com/photos/3730760/pexels-photo-3730760.jpeg?auto=compress&cs=tinysrgb&w=1200") center/cover;
-      opacity:0.08;
-      pointer-events:none;
-    }
-    .header-inner{
-      position:relative;
-      z-index:1;
-      max-width:1120px;
-      margin:0 auto;
-      padding:0 16px;
-    }
-    .logo-row{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom:32px;
-      gap:12px;
-    }
-    .logo{
-      font-weight:700;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      font-size:14px;
-    }
-    .nav{
-      display:flex;
-      gap:20px;
-      font-size:14px;
-      opacity:.9;
-    }
-    .nav a{cursor:pointer;}
-    .hero{
-      display:grid;
-      grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);
-      gap:32px;
-      align-items:center;
-    }
-    .hero-kicker{
-      font-size:13px;
-      text-transform:uppercase;
-      letter-spacing:.16em;
-      opacity:.8;
-      margin-bottom:8px;
-    }
-    .hero h1{
-      font-size:clamp(30px,4vw,40px);
-      line-height:1.1;
-      margin-bottom:16px;
-    }
-    .hero p{
-      font-size:15px;
-      max-width:420px;
-      opacity:.9;
-      margin-bottom:24px;
-    }
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      align-items:center;
-    }
-    .btn-primary{
-      background:#fff;
-      color:#111827;
-      border-radius:999px;
-      padding:10px 20px;
-      font-size:14px;
-      font-weight:600;
-      border:none;
-      cursor:pointer;
-      box-shadow:0 10px 30px rgba(0,0,0,.25);
-    }
-    .btn-secondary{
-      font-size:14px;
-      opacity:.9;
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-    }
-    .btn-secondary span{
-      font-size:18px;
-    }
-    .hero-tagline{
-      margin-top:14px;
-      font-size:13px;
-      opacity:.8;
-    }
-    .hero-card{
-      background:rgba(15,23,42,.85);
-      border-radius:var(--radio);
-      padding:18px;
-      border:1px solid rgba(148,163,184,.6);
-      backdrop-filter:blur(12px);
-    }
-    .hero-card-header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:12px;
-      color:#e5e7eb;
-      font-size:12px;
-    }
-    .hero-grid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:8px;
-    }
-    .mini-tile{
-      position:relative;
-      border-radius:10px;
-      overflow:hidden;
-      background:#020617;
-      border:1px solid rgba(148,163,184,.25);
-    }
-    .mini-tile img{
-      height:110px;
-      width:100%;
-      object-fit:cover;
-    }
-    .mini-label{
-      position:absolute;
-      inset:auto 8px 8px 8px;
-      padding:5px 8px;
-      border-radius:999px;
-      background:rgba(15,23,42,.85);
-      color:#e5e7eb;
-      font-size:11px;
-      display:inline-flex;
-      align-items:center;
-      gap:4px;
-    }
+header{
+  background:linear-gradient(135deg,#00184a,var(--azul));
+  color:#fff;
+  padding:20px 0 56px;
+  position:relative;
+  overflow:hidden;
+}
+header::after{
+  content:"";
+  position:absolute;
+  inset:-40%;
+  background:url("https://images.pexels.com/photos/3730760/pexels-photo-3730760.jpeg?auto=compress&cs=tinysrgb&w=1200") center/cover;
+  opacity:0.08;
+  pointer-events:none;
+}
+.header-inner{
+  position:relative;
+  z-index:1;
+  max-width:1120px;
+  margin:0 auto;
+  padding:0 16px;
+}
+.logo-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:32px;
+  gap:12px;
+}
+.logo{
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  font-size:14px;
+}
+.nav{
+  display:flex;
+  gap:20px;
+  font-size:14px;
+  opacity:.9;
+}
+.nav a{cursor:pointer;}
+
+  /* MENÚ HAMBURGUESA */
+.menu-toggle{
+  display:none;
+  background:transparent;
+  border:none;
+  cursor:pointer;
+  padding:6px;
+  border-radius:999px;
+}
+
+.menu-toggle span{
+  display:block;
+  width:18px;
+  height:2px;
+  background:#ffffff;
+  border-radius:999px;
+  transition:transform .25s ease, opacity .25s ease, translate .25s ease;
+}
+
+.menu-toggle span + span{
+  margin-top:4px;
+}
+
+/* Animación del icono al abrir */
+.menu-toggle.menu-open span:nth-child(1){
+  transform:rotate(45deg);
+  translate:0 3px;
+}
+.menu-toggle.menu-open span:nth-child(2){
+  opacity:0;
+}
+.menu-toggle.menu-open span:nth-child(3){
+  transform:rotate(-45deg);
+  translate:0 -3px;
+}
+  
+    
+/* MENÚ HAMBURGUESA */
+.menu-toggle{
+  display:none;
+  background:transparent;
+  border:none;
+  cursor:pointer;
+  padding:6px;
+  border-radius:999px;
+}
+.menu-toggle span{
+  display:block;
+  width:18px;
+  height:2px;
+  background:#ffffff;
+  border-radius:999px;
+  transition:transform .25s ease, opacity .25s ease, translate .25s ease;
+}
+.menu-toggle span + span{
+  margin-top:4px;
+}
+/* Animación del icono al abrir */
+.menu-toggle.menu-open span:nth-child(1){
+  transform:rotate(45deg);
+  translate:0 3px;
+}
+.menu-toggle.menu-open span:nth-child(2){
+  opacity:0;
+}
+.menu-toggle.menu-open span:nth-child(3){
+  transform:rotate(-45deg);
+  translate:0 -3px;
+}
+
+/* HERO */
+.hero{
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);
+  gap:32px;
+  align-items:center;
+}
+.hero-kicker{
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  opacity:.8;
+  margin-bottom:8px;
+}
+.hero h1{
+  font-size:clamp(30px,4vw,40px);
+  line-height:1.1;
+  margin-bottom:16px;
+}
+.hero p{
+  font-size:15px;
+  max-width:420px;
+  opacity:.9;
+  margin-bottom:24px;
+}
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  align-items:center;
+}
+.btn-primary{
+  background:#fff;
+  color:#111827;
+  border-radius:999px;
+  padding:10px 20px;
+  font-size:14px;
+  font-weight:600;
+  border:none;
+  cursor:pointer;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+.btn-secondary{
+  font-size:14px;
+  opacity:.9;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+.btn-secondary span{
+  font-size:18px;
+}
+.hero-tagline{
+  margin-top:14px;
+  font-size:13px;
+  opacity:.8;
+}
+.hero-card{
+  background:rgba(15,23,42,.85);
+  border-radius:var(--radio);
+  padding:18px;
+  border:1px solid rgba(148,163,184,.6);
+  backdrop-filter:blur(12px);
+}
+.hero-card-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+  color:#e5e7eb;
+  font-size:12px;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+}
+.mini-tile{
+  position:relative;
+  border-radius:10px;
+  overflow:hidden;
+  background:#020617;
+  border:1px solid rgba(148,163,184,.25);
+}
+.mini-tile img{
+  height:110px;
+  width:100%;
+  object-fit:cover;
+}
+.mini-label{
+  position:absolute;
+  inset:auto 8px 8px 8px;
+  padding:5px 8px;
+  border-radius:999px;
+  background:rgba(15,23,42,.85);
+  color:#e5e7eb;
+  font-size:11px;
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+}
+
 
     /* MARCAS */
     .section{
@@ -426,15 +499,23 @@
 
 <header>
   <div class="header-inner">
-    <div class="logo-row">
-      <div class="logo">VIA STUDIO+</div>
-      <nav class="nav">
-        <a href="#servicios">Servicios</a>
-        <a href="#trabajos">Trabajos</a>
-        <a href="#partners">Partners</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
-    </div>
+   <div class="logo-row">
+  <div class="logo">mcmdigital</div>
+
+  <!-- Botón menú hamburguesa (mobile) -->
+  <button class="menu-toggle" aria-label="Abrir menú de navegación">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <nav class="nav">
+    <a href="#servicios">Servicios</a>
+    <a href="#trabajos">Trabajos</a>
+    <a href="#partners">Partners</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+</div>
 
     <div class="hero reveal">
       <div>
