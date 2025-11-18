@@ -427,6 +427,31 @@
     margin-top:20px;
   }
 
+  /* HERO VISUAL: MOCKUP MOBILE */
+.hero-visual{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.hero-phone img{
+  max-width:320px;
+  width:100%;
+  height:auto;
+  filter:drop-shadow(0 18px 45px rgba(15,23,42,.7));
+}
+
+.hero-badge{
+  margin-top:12px;
+  font-size:12px;
+  padding:6px 12px;
+  border-radius:999px;
+  background:rgba(15,23,42,.85);
+  border:1px solid rgba(148,163,184,.5);
+  color:#e5e7eb;
+}
+
   .logo-row{
     flex-direction:row;
     justify-content:space-between;
@@ -545,30 +570,18 @@
         </div>
       </div>
 
-      <aside class="hero-card reveal">
-        <div class="hero-card-header">
-          <span>Preview tienda personalizada</span>
-          <span style="font-size:11px;opacity:.8;">Tienda Nube · Mobile first</span>
-        </div>
-        <div class="hero-grid">
-          <div class="mini-tile">
-            <img src="https://images.pexels.com/photos/6311579/pexels-photo-6311579.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Mockup tienda moda" />
-            <div class="mini-label">Moda · Colección FW</div>
-          </div>
-          <div class="mini-tile">
-            <img src="https://images.pexels.com/photos/5705493/pexels-photo-5705493.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Mockup tienda deco" />
-            <div class="mini-label">Deco & Hogar</div>
-          </div>
-          <div class="mini-tile">
-            <img src="https://images.pexels.com/photos/4464481/pexels-photo-4464481.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Mockup catálogo" />
-            <div class="mini-label">Catálogo optimizado</div>
-          </div>
-          <div class="mini-tile">
-            <img src="https://images.pexels.com/photos/3730762/pexels-photo-3730762.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Mockup mobile" />
-            <div class="mini-label">Mobile · 100% responsive</div>
-          </div>
-        </div>
-      </aside>
+      <aside class="hero-visual reveal">
+  <div class="hero-phone">
+    <img
+      src="img/hero-mobile-mcmdigital.png"
+      alt="Mockup de tienda online pensada para mobile first"
+    />
+  </div>
+  <div class="hero-badge">
+    Mobile first · Tienda Nube
+  </div>
+</aside>
+
     </div>
   </div>
 </header>
