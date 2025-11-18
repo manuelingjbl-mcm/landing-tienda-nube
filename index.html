@@ -112,39 +112,6 @@ header::after{
 }
   
     
-/* MENÚ HAMBURGUESA */
-.menu-toggle{
-  display:none;
-  background:transparent;
-  border:none;
-  cursor:pointer;
-  padding:6px;
-  border-radius:999px;
-}
-.menu-toggle span{
-  display:block;
-  width:18px;
-  height:2px;
-  background:#ffffff;
-  border-radius:999px;
-  transition:transform .25s ease, opacity .25s ease, translate .25s ease;
-}
-.menu-toggle span + span{
-  margin-top:4px;
-}
-/* Animación del icono al abrir */
-.menu-toggle.menu-open span:nth-child(1){
-  transform:rotate(45deg);
-  translate:0 3px;
-}
-.menu-toggle.menu-open span:nth-child(2){
-  opacity:0;
-}
-.menu-toggle.menu-open span:nth-child(3){
-  transform:rotate(-45deg);
-  translate:0 -3px;
-}
-
 /* HERO */
 .hero{
   display:grid;
@@ -453,27 +420,61 @@ header::after{
     }
 
     /* RESPONSIVE */
-    @media (max-width:768px){
-      .hero{
-        grid-template-columns:1fr;
-      }
-      .logo-row{
-        flex-direction:row;
-        justify-content:space-between;
-        gap:12px;
-      }
-      .contact-grid{
-        grid-template-columns:1fr;
-      }
-      .wrapper{
-        padding:0 16px 40px;
-      }
-      .section,
-      .section-dark,
-      .contact-section{
-        padding:40px 0;
-      }
-    }
+   @media (max-width:768px){
+  .hero{
+    grid-template-columns:1fr;
+    gap:24px;
+  }
+
+  .logo-row{
+    flex-direction:row;
+    justify-content:space-between;
+    gap:12px;
+  }
+
+  .wrapper{
+    padding:0 16px 40px;
+  }
+
+  .section,
+  .section-dark,
+  .contact-section{
+    padding:40px 0;
+  }
+
+  .contact-grid{
+    grid-template-columns:1fr;
+  }
+
+  /* NAV MOBILE */
+  .menu-toggle{
+    display:block;
+  }
+
+  .nav{
+    position:absolute;
+    top:52px;
+    right:16px;
+    left:16px;
+    background:rgba(15,23,42,.98);
+    border-radius:14px;
+    padding:10px 14px;
+    flex-direction:column;
+    gap:10px;
+    font-size:15px;
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(-6px);
+    transition:opacity .22s ease, transform .22s ease;
+  }
+
+  .nav.nav-open{
+    opacity:1;
+    pointer-events:auto;
+    transform:translateY(0);
+  }
+}
+
 
     @media (max-width:480px){
       header{
@@ -760,7 +761,6 @@ header::after{
   WhatsApp
 </a>
 
-<!-- SCRIPT ANIMACIONES SCROLL -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     /* ==== ANIMACIONES SCROLL ==== */
@@ -813,8 +813,28 @@ header::after{
         }
       });
     }
+
+    /* ==== MENÚ HAMBURGUESA (MOBILE) ==== */
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.nav');
+
+    if (menuToggle && nav) {
+      menuToggle.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('nav-open');
+        menuToggle.classList.toggle('menu-open', isOpen);
+      });
+
+      // Cerrar menú al hacer clic en un link
+      nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          nav.classList.remove('nav-open');
+          menuToggle.classList.remove('menu-open');
+        });
+      });
+    }
   });
 </script>
+
 
 
 </body>
