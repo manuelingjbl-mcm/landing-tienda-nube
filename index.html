@@ -2,10 +2,10 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Estudio Tienda Nube – Landing</title>
+  <title>VIA STUDIO+ · Diseño y optimización Tienda Nube</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Diseñamos y optimizamos tiendas Tienda Nube a medida para tu marca." />
- 
+  <meta name="description" content="Diseñamos y optimizamos tiendas Tienda Nube a medida para tu marca. Home, categorías, PDP y landings listas para convertir visitas en ventas." />
+
   <style>
     :root{
       --azul:#0056ff;
@@ -59,6 +59,7 @@
       align-items:center;
       justify-content:space-between;
       margin-bottom:32px;
+      gap:12px;
     }
     .logo{
       font-weight:700;
@@ -335,6 +336,38 @@
       gap:12px;
     }
 
+    /* ==== REVEAL ON SCROLL ==== */
+    .reveal{
+      opacity:0;
+      transform:translateY(20px);
+      transition:opacity .6s ease, transform .6s ease;
+    }
+    .reveal-visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    /* ==== BOTÓN FLOTANTE WHATSAPP ==== */
+    .whatsapp-float{
+      position:fixed;
+      right:16px;
+      bottom:16px;
+      z-index:40;
+      background:#25D366;
+      color:#fff;
+      padding:10px 16px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:600;
+      box-shadow:0 10px 25px rgba(0,0,0,.35);
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .whatsapp-float span{
+      font-size:18px;
+    }
+
     /* RESPONSIVE */
     @media (max-width:768px){
       .hero{
@@ -348,97 +381,37 @@
       .contact-grid{
         grid-template-columns:1fr;
       }
+      .wrapper{
+        padding:0 16px 40px;
+      }
+      .section,
+      .section-dark,
+      .contact-section{
+        padding:40px 0;
+      }
     }
-/* ==== REVEAL ON SCROLL ==== */
-.reveal{
-  opacity:0;
-  transform:translateY(20px);
-  transition:opacity .6s ease, transform .6s ease;
-}
 
-.reveal-visible{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* ==== BOTÓN FLOTANTE WHATSAPP ==== */
-.whatsapp-float{
-  position:fixed;
-  right:16px;
-  bottom:16px;
-  z-index:40;
-  background:#25D366;
-  color:#fff;
-  padding:10px 16px;
-  border-radius:999px;
-  font-size:14px;
-  font-weight:600;
-  box-shadow:0 10px 25px rgba(0,0,0,.35);
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-.whatsapp-float span{
-  font-size:18px;
-}
-
-/* ==== EXTRA MOBILE TUNING ==== */
-@media (max-width:480px){
-  header{
-    padding:16px 0 40px;
-  }
-  .section,
-  .section-dark,
-  .contact-section{
-    padding:40px 0;
-  }
-  .hero{
-    gap:20px;
-  }
-  .hero-card{
-    margin-top:4px;
-  }
-  .whatsapp-float{
-    right:12px;
-    bottom:12px;
-    padding:9px 14px;
-    font-size:13px;
-  }
-}
-
-    <a
-  href="https://wa.me/5491159288093?text=Hola%20Sofi%2C%20vengo%20de%20la%20landing%20de%20Tienda%20Nube%20y%20quiero%20una%20consultor%C3%ADa."
-  class="whatsapp-float"
-  target="_blank"
-  rel="noopener"
->
-  <span>💬</span>
-  WhatsApp
-</a>
-   </style>
+    @media (max-width:480px){
+      header{
+        padding:16px 0 40px;
+      }
+      .hero{
+        gap:20px;
+      }
+      .hero-card{
+        margin-top:4px;
+      }
+      .whatsapp-float{
+        right:12px;
+        bottom:12px;
+        padding:9px 14px;
+        font-size:13px;
+      }
+    }
+  </style>
 </head>
-  
-<script>
-      document.addEventListener('DOMContentLoaded', function () {
-        const reveals = document.querySelectorAll('.reveal');
 
-        const observer = new IntersectionObserver(
-          (entries, obs) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('reveal-visible');
-                obs.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.1 }
-        );
-
-        reveals.forEach(el => observer.observe(el));
-      });
-    </script>
-
-  <body>
+<body>
 
 <header>
   <div class="header-inner">
@@ -452,7 +425,7 @@
       </nav>
     </div>
 
-    <div class="hero">
+    <div class="hero reveal">
       <div>
         <div class="hero-kicker">Tienda Nube · Estudio especializado</div>
         <h1>Diseñamos tu tienda online a medida de tu marca.</h1>
@@ -461,7 +434,7 @@
           carguen rápido y conviertan visitas en ventas. Sin plantillas genéricas.
         </p>
         <div class="hero-actions">
-          <button class="btn-primary">Agendar consultoría gratuita</button>
+          <a href="#contacto" class="btn-primary">Agendar consultoría gratuita</a>
           <a class="btn-secondary" href="#trabajos">
             Ver trabajos <span>↗</span>
           </a>
@@ -471,7 +444,7 @@
         </div>
       </div>
 
-      <aside class="hero-card">
+      <aside class="hero-card reveal">
         <div class="hero-card-header">
           <span>Preview tienda personalizada</span>
           <span style="font-size:11px;opacity:.8;">Tienda Nube · Mobile first</span>
@@ -501,7 +474,7 @@
 
 <main>
   <!-- MARCAS -->
-  <section class="section">
+  <section class="section reveal">
     <div class="wrapper">
       <div class="section-title">Marcas que podrían trabajar con nosotros</div>
       <h2>Estructuramos tu tienda para que se vea a la altura de tu marca.</h2>
@@ -524,7 +497,7 @@
   </section>
 
   <!-- SERVICIOS -->
-  <section id="servicios" class="section-dark">
+  <section id="servicios" class="section-dark reveal">
     <div class="wrapper">
       <div class="section-title">Nuestros servicios</div>
       <h2>Desde el diseño hasta la optimización para vender más.</h2>
@@ -565,7 +538,7 @@
   </section>
 
   <!-- TRABAJOS -->
-  <section id="trabajos" class="section">
+  <section id="trabajos" class="section reveal">
     <div class="wrapper">
       <div class="section-title">Nuestros trabajos</div>
       <h2>Algunos tipos de proyectos que podemos desarrollar.</h2>
@@ -586,7 +559,7 @@
   </section>
 
   <!-- PARTNERS -->
-  <section id="partners" class="section" style="background:var(--gris);">
+  <section id="partners" class="section reveal" style="background:var(--gris);">
     <div class="wrapper">
       <div class="section-title">Stack con el que trabajamos</div>
       <h2>Preparamos tu tienda para integrarse con las herramientas que ya usás.</h2>
@@ -605,7 +578,7 @@
   </section>
 
   <!-- CONTACTO -->
-  <section id="contacto" class="contact-section">
+  <section id="contacto" class="contact-section reveal">
     <div class="wrapper">
       <div class="section-title">Contacto</div>
       <h2>¿Agendamos una llamada para ver tu caso?</h2>
@@ -620,34 +593,34 @@
           </p>
         </div>
 
+        <!-- FORMULARIO: ENVÍA A TU MAIL -->
         <form action="mailto:manuelingjbl@gmail.com" method="POST" enctype="text/plain">
-  <input type="hidden" name="subject" value="Consulta desde landing VIA STUDIO+" />
+          <input type="hidden" name="subject" value="Consulta desde landing VIA STUDIO+" />
 
-  <div>
-    <label>Nombre y marca</label>
-    <input type="text" name="nombre_marca" placeholder="Ej: Manuel · VIA SHOP" required />
-  </div>
+          <div>
+            <label>Nombre y marca</label>
+            <input type="text" name="nombre_marca" placeholder="Ej: Manuel · VIA SHOP" required />
+          </div>
 
-  <div>
-    <label>Email</label>
-    <input type="email" name="email" placeholder="tu@correo.com" required />
-  </div>
+          <div>
+            <label>Email</label>
+            <input type="email" name="email" placeholder="tu@correo.com" required />
+          </div>
 
-  <div>
-    <label>Instagram o sitio actual</label>
-    <input type="text" name="instagram_sitio" placeholder="@tumarca o URL" />
-  </div>
+          <div>
+            <label>Instagram o sitio actual</label>
+            <input type="text" name="instagram_sitio" placeholder="@tumarca o URL" />
+          </div>
 
-  <div>
-    <label>Contanos brevemente qué necesitás</label>
-    <textarea name="mensaje" placeholder="Ej: ya tengo tienda en Tienda Nube pero necesito ordenarla y dejarla lista para campañas." required></textarea>
-  </div>
+          <div>
+            <label>Contanos brevemente qué necesitás</label>
+            <textarea name="mensaje" placeholder="Ej: ya tengo tienda en Tienda Nube pero necesito ordenarla y dejarla lista para campañas." required></textarea>
+          </div>
 
-  <button type="submit" class="btn-primary" style="width:100%;justify-content:center;display:flex;">
-    Enviar consulta
-  </button>
-</form>
-
+          <button type="submit" class="btn-primary" style="width:100%;justify-content:center;display:flex;">
+            Enviar consulta
+          </button>
+        </form>
       </div>
 
       <div class="footer">
@@ -657,6 +630,38 @@
     </div>
   </section>
 </main>
+
+<!-- BOTÓN FLOTANTE DE WHATSAPP -->
+<a
+  href="https://wa.me/54115928893?text=Hola%20Sofi%2C%20vengo%20de%20la%20landing%20de%20Tienda%20Nube%20y%20quiero%20una%20consultor%C3%ADa."
+  class="whatsapp-float"
+  target="_blank"
+  rel="noopener"
+>
+  <span>💬</span>
+  WhatsApp
+</a>
+
+<!-- SCRIPT ANIMACIONES SCROLL -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const reveals = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    reveals.forEach(el => observer.observe(el));
+  });
+</script>
 
 </body>
 </html>
