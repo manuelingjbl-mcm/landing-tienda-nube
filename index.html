@@ -35,7 +35,7 @@
     header{
   background:linear-gradient(135deg,#00184a,var(--azul));
   color:#fff;
-  padding:20px 0 56px;
+  padding:24px 0 40px;
   position:relative;
   overflow:hidden;
   min-height:100vh; /* el azul ocupa toda la pantalla del home */
@@ -51,9 +51,9 @@
     .header-inner{
       position:relative;
       z-index:1;
-      max-width:1120px;
+      max-width:1200px;
       margin:0 auto;
-      padding:0 16px;
+      padding:0 40px;
     }
     .logo-row{
       display:flex;
@@ -112,15 +112,15 @@
    /* HERO – DESKTOP */
 .hero{
   display:grid;
-  grid-template-columns:minmax(0,1.6fr) minmax(0,1fr); /* más espacio para texto */
-  column-gap:64px;                                     /* más aire entre texto e imagen */
+  grid-template-columns:minmax(0,1.7fr) minmax(0,1fr); /* más espacio para texto */
+  column-gap:72px;                                     /* más aire entre texto e imagen */
   align-items:center;
-  padding:40px 0 80px;                                 /* más respiro abajo */
+  padding:32px 0 32px;                                 /* más respiro abajo */
 }
 
     /* Limitamos el ancho del bloque de texto */
 .hero > div:first-child{
-  max-width:580px;
+  max-width:640px;
 }
 
     .hero-kicker{
@@ -137,7 +137,7 @@
     }
     .hero p{
       font-size:15px;
-      max-width:520px;
+      max-width:540px;
       opacity:.9;
       margin-bottom:24px;
     }
@@ -518,6 +518,11 @@
     pointer-events:auto;
     transform:translateY(0);
   }
+
+    /* Primera sección después del hero: menos padding arriba */
+.section:first-of-type{
+  padding-top:32px;   /* antes heredaba 56px */
+}   
 }
 
 @media (max-width:480px){
