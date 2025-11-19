@@ -72,12 +72,36 @@
       font-size:14px;
     }
     .nav{
-      display:flex;
-      gap:20px;
-      font-size:14px;
-      opacity:.9;
-    }
-    .nav a{cursor:pointer;}
+  display:flex;
+  gap:20px;
+  font-size:14px;
+  opacity:.9;
+}
+
+/* Links de navegación con subrayado animado */
+.nav a{
+  position:relative;
+  cursor:pointer;
+  padding-bottom:4px;
+}
+
+/* Línea oculta por defecto */
+.nav a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:0;
+  height:2px;
+  background:#ffffff;
+  transition:width .22s ease;
+}
+
+/* Al pasar el mouse aparece la línea */
+.nav a:hover::after{
+  width:100%;
+}
+
 
     /* MENÚ HAMBURGUESA (desktop oculto) */
     .menu-toggle{
@@ -577,6 +601,10 @@
 
   .nav a{
     color:#111827;
+  }
+
+  .nav a::after{
+    background:#111827;
   }
 
   .nav.nav-open{
