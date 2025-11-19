@@ -35,22 +35,31 @@
     }
 
     /* HEADER */
-    header{
-  background:linear-gradient(135deg,#00184a,var(--azul));
+  /* HEADER con degradado azul → violeta */
+header{
+  background:
+    radial-gradient(circle at top left, rgba(118,169,250,0.40) 0, transparent 45%),
+    linear-gradient(135deg,#020617,#0033c7 45%,#5b21ff 100%);
   color:#fff;
   padding:24px 0 40px;
   position:relative;
   overflow:hidden;
   min-height:100vh; /* el azul ocupa toda la pantalla del home */
 }
-    header::after{
-      content:"";
-      position:absolute;
-      inset:-40%;
-      background:url("https://images.pexels.com/photos/3730760/pexels-photo-3730760.jpeg?auto=compress&cs=tinysrgb&w=1200") center/cover;
-      opacity:0.08;
-      pointer-events:none;
-    }
+
+/* Textura / foto de fondo con la imagen nueva */
+header::after{
+  content:"";
+  position:absolute;
+  inset:-40%;
+  background:
+    linear-gradient(180deg,rgba(3,7,18,0.80),rgba(3,7,18,0.60)),
+    url("bg-viacloudstudio-dev.jpg") center/cover no-repeat;
+  opacity:0.45;              /* podés bajar/subir este valor para más o menos foto */
+  mix-blend-mode:soft-light; /* integra la imagen con el degradado */
+  pointer-events:none;
+}
+
     .header-inner{
       position:relative;
       z-index:1;
