@@ -846,6 +846,18 @@ header::after{
     transform-origin:center bottom;
   }
 }
+    
+/* HERO – tamaño de la imagen solo en desktop */
+@media (min-width:769px){
+  .hero-phone{
+    max-width:480px;      /* ancho del “celu” en desktop */
+  }
+
+  .hero-phone img{
+    width:100%;           /* ocupa todo el .hero-phone */
+    height:auto;
+  }
+}
 
   </style>
 </head>
