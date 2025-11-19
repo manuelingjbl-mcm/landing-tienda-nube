@@ -746,7 +746,7 @@ header::after{
     width:125%;                /* zoom suave para que llene más */
     max-width:none;
     height:auto;
-    transform:translateY(8px); /* baja un poquito dentro del marco */
+    transform:translateY(8px); !important; /* baja un poquito dentro del marco */
     filter:drop-shadow(0 18px 45px rgba(15,23,42,.7));
   }
 
@@ -842,19 +842,7 @@ header::after{
   }
 }
 
-    @media (max-width:768px){
-
-  .hero-phone img{
-    width:125%;
-    max-width:none;
-    height:auto;
-    transform: translateY(1px) !important; /* baja fuerte el modelo */
-  }
-
-}
-
-    
-/* Extra zoom en teléfonos más chicos (<= 480px) */
+   /* Extra zoom en teléfonos más chicos (<= 480px) */
 @media (max-width:480px){
   .hero-phone img{
     max-width:440px;
