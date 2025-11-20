@@ -532,14 +532,12 @@ header::after{
       font-size:18px;
     }
 
-/* RESPONSIVE */
-/* ============== MOBILE (hasta 768px) ============== */
+/* ===================== RESPONSIVE MOBILE ===================== */
 @media (max-width:768px){
 
-  /* Hero más compacto en mobile */
   header{
     padding:16px 0 40px;
-    min-height:auto;                 /* no fuerza 100vh en pantallas chicas */
+    min-height:auto;
   }
 
   .header-inner{
@@ -552,10 +550,9 @@ header::after{
     flex-direction:column;
     align-items:center;
     gap:24px;
-    margin-top:16px;
+    margin-top:12px;
   }
 
-  /* Bloque visual (mockup) primero */
   .hero-visual{
     order:1;
     display:flex;
@@ -564,16 +561,18 @@ header::after{
     justify-content:center;
   }
 
+  /* Contenedor del “celu” en mobile */
   .hero-phone{
     width:100%;
-    max-width:480px;
+    max-width:460px;
   }
 
+  /* AQUÍ movemos y centramos la imagen SOLO en mobile */
   .hero-phone img{
-    width:135%;
+    width:125%;                 /* zoom suave */
     max-width:none;
     height:auto;
-    transform:translate(-34px, 14px); /* mueve un poco a la izquierda y mantiene la bajada */
+    transform:translate(-16px, 28px);  /* X = -16px → izquierda | Y = 28px → abajo */
     filter:drop-shadow(0 18px 45px rgba(15,23,42,.7));
   }
 
@@ -587,47 +586,24 @@ header::after{
     color:#e5e7eb;
   }
 
-  /* Bloque de texto después de la imagen */
-  .hero-content{
+  /* Texto del hero */
+  .hero > div:first-child{
     order:2;
     width:100%;
     max-width:420px;
   }
 
-  .hero-kicker{
-    font-size:12px;
-    margin-bottom:6px;
-  }
-
   .hero h1{
     font-size:clamp(24px,7vw,30px);
     line-height:1.15;
-    margin-bottom:12px;
   }
 
   .hero p{
     font-size:14px;
-    margin-bottom:16px;
   }
 
   .hero-actions{
     gap:10px;
-    flex-direction:column;
-    align-items:stretch;
-  }
-
-  .hero-actions .btn-primary{
-    width:100%;
-    justify-content:center;
-  }
-
-  .hero-actions .btn-secondary{
-    justify-content:flex-start;
-  }
-
-  .hero-tagline{
-    font-size:12px;
-    margin-top:8px;
   }
 
   /* Header móvil */
@@ -637,7 +613,6 @@ header::after{
     gap:12px;
   }
 
-  /* Layout general */
   .wrapper{
     padding:0 16px 40px;
   }
@@ -649,10 +624,10 @@ header::after{
   }
 
   .contact-grid{
-    grid-template-columns:1fr;          /* formulario debajo del texto */
+    grid-template-columns:1fr;
   }
 
-  /* NAV MOBILE: menú desplegable */
+  /* NAV MOBILE */
   .menu-toggle{
     display:block;
   }
@@ -679,12 +654,6 @@ header::after{
 
   .nav a{
     color:#111827;
-    position:relative;
-    padding-bottom:4px;
-  }
-
-  .nav a::after{
-    background:#111827;                 /* subrayado oscuro sobre blanco */
   }
 
   .nav.nav-open{
@@ -693,22 +662,16 @@ header::after{
     transform:translateY(0);
   }
 
-  /* Primera sección después del hero: más cerca */
   .section:first-of-type{
     padding-top:32px;
   }
 }
 
-/* Extra ajustes en teléfonos más chicos (<= 480px) */
+/* Extra zoom y ajuste fino en teléfonos muy chicos */
 @media (max-width:480px){
-
-  .hero{
-    gap:20px;
-  }
-
   .hero-phone img{
-    width:165%;                          /* un toque más de zoom */
-    transform:translateY(0px);          /* lo bajamos un poquito más */
+    transform:translate(-12px, 26px) scale(1.06);
+    transform-origin:center bottom;
   }
 
   .whatsapp-float{
@@ -718,8 +681,7 @@ header::after{
     font-size:13px;
   }
 }
-
-    
+ 
   </style>
 </head>
 <body>
