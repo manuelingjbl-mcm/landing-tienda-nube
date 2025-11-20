@@ -1211,6 +1211,16 @@ section#trabajos .wrapper {
   }
 }
 
+    /* Alinear columnas de contacto arriba */
+#contacto .contact-grid {
+  align-items: flex-start;   /* si usás grid, flex-start funciona igual */
+}
+
+/* Que el formulario no tenga margen extra arriba */
+#contacto .contact-grid > form {
+  margin-top: 0;
+}
+
     
   </style>
 </head>
@@ -1570,15 +1580,15 @@ section#trabajos .wrapper {
           <!-- Mensaje de estado -->
           <p id="form-status" class="form-status" aria-live="polite"></p>
         </form>
-               
-      <div class="footer-full-divider"></div>
+        </section>
+        
       <div class="footer">
         <span>© 2025 VIACLOUDSTUDIO. Diseño & optimización Tienda Nube.</span>
         <span>Hecho en Argentina · pensado para vender online.</span>
       </div>
     </div>
  </main>
- </section>
+ 
       
 <!-- BOTÓN FLOTANTE DE WHATSAPP -->
 <a
