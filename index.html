@@ -749,9 +749,11 @@ header::after{
     transform:translateY(8px); /* baja un poquito dentro del marco */
     filter:drop-shadow(0 18px 45px rgba(15,23,42,.7));
   }
+  
+  /* MOBILE */
 @media (max-width:768px){
   .hero-phone img{
-    transform: translateY(24px);  /* solo lo bajamos, el tamaño no cambia */
+    transform: translateY(24px) !important;  /* solo lo bajamos, el tamaño no cambia */
   }
 }
 
