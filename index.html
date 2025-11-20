@@ -1150,5 +1150,30 @@ header::after{
   });
 </script>
 
+  
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const cards = document.querySelectorAll(".service-card");
+    if (!cards.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          const card = entry.target;
+          // delay suave para cada card
+          card.style.transitionDelay = (index * 120) + "ms";
+          card.classList.add("in-view");
+          observer.unobserve(card);
+        }
+      });
+    }, {
+      threshold: 0.25
+    });
+
+    cards.forEach(card => observer.observe(card));
+  });
+</script>
+
+  
 </body>
 </html>
