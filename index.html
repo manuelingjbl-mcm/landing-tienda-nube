@@ -564,7 +564,145 @@ header::after{
   }
 }
 
+/* ===== BLOQUE LANDING + NEWSLETTER (tipo Zurbrand) ===== */
 
+.works-split {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: center;
+}
+
+/* Columna de mockups */
+.works-shots {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+}
+
+.works-shot {
+  position: relative;
+  border: none;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 22px 45px rgba(0,0,0,0.45);
+  transform: translateY(0) scale(0.96);
+  transition:
+    transform 280ms ease-out,
+    box-shadow 280ms ease-out,
+    filter 220ms ease-out,
+    opacity 220ms ease-out;
+}
+
+.works-shot img {
+  display: block;
+  width: 210px;
+  max-height: 420px;
+  object-fit: contain;
+  background: #050816;
+}
+
+/* Estado por defecto: la no activa un poco más atrás */
+.works-shot:not(.is-active) {
+  opacity: 0.7;
+  filter: blur(0.4px);
+  transform: translateY(6px) scale(0.94);
+}
+
+/* Hover desktop: levanta un poco */
+@media (hover: hover) and (pointer: fine) {
+  .works-shot:hover {
+    transform: translateY(-4px) scale(0.98);
+    box-shadow: 0 26px 55px rgba(0,0,0,0.55);
+    filter: none;
+    opacity: 1;
+  }
+}
+
+/* La activa: bien nítida y adelante */
+.works-shot.is-active {
+  opacity: 1;
+  filter: none;
+  transform: translateY(0) scale(1);
+  box-shadow: 0 26px 60px rgba(0,0,0,0.65);
+}
+
+/* Columna de texto */
+.works-copy {
+  color: #0f172a;
+}
+
+.works-tag {
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin: 0 0 8px;
+}
+
+.works-copy h3 {
+  margin: 0 0 10px;
+  font-size: 1.35rem;
+}
+
+.works-copy p {
+  margin: 0 0 10px;
+  color: #4b5563;
+}
+
+.works-points {
+  margin: 0 0 16px;
+  padding-left: 18px;
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+
+.works-points li + li {
+  margin-top: 4px;
+}
+
+.works-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid #111827;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: #111827;
+}
+
+.works-link::after {
+  content: "↗";
+  font-size: 0.85rem;
+}
+
+/* Responsive: stack en mobile */
+@media (max-width: 900px) {
+  .works-split {
+    grid-template-columns: 1fr;
+  }
+
+  .works-shots {
+    order: 2;
+  }
+
+  .works-copy {
+    order: 1;
+  }
+
+  .works-shot img {
+    width: 180px;
+    max-height: 360px;
+  }
+}
+
+    
     /* PARTNERS */
     .partner-row{
       display:flex;
@@ -1114,36 +1252,40 @@ header::after{
   </a>
 </div>
 
-  <!-- LANDING (vertical) -->
-  <a class="portfolio-link"
-     href="#hero"  <!-- o la URL pública de la landing -->
-     >
-    <div class="portfolio-thumb portfolio-thumb--tall">
-      <img src="landing-via.png" alt="Landing VIA SHOP">
-      <span class="portfolio-pill">Landing Tienda Nube</span>
+  <div class="works-split">
+  <!-- Mockups verticales -->
+  <div class="works-shots">
+    <!-- Landing -->
+    <button class="works-shot is-active" data-project="landing" type="button">
+      <img src="landing-via.png" alt="Landing VIASHOP">
+    </button>
 
-      <div class="portfolio-overlay">
-        <h3>Landing VIACLOUDSTUDIO</h3>
-        <p>Landing enfocada en servicios de diseño y optimización de Tienda Nube.</p>
-      </div>
-    </div>
-  </a>
-
-  <!-- NEWSLETTER (vertical) -->
-  <a class="portfolio-link"
-     href="#contacto"  <!-- o un link a una vista del newsletter -->
-     >
-    <div class="portfolio-thumb portfolio-thumb--tall">
+    <!-- Newsletter -->
+    <button class="works-shot" data-project="newsletter" type="button">
       <img src="distri-home.png" alt="Newsletter DISTRI HOME">
-      <span class="portfolio-pill">Newsletter & automatizaciones</span>
+    </button>
+  </div>
 
-      <div class="portfolio-overlay">
-        <h3>Newsletter DISTRI HOME</h3>
-        <p>Diseño mobile first integrado con Marketing Nube y flujos básicos.</p>
-      </div>
-    </div>
-  </a>
+  <!-- Texto que cambia -->
+  <div class="works-copy" id="works-copy">
+    <p class="works-tag" id="works-tag">Landing Tienda Nube</p>
+    <h3 id="works-title">Landing VIA SHOP</h3>
+    <p id="works-description">
+      Landing enfocada en servicios de diseño y optimización de Tienda Nube,
+      con hero mobile first, servicios claros, ejemplos de trabajos e integración
+      directa al formulario de contacto.
+    </p>
+    <ul class="works-points" id="works-points">
+      <li>Diseño pensado para tráfico desde campañas.</li>
+      <li>Estructura clara: hero, propuesta, servicios, trabajos y contacto.</li>
+      <li>Optimizada para leer bien en mobile.</li>
+    </ul>
+    <a id="works-link" class="works-link" href="#contacto">
+      Ver sección en esta landing
+    </a>
+  </div>
 </div>
+
     
     
   </section>
@@ -1354,6 +1496,82 @@ header::after{
     });
 
     cards.forEach(card => observer.observe(card));
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const shots = document.querySelectorAll(".works-shot");
+    const tagEl = document.getElementById("works-tag");
+    const titleEl = document.getElementById("works-title");
+    const descEl = document.getElementById("works-description");
+    const pointsEl = document.getElementById("works-points");
+    const linkEl = document.getElementById("works-link");
+
+    if (!shots.length) return;
+
+    const projects = {
+      landing: {
+        tag: "Landing Tienda Nube",
+        title: "Landing VIA SHOP",
+        description:
+          "Landing enfocada en servicios de diseño y optimización de Tienda Nube, lista para recibir tráfico de campañas y convertir visitas en consultas.",
+        points: [
+          "Hero mobile first con propuesta clara y CTA principal.",
+          "Secciones de servicios, casos y stack de integraciones.",
+          "Formulario de contacto optimizado para leads rápidos."
+        ],
+        link: "#hero",
+        linkLabel: "Ver landing en esta página"
+      },
+      newsletter: {
+        tag: "Newsletter & automatizaciones",
+        title: "Newsletter DISTRI HOME",
+        description:
+          "Newsletter diseñado para Marketing Nube, con foco en productos destacados, ofertas y derivación a la tienda online.",
+        points: [
+          "Diseño mobile first que se lee perfecto en correo.",
+          "Bloques de productos y beneficios claros.",
+          "Listo para integrarse con flujos básicos de bienvenida y promos."
+        ],
+        link: "#contacto", // o un enlace público de preview si lo tenés
+        linkLabel: "Ver cómo trabajamos newsletters"
+      }
+    };
+
+    function setProject(key) {
+      const data = projects[key];
+      if (!data) return;
+
+      tagEl.textContent = data.tag;
+      titleEl.textContent = data.title;
+      descEl.textContent = data.description;
+
+      // reconstruimos la lista
+      pointsEl.innerHTML = "";
+      data.points.forEach(function (txt) {
+        const li = document.createElement("li");
+        li.textContent = txt;
+        pointsEl.appendChild(li);
+      });
+
+      linkEl.href = data.link;
+      linkEl.textContent = data.linkLabel;
+    }
+
+    shots.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        const key = btn.getAttribute("data-project");
+        // visual
+        shots.forEach(s => s.classList.remove("is-active"));
+        btn.classList.add("is-active");
+        // contenido
+        setProject(key);
+      });
+    });
+
+    // Estado inicial (por si acaso)
+    setProject("landing");
   });
 </script>
 
