@@ -1154,29 +1154,19 @@ section#trabajos .wrapper {
 /* ===== CONTACTO: ICONOS DE WHATSAPP / MAIL / REDES ===== */
 
     .contact-social-row {
-  margin-top: 28px;              /* los "sube" un poco hacia el form */
+  margin-top: 28px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;       /* centrados como en Tienda Nube */
+  justify-content: center;    /* centrados */
   align-items: center;
+  gap: 18px;
 }
 
 .contact-social-item {
-  display: flex;
-  flex-direction: column;        /* icono arriba, texto abajo */
-  align-items: center;
-  gap: 6px;
+  display: inline-flex;
   text-decoration: none;
-  color: #e5e7eb;
-  font-size: 0.85rem;
 }
 
-.contact-social-item:hover .contact-social-value {
-  text-decoration: underline;
-}
-
-/* iconos redondos blancos */
+/* círculo con borde blanco y fondo dark */
 .contact-social-icon {
   width: 36px;
   height: 36px;
@@ -1189,21 +1179,36 @@ section#trabajos .wrapper {
   overflow: hidden;
 }
 
+/* PNG negros → los invertimos a blanco */
 .contact-social-icon img {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   object-fit: contain;
-  filter: invert(1);             /* si el svg es oscuro, se ve blanco */
+  filter: invert(1);          /* negro → blanco */
 }
 
-.contact-social-value {
+/* Email debajo para copiar fácil */
+.contact-email-copy {
+  margin-top: 16px;
   text-align: center;
+  font-size: 0.9rem;
+  color: #e5e7eb;
 }
 
-/* Mobile: un poquito de espacio extra */
+.contact-email-copy a {
+  color: #e5e7eb;
+  text-decoration: none;
+}
+
+.contact-email-copy a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile */
 @media (max-width: 768px) {
   .contact-social-row {
     margin-top: 24px;
+    gap: 14px;
   }
 }
 
@@ -1554,57 +1559,37 @@ section#trabajos .wrapper {
 
         <!-- Fila de WhatsApp / correo / redes -->
     <div class="contact-social-row">
-      <a class="contact-social-item"
-         href="https://wa.me/5491159288093"
-         target="_blank"
-         rel="noopener noreferrer">
-        <span class="contact-social-icon">
-          <img src="icon-whatsapp.svg" alt="WhatsApp">
-        </span>
-        <div class="contact-social-text">
-          <span class="contact-social-label">WhatsApp</span>
-          <span class="contact-social-value">11 5928-8093</span>
-        </div>
-      </a>
+  <a class="contact-social-item"
+     href="https://wa.me/5491159288093"
+     target="_blank"
+     rel="noopener noreferrer">
+    <span class="contact-social-icon">
+      <img src="icon-whatsapp.png" alt="WhatsApp">
+    </span>
+  </a>
 
-      <a class="contact-social-item"
-         href="mailto:manuelingjbl@gmail.com">
-        <span class="contact-social-icon">
-          <img src="icon-mail.svg" alt="Correo">
-        </span>
-        <div class="contact-social-text">
-          <span class="contact-social-label">Correo</span>
-          <span class="contact-social-value">manuelingjbl@gmail.com</span>
-        </div>
-      </a>
+  <a class="contact-social-item"
+     href="https://instagram.com/manuelrubis"
+     target="_blank"
+     rel="noopener noreferrer">
+    <span class="contact-social-icon">
+      <img src="icon-instagram.png" alt="Instagram">
+    </span>
+  </a>
 
-      <a class="contact-social-item"
-         href="https://instagram.com/manuelrubis"
-         target="_blank"
-         rel="noopener noreferrer">
-        <span class="contact-social-icon">
-          <img src="icon-instagram.svg" alt="Instagram">
-        </span>
-        <div class="contact-social-text">
-          <span class="contact-social-label">Instagram</span>
-          <span class="contact-social-value">@manuelrubis</span>
-        </div>
-      </a>
+  <a class="contact-social-item"
+     href="https://www.facebook.com/manuelcmdigital"
+     target="_blank"
+     rel="noopener noreferrer">
+    <span class="contact-social-icon">
+      <img src="icon-facebook.png" alt="Facebook">
+    </span>
+  </a>
+</div>
 
-      <a class="contact-social-item"
-         href="https://www.facebook.com/manuelcmdigital"
-         target="_blank"
-         rel="noopener noreferrer">
-        <span class="contact-social-icon">
-          <img src="icon-facebook.svg" alt="Facebook">
-        </span>
-        <div class="contact-social-text">
-          <span class="contact-social-label">Facebook</span>
-          <span class="contact-social-value">/manuelcmdigital</span>
-        </div>
-      </a>
-    </div>
-  </div>
+<p class="contact-email-copy">
+  Email: <a href="mailto:manuelingjbl@gmail.com">manuelingjbl@gmail.com</a>
+</p>
       
       
       <div class="footer-full-divider"></div>
