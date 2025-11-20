@@ -1211,52 +1211,6 @@ section#trabajos .wrapper {
   }
 }
 
-/* ===== DIVISOR A TODO LO ANCHO ANTES DEL FOOTER ===== */
-.footer-full-divider {
-  width: 100%;              /* ocupa todo el ancho */
-  height: 3px;
-  background: linear-gradient(
-    90deg,
-    rgba(14, 165, 233, 0) 0%,
-    #0b63e8 50%,
-    rgba(14, 165, 233, 0) 100%
-  );
-  margin-top: 0;            /* pegado a la sección de contacto */
-  margin-bottom: 0;         /* sin franja “extra” entre línea y footer */
-}
-
-/* Sección de contacto: el espacio queda dentro, no afuera */
-#contacto {
-  margin-bottom: 0 !important;  /* elimina banda blanca del body */
-  padding-bottom: 72px;         /* respiración interna con fondo oscuro */
-}
-
-/* ===== BLOQUE DE FOOTER ===== */
-.footer {
-  background: #020617;       /* mismo fondo que contacto */
-  padding: 18px 24px 32px;
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  font-size: 12px;
-  color: #9ca3af;
-}
-
-.footer span {
-  white-space: nowrap;
-}
-
-/* En mobile que se apilen prolijo */
-@media (max-width: 768px) {
-  .footer {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-}
-
-
-
     
   </style>
 </head>
