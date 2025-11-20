@@ -542,6 +542,28 @@ header::after{
   }
 }
 
+    /* Variante para piezas verticales (landing + newsletter) */
+.portfolio-thumb--tall {
+  height: 360px;                        /* más alta que las otras */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #050816;
+}
+
+.portfolio-thumb--tall img {
+  width: auto;
+  height: 100%;
+  object-fit: contain;                  /* se ve la imagen completa */
+}
+
+/* En mobile podemos bajar un toque la altura */
+@media (max-width: 800px) {
+  .portfolio-thumb--tall {
+    height: 320px;
+  }
+}
+
 
     /* PARTNERS */
     .partner-row{
