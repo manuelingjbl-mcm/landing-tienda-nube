@@ -532,88 +532,53 @@ header::after{
       font-size:18px;
     }
 
-    /* RESPONSIVE */
+/* RESPONSIVE */
 /* ============== MOBILE (hasta 768px) ============== */
 @media (max-width:768px){
 
-  /* Hero más compacto y protagonista en mobile */
+  /* Hero más compacto en mobile */
   header{
-    padding:18px 0 40px;
-    min-height:auto;              /* que no obligue a 100vh en pantallas chicas */
+    padding:16px 0 40px;
+    min-height:auto;                 /* no fuerza 100vh en pantallas chicas */
   }
 
   .header-inner{
     padding:0 16px;
   }
 
+  /* HERO: imagen arriba, texto abajo */
   .hero{
     display:flex;
-    flex-direction:column;        /* todo en columna */
-    gap:24px;                     /* espacio entre imagen y texto */
-    margin-top:28px;
-  }
-
-  /* Texto del hero */
-  .hero > div:first-child{
-    text-align:left;
-  }
-
-  .hero-kicker{
-    font-size:12px;
-    margin-bottom:6px;
-  }
-
-  .hero h1{
-    font-size:clamp(26px,7.4vw,32px);
-    line-height:1.15;
-    margin-bottom:14px;
-  }
-
-  .hero p{
-    font-size:14px;
-    max-width:none;
-    margin-bottom:18px;
-  }
-
-  .hero-actions{
     flex-direction:column;
-    align-items:stretch;
-    gap:10px;
+    align-items:center;
+    gap:24px;
+    margin-top:16px;
   }
 
-  .hero-actions .btn-primary{
-    width:100%;                   /* botón tipo app, bien ancho */
-    justify-content:center;
-  }
-
-  .hero-actions .btn-secondary{
-    justify-content:flex-start;
-  }
-
-  .hero-tagline{
-    max-width:none;
-    font-size:12px;
-    margin-top:10px;
-  }
-
-  /* HERO VISUAL: mockup bien grande y centrado */
+  /* Bloque visual (mockup) primero */
   .hero-visual{
+    order:1;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    order:-1;                     /* la imagen se ve primero en mobile */
+  }
+
+  .hero-phone{
+    width:100%;
+    max-width:460px;
   }
 
   .hero-phone img{
-    width:100%;
-    max-width:380px;              /* más grande en mobile */
+    width:125%;                           /* mismo zoom que te gusta */
+    max-width:none;
     height:auto;
-    filter:drop-shadow(0 22px 60px rgba(15,23,42,.7));
+    transform:translateY(32px);           /* 👈 acá lo bajamos sin cambiar tamaño */
+    filter:drop-shadow(0 18px 45px rgba(15,23,42,.7));
   }
 
   .hero-badge{
-    margin-top:14px;
+    margin-top:10px;
     font-size:12px;
     padding:6px 14px;
     border-radius:999px;
@@ -622,14 +587,57 @@ header::after{
     color:#e5e7eb;
   }
 
-  /* Header superior: logo + hamburguesa como ya venía */
+  /* Bloque de texto después de la imagen */
+  .hero-content{
+    order:2;
+    width:100%;
+    max-width:420px;
+  }
+
+  .hero-kicker{
+    font-size:12px;
+    margin-bottom:6px;
+  }
+
+  .hero h1{
+    font-size:clamp(24px,7vw,30px);
+    line-height:1.15;
+    margin-bottom:12px;
+  }
+
+  .hero p{
+    font-size:14px;
+    margin-bottom:16px;
+  }
+
+  .hero-actions{
+    gap:10px;
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .hero-actions .btn-primary{
+    width:100%;
+    justify-content:center;
+  }
+
+  .hero-actions .btn-secondary{
+    justify-content:flex-start;
+  }
+
+  .hero-tagline{
+    font-size:12px;
+    margin-top:8px;
+  }
+
+  /* Header móvil */
   .logo-row{
     flex-direction:row;
     justify-content:space-between;
     gap:12px;
   }
 
-  /* Espacios generales de las secciones en mobile */
+  /* Layout general */
   .wrapper{
     padding:0 16px 40px;
   }
@@ -640,7 +648,11 @@ header::after{
     padding:40px 0;
   }
 
-  /* NAV MOBILE (menú desplegable blanco) */
+  .contact-grid{
+    grid-template-columns:1fr;          /* formulario debajo del texto */
+  }
+
+  /* NAV MOBILE: menú desplegable */
   .menu-toggle{
     display:block;
   }
@@ -672,7 +684,7 @@ header::after{
   }
 
   .nav a::after{
-    background:#111827;           /* subrayado oscuro sobre fondo blanco */
+    background:#111827;                 /* subrayado oscuro sobre blanco */
   }
 
   .nav.nav-open{
@@ -681,24 +693,22 @@ header::after{
     transform:translateY(0);
   }
 
-  /* Primera sección después del hero: menos aire arriba */
+  /* Primera sección después del hero: más cerca */
   .section:first-of-type{
     padding-top:32px;
   }
 }
 
-
+/* Extra ajustes en teléfonos más chicos (<= 480px) */
 @media (max-width:480px){
-  header{
-    padding:12px 0 36px;
-  }
 
   .hero{
     gap:20px;
   }
 
   .hero-phone img{
-    max-width:400px;   /* todavía un toque más grande si hay lugar */
+    width:135%;                          /* un toque más de zoom */
+    transform:translateY(36px);          /* lo bajamos un poquito más */
   }
 
   .whatsapp-float{
@@ -708,156 +718,7 @@ header::after{
     font-size:13px;
   }
 }
-/* ===================== RESPONSIVE MOBILE ===================== */
-@media (max-width:768px){
-  header{
-    padding:16px 0 40px;
-    min-height:auto;           /* ya no fuerza 100vh en mobile */
-  }
 
-  .header-inner{
-    padding:0 16px;
-  }
-
-  /* HERO: imagen protagonista arriba, texto abajo */
-  .hero{
-    display:flex;
-    flex-direction:column;     /* vertical */
-    align-items:center;
-    gap:24px;
-    margin-top:12px;
-  }
-
-  /* Bloque visual (mockup) primero */
-  .hero-visual{
-    order:1;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-  }
-
-  .hero-phone{
-    width:100%;
-    max-width:460px;
-  }
-
-  .hero-phone img{
-    width:125%;                /* zoom suave para que llene más */
-    max-width:none;
-    height:auto;
-    transform:translateY(0px); /* posición neutra por defecto */
-    filter:drop-shadow(0 18px 45px rgba(15,23,42,.7));
-  }
- @media (max-width:768px){
-
-  .hero-phone img{
-    transform:translateY(32px); /* baja la imagen sin cambiar el zoom */
-  }
-
-}
-
-
-  .hero-badge{
-    margin-top:10px;
-    font-size:12px;
-    padding:6px 14px;
-    border-radius:999px;
-    background:rgba(15,23,42,.85);
-    border:1px solid rgba(148,163,184,.5);
-    color:#e5e7eb;
-  }
-
-  /* Bloque de texto después de la imagen */
-  .hero > div:first-child{
-    order:2;
-    width:100%;
-    max-width:420px;
-  }
-
-  .hero h1{
-    font-size:clamp(24px,7vw,30px);
-    line-height:1.15;
-  }
-
-  .hero p{
-    font-size:14px;
-  }
-
-  .hero-actions{
-    gap:10px;
-  }
-
-  /* Header móvil */
-  .logo-row{
-    flex-direction:row;
-    justify-content:space-between;
-    gap:12px;
-  }
-
-  .wrapper{
-    padding:0 16px 40px;
-  }
-
-  .section,
-  .section-dark,
-  .contact-section{
-    padding:40px 0;
-  }
-
-  .contact-grid{
-    grid-template-columns:1fr;
-  }
-
-  /* NAV MOBILE: mantiene lo que ya tenías */
-  .menu-toggle{
-    display:block;
-  }
-
-  .nav{
-    position:absolute;
-    top:52px;
-    right:16px;
-    left:16px;
-    background:#ffffff;
-    color:#111827;
-    border-radius:14px;
-    padding:10px 14px;
-    flex-direction:column;
-    gap:10px;
-    font-size:15px;
-    opacity:0;
-    pointer-events:none;
-    transform:translateY(-6px);
-    transition:opacity .22s ease, transform .22s ease;
-    box-shadow:0 18px 40px rgba(15,23,42,.35);
-    z-index:40;
-  }
-
-  .nav a{
-    color:#111827;
-  }
-
-  .nav.nav-open{
-    opacity:1;
-    pointer-events:auto;
-    transform:translateY(0);
-  }
-
-  /* Primera sección después del hero: un poco más cerca */
-  .section:first-of-type{
-    padding-top:32px;
-  }
-}
-
-   /* Extra zoom en teléfonos más chicos (<= 480px) */
-@media (max-width:480px){
-  .hero-phone img{
-    max-width:440px;
-    transform:scale(1.18);  /* un poquito más grande */
-    transform-origin:center bottom;
-  }
-}
     
   </style>
 </head>
