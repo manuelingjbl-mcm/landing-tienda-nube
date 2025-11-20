@@ -1233,7 +1233,7 @@ section#trabajos .wrapper {
 /* CONTACTO: alinear columnas arriba y quitar márgenes extra del form */
 #contacto .contact-grid {
   align-items: flex-start;  /* columnas alineadas arriba */
-  margin-top: 16px;         /* si lo ves todavía muy abajo, bajá a 20 o 16 */
+  margin-top: 8px;         /* si lo ves todavía muy abajo, bajá a 20 o 16 */
 }
 
 #contacto .contact-grid > form {
@@ -1255,6 +1255,28 @@ section#trabajos .wrapper {
 }
 
 /* En mobile que se apilen con espacio */
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+    .footer {
+  background: #020617;  /* o el color exacto de tu sección contacto */
+  padding: 18px 24px 32px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.footer span {
+  white-space: nowrap;
+}
+
 @media (max-width: 768px) {
   .footer {
     flex-direction: column;
