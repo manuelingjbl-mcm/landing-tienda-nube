@@ -1062,23 +1062,24 @@ header::after{
 }
 
     
-    /* Fondo suave para la sección de trabajos */
-#trabajos {
+    /* ===== FONDO SECCIÓN NUESTROS TRABAJOS ===== */
+section#trabajos {
   position: relative;
   background:
     radial-gradient(circle at top left,
-      rgba(11, 99, 232, 0.08),
-      transparent 55%),
+      rgba(11, 99, 232, 0.25),
+      transparent 60%),
     radial-gradient(circle at bottom right,
-      rgba(168, 85, 247, 0.06),
-      transparent 55%),
-    #f9fafb; /* base clarita */
-}
-
-/* Un poco más de aire arriba y abajo para que respiren las cards */
-#trabajos .wrapper {
+      rgba(168, 85, 247, 0.20),
+      transparent 60%),
+    #eef2ff; /* base clarita violeta/azul */
   padding-top: 64px;
   padding-bottom: 72px;
+}
+
+/* Por las dudas, que el wrapper NO pise el fondo */
+section#trabajos .wrapper {
+  background: transparent !important;
 }
 
   </style>
