@@ -1153,65 +1153,60 @@ section#trabajos .wrapper {
 
 /* ===== CONTACTO: ICONOS DE WHATSAPP / MAIL / REDES ===== */
 
-.contact-info-inline {
-  margin-top: 28px;
+    .contact-social-row {
+  margin-top: 28px;              /* los "sube" un poco hacia el form */
   display: flex;
   flex-wrap: wrap;
-  gap: 18px 32px;
+  gap: 20px;
+  justify-content: center;       /* centrados como en Tienda Nube */
   align-items: center;
 }
 
-.contact-info-item {
+.contact-social-item {
   display: flex;
+  flex-direction: column;        /* icono arriba, texto abajo */
   align-items: center;
-  gap: 10px;
-  color: #e5e7eb;
+  gap: 6px;
   text-decoration: none;
-  font-size: 0.9rem;
+  color: #e5e7eb;
+  font-size: 0.85rem;
 }
 
-.contact-info-item:hover .contact-info-value {
+.contact-social-item:hover .contact-social-value {
   text-decoration: underline;
 }
 
-/* Icono redondo blanco */
-.contact-info-icon {
-  width: 32px;
-  height: 32px;
+/* iconos redondos blancos */
+.contact-social-icon {
+  width: 36px;
+  height: 36px;
   border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.9);
-  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  background: rgba(15, 23, 42, 0.95);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: #ffffff;
+  overflow: hidden;
 }
 
-.contact-info-text {
-  display: flex;
-  flex-direction: column;
+.contact-social-icon img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  filter: invert(1);             /* si el svg es oscuro, se ve blanco */
 }
 
-.contact-info-label {
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: #6b7280;
+.contact-social-value {
+  text-align: center;
 }
 
-.contact-info-value {
-  font-size: 0.9rem;
-}
-
-/* Mobile: en columna */
+/* Mobile: un poquito de espacio extra */
 @media (max-width: 768px) {
-  .contact-info-inline {
-    flex-direction: column;
-    align-items: flex-start;
+  .contact-social-row {
+    margin-top: 24px;
   }
 }
+
 
     /* ===== DIVISOR A TODO LO ANCHO ANTES DEL FOOTER ===== */
 
