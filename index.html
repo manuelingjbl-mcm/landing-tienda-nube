@@ -759,17 +759,7 @@ header::after{
       color:#e5e7eb;
     }
     textarea{min-height:90px;resize:vertical;}
-    .footer{
-      margin-top:32px;
-      font-size:11px;
-      color:#6b7280;
-      display:flex;
-      justify-content:space-between;
-      flex-wrap:wrap;
-      gap:12px;
-    }
-
-    .form-status{
+       .form-status{
       margin-top:8px;
       font-size:13px;
       color:#e5e7eb;
@@ -1211,7 +1201,41 @@ section#trabajos .wrapper {
   }
 }
 
+/* DIVISOR A LO ANCHO ANTES DEL FOOTER */
+.footer-full-divider {
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    rgba(14, 165, 233, 0),
+    #0b63e8,
+    rgba(14, 165, 233, 0)
+  );
+  margin: 0; /* pegado al contacto y al footer */
+}
 
+/* FOOTER */
+.footer {
+  background: #020617;
+  padding: 18px 24px 32px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.footer span {
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
     
   </style>
 </head>
@@ -1464,123 +1488,102 @@ section#trabajos .wrapper {
 </section>
 
 
-  <!-- CONTACTO -->
-  <section id="contacto" class="contact-section reveal">
-    <div class="wrapper">
-      <div class="section-title">Contacto</div>
-      <h2>¿Agendamos una llamada para ver tu caso?</h2>
-      <div class="contact-grid">
-        <div>
-          <p>
-            Contanos en qué estado está tu proyecto y qué te gustaría mejorar.
-            Te respondemos con una propuesta clara, sin letra chica.
-          </p>
-          <p style="margin-top:12px;font-size:13px;color:#9ca3af;">
-            Tiempo estimado de respuesta: 24/48 hs hábiles.
-          </p>
+ <!-- CONTACTO -->
+<section id="contacto" class="contact-section reveal">
+  <div class="wrapper">
+    <div class="section-title">Contacto</div>
+    <h2>¿Agendamos una llamada para ver tu caso?</h2>
 
-          <!-- 👇 ICONOS Y MAIL VAN AQUÍ -->
-    <div class="contact-social-row">
-      <a class="contact-social-item"
-         href="https://wa.me/5491159288093"
-         target="_blank"
-         rel="noopener noreferrer">
-        <span class="contact-social-icon">
-          <img src="icon-whatsapp.png" alt="WhatsApp">
-        </span>
-      </a>
+    <div class="contact-grid">
+      <!-- COLUMNA IZQUIERDA: texto + iconos -->
+      <div>
+        <p>
+          Contanos en qué estado está tu proyecto y qué te gustaría mejorar.
+          Te respondemos con una propuesta clara, sin letra chica.
+        </p>
+        <p style="margin-top:12px;font-size:13px;color:#9ca3af;">
+          Tiempo estimado de respuesta: 24/48 hs hábiles.
+        </p>
 
-      <a class="contact-social-item"
-         href="https://instagram.com/manuelrubis"
-         target="_blank"
-         rel="noopener noreferrer">
-        <span class="contact-social-icon">
-          <img src="icon-instagram.png" alt="Instagram">
-        </span>
-      </a>
+        <!-- ICONOS + EMAIL -->
+        <div class="contact-social-row">
+          <a class="contact-social-item"
+             href="https://wa.me/5491159288093"
+             target="_blank" rel="noopener noreferrer">
+            <span class="contact-social-icon">
+              <img src="icon-whatsapp.png" alt="WhatsApp">
+            </span>
+          </a>
 
-      <a class="contact-social-item"
-         href="https://www.facebook.com/manuelcmdigital"
-         target="_blank"
-         rel="noopener noreferrer">
-        <span class="contact-social-icon">
-          <img src="icon-facebook.png" alt="Facebook">
-        </span>
-      </a>
-    </div>
+          <a class="contact-social-item"
+             href="https://instagram.com/manuelrubis"
+             target="_blank" rel="noopener noreferrer">
+            <span class="contact-social-icon">
+              <img src="icon-instagram.png" alt="Instagram">
+            </span>
+          </a>
 
-    <p class="contact-email-copy">
-      Email: <a href="mailto:manuelingjbl@gmail.com">manuelingjbl@gmail.com</a>
-    </p>
+          <a class="contact-social-item"
+             href="https://www.facebook.com/manuelcmdigital"
+             target="_blank" rel="noopener noreferrer">
+            <span class="contact-social-icon">
+              <img src="icon-facebook.png" alt="Facebook">
+            </span>
+          </a>
         </div>
 
-       <!-- FORMULARIO: ENVÍA A FORMSPREE SIN SALIR DE LA PÁGINA -->
-        <form id="contact-form" method="POST">
-  <input type="hidden" name="_subject" value="Consulta desde landing MCMDIGITAL" />
-
-  <div>
-    <label for="nombre_marca">Nombre y marca</label>
-    <input
-      id="nombre_marca"
-      type="text"
-      name="nombre_marca"
-      placeholder="Nombre y marca"
-      required
-    />
-  </div>
-
-  <div>
-    <label for="email">Email</label>
-    <input
-      id="email"
-      type="email"
-      name="email"
-      placeholder="Email"
-      required
-    />
-  </div>
-
-  <div>
-    <label for="instagram_sitio">Instagram o sitio actual</label>
-    <input
-      id="instagram_sitio"
-      type="text"
-      name="instagram_sitio"
-      placeholder="Instagram o sitio actual"
-    />
-  </div>
-
-  <div>
-    <label for="mensaje">Contanos brevemente qué necesitás</label>
-    <textarea
-      id="mensaje"
-      name="mensaje"
-      placeholder="Contanos brevemente qué necesitás"
-      required
-    ></textarea>
-  </div>
-
-          <button
-            type="submit"
-            class="btn-primary"
-            style="width:100%;justify-content:center;display:flex;"
-          >
-            Enviar consulta
-          </button>
-
-          <!-- Mensaje de estado -->
-          <p id="form-status" class="form-status" aria-live="polite"></p>
-        </form>
-       
-        
-      <div class="footer">
-        <span>© 2025 VIACLOUDSTUDIO. Diseño & optimización Tienda Nube.</span>
-        <span>Hecho en Argentina · pensado para vender online.</span>
+        <p class="contact-email">
+          Email: <a href="mailto:manuelingjbl@gmail.com">manuelingjbl@gmail.com</a>
+        </p>
       </div>
-    </div>
-      </section>
- </main>
-  
+
+      <!-- COLUMNA DERECHA: FORMULARIO -->
+      <form id="contact-form" method="POST">
+        <input type="hidden" name="_subject"
+               value="Consulta desde landing MCMDIGITAL" />
+
+        <div>
+          <label>Nombre y marca</label>
+          <input type="text" name="nombre_marca"
+                 placeholder="Nombre y marca" required />
+        </div>
+
+        <div>
+          <label>Email</label>
+          <input type="email" name="email"
+                 placeholder="Email" required />
+        </div>
+
+        <div>
+          <label>Instagram o sitio actual</label>
+          <input type="text" name="instagram_sitio"
+                 placeholder="Instagram o sitio actual" />
+        </div>
+
+        <div>
+          <label>Contanos brevemente qué necesitás</label>
+          <textarea name="mensaje"
+                    placeholder="Contanos brevemente qué necesitás"
+                    required></textarea>
+        </div>
+
+        <button type="submit">Enviar consulta</button>
+
+        <!-- Mensaje de estado -->
+        <p id="form-status" class="form-status" aria-live="polite"></p>
+      </form>
+    </div> <!-- /contact-grid -->
+  </div> <!-- /wrapper -->
+</section>
+
+<!-- DIVISOR ANTES DEL FOOTER -->
+<div class="footer-full-divider"></div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span>© 2025 VIACLOUDSTUDIO. Diseño &amp; optimización Tienda Nube.</span>
+  <span>Hecho en Argentina · pensado para vender online.</span>
+</div>
       
 <!-- BOTÓN FLOTANTE DE WHATSAPP -->
 <a
