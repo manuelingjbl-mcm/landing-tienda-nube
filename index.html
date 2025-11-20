@@ -389,6 +389,21 @@ header::after{
   }
 }
 
+    /* ===== MOBILE: pills una debajo de la otra ===== */
+@media (max-width: 768px) {
+  .brand-grid {
+    flex-direction: column;      /* de fila → columna */
+    align-items: center;         /* centradas en el eje horizontal */
+    gap: 16px;                   /* espacio entre pills */
+  }
+
+  .brand-grid .client-pill {
+    width: 100%;                 /* que ocupen todo el ancho disponible */
+    max-width: 360px;            /* opcional: para que no se hagan demasiado anchas */
+    margin: 0 auto;              /* centradas dentro de la sección */
+  }
+}
+
 /* Un toque más compactas en mobile */
 @media (max-width:768px){
   .client-pill{
