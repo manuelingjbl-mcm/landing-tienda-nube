@@ -1153,12 +1153,12 @@ section#trabajos .wrapper {
 
 /* ===== CONTACTO: ICONOS DE WHATSAPP / MAIL / REDES ===== */
 
-    .contact-social-row {
-  margin-top: 28px;
+.contact-social-row {
+  margin-top: 20px;
   display: flex;
-  justify-content: center;    /* centrados */
+  justify-content: flex-start;   /* alineados con el texto de la columna izquierda */
   align-items: center;
-  gap: 18px;
+  gap: 14px;
 }
 
 .contact-social-item {
@@ -1184,15 +1184,15 @@ section#trabajos .wrapper {
   width: 20px;
   height: 20px;
   object-fit: contain;
-  filter: invert(1);          /* negro → blanco */
+  filter: invert(1);
 }
 
 /* Email debajo para copiar fácil */
 .contact-email-copy {
-  margin-top: 16px;
-  text-align: center;
+  margin-top: 10px;
   font-size: 0.9rem;
   color: #e5e7eb;
+  text-align: left;             /* alineado con los iconos y el texto */
 }
 
 .contact-email-copy a {
@@ -1207,10 +1207,11 @@ section#trabajos .wrapper {
 /* Mobile */
 @media (max-width: 768px) {
   .contact-social-row {
-    margin-top: 24px;
-    gap: 14px;
+    margin-top: 16px;
   }
 }
+
+
 
 
     /* ===== DIVISOR A TODO LO ANCHO ANTES DEL FOOTER ===== */
@@ -1497,6 +1498,40 @@ section#trabajos .wrapper {
           <p style="margin-top:12px;font-size:13px;color:#9ca3af;">
             Tiempo estimado de respuesta: 24/48 hs hábiles.
           </p>
+
+          <!-- 👇 ICONOS Y MAIL VAN AQUÍ -->
+    <div class="contact-social-row">
+      <a class="contact-social-item"
+         href="https://wa.me/5491159288093"
+         target="_blank"
+         rel="noopener noreferrer">
+        <span class="contact-social-icon">
+          <img src="icon-whatsapp.png" alt="WhatsApp">
+        </span>
+      </a>
+
+      <a class="contact-social-item"
+         href="https://instagram.com/manuelrubis"
+         target="_blank"
+         rel="noopener noreferrer">
+        <span class="contact-social-icon">
+          <img src="icon-instagram.png" alt="Instagram">
+        </span>
+      </a>
+
+      <a class="contact-social-item"
+         href="https://www.facebook.com/manuelcmdigital"
+         target="_blank"
+         rel="noopener noreferrer">
+        <span class="contact-social-icon">
+          <img src="icon-facebook.png" alt="Facebook">
+        </span>
+      </a>
+    </div>
+
+    <p class="contact-email-copy">
+      Email: <a href="mailto:manuelingjbl@gmail.com">manuelingjbl@gmail.com</a>
+    </p>
         </div>
 
        <!-- FORMULARIO: ENVÍA A FORMSPREE SIN SALIR DE LA PÁGINA -->
@@ -1556,42 +1591,7 @@ section#trabajos .wrapper {
           <!-- Mensaje de estado -->
           <p id="form-status" class="form-status" aria-live="polite"></p>
         </form>
-
-        <!-- Fila de WhatsApp / correo / redes -->
-    <div class="contact-social-row">
-  <a class="contact-social-item"
-     href="https://wa.me/5491159288093"
-     target="_blank"
-     rel="noopener noreferrer">
-    <span class="contact-social-icon">
-      <img src="icon-whatsapp.png" alt="WhatsApp">
-    </span>
-  </a>
-
-  <a class="contact-social-item"
-     href="https://instagram.com/manuelrubis"
-     target="_blank"
-     rel="noopener noreferrer">
-    <span class="contact-social-icon">
-      <img src="icon-instagram.png" alt="Instagram">
-    </span>
-  </a>
-
-  <a class="contact-social-item"
-     href="https://www.facebook.com/manuelcmdigital"
-     target="_blank"
-     rel="noopener noreferrer">
-    <span class="contact-social-icon">
-      <img src="icon-facebook.png" alt="Facebook">
-    </span>
-  </a>
-</div>
-
-<p class="contact-email-copy">
-  Email: <a href="mailto:manuelingjbl@gmail.com">manuelingjbl@gmail.com</a>
-</p>
-      
-      
+             
       <div class="footer-full-divider"></div>
       <div class="footer">
         <span>© 2025 VIACLOUDSTUDIO. Diseño & optimización Tienda Nube.</span>
