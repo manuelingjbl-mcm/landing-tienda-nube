@@ -1217,8 +1217,7 @@ section#trabajos .wrapper {
     /* ===== DIVISOR A TODO LO ANCHO ANTES DEL FOOTER ===== */
 
 .footer-full-divider {
-  position: relative;
-  width: 100vw;
+  width: 100%;                 /* ocupa todo el ancho del viewport */
   height: 3px;
   background: linear-gradient(
     to right,
@@ -1228,9 +1227,8 @@ section#trabajos .wrapper {
   );
   margin-top: 40px;
   margin-bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
 }
+
     
 /* CONTACTO: alinear columnas arriba y quitar márgenes extra del form */
 #contacto .contact-grid {
