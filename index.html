@@ -1201,41 +1201,51 @@ section#trabajos .wrapper {
   }
 }
 
-/* DIVISOR A LO ANCHO ANTES DEL FOOTER */
+/* Sección de contacto: que el espacio quede dentro de la sección, no afuera */
+#contacto {
+  margin-bottom: 0;       /* sin espacio blanco extra debajo */
+  padding-bottom: 72px;   /* respiración interna con fondo oscuro */
+}
+
+/* Línea divisora antes del footer */
 .footer-full-divider {
-  width: 100%;
+  width: 100%;  /* ocupa todo el ancho sin provocar scroll horizontal */
   height: 3px;
   background: linear-gradient(
     to right,
-    rgba(14, 165, 233, 0),
+    rgba(11, 99, 232, 0),
     #0b63e8,
-    rgba(14, 165, 233, 0)
+    rgba(11, 99, 232, 0)
   );
-  margin: 0; /* pegado al contacto y al footer */
+  margin: 24px 0 16px;  /* aire arriba y abajo de la línea */
 }
 
-/* FOOTER */
+/* Bloque de footer: textos uno a la izquierda y otro a la derecha */
 .footer {
-  background: #020617;
-  padding: 18px 24px 32px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 16px;
   font-size: 12px;
   color: #9ca3af;
+  padding: 0 24px 32px;  /* un poco de padding lateral e inferior */
 }
 
+/* Evita que se corten raro las frases largas */
 .footer span {
   white-space: nowrap;
 }
 
+/* En mobile se apilan centrados */
 @media (max-width: 768px) {
   .footer {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    gap: 4px;
   }
 }
+
     
   </style>
 </head>
