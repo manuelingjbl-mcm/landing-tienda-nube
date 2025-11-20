@@ -1231,6 +1231,46 @@ section#trabajos .wrapper {
   left: 50%;
   transform: translateX(-50%);
 }
+    
+/* CONTACTO: alinear la grilla arriba y quitar salto del form */
+.contact-section .contact-grid {
+  align-items: flex-start;   /* columnas alineadas arriba */
+}
+
+.contact-section .contact-grid form {
+  margin-top: 0;             /* por si hay un margin-top anterior */
+}
+
+    /* Línea que separa el footer */
+.footer-full-divider {
+  margin-top: 48px;  /* separa bien el contacto del footer */
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, #0b63e8 0%, #4f46e5 50%, #0b63e8 100%);
+}
+
+/* Bloque de footer */
+.footer {
+  padding: 18px 24px 32px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.footer span {
+  white-space: nowrap;  /* evita que se rompan raro en una sola palabra */
+}
+
+/* En mobile que se apilen con espacio */
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
 
     
   </style>
