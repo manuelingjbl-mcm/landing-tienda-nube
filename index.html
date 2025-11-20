@@ -1151,78 +1151,84 @@ section#trabajos .wrapper {
   }
 }
 
-/* ===== BLOQUE EXTRA DE CONTACTO (línea + datos) ===== */
+/* ===== CONTACTO: ICONOS DE WHATSAPP / MAIL / REDES ===== */
 
-.contact-extra {
-  margin-top: 40px;
-}
-
-/* línea / franja estética */
-.contact-extra-line {
-  height: 1px;
-  width: 100%;
-  background: linear-gradient(
-    to right,
-    rgba(148, 163, 184, 0),
-    rgba(148, 163, 184, 0.55),
-    rgba(148, 163, 184, 0)
-  );
-  margin-bottom: 20px;
-}
-
-/* fila de items */
-.contact-extra-items {
+.contact-info-inline {
+  margin-top: 28px;
   display: flex;
   flex-wrap: wrap;
   gap: 18px 32px;
   align-items: center;
-  color: #e5e7eb;
-  font-size: 0.9rem;
 }
 
-.contact-extra-item {
+.contact-info-item {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-/* “iconos” en circulito */
-.contact-extra-icon {
-  width: 30px;
-  height: 30px;
-  border-radius: 999px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(15, 23, 42, 0.9);
-  border: 1px solid rgba(148, 163, 184, 0.6);
+  color: #e5e7eb;
+  text-decoration: none;
   font-size: 0.9rem;
 }
 
-.contact-extra-text span {
-  display: block;
+.contact-info-item:hover .contact-info-value {
+  text-decoration: underline;
+}
+
+/* Icono redondo blanco */
+.contact-info-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.9);
+  background: rgba(15, 23, 42, 0.9);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.contact-info-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-info-label {
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: #6b7280;
 }
 
-.contact-extra-text a {
-  color: #e5e7eb;
-  text-decoration: none;
+.contact-info-value {
   font-size: 0.9rem;
 }
 
-.contact-extra-text a:hover {
-  text-decoration: underline;
-}
-
-/* mobile: que bajen uno debajo del otro prolijos */
+/* Mobile: en columna */
 @media (max-width: 768px) {
-  .contact-extra-items {
+  .contact-info-inline {
     flex-direction: column;
     align-items: flex-start;
   }
+}
+
+    /* ===== DIVISOR A TODO LO ANCHO ANTES DEL FOOTER ===== */
+
+.footer-full-divider {
+  position: relative;
+  width: 100vw;
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    rgba(14, 165, 233, 0),
+    #0b63e8,
+    rgba(14, 165, 233, 0)
+  );
+  margin-top: 40px;
+  margin-bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
     
@@ -1493,6 +1499,52 @@ section#trabajos .wrapper {
           </p>
         </div>
 
+        <div class="contact-info-inline">
+  <a class="contact-info-item"
+     href="https://wa.me/5491159288093"
+     target="_blank"
+     rel="noopener noreferrer">
+    <span class="contact-info-icon">W</span>
+    <div class="contact-info-text">
+      <span class="contact-info-label">WhatsApp</span>
+      <span class="contact-info-value">11 5928-8093</span>
+    </div>
+  </a>
+
+  <a class="contact-info-item"
+     href="mailto:manuelingjbl@gmail.com">
+    <span class="contact-info-icon">@</span>
+    <div class="contact-info-text">
+      <span class="contact-info-label">Correo</span>
+      <span class="contact-info-value">manuelingjbl@gmail.com</span>
+    </div>
+  </a>
+
+  <a class="contact-info-item"
+     href="https://instagram.com/manuelrubis"
+     target="_blank"
+     rel="noopener noreferrer">
+    <span class="contact-info-icon">IG</span>
+    <div class="contact-info-text">
+      <span class="contact-info-label">Instagram</span>
+      <span class="contact-info-value">@manuelrubis</span>
+    </div>
+  </a>
+
+  <a class="contact-info-item"
+     href="https://www.facebook.com/manuelcmdigital"
+     target="_blank"
+     rel="noopener noreferrer">
+    <span class="contact-info-icon">f</span>
+    <div class="contact-info-text">
+      <span class="contact-info-label">Facebook</span>
+      <span class="contact-info-value">/manuelcmdigital</span>
+    </div>
+  </a>
+</div>
+
+        
+        
         <!-- FORMULARIO: ENVÍA A FORMSPREE SIN SALIR DE LA PÁGINA -->
         <form id="contact-form" method="POST">
   <input type="hidden" name="_subject" value="Consulta desde landing MCMDIGITAL" />
@@ -1551,53 +1603,9 @@ section#trabajos .wrapper {
           <p id="form-status" class="form-status" aria-live="polite"></p>
         </form>
 
-        <div class="contact-extra">
-  <div class="contact-extra-line"></div>
-
-  <div class="contact-extra-items">
-    <div class="contact-extra-item">
-      <span class="contact-extra-icon">💬</span>
-      <div class="contact-extra-text">
-        <span>WhatsApp</span>
-        <a href="https://wa.me/5491159288093" target="_blank" rel="noopener noreferrer">
-          11 5928-8093
-        </a>
-      </div>
-    </div>
-
-    <div class="contact-extra-item">
-      <span class="contact-extra-icon">✉️</span>
-      <div class="contact-extra-text">
-        <span>Correo</span>
-        <a href="mailto:manuelingjbl@gmail.com">manuelingjbl@gmail.com</a>
-      </div>
-    </div>
-
-    <div class="contact-extra-item">
-      <span class="contact-extra-icon">📸</span>
-      <div class="contact-extra-text">
-        <span>Instagram</span>
-        <a href="https://instagram.com/manuelrubis" target="_blank" rel="noopener noreferrer">
-          @manuelrubis
-        </a>
-      </div>
-    </div>
-
-    <div class="contact-extra-item">
-      <span class="contact-extra-icon">📘</span>
-      <div class="contact-extra-text">
-        <span>Facebook</span>
-        <a href="https://www.facebook.com/manuelcmdigital" target="_blank" rel="noopener noreferrer">
-          /manuelcmdigital
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-      </div>
-
+       </div>
+      
+      <div class="footer-full-divider"></div>
       <div class="footer">
         <span>© 2025 VIACLOUDSTUDIO. Diseño & optimización Tienda Nube.</span>
         <span>Hecho en Argentina · pensado para vender online.</span>
