@@ -1420,45 +1420,49 @@ section#trabajos .wrapper {
 
         <!-- FORMULARIO: ENVÍA A FORMSPREE SIN SALIR DE LA PÁGINA -->
         <form id="contact-form" method="POST">
-          <input type="hidden" name="_subject" value="Consulta desde landing MCMDIGITAL" />
+  <input type="hidden" name="_subject" value="Consulta desde landing MCMDIGITAL" />
 
-          <div>
-            <label>Nombre y marca</label>
-            <input
-              type="text"
-              name="nombre_marca"
-              placeholder="Ej: Manuel · VIA SHOP"
-              required
-            />
-          </div>
+  <div>
+    <label for="nombre_marca">Nombre y marca</label>
+    <input
+      id="nombre_marca"
+      type="text"
+      name="nombre_marca"
+      placeholder="Nombre y marca"
+      required
+    />
+  </div>
 
-          <div>
-            <label>Email</label>
-            <input
-              type="email"
-              name="email"
-              placeholder="tu@correo.com"
-              required
-            />
-          </div>
+  <div>
+    <label for="email">Email</label>
+    <input
+      id="email"
+      type="email"
+      name="email"
+      placeholder="Email"
+      required
+    />
+  </div>
 
-          <div>
-            <label>Instagram o sitio actual</label>
-            <input
-              type="text"
-              name="instagram_sitio"
-              placeholder="@tumarca o URL"
-            />
-          </div>
+  <div>
+    <label for="instagram_sitio">Instagram o sitio actual</label>
+    <input
+      id="instagram_sitio"
+      type="text"
+      name="instagram_sitio"
+      placeholder="Instagram o sitio actual"
+    />
+  </div>
 
-          <div>
-            <label>Contanos brevemente qué necesitás</label>
-            <textarea
-              name="mensaje"
-              placeholder="Ej: ya tengo tienda en Tienda Nube pero necesito ordenarla y dejarla lista para campañas."
-              required
-            ></textarea>
-          </div>
+  <div>
+    <label for="mensaje">Contanos brevemente qué necesitás</label>
+    <textarea
+      id="mensaje"
+      name="mensaje"
+      placeholder="Contanos brevemente qué necesitás"
+      required
+    ></textarea>
+  </div>
 
           <button
             type="submit"
