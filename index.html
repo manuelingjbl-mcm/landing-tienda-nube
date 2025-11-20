@@ -1232,14 +1232,16 @@ section#trabajos .wrapper {
   transform: translateX(-50%);
 }
     
-/* CONTACTO: alinear la grilla arriba y quitar salto del form */
-.contact-section .contact-grid {
-  align-items: flex-start;   /* columnas alineadas arriba */
+/* CONTACTO: alinear columnas arriba y quitar márgenes extra del form */
+#contacto .contact-grid {
+  align-items: flex-start;  /* columnas alineadas arriba */
+  margin-top: 24px;         /* si lo ves todavía muy abajo, bajá a 20 o 16 */
 }
 
-.contact-section .contact-grid form {
-  margin-top: 0;             /* por si hay un margin-top anterior */
+#contacto .contact-grid > form {
+  margin-top: 0;            /* por si tenía un margin-top anterior */
 }
+
 
     /* Línea que separa el footer */
 .footer-full-divider {
@@ -1631,15 +1633,15 @@ section#trabajos .wrapper {
           <!-- Mensaje de estado -->
           <p id="form-status" class="form-status" aria-live="polite"></p>
         </form>
-             
+        </section>
+        
       <div class="footer-full-divider"></div>
       <div class="footer">
         <span>© 2025 VIACLOUDSTUDIO. Diseño & optimización Tienda Nube.</span>
         <span>Hecho en Argentina · pensado para vender online.</span>
       </div>
     </div>
-  </section>
-</main>
+ </main>
 
 <!-- BOTÓN FLOTANTE DE WHATSAPP -->
 <a
