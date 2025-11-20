@@ -448,31 +448,100 @@ header::after{
     }
 
     /* PORTFOLIO */
-    .grid-portfolio{
-      margin-top:32px;
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:12px;
-    }
-    .portfolio-item{
-      border-radius:14px;
-      overflow:hidden;
-      background:#0f172a;
-      min-height:180px;
-      position:relative;
-      color:#e5e7eb;
-      display:flex;
-      align-items:flex-end;
-      padding:12px;
-    }
-    .portfolio-item::after{
-      content:"Mockup Tienda Nube";
-      position:absolute;
-      top:10px;
-      left:12px;
-      font-size:11px;
-      opacity:.7;
-    }
+    /* ===== PORTFOLIO — cards con imagen de fondo ===== */
+.grid-portfolio{
+  margin-top:32px;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:32px;
+}
+
+/* el link envuelve toda la card */
+.portfolio-link{
+  display:block;
+  text-decoration:none;
+  color:inherit;
+  border-radius:24px;
+  overflow:hidden;
+}
+
+/* contenedor imagen + overlay */
+.portfolio-thumb{
+  position:relative;
+  height:260px;
+  background:#050816;
+  border-radius:24px;
+  overflow:hidden;
+}
+
+.portfolio-thumb img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  transform:scale(1.04);
+  transition:transform 400ms ease-out;
+}
+
+/* badge arriba */
+.portfolio-pill{
+  position:absolute;
+  top:16px;
+  left:16px;
+  padding:4px 12px;
+  border-radius:999px;
+  font-size:0.75rem;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  background:rgba(0,0,0,0.65);
+  color:#f5f7ff;
+}
+
+/* overlay inferior con nombre + subtítulo */
+.portfolio-overlay{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  padding:18px 20px 20px;
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,0.78),
+    rgba(0,0,0,0.25),
+    transparent
+  );
+  color:#f5f7ff;
+}
+
+.portfolio-overlay h3{
+  margin:0 0 4px;
+  font-size:1.05rem;
+}
+
+.portfolio-overlay p{
+  margin:0;
+  font-size:0.85rem;
+  color:rgba(235,241,255,0.9);
+}
+
+/* hover desktop */
+@media (hover:hover) and (pointer:fine){
+  .portfolio-link:hover .portfolio-thumb img{
+    transform:scale(1.08);
+  }
+}
+
+/* mobile: 1 por fila */
+@media (max-width:800px){
+  .grid-portfolio{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+  .portfolio-thumb{
+    height:240px;
+  }
+}
+
 
     /* PARTNERS */
     .partner-row{
@@ -832,6 +901,7 @@ header::after{
   border-color: rgba(148, 196, 255, 0.6);
   color: rgba(228, 240, 255, 0.96);
 }
+
     
   </style>
 </head>
@@ -989,45 +1059,38 @@ header::after{
     </p>
 
     <div class="grid-portfolio">
-      <!-- VIA SHOP -->
-      <a class="portfolio-item portfolio-link"
-         href="https://www.via-shop.com/"
-         target="_blank"
-         rel="noopener noreferrer">
-        <div class="portfolio-thumb">
-          <img src="gadget-viashop.png"
-               alt="Mockup tienda VIA SHOP">
-          <span class="portfolio-pill">Tienda Nube en producción</span>
-        </div>
-        <div class="portfolio-body">
-          <h3>VIA SHOP · Hogar, bazar y tecnología</h3>
-          <p>
-            E-commerce pensado para campañas en Meta y Google, con foco en combos,
-            tickets promedio y experiencia mobile first.
-          </p>
-        </div>
-      </a>
+  <!-- VIA SHOP -->
+  <a class="portfolio-link"
+     href="https://www.via-shop.com/"
+     target="_blank"
+     rel="noopener noreferrer">
+    <div class="portfolio-thumb">
+      <img src="gadget-viashop.png" alt="Mockup tienda VIA SHOP">
+      <span class="portfolio-pill">Mockup Tienda Nube</span>
 
-      <!-- CASA OADA -->
-      <a class="portfolio-item portfolio-link"
-         href="https://www.casaoada.com.ar/"
-         target="_blank"
-         rel="noopener noreferrer">
-        <div class="portfolio-thumb">
-          <img src="ferreteria-oada.png"
-               alt="Mockup tienda CASA OADA ferretería">
-          <span class="portfolio-pill">Tienda Nube en producción</span>
-        </div>
-        <div class="portfolio-body">
-          <h3>CASA OADA · Ferretería y hogar</h3>
-          <p>
-            Tienda orientada a una estructura clara de categorías y catálogo,
-            lista para campañas de performance.
-          </p>
-        </div>
-      </a>
+      <div class="portfolio-overlay">
+        <h3>VIA SHOP</h3>
+        <p>Hogar, bazar y tecnología · Tienda Nube en producción</p>
+      </div>
     </div>
-  </div>
+  </a>
+
+  <!-- CASA OADA -->
+  <a class="portfolio-link"
+     href="https://www.casaoada.com.ar/"
+     target="_blank"
+     rel="noopener noreferrer">
+    <div class="portfolio-thumb">
+      <img src="ferreteria-oada.png" alt="Mockup tienda CASA OADA">
+      <span class="portfolio-pill">Mockup Tienda Nube</span>
+
+      <div class="portfolio-overlay">
+        <h3>CASA OADA</h3>
+        <p>Ferretería y hogar · Tienda Nube en producción</p>
+      </div>
+    </div>
+  </a>
+</div>
 
   </section>
 
