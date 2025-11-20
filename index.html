@@ -1151,6 +1151,81 @@ section#trabajos .wrapper {
   }
 }
 
+/* ===== BLOQUE EXTRA DE CONTACTO (línea + datos) ===== */
+
+.contact-extra {
+  margin-top: 40px;
+}
+
+/* línea / franja estética */
+.contact-extra-line {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(148, 163, 184, 0),
+    rgba(148, 163, 184, 0.55),
+    rgba(148, 163, 184, 0)
+  );
+  margin-bottom: 20px;
+}
+
+/* fila de items */
+.contact-extra-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 32px;
+  align-items: center;
+  color: #e5e7eb;
+  font-size: 0.9rem;
+}
+
+.contact-extra-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* “iconos” en circulito */
+.contact-extra-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  font-size: 0.9rem;
+}
+
+.contact-extra-text span {
+  display: block;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #6b7280;
+}
+
+.contact-extra-text a {
+  color: #e5e7eb;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.contact-extra-text a:hover {
+  text-decoration: underline;
+}
+
+/* mobile: que bajen uno debajo del otro prolijos */
+@media (max-width: 768px) {
+  .contact-extra-items {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+    
   </style>
 </head>
 <body>
@@ -1475,6 +1550,51 @@ section#trabajos .wrapper {
           <!-- Mensaje de estado -->
           <p id="form-status" class="form-status" aria-live="polite"></p>
         </form>
+
+        <div class="contact-extra">
+  <div class="contact-extra-line"></div>
+
+  <div class="contact-extra-items">
+    <div class="contact-extra-item">
+      <span class="contact-extra-icon">💬</span>
+      <div class="contact-extra-text">
+        <span>WhatsApp</span>
+        <a href="https://wa.me/5491159288093" target="_blank" rel="noopener noreferrer">
+          11 5928-8093
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-extra-item">
+      <span class="contact-extra-icon">✉️</span>
+      <div class="contact-extra-text">
+        <span>Correo</span>
+        <a href="mailto:manuelingjbl@gmail.com">manuelingjbl@gmail.com</a>
+      </div>
+    </div>
+
+    <div class="contact-extra-item">
+      <span class="contact-extra-icon">📸</span>
+      <div class="contact-extra-text">
+        <span>Instagram</span>
+        <a href="https://instagram.com/manuelrubis" target="_blank" rel="noopener noreferrer">
+          @manuelrubis
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-extra-item">
+      <span class="contact-extra-icon">📘</span>
+      <div class="contact-extra-text">
+        <span>Facebook</span>
+        <a href="https://www.facebook.com/manuelcmdigital" target="_blank" rel="noopener noreferrer">
+          /manuelcmdigital
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
 
       </div>
 
