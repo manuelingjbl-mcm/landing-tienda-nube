@@ -1082,6 +1082,75 @@ section#trabajos .wrapper {
   background: transparent !important;
 }
 
+    /* ===== STACK CON EL QUE TRABAJAMOS ===== */
+
+.stack-pills {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-start;
+}
+
+.stack-pill {
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  border: 1.5px solid rgba(129, 140, 248, 0.65); /* violeta azulado */
+  background:
+    radial-gradient(circle at top left,
+      rgba(129, 140, 248, 0.18),
+      rgba(219, 234, 254, 0.15));
+  color: #111827;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+  white-space: nowrap;
+  transition:
+    background 220ms ease-out,
+    transform 200ms ease-out,
+    box-shadow 220ms ease-out,
+    border-color 200ms ease-out;
+}
+
+/* Pills destacadas: Marketing Nube + Chat Nube */
+.stack-pill--highlight {
+  border-color: rgba(236, 72, 153, 0.75); /* rosa/violeta */
+  background:
+    radial-gradient(circle at top left,
+      rgba(236, 72, 153, 0.20),
+      rgba(129, 140, 248, 0.10));
+}
+
+/* Hover desktop */
+@media (hover: hover) and (pointer: fine) {
+  .stack-pill:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(15, 23, 42, 0.18);
+    border-color: rgba(59, 130, 246, 0.9);
+    background:
+      radial-gradient(circle at top left,
+        rgba(59, 130, 246, 0.25),
+        rgba(226, 232, 255, 0.25));
+  }
+
+  .stack-pill--highlight:hover {
+    border-color: rgba(236, 72, 153, 0.95);
+    background:
+      radial-gradient(circle at top left,
+        rgba(236, 72, 153, 0.30),
+        rgba(129, 140, 248, 0.20));
+  }
+}
+
+/* Responsive: que se acomoden en varias filas y no se corten feo */
+@media (max-width: 768px) {
+  .stack-pills {
+    justify-content: flex-start;
+  }
+  .stack-pill {
+    white-space: normal;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -1310,23 +1379,27 @@ section#trabajos .wrapper {
   </section>
 
   <!-- PARTNERS -->
-  <section id="partners" class="section reveal" style="background:var(--gris);">
-    <div class="wrapper">
-      <div class="section-title">Stack con el que trabajamos</div>
-      <h2>Preparamos tu tienda para integrarse con las herramientas que ya usás.</h2>
-      <p>
-        Dejamos todo listo para que puedas medir, pautar y escalar sin dolores de cabeza técnicos.
-      </p>
+  <section class="section" id="stack">
+  <div class="wrapper">
+    <div class="section-title">Stack con el que trabajamos</div>
+    <h2>Preparamos tu tienda para integrarse con las herramientas que ya usás.</h2>
+    <p>
+      Dejamos todo listo para que puedas medir, pautar, automatizar y escalar sin dolores de cabeza:
+      desde la base en Tienda Nube hasta campañas, analítica, newsletters y Chat Nube.
+    </p>
 
-      <div class="partner-row">
-        <div class="partner-pill">Tienda Nube</div>
-        <div class="partner-pill">Meta Pixel & Conversion API</div>
-        <div class="partner-pill">Google Analytics 4</div>
-        <div class="partner-pill">Google Tag Manager</div>
-        <div class="partner-pill">Google Ads & Merchant Center</div>
-      </div>
+    <div class="stack-pills">
+      <div class="stack-pill">Tienda Nube</div>
+      <div class="stack-pill">Meta Pixel &amp; Conversion API</div>
+      <div class="stack-pill">Google Analytics 4</div>
+      <div class="stack-pill">Google Tag Manager</div>
+      <div class="stack-pill">Google Ads &amp; Merchant Center</div>
+      <div class="stack-pill stack-pill--highlight">Marketing Nube · Newsletters y flujos</div>
+      <div class="stack-pill stack-pill--highlight">Chat Nube · Chatbot &amp; WhatsApp</div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- CONTACTO -->
   <section id="contacto" class="contact-section reveal">
