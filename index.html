@@ -1229,18 +1229,7 @@ section#trabajos .wrapper {
   margin-bottom: 16px;
 }
 
-    
-/* CONTACTO: alinear columnas arriba y quitar márgenes extra del form */
-#contacto .contact-grid {
-  align-items: flex-start;  /* columnas alineadas arriba */
-  margin-top: 8px;         /* si lo ves todavía muy abajo, bajá a 20 o 16 */
-}
-
-#contacto .contact-grid > form {
-  margin-top: -12;            /* por si tenía un margin-top anterior */
-}
-
-/* Bloque de footer */
+    /* Bloque de footer */
 .footer {
   padding: 18px 24px 32px;
   display: flex;
@@ -1283,6 +1272,28 @@ section#trabajos .wrapper {
     align-items: center;
     text-align: center;
   }
+}
+
+    /* CONTACTO: alinear columnas y subir un poco el form */
+#contacto .contact-grid {
+  align-items: flex-start;
+}
+
+/* Ajuste fino de altura del card del formulario */
+#contacto .contact-grid > form {
+  margin-top: -16px;    /* probá -16px, y si querés más alto, -20px */
+}
+
+    /* Sección de contacto: que el espacio quede dentro de la sección, no afuera */
+#contacto {
+  margin-bottom: 0 !important;   /* eliminamos el espacio externo que muestra el fondo blanco */
+  padding-bottom: 72px;          /* respiración interna con fondo oscuro */
+}
+
+/* Divider pegadito a la sección, sin margen extra arriba */
+.footer-full-divider {
+  margin-top: 0;                 /* ya no necesitamos espacio blanco arriba */
+  margin-bottom: 16px;           /* este lo podés ajustar si querés más/menos aire antes del texto del footer */
 }
 
     
