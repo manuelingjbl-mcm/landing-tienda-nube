@@ -392,15 +392,19 @@ header::after{
     /* ===== MOBILE: pills una debajo de la otra ===== */
 @media (max-width: 768px) {
   .brand-grid {
-    flex-direction: column;      /* de fila → columna */
-    align-items: center;         /* centradas en el eje horizontal */
-    gap: 16px;                   /* espacio entre pills */
+    display: flex;              /* forzamos flex en mobile */
+    flex-direction: column;     /* columna: una bajo la otra */
+    align-items: stretch;       /* que ocupen todo el ancho */
+    gap: 16px;                  /* espacio entre cada pill */
   }
 
+  /* Cada pill ocupa toda la fila */
+  .brand-grid > span,
   .brand-grid .client-pill {
-    width: 100%;                 /* que ocupen todo el ancho disponible */
-    max-width: 360px;            /* opcional: para que no se hagan demasiado anchas */
-    margin: 0 auto;              /* centradas dentro de la sección */
+    display: block;
+    width: 100%;
+    max-width: 380px;           /* opcional, para que no se vayan muy anchas */
+    margin: 0 auto;
   }
 }
 
