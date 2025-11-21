@@ -781,28 +781,7 @@ header::after{
       opacity:1;
       transform:translateY(0);
     }
-
-    /* ==== BOTÓN FLOTANTE WHATSAPP ==== */
-    .whatsapp-float{
-      position:fixed;
-      right:16px;
-      bottom:16px;
-      z-index:40;
-      background:#25D366;
-      color:#fff;
-      padding:10px 16px;
-      border-radius:999px;
-      font-size:14px;
-      font-weight:600;
-      box-shadow:0 10px 25px rgba(0,0,0,.35);
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
-    .whatsapp-float span{
-      font-size:18px;
-    }
-
+   
 /* ===================== RESPONSIVE MOBILE ===================== */
 @media (max-width:768px){
 
@@ -1322,6 +1301,201 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   height: 100%;
 }
 
+/* Botón flotante redondo */
+.vc-chat-launcher {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: #f97316; /* naranja tipo Hostinger */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  z-index: 9999;
+}
+
+.vc-chat-launcher:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+}
+
+.vc-chat-icon {
+  font-size: 22px;
+}
+
+/* Caja de chat */
+.vc-chat-widget {
+  position: fixed;
+  right: 24px;
+  bottom: 96px;
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  background: #020617;
+  border-radius: 18px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.7);
+  display: none;            /* se muestra con la clase .is-open */
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 9998;
+}
+
+/* Estado abierto */
+.vc-chat-widget.is-open {
+  display: flex;
+  animation: vcChatIn 0.22s ease-out;
+}
+
+@keyframes vcChatIn {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Header del chat */
+.vc-chat-header {
+  padding: 12px 14px;
+  background: #020617;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.vc-chat-header-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vc-chat-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #0b63e8, #22c55e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #f9fafb;
+  font-weight: 600;
+}
+
+.vc-chat-title {
+  font-size: 14px;
+  color: #f9fafb;
+  font-weight: 600;
+}
+
+.vc-chat-subtitle {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.vc-chat-close {
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Cuerpo (mensajes) */
+.vc-chat-body {
+  padding: 16px;
+  background: radial-gradient(circle at top, #0b1120 0, #020617 55%);
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+/* Burbujas */
+.vc-chat-bubble {
+  max-width: 85%;
+  padding: 10px 12px;
+  border-radius: 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.vc-chat-bubble-agent {
+  background: rgba(15, 23, 42, 0.95);
+  color: #e5e7eb;
+}
+
+.vc-chat-bubble-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: #93c5fd;
+  margin-bottom: 4px;
+}
+
+.vc-chat-bubble-time {
+  font-size: 10px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+/* Barra de entrada */
+.vc-chat-input-bar {
+  padding: 10px;
+  background: #020617;
+  border-top: 1px solid rgba(148, 163, 184, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vc-chat-input {
+  flex: 1;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid #1e293b;
+  background: #020617;
+  color: #e5e7eb;
+  padding: 0 14px;
+  font-size: 13px;
+}
+
+.vc-chat-input::placeholder {
+  color: #6b7280;
+}
+
+.vc-chat-send {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: none;
+  background: #0b63e8;
+  color: #f9fafb;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Mobile: que el chat suba un poco más y ocupe más ancho */
+@media (max-width: 640px) {
+  .vc-chat-widget {
+    right: 16px;
+    left: 16px;
+    width: auto;
+    bottom: 90px;
+  }
+
+  .vc-chat-launcher {
+    right: 16px;
+    bottom: 16px;
+  }
+}
 
 
     
@@ -1667,18 +1841,6 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   <span>Hecho en Argentina · pensado para vender online.</span>
 </div>
   </main>
-  
-      
-<!-- BOTÓN FLOTANTE DE WHATSAPP -->
-<a
-  href="https://wa.me/541159288093?text=Hola%20Sofi%2C%20vengo%20de%20la%20landing%20de%20Tienda%20Nube%20y%20quiero%20una%20consultor%C3%ADa."
-  class="whatsapp-float"
-  target="_blank"
-  rel="noopener"
->
-  <span>💬</span>
-  WhatsApp
-</a>
 
 <!-- SCRIPT ANIMACIONES + FORM + MENÚ -->
 <script>
@@ -1853,6 +2015,80 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     // Estado inicial (por si acaso)
     setProject("landing");
   });
+</script>
+
+<!-- Lanzador flotante -->
+<button class="vc-chat-launcher" id="vcChatLauncher" aria-label="Abrir chat">
+  <span class="vc-chat-icon">💬</span>
+</button>
+
+<!-- Widget de chat -->
+<div class="vc-chat-widget" id="vcChatWidget" aria-hidden="true">
+  <div class="vc-chat-header">
+    <div class="vc-chat-header-info">
+      <div class="vc-chat-avatar">S</div>
+      <div>
+        <div class="vc-chat-title">Sofi · Chat Nube</div>
+        <div class="vc-chat-subtitle">El equipo también puede ayudar</div>
+      </div>
+    </div>
+    <button class="vc-chat-close" id="vcChatClose" aria-label="Cerrar chat">✕</button>
+  </div>
+
+  <div class="vc-chat-body">
+    <div class="vc-chat-bubble vc-chat-bubble-agent">
+      <div class="vc-chat-bubble-name">Sofi</div>
+      <div class="vc-chat-bubble-text">
+        Hola 👋<br />
+        ¿En qué puedo ayudarte hoy?
+      </div>
+      <div class="vc-chat-bubble-time">Ahora</div>
+    </div>
+  </div>
+
+  <div class="vc-chat-input-bar">
+    <input
+      type="text"
+      class="vc-chat-input"
+      placeholder="Haz una pregunta..."
+    />
+    <button class="vc-chat-send" type="button">
+      ➤
+    </button>
+  </div>
+</div>
+  
+<script>
+  (function () {
+    const launcher = document.getElementById('vcChatLauncher');
+    const widget   = document.getElementById('vcChatWidget');
+    const closeBtn = document.getElementById('vcChatClose');
+
+    function openChat() {
+      widget.classList.add('is-open');
+      widget.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeChat() {
+      widget.classList.remove('is-open');
+      widget.setAttribute('aria-hidden', 'true');
+    }
+
+    launcher.addEventListener('click', function () {
+      if (widget.classList.contains('is-open')) {
+        closeChat();
+      } else {
+        openChat();
+      }
+    });
+
+    closeBtn.addEventListener('click', closeChat);
+
+    // Cerrar con ESC
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeChat();
+    });
+  })();
 </script>
 
   
