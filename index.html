@@ -1533,35 +1533,78 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
-/* ==== NUESTROS TRABAJOS · CARRUSEL MOBILE ==== */
-@media (max-width: 575.98px) {
+/* ==== NUESTROS TRABAJOS · Mockups + texto ==== */
 
-  /* Contenedor: carrusel horizontal */
+/* Layout general de la sección (modo escritorio) */
+.works-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr);
+  align-items: center;
+  gap: 56px;
+}
+
+/* Contenedor de mockups (escritorio) */
+.works-shots {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+/* Cada mockup */
+.works-shot {
+  border: none;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+}
+
+.works-shot img {
+  display: block;
+  width: 230px;          /* tamaño cómodo en desktop */
+  max-width: 100%;
+  border-radius: 26px;
+  box-shadow: 0 24px 45px rgba(15, 23, 42, 0.45);
+}
+
+/* Activa */
+.works-shot.is-active {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 30px 60px rgba(15, 23, 42, 0.65);
+}
+
+/* ====== Mobile: carrusel horizontal ====== */
+@media (max-width: 767.98px) {
+  /* El layout pasa a una sola columna: texto arriba, mockups abajo */
+  .works-split {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  /* Contenedor scrollable */
   .works-shots {
-    display: flex;
-    flex-direction: row;
-    gap: 14px;
+    justify-content: flex-start;
     overflow-x: auto;
-    padding-bottom: 8px;
-    margin-bottom: 18px;
+    padding: 0 16px 12px;
+    margin: 0 -16px;              /* para que las tarjetas respiren al borde */
+    gap: 16px;
     scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
   }
 
-  /* Ocultar scrollbar en mobile */
   .works-shots::-webkit-scrollbar {
-    display: none;
+    display: none;                /* sin scroll bar en mobile */
   }
 
-  /* Cada mockup ocupa buen ancho en mobile */
+  /* Cada tarjeta ocupa buena parte del ancho y no se encoge */
   .works-shot {
-    flex: 0 0 68%;          /* probá subir a 72–75% si los querés aún más grandes */
+    flex: 0 0 72%;                /* ~70% del ancho de pantalla */
+    max-width: 72%;
     scroll-snap-align: center;
   }
 
   .works-shot img {
     width: 100%;
-    height: auto;
   }
 }
 
