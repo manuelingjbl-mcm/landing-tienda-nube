@@ -1719,36 +1719,41 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 </div>
 
   <div class="works-split">
-  <!-- Mockups verticales -->
-  <div class="works-shots">
-    <!-- Landing -->
-    <button class="works-shot is-active" data-project="landing" type="button">
-      <img src="landing-via.png" alt="Landing VIASHOP">
-    </button>
 
-    <!-- Newsletter -->
-    <button class="works-shot" data-project="newsletter" type="button">
-      <img src="distri-home.png" alt="Newsletter DISTRI HOME">
-    </button>
-  </div>
+    <!-- Mockups verticales -->
+ <div class="works-shots">
+  <!-- Landing VIA SHOP -->
+  <button class="works-shot data-project="landing" type="button">
+    <img src="landing-via.png" alt="Landing VIA SHOP">
+  </button>
 
-  <!-- Texto que cambia -->
-  <div class="works-copy" id="works-copy">
-    <p class="works-tag" id="works-tag">Landing Tienda Nube</p>
-    <h3 id="works-title">Landing VIA SHOP</h3>
-    <p id="works-description">
-      Landing enfocada en servicios de diseño y optimización de Tienda Nube,
-      lista para recibir tráfico de campañas y convertir visitas en consultas.
-    </p>
-    <ul class="works-points" id="works-points">
-      <li>Diseño pensado para tráfico desde campañas.</li>
-      <li>Estructura clara: hero, propuesta, servicios, trabajos y contacto.</li>
-      <li>Optimizada para leer bien en mobile.</li>
-    </ul>
-    <a id="works-link" class="works-link" href="#contacto">
-      Ver landing en esta página
-    </a>
-  </div>
+  <!-- Newsletter DISTRI HOME -->
+  <button class="works-shot" data-project="newsletter" type="button">
+    <img src="distri-home.png" alt="Newsletter DISTRI HOME">
+  </button>
+
+  <!-- Nueva landing VIACLOUDSTUDIO -->
+  <button class="works-shot" is-active" data-project="viacloud" type="button">
+    <img src="via-clod.png" alt="Landing VIACLOUDSTUDIO · diseño y optimización Tienda Nube">
+  </button>
+</div>
+
+<!-- Texto que cambia -->
+<div class="works-copy" id="works-copy">
+  <p class="works-tag" id="works-tag">Landing Tienda Nube</p>
+  <h3 id="works-title">Landing VIA SHOP</h3>
+  <p id="works-description">
+    Landing enfocada en servicios de diseño y optimización de Tienda Nube,
+    lista para recibir tráfico de campañas y convertir visitas en consultas.
+  </p>
+  <ul class="works-points" id="works-points">
+    <li>Diseño pensado para tráfico desde campañas.</li>
+    <li>Estructura clara: hero, propuesta, servicios, trabajos y contacto.</li>
+    <li>Optimizada para leer bien en mobile.</li>
+  </ul>
+  <a id="works-link" class="works-link" href="#contacto">
+    Ver landing en esta página
+  </a>
 </div>
 
     
@@ -1977,78 +1982,91 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const shots = document.querySelectorAll(".works-shot");
-    const tagEl = document.getElementById("works-tag");
-    const titleEl = document.getElementById("works-title");
-    const descEl = document.getElementById("works-description");
-    const pointsEl = document.getElementById("works-points");
-    const linkEl = document.getElementById("works-link");
+  const shots    = document.querySelectorAll(".works-shot");
+  const tagEl    = document.getElementById("works-tag");
+  const titleEl  = document.getElementById("works-title");
+  const descEl   = document.getElementById("works-description");
+  const pointsEl = document.getElementById("works-points");
+  const linkEl   = document.getElementById("works-link");
 
-    if (!shots.length) return;
+  if (!shots.length) return;
 
-    const projects = {
-      landing: {
-        tag: "Landing Tienda Nube",
-        title: "Landing VIA SHOP",
-        description:
-          "Landing enfocada en servicios de diseño y optimización de Tienda Nube, lista para recibir tráfico de campañas y convertir visitas en consultas.",
-        points: [
-          "Hero mobile first con propuesta clara y CTA principal.",
-          "Secciones de servicios, casos y stack de integraciones.",
-          "Formulario de contacto optimizado para leads rápidos."
-        ],
-        link: "#contacto",
-        linkLabel: "Ver landing en esta página"
-      },
-      newsletter: {
-        tag: "Newsletter & automatizaciones",
-        title: "Newsletter DISTRI HOME",
-        description:
-          "Newsletter diseñado para Marketing Nube, con foco en productos destacados, ofertas y derivación a la tienda online.",
-        points: [
-          "Diseño mobile first que se lee perfecto en correo.",
-          "Bloques de productos y beneficios claros.",
-          "Listo para integrarse con flujos básicos de bienvenida y promos."
-        ],
-        link: "#contacto", // o un enlace público de preview si lo tenés
-        linkLabel: "Ver cómo trabajamos newsletters"
-      }
-    };
-
-    function setProject(key) {
-      const data = projects[key];
-      if (!data) return;
-
-      tagEl.textContent = data.tag;
-      titleEl.textContent = data.title;
-      descEl.textContent = data.description;
-
-      // reconstruimos la lista
-      pointsEl.innerHTML = "";
-      data.points.forEach(function (txt) {
-        const li = document.createElement("li");
-        li.textContent = txt;
-        pointsEl.appendChild(li);
-      });
-
-      linkEl.href = data.link;
-      linkEl.textContent = data.linkLabel;
+  const projects = {
+    landing: {
+      tag: "Landing Tienda Nube",
+      title: "Landing VIA SHOP",
+      description:
+        "Landing enfocada en servicios de diseño y optimización de Tienda Nube, lista para recibir tráfico de campañas y convertir visitas en consultas.",
+      points: [
+        "Hero mobile first con propuesta clara y CTA principal.",
+        "Secciones de servicios, casos y stack de integraciones.",
+        "Formulario de contacto optimizado para leads rápidos."
+      ],
+      link: "#contacto",
+      linkLabel: "Ver landing en esta página"
+    },
+    newsletter: {
+      tag: "Newsletter & automatizaciones",
+      title: "Newsletter DISTRI HOME",
+      description:
+        "Newsletter diseñado para Marketing Nube, con foco en productos destacados, ofertas y derivación a la tienda online.",
+      points: [
+        "Diseño mobile first que se lee perfecto en correo.",
+        "Bloques de productos y beneficios claros.",
+        "Listo para integrarse con flujos básicos de bienvenida y promos."
+      ],
+      link: "#contacto",
+      linkLabel: "Ver cómo trabajamos newsletters"
+    },
+    viacloud: {
+      tag: "Landing servicio Tienda Nube",
+      title: "Landing VIACLOUDSTUDIO",
+      description:
+        "Landing propia para presentar el servicio de diseño y optimización de Tienda Nube, pensada para captar leads calientes desde campañas y contenido orgánico.",
+      points: [
+        "Hero con propuesta de valor clara, orientada a emprendedores y marcas que quieren escalar.",
+        "Explica el proceso de trabajo, tipos de proyectos y stack de herramientas en un recorrido simple.",
+        "Incluye CTA principales y formulario de consulta rápido conectado a WhatsApp."
+      ],
+      link: "#contacto", // si después tenés una URL pública, la cambiamos acá
+      linkLabel: "Quiero una landing como esta"
     }
+  };
 
-    shots.forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        const key = btn.getAttribute("data-project");
-        // visual
-        shots.forEach(s => s.classList.remove("is-active"));
-        btn.classList.add("is-active");
-        // contenido
-        setProject(key);
-      });
+  function setProject(key) {
+    const data = projects[key];
+    if (!data) return;
+
+    tagEl.textContent   = data.tag;
+    titleEl.textContent = data.title;
+    descEl.textContent  = data.description;
+
+    // reconstruimos la lista
+    pointsEl.innerHTML = "";
+    data.points.forEach(function (txt) {
+      const li = document.createElement("li");
+      li.textContent = txt;
+      pointsEl.appendChild(li);
     });
 
-    // Estado inicial (por si acaso)
-    setProject("landing");
+    linkEl.href        = data.link;
+    linkEl.textContent = data.linkLabel;
+  }
+
+  shots.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      const key = btn.getAttribute("data-project");
+      // visual
+      shots.forEach(s => s.classList.remove("is-active"));
+      btn.classList.add("is-active");
+      // contenido
+      setProject(key);
+    });
   });
+
+  // Estado inicial
+  setProject("viacloud"); // Si querés que arranque en VIACLOUDSTUDIO, cambialo a "viacloud"
+});
 </script>
 
 <!-- BOTÓN FLOTANTE · SOFI CHAT -->
