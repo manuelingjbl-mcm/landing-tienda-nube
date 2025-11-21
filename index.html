@@ -1571,47 +1571,48 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   box-shadow: 0 30px 60px rgba(15, 23, 42, 0.65);
 }
 
-/* ====== Mobile: carrusel horizontal ====== */
+/* ====== Mobile: carrusel horizontal optimizado ====== */
 @media (max-width: 767.98px) {
-  /* Layout: una columna, texto arriba / mockups abajo */
+
+  /* Una sola columna: texto arriba, mockups abajo */
   .works-split {
     grid-template-columns: minmax(0, 1fr);
     gap: 28px;
   }
 
-  /* Contenedor scrollable de las tarjetas */
+  /* Contenedor scrollable horizontal */
   .works-shots {
-    display: flex;
     justify-content: flex-start;
     overflow-x: auto;
-    overflow-y: visible;            /* deja que el scale no corte nada */
-    padding: 0 20px 24px;           /* un poco más de aire abajo */
-    margin: 0 -20px;                /* que lleguen casi al borde */
-    gap: 20px;
+    padding: 0 16px 18px;
+    margin: 0 -16px;        /* para que respiren hasta el borde de la pantalla */
+    gap: 18px;
     scroll-snap-type: x mandatory;
   }
 
   .works-shots::-webkit-scrollbar {
-    display: none;
+    display: none;          /* sin barra de scroll visible */
   }
 
-  /* Cada tarjeta ocupa casi todo el ancho */
+  /* Cada tarjeta ocupa buena parte del ancho, pero sigue siendo vertical */
   .works-shot {
-    flex: 0 0 88%;                  /* más grande en mobile */
-    max-width: 88%;
+    flex: 0 0 72vw;         /* probá 70–75vw: vertical, grande y cómoda */
+    max-width: 72vw;
     scroll-snap-align: center;
   }
 
   .works-shot img {
     width: 100%;
+    height: auto;           /* mantiene la proporción vertical del mockup */
   }
 
-  /* En mobile casi no agrandamos para que no se "corte" visualmente */
+  /* En mobile NO escalamos para que no se corten, solo ajustamos sombra */
   .works-shot.is-active {
-    transform: translateY(-4px) scale(1.01);
-    box-shadow: 0 26px 50px rgba(15, 23, 42, 0.6);
+    transform: none;
+    box-shadow: 0 24px 50px rgba(15, 23, 42, 0.55);
   }
 }
+
 
 
     
