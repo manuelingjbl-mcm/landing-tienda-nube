@@ -1302,34 +1302,44 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
 
 /* ====== BOTÓN FLOTANTE ====== */
-.vs-chat-launcher {
+.vc-chat-fab {
   position: fixed;
   right: 24px;
   bottom: 24px;
   width: 56px;
   height: 56px;
   border-radius: 50%;
+  background: #0b63e8;                 /* azul VIA */
   border: none;
   cursor: pointer;
-  background: #0b63e8; /* color principal de la landing */
-  box-shadow: 0 12px 28px rgba(11, 99, 232, 0.55);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  box-shadow: 0 12px 30px rgba(11, 99, 232, 0.55);
   z-index: 9999;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
-.vs-chat-launcher:hover {
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 16px 32px rgba(11, 99, 232, 0.7);
-  background: #1b76ff;
+/* efecto hover */
+.vc-chat-fab:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(11, 99, 232, 0.7);
 }
 
-.vs-chat-launcher-icon {
-  font-size: 22px;
-  color: #ffffff;
-  line-height: 1;
+/* SVG de la sonrisa */
+.vc-chat-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: #ffffff;
+  stroke-width: 1.6;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* el círculo exterior sí lo rellenamos un poco para que se vea mejor */
+.vc-chat-icon svg circle:first-child {
+  fill: transparent;      /* solo contorno; si querés círculo sólido, poné #0b63e8 */
 }
 
 /* ====== VENTANA DE CHAT ====== */
@@ -2045,12 +2055,22 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   });
 </script>
 
-<!-- SOFI · CHAT NUBE -->
-<button id="vs-chat-launcher"
-        class="vs-chat-launcher"
-        aria-label="Abrir chat con Sofi">
-  <span class="vs-chat-launcher-icon">☺</span>
+<!-- BOTÓN FLOTANTE · SOFI CHAT -->
+<button id="sofi-chat-toggle" class="vc-chat-fab" aria-label="Abrir chat">
+  <span class="vc-chat-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24">
+      <!-- círculo exterior -->
+      <circle cx="12" cy="12" r="9" />
+      <!-- ojo izquierdo -->
+      <circle cx="9" cy="10" r="0.7" />
+      <!-- ojo derecho -->
+      <circle cx="15" cy="10" r="0.7" />
+      <!-- sonrisa -->
+      <path d="M8.5 14.5c1.1 1.3 2.4 2 3.5 2s2.4-.7 3.5-2" />
+    </svg>
+  </span>
 </button>
+
 
 <div id="vs-chat-widget" class="vs-chat-widget" aria-hidden="true">
   <div class="vs-chat-header">
