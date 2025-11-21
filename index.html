@@ -1290,6 +1290,36 @@ section#trabajos .wrapper {
   margin-top: 8px;         /* que “Contanos en qué estado...” respire bajo el h2 */
 }
 
+/* ==== ICONOS DE REDES SIN CÍRCULO ==== */
+
+.contact-social-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;              /* separa los iconos entre sí */
+}
+
+.contact-social-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* acá sacamos el círculo */
+.contact-social-icon {
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+}
+
+/* aseguramos que el PNG ocupe todo sin deformarse */
+.contact-social-icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 
 
 
