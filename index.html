@@ -1302,44 +1302,34 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
 
 /* ====== BOTÓN FLOTANTE ====== */
-.vc-chat-fab {
+.vs-chat-launcher {
   position: fixed;
   right: 24px;
   bottom: 24px;
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: #0b63e8;                 /* azul VIA */
   border: none;
   cursor: pointer;
+  background: #0b63e8; /* color principal de la landing */
+  box-shadow: 0 12px 28px rgba(11, 99, 232, 0.55);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 12px 30px rgba(11, 99, 232, 0.55);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
   z-index: 9999;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
-/* efecto hover */
-.vc-chat-fab:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 36px rgba(11, 99, 232, 0.7);
+.vs-chat-launcher:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 16px 32px rgba(11, 99, 232, 0.7);
+  background: #1b76ff;
 }
 
-/* SVG de la sonrisa */
-.vc-chat-icon svg {
-  width: 22px;
-  height: 22px;
-  stroke: #ffffff;
-  stroke-width: 1.6;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* el círculo exterior sí lo rellenamos un poco para que se vea mejor */
-.vc-chat-icon svg circle:first-child {
-  fill: transparent;      /* solo contorno; si querés círculo sólido, poné #0b63e8 */
+.vs-chat-launcher-icon {
+  font-size: 22px;
+  color: #ffffff;
+  line-height: 1;
 }
 
 /* ====== VENTANA DE CHAT ====== */
