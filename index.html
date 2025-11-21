@@ -772,15 +772,19 @@ header::after{
     }
 
     /* ==== REVEAL ON SCROLL ==== */
-    .reveal{
-      opacity:0;
-      transform:translateY(20px);
-      transition:opacity .6s ease, transform .6s ease;
-    }
-    .reveal-visible{
-      opacity:1;
-      transform:translateY(0);
-    }
+    .reveal {
+  opacity: 0;
+  transform: translateY(32px) scale(0.98);  /* más abajo y un poquito más chico */
+  transition:
+    opacity 0.7s ease-out,
+    transform 0.7s ease-out;
+}
+
+/* Cuando el observer agrega la clase */
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
    
 /* ===================== RESPONSIVE MOBILE ===================== */
 @media (max-width:768px){
