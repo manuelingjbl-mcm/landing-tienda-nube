@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -1317,28 +1317,24 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   box-shadow: 0 12px 30px rgba(11, 99, 232, 0.55);
   cursor: pointer;
   z-index: 999;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
 }
 
-/* Nueva sonrisa */
-.chat-launcher-img {
-  width: 26px;
-  height: 26px;
+/* sonrisa (la imagen dentro del botón) */
+.chat-launcher img {
+  width: 28px;          /* subílo a 30–32px si la querés más grande */
+  height: 28px;
   object-fit: contain;
   display: block;
 }
 
-
-.vs-chat-launcher:hover {
+/* hover de la burbuja */
+.chat-launcher:hover {
   transform: translateY(-2px) scale(1.03);
   box-shadow: 0 16px 32px rgba(11, 99, 232, 0.7);
   background: #1b76ff;
 }
 
-.vs-chat-launcher-icon {
-  font-size: 22px;
-  color: #ffffff;
-  line-height: 1;
-}
 
 /* ====== VENTANA DE CHAT ====== */
 .vs-chat-widget {
@@ -1527,11 +1523,12 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     bottom: 86px;
   }
 
-  .vs-chat-launcher {
+  .chat-launcher {
     right: 16px;
     bottom: 16px;
   }
 }
+
 
 
     
@@ -2169,24 +2166,37 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 
   function openWidget() {
-    widget.classList.add('is-open');
-    widget.setAttribute('aria-hidden', 'false');
-    if (!bodyEl.dataset.init) {
-      appendMessage(
-        'Hola 👋 Soy Sofi. Elegí una opción rápida o escribime tu consulta y te ayudo a ver la mejor forma de optimizar tu tienda.',
-        'bot'
-      );
-      bodyEl.dataset.init = '1';
-    }
-  }
+  widget.classList.add('is-open');
+  widget.setAttribute('aria-hidden', 'false');
 
-  function closeWidget() {
-    widget.classList.remove('is-open');
-    widget.setAttribute('aria-hidden', 'true');
+  if (!bodyEl.dataset.init) {
+    appendMessage(
+      'Hola 👋 Soy Sofi. Elegí una opción rápida o escribime tu consulta y te ayudo a ver la mejor forma de optimizar tu tienda.',
+      'bot'
+    );
+    bodyEl.dataset.init = '1';
   }
+}
 
-  launcher.addEventListener('click', openWidget);
-  closeBtn.addEventListener('click', closeWidget);
+function closeWidget() {
+  widget.classList.remove('is-open');
+  widget.setAttribute('aria-hidden', 'true');
+}
+
+// 👉 ahora hace toggle
+function toggleWidget() {
+  if (widget.classList.contains('is-open')) {
+    closeWidget();
+  } else {
+    openWidget();
+  }
+}
+
+// click en la burbuja = abrir/cerrar
+launcher.addEventListener('click', toggleWidget);
+// botón "×" sigue cerrando
+closeBtn.addEventListener('click', closeWidget);
+
 
   // Construir los botones FAQ
   faqs.forEach(function (faq) {
