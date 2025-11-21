@@ -1272,21 +1272,24 @@ section#trabajos .wrapper {
   }
 }
 
-/* === CONTACTO: alineamos la grilla con el título === */
+/* ==== CONTACTO: alinear solo el formulario con el título ==== */
+
+/* 1) Dejamos la grilla sin desplazamientos raros */
 #contacto .contact-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-  column-gap: 64px;
-  row-gap: 0;
-  margin-top: -40px;       /* <--- acá lo acercamos al título (prueba 0 / 8 / 12px) */
-  align-items: flex-start;
+  align-items: flex-start;  /* columnas arriba */
+  margin-top: 0;           /* importante: resetea el margen que lo subía todo */
 }
 
-/* Nos aseguramos de que ni el texto ni el form agreguen margen extra arriba */
-#contacto .contact-grid > div,
+/* 2) Subimos SOLO el formulario para que se acerque al h2 */
 #contacto .contact-grid > form {
-  margin-top: 0;
+  margin-top: -32px;       /* probá -32px; si lo ves muy alto, cambiá a -24px */
 }
+
+/* 3) Opcional: un poco de aire al bloque de texto bajo el título */
+#contacto .contact-grid > div:first-child {
+  margin-top: 8px;         /* que “Contanos en qué estado...” respire bajo el h2 */
+}
+
 
 
 
