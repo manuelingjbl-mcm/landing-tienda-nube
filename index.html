@@ -577,7 +577,7 @@ header::after{
 /* Columna de mockups */
 .works-shots {
   display: flex;
-  gap: 18px;
+  gap: 14px;
   justify-content: center;
 }
 
@@ -587,9 +587,9 @@ header::after{
   padding: 0;
   background: transparent;
   cursor: pointer;
-  border-radius: 28px;
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 22px 45px rgba(0,0,0,0.45);
+  box-shadow: 0 18px 40px rgba(15, 23, 42,0.4);
   transform: translateY(0) scale(0.96);
   transition:
     transform 280ms ease-out,
@@ -600,7 +600,7 @@ header::after{
 
 .works-shot img {
   display: block;
-  width: 210px;
+  width: 100px;
   max-height: 420px;
   object-fit: contain;
   background: #050816;
@@ -616,8 +616,8 @@ header::after{
 /* Hover desktop: levanta un poco */
 @media (hover: hover) and (pointer: fine) {
   .works-shot:hover {
-    transform: translateY(-4px) scale(0.98);
-    box-shadow: 0 26px 55px rgba(0,0,0,0.55);
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 22px 50px rgba(15, 23, 42, 0.7);
     filter: none;
     opacity: 1;
   }
@@ -1533,6 +1533,37 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
+/* ==== NUESTROS TRABAJOS · CARRUSEL MOBILE ==== */
+@media (max-width: 575.98px) {
+
+  /* Contenedor: carrusel horizontal */
+  .works-shots {
+    display: flex;
+    flex-direction: row;
+    gap: 14px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    margin-bottom: 18px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Ocultar scrollbar en mobile */
+  .works-shots::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Cada mockup ocupa buen ancho en mobile */
+  .works-shot {
+    flex: 0 0 68%;          /* probá subir a 72–75% si los querés aún más grandes */
+    scroll-snap-align: center;
+  }
+
+  .works-shot img {
+    width: 100%;
+    height: auto;
+  }
+}
 
 
     
