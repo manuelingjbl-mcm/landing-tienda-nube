@@ -1272,6 +1272,18 @@ section#trabajos .wrapper {
   }
 }
 
+/* GRID DE CONTACTO: texto + formulario */
+#contacto .contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+  gap: 64px;              /* espacio entre texto y formulario */
+  align-items: flex-start; /* alinea ambas columnas por arriba */
+}
+
+/* Formulario: que no tenga margen extra hacia arriba */
+#contacto .contact-grid > form {
+  margin-top: 0;
+}
 
 
     
