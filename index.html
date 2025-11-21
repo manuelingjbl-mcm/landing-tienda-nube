@@ -1272,18 +1272,22 @@ section#trabajos .wrapper {
   }
 }
 
-/* GRID DE CONTACTO: texto + formulario */
+/* === CONTACTO: alineamos la grilla con el título === */
 #contacto .contact-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-  gap: 64px;              /* espacio entre texto y formulario */
-  align-items: flex-start; /* alinea ambas columnas por arriba */
+  column-gap: 64px;
+  row-gap: 0;
+  margin-top: 8px;       /* <--- acá lo acercamos al título (prueba 0 / 8 / 12px) */
+  align-items: flex-start;
 }
 
-/* Formulario: que no tenga margen extra hacia arriba */
+/* Nos aseguramos de que ni el texto ni el form agreguen margen extra arriba */
+#contacto .contact-grid > div,
 #contacto .contact-grid > form {
-  margin-top: 10;
+  margin-top: 0;
 }
+
 
 
     
@@ -1590,7 +1594,7 @@ section#trabajos .wrapper {
       <!-- COLUMNA DERECHA: FORMULARIO -->
       <form id="contact-form" method="POST">
         <input type="hidden" name="_subject"
-               value="Consulta desde landing MCMDIGITAL" />
+               value="Consulta desde landing VIACLOUDSTUDIO" />
 
         <div>
           <label>Nombre y marca</label>
