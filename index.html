@@ -1573,35 +1573,43 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 
 /* ====== Mobile: carrusel horizontal ====== */
 @media (max-width: 767.98px) {
-  /* El layout pasa a una sola columna: texto arriba, mockups abajo */
+  /* Layout: una columna, texto arriba / mockups abajo */
   .works-split {
     grid-template-columns: minmax(0, 1fr);
     gap: 28px;
   }
 
-  /* Contenedor scrollable */
+  /* Contenedor scrollable de las tarjetas */
   .works-shots {
+    display: flex;
     justify-content: flex-start;
     overflow-x: auto;
-    padding: 0 16px 12px;
-    margin: 0 -16px;              /* para que las tarjetas respiren al borde */
-    gap: 16px;
+    overflow-y: visible;            /* deja que el scale no corte nada */
+    padding: 0 20px 24px;           /* un poco más de aire abajo */
+    margin: 0 -20px;                /* que lleguen casi al borde */
+    gap: 20px;
     scroll-snap-type: x mandatory;
   }
 
   .works-shots::-webkit-scrollbar {
-    display: none;                /* sin scroll bar en mobile */
+    display: none;
   }
 
-  /* Cada tarjeta ocupa buena parte del ancho y no se encoge */
+  /* Cada tarjeta ocupa casi todo el ancho */
   .works-shot {
-    flex: 0 0 72%;                /* ~70% del ancho de pantalla */
-    max-width: 72%;
+    flex: 0 0 88%;                  /* más grande en mobile */
+    max-width: 88%;
     scroll-snap-align: center;
   }
 
   .works-shot img {
     width: 100%;
+  }
+
+  /* En mobile casi no agrandamos para que no se "corte" visualmente */
+  .works-shot.is-active {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 26px 50px rgba(15, 23, 42, 0.6);
   }
 }
 
