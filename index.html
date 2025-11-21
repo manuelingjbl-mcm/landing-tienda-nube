@@ -1301,8 +1301,8 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   height: 100%;
 }
 
-/* Botón flotante redondo */
-.vc-chat-launcher {
+/* ====== BOTÓN FLOTANTE ====== */
+.vs-chat-launcher {
   position: fixed;
   right: 24px;
   bottom: 24px;
@@ -1310,188 +1310,216 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   height: 56px;
   border-radius: 50%;
   border: none;
-  background: #f97316; /* naranja tipo Hostinger */
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  background: #0b63e8; /* color principal de la landing */
+  box-shadow: 0 12px 28px rgba(11, 99, 232, 0.55);
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
   z-index: 9999;
 }
 
-.vc-chat-launcher:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+.vs-chat-launcher:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 16px 32px rgba(11, 99, 232, 0.7);
+  background: #1b76ff;
 }
 
-.vc-chat-icon {
+.vs-chat-launcher-icon {
   font-size: 22px;
+  color: #ffffff;
+  line-height: 1;
 }
 
-/* Caja de chat */
-.vc-chat-widget {
+/* ====== VENTANA DE CHAT ====== */
+.vs-chat-widget {
   position: fixed;
   right: 24px;
   bottom: 96px;
   width: 360px;
-  max-width: calc(100vw - 32px);
+  max-width: calc(100% - 32px);
   background: #020617;
-  border-radius: 18px;
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.7);
-  display: none;            /* se muestra con la clase .is-open */
+  border-radius: 20px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.9);
+  display: none;
   flex-direction: column;
   overflow: hidden;
-  z-index: 9998;
+  z-index: 9999;
 }
 
-/* Estado abierto */
-.vc-chat-widget.is-open {
+.vs-chat-widget.is-open {
   display: flex;
-  animation: vcChatIn 0.22s ease-out;
 }
 
-@keyframes vcChatIn {
-  from {
-    transform: translateY(8px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-/* Header del chat */
-.vc-chat-header {
-  padding: 12px 14px;
-  background: #020617;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+/* Header */
+.vs-chat-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 12px 14px;
+  background: radial-gradient(circle at top left, #0b63e8 0, #020617 45%);
 }
 
-.vc-chat-header-info {
+.vs-chat-header-left {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.vc-chat-avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #0b63e8, #22c55e);
+.vs-chat-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0b63e8, #22c1c3);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
-  color: #f9fafb;
-  font-weight: 600;
 }
 
-.vc-chat-title {
+.vs-chat-avatar-icon {
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.vs-chat-header-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.vs-chat-title {
   font-size: 14px;
-  color: #f9fafb;
   font-weight: 600;
+  color: #f9fafb;
 }
 
-.vc-chat-subtitle {
+.vs-chat-subtitle {
   font-size: 11px;
-  color: #9ca3af;
+  color: #cbd5f5;
 }
 
-.vc-chat-close {
-  background: transparent;
+.vs-chat-close {
   border: none;
-  color: #9ca3af;
-  font-size: 16px;
+  background: transparent;
+  color: #e5e7eb;
+  font-size: 18px;
   cursor: pointer;
 }
 
-/* Cuerpo (mensajes) */
-.vc-chat-body {
-  padding: 16px;
-  background: radial-gradient(circle at top, #0b1120 0, #020617 55%);
-  max-height: 360px;
+/* Body */
+.vs-chat-body {
+  padding: 10px 14px 8px;
+  max-height: 320px;
   overflow-y: auto;
-}
-
-/* Burbujas */
-.vc-chat-bubble {
-  max-width: 85%;
-  padding: 10px 12px;
-  border-radius: 14px;
-  font-size: 13px;
-  line-height: 1.5;
-  margin-bottom: 10px;
-}
-
-.vc-chat-bubble-agent {
-  background: rgba(15, 23, 42, 0.95);
-  color: #e5e7eb;
-}
-
-.vc-chat-bubble-name {
-  font-size: 11px;
-  font-weight: 600;
-  color: #93c5fd;
-  margin-bottom: 4px;
-}
-
-.vc-chat-bubble-time {
-  font-size: 10px;
-  color: #6b7280;
-  margin-top: 4px;
-}
-
-/* Barra de entrada */
-.vc-chat-input-bar {
-  padding: 10px;
-  background: #020617;
-  border-top: 1px solid rgba(148, 163, 184, 0.25);
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 8px;
 }
 
-.vc-chat-input {
-  flex: 1;
-  height: 40px;
-  border-radius: 999px;
-  border: 1px solid #1e293b;
-  background: #020617;
-  color: #e5e7eb;
-  padding: 0 14px;
+/* Burbujas */
+.vs-chat-bubble {
+  max-width: 80%;
+  border-radius: 14px;
+  padding: 8px 10px;
   font-size: 13px;
+  line-height: 1.4;
 }
 
-.vc-chat-input::placeholder {
-  color: #6b7280;
+.vs-chat-bubble--bot {
+  align-self: flex-start;
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
 }
 
-.vc-chat-send {
-  width: 40px;
-  height: 40px;
+.vs-chat-bubble--user {
+  align-self: flex-end;
+  background: #0b63e8;
+  color: #ffffff;
+}
+
+/* FAQs */
+.vs-chat-faqs {
+  padding: 8px 14px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  border-top: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+.vs-chat-faq-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 11px;
+  cursor: pointer;
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  white-space: nowrap;
+}
+
+.vs-chat-faq-btn:hover {
+  background: #0b63e8;
+}
+
+/* Botón interno para ir a WhatsApp */
+.vs-chat-wa-btn {
+  margin-top: 4px;
+  align-self: flex-start;
   border-radius: 999px;
   border: none;
-  background: #0b63e8;
-  color: #f9fafb;
-  font-size: 16px;
+  padding: 6px 12px;
+  font-size: 12px;
+  background: #22c55e;
+  color: #022c22;
   cursor: pointer;
 }
 
-/* Mobile: que el chat suba un poco más y ocupe más ancho */
-@media (max-width: 640px) {
-  .vc-chat-widget {
-    right: 16px;
-    left: 16px;
+/* Formulario de texto */
+.vs-chat-form {
+  padding: 8px;
+  border-top: 1px solid rgba(148, 163, 184, 0.35);
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  background: #020617;
+}
+
+.vs-chat-input {
+  flex: 1;
+  border-radius: 999px;
+  border: 1px solid #1f2937;
+  background: #020617;
+  color: #e5e7eb;
+  font-size: 13px;
+  padding: 8px 12px;
+}
+
+.vs-chat-input::placeholder {
+  color: #6b7280;
+}
+
+.vs-chat-send-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: none;
+  background: #0b63e8;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Mobile: que la ventana use casi todo el ancho */
+@media (max-width: 575.98px) {
+  .vs-chat-widget {
+    right: 12px;
+    left: 12px;
     width: auto;
-    bottom: 90px;
+    bottom: 86px;
   }
 
-  .vc-chat-launcher {
+  .vs-chat-launcher {
     right: 16px;
     bottom: 16px;
   }
@@ -2017,78 +2045,170 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   });
 </script>
 
-<!-- Lanzador flotante -->
-<button class="vc-chat-launcher" id="vcChatLauncher" aria-label="Abrir chat">
-  <span class="vc-chat-icon">💬</span>
+<!-- SOFI · CHAT NUBE -->
+<button id="vs-chat-launcher"
+        class="vs-chat-launcher"
+        aria-label="Abrir chat con Sofi">
+  <span class="vs-chat-launcher-icon">☺</span>
 </button>
 
-<!-- Widget de chat -->
-<div class="vc-chat-widget" id="vcChatWidget" aria-hidden="true">
-  <div class="vc-chat-header">
-    <div class="vc-chat-header-info">
-      <div class="vc-chat-avatar">S</div>
-      <div>
-        <div class="vc-chat-title">Sofi · Chat Nube</div>
-        <div class="vc-chat-subtitle">El equipo también puede ayudar</div>
+<div id="vs-chat-widget" class="vs-chat-widget" aria-hidden="true">
+  <div class="vs-chat-header">
+    <div class="vs-chat-header-left">
+      <div class="vs-chat-avatar">
+        <span class="vs-chat-avatar-icon">🤖</span>
+      </div>
+      <div class="vs-chat-header-text">
+        <div class="vs-chat-title">Sofi · Chat Nube</div>
+        <div class="vs-chat-subtitle">El equipo también puede ayudar</div>
       </div>
     </div>
-    <button class="vc-chat-close" id="vcChatClose" aria-label="Cerrar chat">✕</button>
+    <button class="vs-chat-close" type="button" aria-label="Cerrar chat">×</button>
   </div>
 
-  <div class="vc-chat-body">
-    <div class="vc-chat-bubble vc-chat-bubble-agent">
-      <div class="vc-chat-bubble-name">Sofi</div>
-      <div class="vc-chat-bubble-text">
-        Hola 👋<br />
-        ¿En qué puedo ayudarte hoy?
-      </div>
-      <div class="vc-chat-bubble-time">Ahora</div>
-    </div>
+  <div class="vs-chat-body" id="vs-chat-body">
+    <!-- Mensaje de bienvenida se inyecta por JS -->
   </div>
 
-  <div class="vc-chat-input-bar">
-    <input
-      type="text"
-      class="vc-chat-input"
-      placeholder="Haz una pregunta..."
-    />
-    <button class="vc-chat-send" type="button">
-      ➤
-    </button>
+  <div class="vs-chat-faqs" id="vs-chat-faqs">
+    <!-- Botones FAQ se inyectan por JS -->
   </div>
+
+  <form id="vs-chat-form" class="vs-chat-form">
+    <input id="vs-chat-input"
+           class="vs-chat-input"
+           type="text"
+           placeholder="Escribí tu consulta..."
+           autocomplete="off" />
+    <button type="submit" class="vs-chat-send-btn">➤</button>
+  </form>
 </div>
+<!-- /SOFI · CHAT NUBE -->
   
 <script>
-  (function () {
-    const launcher = document.getElementById('vcChatLauncher');
-    const widget   = document.getElementById('vcChatWidget');
-    const closeBtn = document.getElementById('vcChatClose');
+(function () {
+  const launcher = document.getElementById('vs-chat-launcher');
+  const widget   = document.getElementById('vs-chat-widget');
+  const closeBtn = widget.querySelector('.vs-chat-close');
+  const bodyEl   = document.getElementById('vs-chat-body');
+  const form     = document.getElementById('vs-chat-form');
+  const input    = document.getElementById('vs-chat-input');
+  const faqsEl   = document.getElementById('vs-chat-faqs');
 
-    function openChat() {
-      widget.classList.add('is-open');
-      widget.setAttribute('aria-hidden', 'false');
+  // 👉 reemplazá por tu número si hiciera falta
+  const WHATSAPP_URL =
+    'https://wa.me/5491159288093?text=' +
+    encodeURIComponent('Hola Sofi, vengo desde la landing de VIACLOUDSTUDIO 🙂');
+
+  const faqs = [
+    {
+      id: 'tienda-cero',
+      label: 'Quiero mi primera tienda Nube',
+      answer:
+        '¡Buenísimo! Puedo armar tu tienda completa en Tienda Nube: diseño, estructura y carga inicial. ' +
+        'Si querés ver una propuesta concreta, seguimos por WhatsApp 👇',
+      toWhatsApp: true
+    },
+    {
+      id: 'optimizar',
+      label: 'Ya tengo tienda y quiero optimizar',
+      answer:
+        'Perfecto, reviso tu tienda actual y te propongo mejoras de diseño, velocidad y conversión. ' +
+        'Contame un poco más por WhatsApp y vemos tu caso puntual 👇',
+      toWhatsApp: true
+    },
+    {
+      id: 'precios',
+      label: 'Quiero saber precios',
+      answer:
+        'Los precios dependen de si necesitás armado desde cero, optimización o campaña puntual. ' +
+        'Te los dejo claros y sin letra chica por WhatsApp 👇',
+      toWhatsApp: true
+    },
+    {
+      id: 'whatsapp-directo',
+      label: 'Hablar directo por WhatsApp',
+      answer: 'Te llevo directo a WhatsApp para seguir la conversación 😊',
+      toWhatsApp: true
     }
+  ];
 
-    function closeChat() {
-      widget.classList.remove('is-open');
-      widget.setAttribute('aria-hidden', 'true');
+  function appendMessage(text, sender) {
+    const bubble = document.createElement('div');
+    bubble.className =
+      'vs-chat-bubble ' +
+      (sender === 'user' ? 'vs-chat-bubble--user' : 'vs-chat-bubble--bot');
+    bubble.textContent = text;
+    bodyEl.appendChild(bubble);
+    bodyEl.scrollTop = bodyEl.scrollHeight;
+  }
+
+  function appendWhatsAppButton() {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'vs-chat-wa-btn';
+    btn.textContent = 'Abrir WhatsApp';
+    btn.addEventListener('click', function () {
+      window.open(WHATSAPP_URL, '_blank');
+    });
+    bodyEl.appendChild(btn);
+    bodyEl.scrollTop = bodyEl.scrollHeight;
+  }
+
+  function openWidget() {
+    widget.classList.add('is-open');
+    widget.setAttribute('aria-hidden', 'false');
+    if (!bodyEl.dataset.init) {
+      appendMessage(
+        'Hola 👋 Soy Sofi. Elegí una opción rápida o escribime tu consulta y te ayudo a ver la mejor forma de optimizar tu tienda.',
+        'bot'
+      );
+      bodyEl.dataset.init = '1';
     }
+  }
 
-    launcher.addEventListener('click', function () {
-      if (widget.classList.contains('is-open')) {
-        closeChat();
-      } else {
-        openChat();
+  function closeWidget() {
+    widget.classList.remove('is-open');
+    widget.setAttribute('aria-hidden', 'true');
+  }
+
+  launcher.addEventListener('click', openWidget);
+  closeBtn.addEventListener('click', closeWidget);
+
+  // Construir los botones FAQ
+  faqs.forEach(function (faq) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'vs-chat-faq-btn';
+    btn.textContent = faq.label;
+
+    btn.addEventListener('click', function () {
+      appendMessage(faq.label, 'user');
+      appendMessage(faq.answer, 'bot');
+      if (faq.toWhatsApp) {
+        appendWhatsAppButton();
       }
     });
 
-    closeBtn.addEventListener('click', closeChat);
+    faqsEl.appendChild(btn);
+  });
 
-    // Cerrar con ESC
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeChat();
-    });
-  })();
+  // Envío manual de mensaje
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const value = input.value.trim();
+    if (!value) return;
+
+    appendMessage(value, 'user');
+    input.value = '';
+
+    appendMessage(
+      'Gracias por tu mensaje 🙌. Para darte una respuesta más precisa te escribo por WhatsApp.',
+      'bot'
+    );
+    appendWhatsAppButton();
+  });
+})();
 </script>
 
   
