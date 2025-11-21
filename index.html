@@ -1302,23 +1302,31 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
 
 /* ====== BOTÓN FLOTANTE ====== */
-.vs-chat-launcher {
+.chat-launcher {
   position: fixed;
   right: 24px;
   bottom: 24px;
-  width: 56px;
-  height: 56px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   border: none;
-  cursor: pointer;
-  background: #0b63e8; /* color principal de la landing */
-  box-shadow: 0 12px 28px rgba(11, 99, 232, 0.55);
+  background: #0b63e8;            /* azul de la landing */
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-  z-index: 9999;
+  box-shadow: 0 12px 30px rgba(11, 99, 232, 0.55);
+  cursor: pointer;
+  z-index: 999;
 }
+
+/* Nueva sonrisa */
+.chat-launcher-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+}
+
 
 .vs-chat-launcher:hover {
   transform: translateY(-2px) scale(1.03);
@@ -2046,10 +2054,8 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 </script>
 
 <!-- BOTÓN FLOTANTE · SOFI CHAT -->
-<button id="vs-chat-launcher"
-        class="vs-chat-launcher"
-        aria-label="Abrir chat con Sofi">
-  <span class="vs-chat-launcher-icon">☺</span>
+<button class="chat-launcher" id="chat-launcher" aria-label="Abrir chat con Sofi">
+  <img src="smile.png" alt="Chat Sofi" class="chat-launcher-img">
 </button>
 
 
