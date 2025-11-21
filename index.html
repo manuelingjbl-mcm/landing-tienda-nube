@@ -574,37 +574,34 @@ header::after{
   align-items: center;
 }
 
-/* Columna de mockups */
+/* Wrapper de mockups (desktop) */
 .works-shots {
   display: flex;
-  gap: 14px;
   justify-content: center;
+  gap: 32px;
 }
 
+/* Cada tarjeta con la imagen */
 .works-shot {
-  position: relative;
   border: none;
-  padding: 0;
   background: transparent;
+  padding: 0;
   cursor: pointer;
-  border-radius: 18px;
+  position: relative;
+  border-radius: 26px;
   overflow: hidden;
-  box-shadow: 0 18px 40px rgba(15, 23, 42,0.4);
-  transform: translateY(0) scale(0.96);
-  transition:
-    transform 280ms ease-out,
-    box-shadow 280ms ease-out,
-    filter 220ms ease-out,
-    opacity 220ms ease-out;
+  box-shadow: 0 24px 45px rgba(15, 23, 42, 0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
 }
 
+/* Imagen adentro del botón */
 .works-shot img {
   display: block;
-  width: 100px;
-  max-height: 420px;
-  object-fit: contain;
-  background: #050816;
+  width: 230px;      /* vuelve a ser grande en desktop */
+  max-width: 100%;
+  height: auto;
 }
+
 
 /* Estado por defecto: la no activa un poco más atrás */
 .works-shot:not(.is-active) {
