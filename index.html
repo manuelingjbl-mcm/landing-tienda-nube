@@ -1150,6 +1150,89 @@ section#trabajos .wrapper {
   }
 }
 
+    /* ===== QUIÉN ESTÁ DETRÁS / ABOUT ===== */
+.section-about .about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+}
+
+.about-list {
+  margin: 16px 0 0;
+  padding-left: 18px;
+  font-size: 0.95rem;
+  color: #e5e7eb;
+}
+
+.about-list li + li {
+  margin-top: 4px;
+}
+
+/* Tarjeta lateral con tus datos */
+.about-card {
+  border-radius: 18px;
+  padding: 18px 18px 20px;
+  background: radial-gradient(circle at top left, #0b63e8 0, #020617 55%);
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.8);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.about-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-avatar-initials {
+  font-size: 22px;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+.about-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.about-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+.about-role {
+  font-size: 12px;
+  color: #cbd5f5;
+}
+
+.about-note {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #e5e7eb;
+}
+
+/* Mobile: se apila todo */
+@media (max-width: 767.98px) {
+  .section-about .about-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .about-card {
+    padding: 16px 16px 18px;
+  }
+}
+
+    
 /* ===== CONTACTO: ICONOS DE WHATSAPP / MAIL / REDES ===== */
 
 .contact-social-row {
@@ -1897,7 +1980,50 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   </div>
 </section>
 
+    
+<!-- QUIÉN ESTÁ DETRÁS -->
+<section class="section reveal section-about">
+  <div class="wrapper about-grid">
+    <div>
+      <div class="section-title">Quién está detrás</div>
+      <h2>Hola, soy Manuel. Yo voy a trabajar en tu Tienda Nube.</h2>
+      <p>
+        Trabajo día a día con Tienda Nube, campañas en Meta y Google, y la
+        optimización de tiendas como <strong>VIA SHOP</strong> y
+        <strong>CASA OADA</strong>. La idea de VIACLOUDSTUDIO es simple:
+        ayudarte a tener una tienda clara, rápida y lista para vender.
+      </p>
+      <p>
+        No hablás con una agencia gigante sino directo conmigo: reviso tu caso,
+        te propongo un plan y llevo el proyecto de principio a fin.
+      </p>
 
+      <ul class="about-list">
+        <li>Armado y optimización de Tienda Nube (estructura, diseño, UX).</li>
+        <li>Integración con campañas en Meta / Google y métricas básicas.</li>
+        <li>Acompañamiento cercano: WhatsApp, videollamada y checklists claros.</li>
+      </ul>
+    </div>
+
+    <div class="about-card">
+      <div class="about-avatar">
+        <!-- Podés cambiar por una foto tuya si querés -->
+        <span class="about-avatar-initials">M</span>
+      </div>
+      <div class="about-meta">
+        <div class="about-name">Manuel Aparicio</div>
+        <div class="about-role">Diseño y optimización de Tienda Nube</div>
+        <p class="about-note">
+          Cuando completes el formulario o escribas por WhatsApp
+          vas a hablar directamente conmigo, sin bots ni intermediarios.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /QUIÉN ESTÁ DETRÁS -->
+
+    
  <!-- CONTACTO -->
 <section id="contacto" class="contact-section reveal">
   <div class="wrapper">
@@ -1945,6 +2071,12 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
         <p class="contact-email">
           Email: <a href="mailto:manuelingjbl@gmail.com">manuelingjbl@gmail.com</a>
         </p>
+
+        <p class="contact-small-note">
+  Todas las consultas las respondo yo, Manuel. Te leo y vemos juntos
+  qué es lo mejor para tu tienda.
+</p>
+
       </div>
 
       <!-- COLUMNA DERECHA: FORMULARIO -->
