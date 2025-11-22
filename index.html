@@ -335,71 +335,34 @@ header::after{
 /* ====== MOBILE: overlay tipo Higher-Web ====== */
 @media (max-width: 767.98px) {
 
-  .hero {
-    padding-top: 0;
-    padding-bottom: 0;
-    background-color: transparent; /* que use el fondo general de la página */
-    display: block;
-  }
-
-  /* Orden: primero imagen, luego texto */
-  .hero-visual {
-    order: 1;
-    width: 100%;
-  }
-
-  .hero-content {
-    order: 2;
-    padding: 24px 20px 32px;
-  }
-
-  /* En mobile NO queremos repetir título ni kicker:
-     solo se muestran en el overlay de la imagen */
-  .hero-kicker,
-  .hero-content h1 {
-    display: none;
-  }
-
-  .hero-phone {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-  }
-
-  .hero-phone img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  /* Overlay encima de la imagen (tipo Higher-Web) */
   .hero-mobile-overlay {
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
 
-    padding: 18px 20px 80px;
+    padding: 18px 20px 40px;
     display: flex;
     flex-direction: column;
     gap: 8px;
 
-    /* Degradado SOLO en la parte baja de la imagen,
-       se desvanece hacia arriba */
-    background: linear-gradient(
-      to top,
-      rgba(4, 6, 26, 0.98) 0%,
-      rgba(4, 6, 26, 0.88) 35%,
-      rgba(4, 6, 26, 0.00) 100%
-    );
+    /* SIN degradado: dejamos la imagen limpia */
+    background: none;
+  }
+
+  /* Sombra para que se lea sobre la foto */
+  .hero-mobile-kicker,
+  .hero-mobile-title {
+    text-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.55),
+      0 0 12px rgba(0, 0, 0, 0.45);
   }
 
   .hero-mobile-kicker {
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #e5e7ff;
-    opacity: 0.9;
+    color: #ffffff;
   }
 
   .hero-mobile-title {
@@ -408,22 +371,8 @@ header::after{
     color: #ffffff;
     max-width: 20rem;
   }
-
-  /* El pill “Mobile first · Tienda Nube” va debajo de la imagen,
-     ya no en posición absoluta */
-  .hero-badge {
-    position: static;
-    margin: 16px 20px 0;
-    display: inline-flex;
-    align-items: center;
-    padding: 8px 16px;
-    border-radius: 999px;
-    background: #ffffff;
-    color: #111827;
-    font-size: 12px;
-    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
-  }
 }
+
 
 
     
