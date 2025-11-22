@@ -1574,44 +1574,47 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 /* ====== Mobile: carrusel horizontal optimizado ====== */
 @media (max-width: 767.98px) {
 
-  /* Una sola columna: texto arriba, mockups abajo */
   .works-split {
     grid-template-columns: minmax(0, 1fr);
     gap: 28px;
   }
 
-  /* Contenedor scrollable horizontal */
   .works-shots {
-    justify-content: flex-start;
+    justify-content: center;     /* antes: flex-start */
     overflow-x: auto;
     padding: 0 16px 18px;
-    margin: 0 -16px;        /* para que respiren hasta el borde de la pantalla */
+    margin: 0 -16px;
     gap: 18px;
     scroll-snap-type: x mandatory;
   }
 
   .works-shots::-webkit-scrollbar {
-    display: none;          /* sin barra de scroll visible */
+    display: none;
   }
 
-  /* Cada tarjeta ocupa buena parte del ancho, pero sigue siendo vertical */
+  /* acá solo agrandamos un poco, pero seguimos usando vw */
   .works-shot {
-    flex: 0 0 50vw;         /* probá 70–75vw: vertical, grande y cómoda */
-    max-width: 72vw;
+    flex: 0 0 60vw;              /* antes 50vw -> más grande */
+    max-width: 60vw;             /* alineado con lo de arriba */
     scroll-snap-align: center;
   }
 
   .works-shot img {
     width: 100%;
-    height: auto;           /* mantiene la proporción vertical del mockup */
+    height: auto;                /* mantiene proporción vertical */
   }
 
-  /* En mobile NO escalamos para que no se corten, solo ajustamos sombra */
+  /* un pelín de “zoom” sin que se corten */
   .works-shot.is-active {
-    transform: none;
+    transform: scale(1.04);      /* suave para que no se salga del contenedor */
     box-shadow: 0 24px 50px rgba(15, 23, 42, 0.55);
   }
+
+  .works-shot:active {
+    transform: scale(1.03);
+  }
 }
+
 
 
 
