@@ -2373,6 +2373,35 @@ closeBtn.addEventListener('click', closeWidget);
 })();
 </script>
 
+   <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Todos los links internos que apuntan a un ID de la misma página
+    const internalLinks = document.querySelectorAll('a[href^="#"]');
+
+    internalLinks.forEach(function (link) {
+      link.addEventListener('click', function (event) {
+        const href = link.getAttribute('href');
+
+        // Si es solo "#" o no hay destino, no hacemos nada
+        if (!href || href === '#') return;
+
+        const targetId = href.substring(1);
+        const targetEl = document.getElementById(targetId);
+        if (!targetEl) return;
+
+        // Evitamos el salto brusco por defecto
+        event.preventDefault();
+
+        // Scroll suave hasta la sección
+        targetEl.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      });
+    });
+  });
+</script>
+ 
   
 </body>
 </html>
