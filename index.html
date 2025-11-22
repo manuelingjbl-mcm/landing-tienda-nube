@@ -342,9 +342,15 @@ header::after{
     background: none !important;
   }
 
-  /* Contenido de texto debajo de la imagen */
+  /* Orden: primero imagen, luego contenido (si el wrapper es flex en desktop) */
+  .hero-visual {
+    order: 1;
+    width: 100%;
+  }
+
   .hero-content {
-    padding: 24px 20px 0;
+    order: 2;
+    padding: 12px 20px 0; /* un poco más cerca del pill */
   }
 
   /* No repetir kicker + título en el bloque de contenido */
@@ -381,27 +387,26 @@ header::after{
     background: none;          /* sin degradado, imagen limpia */
   }
 
+  .hero-mobile-kicker,
+  .hero-mobile-title {
+    color: #fdfcff; /* casi blanco pero ligeramente frío */
+    text-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.85),
+      0 0 14px rgba(0, 0, 0, 0.65);
+    -webkit-text-stroke: 0.35px rgba(0, 0, 0, 0.35); /* contorno suave para zonas claras */
+  }
+
   .hero-mobile-kicker {
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #ffffff;
     margin-bottom: 12px;
-
-    text-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.55),
-      0 0 12px rgba(0, 0, 0, 0.45);
   }
 
   .hero-mobile-title {
     font-size: clamp(30px, 8.8vw, 38px);  /* más grande */
     line-height: 1.15;
-    color: #ffffff;
     max-width: 22rem;
-
-    text-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.65),
-      0 0 16px rgba(0, 0, 0, 0.5);
   }
 
   /* Pill “Mobile first · Tienda Nube” debajo de la imagen, centrado */
@@ -410,7 +415,7 @@ header::after{
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin: 16px auto 0;
+    margin: 16px auto 4px;
 
     padding: 8px 16px;
     border-radius: 999px;
@@ -418,6 +423,29 @@ header::after{
     color: #111827;
     font-size: 12px;
     box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Texto de párrafo un poco más cerca del pill */
+  .hero-content p:first-of-type {
+    margin-top: 8px;
+  }
+
+  /* Botones: lado a lado en mobile */
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .hero-actions .btn-primary--hero {
+    flex: 1 1 60%;
+  }
+
+  .hero-actions .btn-secondary {
+    flex: 1 1 40%;
+    text-align: center;
+    justify-content: center;
   }
 }
 
