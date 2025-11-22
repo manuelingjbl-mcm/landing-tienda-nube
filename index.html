@@ -483,7 +483,7 @@ header::after{
   transition:transform 400ms ease-out;
 }
 
-/* badge arriba */
+/* badge arriba (minimal + animado) */
 .portfolio-pill{
   position:absolute;
   top:16px;
@@ -495,7 +495,36 @@ header::after{
   text-transform:uppercase;
   background:rgba(0,0,0,0.65);
   color:#f5f7ff;
+
+  /* efecto de aparición */
+  opacity:0;
+  transform:translateY(-6px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
 }
+
+    /* En desktop: mostrar pill al hacer hover/focus */
+@media (hover:hover) and (pointer:fine){
+  .portfolio-link:hover .portfolio-thumb img{
+    transform:scale(1.08);
+  }
+
+  .portfolio-link:hover .portfolio-pill,
+  .portfolio-link:focus-within .portfolio-pill{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* En mobile: que el pill esté siempre visible */
+@media (hover:none) and (pointer:coarse){
+  .portfolio-pill{
+    opacity:1;
+    transform:none;
+  }
+}
+
 
 /* overlay inferior con nombre + subtítulo */
 .portfolio-overlay{
