@@ -335,27 +335,56 @@ header::after{
 /* ====== MOBILE: overlay tipo Higher-Web ====== */
 @media (max-width: 767.98px) {
 
-  .hero-mobile-overlay {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    padding: 18px 20px 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-
-    /* SIN degradado: dejamos la imagen limpia */
-    background: none;
+  .hero {
+    padding-top: 0;
+    padding-bottom: 32px;
+    background-color: #050b2a; /* o el fondo que estés usando */
+    display: block;
   }
 
-  /* Sombra para que se lea sobre la foto */
-  .hero-mobile-kicker,
-  .hero-mobile-title {
-    text-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.55),
-      0 0 12px rgba(0, 0, 0, 0.45);
+  /* Orden: primero imagen, luego contenido */
+  .hero-visual {
+    order: 1;
+    width: 100%;
+  }
+
+  .hero-content {
+    order: 2;
+    padding: 24px 20px 0;
+  }
+
+  /* 🔥 IMPORTANTE: ocultamos kicker + H1 del bloque de contenido,
+     así NO se repite el título en mobile */
+  .hero-kicker,
+  .hero-content h1 {
+    display: none !important;
+  }
+
+  .hero-phone {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .hero-phone img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* === OVERLAY SOBRE LA IMAGEN, CENTRADO TIPO HIGHER-WEB === */
+  .hero-mobile-overlay {
+    position: absolute;
+    inset: 0;
+    padding: 0 24px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;   /* centrado vertical */
+    align-items: center;       /* centrado horizontal */
+    text-align: center;
+
+    background: none;          /* sin degradado, imagen limpia */
   }
 
   .hero-mobile-kicker {
@@ -363,16 +392,40 @@ header::after{
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: #ffffff;
+    margin-bottom: 12px;
+
+    text-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.55),
+      0 0 12px rgba(0, 0, 0, 0.45);
   }
 
   .hero-mobile-title {
-    font-size: clamp(24px, 7vw, 30px);
-    line-height: 1.15;
+    font-size: clamp(26px, 8vw, 34px); /* más grande */
+    line-height: 1.2;
     color: #ffffff;
-    max-width: 20rem;
+    max-width: 22rem;
+
+    text-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.65),
+      0 0 16px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Pill debajo de la imagen, centrado */
+  .hero-badge {
+    position: static;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px auto 0;
+
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #111827;
+    font-size: 12px;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
   }
 }
-
 
 
     
