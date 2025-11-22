@@ -327,6 +327,60 @@ header::after{
   align-self:center;
 }
 
+/* Overlay apagado por defecto (desktop) */
+.hero-phone-overlay {
+  display: none;
+}
+
+/* ===== HERO – ajuste mobile ===== */
+@media (max-width: 767.98px) {
+  .hero-phone {
+    position: relative;
+  }
+
+  /* Degradé sobre la imagen para que el texto se lea bien */
+  .hero-phone::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(2, 6, 23, 0.80),
+      rgba(2, 6, 23, 0.30),
+      transparent
+    );
+    z-index: 1;
+  }
+
+  /* Mostramos el overlay solo en mobile */
+  .hero-phone-overlay {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    z-index: 2;
+  }
+
+  .hero-overlay-kicker {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #e5e7eb;
+    opacity: 0.9;
+  }
+
+  .hero-overlay-title {
+    margin: 0;
+    font-size: clamp(20px, 5.2vw, 24px);
+    line-height: 1.25;
+    color: #f9fafb;
+  }
+}
+
+    
     /* MARCAS */
     .section{
       padding:56px 0;
@@ -1862,15 +1916,27 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 
       <aside class="hero-visual reveal">
   <div class="hero-phone">
+    <!-- Overlay de texto SOLO para mobile -->
+    <div class="hero-phone-overlay">
+      <span class="hero-overlay-kicker">
+        Tienda Nube · Estudio especializado
+      </span>
+      <h2 class="hero-overlay-title">
+        Diseñamos tu tienda online a medida de tu marca.
+      </h2>
+    </div>
+
     <img
       src="hero-mobile-mcmdigital.png"
       alt="Mockup de tienda online pensada para mobile first"
     />
   </div>
+
   <div class="hero-badge">
     Mobile first · Tienda Nube
   </div>
 </aside>
+
 
     </div>
   </div>
