@@ -334,65 +334,58 @@ header::after{
 
 /* ===== HERO MOBILE: texto sobre la imagen con degradé ===== */
 @media (max-width: 767.98px) {
-
+  /* Aseguramos que el contenedor pueda tener overlays */
   .hero-phone {
-    position: relative;        /* ancla para el overlay */
-    overflow: hidden;
+    position: relative;
+    max-width: 320px;
+    margin: 0 auto;
+    overflow: hidden;            /* respeta bordes redondeados si los hay */
   }
 
-  .hero-mobile-overlay {
+  .hero-phone img {
+    display: block;
+    width: 100%;
+    height: auto;                /* la imagen NO se toca, sólo se cubre */
+  }
+
+  .hero-phone-mobile-overlay {
     position: absolute;
-    inset: 0;                  /* ocupa todo el bloque de la imagen */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end; /* texto apoyado en la parte baja */
-    padding: 20px 18px 26px;
-    background: linear-gradient(
-      to top,
-      rgba(4, 7, 20, 0.92) 0%,   /* bien oscuro abajo */
-      rgba(4, 7, 20, 0.40) 45%,  /* se va aclarando */
-      rgba(4, 7, 20, 0.00) 82%   /* transparente antes de los bordes */
-    );
-    pointer-events: none;      /* no bloquea el scroll ni los toques */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 18px 18px 22px;
+    /* Degradé suave: fuerte abajo, se desvanece hacia arriba y los lados */
+    background:
+      radial-gradient(
+        ellipse at bottom,
+        rgba(0, 0, 0, 0.88) 0%,
+        rgba(0, 0, 0, 0.0) 70%
+      ),
+      linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(0, 0, 0, 0.0) 70%
+      );
+    color: #f9fafb;
+    pointer-events: none;        /* no bloquea taps en el hero */
   }
 
-  .hero-mobile-kicker {
+  .hero-phone-kicker {
     font-size: 11px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #dbeafe;
-    margin-bottom: 6px;
+    margin: 0 0 4px;
+    opacity: 0.9;
   }
 
-  .hero-mobile-title {
-    font-size: 24px;           /* más grande y llamativo */
+  .hero-phone-title {
+    margin: 0;
+    font-size: 20px;             /* más protagonista */
     line-height: 1.25;
     font-weight: 700;
-    color: #ffffff;
-    max-width: 90%;
-  }
-
-  /* Ocultamos el título/kicker originales en mobile
-     para que no aparezcan duplicados más abajo */
-  .hero-content .hero-kicker,
-  .hero-content h1 {
-    display: none;
-  }
-
-  /* Subimos un poco el resto del contenido para que el botón
-     “Agendar consultoría gratuita” quede más a mano */
-  .hero-content p {
-    margin-top: 12px;
-  }
-
-  .hero-actions {
-    margin-top: 18px;
-  }
-
-  .hero-tagline {
-    margin-top: 14px;
   }
 }
+
 
 
     
