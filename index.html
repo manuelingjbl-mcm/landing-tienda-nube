@@ -1571,49 +1571,51 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   box-shadow: 0 30px 60px rgba(15, 23, 42, 0.65);
 }
 
-/* ====== Mobile: carrusel horizontal optimizado ====== */
+/* ====== MOBILE: carrusel horizontal ====== */
 @media (max-width: 767.98px) {
 
+  /* Una sola columna: texto arriba, mockups abajo */
   .works-split {
     grid-template-columns: minmax(0, 1fr);
     gap: 28px;
   }
 
+  /* Contenedor scrollable horizontal */
   .works-shots {
-    justify-content: center;     /* antes: flex-start */
+    justify-content: flex-start;
     overflow-x: auto;
-    padding: 0 16px 18px;
-    margin: 0 -16px;
+    padding: 0 20px 24px;   /* aire a los lados y abajo */
+    margin: 0;             /* quitamos el margen negativo */
     gap: 18px;
     scroll-snap-type: x mandatory;
+    scroll-padding: 0 20px; /* para que primera y última centren mejor */
   }
 
   .works-shots::-webkit-scrollbar {
     display: none;
   }
 
-  /* acá solo agrandamos un poco, pero seguimos usando vw */
+  /* Cada tarjeta ocupa buena parte del ancho, sigue siendo vertical */
   .works-shot {
-    flex: 0 0 60vw;              /* antes 50vw -> más grande */
-    max-width: 60vw;             /* alineado con lo de arriba */
+    flex: 0 0 68vw;        /* ancho visible (puedes probar 70–72vw si la querés más grande) */
+    max-width: 280px;      /* límite para que no explote en pantallas grandes */
     scroll-snap-align: center;
+    scroll-snap-stop: always;
   }
 
   .works-shot img {
     width: 100%;
-    height: auto;                /* mantiene proporción vertical */
+    height: auto;          /* respeta el formato vertical del mockup */
+    border-radius: 24px;
   }
 
-  /* un pelín de “zoom” sin que se corten */
+  /* En mobile NO escalamos para que no se corten al crecer */
   .works-shot.is-active {
-    transform: scale(1.04);      /* suave para que no se salga del contenedor */
+    transform: none;
     box-shadow: 0 24px 50px rgba(15, 23, 42, 0.55);
   }
-
-  .works-shot:active {
-    transform: scale(1.03);
-  }
 }
+
 
 
 
