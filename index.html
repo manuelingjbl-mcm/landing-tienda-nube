@@ -335,35 +335,29 @@ header::after{
 /* ====== MOBILE: overlay tipo Higher-Web ====== */
 @media (max-width: 767.98px) {
 
+  /* Hero sin fondo azul en mobile */
   .hero {
     padding-top: 0;
     padding-bottom: 32px;
-    background-color: #050b2a; /* o el fondo que estés usando */
-    display: block;
+    background: none !important;
   }
 
-  /* Orden: primero imagen, luego contenido */
-  .hero-visual {
-    order: 1;
-    width: 100%;
-  }
-
+  /* Contenido de texto debajo de la imagen */
   .hero-content {
-    order: 2;
     padding: 24px 20px 0;
   }
 
-  /* 🔥 IMPORTANTE: ocultamos kicker + H1 del bloque de contenido,
-     así NO se repite el título en mobile */
+  /* No repetir kicker + título en el bloque de contenido */
   .hero-kicker,
   .hero-content h1 {
     display: none !important;
   }
 
+  /* Imagen del hero */
   .hero-phone {
     position: relative;
     width: 100%;
-    overflow: hidden;
+    overflow: visible;  /* que no recorte la imagen */
   }
 
   .hero-phone img {
@@ -372,7 +366,7 @@ header::after{
     display: block;
   }
 
-  /* === OVERLAY SOBRE LA IMAGEN, CENTRADO TIPO HIGHER-WEB === */
+  /* === Overlay sobre la imagen, centrado tipo HIGHER-WEB === */
   .hero-mobile-overlay {
     position: absolute;
     inset: 0;
@@ -400,8 +394,8 @@ header::after{
   }
 
   .hero-mobile-title {
-    font-size: clamp(26px, 8vw, 34px); /* más grande */
-    line-height: 1.2;
+    font-size: clamp(30px, 8.8vw, 38px);  /* más grande */
+    line-height: 1.15;
     color: #ffffff;
     max-width: 22rem;
 
@@ -410,7 +404,7 @@ header::after{
       0 0 16px rgba(0, 0, 0, 0.5);
   }
 
-  /* Pill debajo de la imagen, centrado */
+  /* Pill “Mobile first · Tienda Nube” debajo de la imagen, centrado */
   .hero-badge {
     position: static;
     display: inline-flex;
@@ -425,30 +419,8 @@ header::after{
     font-size: 12px;
     box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
   }
-  /* Hero SIN fondo azul en mobile */
-  .hero {
-    background-color: transparent !important;
-    background: none !important;
-  }
-
-  /* Overlay centrado como ya está, solo retoco tamaño y line-height */
-  .hero-mobile-overlay {
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-
-  .hero-mobile-title {
-    font-size: clamp(30px, 8.8vw, 38px); /* un poco más grande */
-    line-height: 1.15;
-    color: #ffffff;
-    max-width: 22rem;
-
-    text-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.65),
-      0 0 16px rgba(0, 0, 0, 0.5);
-  }
 }
+
 
 
     
@@ -1998,7 +1970,8 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
           Tienda Nube · Estudio especializado
         </span>
         <h1 class="hero-mobile-title">
-          Diseñamos tu tienda online<br>
+          Diseñamos<br> 
+          tu tienda online<br>
           a medida de tu marca.
         </h1>
       </div>
