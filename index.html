@@ -335,21 +335,7 @@ header::after{
 /* === HERO MOBILE: overlay arriba de la imagen, sin cortar nada === */
 @media (max-width: 767.98px) {
 
-  /* Mostramos el overlay móvil */
-  .hero-mobile-copy {
-    display: flex;              /* aquí la activamos SOLO en mobile */
-    flex-direction: column;
-    gap: 4px;
-    position: absolute;
-    left: 16px;
-    right: 16px;
-    bottom: 18%;
-    z-index: 2;
-  }
-
-  /* Ocultamos solo el kicker + H1 del bloque de texto normal
-     para que no se duplique el título */
-  .hero-kicker,
+  /* Ocultamos el H1 “normal” para que no se duplique */
   .hero-content h1 {
     display: none;
   }
@@ -375,6 +361,18 @@ header::after{
       );
   }
 
+  /* Texto sobre la imagen en mobile */
+  .hero-mobile-overlay {
+    display: flex;          /* aquí la activamos SOLO en mobile */
+    flex-direction: column;
+    gap: 4px;
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: 18%;               /* ajustá 16–22% si querés moverlo un poco */
+    z-index: 2;
+  }
+
   .hero-mobile-kicker {
     font-size: 11px;
     letter-spacing: 0.18em;
@@ -383,12 +381,13 @@ header::after{
   }
 
   .hero-mobile-title {
-    font-size: clamp(20px, 5.2vw, 24px);
+    font-size: clamp(22px, 5.4vw, 26px);
     line-height: 1.22;
     font-weight: 700;
     color: #f9fafb;
   }
 }
+
 
 
     
@@ -1932,14 +1931,14 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
       alt="Mockup de tienda online pensada para mobile first"
     />
 
-    <!-- Overlay SOLO para mobile, sobre la imagen -->
+    <!-- Texto SOLO para mobile, encima de la imagen -->
     <div class="hero-mobile-overlay">
       <span class="hero-mobile-kicker">
         Tienda Nube · Estudio especializado
       </span>
       <h1 class="hero-mobile-title">
-        Diseñamos tu tienda online
-        <br> a medida de tu marca.
+        Diseñamos tu tienda online<br>
+        a medida de tu marca.
       </h1>
     </div>
   </div>
@@ -1948,6 +1947,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     Mobile first · Tienda Nube
   </div>
 </aside>
+
 
 
 
