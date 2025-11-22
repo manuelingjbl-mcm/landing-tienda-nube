@@ -338,34 +338,43 @@ header::after{
   .hero {
     position: relative;
     padding: 0;
-    min-height: 100vh;          /* que el hero llene la pantalla */
-    background-color: #04061a;  /* color de fondo por si la imagen tarda */
+    min-height: 100vh;
+    background-color: #04061a;
+    display: flex;
+    flex-direction: column;
   }
 
-  /* IMPORTANTE: ocultamos el bloque de texto normal
-     para que no aparezca debajo del pill “Mobile first” */
-  .hero-content {
-    display: none;
-  }
-
+  /* Orden: primero imagen, luego texto */
   .hero-visual {
-    position: relative;
+    order: 1;
     width: 100%;
+  }
+
+  .hero-content {
+    order: 2;
+    display: block;              /* volvemos a mostrar el contenido */
+    padding: 24px 20px 32px;
+  }
+
+  /* Ocultamos SOLO la kicker para que no se repita el texto */
+  .hero-kicker {
+    display: none;
   }
 
   .hero-phone {
     position: relative;
     width: 100%;
-    height: 100vh;   /* imagen a pantalla completa */
+    height: 100vh;
     overflow: hidden;
   }
 
   .hero-phone img {
     width: 100%;
     height: 100%;
-    object-fit: cover;   /* llena todo sin deformarse */
+    object-fit: cover;
   }
 
+  /* Overlay encima de la imagen, con degradado más suave */
   .hero-mobile-overlay {
     display: flex;
     flex-direction: column;
@@ -374,14 +383,17 @@ header::after{
 
     position: absolute;
     inset: 0;
-    padding: 24px 20px 96px; /* espacio extra abajo para el pill blanco */
+    padding: 24px 20px 96px;
 
-    /* Degradado vertical suave que cubre toda la pantalla */
+    /* Degradado SOLO fuerte en la parte baja,
+       se va haciendo transparente hacia arriba */
     background: linear-gradient(
       to top,
-      rgba(4, 6, 26, 0.98) 0%,
-      rgba(4, 6, 26, 0.92) 25%,
-      rgba(4, 6, 26, 0.60) 55%,
+      rgba(4, 6, 26, 0.96) 0%,
+      rgba(4, 6, 26, 0.90) 18%,
+      rgba(4, 6, 26, 0.60) 38%,
+      rgba(4, 6, 26, 0.28) 60%,
+      rgba(4, 6, 26, 0.00) 82%,
       rgba(4, 6, 26, 0.00) 100%
     );
   }
@@ -401,13 +413,6 @@ header::after{
     max-width: 20rem;
   }
 
-  /* Si luego agregas un párrafo en el overlay, se verá bien */
-  .hero-mobile-overlay p {
-    color: #f9fafb;
-    max-width: 26rem;
-  }
-
-  /* Pill blanco “Mobile first · Tienda Nube” flotando arriba del borde inferior */
   .hero-badge {
     position: absolute;
     left: 20px;
@@ -420,7 +425,6 @@ header::after{
     color: #111827;
     font-size: 12px;
     box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
-
     white-space: nowrap;
   }
 }
