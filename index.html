@@ -425,6 +425,29 @@ header::after{
     font-size: 12px;
     box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
   }
+  /* Hero SIN fondo azul en mobile */
+  .hero {
+    background-color: transparent !important;
+    background: none !important;
+  }
+
+  /* Overlay centrado como ya está, solo retoco tamaño y line-height */
+  .hero-mobile-overlay {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-mobile-title {
+    font-size: clamp(30px, 8.8vw, 38px); /* un poco más grande */
+    line-height: 1.15;
+    color: #ffffff;
+    max-width: 22rem;
+
+    text-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.65),
+      0 0 16px rgba(0, 0, 0, 0.5);
+  }
 }
 
 
