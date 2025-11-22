@@ -1159,14 +1159,15 @@ section#trabajos .wrapper {
 }
 
 .about-list {
-  margin: 16px 0 0;
-  padding-left: 18px;
-  font-size: 0.95rem;
-  color: #e5e7eb;
+  margin: 18px 0 0;
+  padding-left: 1.1rem;
+  list-style: disc;
+  color: #111827;      /* texto bien oscuro */
 }
 
-.about-list li + li {
-  margin-top: 4px;
+.about-list li {
+  margin-bottom: 6px;
+  opacity: 0.96;       /* antes seguro estaba en 0.4 / 0.5 */
 }
 
 /* Tarjeta lateral con tus datos */
@@ -1181,21 +1182,26 @@ section#trabajos .wrapper {
   gap: 14px;
 }
 
-.about-avatar {
-  width: 52px;
-  height: 52px;
+.about-card-avatar {
+  width: 64px;              /* o 56px si la querés un poco más chica */
+  height: 64px;
   border-radius: 999px;
-  background: rgba(15, 23, 42, 0.85);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
+  border: 2px solid rgba(148, 163, 184, 0.55);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.55);
+  background: #020617;
+  flex-shrink: 0;
 }
 
+/* ahora la “inicial” es la foto */
 .about-avatar-initials {
-  font-size: 22px;
-  font-weight: 600;
-  color: #e5e7eb;
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 999px;
+  object-fit: cover;   /* mantiene bien tu cara sin deformar */
 }
+
 
 .about-meta {
   display: flex;
@@ -2015,7 +2021,12 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     <div class="about-card">
       <div class="about-avatar">
         <!-- Podés cambiar por una foto tuya si querés -->
-        <span class="about-avatar-initials">M</span>
+        <img
+  src="avatar-perfil.png"
+  alt="Manuel Aparicio"
+  class="about-avatar-initials"
+/>
+
       </div>
       <div class="about-meta">
         <div class="about-name">Manuel Aparicio</div>
