@@ -327,81 +327,70 @@ header::after{
   align-self:center;
 }
 
-/* HERO · overlay mobile mejorado */
+/* Por defecto (desktop): el overlay no se muestra */
+.hero-mobile-overlay {
+  display: none;
+}
+
+/* ===== HERO MOBILE: texto sobre la imagen con degradé ===== */
 @media (max-width: 767.98px) {
 
-  /* El contenedor del mockup */
   .hero-phone {
-    position: relative;
+    position: relative;        /* ancla para el overlay */
+    overflow: hidden;
   }
 
-  .hero-phone img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 32px;
-  }
-
-  /* Degradé de abajo hacia arriba, sin comerse los bordes */
-  .hero-phone::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 32px;
-    pointer-events: none;
-    background: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.85) 0%,
-      rgba(0, 0, 0, 0.55) 30%,
-      rgba(0, 0, 0, 0.10) 65%,
-      rgba(0, 0, 0, 0) 80%
-    );
-  }
-
-  /* Bloque de texto sobre la imagen */
   .hero-mobile-overlay {
     position: absolute;
-    left: 10%;
-    right: 10%;
-    bottom: 20%;
-    z-index: 2;
-    text-align: left;
+    inset: 0;                  /* ocupa todo el bloque de la imagen */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* texto apoyado en la parte baja */
+    padding: 20px 18px 26px;
+    background: linear-gradient(
+      to top,
+      rgba(4, 7, 20, 0.92) 0%,   /* bien oscuro abajo */
+      rgba(4, 7, 20, 0.40) 45%,  /* se va aclarando */
+      rgba(4, 7, 20, 0.00) 82%   /* transparente antes de los bordes */
+    );
+    pointer-events: none;      /* no bloquea el scroll ni los toques */
   }
 
   .hero-mobile-kicker {
-    margin: 0 0 6px;
     font-size: 11px;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(248, 250, 252, 0.9);
+    color: #dbeafe;
+    margin-bottom: 6px;
   }
 
   .hero-mobile-title {
-    margin: 0;
-    font-weight: 700;
+    font-size: 24px;           /* más grande y llamativo */
     line-height: 1.25;
-    font-size: clamp(22px, 5.4vw, 26px); /* título más grande y llamativo */
-    color: #f9fafb;
+    font-weight: 700;
+    color: #ffffff;
+    max-width: 90%;
   }
 
-  /* Ocultamos la versión “duplicada” del título del lado izquierdo
-     pero la dejamos en el DOM para SEO/accesibilidad */
-  .hero-content > .hero-kicker,
-  .hero-content > h1 {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+  /* Ocultamos el título/kicker originales en mobile
+     para que no aparezcan duplicados más abajo */
+  .hero-content .hero-kicker,
+  .hero-content h1 {
+    display: none;
   }
 
-  /* Ajuste suave para que el texto y el botón queden más arriba en mobile */
-  .hero-content {
-    margin-top: 8px;
+  /* Subimos un poco el resto del contenido para que el botón
+     “Agendar consultoría gratuita” quede más a mano */
+  .hero-content p {
+    margin-top: 12px;
+  }
+
+  .hero-actions {
+    margin-top: 18px;
+  }
+
+  .hero-tagline {
+    margin-top: 14px;
   }
 }
 
@@ -1940,28 +1929,30 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
         </div>
       </div>
 
-      <aside class="hero-visual reveal">
+     <aside class="hero-visual reveal">
   <div class="hero-phone">
-    <!-- Overlay de texto SOLO para mobile -->
-    <div class="hero-phone-overlay">
-      <span class="hero-overlay-kicker">
-        Tienda Nube · Estudio especializado
-      </span>
-      <h2 class="hero-overlay-title">
-        Diseñamos tu tienda online a medida de tu marca.
-      </h2>
-    </div>
-
     <img
       src="hero-mobile-mcmdigital.png"
       alt="Mockup de tienda online pensada para mobile first"
     />
+
+    <!-- Overlay SOLO para mobile, sobre la imagen -->
+    <div class="hero-mobile-overlay">
+      <span class="hero-mobile-kicker">
+        Tienda Nube · Estudio especializado
+      </span>
+      <h1 class="hero-mobile-title">
+        Diseñamos tu tienda online
+        <br> a medida de tu marca.
+      </h1>
+    </div>
   </div>
 
   <div class="hero-badge">
     Mobile first · Tienda Nube
   </div>
 </aside>
+
 
 
     </div>
