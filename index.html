@@ -327,58 +327,84 @@ header::after{
   align-self:center;
 }
 
-/* Overlay apagado por defecto (desktop) */
-.hero-phone-overlay {
-  display: none;
-}
-
-/* ===== HERO – ajuste mobile ===== */
+/* HERO · overlay mobile mejorado */
 @media (max-width: 767.98px) {
+
+  /* El contenedor del mockup */
   .hero-phone {
     position: relative;
   }
 
-  /* Degradé sobre la imagen para que el texto se lea bien */
+  .hero-phone img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 32px;
+  }
+
+  /* Degradé de abajo hacia arriba, sin comerse los bordes */
   .hero-phone::before {
     content: "";
     position: absolute;
     inset: 0;
+    border-radius: 32px;
+    pointer-events: none;
     background: linear-gradient(
-      to bottom,
-      rgba(2, 6, 23, 0.80),
-      rgba(2, 6, 23, 0.30),
-      transparent
+      to top,
+      rgba(0, 0, 0, 0.85) 0%,
+      rgba(0, 0, 0, 0.55) 30%,
+      rgba(0, 0, 0, 0.10) 65%,
+      rgba(0, 0, 0, 0) 80%
     );
-    z-index: 1;
   }
 
-  /* Mostramos el overlay solo en mobile */
-  .hero-phone-overlay {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  /* Bloque de texto sobre la imagen */
+  .hero-mobile-overlay {
     position: absolute;
-    top: 16px;
-    left: 16px;
-    right: 16px;
+    left: 10%;
+    right: 10%;
+    bottom: 20%;
     z-index: 2;
+    text-align: left;
   }
 
-  .hero-overlay-kicker {
+  .hero-mobile-kicker {
+    margin: 0 0 6px;
     font-size: 11px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: #e5e7eb;
-    opacity: 0.9;
+    color: rgba(248, 250, 252, 0.9);
   }
 
-  .hero-overlay-title {
+  .hero-mobile-title {
     margin: 0;
-    font-size: clamp(20px, 5.2vw, 24px);
+    font-weight: 700;
     line-height: 1.25;
+    font-size: clamp(22px, 5.4vw, 26px); /* título más grande y llamativo */
     color: #f9fafb;
   }
+
+  /* Ocultamos la versión “duplicada” del título del lado izquierdo
+     pero la dejamos en el DOM para SEO/accesibilidad */
+  .hero-content > .hero-kicker,
+  .hero-content > h1 {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Ajuste suave para que el texto y el botón queden más arriba en mobile */
+  .hero-content {
+    margin-top: 8px;
+  }
 }
+
 
     
     /* MARCAS */
