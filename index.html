@@ -1238,12 +1238,21 @@ section#trabajos .wrapper {
   }
 }
     
-/* ABOUT – ajuste de alineación desktop */
+/* ABOUT – alineación y desplazamiento en desktop */
 @media (min-width: 900px) {
+
+  /* Asegura que ambas columnas arranquen arriba */
+  .section-about .about-grid {
+    align-items: flex-start;
+  }
+
+  /* Baja visualmente la tarjeta un poquito */
   .about-card {
-    margin-top: 18px;   /* probá entre 16px y 32px según lo que veas mejor */
+    margin-top: 0;                 /* anulamos el margen que no hacía efecto */
+    transform: translateY(14px);   /* probá entre 10px y 20px según lo veas */
   }
 }
+
 
     
 /* ===== CONTACTO: ICONOS DE WHATSAPP / MAIL / REDES ===== */
