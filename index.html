@@ -327,65 +327,71 @@ header::after{
   align-self:center;
 }
 
-/* Por defecto (desktop): el overlay no se muestra */
-.hero-mobile-overlay {
-  display: none;
-}
-
-/* ===== HERO MOBILE: texto sobre la imagen con degradé ===== */
+/* === HERO MOBILE: overlay arriba de la imagen, sin cortar nada === */
 @media (max-width: 767.98px) {
-  /* Aseguramos que el contenedor pueda tener overlays */
-  .hero-phone {
+
+  /* Aseguramos que el hero pueda tener capas absolutas */
+  .hero {
     position: relative;
-    max-width: 320px;
-    margin: 0 auto;
-    overflow: hidden;            /* respeta bordes redondeados si los hay */
+    overflow: hidden;
   }
 
-  .hero-phone img {
+  /* Capas principales del hero por encima del degradé */
+  .hero-content,
+  .hero-visual {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Texto flotante arriba de la imagen */
+  .hero-mobile-overlay {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: 96px;                   /* ajusta 80-110px según lo veas en el celu */
+    z-index: 3;
+    pointer-events: none;        /* no tapa el scroll ni los botones */
+    color: #ffffff;
+  }
+
+  .hero-mobile-kicker {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.82;
+    margin: 0 0 4px;
     display: block;
-    width: 100%;
-    height: auto;                /* la imagen NO se toca, sólo se cubre */
   }
 
-  .hero-phone-mobile-overlay {
+  .hero-mobile-title {
+    margin: 0;
+    font-weight: 700;
+    font-size: clamp(22px, 5.5vw, 28px);
+    line-height: 1.2;
+    max-width: 18ch;            /* para que se vea como bloque compacto */
+  }
+
+  /* Degradé suave detrás del texto, sin tocar la imagen */
+  .hero::before {
+    content: "";
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
-    padding: 18px 18px 22px;
-    /* Degradé suave: fuerte abajo, se desvanece hacia arriba y los lados */
+    top: 40px;                   /* inicia un poco por debajo del logo */
+    height: 200px;               /* solo una franja superior */
+    z-index: 1;
+    pointer-events: none;
     background:
-      radial-gradient(
-        ellipse at bottom,
-        rgba(0, 0, 0, 0.88) 0%,
-        rgba(0, 0, 0, 0.0) 70%
-      ),
-      linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.9) 0%,
-        rgba(0, 0, 0, 0.0) 70%
-      );
-    color: #f9fafb;
-    pointer-events: none;        /* no bloquea taps en el hero */
-  }
-
-  .hero-phone-kicker {
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    margin: 0 0 4px;
-    opacity: 0.9;
-  }
-
-  .hero-phone-title {
-    margin: 0;
-    font-size: 20px;             /* más protagonista */
-    line-height: 1.25;
-    font-weight: 700;
+      radial-gradient(circle at 20% 0,
+        rgba(15, 23, 42, 0.55),
+        transparent 60%)
+      ,
+      linear-gradient(to bottom,
+        rgba(15, 23, 42, 0.50),
+        rgba(15, 23, 42, 0.10),
+        transparent 90%);
   }
 }
-
 
 
     
