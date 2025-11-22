@@ -336,12 +336,10 @@ header::after{
 @media (max-width: 767.98px) {
 
   .hero {
-    position: relative;
-    padding: 0;
-    min-height: 100vh;
-    background-color: #04061a;
-    display: flex;
-    flex-direction: column;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: transparent; /* que use el fondo general de la página */
+    display: block;
   }
 
   /* Orden: primero imagen, luego texto */
@@ -352,48 +350,46 @@ header::after{
 
   .hero-content {
     order: 2;
-    display: block;              /* volvemos a mostrar el contenido */
     padding: 24px 20px 32px;
   }
 
-  /* Ocultamos SOLO la kicker para que no se repita el texto */
-  .hero-kicker {
+  /* En mobile NO queremos repetir título ni kicker:
+     solo se muestran en el overlay de la imagen */
+  .hero-kicker,
+  .hero-content h1 {
     display: none;
   }
 
   .hero-phone {
     position: relative;
     width: 100%;
-    height: 100vh;
     overflow: hidden;
   }
 
   .hero-phone img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    display: block;
   }
 
-  /* Overlay encima de la imagen, con degradado más suave */
+  /* Overlay encima de la imagen (tipo Higher-Web) */
   .hero-mobile-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    padding: 18px 20px 80px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    gap: 10px;
+    gap: 8px;
 
-    position: absolute;
-    inset: 0;
-    padding: 24px 20px 96px;
-
-    /* Degradado SOLO fuerte en la parte baja,
-       se va haciendo transparente hacia arriba */
+    /* Degradado SOLO en la parte baja de la imagen,
+       se desvanece hacia arriba */
     background: linear-gradient(
       to top,
-      rgba(4, 6, 26, 0.96) 0%,
-      rgba(4, 6, 26, 0.90) 18%,
-      rgba(4, 6, 26, 0.60) 38%,
-      rgba(4, 6, 26, 0.28) 60%,
-      rgba(4, 6, 26, 0.00) 82%,
+      rgba(4, 6, 26, 0.98) 0%,
+      rgba(4, 6, 26, 0.88) 35%,
       rgba(4, 6, 26, 0.00) 100%
     );
   }
@@ -413,19 +409,19 @@ header::after{
     max-width: 20rem;
   }
 
+  /* El pill “Mobile first · Tienda Nube” va debajo de la imagen,
+     ya no en posición absoluta */
   .hero-badge {
-    position: absolute;
-    left: 20px;
-    bottom: 24px;
-    z-index: 4;
-
+    position: static;
+    margin: 16px 20px 0;
+    display: inline-flex;
+    align-items: center;
     padding: 8px 16px;
     border-radius: 999px;
     background: #ffffff;
     color: #111827;
     font-size: 12px;
-    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
-    white-space: nowrap;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
   }
 }
 
