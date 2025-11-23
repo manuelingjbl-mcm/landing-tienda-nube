@@ -224,7 +224,8 @@ header::after{
 
   .hero-content {
     order: 2;
-    padding: 10px 20px 0;  /* bajamos un poco para acercar texto al pill */
+    padding: 0px 20px 0;  /* bajamos un poco para acercar texto al pill */
+    margin-top: -8px;   /* lo “tiramos” un poco hacia arriba */
   }
 
   /* En mobile NO queremos repetir kicker + H1 del bloque de contenido */
@@ -296,7 +297,7 @@ header::after{
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin: 14px auto 2px; /* un poquito más cerca del texto */
+    margin: 4px auto 0px; /* un poquito más cerca del texto */
     padding: 8px 16px;
     border-radius: 999px;
     background: #ffffff;
@@ -307,7 +308,7 @@ header::after{
 
   /* Texto: pegadito al pill */
   .hero-content p:first-of-type {
-    margin-top: -36px;
+    margin-top: 2px;
   }
 
   /* Botones: lado a lado en mobile */
