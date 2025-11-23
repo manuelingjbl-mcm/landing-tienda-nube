@@ -207,13 +207,16 @@ header::after{
     z-index: 1000;
   }
 
-  /* Hero base */
+  /* Hero base: columna en mobile */
   .hero {
+    display: flex;              /* 👈 nos aseguramos que sea flex */
+    flex-direction: column;     /* 👈 se apilan verticalmente */
+    align-items: stretch;
     padding-top: 0;
-    padding-bottom: 16px;
+    padding-bottom: 16px;       /* menos aire abajo */
     background: none !important;
     position: relative;
-    z-index: 0; /* no tapa al botón de chat */
+    z-index: 0;                 /* no tapa al botón de chat */
   }
 
   /* Orden: primero mockup, luego texto */
@@ -224,8 +227,8 @@ header::after{
 
   .hero-content {
     order: 2;
-    padding: 0px 20px 0;  /* bajamos un poco para acercar texto al pill */
-    margin-top: -24px;   /* lo “tiramos” un poco hacia arriba */
+    padding: 0 20px 0;
+    margin-top: -32px;          /* 👈 sube TODO el bloque (texto + botones) */
   }
 
   /* En mobile NO queremos repetir kicker + H1 del bloque de contenido */
@@ -238,7 +241,7 @@ header::after{
   .hero-phone {
     position: relative;
     width: 100%;
-    overflow: visible; /* que no recorte la imagen */
+    overflow: visible;          /* que no recorte la imagen */
   }
 
   .hero-phone img {
@@ -255,14 +258,14 @@ header::after{
 
     display: flex;
     flex-direction: column;
-    justify-content: center;   /* centrado vertical */
-    align-items: center;       /* centrado horizontal */
+    justify-content: center;    /* centrado vertical */
+    align-items: center;        /* centrado horizontal */
     text-align: center;
 
-    background: none;          /* sin degradado, imagen limpia */
-    pointer-events: none;      /* NO bloquea clics (header / chat) */
+    background: none;           /* sin degradado, imagen limpia */
+    pointer-events: none;       /* NO bloquea clics (header / chat) */
 
-    transform: translateY(-210%); /* 👈 subir texto sin despegarlo tanto del resto */
+    transform: translateY(-210%); /* 👈 dejámos tu valor porque ahí te gusta */
   }
 
   .hero-mobile-overlay * {
@@ -297,7 +300,7 @@ header::after{
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin: -12px auto 0px; /* un poquito más cerca del texto */
+    margin: -20px auto 0;       /* 👈 pill entra un poquito en el área de la imagen */
     padding: 8px 16px;
     border-radius: 999px;
     background: #ffffff;
