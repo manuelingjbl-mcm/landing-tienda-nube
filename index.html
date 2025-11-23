@@ -297,23 +297,34 @@ header::after{
 
   /* Pill “Mobile first · Tienda Nube” debajo de la imagen, centrado */
   .hero-badge {
-    position: static;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin: -20px auto 0;       /* 👈 pill entra un poquito en el área de la imagen */
-    padding: 8px 16px;
-    border-radius: 999px;
-    background: #ffffff;
-    color: #111827;
-    font-size: 12px;
-    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
-  }
+  position: static;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-  /* Texto: pegadito al pill */
-  .hero-content p:first-of-type {
-    margin-top: 20px;
-  }
+  /* NUEVO: un poquito metido arriba, pero con aire abajo */
+  margin: -8px auto 12px;  /* arriba -8 (menos agresivo), abajo 12px */
+
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #111827;
+  font-size: 12px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* Podemos volver a algo más normal acá */
+.hero-content {
+  order: 2;
+  padding: 0 20px 0;
+  margin-top: 0;          /* 👈 quitamos el negativo para no “pegarlo” al pill */
+}
+
+/* Y este ya ni hace falta, pero si lo dejas ponelo suave */
+.hero-content p:first-of-type {
+  margin-top: 6px;        /* solo un toque de aire interno */
+}
+
 
   /* Botones: lado a lado en mobile */
   .hero-actions {
