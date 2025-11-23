@@ -213,7 +213,7 @@ header::after{
     padding-bottom: 32px;
     background: none !important;
     position: relative;
-    z-index: 1; /* por debajo del header y del botón de chat */
+    z-index: 0; /* no tapa al botón de chat */
   }
 
   /* Orden: primero mockup, luego texto */
@@ -224,7 +224,7 @@ header::after{
 
   .hero-content {
     order: 2;
-    padding: 12px 20px 0; /* acercamos el texto al pill */
+    padding: 10px 20px 0;  /* bajamos un poco para acercar texto al pill */
   }
 
   /* En mobile NO queremos repetir kicker + H1 del bloque de contenido */
@@ -261,7 +261,7 @@ header::after{
     background: none;          /* sin degradado, imagen limpia */
     pointer-events: none;      /* NO bloquea clics (header / chat) */
 
-    transform: translateY(-120%); /* lo subimos un poquito sobre la imagen */
+    transform: translateY(-22%); /* 👈 subir texto sin despegarlo tanto del resto */
   }
 
   .hero-mobile-overlay * {
@@ -296,8 +296,7 @@ header::after{
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin: 12px auto 4px;
-
+    margin: 14px auto 2px; /* un poquito más cerca del texto */
     padding: 8px 16px;
     border-radius: 999px;
     background: #ffffff;
@@ -306,9 +305,9 @@ header::after{
     box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
   }
 
-  /* Texto: un poco más cerca del pill */
+  /* Texto: pegadito al pill */
   .hero-content p:first-of-type {
-    margin-top: 12px;
+    margin-top: 6px;
   }
 
   /* Botones: lado a lado en mobile */
@@ -329,8 +328,7 @@ header::after{
     justify-content: center;
   }
 }
-    
- 
+
     
 
 
