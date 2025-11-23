@@ -225,25 +225,26 @@ header::after{
     width: 100%;
   }
 
- /* En mobile NO queremos repetir kicker + H1 del bloque de contenido */
+  /* En mobile NO queremos repetir kicker + H1 del bloque de contenido */
   .hero-kicker,
   .hero-content h1 {
     display: none !important;
   }
 
-/* Imagen del hero */
-.hero-phone {
-  position: relative;
-  width: 100%;
-  overflow: visible;          /* que no recorte la imagen */
-  margin-bottom: -220px;      /* ajusta este valor si hace falta */
-}
+  /* Imagen del hero */
+  .hero-phone {
+    position: relative;
+    width: 100%;
+    overflow: visible;          /* que no recorte la imagen */
+    margin-bottom: -220px;      /* ajusta este valor si hace falta */
+    z-index: 0;                 /* capa por debajo del contenido */
+  }
 
   .hero-img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
+    width: 100%;
+    height: auto;
+    display: block;
+  }
 
   /* === Overlay sobre la imagen, centrado tipo Higher-Web === */
   .hero-mobile-overlay {
@@ -291,35 +292,36 @@ header::after{
 
   /* Pill “Mobile first · Tienda Nube” debajo de la imagen, centrado */
   .hero-badge {
-  position: static;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+    position: static;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-  /* NUEVO: un poquito metido arriba, pero con aire abajo */
-  margin: -14px auto 20px;  /* arriba -8 (menos agresivo), abajo 12px */
+    /* un poquito metido arriba, pero con aire abajo */
+    margin: -14px auto 20px;
 
-  padding: 8px 16px;
-  border-radius: 999px;
-  background: #ffffff;
-  color: #111827;
-  font-size: 12px;
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
-}
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #111827;
+    font-size: 12px;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+  }
 
-/* Podemos volver a algo más normal acá */
-.hero-content {
-  order: 2;
-  padding: 0 20px 0;
-  margin-top: -30px;          /* 👈 quitamos el negativo para no “pegarlo” al pill */
-}
+  /* Bloque de contenido: ahora por ENCIMA de la imagen */
+  .hero-content {
+    order: 2;
+    padding: 0 20px 0;
+    margin-top: -30px;
+    position: relative;
+    z-index: 1;                 /* 👈 garantiza que el botón reciba el tap */
+  }
 
-/* Y este ya ni hace falta, pero si lo dejas ponelo suave */
-.hero-content p:first-of-type {
-  margin-top: 6px;        /* solo un toque de aire interno */
-}
+  .hero-content p:first-of-type {
+    margin-top: 6px;            /* solo un toque de aire interno */
+  }
 
-/* Botones: lado a lado en mobile */
+  /* Botones: lado a lado en mobile */
   .hero-actions {
     display: flex;
     flex-wrap: wrap;
@@ -337,6 +339,7 @@ header::after{
     justify-content: center;
   }
 }
+
 
   
     
