@@ -2246,29 +2246,37 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   </div>
 
   <aside class="hero-visual reveal">
-    <div class="hero-phone">
+  <div class="hero-phone">
+    <picture>
+      <!-- Imagen especial SOLO para mobile (sin la línea arriba) -->
+      <source
+        media="(max-width: 767.98px)"
+        srcset="hero-mobile-digital.png"
+      />
+      <!-- Imagen por defecto (desktop / tablets) -->
       <img
         src="hero-mobile-mcmdigital.png"
         alt="Mockup de tienda online pensada para mobile first"
       />
+    </picture>
 
-      <!-- Overlay SOLO mobile -->
-      <div class="hero-mobile-overlay">
-        <span class="hero-mobile-kicker">
-          Tienda Nube · Estudio especializado
-        </span>
-        <h1 class="hero-mobile-title">
-          Diseñamos<br> 
-          tu tienda online<br>
-          a medida de tu marca.
-        </h1>
-      </div>
+    <!-- Overlay SOLO mobile -->
+    <div class="hero-mobile-overlay">
+      <span class="hero-mobile-kicker">
+        Tienda Nube · Estudio especializado
+      </span>
+      <h1 class="hero-mobile-title">
+        Diseñamos<br> 
+        tu tienda online<br>
+        a medida de tu marca.
+      </h1>
     </div>
+  </div>
 
-    <div class="hero-badge">
-      Mobile first · Tienda Nube
-    </div>
-  </aside>
+  <div class="hero-badge">
+    Mobile first · Tienda Nube
+  </div>
+</aside>
 </div>
 
   </div>
