@@ -113,37 +113,115 @@ header::after{
 
 
     /* MENÚ HAMBURGUESA (desktop oculto) */
-    .menu-toggle{
-      display:none;
-      background:transparent;
-      border:none;
-      cursor:pointer;
-      padding:6px;
-      border-radius:999px;
-    }
-    .menu-toggle span{
-      display:block;
-      width:18px;
-      height:2px;
-      background:#ffffff;
-      border-radius:999px;
-      transition:transform .25s ease, opacity .25s ease, translate .25s ease;
-    }
-    .menu-toggle span + span{
-      margin-top:4px;
-    }
-    /* Animación del icono al abrir */
-    .menu-toggle.menu-open span:nth-child(1){
-      transform:rotate(45deg);
-      translate:0 3px;
-    }
-    .menu-toggle.menu-open span:nth-child(2){
-      opacity:0;
-    }
-    .menu-toggle.menu-open span:nth-child(3){
-      transform:rotate(-45deg);
-      translate:0 -3px;
-    }
+.menu-toggle{
+  display:none;
+  background:transparent;
+  border:none;
+  cursor:pointer;
+  padding:6px;
+  border-radius:999px;
+}
+.menu-toggle span{
+  display:block;
+  width:18px;
+  height:2px;
+  background:#ffffff;
+  border-radius:999px;
+  transition:transform .25s ease, opacity .25s ease, translate .25s ease;
+}
+.menu-toggle span + span{
+  margin-top:4px;
+}
+/* Animación del icono al abrir */
+.menu-toggle.menu-open span:nth-child(1){
+  transform:rotate(45deg);
+  translate:0 3px;
+}
+.menu-toggle.menu-open span:nth-child(2){
+  opacity:0;
+}
+.menu-toggle.menu-open span:nth-child(3){
+  transform:rotate(-45deg);
+  translate:0 -3px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 767.98px){
+
+  .menu-toggle{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    z-index:999; /* por encima del hero */
+  }
+
+  .nav{
+    position:absolute;
+    top:100%;
+    right:16px;
+    left:16px;
+    margin-top:8px;
+    padding:12px 16px;
+    background:#050b2a;
+    border-radius:12px;
+    display:none;       /* oculto por defecto */
+    flex-direction:column;
+    gap:8px;
+    z-index:998;
+  }
+
+  .nav a{
+    color:#ffffff;
+    text-decoration:none;
+    padding:6px 0;
+  }
+
+  /* Cuando JS agrega .nav-open, se ve el menú */
+  .nav.nav-open{
+    display:flex;
+  }
+}
+
+/* ===== DESKTOP ===== */
+@media (min-width: 768px){
+  .menu-toggle{
+    display:none;
+  }
+
+  .nav{
+    position:static;
+    display:flex !important;
+    gap:24px;
+    background:none;
+    padding:0;
+  }
+}
+
+@media (max-width: 767.98px){
+  header,
+  .site-header,
+  .main-header {
+    position:relative;
+    z-index:1000;
+  }
+
+  .hero,
+  .hero-visual,
+  .hero-phone,
+  .hero-mobile-overlay{
+    position:relative;
+    z-index:1;
+  }
+
+  .hero-mobile-overlay{
+    pointer-events:none !important;
+  }
+  .hero-mobile-overlay *{
+    pointer-events:none !important;
+  }
+}
+    
 
    /* HERO – DESKTOP */
 .hero{
@@ -2426,6 +2504,8 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
       });
     }
 
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
     /* ==== MENÚ HAMBURGUESA (MOBILE) ==== */
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('.nav');
@@ -2446,6 +2526,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     }
   });
 </script>
+
 
   
   <script>
