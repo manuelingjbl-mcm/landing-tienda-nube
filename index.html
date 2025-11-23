@@ -245,11 +245,29 @@ header::after{
     margin-bottom: -180px;   /* 👈 recortamos altura visual del hero */
   }
 
-  .hero-phone img {
-    width: 100%;
-    height: auto;
+  /* Estilo base para las dos imágenes del hero */
+.hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Por defecto (desktop / tablet): solo se ve la desktop */
+.hero-img-mobile {
+  display: none;
+}
+
+@media (max-width: 767.98px) {
+  /* En mobile ocultamos la desktop y mostramos la mobile */
+  .hero-img-desktop {
+    display: none;
+  }
+
+  .hero-img-mobile {
     display: block;
   }
+}
+
 
   /* === Overlay sobre la imagen, centrado tipo Higher-Web === */
   .hero-mobile-overlay {
@@ -2244,21 +2262,21 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
       Ideal para marcas de moda, hogar, bazar y lifestyle que quieren dar el salto al e-commerce.
     </div>
   </div>
-
-  <aside class="hero-visual reveal">
+<aside class="hero-visual reveal">
   <div class="hero-phone">
-    <picture>
-      <!-- Imagen especial SOLO para mobile (sin la línea arriba) -->
-      <source
-        media="(max-width: 767.98px)"
-        srcset="hero-mobile-digital.png"
-      />
-      <!-- Imagen por defecto (desktop / tablets) -->
-      <img
-        src="hero-mobile-mcmdigital.png"
-        alt="Mockup de tienda online pensada para mobile first"
-      />
-    </picture>
+    <!-- Imagen DESKTOP -->
+    <img
+      class="hero-img hero-img-desktop"
+      src="hero-mobile-mcmdigital.png"
+      alt="Mockup de tienda online pensada para mobile first"
+    />
+
+    <!-- Imagen MOBILE (sin la línea arriba) -->
+    <img
+      class="hero-img hero-img-mobile"
+      src="hero-mobile-digital.png"
+      alt="Mockup de tienda online pensada para mobile first"
+    />
 
     <!-- Overlay SOLO mobile -->
     <div class="hero-mobile-overlay">
@@ -2266,7 +2284,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
         Tienda Nube · Estudio especializado
       </span>
       <h1 class="hero-mobile-title">
-        Diseñamos<br> 
+        Diseñamos<br>
         tu tienda online<br>
         a medida de tu marca.
       </h1>
