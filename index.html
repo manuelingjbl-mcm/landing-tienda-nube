@@ -237,15 +237,15 @@ header::after{
     display: none !important;
   }
 
-  /* Imagen del hero */
-  .hero-phone {
-    position: relative;
-    width: 100%;
-    overflow: visible;          /* que no recorte la imagen */
-    margin-bottom: -180px;   /* 👈 recortamos altura visual del hero */
-  }
+/* Imagen del hero */
+.hero-phone {
+  position: relative;
+  width: 100%;
+  overflow: visible;          /* que no recorte la imagen */
+  margin-bottom: -180px;      /* ajusta este valor si hace falta */
+}
 
-  /* Estilo base para las dos imágenes del hero */
+/* Estilo base para las dos imágenes del hero */
 .hero-img {
   width: 100%;
   height: auto;
@@ -253,12 +253,16 @@ header::after{
 }
 
 /* Por defecto (desktop / tablet): solo se ve la desktop */
+.hero-img-desktop {
+  display: block;
+}
+
 .hero-img-mobile {
   display: none;
 }
 
+/* En MOBILE ocultamos la desktop y mostramos la mobile */
 @media (max-width: 767.98px) {
-  /* En mobile ocultamos la desktop y mostramos la mobile */
   .hero-img-desktop {
     display: none;
   }
@@ -267,7 +271,6 @@ header::after{
     display: block;
   }
 }
-
 
   /* === Overlay sobre la imagen, centrado tipo Higher-Web === */
   .hero-mobile-overlay {
