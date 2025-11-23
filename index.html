@@ -417,7 +417,7 @@ header::after{
     justify-content: center;
     margin: 16px auto 0px;
 
-    padding: 8px 16px;
+    padding: 8px 20px;
     border-radius: 999px;
     background: #ffffff;
     color: #111827;
@@ -427,7 +427,7 @@ header::after{
 
   /* Texto de párrafo un poco más cerca del pill */
   .hero-content p:first-of-type {
-    margin-top: 0px;
+    margin-top: 4px;
   }
 
   /* Botones: lado a lado en mobile */
@@ -1934,6 +1934,30 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
+/* ====== FIX: que el hero no bloquee la hamburguesa en mobile ====== */
+@media (max-width: 767.98px) {
+
+  /* 1) El overlay del hero solo es decorativo, que NO capture clics */
+  .hero-mobile-overlay {
+    pointer-events: none;
+  }
+
+  /* 2) Aseguramos que el header esté siempre por encima del hero */
+  header,
+  .site-header,
+  .main-header {
+    position: relative;
+    z-index: 100;
+  }
+
+  /* Y el hero por debajo */
+  .hero,
+  .hero-visual,
+  .hero-phone {
+    position: relative;
+    z-index: 1;
+  }
+}
 
 
 
