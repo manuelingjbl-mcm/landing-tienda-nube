@@ -2120,20 +2120,21 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 /* ====== FIX: que el hero no bloquee la hamburguesa en mobile ====== */
 @media (max-width: 767.98px) {
 
-  /* 1) El overlay del hero solo es decorativo, que NO capture clics */
-  .hero-mobile-overlay {
-    pointer-events: none;
+  /* El overlay solo decorativo: no captura clics */
+  .hero-mobile-overlay,
+  .hero-mobile-overlay * {
+    pointer-events: none !important;
   }
 
-  /* 2) Aseguramos que el header esté siempre por encima del hero */
+  /* Header SIEMPRE por encima del hero */
   header,
   .site-header,
   .main-header {
     position: relative;
-    z-index: 100;
+    z-index: 1000;
   }
 
-  /* Y el hero por debajo */
+  /* Hero y mockup por debajo */
   .hero,
   .hero-visual,
   .hero-phone {
@@ -2141,6 +2142,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     z-index: 1;
   }
 }
+
 
 @media (max-width: 767.98px){
   header,
@@ -3238,54 +3240,56 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 </button>
 
 <script>
-  // ============================
-  // MENÚ HAMBURGUESA (MOBILE)
-  // ============================
-  const menuToggle = document.querySelector('.menu-toggle');
-  const nav = document.querySelector('.nav');
+  document.addEventListener('DOMContentLoaded', function () {
+    /* ============================
+       MENÚ HAMBURGUESA (MOBILE)
+    ============================ */
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.nav');
 
-  if (menuToggle && nav) {
-    // Abrir / cerrar menú
-    menuToggle.addEventListener('click', () => {
-      const isOpen = nav.classList.toggle('nav-open');
-      menuToggle.classList.toggle('menu-open', isOpen);
-    });
-
-    // Cerrar menú al hacer clic en un link
-    nav.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        nav.classList.remove('nav-open');
-        menuToggle.classList.remove('menu-open');
+    if (menuToggle && nav) {
+      // Abrir / cerrar menú
+      menuToggle.addEventListener('click', function () {
+        const isOpen = nav.classList.toggle('nav-open');
+        menuToggle.classList.toggle('menu-open', isOpen);
       });
-    });
-  }
 
-  // ============================
-  // BOTÓN FLOTANTE VOLVER ARRIBA
-  // ============================
-  const scrollBtn = document.querySelector('.scroll-top-btn');
-
-  if (scrollBtn) {
-    const toggleScrollBtn = () => {
-      if (window.scrollY > 300) {
-        scrollBtn.classList.add('is-visible');
-      } else {
-        scrollBtn.classList.remove('is-visible');
-      }
-    };
-
-    // Estado inicial + escucha de scroll
-    toggleScrollBtn();
-    window.addEventListener('scroll', toggleScrollBtn);
-
-    // Scroll suave al top
-    scrollBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
+      // Cerrar menú al hacer clic en un link
+      nav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          nav.classList.remove('nav-open');
+          menuToggle.classList.remove('menu-open');
+        });
       });
-    });
-  }
+    }
+
+    /* ============================
+       BOTÓN FLOTANTE VOLVER ARRIBA
+    ============================ */
+    const scrollBtn = document.querySelector('.scroll-top-btn');
+
+    if (scrollBtn) {
+      const toggleScrollBtn = function () {
+        if (window.scrollY > 300) {
+          scrollBtn.classList.add('is-visible');
+        } else {
+          scrollBtn.classList.remove('is-visible');
+        }
+      };
+
+      // Estado inicial + escucha de scroll
+      toggleScrollBtn();
+      window.addEventListener('scroll', toggleScrollBtn);
+
+      // Scroll suave al top
+      scrollBtn.addEventListener('click', function () {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+  });
 </script>
 
 
