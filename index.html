@@ -2126,16 +2126,13 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   } 
   
   /*  2) Aseguramos que el header esté siempre por encima del hero */ 
-  header, .site-header, .main-header { 
-  position: relative; z-index: 100; 
+  header, 
+  .site-header, 
+  .main-header { 
+  position: relative; 
+  z-index: 100; 
   } 
   
-  /* Y el hero por debajo */ 
-  .hero, .hero-visual, .hero-phone { 
-  position: relative; z-index: 1; 
-  } 
-}
-
   /* Hero y mockup por debajo */
   .hero,
   .hero-visual,
@@ -2144,7 +2141,6 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     z-index: 1;
   }
 }
-
 
 @media (max-width: 767.98px){
   header,
