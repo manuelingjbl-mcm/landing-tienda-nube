@@ -2302,28 +2302,32 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   transform: translateY(0);
 }
 
-
-/* === Animación de entrada para las cards de SERVICIOS === */
+/* === ANIMACIÓN CARDS "NUESTROS SERVICIOS" === */
 .section-dark .service-card {
-  opacity: 0;
-  transform: translateY(26px);  /* arranca un poquito más abajo */
+  /* Estado inicial oculto y ligeramente abajo */
+  opacity: 0 !important;
+  transform: translateY(30px) !important;
+
+  /* Transiciones: incluimos transform y opacity */
   transition:
     opacity 0.6s ease,
     transform 0.6s ease,
     box-shadow 0.25s ease,
-    background 0.25s ease;
+    background 0.25s ease !important;
 }
 
-/* Cuando el JS agrega la clase, la card aparece y sube a su posición */
+/* Cuando se hace visible (clase que agrega el JS) */
 .section-dark .service-card.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
 
-/* Hover solo cuando ya es visible (para no pelearse con la entrada) */
+/* Hover solo después de visible */
 .section-dark .service-card.is-visible:hover {
-  transform: translateY(-4px);
+  transform: translateY(-4px) !important;
 }
+
+
 
     
     
@@ -3163,33 +3167,36 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 
     
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", function () {
     const cards = document.querySelectorAll(".section-dark .service-card");
     if (!cards.length) return;
 
-    // Pequeño delay escalonado para cada card
-    cards.forEach((card, index) => {
+    // Delay en cascada para cada card
+    cards.forEach(function (card, index) {
       card.style.transitionDelay = (index * 120) + "ms";
     });
 
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      function (entries) {
+        entries.forEach(function (entry) {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target); // no lo seguimos observando
+            observer.unobserve(entry.target); // no hace falta observarla más
           }
         });
       },
       {
-        threshold: 0.2,          // se dispara cuando se ve un 20% de la card
+        threshold: 0.15,      // con 15% visible ya dispara
         rootMargin: "0px 0px -10% 0px"
       }
     );
 
-    cards.forEach((card) => observer.observe(card));
+    cards.forEach(function (card) {
+      observer.observe(card);
+    });
   });
 </script>
+
 
 
   
