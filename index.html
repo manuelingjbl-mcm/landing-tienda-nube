@@ -2327,6 +2327,30 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
 
 
+/* ===== HEADER TRANSPARENTE + STICKY ===== */
+
+/* Barra del menú: transparente encima del hero */
+.header-inner.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+
+  background: transparent;
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    backdrop-filter 0.25s ease;
+}
+
+/* Estado "sólido" cuando scrolleás */
+.header-inner.site-header.header-solid {
+  background: rgba(5, 11, 42, 0.92);    /* azul oscuro semi-opaco */
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
 
     
     
@@ -3198,6 +3222,31 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 </script>
 
     
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const header = document.querySelector('.header-inner.site-header');
+  const hero   = document.querySelector('.hero');
+
+  if (!header || !hero) return;
+
+  // Umbral a partir del cual queremos que el header se vuelva sólido
+  const heroLimit = hero.offsetHeight * 0.35; // 35% del alto del hero
+
+  const onScroll = () => {
+    const y = window.scrollY || window.pageYOffset;
+
+    if (y > heroLimit) {
+      header.classList.add('header-solid');
+    } else {
+      header.classList.remove('header-solid');
+    }
+  };
+
+  // Forzamos el estado correcto al cargar
+  onScroll();
+  window.addEventListener('scroll', onScroll);
+});
+</script>
 
 
 
