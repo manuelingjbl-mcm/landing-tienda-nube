@@ -2326,6 +2326,50 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   transform: translateY(-4px) !important;
 }
 
+    
+/* Barra superior (logo + nav) flotando sobre el hero */
+.site-header {
+  position: relative; /* header normal, contiene al hero */
+}
+
+/* NAV STICKY */
+.header-inner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
+  /* usa el layout que ya tenías */
+  padding: 16px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: transparent;
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    backdrop-filter 0.25s ease;
+}
+
+/* Cuando hacemos scroll: fondo sólido + blur */
+.header-inner.header-solid {
+  background: rgba(5, 11, 42, 0.92);   /* azul oscuro semi-opaco */
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Para que el hero no quede escondido detrás del nav fijo */
+.site-header {
+  padding-top: 72px;   /* aprox. la altura de la barra en desktop */
+}
+
+@media (max-width: 767.98px) {
+  .site-header {
+    padding-top: 64px; /* ajustá si en móvil ves que tapa mucho o poco */
+  }
+}
 
 
     
@@ -2353,10 +2397,11 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
         <a href="#contacto">Contacto</a>
       </nav>
     </div>
+   </div> <!-- 👈 AQUÍ cerramos header-inner SOLO PARA EL NAV -->
   
  
 <!-- HERO: va *después* del header -->
-    <div class="hero reveal">
+  <div class="hero reveal">
   <div class="hero-content">
     <div class="hero-kicker">Tienda Nube · Estudio especializado</div>
     <h1>Diseñamos tu tienda online a medida de tu marca.</h1>
@@ -2400,9 +2445,8 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     Mobile first · Tienda Nube
   </div>
 </aside>
-</div>
+</div> <!-- /hero -->
 
-</div>
 </header>  
   
 <main>
@@ -2812,6 +2856,46 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
       });
     }
    });
+  // ==== HEADER: cambiar fondo al salir del hero ====
+  document.addEventListener('DOMContentLoaded', function () {
+    const headerInner = document.querySelector('.site-header .header-inner');
+    const hero = document.querySelector('.hero');
+
+    if (!headerInner || !hero) return;
+
+    // Punto a partir del cual el header se vuelve sólido
+    const heroLimit = hero.offsetHeight * 0.6;
+
+    function onScroll() {
+      const y = window.scrollY || window.pageYOffset;
+
+      if (y > heroLimit) {
+        headerInner.classList.add('header-inner--solid');
+      } else {
+        headerInner.classList.remove('header-inner--solid');
+      }
+    }
+
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+  });
+  
+  // ==== HEADER STICKY: fondo sólido al hacer scroll ====
+const headerBar = document.querySelector('.header-inner');
+
+if (headerBar) {
+  const onScroll = () => {
+    if (window.scrollY > 40) {
+      headerBar.classList.add('header-solid');
+    } else {
+      headerBar.classList.remove('header-solid');
+    }
+  };
+
+  window.addEventListener('scroll', onScroll);
+  onScroll(); // para que aplique bien si se recarga en medio de la página
+}
+
   </script>
 
 
