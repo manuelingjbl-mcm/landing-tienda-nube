@@ -2334,6 +2334,63 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   padding: 0 32px;
 }
 
+/* ==== BOTÓN FLOTANTE VOLVER ARRIBA ==== */
+.scroll-top-btn {
+  position: fixed;
+  right: 24px;        /* alineado con el chat: podés ajustar */
+  bottom: 110px;      /* justo por encima del botón de chat */
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  z-index: 120;       /* por encima del contenido, debajo o similar al chat */
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 22px;
+  line-height: 1;
+  color: #ffffff;
+
+  background: rgba(11, 99, 232, 0.95); /* azul VIA */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* Estado visible cuando se scrollea */
+.scroll-top-btn.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* Hover desktop */
+@media (hover: hover) {
+  .scroll-top-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+  }
+}
+
+/* Un poco más grande en mobile para que sea cómodo de tocar */
+@media (max-width: 767.98px) {
+  .scroll-top-btn {
+    right: 18px;
+    bottom: 100px;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+}
     
     
   </style>
@@ -3208,6 +3265,38 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 </script>
 
 
+    
+<!-- Botón flotante "volver arriba" -->
+<button class="scroll-top-btn" aria-label="Volver arriba">
+  ↑
+</button>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const scrollBtn = document.querySelector('.scroll-top-btn');
+    if (!scrollBtn) return;
+
+    const toggleScrollBtn = () => {
+      if (window.scrollY > 300) {
+        scrollBtn.classList.add('is-visible');
+      } else {
+        scrollBtn.classList.remove('is-visible');
+      }
+    };
+
+    // Mostrar / ocultar según scroll
+    toggleScrollBtn();
+    window.addEventListener('scroll', toggleScrollBtn);
+
+    // Scroll suave al top
+    scrollBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  });
+</script>
 
     
 </body>
