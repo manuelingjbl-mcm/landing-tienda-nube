@@ -2326,6 +2326,48 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   transform: translateY(-4px) !important;
 }
 
+/* =========================
+   HEADER TRANSPARENTE + STICKY
+   ========================== */
+
+/* Barra de navegación fija arriba */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
+  /* mismo ancho que el resto del layout */
+  padding: 16px 0;
+  background: transparent;
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    backdrop-filter 0.25s ease;
+}
+
+/* Contenido interno del header (logo + menú) */
+.site-header .header-inner {
+  max-width: 1160px;     /* usá el mismo ancho que el wrapper de la landing */
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Estado “barra sólida” cuando se hace scroll */
+.site-header.header-solid {
+  background: rgba(5, 11, 42, 0.94);   /* azul oscuro semi-opaco */
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Para que el contenido (hero) no quede escondido debajo del header fijo */
+body.with-fixed-header {
+  padding-top: 72px;  /* ~altura del header; ajustá a ojo si ves que queda muy arriba o muy abajo */
+}
+    
 
     
   </style>
@@ -2352,6 +2394,8 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
         <a href="#contacto">Contacto</a>
       </nav>
     </div>
+   </div>
+</header>
  
 <!-- HERO: va *después* del header -->
     <div class="hero reveal">
@@ -2400,11 +2444,6 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 </aside>
 </div>
   
-</div>
-</header>
-  
-  
-
 <main>
   <!-- MARCAS -->
  <section class="section reveal">
@@ -2812,7 +2851,26 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
       });
     }
    });
-</script>
+ /* ==== HEADER TRANSPARENTE + STICKY ==== */
+  document.addEventListener("DOMContentLoaded", function () {
+    const header = document.querySelector(".site-header");
+    if (!header) return;
+
+    const limit = 80; // px de scroll para activar fondo sólido
+
+    function handleScroll() {
+      const y = window.scrollY || window.pageYOffset;
+      if (y > limit) {
+        header.classList.add("header-solid");
+      } else {
+        header.classList.remove("header-solid");
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // para que quede bien al recargar en medio de la página
+  });
+  </script>
 
 
 <script>
@@ -3195,6 +3253,8 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     });
   });
 </script>
+
+
 
     
 </body>
