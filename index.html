@@ -2191,47 +2191,6 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
-/* =========================
-   HEADER TRANSPARENTE + STICKY
-   ========================== */
-
-/* Estado base: transparente sobre el hero */
-.site-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  padding: 16px 0;
-  background: transparent;
-  transition:
-    background 0.25s ease,
-    box-shadow 0.25s ease,
-    backdrop-filter 0.25s ease;
-}
-
-/* Cuando hacemos scroll: fondo sólido + blur */
-.site-header.header-solid {
-  background: rgba(5, 11, 42, 0.92);   /* azul oscuro semi-opaco */
-  backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-}
-
-/* Compensar el header fijo (desktop) */
-body {
-  padding-top: 72px;   /* aprox. altura del header en desktop */
-}
-
-/* Compensar en mobile */
-@media (max-width: 767.98px) {
-  body {
-    padding-top: 64px; /* ajustá si ves que tapa mucho o poco */
-  }
-}
-
-
-
-
     
   </style>
 </head>
