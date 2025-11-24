@@ -2236,7 +2236,8 @@ body {
   </style>
 </head>
 <body>
-
+  
+<body>
 <header>
   <div class="header-inner">
     <div class="logo-row">
@@ -2257,7 +2258,7 @@ body {
         <a href="#contacto">Contacto</a>
       </nav>
     </div>
-   
+   <header>
 
     <div class="hero reveal">
   <div class="hero-content">
@@ -2719,27 +2720,31 @@ body {
 
 <script>
   // ==== HEADER TRANSPARENTE + FONDO AL HACER SCROLL ====
-  document.addEventListener("DOMContentLoaded", () => {
-  const header = document.querySelector(".site-header");
-  if (!header) return;
+ document.addEventListener('DOMContentLoaded', function () {
+    const header = document.querySelector('.site-header');
+    const hero   = document.querySelector('.hero');
 
-  const toggleHeader = () => {
-    const y = window.scrollY || window.pageYOffset;
+    if (!header || !hero) return;
 
-    // A partir de un poquito de scroll, activamos el fondo sólido
-    if (y > 40) {
-      header.classList.add("header-solid");
-    } else {
-      header.classList.remove("header-solid");
-    }
-  };
+    // Punto a partir del cual se vuelve sólido (60% del hero)
+    const heroLimit = hero.offsetHeight * 0.6;
 
-  // Lo ejecutamos una vez al cargar
-  toggleHeader();
+    const onScroll = () => {
+      const y = window.scrollY || window.pageYOffset || 0;
 
-  // Y luego en cada scroll
-  window.addEventListener("scroll", toggleHeader);
-});
+      if (y > heroLimit) {
+        header.classList.add('header-solid');
+      } else {
+        header.classList.remove('header-solid');
+      }
+    };
+
+    // Forzamos el estado correcto al cargar
+    onScroll();
+
+    // Y escuchamos el scroll
+    window.addEventListener('scroll', onScroll);
+  });
 </script>
 
 <script>
