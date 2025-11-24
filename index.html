@@ -2334,26 +2334,13 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   padding: 0 32px;
 }
 
+    
+/* ============ HEADER STICKY ============ */
 
-/* === NAV FIJO SOBRE EL HERO === */
-
-/* La fila que tiene logo + menú se vuelve la barra fija */
-.logo-row {
-  position: fixed;
+.site-header {
+  position: sticky;          /* se mantiene en flujo y se pega al top */
   top: 0;
-  left: 0;
-  right: 0;
-
   z-index: 1000;
-
-  /* Ajustá estos paddings según cómo la veas */
-  padding: 18px 40px;
-
-  /* Que ocupe todo el ancho pero el contenido se alinee como ya lo tenías */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
   background: transparent;
   transition:
     background 0.25s ease,
@@ -2361,28 +2348,60 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     backdrop-filter 0.25s ease;
 }
 
-/* Estado cuando hacemos scroll (fondo sólido) */
-.logo-row--solid {
-  background: rgba(5, 11, 42, 0.92);
+/* Estado “sólido” cuando hacemos scroll */
+.site-header.header-solid {
+  background: rgba(5, 11, 42, 0.96);
   backdrop-filter: blur(10px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
-/* Compensar la altura de la barra para que el hero no quede tapado */
-header {
-  padding-top: 72px;   /* ajusta si ves que tapa mucho o poco */
+/* Contenedor interno del header, para que no quede pegado a los bordes */
+.header-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-@media (max-width: 767.98px) {
-  header {
-    padding-top: 60px; /* un poco menos en mobile si tu barra es más baja */
-    padding-left: 16px;
-    padding-right: 16px;
-  }
+/* fila logo + nav (en tu HTML ya existe .logo-row, lo aprovechamos) */
+.logo-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
 
-  .logo-row {
-    padding: 14px 16px;
-  }
+/* navegación más angosta y separada */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 15px;
+}
+
+/* limpiamos cualquier padding extra que estuviera empujando todo hacia abajo */
+body {
+  padding-top: 0;
+}
+main {
+  margin-top: 0;
+}
+
+/* ============ HERO (ajuste de posición) ============ */
+
+.hero {
+  margin-top: 0 !important;      /* por si quedó algún margen viejo */
+  padding-top: 80px;             /* altura aprox. del header + aire */
+  padding-bottom: 80px;
+  box-sizing: border-box;
+}
+
+/* Si tenés algo como .hero-wrapper o similar que empuje hacia abajo,
+   también lo dejamos sin margen por las dudas */
+.hero-wrapper {
+  margin-top: 0 !important;
 }
 
 
