@@ -2191,6 +2191,58 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
+    /* ====== SERVICIOS · RESETEO VISIBILIDAD ====== */
+
+/* Grid de servicios */
+.section-dark .services {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  margin-top: 32px;
+}
+
+/* En desktop, 2 columnas */
+@media (min-width: 992px) {
+  .section-dark .services {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Card base SIEMPRE visible (sin depender de JS) */
+.section-dark .service-card {
+  background: #0f172a;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.45);
+
+  color: #f9fafb;
+  opacity: 1 !important;          /* 👈 por si algún CSS viejo la dejaba en 0 */
+  transform: none !important;     /* 👈 por si había animación con translateY */
+}
+
+/* Títulos y texto dentro de la card */
+.section-dark .service-card h3 {
+  margin-bottom: 12px;
+}
+
+.section-dark .service-card p {
+  margin-bottom: 16px;
+}
+
+/* Pill dentro de cada servicio */
+.section-dark .service-card .pill {
+  display: inline-block !important; /* 👈 por si algún .pill global lo ocultaba */
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 1.4;
+
+  background: #111827;
+  color: #e5e7eb;
+  white-space: normal;
+}
+
+
 /* ==== GRID SERVICIOS ==== */
 .services {
   display: grid;
