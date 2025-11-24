@@ -2327,34 +2327,6 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
 
 
-/* ===== HEADER TRANSPARENTE QUE SE VUELVE SÓLIDO AL SCROLL ===== */
-
-.site-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-
-  padding: 18px 0;             /* ajustá si lo querés más alto o más bajo */
-  background: transparent;     /* sobre el hero se ve transparente */
-
-  transition:
-    background 0.25s ease,
-    box-shadow 0.25s ease,
-    backdrop-filter 0.25s ease;
-}
-
-/* Estado cuando SCROLLEÁS un poquito */
-.site-header.header-solid {
-  background: rgba(5, 11, 42, 0.94);   /* azul oscuro tipo zurbrand */
-  backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-}
-
-/* Nada de padding-top raro en el body: dejamos el hero “pegado” arriba */
-
-    
     
   </style>
 </head>
@@ -3225,29 +3197,5 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 </script>
 
     
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const header = document.querySelector('.site-header');
-    if (!header) return;
-
-    // A partir de cuántos píxeles de scroll se vuelve sólido
-    const solidAt = 120; // probá 80, 120, 150 según te guste
-
-    function onScroll() {
-      if (window.scrollY > solidAt) {
-        header.classList.add('header-solid');
-      } else {
-        header.classList.remove('header-solid');
-      }
-    }
-
-    window.addEventListener('scroll', onScroll);
-    onScroll(); // para que se aplique si entras ya scrolleado
-  });
-</script>
-
-
-
-  
 </body>
 </html>
