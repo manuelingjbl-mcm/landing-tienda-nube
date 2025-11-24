@@ -2191,9 +2191,9 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
-/* ===============================
+/* =========================
    HEADER TRANSPARENTE + STICKY
-   =============================== */
+   ========================== */
 
 /* Estado base: transparente sobre el hero */
 .site-header {
@@ -2201,8 +2201,8 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   top: 0;
   left: 0;
   right: 0;
-  z-index: 900;
-  padding: 16px 0; /* ajusta si hace falta */
+  z-index: 1000;
+  padding: 16px 0;
   background: transparent;
   transition:
     background 0.25s ease,
@@ -2210,24 +2210,25 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     backdrop-filter 0.25s ease;
 }
 
-/* Logo + links sobre fondo oscuro/azul cuando se scrollea */
+/* Cuando hacemos scroll: fondo sólido + blur */
 .site-header.header-solid {
-  background: rgba(5, 11, 42, 0.9);      /* azul oscuro semi-opaco */
+  background: rgba(5, 11, 42, 0.92);   /* azul oscuro semi-opaco */
   backdrop-filter: blur(10px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
-/* Para que el contenido no quede tapado por el header fijo */
-body.has-fixed-header {
-  padding-top: 72px; /* aprox. altura del header en desktop */
+/* Compensar el header fijo (desktop) */
+body {
+  padding-top: 72px;   /* aprox. altura del header en desktop */
 }
 
-/* En mobile el comportamiento es el mismo; puedes ajustar la altura si hace falta */
+/* Compensar en mobile */
 @media (max-width: 767.98px) {
-  body.has-fixed-header {
-    padding-top: 64px;
+  body {
+    padding-top: 64px; /* ajustá si ves que tapa mucho o poco */
   }
 }
+
 
 
 
@@ -2720,32 +2721,27 @@ body.has-fixed-header {
 
 <script>
   // ==== HEADER TRANSPARENTE + FONDO AL HACER SCROLL ====
-  document.addEventListener('DOMContentLoaded', () => {
-    const header = document.querySelector('.site-header');
-    const hero   = document.querySelector('.hero');
+  document.addEventListener("DOMContentLoaded", () => {
+  const header = document.querySelector(".site-header");
+  if (!header) return;
 
-    if (!header || !hero) return;
+  const toggleHeader = () => {
+    const y = window.scrollY || window.pageYOffset;
 
-    // dejamos espacio para el header fijo
-    document.body.classList.add('has-fixed-header');
+    // A partir de un poquito de scroll, activamos el fondo sólido
+    if (y > 40) {
+      header.classList.add("header-solid");
+    } else {
+      header.classList.remove("header-solid");
+    }
+  };
 
-    // punto a partir del cual se vuelve sólido
-    const heroLimit = hero.offsetHeight * 0.4;
+  // Lo ejecutamos una vez al cargar
+  toggleHeader();
 
-    const onScroll = () => {
-      const y = window.scrollY || window.pageYOffset || 0;
-
-      if (y > heroLimit) {
-        header.classList.add('header-solid');
-      } else {
-        header.classList.remove('header-solid');
-      }
-    };
-
-    // forzar estado correcto al recargar con scroll
-    onScroll();
-    window.addEventListener('scroll', onScroll);
-  });
+  // Y luego en cada scroll
+  window.addEventListener("scroll", toggleHeader);
+});
 </script>
 
 <script>
