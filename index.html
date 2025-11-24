@@ -2327,30 +2327,32 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
 
 
-/* ===== HEADER TRANSPARENTE + STICKY ===== */
+/* ===== HEADER TRANSPARENTE QUE SE VUELVE SÓLIDO AL SCROLL ===== */
 
-/* Barra del menú: transparente encima del hero */
-.header-inner.site-header {
+.site-header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  width: 100%;
 
-  background: transparent;
+  padding: 18px 0;             /* ajustá si lo querés más alto o más bajo */
+  background: transparent;     /* sobre el hero se ve transparente */
+
   transition:
     background 0.25s ease,
     box-shadow 0.25s ease,
     backdrop-filter 0.25s ease;
 }
 
-/* Estado "sólido" cuando scrolleás */
-.header-inner.site-header.header-solid {
-  background: rgba(5, 11, 42, 0.92);    /* azul oscuro semi-opaco */
+/* Estado cuando SCROLLEÁS un poquito */
+.site-header.header-solid {
+  background: rgba(5, 11, 42, 0.94);   /* azul oscuro tipo zurbrand */
   backdrop-filter: blur(10px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
+
+/* Nada de padding-top raro en el body: dejamos el hero “pegado” arriba */
 
     
     
@@ -2358,8 +2360,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 </head>
 <body>
   
-<header>
-  <div class="header-inner site-header">
+<header class="site-header">
   <div class="header-inner">
     <div class="logo-row">
       <div class="logo">viacloudstudio</div>
@@ -2379,7 +2380,10 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
         <a href="#contacto">Contacto</a>
       </nav>
     </div>
+   </div>
+</header>
 
+<!-- HERO: va *después* del header -->
     <div class="hero reveal">
   <div class="hero-content">
     <div class="hero-kicker">Tienda Nube · Estudio especializado</div>
@@ -2425,6 +2429,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   </div>
 </aside>
 </div>
+  
 </div>
 </header>
   
@@ -3223,29 +3228,24 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 
     
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const header = document.querySelector('.header-inner.site-header');
-  const hero   = document.querySelector('.hero');
+  document.addEventListener('DOMContentLoaded', function () {
+    const header = document.querySelector('.site-header');
+    if (!header) return;
 
-  if (!header || !hero) return;
+    // A partir de cuántos píxeles de scroll se vuelve sólido
+    const solidAt = 120; // probá 80, 120, 150 según te guste
 
-  // Umbral a partir del cual queremos que el header se vuelva sólido
-  const heroLimit = hero.offsetHeight * 0.35; // 35% del alto del hero
-
-  const onScroll = () => {
-    const y = window.scrollY || window.pageYOffset;
-
-    if (y > heroLimit) {
-      header.classList.add('header-solid');
-    } else {
-      header.classList.remove('header-solid');
+    function onScroll() {
+      if (window.scrollY > solidAt) {
+        header.classList.add('header-solid');
+      } else {
+        header.classList.remove('header-solid');
+      }
     }
-  };
 
-  // Forzamos el estado correcto al cargar
-  onScroll();
-  window.addEventListener('scroll', onScroll);
-});
+    window.addEventListener('scroll', onScroll);
+    onScroll(); // para que se aplique si entras ya scrolleado
+  });
 </script>
 
 
