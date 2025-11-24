@@ -2334,13 +2334,26 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   padding: 0 32px;
 }
 
-/* ====== HEADER STICKY TRANSPARENTE ====== */
-.site-header {
+
+/* === NAV FIJO SOBRE EL HERO === */
+
+/* La fila que tiene logo + menú se vuelve la barra fija */
+.logo-row {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
+
   z-index: 1000;
+
+  /* Ajustá estos paddings según cómo la veas */
+  padding: 18px 40px;
+
+  /* Que ocupe todo el ancho pero el contenido se alinee como ya lo tenías */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   background: transparent;
   transition:
     background 0.25s ease,
@@ -2348,77 +2361,27 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     backdrop-filter 0.25s ease;
 }
 
-/* Contenido centrado del header */
-.header-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 0;          /* altura base del header */
-}
-
-/* Logo + nav en la misma fila */
-.logo-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.site-header .logo {
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-/* Nav desktop */
-.site-header .nav {
-  display: flex;
-  gap: 32px;
-}
-
-/* Estado al hacer scroll: barra sólida + un poco más angosta */
-.site-header.header-solid {
-  background: rgba(5, 11, 42, 0.96);
+/* Estado cuando hacemos scroll (fondo sólido) */
+.logo-row--solid {
+  background: rgba(5, 11, 42, 0.92);
   backdrop-filter: blur(10px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
-.site-header.header-solid .header-inner {
-  padding: 10px 0;        /* se hace más finita al scrollear */
+/* Compensar la altura de la barra para que el hero no quede tapado */
+header {
+  padding-top: 72px;   /* ajusta si ves que tapa mucho o poco */
 }
 
-/* Espacio para que el hero no quede escondido detrás del header */
-.hero-section {
-  padding-top: 96px;      /* ajustá a ojo: 80–96px suele ir bien */
-}
-
-/* Mobile: ocultar nav y mostrar hamburguesa, como ya tenías */
 @media (max-width: 767.98px) {
-  .site-header .nav {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: rgba(5, 11, 42, 0.97);
-    padding: 16px 24px;
-    flex-direction: column;
-    gap: 16px;
-    min-width: 220px;
-    border-radius: 0 0 16px 16px;
-    transform-origin: top right;
-    transform: scaleY(0);
-    opacity: 0;
-    pointer-events: none;
-    transition: transform 0.18s ease, opacity 0.18s ease;
+  header {
+    padding-top: 60px; /* un poco menos en mobile si tu barra es más baja */
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
-  .site-header .nav.nav-open {
-    transform: scaleY(1);
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .menu-toggle {
-    display: inline-flex;
+  .logo-row {
+    padding: 14px 16px;
   }
 }
 
@@ -2911,42 +2874,26 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
       });
     }
    });
-  // ==== HEADER: cambiar fondo al salir del hero ====
+ </script>
+
+<script>
+  // NAV: cambiar a fondo sólido al hacer scroll
   document.addEventListener('DOMContentLoaded', function () {
-    const headerInner = document.querySelector('.site-header .header-inner');
-    const hero = document.querySelector('.hero');
+    const navBar = document.querySelector('.logo-row');
+    if (!navBar) return;
 
-    if (!headerInner || !hero) return;
-
-    // Punto a partir del cual el header se vuelve sólido
-    const heroLimit = hero.offsetHeight * 0.6;
-
-    function onScroll() {
-      const y = window.scrollY || window.pageYOffset;
-
-      if (y > heroLimit) {
-        headerInner.classList.add('header-inner--solid');
+    function toggleNavBackground() {
+      if (window.scrollY > 40) {
+        navBar.classList.add('logo-row--solid');
       } else {
-        headerInner.classList.remove('header-inner--solid');
+        navBar.classList.remove('logo-row--solid');
       }
     }
 
-    window.addEventListener('scroll', onScroll);
-    onScroll();
+    toggleNavBackground();
+    window.addEventListener('scroll', toggleNavBackground);
   });
-  
-  // ===== Header: cambiar fondo al hacer scroll =====
-const header = document.querySelector('.site-header');
-
-if (header) {
-  window.addEventListener('scroll', () => {
-    const solid = window.scrollY > 80; // cuando ya saliste un poco del hero
-    header.classList.toggle('header-solid', solid);
-  });
-}
-
-
-  </script>
+</script>
 
 
 <script>
