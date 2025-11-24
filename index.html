@@ -2117,22 +2117,24 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
-/* ====== FIX: que el hero no bloquee la hamburguesa en mobile ====== */
-@media (max-width: 767.98px) {
-
-  /* El overlay solo decorativo: no captura clics */
-  .hero-mobile-overlay,
-  .hero-mobile-overlay * {
-    pointer-events: none !important;
-  }
-
-  /* Header SIEMPRE por encima del hero */
-  header,
-  .site-header,
-  .main-header {
-    position: relative;
-    z-index: 1000;
-  }
+/* ====== FIX: que el hero no bloquee la hamburguesa en mobile ====== 
+    */ @media (max-width: 767.98px) { 
+  
+  /*  1) El overlay del hero solo es decorativo, que NO capture clics */ 
+  .hero-mobile-overlay { 
+  pointer-events: none; 
+  } 
+  
+  /*  2) Aseguramos que el header esté siempre por encima del hero */ 
+  header, .site-header, .main-header { 
+  position: relative; z-index: 100; 
+  } 
+  
+  /* Y el hero por debajo */ 
+  .hero, .hero-visual, .hero-phone { 
+  position: relative; z-index: 1; 
+  } 
+}
 
   /* Hero y mockup por debajo */
   .hero,
