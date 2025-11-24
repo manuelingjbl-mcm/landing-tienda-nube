@@ -2229,35 +2229,15 @@ body.has-fixed-header {
   }
 }
 
-/* ===== SANEAR HERO PARA QUE NO TAPE EL RESTO ===== */
 
-/* El hero se comporta como una sección normal */
-.hero {
-  position: relative;
-  z-index: 1;
-}
-
-/* Nada de posición fija en el hero o sus hijos */
-.hero,
-.hero-visual,
-.hero-phone {
-  position: relative;
-}
-
-/* Aseguramos que la sección siguiente esté por encima si hay solapes raros */
-main,
-.section,
-.section-home {
-  position: relative;
-  z-index: 2;
-}
 
     
   </style>
 </head>
 <body>
 
-<header>
+<body>
+  <header class="site-header">
   <div class="header-inner">
     <div class="logo-row">
       <div class="logo">viacloudstudio</div>
@@ -2277,6 +2257,8 @@ main,
         <a href="#contacto">Contacto</a>
       </nav>
     </div>
+    </div>
+  </header>
 
     <div class="hero reveal">
   <div class="hero-content">
@@ -2737,66 +2719,32 @@ main,
 </script>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const header = document.querySelector(".site-header");
-    const hero   = document.querySelector(".hero");
+  // ==== HEADER TRANSPARENTE + FONDO AL HACER SCROLL ====
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('.site-header');
+    const hero   = document.querySelector('.hero');
 
-    // si no hay header, salimos
-    if (!header) return;
+    if (!header || !hero) return;
 
-    // metemos el padding-top global para compensar el header fijo
-    document.body.classList.add("has-fixed-header");
+    // dejamos espacio para el header fijo
+    document.body.classList.add('has-fixed-header');
 
-    function onScroll() {
-      // si por alguna razón no hay hero, lo dejamos siempre sólido al scrollear
-      if (!hero) {
-        if (window.scrollY > 10) {
-          header.classList.add("header-solid");
-        } else {
-          header.classList.remove("header-solid");
-        }
-        return;
-      }
+    // punto a partir del cual se vuelve sólido
+    const heroLimit = hero.offsetHeight * 0.4;
 
-      // distancia del borde inferior del hero al viewport
-      const heroBottom = hero.getBoundingClientRect().bottom;
+    const onScroll = () => {
+      const y = window.scrollY || window.pageYOffset || 0;
 
-      // cuando el hero ya “se fue” hacia arriba, encendemos el fondo sólido
-      if (heroBottom <= 0) {
-        header.classList.add("header-solid");
+      if (y > heroLimit) {
+        header.classList.add('header-solid');
       } else {
-        header.classList.remove("header-solid");
+        header.classList.remove('header-solid');
       }
-    }
+    };
 
-    // escuchamos el scroll y forzamos una primera evaluación al cargar
-    window.addEventListener("scroll", onScroll);
+    // forzar estado correcto al recargar con scroll
     onScroll();
-  });
-</script>
-
-
-  
-  <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const cards = document.querySelectorAll(".service-card");
-    if (!cards.length) return;
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          const card = entry.target;
-          // delay suave para cada card
-          card.style.transitionDelay = (index * 120) + "ms";
-          card.classList.add("in-view");
-          observer.unobserve(card);
-        }
-      });
-    }, {
-      threshold: 0.25
-    });
-
-    cards.forEach(card => observer.observe(card));
+    window.addEventListener('scroll', onScroll);
   });
 </script>
 
