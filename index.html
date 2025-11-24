@@ -3223,26 +3223,27 @@ header.header-solid {
 
     
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const header = document.querySelector('header');
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('.site-header');
+    const hero   = document.querySelector('.hero');
+
     if (!header) return;
 
-    const OFFSET = 40; // pixeles de scroll para activar el fondo sólido
+    const limit = hero ? hero.offsetHeight * 0.5 : 120; // a mitad del hero aprox.
 
-    function updateHeader() {
-      if (window.scrollY > OFFSET) {
+    const onScroll = () => {
+      if (window.scrollY > limit) {
         header.classList.add('header-solid');
       } else {
         header.classList.remove('header-solid');
       }
-    }
+    };
 
-    // Estado inicial (por si recargás con scroll)
-    updateHeader();
-
-    window.addEventListener('scroll', updateHeader, { passive: true });
+    onScroll(); // para que aplique si recargás estando abajo
+    window.addEventListener('scroll', onScroll);
   });
 </script>
+
 
 
   
