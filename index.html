@@ -201,11 +201,10 @@ header::after{
 
   /* Header siempre por encima del hero (hamburguesa clickeable) */
   header,
-  .site-header,
-  .main-header {
-    position: relative;
-    z-index: 1000;
-  }
+.site-header,
+.main-header {
+  z-index: 1000;  /* solo z-index, SIN position */
+}
 
   /* Hero base: columna en mobile */
   .hero {
@@ -2327,6 +2326,29 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   transform: translateY(-4px) !important;
 }
 
+/* ===== HEADER SIMPLE: TRANSPARENTE ARRIBA, SÓLIDO AL SCROLL ===== */
+
+/* Estado base: transparente encima del hero */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 16px 0;
+  background: transparent;
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    backdrop-filter 0.25s ease;
+}
+
+/* Estado scrolleado: fondo sólido + blur */
+header.header-solid {
+  background: rgba(5, 11, 42, 0.92);   /* azul oscuro semi-opaco */
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
 
 
     
@@ -2355,6 +2377,8 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
         <a href="#contacto">Contacto</a>
       </nav>
     </div>
+    </div>
+</header>
   
 
     <div class="hero reveal">
@@ -3197,6 +3221,28 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   });
 </script>
 
+    
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const header = document.querySelector('header');
+    if (!header) return;
+
+    const OFFSET = 40; // pixeles de scroll para activar el fondo sólido
+
+    function updateHeader() {
+      if (window.scrollY > OFFSET) {
+        header.classList.add('header-solid');
+      } else {
+        header.classList.remove('header-solid');
+      }
+    }
+
+    // Estado inicial (por si recargás con scroll)
+    updateHeader();
+
+    window.addEventListener('scroll', updateHeader, { passive: true });
+  });
+</script>
 
 
   
