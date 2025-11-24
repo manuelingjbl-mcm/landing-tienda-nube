@@ -3260,11 +3260,15 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('.nav');
 
+    console.log('menuToggle:', menuToggle);
+    console.log('nav:', nav);
+
     if (menuToggle && nav) {
       // Abrir / cerrar menú
       menuToggle.addEventListener('click', () => {
         const isOpen = nav.classList.toggle('nav-open');
         menuToggle.classList.toggle('menu-open', isOpen);
+        console.log('click hamburguesa, isOpen:', isOpen);
       });
 
       // Cerrar menú al hacer clic en un link
