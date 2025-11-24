@@ -2399,9 +2399,9 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   
 <!-- ================== HEADER ================== -->
 <header class="site-header">
-  <div class="wrapper header-inner">
+  <div class="header-inner">
     <div class="logo-row">
-      <div class="logo">VIACLOUDSTUDIO</div>
+      <div class="logo">viacloudstudio</div>
 
       <!-- Botón menú hamburguesa (mobile) -->
       <button class="menu-toggle" aria-label="Abrir menú de navegación">
@@ -3260,18 +3260,12 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('.nav');
 
-    console.log('menuToggle:', menuToggle);
-    console.log('nav:', nav);
-
     if (menuToggle && nav) {
-      // Abrir / cerrar menú
       menuToggle.addEventListener('click', () => {
         const isOpen = nav.classList.toggle('nav-open');
         menuToggle.classList.toggle('menu-open', isOpen);
-        console.log('click hamburguesa, isOpen:', isOpen);
       });
 
-      // Cerrar menú al hacer clic en un link
       nav.querySelectorAll('a').forEach((link) => {
         link.addEventListener('click', () => {
           nav.classList.remove('nav-open');
@@ -3294,11 +3288,9 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
         }
       };
 
-      // Estado inicial + escucha de scroll
       toggleScrollBtn();
       window.addEventListener('scroll', toggleScrollBtn);
 
-      // Scroll suave al top
       scrollBtn.addEventListener('click', () => {
         window.scrollTo({
           top: 0,
@@ -3308,6 +3300,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     }
   });
 </script>
+
 
 
 
