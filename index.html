@@ -2737,31 +2737,44 @@ main,
 </script>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const header = document.querySelector('.site-header');
-    const hero   = document.querySelector('.hero');
+  document.addEventListener("DOMContentLoaded", function () {
+    const header = document.querySelector(".site-header");
+    const hero   = document.querySelector(".hero");
 
+    // si no hay header, salimos
     if (!header) return;
 
-    // Añadimos la clase al body para meter el padding-top
-    document.body.classList.add('has-fixed-header');
+    // metemos el padding-top global para compensar el header fijo
+    document.body.classList.add("has-fixed-header");
 
-    // Punto a partir del cual se pone sólido el header
-    const heroLimit = hero ? hero.offsetHeight * 0.4 : 80;
-
-    const onScroll = () => {
-      const y = window.scrollY || window.pageYOffset;
-      if (y > heroLimit) {
-        header.classList.add('header-solid');
-      } else {
-        header.classList.remove('header-solid');
+    function onScroll() {
+      // si por alguna razón no hay hero, lo dejamos siempre sólido al scrollear
+      if (!hero) {
+        if (window.scrollY > 10) {
+          header.classList.add("header-solid");
+        } else {
+          header.classList.remove("header-solid");
+        }
+        return;
       }
-    };
 
+      // distancia del borde inferior del hero al viewport
+      const heroBottom = hero.getBoundingClientRect().bottom;
+
+      // cuando el hero ya “se fue” hacia arriba, encendemos el fondo sólido
+      if (heroBottom <= 0) {
+        header.classList.add("header-solid");
+      } else {
+        header.classList.remove("header-solid");
+      }
+    }
+
+    // escuchamos el scroll y forzamos una primera evaluación al cargar
+    window.addEventListener("scroll", onScroll);
     onScroll();
-    window.addEventListener('scroll', onScroll);
   });
 </script>
+
 
   
   <script>
