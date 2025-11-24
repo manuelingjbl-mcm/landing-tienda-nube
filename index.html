@@ -2859,28 +2859,8 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
           statusEl.classList.add('form-status--error');
         }
       });
-    }
-
-  /* ==== MENÚ HAMBURGUESA (MOBILE) ==== */
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('.nav');
-
-    if (menuToggle && nav) {
-      menuToggle.addEventListener('click', () => {
-        const isOpen = nav.classList.toggle('nav-open');
-        menuToggle.classList.toggle('menu-open', isOpen);
       });
-
-      // Cerrar menú al hacer clic en un link
-      nav.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          nav.classList.remove('nav-open');
-          menuToggle.classList.remove('menu-open');
-        });
-      });
-    }
-   });
- </script>
+</script>
 
 
 <script>
@@ -3273,30 +3253,57 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const scrollBtn = document.querySelector('.scroll-top-btn');
-    if (!scrollBtn) return;
+    /* ============================
+       MENÚ HAMBURGUESA (MOBILE)
+    ============================ */
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.nav');
 
-    const toggleScrollBtn = () => {
-      if (window.scrollY > 300) {
-        scrollBtn.classList.add('is-visible');
-      } else {
-        scrollBtn.classList.remove('is-visible');
-      }
-    };
-
-    // Mostrar / ocultar según scroll
-    toggleScrollBtn();
-    window.addEventListener('scroll', toggleScrollBtn);
-
-    // Scroll suave al top
-    scrollBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+    if (menuToggle && nav) {
+      // Abrir / cerrar menú
+      menuToggle.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('nav-open');
+        menuToggle.classList.toggle('menu-open', isOpen);
       });
-    });
+
+      // Cerrar menú al hacer clic en un link
+      nav.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          nav.classList.remove('nav-open');
+          menuToggle.classList.remove('menu-open');
+        });
+      });
+    }
+
+    /* ============================
+       BOTÓN FLOTANTE VOLVER ARRIBA
+    ============================ */
+    const scrollBtn = document.querySelector('.scroll-top-btn');
+
+    if (scrollBtn) {
+      const toggleScrollBtn = () => {
+        if (window.scrollY > 300) {
+          scrollBtn.classList.add('is-visible');
+        } else {
+          scrollBtn.classList.remove('is-visible');
+        }
+      };
+
+      // Estado inicial + escucha de scroll
+      toggleScrollBtn();
+      window.addEventListener('scroll', toggleScrollBtn);
+
+      // Scroll suave al top
+      scrollBtn.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+      });
+    }
   });
 </script>
+
 
     
 </body>
