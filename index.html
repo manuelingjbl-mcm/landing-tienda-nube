@@ -2326,29 +2326,6 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   transform: translateY(-4px) !important;
 }
 
-/* ===== HEADER SIMPLE: TRANSPARENTE ARRIBA, SÓLIDO AL SCROLL ===== */
-
-/* Estado base: transparente encima del hero */
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  padding: 16px 0;
-  background: transparent;
-  transition:
-    background 0.25s ease,
-    box-shadow 0.25s ease,
-    backdrop-filter 0.25s ease;
-}
-
-/* Estado scrolleado: fondo sólido + blur */
-header.header-solid {
-  background: rgba(5, 11, 42, 0.92);   /* azul oscuro semi-opaco */
-  backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-}
 
 
     
@@ -3222,27 +3199,6 @@ header.header-solid {
 </script>
 
     
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const header = document.querySelector('.site-header');
-    const hero   = document.querySelector('.hero');
-
-    if (!header) return;
-
-    const limit = hero ? hero.offsetHeight * 0.5 : 120; // a mitad del hero aprox.
-
-    const onScroll = () => {
-      if (window.scrollY > limit) {
-        header.classList.add('header-solid');
-      } else {
-        header.classList.remove('header-solid');
-      }
-    };
-
-    onScroll(); // para que aplique si recargás estando abajo
-    window.addEventListener('scroll', onScroll);
-  });
-</script>
 
 
 
