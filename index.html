@@ -3136,7 +3136,35 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     });
   });
 </script>
- 
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll(".service-card");
+    if (!cards.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("service-card--visible");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.25
+      }
+    );
+
+    cards.forEach((card, index) => {
+      // pequeño delay escalonado (como antes)
+      card.style.transitionDelay = index * 120 + "ms";
+      observer.observe(card);
+    });
+  });
+</script>
+
   
 </body>
 </html>
