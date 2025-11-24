@@ -2191,58 +2191,65 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
-/* ===== HEADER TRANSPARENTE + ESTADO SCROLLED ===== */
-/* Estado base: arriba del hero, transparente */
-header,
-.site-header,
-.main-header {
-  position: fixed;         /* se queda pegado arriba */
+/* ===============================
+   HEADER TRANSPARENTE + STICKY
+   =============================== */
+
+/* Estado base: transparente sobre el hero */
+.site-header {
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1200;           /* por encima del hero y del chat */
+  z-index: 900;
+  padding: 16px 0; /* ajusta si hace falta */
   background: transparent;
-  box-shadow: none;
-  backdrop-filter: none;
   transition:
     background 0.25s ease,
     box-shadow 0.25s ease,
-    backdrop-filter 0.25s ease,
-    padding 0.25s ease;
+    backdrop-filter 0.25s ease;
 }
 
-/* Para que el contenido no se esconda detrás del header fijo */
-body {
-  /* ajustá esta altura si tu header es más alto/bajo */
-  padding-top: 72px;
+/* Logo + links sobre fondo oscuro/azul cuando se scrollea */
+.site-header.header-solid {
+  background: rgba(5, 11, 42, 0.9);      /* azul oscuro semi-opaco */
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
-/* Estado SCROLLED: cuando se agrega la clase desde JS */
-.header-scrolled {
-  background: rgba(5, 11, 42, 0.92);  /* azul oscuro casi sólido */
-  backdrop-filter: blur(14px);        /* efecto glass suave */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+/* Para que el contenido no quede tapado por el header fijo */
+body.has-fixed-header {
+  padding-top: 72px; /* aprox. altura del header en desktop */
 }
 
-/* Opcional: un pelín menos de padding cuando está scrolleado */
-.header-scrolled .header-inner,
-.header-scrolled .main-nav,
-.header-scrolled .wrapper {
-  padding-top: 8px;
-  padding-bottom: 8px;
+/* En mobile el comportamiento es el mismo; puedes ajustar la altura si hace falta */
+@media (max-width: 767.98px) {
+  body.has-fixed-header {
+    padding-top: 64px;
+  }
 }
 
-/* Aseguramos que logo + links se sigan viendo blancos */
-.header-scrolled .logo,
-.header-scrolled .logo span,
-.header-scrolled .nav a,
-.header-scrolled .main-nav a {
-  color: #ffffff;
+/* ===== SANEAR HERO PARA QUE NO TAPE EL RESTO ===== */
+
+/* El hero se comporta como una sección normal */
+.hero {
+  position: relative;
+  z-index: 1;
 }
 
-/* Por si tu logo es un SVG oscuro y querés aclararlo al scrollear */
-.header-scrolled .logo svg {
-  filter: brightness(1.2);
+/* Nada de posición fija en el hero o sus hijos */
+.hero,
+.hero-visual,
+.hero-phone {
+  position: relative;
+}
+
+/* Aseguramos que la sección siguiente esté por encima si hay solapes raros */
+main,
+.section,
+.section-home {
+  position: relative;
+  z-index: 2;
 }
 
     
@@ -2726,29 +2733,35 @@ body {
         });
       });
     }
-    const headerEl = document.querySelector('.site-header');
-
-    if (headerEl) {
-      const onScrollHeader = () => {
-        const trigger = 40; // px desde el top para activar fondo sólido
-
-        if (window.scrollY > trigger) {
-          headerEl.classList.add('header-solid');
-          headerEl.classList.remove('header-transparent');
-        } else {
-          headerEl.classList.add('header-transparent');
-          headerEl.classList.remove('header-solid');
-        }
-      };
-
-      // Estado inicial
-      onScrollHeader();
-      // Escuchar scroll
-      window.addEventListener('scroll', onScrollHeader);
-    }
-  });
+   });
 </script>
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('.site-header');
+    const hero   = document.querySelector('.hero');
+
+    if (!header) return;
+
+    // Añadimos la clase al body para meter el padding-top
+    document.body.classList.add('has-fixed-header');
+
+    // Punto a partir del cual se pone sólido el header
+    const heroLimit = hero ? hero.offsetHeight * 0.4 : 80;
+
+    const onScroll = () => {
+      const y = window.scrollY || window.pageYOffset;
+      if (y > heroLimit) {
+        header.classList.add('header-solid');
+      } else {
+        header.classList.remove('header-solid');
+      }
+    };
+
+    onScroll();
+    window.addEventListener('scroll', onScroll);
+  });
+</script>
 
   
   <script>
