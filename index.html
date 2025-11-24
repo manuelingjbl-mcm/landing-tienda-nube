@@ -2237,7 +2237,6 @@ body {
 </head>
 <body>
   
-<body>
 <header>
   <div class="header-inner">
     <div class="logo-row">
@@ -2258,7 +2257,7 @@ body {
         <a href="#contacto">Contacto</a>
       </nav>
     </div>
-   <header>
+  
 
     <div class="hero reveal">
   <div class="hero-content">
@@ -2718,34 +2717,6 @@ body {
    });
 </script>
 
-<script>
-  // ==== HEADER TRANSPARENTE + FONDO AL HACER SCROLL ====
- document.addEventListener('DOMContentLoaded', function () {
-    const header = document.querySelector('.site-header');
-    const hero   = document.querySelector('.hero');
-
-    if (!header || !hero) return;
-
-    // Punto a partir del cual se vuelve sólido (60% del hero)
-    const heroLimit = hero.offsetHeight * 0.6;
-
-    const onScroll = () => {
-      const y = window.scrollY || window.pageYOffset || 0;
-
-      if (y > heroLimit) {
-        header.classList.add('header-solid');
-      } else {
-        header.classList.remove('header-solid');
-      }
-    };
-
-    // Forzamos el estado correcto al cargar
-    onScroll();
-
-    // Y escuchamos el scroll
-    window.addEventListener('scroll', onScroll);
-  });
-</script>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
