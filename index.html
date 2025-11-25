@@ -2243,70 +2243,79 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
-/* ===== BASE (desktop): nav normal, hamburguesa oculta ===== */
-.menu-toggle{ display:none; }
+/* ================================
+   NAV MOBILE estable (checkbox)
+================================ */
 
-.nav{
-  display:flex;
-  gap:20px;
-  font-size:14px;
-  opacity:.9;
+/* 1) Ocultamos el checkbox REAL (ese era el “puntito/cuadrado”) */
+.nav-toggle{
+  position:absolute !important;
+  width:1px !important;
+  height:1px !important;
+  padding:0 !important;
+  margin:-1px !important;
+  overflow:hidden !important;
+  clip:rect(0,0,0,0) !important;
+  clip-path: inset(50%) !important;
+  white-space:nowrap !important;
+  border:0 !important;
 }
 
-/* Overlay mobile: oculto por defecto en desktop */
-.hero-mobile-overlay{ display:none; }
+/* 2) Desktop: nav visible, hamburguesa oculta */
+@media (min-width: 768px){
+  .menu-toggle{ display:none !important; }
+  .nav{
+    position: static !important;
+    display:flex !important;
+    flex-direction: row !important;
+    gap: 20px !important;
+    background: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
 
-/* ===== MOBILE ===== */
+    opacity:1 !important;
+    pointer-events:auto !important;
+    transform:none !important;
+  }
+}
+
+/* 3) Mobile: hamburguesa visible + menú desplegable */
 @media (max-width: 767.98px){
 
-  /* Header por encima del hero */
-  .header-inner,
-  .logo-row{
-    position:relative;
-    z-index:9000;
-  }
+  /* Aseguramos capa alta para tocarla */
+  .logo-row{ position:relative; z-index:9000; }
 
-  /* 🍔 visible y bien “dibujada” */
   .menu-toggle{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
+    display:flex !important;
+    flex-direction:column;
+    gap:5px;
     width:44px;
     height:44px;
-    background:transparent;
-    border:none;
-    cursor:pointer;
-    border-radius:999px;
+    align-items:center;
+    justify-content:center;
+
+    background: transparent;
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
 
     position:relative;
     z-index:9001;
-    pointer-events:auto;
-    touch-action:manipulation;
     -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
 
+  /* Las 3 líneas de la 🍔 */
   .menu-toggle span{
     display:block;
     width:22px;
     height:2px;
     background:#fff;
     border-radius:999px;
-    transition:transform .25s ease, opacity .25s ease;
-  }
-  .menu-toggle span:nth-child(2){ margin:6px 0; }
-
-  /* estado abierto (X) */
-  .menu-toggle.menu-open span:nth-child(1){
-    transform: translateY(8px) rotate(45deg);
-  }
-  .menu-toggle.menu-open span:nth-child(2){
-    opacity:0;
-  }
-  .menu-toggle.menu-open span:nth-child(3){
-    transform: translateY(-8px) rotate(-45deg);
+    transition: transform .22s ease, opacity .22s ease;
   }
 
-  /* Menú desplegable */
+  /* Menú */
   .nav{
     position:absolute;
     top:100%;
@@ -2315,47 +2324,77 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     margin-top:8px;
     padding:12px 16px;
     background:#050b2a;
-    border-radius:14px;
+    border-radius:12px;
 
-    display:flex;              /* queda listo siempre */
+    display:none;               /* cerrado */
     flex-direction:column;
     gap:10px;
 
-    opacity:0;
-    pointer-events:none;
-    transform:translateY(-6px);
-    transition:opacity .22s ease, transform .22s ease;
     z-index:9000;
+    box-shadow:0 18px 40px rgba(15,23,42,.35);
   }
   .nav a{ color:#fff; padding:8px 0; }
 
-  .nav.nav-open{
-    opacity:1;
-    pointer-events:auto;
-    transform:translateY(0);
-  }
+  /* ABRIR: cuando el checkbox está checked */
+  #nav-toggle:checked ~ .nav{ display:flex; }
 
-  /* Overlay del título: visible sí o sí en mobile */
-  .hero-phone{ position:relative; } /* importante para el position:absolute del overlay */
+  /* Animación a “X” cuando abre */
+  #nav-toggle:checked + .menu-toggle span:nth-child(1){
+    transform: translateY(7px) rotate(45deg);
+  }
+  #nav-toggle:checked + .menu-toggle span:nth-child(2){
+    opacity: 0;
+  }
+  #nav-toggle:checked + .menu-toggle span:nth-child(3){
+    transform: translateY(-7px) rotate(-45deg);
+  }
+}
+
+/* ================================
+   HERO overlay (solo mobile)
+================================ */
+
+/* Desktop: overlay apagado SIEMPRE */
+.hero-mobile-overlay{ display:none !important; }
+
+/* Mobile: overlay encendido + arriba de la imagen */
+@media (max-width: 767.98px){
+  .hero-phone{ position:relative; }
+
   .hero-mobile-overlay{
     display:flex !important;
-    pointer-events:none;
     position:absolute;
     inset:0;
-    padding:0 24px;
+    padding: 14px 24px 0;
+    flex-direction:column;
     align-items:center;
-    justify-content:center;
     text-align:center;
+    justify-content:flex-start;
 
-    /* ⚠️ Ajustá este valor: si está muy alto, no se ve */
-    transform: translateY(-35%);
-  }
-  .hero-mobile-overlay *{ pointer-events:none; }
-
-  /* La imagen/visual no debe “comerse” taps cerca del header */
-  .hero-phone,
-  .hero-phone img{
+    z-index: 5;
     pointer-events:none !important;
+  }
+
+  .hero-mobile-kicker,
+  .hero-mobile-title{
+    color:#fdfcff;
+    text-shadow:
+      0 2px 4px rgba(0,0,0,.85),
+      0 0 14px rgba(0,0,0,.65);
+    -webkit-text-stroke: .35px rgba(0,0,0,.35);
+  }
+
+  .hero-mobile-kicker{
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+
+  .hero-mobile-title{
+    font-size: clamp(36px, 10vw, 46px);
+    line-height: 1.1;
+    max-width: 24rem;
   }
 }
 
@@ -2374,8 +2413,10 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     <div class="logo-row">
       <div class="logo">viacloudstudio</div>
 
-      <!-- Botón menú hamburguesa (mobile) -->
+<!-- Toggle (oculto) -->
 <input id="nav-toggle" class="nav-toggle" type="checkbox" aria-hidden="true">
+      
+<!-- Botón hamburguesa (label) -->
 <label for="nav-toggle" class="menu-toggle" aria-label="Abrir menú de navegación" aria-controls="site-nav">
   <span></span>
   <span></span>
