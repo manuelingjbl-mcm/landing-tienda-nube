@@ -435,11 +435,7 @@ header::after{
   align-self:center;
 }
 
-/* Por defecto (desktop): ocultamos la capa de texto móvil */
-.hero-mobile-overlay {
-  display: none;
-}
-    
+  
 /* ====== MOBILE: overlay tipo Higher-Web ====== */
 @media (max-width: 767.98px) {
 
@@ -2354,9 +2350,19 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 
     
 .hero-mobile-overlay{ display:none; }
-@media (max-width:767.98px){
-  .hero-mobile-overlay{ display:flex !important; pointer-events:none; }
+
+@media (max-width: 767.98px){
+  .hero-phone{ position:relative; } /* por las dudas */
+
+  .hero-mobile-overlay{
+    display:flex !important;
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:2; /* arriba de la imagen */
+  }
 }
+
 
   
     
