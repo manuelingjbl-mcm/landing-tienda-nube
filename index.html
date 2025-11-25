@@ -2308,7 +2308,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
       <div class="logo">viacloudstudio</div>
 
       <!-- Botón menú hamburguesa (mobile) -->
-      <button class="menu-toggle" type="button" aria-label="Abrir menú aria-controls="site-nav" aria-expanded="false">
+      <button class="menu-toggle" type="button" aria-label="Abrir menú de navegación">
         <span></span>
         <span></span>
         <span></span>
@@ -2375,7 +2375,6 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
       </aside>
     </div>
   </div>
- </section>
  </header>
   
 <main>
@@ -3188,27 +3187,6 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   });
 })();
 
-
-  /* ============================
-     BOTÓN FLOTANTE VOLVER ARRIBA
-  ============================ */
- 
-  const scrollBtn = document.querySelector('.scroll-top-btn');
-
-  if (scrollBtn) {
-    const toggleScrollBtn = () => {
-      scrollBtn.classList.toggle('is-visible', window.scrollY > 300);
-    };
-
-    toggleScrollBtn();
-    window.addEventListener('scroll', toggleScrollBtn);
-
-    scrollBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
-
-});
 </script>
 
 
