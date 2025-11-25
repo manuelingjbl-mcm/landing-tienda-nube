@@ -2244,93 +2244,166 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
 
 /* =========================
-   NAV + HAMBURGUESA (FINAL)
+   NAV (checkbox) — ESTABLE
 ========================= */
 
-/* Desktop */
-.menu-toggle{ display:none; }
-.nav{ display:flex; gap:20px; font-size:14px; opacity:.9; }
-
-/* Icono 🍔 (3 líneas) */
-.menu-toggle{
-  appearance:none;
-  -webkit-appearance:none;
-  background:transparent;
+/* Oculta el checkbox (el “puntito”) */
+.nav-toggle{
+  position:absolute;
+  width:1px; height:1px;
+  margin:-1px; padding:0;
   border:0;
-  padding:6px;
-  border-radius:999px;
-  cursor:pointer;
+  opacity:0;
+  overflow:hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
-.menu-toggle span{
-  display:block;
-  width:20px;
-  height:2px;
-  background:#fff;
-  border-radius:999px;
-  transition:transform .25s ease, opacity .25s ease;
-}
-.menu-toggle span + span{ margin-top:5px; }
 
-/* Estado X */
-.menu-toggle.menu-open span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
-.menu-toggle.menu-open span:nth-child(2){ opacity:0; }
-.menu-toggle.menu-open span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
-
-/* Mobile */
+/* ---------- MOBILE ---------- */
 @media (max-width: 767.98px){
 
-  /* Mostrar 🍔 solo en mobile */
+  .logo-row{ position:relative; z-index:9000; }
+
+  /* Botón hamburguesa */
   .menu-toggle{
     display:inline-flex !important;
-    align-items:center;
-    justify-content:center;
+    width:44px; height:44px;
+    align-items:center; justify-content:center;
+    flex-direction:column;
+    gap:6px;
+    cursor:pointer;
     position:relative;
     z-index:9001;
     -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
+    user-select:none;
+  }
+  .menu-toggle span{
+    display:block !important;
+    width:22px !important;
+    height:2px !important;
+    background: rgba(255,255,255,.92) !important;
+    border-radius: 2px !important;
+    transform-origin:center;
+    transition: transform .22s ease, opacity .2s ease;
   }
 
-  /* Menú desplegable */
-  .nav{
+  /* Dropdown oculto */
+  #site-nav.nav{
     position:absolute;
-    top:100%;
+    top: calc(100% + 10px);
     left:16px;
     right:16px;
-    margin-top:10px;
     padding:14px 16px;
+    border-radius:14px;
     background:#050b2a;
-    border-radius:16px;
+    z-index:9000;
 
-    display:none;               /* CLAVE: oculto real */
+    display:flex;
     flex-direction:column;
     gap:10px;
 
-    z-index:9000;
-    box-shadow:0 18px 40px rgba(0,0,0,.35);
+    opacity:0;
+    pointer-events:none;
+    transform: translateY(-6px);
+    transition: opacity .22s ease, transform .22s ease;
   }
-  .nav a{ color:#fff; padding:8px 0; }
-
-  .nav.nav-open{ display:flex !important; }  /* CLAVE: visible al abrir */
-
-  /* Header siempre por arriba del hero */
-  header.site-header,
-  .header-inner,
-  .logo-row{
-    position:relative;
-    z-index:9000;
+  #site-nav.nav a{
+    color:#fff;
+    text-decoration:none;
+    padding:8px 2px;
   }
 
-  /* Overlay del título: VISIBLE en mobile sí o sí */
-  .hero-phone{ position:relative; }
+  /* Abierto */
+  .nav-toggle:checked ~ #site-nav.nav{
+    opacity:1;
+    pointer-events:auto;
+    transform: translateY(0);
+  }
+
+  /* Animación a X */
+  .nav-toggle:checked + .menu-toggle span:nth-child(1){
+    transform: translateY(8px) rotate(45deg);
+  }
+  .nav-toggle:checked + .menu-toggle span:nth-child(2){
+    opacity:0;
+  }
+  .nav-toggle:checked + .menu-toggle span:nth-child(3){
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* El hero NO debe capturar taps */
+  .hero-visual,
+  .hero-phone,
+  .hero-phone img,
   .hero-mobile-overlay{
-    display:flex !important;
     pointer-events:none !important;
   }
 }
 
-/* Desktop: overlay NO */
+/* ---------- DESKTOP ---------- */
 @media (min-width: 768px){
-  .hero-mobile-overlay{ display:none !important; }
+
+  .menu-toggle{ display:none !important; }
+
+  #site-nav.nav{
+    position:static !important;
+    opacity:1 !important;
+    pointer-events:auto !important;
+    transform:none !important;
+    background:none !important;
+    padding:0 !important;
+    border-radius:0 !important;
+
+    display:flex !important;
+    flex-direction:row !important;
+    gap:22px !important;
+  }
+}
+
+    
+.hero-mobile-overlay{ display:none; }
+
+@media (max-width: 767.98px){
+  .hero-phone{ position:relative; }
+
+  .hero-mobile-overlay{
+    display:flex !important;
+    position:absolute;
+    inset:0;
+    z-index:5;
+    padding: 0 24px;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:center;
+    text-align:center;
+    gap:10px;
+
+    /* Ajuste fino (mueve el bloque hacia abajo) */
+    transform: translateY(18px);
+  }
+
+  .hero-mobile-kicker,
+  .hero-mobile-title{
+    color:#fdfcff;
+    text-shadow:
+      0 2px 4px rgba(0,0,0,.85),
+      0 0 14px rgba(0,0,0,.65);
+    -webkit-text-stroke: 0.35px rgba(0,0,0,.35);
+  }
+
+  .hero-mobile-kicker{
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    margin-bottom: 6px;
+  }
+
+  .hero-mobile-title{
+    font-size: clamp(30px, 9.5vw, 44px);
+    line-height:1.08;
+    max-width: 24rem;
+  }
 }
 
 
@@ -2349,7 +2422,8 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
       <div class="logo">viacloudstudio</div>
 
 <!-- Botón hamburguesa (label) -->
-<button class="menu-toggle" type="button" aria-label="Abrir menú" aria-controls="site-nav" aria-expanded="false">
+<input id="nav-toggle" class="nav-toggle" type="checkbox" aria-hidden="true">
+<label for="nav-toggle" class="menu-toggle" aria-label="Abrir menú" aria-controls="site-nav">
   <span></span>
   <span></span>
   <span></span>
@@ -3198,51 +3272,6 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 <button class="scroll-top-btn" aria-label="Volver arriba">
   ↑
 </button>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const toggle = document.getElementById('nav-toggle');
-  const nav = document.getElementById('site-nav');
-  if (!toggle || !nav) return;
-
-  nav.querySelectorAll('a').forEach(a=>{
-    a.addEventListener('click', ()=>{ toggle.checked = false; });
-  });
-});
-</script>
-
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const menuToggle = document.querySelector('.menu-toggle');
-  const nav = document.querySelector('.nav');
-  if (!menuToggle || !nav) return;
-
-  menuToggle.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const isOpen = nav.classList.toggle('nav-open');
-    menuToggle.classList.toggle('menu-open', isOpen);
-    menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  });
-
-  nav.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      nav.classList.remove('nav-open');
-      menuToggle.classList.remove('menu-open');
-      menuToggle.setAttribute('aria-expanded', 'false');
-    });
-  });
-
-  document.addEventListener('click', (e) => {
-    if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
-      nav.classList.remove('nav-open');
-      menuToggle.classList.remove('menu-open');
-      menuToggle.setAttribute('aria-expanded', 'false');
-    }
-  });
-});
-</script>
 
 
 
