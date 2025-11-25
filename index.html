@@ -3234,6 +3234,8 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 </button>
 
 <script>
+document.addEventListener('DOMContentLoaded', () => {
+
   /* ============================
      MENÚ HAMBURGUESA (MOBILE)
   ============================ */
@@ -3241,18 +3243,27 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   const nav = document.querySelector('.nav');
 
   if (menuToggle && nav) {
-    // Abrir / cerrar menú
-    menuToggle.addEventListener('click', () => {
+    menuToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       const isOpen = nav.classList.toggle('nav-open');
       menuToggle.classList.toggle('menu-open', isOpen);
     });
 
-    // Cerrar menú al hacer clic en un link
+    // Cerrar al tocar un link
     nav.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
         nav.classList.remove('nav-open');
         menuToggle.classList.remove('menu-open');
       });
+    });
+
+    // Cerrar al tocar afuera
+    document.addEventListener('click', (e) => {
+      if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
+        nav.classList.remove('nav-open');
+        menuToggle.classList.remove('menu-open');
+      }
     });
   }
 
@@ -3263,25 +3274,18 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 
   if (scrollBtn) {
     const toggleScrollBtn = () => {
-      if (window.scrollY > 300) {
-        scrollBtn.classList.add('is-visible');
-      } else {
-        scrollBtn.classList.remove('is-visible');
-      }
+      scrollBtn.classList.toggle('is-visible', window.scrollY > 300);
     };
 
-    // Estado inicial + escucha de scroll
     toggleScrollBtn();
     window.addEventListener('scroll', toggleScrollBtn);
 
-    // Scroll suave al top
     scrollBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
+
+});
 </script>
 
 
