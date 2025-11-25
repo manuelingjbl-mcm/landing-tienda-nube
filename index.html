@@ -143,44 +143,6 @@ header::after{
   translate:0 -3px;
 }
 
-/* ===== MOBILE ===== */
-@media (max-width: 767.98px){
-
-  .menu-toggle{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    position:relative;
-    z-index:999; /* por encima del hero */
-  }
-
-  .nav{
-    position:absolute;
-    top:100%;
-    right:16px;
-    left:16px;
-    margin-top:8px;
-    padding:12px 16px;
-    background:#050b2a;
-    border-radius:12px;
-    display:none;       /* oculto por defecto */
-    flex-direction:column;
-    gap:8px;
-    z-index:998;
-  }
-
-  .nav a{
-    color:#ffffff;
-    text-decoration:none;
-    padding:6px 0;
-  }
-
-  /* Cuando JS agrega .nav-open, se ve el menú */
-  .nav.nav-open{
-    display:flex;
-  }
-}
-
 /* ====== HERO MOBILE · VIACLOUDSTUDIO (versión estable) ====== */
 @media (max-width: 767.98px) {
 
@@ -2113,22 +2075,27 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
-/* ====== FIX: que el hero no bloquee la hamburguesa en mobile ====== 
-    */ @media (max-width: 767.98px) { 
-  
-  /*  1) El overlay del hero solo es decorativo, que NO capture clics */ 
-  .hero-mobile-overlay { 
-  pointer-events: none; 
-  } 
-  
-  /*  2) Aseguramos que el header esté siempre por encima del hero */ 
-  header, 
-  .site-header, 
-  .main-header { 
-  position: relative; 
-  z-index: 100; 
-  } 
-  
+/* ====== HERO + HAMBURGUESA · MOBILE (overlay no bloquea taps) ====== */
+@media (max-width: 767.98px) {
+
+  /* Header y hamburguesa SIEMPRE por encima del hero */
+  header,
+  .site-header,
+  .main-header {
+    position: relative;
+    z-index: 5000;
+  }
+
+  .menu-toggle {
+    position: relative;
+    z-index: 6000;
+    pointer-events: auto;
+  }
+
+  .nav {
+    z-index: 5500;
+  }
+
   /* Hero y mockup por debajo */
   .hero,
   .hero-visual,
@@ -2136,40 +2103,21 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     position: relative;
     z-index: 1;
   }
-}
 
-@media (max-width: 767.98px){
-  header,
-  .site-header,
-  .main-header {
-    position:relative;
-    z-index:1000;
+  /* Overlay de texto: solo visual, no captura clics */
+  .hero-mobile-overlay,
+  .hero-mobile-overlay * {
+    pointer-events: none !important;
   }
 
-  .hero,
-  .hero-visual,
-  .hero-phone,
-  .hero-mobile-overlay{
-    position:relative;
-    z-index:1;
-  }
-
-  .hero-mobile-overlay{
-    pointer-events:none !important;
-  }
-  .hero-mobile-overlay *{
-    pointer-events:none !important;
-  }
- 
-
-/* ==== Ajuste final tamaño título overlay (mobile) ==== */
-@media (max-width: 767.98px) {
+  /* Ajuste final tamaño título overlay (mobile) */
   .hero .hero-mobile-title {
     font-size: clamp(36px, 10vw, 46px) !important;
     line-height: 1.1 !important;
     max-width: 24rem;
   }
 }
+
 
     /* ====== SERVICIOS · RESETEO VISIBILIDAD ====== */
 
@@ -2850,7 +2798,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
         }
       });
      }
-    });  <!-- 👈 cierra el DOMContentLoaded -->
+    });  
     </script>
 
 
