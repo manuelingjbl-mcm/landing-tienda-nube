@@ -3228,6 +3228,17 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   ↑
 </button>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const toggle = document.getElementById('nav-toggle');
+  const nav = document.getElementById('site-nav');
+  if (!toggle || !nav) return;
+
+  nav.querySelectorAll('a').forEach(a=>{
+    a.addEventListener('click', ()=>{ toggle.checked = false; });
+  });
+});
+</script>
 
 
 
