@@ -2303,10 +2303,10 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     pointer-events: none !important;
   }
 
-  /* El overlay del título debe existir en mobile */
-  .hero-mobile-overlay{
-    display: flex !important;
-  }
+  /* Overlay del título en mobile: debe verse */
+  .hero-mobile-overlay{ display:flex !important; pointer-events:none !important; }
+  .hero-mobile-overlay *{ pointer-events:none !important; }
+}
 }
 
 /* Desktop: nav normal */
@@ -2337,7 +2337,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
       <div class="logo">viacloudstudio</div>
 
       <!-- Botón menú hamburguesa (mobile) -->
-      <button class="menu-toggle" type="button" aria-label="Abrir menú de navegación">
+      <button class="menu-toggle" type="button" aria-label="Abrir menú aria-controls="site-nav" aria-expanded="false">">
         <span></span>
         <span></span>
         <span></span>
@@ -2355,7 +2355,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 
 
 <!-- ================== HERO ================== -->
-<section id="hero" class="hero-section">
+<section id="hero" .hero-mobile-overlay{ display:flex !important; }>
   <div class="wrapper">
     <div class="hero reveal">
       <div class="hero-content">
