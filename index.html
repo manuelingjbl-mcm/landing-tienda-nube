@@ -2349,19 +2349,98 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
 
     
+/* =========================
+   FIX FINAL 🍔 + OVERLAY HERO
+   (PEGAR AL FINAL DEL <style>)
+========================= */
+
+/* --- 1) Hamburguesa: 3 líneas prolijas (mobile) --- */
+@media (max-width: 767.98px){
+
+  /* Aseguramos área clickeable */
+  .menu-toggle{
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:44px !important;
+    height:44px !important;
+    padding:8px !important;
+    background:transparent !important;
+    border:0 !important;
+    cursor:pointer !important;
+    position:relative !important;
+    z-index:9001 !important;
+    pointer-events:auto !important;
+    touch-action:manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Las 3 barritas */
+  .menu-toggle span{
+    display:block !important;
+    width:22px !important;
+    height:2px !important;
+    background:#fff !important;
+    border-radius:999px !important;
+    margin:0 !important;
+    position:relative !important;
+    transform-origin:center !important;
+    transition: transform .22s ease, opacity .22s ease !important;
+  }
+  .menu-toggle span + span{ margin-top:5px !important; }
+
+  /* Estado abierto -> X (sin usar "translate:" que a veces rompe) */
+  .menu-toggle.menu-open span:nth-child(1){
+    transform: translateY(7px) rotate(45deg) !important;
+  }
+  .menu-toggle.menu-open span:nth-child(2){
+    opacity:0 !important;
+  }
+  .menu-toggle.menu-open span:nth-child(3){
+    transform: translateY(-7px) rotate(-45deg) !important;
+  }
+
+  /* Menú desplegable (por si otro CSS lo pisa) */
+  .nav{
+    z-index:9000 !important;
+  }
+}
+
+/* Desktop: ocultar la 🍔 sí o sí */
+@media (min-width: 768px){
+  .menu-toggle{ display:none !important; }
+}
+
+
+/* --- 2) Overlay del título arriba de la imagen (mobile) --- */
+
+/* Desktop: oculto */
 .hero-mobile-overlay{ display:none; }
 
 @media (max-width: 767.98px){
-  .hero-phone{ position:relative; } /* por las dudas */
 
+  /* El contenedor debe ser "ancla" */
+  .hero-phone{ position:relative !important; }
+
+  /* La imagen queda debajo */
+  .hero-phone img{
+    position:relative !important;
+    z-index:1 !important;
+  }
+
+  /* Overlay arriba y visible */
   .hero-mobile-overlay{
     display:flex !important;
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-    z-index:2; /* arriba de la imagen */
+    position:absolute !important;
+    inset:0 !important;
+    z-index:2 !important;
+    pointer-events:none !important;
+
+    /* Importante: si el -130% te lo saca de pantalla, bajalo */
+    transform: translateY(-20%) !important; /* probá -10% / -15% / -25% */
   }
 }
+
 
 
   
