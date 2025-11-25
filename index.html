@@ -174,7 +174,7 @@ header::after{
     background: none;           /* sin degradado, imagen limpia */
     pointer-events: none;       /* NO bloquea clics (header / chat) */
 
-    transform: translateY(-100%); /* 👈 dejámos tu valor porque ahí te gusta */
+    transform: translateY(-60%); /* 👈 dejámos tu valor porque ahí te gusta */
   }
 
   .hero-mobile-overlay * {
@@ -2406,6 +2406,38 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
+/* ===== FORZAR PILL en MOBILE (hero-badge) ===== */
+@media (max-width: 767.98px){
+
+  /* aseguramos contexto */
+  .site-header,
+  .header-inner,
+  .logo-row{
+    position: relative;
+    z-index: 8000;
+  }
+
+  /* el hero suele tener cosas absolutas arriba */
+  .hero,
+  header{
+    position: relative;
+  }
+
+  .hero-badge{
+    display: inline-flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+
+    position: absolute;        /* 👈 clave para z-index */
+    top: 58px;                 /* 👈 ajustá 52/60/66 si hace falta */
+    left: 50%;
+    transform: translateX(-50%);
+
+    margin: 0 !important;
+    z-index: 7500;             /* por arriba del hero */
+    pointer-events: none;
+  }
+}
 
 
 
