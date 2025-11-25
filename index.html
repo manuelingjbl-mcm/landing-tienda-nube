@@ -2248,14 +2248,8 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
 
 /* ===== FIX DEFINITIVO: hamburguesa tocable + overlay visible (MOBILE) ===== */
-@media (max-width: 767.98px){
-
-  /* Header por arriba de cualquier cosa del hero */
-  .header-inner,
-  .logo-row{
-    position: relative;
-    z-index: 9000;
-  }
+@media (max-width:768px){
+  .logo-row{ position:relative; z-index:9000; }
 
   .menu-toggle{
     display:inline-flex;
@@ -2268,61 +2262,38 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* Menú desplegable */
   .nav{
-    position: absolute;
-    top: 100%;
-    left: 16px;
-    right: 16px;
-    margin-top: 8px;
-    padding: 12px 16px;
-    background: #050b2a;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+    position:absolute;
+    top:100%;
+    left:16px;
+    right:16px;
+    margin-top:8px;
+    padding:12px 16px;
+    background:#050b2a;
+    border-radius:12px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
 
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-6px);
-    transition: opacity .22s ease, transform .22s ease;
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(-6px);
+    transition:opacity .22s ease, transform .22s ease;
     z-index:9000;
   }
   .nav a{ color:#fff; padding:6px 0; }
 
   .nav.nav-open{
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0);
-  }
-
-  /* CLAVE: todo lo visual del hero NO debe capturar taps */
-  .hero-phone,
-  .hero-phone img,
-  .hero-mobile-overlay{
-    pointer-events: none !important;
+    opacity:1;
+    pointer-events:auto;
+    transform:translateY(0);
   }
 
   /* Overlay del título en mobile: debe verse */
   .hero-mobile-overlay{ display:flex !important; pointer-events:none !important; }
   .hero-mobile-overlay *{ pointer-events:none !important; }
 }
-}
 
-/* Desktop: nav normal */
-@media (min-width: 768px){
-  .nav{
-    position: static;
-    opacity: 1;
-    pointer-events: auto;
-    transform: none;
-    background: none;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-  }
-}  
 
   
     
@@ -3191,36 +3162,37 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
      MENÚ HAMBURGUESA (MOBILE)
 ============================ */
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-   const menuToggle = document.querySelector('.menu-toggle');
+(() => {
+  const menuToggle = document.querySelector('.menu-toggle');
   const nav = document.querySelector('.nav');
   if (!menuToggle || !nav) return;
+
+  const setOpen = (open) => {
+    nav.classList.toggle('nav-open', open);
+    menuToggle.classList.toggle('menu-open', open);
+    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  };
 
   menuToggle.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
-    const isOpen = nav.classList.toggle('nav-open');
-    menuToggle.classList.toggle('menu-open', isOpen);
+    setOpen(!nav.classList.contains('nav-open'));
   });
 
-  nav.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      nav.classList.remove('nav-open');
-      menuToggle.classList.remove('menu-open');
-    });
+  nav.addEventListener('click', (e) => {
+    if (e.target.closest('a')) setOpen(false);
   });
 
   document.addEventListener('click', (e) => {
-    if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
-      nav.classList.remove('nav-open');
-      menuToggle.classList.remove('menu-open');
-    }
+    if (!nav.contains(e.target) && !menuToggle.contains(e.target)) setOpen(false);
   });
-});
+})();
+
 
   /* ============================
      BOTÓN FLOTANTE VOLVER ARRIBA
   ============================ */
+ 
   const scrollBtn = document.querySelector('.scroll-top-btn');
 
   if (scrollBtn) {
