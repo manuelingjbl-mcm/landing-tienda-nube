@@ -2243,159 +2243,94 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
-/* ================================
-   NAV MOBILE estable (checkbox)
-================================ */
+/* =========================
+   NAV + HAMBURGUESA (FINAL)
+========================= */
 
-/* 1) Ocultamos el checkbox REAL (ese era el “puntito/cuadrado”) */
-.nav-toggle{
-  position:absolute !important;
-  width:1px !important;
-  height:1px !important;
-  padding:0 !important;
-  margin:-1px !important;
-  overflow:hidden !important;
-  clip:rect(0,0,0,0) !important;
-  clip-path: inset(50%) !important;
-  white-space:nowrap !important;
-  border:0 !important;
+/* Desktop */
+.menu-toggle{ display:none; }
+.nav{ display:flex; gap:20px; font-size:14px; opacity:.9; }
+
+/* Icono 🍔 (3 líneas) */
+.menu-toggle{
+  appearance:none;
+  -webkit-appearance:none;
+  background:transparent;
+  border:0;
+  padding:6px;
+  border-radius:999px;
+  cursor:pointer;
 }
-
-/* 2) Desktop: nav visible, hamburguesa oculta */
-@media (min-width: 768px){
-  .menu-toggle{ display:none !important; }
-  .nav{
-    position: static !important;
-    display:flex !important;
-    flex-direction: row !important;
-    gap: 20px !important;
-    background: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-
-    opacity:1 !important;
-    pointer-events:auto !important;
-    transform:none !important;
-  }
+.menu-toggle span{
+  display:block;
+  width:20px;
+  height:2px;
+  background:#fff;
+  border-radius:999px;
+  transition:transform .25s ease, opacity .25s ease;
 }
+.menu-toggle span + span{ margin-top:5px; }
 
-/* 3) Mobile: hamburguesa visible + menú desplegable */
+/* Estado X */
+.menu-toggle.menu-open span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+.menu-toggle.menu-open span:nth-child(2){ opacity:0; }
+.menu-toggle.menu-open span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile */
 @media (max-width: 767.98px){
 
-  /* Aseguramos capa alta para tocarla */
-  .logo-row{ position:relative; z-index:9000; }
-
+  /* Mostrar 🍔 solo en mobile */
   .menu-toggle{
-    display:flex !important;
-    flex-direction:column;
-    gap:5px;
-    width:44px;
-    height:44px;
+    display:inline-flex !important;
     align-items:center;
     justify-content:center;
-
-    background: transparent;
-    border: 0;
-    border-radius: 999px;
-    cursor: pointer;
-
     position:relative;
     z-index:9001;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
   }
 
-  /* Las 3 líneas de la 🍔 */
-  .menu-toggle span{
-    display:block;
-    width:22px;
-    height:2px;
-    background:#fff;
-    border-radius:999px;
-    transition: transform .22s ease, opacity .22s ease;
-  }
-
-  /* Menú */
+  /* Menú desplegable */
   .nav{
     position:absolute;
     top:100%;
     left:16px;
     right:16px;
-    margin-top:8px;
-    padding:12px 16px;
+    margin-top:10px;
+    padding:14px 16px;
     background:#050b2a;
-    border-radius:12px;
+    border-radius:16px;
 
-    display:none;               /* cerrado */
+    display:none;               /* CLAVE: oculto real */
     flex-direction:column;
     gap:10px;
 
     z-index:9000;
-    box-shadow:0 18px 40px rgba(15,23,42,.35);
+    box-shadow:0 18px 40px rgba(0,0,0,.35);
   }
   .nav a{ color:#fff; padding:8px 0; }
 
-  /* ABRIR: cuando el checkbox está checked */
-  #nav-toggle:checked ~ .nav{ display:flex; }
+  .nav.nav-open{ display:flex !important; }  /* CLAVE: visible al abrir */
 
-  /* Animación a “X” cuando abre */
-  #nav-toggle:checked + .menu-toggle span:nth-child(1){
-    transform: translateY(7px) rotate(45deg);
+  /* Header siempre por arriba del hero */
+  header.site-header,
+  .header-inner,
+  .logo-row{
+    position:relative;
+    z-index:9000;
   }
-  #nav-toggle:checked + .menu-toggle span:nth-child(2){
-    opacity: 0;
-  }
-  #nav-toggle:checked + .menu-toggle span:nth-child(3){
-    transform: translateY(-7px) rotate(-45deg);
+
+  /* Overlay del título: VISIBLE en mobile sí o sí */
+  .hero-phone{ position:relative; }
+  .hero-mobile-overlay{
+    display:flex !important;
+    pointer-events:none !important;
   }
 }
 
-/* ================================
-   HERO overlay (solo mobile)
-================================ */
-
-/* Desktop: overlay apagado SIEMPRE */
-.hero-mobile-overlay{ display:none !important; }
-
-/* Mobile: overlay encendido + arriba de la imagen */
-@media (max-width: 767.98px){
-  .hero-phone{ position:relative; }
-
-  .hero-mobile-overlay{
-    display:flex !important;
-    position:absolute;
-    inset:0;
-    padding: 14px 24px 0;
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-    justify-content:flex-start;
-
-    z-index: 5;
-    pointer-events:none !important;
-  }
-
-  .hero-mobile-kicker,
-  .hero-mobile-title{
-    color:#fdfcff;
-    text-shadow:
-      0 2px 4px rgba(0,0,0,.85),
-      0 0 14px rgba(0,0,0,.65);
-    -webkit-text-stroke: .35px rgba(0,0,0,.35);
-  }
-
-  .hero-mobile-kicker{
-    font-size:11px;
-    letter-spacing:.18em;
-    text-transform:uppercase;
-    margin-bottom:10px;
-  }
-
-  .hero-mobile-title{
-    font-size: clamp(36px, 10vw, 46px);
-    line-height: 1.1;
-    max-width: 24rem;
-  }
+/* Desktop: overlay NO */
+@media (min-width: 768px){
+  .hero-mobile-overlay{ display:none !important; }
 }
 
 
@@ -2413,11 +2348,8 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     <div class="logo-row">
       <div class="logo">viacloudstudio</div>
 
-<!-- Toggle (oculto) -->
-<input id="nav-toggle" class="nav-toggle" type="checkbox" aria-hidden="true">
-      
 <!-- Botón hamburguesa (label) -->
-<label for="nav-toggle" class="menu-toggle" aria-label="Abrir menú de navegación" aria-controls="site-nav">
+<button class="menu-toggle" type="button" aria-label="Abrir menú" aria-controls="site-nav" aria-expanded="false">
   <span></span>
   <span></span>
   <span></span>
@@ -3280,6 +3212,37 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('.nav');
+  if (!menuToggle || !nav) return;
+
+  menuToggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const isOpen = nav.classList.toggle('nav-open');
+    menuToggle.classList.toggle('menu-open', isOpen);
+    menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+
+  nav.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('nav-open');
+      menuToggle.classList.remove('menu-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
+      nav.classList.remove('nav-open');
+      menuToggle.classList.remove('menu-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+});
+</script>
 
 
 
