@@ -110,7 +110,9 @@ header::after{
   width:100%;
 }
 
-    /* BASE: hamburguesa oculta en desktop */
+/* ===== NAV + HAMBURGUESA (solo una versión) ===== */
+.logo-row{ position: relative; z-index: 6000; }
+
 .menu-toggle{
   display:none;
   background:transparent;
@@ -118,7 +120,10 @@ header::after{
   cursor:pointer;
   padding:6px;
   border-radius:999px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
+
 .menu-toggle span{
   display:block;
   width:18px;
@@ -127,21 +132,53 @@ header::after{
   border-radius:999px;
   transition:transform .25s ease, opacity .25s ease, translate .25s ease;
 }
-.menu-toggle span + span{
-  margin-top:4px;
+.menu-toggle span + span{ margin-top:4px; }
+
+.menu-toggle.menu-open span:nth-child(1){ transform:rotate(45deg); translate:0 3px; }
+.menu-toggle.menu-open span:nth-child(2){ opacity:0; }
+.menu-toggle.menu-open span:nth-child(3){ transform:rotate(-45deg); translate:0 -3px; }
+
+@media (max-width: 767.98px){
+  header.site-header{ position:relative; z-index:5000; }
+  header.site-header::after{ pointer-events:none; z-index:0; }
+  .header-inner{ position:relative; z-index:5001; }
+
+  .menu-toggle{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    z-index:9000;
+    pointer-events:auto;
+  }
+
+  .nav{
+    position:absolute;
+    top:100%;
+    right:16px;
+    left:16px;
+    margin-top:10px;
+    padding:12px 16px;
+    background:#050b2a;
+    border-radius:12px;
+    display:none;
+    flex-direction:column;
+    gap:10px;
+    z-index:8000;
+  }
+
+  .nav a{ color:#fff; padding:8px 0; }
+  .nav.nav-open{ display:flex; }
+
+  /* overlay del hero NO captura taps */
+  .hero-mobile-overlay,
+  .hero-mobile-overlay *{ pointer-events:none !important; }
 }
-/* Animación del icono al abrir */
-.menu-toggle.menu-open span:nth-child(1){
-  transform:rotate(45deg);
-  translate:0 3px;
+
+@media (min-width: 768px){
+  .nav{ position:static; display:flex; gap:24px; }
 }
-.menu-toggle.menu-open span:nth-child(2){
-  opacity:0;
-}
-.menu-toggle.menu-open span:nth-child(3){
-  transform:rotate(-45deg);
-  translate:0 -3px;
-}
+    
 
 /* ====== HERO MOBILE · VIACLOUDSTUDIO (versión estable) ====== */
 @media (max-width: 767.98px) {
@@ -2075,48 +2112,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
-/* ====== HERO + HAMBURGUESA · MOBILE (overlay no bloquea taps) ====== */
-@media (max-width: 767.98px) {
 
-  /* Header y hamburguesa SIEMPRE por encima del hero */
-  header,
-  .site-header,
-  .main-header {
-    position: relative;
-    z-index: 5000;
-  }
-
-  .menu-toggle {
-    position: relative;
-    z-index: 6000;
-    pointer-events: auto;
-  }
-
-  .nav {
-    z-index: 5500;
-  }
-
-  /* Hero y mockup por debajo */
-  .hero,
-  .hero-visual,
-  .hero-phone {
-    position: relative;
-    z-index: 1;
-  }
-
-  /* Overlay de texto: solo visual, no captura clics */
-  .hero-mobile-overlay,
-  .hero-mobile-overlay * {
-    pointer-events: none !important;
-  }
-
-  /* Ajuste final tamaño título overlay (mobile) */
-  .hero .hero-mobile-title {
-    font-size: clamp(36px, 10vw, 46px) !important;
-    line-height: 1.1 !important;
-    max-width: 24rem;
-  }
-}
 
 
     /* ====== SERVICIOS · RESETEO VISIBILIDAD ====== */
@@ -2409,6 +2405,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
       </aside>
     </div>
   </div>
+ </section>
  </header>
   
 <main>
@@ -2733,6 +2730,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
         <p id="form-status" class="form-status" aria-live="polite"></p>
       </form>
     </div> <!-- /contact-grid -->
+  </div> <!-- /wrapper -->
  </section>
 
 <!-- DIVISOR ANTES DEL FOOTER -->
@@ -3197,32 +3195,30 @@ document.addEventListener('DOMContentLoaded', () => {
      MENÚ HAMBURGUESA (MOBILE)
   ============================ */
   const menuToggle = document.querySelector('.menu-toggle');
-  const nav = document.querySelector('.nav');
+  const nav = document.querySelector('header .nav');
+  if (!menuToggle || !nav) return;
 
-  if (menuToggle && nav) {
-    menuToggle.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const isOpen = nav.classList.toggle('nav-open');
-      menuToggle.classList.toggle('menu-open', isOpen);
-    });
+  const close = () => {
+    nav.classList.remove('nav-open');
+    menuToggle.classList.remove('menu-open');
+  };
 
-    // Cerrar al tocar un link
-    nav.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        nav.classList.remove('nav-open');
-        menuToggle.classList.remove('menu-open');
-      });
-    });
+  const toggle = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const isOpen = nav.classList.toggle('nav-open');
+    menuToggle.classList.toggle('menu-open', isOpen);
+  };
 
-    // Cerrar al tocar afuera
-    document.addEventListener('click', (e) => {
-      if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
-        nav.classList.remove('nav-open');
-        menuToggle.classList.remove('menu-open');
-      }
-    });
-  }
+  // pointerdown funciona perfecto en mobile/emulador
+  menuToggle.addEventListener('pointerdown', toggle, { passive: false });
+
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+
+  document.addEventListener('pointerdown', (e) => {
+    if (!nav.contains(e.target) && !menuToggle.contains(e.target)) close();
+  });
+});
 
   /* ============================
      BOTÓN FLOTANTE VOLVER ARRIBA
