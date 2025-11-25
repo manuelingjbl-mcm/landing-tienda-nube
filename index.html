@@ -2247,10 +2247,59 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
-/* ===== FIX DEFINITIVO: hamburguesa tocable + overlay visible (MOBILE) ===== */
-@media (max-width:768px){
-  .logo-row{ position:relative; z-index:9000; }
+/* ============ NAV TOGGLE (checkbox) ============ */
+.nav-toggle{
+  position:absolute !important;
+  width:1px !important;
+  height:1px !important;
+  padding:0 !important;
+  margin:-1px !important;
+  overflow:hidden !important;
+  clip: rect(0 0 0 0) !important;
+  white-space:nowrap !important;
+  border:0 !important;
+  opacity:0 !important;
+}
 
+/* ============ HAMBURGUESA (icono) ============ */
+.menu-toggle{
+  display:none;                 /* desktop: oculta */
+  background:transparent;
+  border:none;
+  cursor:pointer;
+  padding:6px;
+  border-radius:999px;
+}
+.menu-toggle span{
+  display:block;
+  width:20px;
+  height:2px;
+  background:#fff;
+  border-radius:999px;
+  margin-top:4px;
+  transition:transform .25s ease, opacity .25s ease;
+}
+.menu-toggle span:first-child{ margin-top:0; }
+
+/* ============ DESKTOP NAV ============ */
+@media (min-width:768px){
+  .menu-toggle{ display:none !important; }
+  .nav{
+    position:static !important;
+    display:flex !important;
+    flex-direction:row !important;
+    gap:20px !important;
+    background:none !important;
+    padding:0 !important;
+    margin:0 !important;
+    opacity:1 !important;
+    pointer-events:auto !important;
+    transform:none !important;
+  }
+}
+
+/* ============ MOBILE NAV ============ */
+@media (max-width:767.98px){
   .menu-toggle{
     display:inline-flex;
     align-items:center;
@@ -2271,9 +2320,10 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     padding:12px 16px;
     background:#050b2a;
     border-radius:12px;
+
     display:flex;
     flex-direction:column;
-    gap:8px;
+    gap:10px;
 
     opacity:0;
     pointer-events:none;
@@ -2281,19 +2331,32 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     transition:opacity .22s ease, transform .22s ease;
     z-index:9000;
   }
-  .nav a{ color:#fff; padding:6px 0; }
+  .nav a{ color:#fff; padding:8px 0; }
 
-  .nav.nav-open{
+  /* ABRIR menú cuando el checkbox está checked */
+  .nav-toggle:checked + .menu-toggle + .nav{
     opacity:1;
     pointer-events:auto;
     transform:translateY(0);
   }
 
-  /* Overlay del título en mobile: debe verse */
-  .hero-mobile-overlay{ display:flex !important; pointer-events:none !important; }
-  .hero-mobile-overlay *{ pointer-events:none !important; }
+  /* Animación a X */
+  .nav-toggle:checked + .menu-toggle span:nth-child(1){
+    transform: rotate(45deg) translate(5px,5px);
+  }
+  .nav-toggle:checked + .menu-toggle span:nth-child(2){
+    opacity:0;
+  }
+  .nav-toggle:checked + .menu-toggle span:nth-child(3){
+    transform: rotate(-45deg) translate(5px,-5px);
+  }
 }
 
+    
+.hero-mobile-overlay{ display:none; }
+@media (max-width:767.98px){
+  .hero-mobile-overlay{ display:flex !important; pointer-events:none; }
+}
 
   
     
@@ -2308,11 +2371,12 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
       <div class="logo">viacloudstudio</div>
 
       <!-- Botón menú hamburguesa (mobile) -->
-      <button class="menu-toggle" type="button" aria-label="Abrir menú de navegación">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+<input id="nav-toggle" class="nav-toggle" type="checkbox" aria-hidden="true">
+<label for="nav-toggle" class="menu-toggle" aria-label="Abrir menú de navegación" aria-controls="site-nav">
+  <span></span>
+  <span></span>
+  <span></span>
+</label>
 
       <nav class="nav">
         <a href="#servicios">Servicios</a>
@@ -3157,37 +3221,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   ↑
 </button>
 
-/* ============================
-     MENÚ HAMBURGUESA (MOBILE)
-============================ */
-<script>
-(() => {
-  const menuToggle = document.querySelector('.menu-toggle');
-  const nav = document.querySelector('.nav');
-  if (!menuToggle || !nav) return;
 
-  const setOpen = (open) => {
-    nav.classList.toggle('nav-open', open);
-    menuToggle.classList.toggle('menu-open', open);
-    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  };
-
-  menuToggle.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setOpen(!nav.classList.contains('nav-open'));
-  });
-
-  nav.addEventListener('click', (e) => {
-    if (e.target.closest('a')) setOpen(false);
-  });
-
-  document.addEventListener('click', (e) => {
-    if (!nav.contains(e.target) && !menuToggle.contains(e.target)) setOpen(false);
-  });
-})();
-
-</script>
 
 
 
