@@ -2254,14 +2254,18 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   .header-inner,
   .logo-row{
     position: relative;
-    z-index: 7000;
+    z-index: 9000;
   }
 
   .menu-toggle{
-    position: relative;
-    z-index: 7001;
-    pointer-events: auto;
-    touch-action: manipulation;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    z-index:9001;
+    pointer-events:auto;
+    touch-action:manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
 
   /* Menú desplegable */
@@ -2274,8 +2278,6 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     padding: 12px 16px;
     background: #050b2a;
     border-radius: 12px;
-    z-index: 7000;
-
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -2284,6 +2286,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     pointer-events: none;
     transform: translateY(-6px);
     transition: opacity .22s ease, transform .22s ease;
+    z-index:9000;
   }
   .nav a{ color:#fff; padding:6px 0; }
 
@@ -2294,7 +2297,6 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 
   /* CLAVE: todo lo visual del hero NO debe capturar taps */
-  .hero-visual,
   .hero-phone,
   .hero-phone img,
   .hero-mobile-overlay{
@@ -3185,35 +3187,34 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   ↑
 </button>
 
+/* ============================
+     MENÚ HAMBURGUESA (MOBILE)
+============================ */
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-
-  /* ============================
-     MENÚ HAMBURGUESA (MOBILE)
-  ============================ */
-  const menuToggle = document.querySelector('.menu-toggle');
-  const nav = document.querySelector('header .nav');
+   const menuToggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('.nav');
   if (!menuToggle || !nav) return;
 
-  const close = () => {
-    nav.classList.remove('nav-open');
-    menuToggle.classList.remove('menu-open');
-  };
-
-  const toggle = (e) => {
+  menuToggle.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
     const isOpen = nav.classList.toggle('nav-open');
     menuToggle.classList.toggle('menu-open', isOpen);
-  };
+  });
 
-  // pointerdown funciona perfecto en mobile/emulador
-  menuToggle.addEventListener('pointerdown', toggle, { passive: false });
+  nav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      nav.classList.remove('nav-open');
+      menuToggle.classList.remove('menu-open');
+    });
+  });
 
-  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
-
-  document.addEventListener('pointerdown', (e) => {
-    if (!nav.contains(e.target) && !menuToggle.contains(e.target)) close();
+  document.addEventListener('click', (e) => {
+    if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
+      nav.classList.remove('nav-open');
+      menuToggle.classList.remove('menu-open');
+    }
   });
 });
 
