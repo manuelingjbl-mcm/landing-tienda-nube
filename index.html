@@ -110,344 +110,58 @@ header::after{
   width:100%;
 }
 
-/* ====== HERO MOBILE · VIACLOUDSTUDIO (versión estable) ====== */
-@media (max-width: 767.98px) {
 
-  /* Header siempre por encima del hero (hamburguesa clickeable) */
-  header,
-.site-header,
-.main-header {
-  z-index: 1000;  /* solo z-index, SIN position */
-}
+/* =========================
+   DESKTOP / BASE (DEFAULT)
+========================= */
 
-  /* Hero base: columna en mobile */
-  .hero {
-    display: flex;              /* 👈 nos aseguramos que sea flex */
-    flex-direction: column;     /* 👈 se apilan verticalmente */
-    align-items: stretch;
-    padding-top: 0;
-    padding-bottom: 16px;       /* menos aire abajo */
-    background: none !important;
-    position: relative;
-    z-index: 0;                 /* no tapa al botón de chat */
-  }
+/* Ocultamos overlay mobile en desktop */
+.hero-mobile-overlay{ display:none; }
 
-  /* Orden: primero mockup, luego texto */
-  .hero-visual {
-    order: 1;
-    width: 100%;
-  }
+/* Hamburguesa NO en desktop */
+.menu-toggle{ display:none; }
 
-  /* En mobile NO queremos repetir kicker + H1 del bloque de contenido */
-  .hero-kicker,
-  .hero-content h1 {
-    display: none !important;
-  }
-
-  /* Imagen del hero */
-  .hero-phone {
-    position: relative;
-    width: 100%;
-    overflow: visible;          /* que no recorte la imagen */
-    margin-bottom: -220px;      /* ajusta este valor si hace falta */
-    z-index: 0;                 /* capa por debajo del contenido */
-  }
-
-  .hero-img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  /* ====== HERO MOBILE · VIACLOUDSTUDIO (versión estable) ====== */
-@media (max-width: 767.98px) {
-
-  /* Header siempre por encima del hero (hamburguesa clickeable) */
-  header,
-.site-header,
-.main-header {
-  z-index: 1000;  /* solo z-index, SIN position */
-}
-
-  /* Hero base: columna en mobile */
-  .hero {
-    display: flex;              /* 👈 nos aseguramos que sea flex */
-    flex-direction: column;     /* 👈 se apilan verticalmente */
-    align-items: stretch;
-    padding-top: 0;
-    padding-bottom: 16px;       /* menos aire abajo */
-    background: none !important;
-    position: relative;
-    z-index: 0;                 /* no tapa al botón de chat */
-  }
-
-  /* Orden: primero mockup, luego texto */
-  .hero-visual {
-    order: 1;
-    width: 100%;
-  }
-
-  /* En mobile NO queremos repetir kicker + H1 del bloque de contenido */
-  .hero-kicker,
-  .hero-content h1 {
-    display: none !important;
-  }
-
-  /* Imagen del hero */
-  .hero-phone {
-    position: relative;
-    width: 100%;
-    overflow: visible;          /* que no recorte la imagen */
-    margin-bottom: -220px;      /* ajusta este valor si hace falta */
-    z-index: 0;                 /* capa por debajo del contenido */
-  }
-
-  .hero-img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  /* === Overlay sobre la imagen, centrado tipo Higher-Web === */
-  .hero-mobile-overlay {
-    position: absolute;
-    inset: 0;
-    padding: 0 24px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;    /* centrado vertical */
-    align-items: center;        /* centrado horizontal */
-    text-align: center;
-
-    background: none;           /* sin degradado, imagen limpia */
-    pointer-events: none;       /* NO bloquea clics (header / chat) */
-
-    transform: translateY(10%); /* 👈 dejámos tu valor porque ahí te gusta */
-  }
-
-  .hero-mobile-overlay * {
-    pointer-events: none;
-  }
-
-  .hero-mobile-kicker,
-  .hero-mobile-title {
-    color: #fdfcff; /* casi blanco pero ligeramente frío */
-    text-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.85),
-      0 0 14px rgba(0, 0, 0, 0.65);
-    -webkit-text-stroke: 0.35px rgba(0, 0, 0, 0.35); /* contorno suave para zonas claras */
-  }
-  
-  .hero-mobile-kicker {
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-
-  /* Pill “Mobile first · Tienda Nube” debajo de la imagen, centrado */
-  .hero-badge {
-    position: static;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    /* un poquito metido arriba, pero con aire abajo */
-    margin: -24px auto 20px;
-
-    padding: 8px 16px;
-    border-radius: 999px;
-    background: #ffffff;
-    color: #111827;
-    font-size: 12px;
-    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
-  }
-
-  /* Bloque de contenido: ahora por ENCIMA de la imagen */
-  .hero-content {
-    order: 2;
-    padding: 0 20px 0;
-    margin-top: -10px;
-    position: relative;
-    z-index: 1;                 /* 👈 garantiza que el botón reciba el tap */
-  }
-
-  .hero-content p:first-of-type {
-    margin-top: 6px;            /* solo un toque de aire interno */
-  }
-
-  /* Botones: lado a lado en mobile */
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 18px;
-  }
-
-  .hero-actions .btn-primary--hero {
-    flex: 1 1 60%;
-  }
-
-  .hero-actions .btn-secondary {
-    flex: 1 1 40%;
-    text-align: center;
-    justify-content: center;
-  }
-}
-  
 /* HERO – DESKTOP */
 .hero{
   display:grid;
-  grid-template-columns:minmax(0,1.3fr) minmax(0,1.5fr); /* más espacio para texto */
-  column-gap:64px;                                     /* más aire entre texto e imagen */
+  grid-template-columns:minmax(0,1.3fr) minmax(0,1.5fr);
+  column-gap:64px;
   align-items:center;
-  padding:72px 0 56px;                                 /* más respiro abajo */
+  padding:72px 0 56px;
 }
 
-    /* Limitamos el ancho del bloque de texto */
-.hero > div:first-child{
-  max-width:560px;
+/* Limitamos el ancho del bloque de texto */
+.hero > div:first-child{ max-width:560px; }
+
+.hero-kicker{
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  opacity:.8;
+  margin-bottom:8px;
 }
 
-    .hero-kicker{
-      font-size:13px;
-      text-transform:uppercase;
-      letter-spacing:.16em;
-      opacity:.8;
-      margin-bottom:8px;
-    }
-    .hero h1{
-      font-size:clamp(30px,4vw,40px);
-      line-height:1.1;
-      margin-bottom:16px;
-    }
-    .hero p{
-      font-size:15px;
-      max-width:540px;
-      opacity:.9;
-      margin-bottom:24px;
-    }
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      align-items:center;
-    }
-    .btn-primary{
-  background:#fff;
-  color:#111827;
-  border-radius:999px;
-  padding:10px 20px;
-  font-size:14px;
-  font-weight:600;
-  border:none;
-  cursor:pointer;
-  box-shadow:0 10px 30px rgba(0,0,0,.25);
-  display:inline-flex;
+.hero h1{
+  font-size:clamp(30px,4vw,40px);
+  line-height:1.1;
+  margin-bottom:16px;
+}
+
+.hero p{
+  font-size:15px;
+  max-width:540px;
+  opacity:.9;
+  margin-bottom:24px;
+}
+
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
   align-items:center;
-  justify-content:center;
-  transition:
-    transform .18s ease,
-    box-shadow .18s ease,
-    background-color .18s ease,
-    color .18s ease;
 }
 
-/* Estado hover / click genérico */
-.btn-primary:hover{
-  transform:translateY(-2px);
-  box-shadow:0 14px 36px rgba(15,23,42,.35);
-  background:#f3f4ff;
-}
-
-.btn-primary:active{
-  transform:translateY(0);
-  box-shadow:0 8px 22px rgba(15,23,42,.25);
-}
-
-/* Variante del hero con “saltito” automático */
-.btn-primary--hero{
-  animation:cta-bounce 2.3s ease-in-out infinite;
-}
-
-/* Cuando el usuario pasa el mouse, frenamos la animación y dejamos sólo el hover */
-.btn-primary--hero:hover{
-  animation:none;
-}
-
-/* Pequeño “bounce” suave */
-@keyframes cta-bounce{
-  0%,100%{
-    transform:translateY(0);
-  }
-  50%{
-    transform:translateY(-4px);
-    box-shadow:0 16px 40px rgba(15,23,42,.4);
-  }
-}
-
-    .btn-secondary{
-      font-size:14px;
-      opacity:.9;
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-    }
-    .btn-secondary span{
-      font-size:18px;
-    }
-    .hero-tagline{
-      margin-top:14px;
-      font-size:13px;
-      opacity:.8;
-    }
-    .hero-card{
-      background:rgba(15,23,42,.85);
-      border-radius:var(--radio);
-      padding:18px;
-      border:1px solid rgba(148,163,184,.6);
-      backdrop-filter:blur(12px);
-    }
-    .hero-card-header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:12px;
-      color:#e5e7eb;
-      font-size:12px;
-    }
-    .hero-grid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:8px;
-    }
-    .mini-tile{
-      position:relative;
-      border-radius:10px;
-      overflow:hidden;
-      background:#020617;
-      border:1px solid rgba(148,163,184,.25);
-    }
-    .mini-tile img{
-      height:110px;
-      width:100%;
-      object-fit:cover;
-    }
-    .mini-label{
-      position:absolute;
-      inset:auto 8px 8px 8px;
-      padding:5px 8px;
-      border-radius:999px;
-      background:rgba(15,23,42,.85);
-      color:#e5e7eb;
-      font-size:11px;
-      display:inline-flex;
-      align-items:center;
-      gap:4px;
-    }
-    
-/* HERO VISUAL – DESKTOP: tamaño y posición del mockup */
+/* Visual desktop */
 .hero-visual{
   display:flex;
   flex-direction:column;
@@ -456,16 +170,17 @@ header::after{
 }
 
 .hero-phone{
-  max-width:660px;       /* 👈 agranda o achica el “celu” en desktop */
-  margin-top:-70px;      /* 👈 valor negativo = lo sube un poco */
+  max-width:660px;
+  margin-top:-70px;
 }
 
-.hero-phone img{
+.hero-phone img,
+.hero-img{
   width:100%;
   height:auto;
+  display:block;
   filter:drop-shadow(0 18px 45px rgba(15,23,42,.7));
 }
-
 
 .hero-badge{
   margin-top:16px;
@@ -476,23 +191,6 @@ header::after{
   border:1px solid rgba(148,163,184,.5);
   color:#e5e7eb;
   align-self:center;
-}
-
-  /* ===== Defaults DESKTOP (reset) ===== */
-.menu-toggle{ display:none; }              /* la hamburguesa no existe en desktop */
-.hero-mobile-overlay{ display:none; }      /* overlay mobile apagado en desktop */
-
-/* nav desktop normal */
-.nav{
-  position: static;
-  opacity: 1;
-  pointer-events: auto;
-  transform: none;
-  background: none;
-  padding: 0;
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
 }
 
 
