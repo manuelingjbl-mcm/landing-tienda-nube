@@ -2055,6 +2055,54 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   .scroll-top-btn{ bottom: 96px; }
 }
 
+/* ===== HERO DESKTOP: recuperar estilos originales (CTA pill + tamaños) ===== */
+@media (min-width: 768px){
+
+  /* Botón pill blanco (Agendar...) */
+  .hero-actions .btn-primary,
+  .hero-actions .btn-primary--hero{
+    background:#fff;
+    color:#111827;
+    border-radius:999px;
+    padding:12px 22px;          /* + “pill” */
+    font-size:15px;             /* + grande */
+    font-weight:700;
+    border:0;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+    transition:transform .18s ease, box-shadow .18s ease, background-color .18s ease;
+  }
+  .hero-actions .btn-primary:hover,
+  .hero-actions .btn-primary--hero:hover{
+    transform:translateY(-2px);
+    background:#f3f4ff;         /* hover leve */
+    box-shadow:0 14px 36px rgba(15,23,42,.35);
+  }
+  .hero-actions .btn-primary:active,
+  .hero-actions .btn-primary--hero:active{
+    transform:translateY(0);
+    box-shadow:0 8px 22px rgba(15,23,42,.25);
+  }
+
+  /* “Ver casos reales” más grande */
+  .hero-actions .btn-secondary{
+    font-size:10px;
+    font-weight:600;
+    opacity:.95;
+  }
+  .hero-actions .btn-secondary span{ font-size:18px; }
+
+  /* Las 2 líneas de abajo (tagline) más grandes */
+  .hero-tagline{
+    font-size:10px;
+    opacity:.9;
+    margin-top:14px;
+  }
+
+  /* Fallback por si esas líneas no usan .hero-tagline */
+  .hero-content > p:last-of-type{
+    font-size:14px;
+  }
+}
 
 
 
