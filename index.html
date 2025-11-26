@@ -441,7 +441,7 @@ header::after{
 
   /* ===== Header (aire azul abajo) ===== */
   header{
-    padding: 18px 0 140px;   /* +/– aire azul */
+    padding: 18px 0 130px;   /* +/– aire azul */
     min-height: 100svh;
   }
   @supports (min-height: 100dvh){
@@ -574,7 +574,7 @@ header::after{
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin: 30px auto 10px;   /* arriba / abajo */
+    margin: 30px auto 5px;   /* arriba / abajo */
     padding: 8px 24px;
     border-radius: 999px;
     background: rgba(15,23,42,.85);
@@ -2321,6 +2321,50 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
+/* =========================
+   BOTÓN FLOTANTE: VOLVER ARRIBA
+========================= */
+.scroll-top-btn{
+  position: fixed;
+  right: 16px;
+  bottom: 92px;                 /* deja lugar para el botón de chat */
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255,255,255,.22);
+  background: rgba(15,23,42,.78);
+  color: #fff;
+
+  cursor: pointer;
+  z-index: 9500;                /* arriba del hero y del header */
+  box-shadow: 0 14px 40px rgba(0,0,0,.28);
+
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease, background .18s ease;
+}
+
+.scroll-top-btn:hover{
+  background: rgba(15,23,42,.92);
+}
+
+.scroll-top-btn.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Si querés un poquito más abajo en desktop */
+@media (min-width: 768px){
+  .scroll-top-btn{ bottom: 28px; }
+}
+
 
 
 
@@ -3188,6 +3232,25 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   ↑
 </button>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.querySelector('.scroll-top-btn');
+  if (!btn) return;
+
+  const toggle = () => {
+    const y = window.scrollY || document.documentElement.scrollTop;
+    btn.classList.toggle('is-visible', y > 420);
+  };
+
+  toggle();
+  window.addEventListener('scroll', toggle, { passive: true });
+
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+</script>
 
 
     
