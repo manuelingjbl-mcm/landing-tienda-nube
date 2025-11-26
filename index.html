@@ -159,6 +159,130 @@ header::after{
     display: block;
   }
 
+  /* ====== HERO MOBILE · VIACLOUDSTUDIO (versión estable) ====== */
+@media (max-width: 767.98px) {
+
+  /* Header siempre por encima del hero (hamburguesa clickeable) */
+  header,
+.site-header,
+.main-header {
+  z-index: 1000;  /* solo z-index, SIN position */
+}
+
+  /* Hero base: columna en mobile */
+  .hero {
+    display: flex;              /* 👈 nos aseguramos que sea flex */
+    flex-direction: column;     /* 👈 se apilan verticalmente */
+    align-items: stretch;
+    padding-top: 0;
+    padding-bottom: 16px;       /* menos aire abajo */
+    background: none !important;
+    position: relative;
+    z-index: 0;                 /* no tapa al botón de chat */
+  }
+
+  /* Orden: primero mockup, luego texto */
+  .hero-visual {
+    order: 1;
+    width: 100%;
+  }
+
+  /* En mobile NO queremos repetir kicker + H1 del bloque de contenido */
+  .hero-kicker,
+  .hero-content h1 {
+    display: none !important;
+  }
+
+  /* Imagen del hero */
+  .hero-phone {
+    position: relative;
+    width: 100%;
+    overflow: visible;          /* que no recorte la imagen */
+    margin-bottom: -220px;      /* ajusta este valor si hace falta */
+    z-index: 0;                 /* capa por debajo del contenido */
+  }
+
+  .hero-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* === Overlay sobre la imagen, centrado tipo Higher-Web === */
+  .hero-mobile-overlay {
+    position: absolute;
+    inset: 0;
+    padding: 0 24px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    /* centrado vertical */
+    align-items: center;        /* centrado horizontal */
+    text-align: center;
+
+    background: none;           /* sin degradado, imagen limpia */
+    pointer-events: none;       /* NO bloquea clics (header / chat) */
+
+    transform: translateY(10%); /* 👈 dejámos tu valor porque ahí te gusta */
+  }
+
+  .hero-mobile-kicker {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  /* Pill “Mobile first · Tienda Nube” debajo de la imagen, centrado */
+  .hero-badge {
+    position: static;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    /* un poquito metido arriba, pero con aire abajo */
+    margin: -24px auto 20px;
+
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #111827;
+    font-size: 12px;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Bloque de contenido: ahora por ENCIMA de la imagen */
+  .hero-content {
+    order: 2;
+    padding: 0 20px 0;
+    margin-top: -10px;
+    position: relative;
+    z-index: 1;                 /* 👈 garantiza que el botón reciba el tap */
+  }
+
+  .hero-content p:first-of-type {
+    margin-top: 6px;            /* solo un toque de aire interno */
+  }
+
+  /* Botones: lado a lado en mobile */
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .hero-actions .btn-primary--hero {
+    flex: 1 1 60%;
+  }
+
+  .hero-actions .btn-secondary {
+    flex: 1 1 40%;
+    text-align: center;
+    justify-content: center;
+  }
+}
+  
 /* HERO – DESKTOP */
 .hero{
   display:grid;
