@@ -2322,36 +2322,41 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
 
 /* =========================
-   BOTÓN FLOTANTE: VOLVER ARRIBA
+   BOTÓN FLOTANTE: VOLVER ARRIBA (AZUL + MÁS GRANDE)
 ========================= */
 .scroll-top-btn{
   position: fixed;
   right: 16px;
-  bottom: 92px;                 /* deja lugar para el botón de chat */
-  width: 44px;
-  height: 44px;
+  bottom: 92px;
+
+  width: 56px;                 /* 👈 más grande */
+  height: 56px;                /* 👈 más grande */
   border-radius: 999px;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  border: 1px solid rgba(255,255,255,.22);
-  background: rgba(15,23,42,.78);
+  background: #0b63e8;         /* 👈 azul estilo VIA */
   color: #fff;
+  border: none;
+
+  font-size: 20px;             /* 👈 flecha más grande */
+  font-weight: 800;
+  line-height: 1;
 
   cursor: pointer;
-  z-index: 9500;                /* arriba del hero y del header */
-  box-shadow: 0 14px 40px rgba(0,0,0,.28);
+  z-index: 9500;
+  box-shadow: 0 18px 45px rgba(11,99,232,.35);
 
   opacity: 0;
-  transform: translateY(8px);
+  transform: translateY(10px);
   pointer-events: none;
-  transition: opacity .18s ease, transform .18s ease, background .18s ease;
+  transition: opacity .18s ease, transform .18s ease, filter .18s ease;
 }
 
 .scroll-top-btn:hover{
-  background: rgba(15,23,42,.92);
+  filter: brightness(1.08);
 }
 
 .scroll-top-btn.is-visible{
