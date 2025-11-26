@@ -478,6 +478,23 @@ header::after{
   align-self:center;
 }
 
+  /* ===== Defaults DESKTOP (reset) ===== */
+.menu-toggle{ display:none; }              /* la hamburguesa no existe en desktop */
+.hero-mobile-overlay{ display:none; }      /* overlay mobile apagado en desktop */
+
+/* nav desktop normal */
+.nav{
+  position: static;
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+  background: none;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
 
 /* ====== MOBILE ÚNICO (HERO + BADGE + HEADER + NAV) — SIMPLE & ESTABLE ====== */
 @media (max-width: 767.98px) {
