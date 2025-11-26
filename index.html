@@ -436,29 +436,12 @@ header::after{
 }
 
 
-/* ====== MOBILE ÚNICO (HERO + BADGE + HEADER + NAV) ====== */
+/* ====== MOBILE ÚNICO (HERO + BADGE + HEADER + NAV) — SIMPLE & ESTABLE ====== */
 @media (max-width: 767.98px) {
 
-  /* ===== Perillas (ajuste fino sin romper otros teléfonos) ===== */
-  :root{
-    --m-header-pb: clamp(80px, 10vh, 240px);  /* + aire azul abajo */
-    --m-hero-gap:  clamp(10px, 2.4vh, 22px);
-
-    --m-phone-pull: clamp(100px, 14vh, 270px); /* “sube” la imagen (margin-bottom negativo) */
-
-    --m-img-scale: clamp(1.45, 1.25 + 0.35vw, 1.95);
-    --m-img-x:     clamp(-90px, -16vw, -144px);
-    --m-img-y:     clamp(-12px, -1vh, 30px);
-
-    --m-overlay-top: clamp(280px, 12vh, 460px); /* baja/sube overlay (kicker+h1) */
-
-    --m-badge-mt: clamp(10px, 1.8vh, 18px);
-    --m-badge-mb: clamp(16px, 2.4vh, 26px);
-  }
-
-  /* ===== Header (altura estable) ===== */
+  /* ===== Header (aire azul abajo) ===== */
   header{
-    padding: 16px 0 var(--m-header-pb);
+    padding: 16px 0 140px;   /* +/– aire azul */
     min-height: 100svh;
   }
   @supports (min-height: 100dvh){
@@ -468,7 +451,7 @@ header::after{
   .header-inner{ padding: 0 16px; }
   .logo-row{ position: relative; }
 
-  /* ===== NAV mobile (hamburguesa visible + dropdown) ===== */
+  /* ===== NAV mobile ===== */
   .menu-toggle{
     display: inline-flex !important;
     align-items: center;
@@ -509,12 +492,12 @@ header::after{
     transform: translateY(0);
   }
 
-  /* ===== HERO (imagen arriba, contenido abajo) ===== */
+  /* ===== HERO layout ===== */
   .hero{
     display: flex;
     flex-direction: column;
     padding-top: 0;
-    padding-bottom: var(--m-hero-gap);
+    padding-bottom: 18px;
     background: none !important;
     position: relative;
     gap: 0;
@@ -525,25 +508,31 @@ header::after{
   .hero-kicker,
   .hero-content h1{ display: none !important; }
 
+  /* ===== Imagen (SIN scale/clamp) =====
+     - width en vw controla “zoom”
+     - translateX/Y encuadra
+     - margin-bottom negativo monta la imagen sobre el contenido
+  */
   .hero-phone{
     position: relative;
     width: 100%;
     overflow: visible;
-    margin-bottom: calc(var(--m-phone-pull) * -1);
+    margin-bottom: -150px;  /* +/– cuánto se monta */
     z-index: 0;
   }
 
   .hero-phone img,
   .hero-img{
-    width: 100%;
+    width: 155vw;           /* 145–175vw */
     max-width: none;
     height: auto;
     display: block;
-    transform: translate3d(var(--m-img-x), var(--m-img-y), 0) scale(var(--m-img-scale));
-    transform-origin: center top;
+
+    transform: translateX(-22vw) translateY(-2vh); /* encuadre */
+    filter: drop-shadow(0 18px 45px rgba(15,23,42,.7));
   }
 
-  /* Overlay centrado, pero “estable” entre dispositivos (sin % en translateY) */
+  /* ===== Overlay (título) ===== */
   .hero-mobile-overlay{
     position: absolute;
     inset: 0;
@@ -553,10 +542,9 @@ header::after{
     align-items: center;
     text-align: center;
     justify-content: flex-start;
-    padding-top: var(--m-overlay-top);
+    padding-top: 84px;      /* +/– baja/sube overlay */
     background: none;
     pointer-events: none;
-    transform: none !important;
   }
   .hero-mobile-overlay *{ pointer-events:none; }
 
@@ -580,13 +568,13 @@ header::after{
     max-width: 22rem;
   }
 
-  /* Pill: 1 línea, centrado */
+  /* ===== Badge ===== */
   .hero-badge{
     position: static;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin: var(--m-badge-mt) auto var(--m-badge-mb);
+    margin: 14px auto 18px;   /* arriba / abajo */
     padding: 8px 24px;
     border-radius: 999px;
     background: rgba(15,23,42,.85);
@@ -597,6 +585,7 @@ header::after{
     max-width: calc(100vw - 32px);
   }
 
+  /* ===== Contenido ===== */
   .hero-content{
     order: 2;
     padding: 12px 20px 0;
@@ -619,7 +608,7 @@ header::after{
     justify-content:center;
   }
 }
-  
+
 
 
 
