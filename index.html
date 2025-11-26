@@ -226,6 +226,19 @@ header::after{
     transform: translateY(10%); /* 👈 dejámos tu valor porque ahí te gusta */
   }
 
+  .hero-mobile-overlay * {
+    pointer-events: none;
+  }
+
+  .hero-mobile-kicker,
+  .hero-mobile-title {
+    color: #fdfcff; /* casi blanco pero ligeramente frío */
+    text-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.85),
+      0 0 14px rgba(0, 0, 0, 0.65);
+    -webkit-text-stroke: 0.35px rgba(0, 0, 0, 0.35); /* contorno suave para zonas claras */
+  }
+  
   .hero-mobile-kicker {
     font-size: 11px;
     letter-spacing: 0.18em;
