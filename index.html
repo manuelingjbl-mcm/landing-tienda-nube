@@ -410,6 +410,7 @@ header::after{
     flex-wrap:wrap;
     gap:12px;
     align-items:center;
+    margin-top: 14px;   /* 👈 subí/bajá este valor (12-22px) */
     margin: 0 0 12px;
   }
 
@@ -432,6 +433,16 @@ header::after{
     background:#f3f4ff;
     box-shadow:0 14px 36px rgba(15,23,42,.35);
   }
+
+  .hero-actions .btn-primary,
+.hero-actions .btn-primary--hero{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;  /* 👈 centra el texto */
+  text-align: center;       /* 👈 por si fuera <a> */
+  width: 100%;              /* 👈 si querés pill full-width */
+  /* si NO lo querés full-width, sacá width:100% y listo */
+}
 
   .hero-actions .btn-secondary{
     font-size:13px;
