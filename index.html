@@ -225,20 +225,31 @@ header::after{
 }
 
 /* =========================
-   MOBILE ÚNICO (HERO + NAV) – estable
+   MOBILE ÚNICO (HERO + NAV) – LIMPIO + PERILLAS
 ========================= */
 @media (max-width: 767.98px){
 
-  /* ===== Perillas simples ===== */
+  /* ===== Perillas simples (tocá SOLO esto) ===== */
   :root{
-    --m-phone-pull: 0px;     /* 0 = CONTENT debajo de la imagen (más estable). Probá -80px si querés solapar un poco */
-    --m-overlay-y: 10%;      /* sube/baja overlay: probá 0% / 6% / 12% */
-    --m-badge-mt: 12px;      /* espacio arriba del pill */
-    --m-badge-mb: 16px;      /* espacio abajo del pill */
-    --m-content-mt: 10px;    /* distancia desde el pill al párrafo/botones */
+    /* Imagen */
+    --m-phone-pull: 0px;     /* 0 = contenido debajo. Negativo (-60px) = solapa */
+    --m-img-s: 1.08;         /* zoom leve (1.03 a 1.15) */
+    --m-img-x: -22px;        /* izquierda (-) / derecha (+) */
+    --m-img-y:  0px;         /* arriba (-) / abajo (+) */
+
+    /* Overlay (título arriba de la imagen) */
+    --m-overlay-y: 10%;      /* 0% / 6% / 12% */
+    --m-title-size: 38px;    /* “Diseñamos…” */
+
+    /* Pill */
+    --m-badge-mt: 12px;
+    --m-badge-mb: 16px;
+
+    /* Contenido */
+    --m-content-mt: 10px;    /* separación desde pill → párrafo/botones */
   }
 
-  /* Hamburguesa en mobile */
+  /* ===== Hamburguesa ===== */
   .menu-toggle{
     display:inline-flex !important;
     align-items:center;
@@ -250,7 +261,7 @@ header::after{
     -webkit-tap-highlight-color:transparent;
   }
 
-  /* Menú desplegable */
+  /* ===== Menú desplegable ===== */
   .logo-row{ position:relative; }
   .nav{
     position:absolute;
@@ -281,7 +292,7 @@ header::after{
     transform:translateY(0);
   }
 
-  /* HERO mobile: columna */
+  /* ===== HERO base ===== */
   .hero{
     display:flex;
     flex-direction:column;
@@ -291,43 +302,56 @@ header::after{
     background:none !important;
     position:relative;
   }
-  .hero-visual{ order:1; width:100%; }
 
-  /* Ocultamos el H1 normal (porque usamos overlay) */
+  .hero-visual{
+    order:1;
+    width:100%;
+    display:flex;               /* 👈 centra pill */
+    flex-direction:column;
+    align-items:center;
+  }
+
+  /* Ocultamos H1 normal (usamos overlay) */
   .hero-kicker,
   .hero-content h1{ display:none !important; }
 
-  /* Imagen */
+  /* ===== Imagen (reencuadre estable) ===== */
   .hero-phone{
     position:relative;
     width:100%;
-    overflow:visible;
+    overflow:hidden;            /* 👈 para que el reencuadre no rompa bordes */
     margin-bottom: var(--m-phone-pull);
     z-index:0;
+    border-radius:20px;         /* opcional (podés borrar si no querés recorte suave) */
   }
+
   .hero-phone img,
   .hero-img{
     width:100%;
     height:auto;
     display:block;
     filter:none;
+
+    transform: translate(var(--m-img-x), var(--m-img-y)) scale(var(--m-img-s));
+    transform-origin:center top;
   }
 
-  /* Overlay visible en mobile */
+  /* ===== Overlay (kicker + título) ===== */
   .hero-mobile-overlay{
     display:flex !important;
     position:absolute;
     inset:0;
     padding:0 24px;
+
     flex-direction:column;
     justify-content:center;
     align-items:center;
     text-align:center;
+
     pointer-events:none;
     transform:translateY(var(--m-overlay-y));
   }
 
-  /* MUY IMPORTANTE: fijar tamaños overlay (evita que “herede” estilos desktop y se dispare) */
   .hero-mobile-kicker{
     margin:0 0 12px;
     font-size:11px;
@@ -337,19 +361,23 @@ header::after{
     text-shadow:0 2px 4px rgba(0,0,0,.85), 0 0 14px rgba(0,0,0,.65);
     -webkit-text-stroke:.35px rgba(0,0,0,.35);
   }
+
   .hero-mobile-title{
     margin:0;
-    font-size: 38px;     /* subí/bajá acá si querés agrandar el “Diseñamos…” */
+    font-size: var(--m-title-size);
     line-height:1.12;
-    max-width: 22rem;
+    max-width:22rem;
     color:#fdfcff;
     text-shadow:0 2px 4px rgba(0,0,0,.85), 0 0 14px rgba(0,0,0,.65);
     -webkit-text-stroke:.35px rgba(0,0,0,.35);
   }
 
-  /* Badge (pill) */
+  /* ===== Pill ===== */
   .hero-badge{
+    align-self:center;
     margin: var(--m-badge-mt) auto var(--m-badge-mb);
+    width:fit-content;
+
     display:inline-flex;
     align-items:center;
     justify-content:center;
@@ -361,9 +389,10 @@ header::after{
     color:#e5e7eb;
     font-size:12px;
     white-space:nowrap;
+    max-width:calc(100vw - 32px);
   }
 
-  /* Contenido (párrafo + CTA) */
+  /* ===== Contenido (párrafo + CTA) ===== */
   .hero-content{
     order:2;
     padding:0 20px;
@@ -372,7 +401,19 @@ header::after{
     z-index:1;
   }
 
-  /* Replicar “pill CTA + tamaños” en mobile (igual que desktop) */
+  .hero-content p{
+    margin:0 0 16px;            /* 👈 evita que el CTA “pise” el texto */
+  }
+
+  .hero-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    align-items:center;
+    margin: 0 0 12px;
+  }
+
+  /* CTA pill como desktop */
   .hero-actions .btn-primary,
   .hero-actions .btn-primary--hero{
     background:#fff;
@@ -383,16 +424,26 @@ header::after{
     font-weight:600;
     border:0;
     box-shadow:0 10px 30px rgba(0,0,0,.25);
+    transition:transform .18s ease, box-shadow .18s ease, background-color .18s ease;
   }
+  .hero-actions .btn-primary:hover,
+  .hero-actions .btn-primary--hero:hover{
+    transform:translateY(-2px);
+    background:#f3f4ff;
+    box-shadow:0 14px 36px rgba(15,23,42,.35);
+  }
+
   .hero-actions .btn-secondary{
     font-size:13px;
     font-weight:600;
     opacity:.95;
   }
+
   .hero-tagline,
   .hero-content > p:last-of-type{
     font-size:13px;
     opacity:.9;
+    margin:0;
   }
 }
 
