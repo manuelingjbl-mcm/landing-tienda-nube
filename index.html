@@ -401,9 +401,10 @@ header::after{
     z-index:1;
   }
 
-  .hero-content p{
-    margin:0 0 18px;            /* 👈 evita que el CTA “pise” el texto */
-  }
+ /* Aire SOLO entre el 1er párrafo y los botones */
+.hero-content p:first-of-type{
+  margin: 0 0 18px;
+}
 
   .hero-actions{
     display:flex;
