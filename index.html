@@ -233,9 +233,9 @@ header::after{
   :root{
     /* Imagen */
     --m-phone-pull: 0px;     /* 0 = contenido debajo. Negativo (-60px) = solapa */
-    --m-img-s: 1.08;         /* zoom leve (1.03 a 1.15) */
-    --m-img-x: -22px;        /* izquierda (-) / derecha (+) */
-    --m-img-y:  0px;         /* arriba (-) / abajo (+) */
+    --m-img-s: 3.08;         /* zoom leve (1.03 a 1.15) */
+    --m-img-x: 10px;        /* izquierda (-) / derecha (+) */
+    --m-img-y:  -10px;         /* arriba (-) / abajo (+) */
 
     /* Overlay (título arriba de la imagen) */
     --m-overlay-y: 10%;      /* 0% / 6% / 12% */
@@ -319,10 +319,10 @@ header::after{
   .hero-phone{
     position:relative;
     width:100%;
-    overflow:hidden;            /* 👈 para que el reencuadre no rompa bordes */
+    overflow:visible;            /* 👈 para que el reencuadre no rompa bordes */
     margin-bottom: var(--m-phone-pull);
     z-index:0;
-    border-radius:20px;         /* opcional (podés borrar si no querés recorte suave) */
+    border-radius:0;         /* opcional (podés borrar si no querés recorte suave) */
   }
 
   .hero-phone img,
