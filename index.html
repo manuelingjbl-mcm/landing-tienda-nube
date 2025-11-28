@@ -2358,6 +2358,11 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
+    html, body{ width:100%; overflow-x: clip; }
+@supports not (overflow: clip){
+  html, body{ overflow-x: hidden; }
+}
+
   
     
   </style>
