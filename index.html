@@ -2318,67 +2318,97 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
     
 /* =========================
-   WORKS – MOBILE: flotantes + zoom + copy estable
+   WORKS (Nuestros trabajos) — MOBILE carousel + sin recorte
+   Reemplaza el @media (max-width: 900px) anterior
 ========================= */
 @media (max-width: 900px){
 
-  /* 1) El contenedor del carrusel: que permita ver sombras */
-  .works-carousel,
+  .works-split{
+    grid-template-columns: 1fr;
+    gap: 16px;
+    overflow-x: clip; /* evita que la página “se corra” */
+  }
+
+  /* Texto arriba, carrusel abajo (como lo tenían) */
+  .works-copy{ order: 1; }
+
+  /* Fijamos altura mínima para que NO “suba/baje” el resto de la landing */
+  .works-copy{
+    min-height: 320px; /* ajustá: 300-360 según tu copy más largo */
+  }
+
+  /* Carrusel horizontal scrolleable */
   .works-shots{
-    overflow: visible !important;       /* clave: no recortar sombras */
-  }
+    order: 2;
+    display: flex;
+    gap: 16px;
 
-  /* 2) Cada "card": NO recortes (overflow visible), sombra flotante */
+    padding: 10px 16px 26px;
+    overflow-x: auto;
+    overflow-y: visible;
+
+    scroll-snap-type: x mandatory;
+    scroll-padding: 16px;
+
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+
+    scrollbar-width: none;
+  }
+  .works-shots::-webkit-scrollbar{ display:none; }
+
+  /* Cada “slide” grande y centrado */
   .works-shot{
-    overflow: visible !important;       /* <- elimina el recorte */
-    border-radius: 0 !important;        /* el borde NO va en el botón */
-    background: transparent !important;
-    box-shadow: none !important;        /* la sombra la ponemos en la IMG */
-    transform: translateZ(0);
-    -webkit-tap-highlight-color: transparent;
+    flex: 0 0 78%;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+
+    /* CLAVE: no recortar */
+    overflow: visible;
+    border-radius: 0;
+    box-shadow: none;
+
+    /* No uses transforms acá (pueden generar overflow raro) */
+    transform: none !important;
+    filter: none !important;
+    opacity: 1;
   }
 
-  /* 3) La imagen es la que tiene borde + sombra + zoom */
+  /* El recorte + sombra van en la IMAGEN (no en el botón) */
   .works-shot img{
-    width: 220px !important;            /* <- tamaño base (subí a 230/240 si querés) */
-    max-width: none !important;
-    height: auto !important;
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: auto;
 
-    border-radius: 26px !important;     /* el redondeo real */
-    box-shadow: 0 26px 60px rgba(15, 23, 42, 0.35) !important;
+    border-radius: 26px;
+    box-shadow: 0 28px 70px rgba(15,23,42,.45);
 
-    transform: scale(1.08);             /* <- zoom general (1.06–1.12) */
+    /* Zoom “rico” sin encuadre */
+    transform: scale(1.06);
     transform-origin: center;
     will-change: transform;
-    display: block;
   }
 
-  /* Activa un poquito más grande (sin recorte) */
+  /* Estado no-activo (sutil, sin mover layout) */
+  .works-shot:not(.is-active) img{
+    opacity: .84;
+    filter: blur(.2px);
+    transform: scale(1.03);
+  }
+
+  /* Activo (un toque más grande) */
   .works-shot.is-active img{
-    transform: scale(1.12);             /* <- zoom de la activa (1.10–1.16) */
-    box-shadow: 0 30px 70px rgba(15, 23, 42, 0.42) !important;
+    opacity: 1;
+    filter: none;
+    transform: scale(1.085);
+    box-shadow: 0 34px 80px rgba(15,23,42,.55);
   }
 
-  /* 4) Separación entre cards (evita que se "toquen" con el zoom) */
-  .works-shots{
-    gap: 22px !important;               /* subí si se superponen */
-    padding: 10px 18px 22px !important; /* aire para que se vea la sombra */
-    scroll-padding-left: 18px;
-    scroll-padding-right: 18px;
-  }
-
-  /* 5) Copy: alto fijo para que NO cambie el layout */
-  .works-copy{
-    min-height: 320px;                  /* <- subí/bajá según tu texto más largo */
-  }
-
-  /* Opcional: fija el alto solo del bloque variable (descripción + lista) */
-  #works-description{
-    min-height: 72px;                   /* <- 2–3 líneas */
-  }
-  #works-points{
-    min-height: 96px;                   /* <- lista de 3 items aprox */
-  }
+  /* Snap centrado */
+  .works-shot{ scroll-snap-align: center; }
 }
 
 
@@ -3271,217 +3301,111 @@ document.addEventListener('DOMContentLoaded', () => {
 <script>
 (() => {
   const MQ = window.matchMedia("(max-width: 900px)");
+  const shotsWrap = document.querySelector(".works-shots");
+  if (!shotsWrap) return;
 
-  let state = null;
+  const qsa = (sel, root=document) => [...root.querySelectorAll(sel)];
 
-  function qs(sel, root=document){ return root.querySelector(sel); }
-  function qsa(sel, root=document){ return [...root.querySelectorAll(sel)]; }
+  let idx = 0;
+  let timer = null;
+  let userInteracting = false;
 
-  function setActive(shotsEl, btn){
-    qsa(".works-shot.is-active", shotsEl).forEach(b => b.classList.remove("is-active"));
-    if (btn) btn.classList.add("is-active");
+  function shots(){ return qsa(".works-shot", shotsWrap); }
+
+  // Si tu código ya tiene syncCopy(project), la usamos
+  function sync(project){
+    if (typeof syncCopy === "function") syncCopy(project);
   }
 
-  function syncCopy(project){
-    const tag = qs("#works-tag");
-    const title = qs("#works-title");
-    const desc = qs("#works-description");
-    const points = qs("#works-points");
-    const link = qs("#works-link");
-    if (!tag || !title || !desc || !points || !link) return;
-
-    const DATA = {
-      viacloud: {
-        tag: "Landing Servicio Tienda Nube",
-        title: "Landing VIA CLOUD STUDIO",
-        desc: "Landing propia para presentar el servicio de diseño y optimización de Tienda Nube, pensada para captar leads calientes desde campañas y contenido orgánico.",
-        points: [
-          "Hero con propuesta de valor clara, orientada a emprendedores y marcas que quieren escalar.",
-          "Recorrido simple: proceso, proyectos y stack.",
-          "CTA principales + formulario conectado a WhatsApp."
-        ],
-        href: "#contacto",
-        linkText: "Ver landing en esta página"
-      },
-      landing: {
-        tag: "Landing Tienda Nube",
-        title: "Landing VIA SHOP",
-        desc: "Landing enfocada a mostrar estructura, productos y beneficios, lista para campañas y contenido orgánico.",
-        points: [
-          "Bloques y categorías claros.",
-          "Sección de confianza y CTA visibles.",
-          "Optimizada para mobile."
-        ],
-        href: "#contacto",
-        linkText: "Ver landing en esta página"
-      },
-      newsletter: {
-        tag: "Email Marketing",
-        title: "Newsletter DISTRI HOME",
-        desc: "Pieza de newsletter con diseño de marca, jerarquía visual y foco en conversión.",
-        points: [
-          "Estructura modular (hero, oferta, productos, CTA).",
-          "Diseño claro para lectura rápida.",
-          "Optimización para mobile."
-        ],
-        href: "#contacto",
-        linkText: "Ver cómo trabajamos newsletters"
-      }
-    };
-
-    const d = DATA[project];
-    if (!d) return;
-
-    tag.textContent = d.tag;
-    title.textContent = d.title;
-    desc.textContent = d.desc;
-
-    points.innerHTML = "";
-    d.points.forEach(t => {
-      const li = document.createElement("li");
-      li.textContent = t;
-      points.appendChild(li);
-    });
-
-    link.setAttribute("href", d.href);
-    link.textContent = d.linkText;
+  function centerOn(btn, behavior="smooth"){
+    const left = btn.offsetLeft - (shotsWrap.clientWidth - btn.clientWidth) / 2;
+    shotsWrap.scrollTo({ left, behavior });
   }
 
-  function mount(){
-    const shotsEl = qs(".works-shots");
-    if (!shotsEl || state) return;
+  function setActive(i, behavior="smooth"){
+    const all = shots();
+    if (!all.length) return;
 
-    if (!shotsEl.parentElement.classList.contains("works-carousel")){
-      const wrap = document.createElement("div");
-      wrap.className = "works-carousel";
-      shotsEl.parentElement.insertBefore(wrap, shotsEl);
-      wrap.appendChild(shotsEl);
-    }
+    idx = (i + all.length) % all.length;
 
-    const originals = qsa(".works-shot", shotsEl);
-    if (originals.length < 2) return;
+    all.forEach(b => b.classList.remove("is-active"));
+    const btn = all[idx];
+    btn.classList.add("is-active");
 
-    const CLONES = 2;
-    const head = originals.slice(0, CLONES).map(n => n.cloneNode(true));
-    const tail = originals.slice(-CLONES).map(n => n.cloneNode(true));
+    centerOn(btn, behavior);
+    sync(btn.dataset.project);
+  }
 
-    head.forEach(n => n.dataset.clone = "1");
-    tail.forEach(n => n.dataset.clone = "1");
+  function start(){
+    stop();
+    timer = setInterval(() => {
+      if (!MQ.matches || userInteracting) return;
+      setActive(idx + 1, "smooth");
+    }, 2600); // velocidad del autoplay
+  }
 
-    tail.reverse().forEach(n => shotsEl.insertBefore(n, shotsEl.firstChild));
-    head.forEach(n => shotsEl.appendChild(n));
+  function stop(){
+    if (timer){ clearInterval(timer); timer = null; }
+  }
 
-    const all = qsa(".works-shot", shotsEl);
-
-    const stepPx = () => {
-      const first = all[0];
-      const gap = parseFloat(getComputedStyle(shotsEl).gap || "0") || 0;
-      return first.getBoundingClientRect().width + gap;
-    };
-
-    const firstRealIndex = CLONES;
-    requestAnimationFrame(() => {
-      shotsEl.scrollLeft = firstRealIndex * stepPx();
-      const btn = all[firstRealIndex];
-      setActive(shotsEl, btn);
-      syncCopy(btn?.dataset?.project);
-    });
-
-    let timer = null;
-    let paused = false;
-    let resumeT = null;
-
-    const goNext = (smooth=true) => {
-      const step = stepPx();
-      shotsEl.scrollTo({ left: shotsEl.scrollLeft + step, behavior: smooth ? "smooth" : "auto" });
-    };
-
-    const start = () => {
-      stop();
-      timer = setInterval(() => { if (!paused) goNext(true); }, 3500);
-    };
-    const stop = () => { if (timer) clearInterval(timer); timer = null; };
-
-    const pause = () => {
-      paused = true;
-      if (resumeT) clearTimeout(resumeT);
-      resumeT = setTimeout(() => (paused = false), 2500);
-    };
-
-    let raf = null;
-    const onScroll = () => {
-      pause();
-      if (raf) cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const center = shotsEl.scrollLeft + shotsEl.clientWidth / 2;
-        let best = null, bestDist = Infinity;
-
-        all.forEach(btn => {
-          const left = btn.offsetLeft;
-          const w = btn.getBoundingClientRect().width;
-          const c = left + w / 2;
-          const d = Math.abs(center - c);
-          if (d < bestDist){ bestDist = d; best = btn; }
-        });
-
-        if (best){
-          setActive(shotsEl, best);
-          syncCopy(best.dataset.project);
-        }
-      });
-    };
-
-    let snapT = null;
-    const onScrollEndLike = () => {
-      if (snapT) clearTimeout(snapT);
-      snapT = setTimeout(() => {
-        const step = stepPx();
-        const idxApprox = Math.round(shotsEl.scrollLeft / step);
-        const realStart = CLONES;
-        const realEnd = CLONES + originals.length - 1;
-
-        if (idxApprox < realStart){
-          shotsEl.scrollLeft = (idxApprox + originals.length) * step;
-        } else if (idxApprox > realEnd){
-          shotsEl.scrollLeft = (idxApprox - originals.length) * step;
-        }
-      }, 120);
-    };
-
-    const onPointerDown = () => pause();
-    const onVisibility = () => (document.hidden ? stop() : start());
-
-    shotsEl.addEventListener("scroll", onScroll, { passive: true });
-    shotsEl.addEventListener("scroll", onScrollEndLike, { passive: true });
-    shotsEl.addEventListener("touchstart", onPointerDown, { passive: true });
-    shotsEl.addEventListener("pointerdown", onPointerDown, { passive: true });
-    document.addEventListener("visibilitychange", onVisibility);
-
-    shotsEl.addEventListener("click", (e) => {
-      const btn = e.target.closest(".works-shot");
-      if (!btn) return;
-      pause();
-      const left = btn.offsetLeft - (shotsEl.clientWidth - btn.getBoundingClientRect().width)/2;
-      shotsEl.scrollTo({ left, behavior: "smooth" });
-      setActive(shotsEl, btn);
-      syncCopy(btn.dataset.project);
-    });
-
+  // Click/tap: cambia slide y reinicia autoplay
+  shotsWrap.addEventListener("click", (e) => {
+    const btn = e.target.closest(".works-shot");
+    if (!btn) return;
+    const all = shots();
+    setActive(all.indexOf(btn), "smooth");
     start();
+  }, { passive: true });
 
-    state = { cleanup(){ stop(); document.removeEventListener("visibilitychange", onVisibility); } };
+  // Si el usuario scrollea a mano, detectamos el slide más cercano al centro
+  let raf = null;
+  shotsWrap.addEventListener("scroll", () => {
+    if (!MQ.matches) return;
+
+    userInteracting = true;
+    stop();
+
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      const all = shots();
+      if (!all.length) return;
+
+      const center = shotsWrap.scrollLeft + shotsWrap.clientWidth/2;
+      let best = 0, bestDist = Infinity;
+
+      all.forEach((b, i) => {
+        const bCenter = b.offsetLeft + b.clientWidth/2;
+        const d = Math.abs(center - bCenter);
+        if (d < bestDist){ bestDist = d; best = i; }
+      });
+
+      all.forEach(b => b.classList.remove("is-active"));
+      all[best].classList.add("is-active");
+      idx = best;
+
+      // pequeña “liberación” para que vuelva el autoplay
+      setTimeout(() => { userInteracting = false; start(); }, 900);
+    });
+  }, { passive: true });
+
+  function enable(){
+    if (!MQ.matches){ stop(); return; }
+
+    const all = shots();
+    const active = all.findIndex(b => b.classList.contains("is-active"));
+    idx = active >= 0 ? active : 0;
+
+    // primer centrado sin animación (evita saltos)
+    setActive(idx, "auto");
+    start();
   }
 
-  function unmount(){
-    if (!state) return;
-    state.cleanup();
-    state = null;
-  }
-
-  if (MQ.matches) mount();
-  MQ.addEventListener?.("change", (e) => e.matches ? mount() : unmount());
+  MQ.addEventListener?.("change", enable);
+  window.addEventListener("load", enable);
+  enable();
 })();
 </script>
+
 
 
     
