@@ -846,26 +846,56 @@ header::after{
   font-size: 0.85rem;
 }
 
-/* Responsive: stack en mobile */
+/* Responsive: carrusel real en mobile (sin correr la página) */
 @media (max-width: 900px) {
-  .works-split {
+
+  .works-split{
     grid-template-columns: 1fr;
+    gap: 18px;
   }
 
-  .works-shots {
+  /* Importante: en mobile NO centramos, lo hacemos scrolleable */
+  .works-shots{
     order: 2;
+    justify-content: flex-start;
+    gap: 16px;
+
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 16px;
+    scroll-padding-right: 16px;
+
+    padding: 12px 16px 26px;   /* deja respirar la sombra */
+    touch-action: pan-x;
+    overscroll-behavior-x: contain;
   }
 
-  .works-copy {
-    order: 1;
+  /* Cada “tarjeta” ocupa ancho propio y se “engancha” */
+  .works-shot{
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
   }
 
-  .works-shot img {
-    width: 180px;
-    max-height: 360px;
+  .works-shot img{
+    width: min(78vw, 320px);
+    max-width: none;
+    max-height: none;
+    height: auto;
+  }
+
+  /* En mobile conviene bajar transforms para que no se sientan “raros” al swippear */
+  .works-shot:not(.is-active){
+    opacity: .9;
+    filter: none;
+    transform: none;
   }
 }
- 
+
+    
     /* PARTNERS */
     .partner-row{
       display:flex;
