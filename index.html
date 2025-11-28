@@ -2279,14 +2279,43 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
-/* ===== FIX: sombras recortadas en “Nuestros trabajos” (solo mobile) ===== */
+/* ===== FIX MOBILE: sombra en la IMG (sin marco/recorte) ===== */
 @media (max-width: 767.98px){
-  /* DEBUG: si esto arregla, el problema es overflow hidden en un padre */
-  .section, .wrapper, .container, .works, .projects, .portfolio,
-  .section-works, .work-grid, .projects-grid,
-  .work-card, .project-card, .work-media, .project-media,
-  .mockups, .mockup, .showcase, .gallery{
-    overflow: visible !important;
+
+  /* En mobile: que el layout no quede “pelotón” */
+  .works-shots{
+    justify-content: center;
+    gap: 18px;
+    overflow: visible;
+  }
+
+  /* El botón NO debe “dibujar” la tarjeta */
+  .works-shot{
+    box-shadow: none;
+    overflow: visible;      /* clave: evita el recorte/marco */
+    background: transparent;
+  }
+
+  /* La tarjeta real es la imagen */
+  .works-shot img{
+    width: min(78vw, 320px);   /* crece bien en mobile (no se queda en 180px) */
+    max-width: 100%;
+    height: auto;
+
+    border-radius: 26px;
+    display: block;
+
+    box-shadow: 0 22px 55px rgba(15, 23, 42, 0.28);
+  }
+
+  /* Mantener tu “active” pero aplicado a la imagen */
+  .works-shot.is-active{
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    filter: none;
+  }
+  .works-shot.is-active img{
+    box-shadow: 0 26px 68px rgba(15, 23, 42, 0.34);
   }
 }
 
