@@ -846,43 +846,60 @@ header::after{
   font-size: 0.85rem;
 }
 
-/* Responsive: carrusel real en mobile (sin correr la página) */
+/* ===== WORKS (MOBILE): carrusel horizontal + copy arriba ===== */
 @media (max-width: 900px){
 
+  .works-split{
+    grid-template-columns: 1fr;
+    gap: 18px;
+    align-items: start;
+  }
+
+  /* Asegura texto arriba / mockups abajo */
+  .works-copy{ order: 1; }
+  .works-shots{ order: 2; }
+
+  /* Carrusel horizontal real (sin mover toda la página) */
   .works-shots{
-    display:flex;
-    flex-wrap:nowrap;
-    justify-content:flex-start;
-    gap:16px;
+    display: flex;
+    justify-content: flex-start;
 
-    overflow-x:auto;
-    overflow-y:visible;
-    -webkit-overflow-scrolling:touch;
+    gap: 16px;
 
-    padding:12px 16px 28px;
-    max-width:100%;
-    box-sizing:border-box;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
 
-    /* CLAVE: permitir scroll vertical y horizontal */
-    touch-action: pan-x pan-y;   /* o "auto" si querés aún más seguro */
-    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 16px;
+
+    overscroll-behavior-x: contain; /* clave: no “arrastra” la página */
+    touch-action: pan-x;            /* permite swipe horizontal acá */
+
+    padding: 10px 16px 18px;
+    margin: 0 -16px;                /* hace que el carrusel “respire” a los bordes */
   }
 
+  /* Cada tarjeta: que sea scrolleable (no se aplaste) */
   .works-shot{
-    flex:0 0 auto;
-
-    /* CLAVE: no bloquear pan-y */
-    touch-action: pan-x pan-y;   /* o "auto" */
-    -webkit-tap-highlight-color: transparent;
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    touch-action: pan-x;
   }
 
-  /* Opcional: el dedo “agarra” el botón, no la imagen */
+  /* Tamaño mobile: una tarjeta grande por vez + asoman laterales */
   .works-shot img{
-    pointer-events:none;
-    display:block;
-    width:78vw;
-    max-width:320px;
-    height:auto;
+    width: min(78vw, 320px);
+    max-width: none;
+    height: auto;
+    display: block;
+  }
+
+  /* En mobile evitamos blur/transform agresivo (a veces “mata” la sensación de swipe) */
+  .works-shot:not(.is-active){
+    opacity: .85;
+    filter: none;
+    transform: translateY(0) scale(.96);
   }
 }
 
@@ -2341,9 +2358,6 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
-html, body{
-  overflow-x: hidden;
-}
   
     
   </style>
