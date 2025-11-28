@@ -2318,71 +2318,66 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
     
 /* =========================
-   WORKS · MOBILE CAROUSEL (autoplay loop)
-   NO afecta desktop
+   WORKS – MOBILE: flotantes + zoom + copy estable
 ========================= */
 @media (max-width: 900px){
 
-  /* En mobile: copy arriba, carrusel abajo (como lo tenías originalmente) */
-  .works-split{ grid-template-columns: 1fr; }
-  .works-copy{ order: 1; }
-  .works-shots{ order: 2; }
-
-  /* Contenedor para que nunca empuje el body en X */
-  .works-carousel{
-    overflow: hidden;
-  }
-
-  /* Carrusel táctil */
+  /* 1) El contenedor del carrusel: que permita ver sombras */
+  .works-carousel,
   .works-shots{
-    display: flex;
-    gap: 16px;
-
-    overflow-x: auto;
-    overflow-y: hidden;
-
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-
-    padding: 12px 18px 26px;
-    margin: 0;                 /* importante para que NO “corra la página” */
-    overscroll-behavior-x: contain;
-
-    scrollbar-width: none;
-    touch-action: pan-x;
+    overflow: visible !important;       /* clave: no recortar sombras */
   }
-  .works-shots::-webkit-scrollbar{ display:none; }
 
-  /* Cada slide grande y centrado */
+  /* 2) Cada "card": NO recortes (overflow visible), sombra flotante */
   .works-shot{
-    flex: 0 0 78%;
-    max-width: 78%;
-    scroll-snap-align: center;
-
-    border-radius: 26px;
-    overflow: hidden;
-
-    box-shadow: 0 18px 44px rgba(15, 23, 42, 0.35);
-    transform: scale(.92);
-    opacity: .65;
-
-    transition: transform .22s ease, opacity .22s ease, box-shadow .22s ease;
-    touch-action: pan-x;
+    overflow: visible !important;       /* <- elimina el recorte */
+    border-radius: 0 !important;        /* el borde NO va en el botón */
+    background: transparent !important;
+    box-shadow: none !important;        /* la sombra la ponemos en la IMG */
+    transform: translateZ(0);
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .works-shot.is-active{
-    transform: scale(1);
-    opacity: 1;
-    box-shadow: 0 26px 70px rgba(15, 23, 42, 0.45);
-  }
-
+  /* 3) La imagen es la que tiene borde + sombra + zoom */
   .works-shot img{
+    width: 220px !important;            /* <- tamaño base (subí a 230/240 si querés) */
+    max-width: none !important;
+    height: auto !important;
+
+    border-radius: 26px !important;     /* el redondeo real */
+    box-shadow: 0 26px 60px rgba(15, 23, 42, 0.35) !important;
+
+    transform: scale(1.08);             /* <- zoom general (1.06–1.12) */
+    transform-origin: center;
+    will-change: transform;
     display: block;
-    width: 100%;
-    height: auto;
-    pointer-events: none; /* el swipe funciona mejor así */
-    user-select: none;
-    -webkit-user-drag: none;
+  }
+
+  /* Activa un poquito más grande (sin recorte) */
+  .works-shot.is-active img{
+    transform: scale(1.12);             /* <- zoom de la activa (1.10–1.16) */
+    box-shadow: 0 30px 70px rgba(15, 23, 42, 0.42) !important;
+  }
+
+  /* 4) Separación entre cards (evita que se "toquen" con el zoom) */
+  .works-shots{
+    gap: 22px !important;               /* subí si se superponen */
+    padding: 10px 18px 22px !important; /* aire para que se vea la sombra */
+    scroll-padding-left: 18px;
+    scroll-padding-right: 18px;
+  }
+
+  /* 5) Copy: alto fijo para que NO cambie el layout */
+  .works-copy{
+    min-height: 320px;                  /* <- subí/bajá según tu texto más largo */
+  }
+
+  /* Opcional: fija el alto solo del bloque variable (descripción + lista) */
+  #works-description{
+    min-height: 72px;                   /* <- 2–3 líneas */
+  }
+  #works-points{
+    min-height: 96px;                   /* <- lista de 3 items aprox */
   }
 }
 
