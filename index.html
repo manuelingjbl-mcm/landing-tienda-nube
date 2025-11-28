@@ -2279,6 +2279,41 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
+/* ===== FIX: sombras recortadas en “Nuestros trabajos” (solo mobile) ===== */
+@media (max-width: 767.98px){
+
+  /* 1) Evitar que algún wrapper recorte sombras */
+  #trabajos,
+  .section-works,
+  .works-section,
+  .work-grid,
+  .projects-grid,
+  .wrapper{
+    overflow: visible !important;
+  }
+
+  /* 2) La sombra tiene que estar en la TARJETA, no en la imagen */
+  #trabajos .work-card,
+  #trabajos .project-card,
+  .section-works .work-card,
+  .works-section .work-card{
+    overflow: hidden;              /* conserva bordes redondeados */
+    border-radius: 22px;           /* igualá al diseño */
+    box-shadow: 0 22px 55px rgba(15,23,42,.28);
+    background: transparent;        /* o #fff si tus cards son blancas */
+  }
+
+  /* 3) Sacar drop-shadow del IMG si lo estuvieras usando (se recorta) */
+  #trabajos img,
+  .section-works img,
+  .works-section img{
+    filter: none !important;
+    box-shadow: none !important;
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
 
   
     
