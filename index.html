@@ -903,7 +903,6 @@ header::after{
   }
 }
 
-
     
     /* PARTNERS */
     .partner-row{
@@ -2317,51 +2316,76 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     opacity:.9;
   }
 }
+    
+/* =========================
+   WORKS · MOBILE CAROUSEL (autoplay loop)
+   NO afecta desktop
+========================= */
+@media (max-width: 900px){
 
-/* ===== FIX MOBILE: sombra en la IMG (sin marco/recorte) ===== */
-@media (max-width: 767.98px){
+  /* En mobile: copy arriba, carrusel abajo (como lo tenías originalmente) */
+  .works-split{ grid-template-columns: 1fr; }
+  .works-copy{ order: 1; }
+  .works-shots{ order: 2; }
 
-  /* En mobile: que el layout no quede “pelotón” */
+  /* Contenedor para que nunca empuje el body en X */
+  .works-carousel{
+    overflow: hidden;
+  }
+
+  /* Carrusel táctil */
   .works-shots{
-    justify-content: center;
-    gap: 18px;
-    overflow: visible;
-  }
+    display: flex;
+    gap: 16px;
 
-  /* El botón NO debe “dibujar” la tarjeta */
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+
+    padding: 12px 18px 26px;
+    margin: 0;                 /* importante para que NO “corra la página” */
+    overscroll-behavior-x: contain;
+
+    scrollbar-width: none;
+    touch-action: pan-x;
+  }
+  .works-shots::-webkit-scrollbar{ display:none; }
+
+  /* Cada slide grande y centrado */
   .works-shot{
-    box-shadow: none;
-    overflow: visible;      /* clave: evita el recorte/marco */
-    background: transparent;
-  }
-
-  /* La tarjeta real es la imagen */
-  .works-shot img{
-    width: min(78vw, 320px);   /* crece bien en mobile (no se queda en 180px) */
-    max-width: 100%;
-    height: auto;
+    flex: 0 0 78%;
+    max-width: 78%;
+    scroll-snap-align: center;
 
     border-radius: 26px;
-    display: block;
+    overflow: hidden;
 
-    box-shadow: 0 22px 55px rgba(15, 23, 42, 0.28);
+    box-shadow: 0 18px 44px rgba(15, 23, 42, 0.35);
+    transform: scale(.92);
+    opacity: .65;
+
+    transition: transform .22s ease, opacity .22s ease, box-shadow .22s ease;
+    touch-action: pan-x;
   }
 
-  /* Mantener tu “active” pero aplicado a la imagen */
   .works-shot.is-active{
-    transform: translateY(0) scale(1);
+    transform: scale(1);
     opacity: 1;
-    filter: none;
+    box-shadow: 0 26px 70px rgba(15, 23, 42, 0.45);
   }
-  .works-shot.is-active img{
-    box-shadow: 0 26px 68px rgba(15, 23, 42, 0.34);
+
+  .works-shot img{
+    display: block;
+    width: 100%;
+    height: auto;
+    pointer-events: none; /* el swipe funciona mejor así */
+    user-select: none;
+    -webkit-user-drag: none;
   }
 }
 
-    html, body{ width:100%; overflow-x: clip; }
-@supports not (overflow: clip){
-  html, body{ overflow-x: hidden; }
-}
 
   
     
@@ -3245,6 +3269,223 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 });
+</script>
+
+<!-- ...tu HTML... -->
+
+<script>
+(() => {
+  const MQ = window.matchMedia("(max-width: 900px)");
+
+  let state = null;
+
+  function qs(sel, root=document){ return root.querySelector(sel); }
+  function qsa(sel, root=document){ return [...root.querySelectorAll(sel)]; }
+
+  function setActive(shotsEl, btn){
+    qsa(".works-shot.is-active", shotsEl).forEach(b => b.classList.remove("is-active"));
+    if (btn) btn.classList.add("is-active");
+  }
+
+  function syncCopy(project){
+    const tag = qs("#works-tag");
+    const title = qs("#works-title");
+    const desc = qs("#works-description");
+    const points = qs("#works-points");
+    const link = qs("#works-link");
+    if (!tag || !title || !desc || !points || !link) return;
+
+    const DATA = {
+      viacloud: {
+        tag: "Landing Servicio Tienda Nube",
+        title: "Landing VIA CLOUD STUDIO",
+        desc: "Landing propia para presentar el servicio de diseño y optimización de Tienda Nube, pensada para captar leads calientes desde campañas y contenido orgánico.",
+        points: [
+          "Hero con propuesta de valor clara, orientada a emprendedores y marcas que quieren escalar.",
+          "Recorrido simple: proceso, proyectos y stack.",
+          "CTA principales + formulario conectado a WhatsApp."
+        ],
+        href: "#contacto",
+        linkText: "Ver landing en esta página"
+      },
+      landing: {
+        tag: "Landing Tienda Nube",
+        title: "Landing VIA SHOP",
+        desc: "Landing enfocada a mostrar estructura, productos y beneficios, lista para campañas y contenido orgánico.",
+        points: [
+          "Bloques y categorías claros.",
+          "Sección de confianza y CTA visibles.",
+          "Optimizada para mobile."
+        ],
+        href: "#contacto",
+        linkText: "Ver landing en esta página"
+      },
+      newsletter: {
+        tag: "Email Marketing",
+        title: "Newsletter DISTRI HOME",
+        desc: "Pieza de newsletter con diseño de marca, jerarquía visual y foco en conversión.",
+        points: [
+          "Estructura modular (hero, oferta, productos, CTA).",
+          "Diseño claro para lectura rápida.",
+          "Optimización para mobile."
+        ],
+        href: "#contacto",
+        linkText: "Ver cómo trabajamos newsletters"
+      }
+    };
+
+    const d = DATA[project];
+    if (!d) return;
+
+    tag.textContent = d.tag;
+    title.textContent = d.title;
+    desc.textContent = d.desc;
+
+    points.innerHTML = "";
+    d.points.forEach(t => {
+      const li = document.createElement("li");
+      li.textContent = t;
+      points.appendChild(li);
+    });
+
+    link.setAttribute("href", d.href);
+    link.textContent = d.linkText;
+  }
+
+  function mount(){
+    const shotsEl = qs(".works-shots");
+    if (!shotsEl || state) return;
+
+    if (!shotsEl.parentElement.classList.contains("works-carousel")){
+      const wrap = document.createElement("div");
+      wrap.className = "works-carousel";
+      shotsEl.parentElement.insertBefore(wrap, shotsEl);
+      wrap.appendChild(shotsEl);
+    }
+
+    const originals = qsa(".works-shot", shotsEl);
+    if (originals.length < 2) return;
+
+    const CLONES = 2;
+    const head = originals.slice(0, CLONES).map(n => n.cloneNode(true));
+    const tail = originals.slice(-CLONES).map(n => n.cloneNode(true));
+
+    head.forEach(n => n.dataset.clone = "1");
+    tail.forEach(n => n.dataset.clone = "1");
+
+    tail.reverse().forEach(n => shotsEl.insertBefore(n, shotsEl.firstChild));
+    head.forEach(n => shotsEl.appendChild(n));
+
+    const all = qsa(".works-shot", shotsEl);
+
+    const stepPx = () => {
+      const first = all[0];
+      const gap = parseFloat(getComputedStyle(shotsEl).gap || "0") || 0;
+      return first.getBoundingClientRect().width + gap;
+    };
+
+    const firstRealIndex = CLONES;
+    requestAnimationFrame(() => {
+      shotsEl.scrollLeft = firstRealIndex * stepPx();
+      const btn = all[firstRealIndex];
+      setActive(shotsEl, btn);
+      syncCopy(btn?.dataset?.project);
+    });
+
+    let timer = null;
+    let paused = false;
+    let resumeT = null;
+
+    const goNext = (smooth=true) => {
+      const step = stepPx();
+      shotsEl.scrollTo({ left: shotsEl.scrollLeft + step, behavior: smooth ? "smooth" : "auto" });
+    };
+
+    const start = () => {
+      stop();
+      timer = setInterval(() => { if (!paused) goNext(true); }, 3500);
+    };
+    const stop = () => { if (timer) clearInterval(timer); timer = null; };
+
+    const pause = () => {
+      paused = true;
+      if (resumeT) clearTimeout(resumeT);
+      resumeT = setTimeout(() => (paused = false), 2500);
+    };
+
+    let raf = null;
+    const onScroll = () => {
+      pause();
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const center = shotsEl.scrollLeft + shotsEl.clientWidth / 2;
+        let best = null, bestDist = Infinity;
+
+        all.forEach(btn => {
+          const left = btn.offsetLeft;
+          const w = btn.getBoundingClientRect().width;
+          const c = left + w / 2;
+          const d = Math.abs(center - c);
+          if (d < bestDist){ bestDist = d; best = btn; }
+        });
+
+        if (best){
+          setActive(shotsEl, best);
+          syncCopy(best.dataset.project);
+        }
+      });
+    };
+
+    let snapT = null;
+    const onScrollEndLike = () => {
+      if (snapT) clearTimeout(snapT);
+      snapT = setTimeout(() => {
+        const step = stepPx();
+        const idxApprox = Math.round(shotsEl.scrollLeft / step);
+        const realStart = CLONES;
+        const realEnd = CLONES + originals.length - 1;
+
+        if (idxApprox < realStart){
+          shotsEl.scrollLeft = (idxApprox + originals.length) * step;
+        } else if (idxApprox > realEnd){
+          shotsEl.scrollLeft = (idxApprox - originals.length) * step;
+        }
+      }, 120);
+    };
+
+    const onPointerDown = () => pause();
+    const onVisibility = () => (document.hidden ? stop() : start());
+
+    shotsEl.addEventListener("scroll", onScroll, { passive: true });
+    shotsEl.addEventListener("scroll", onScrollEndLike, { passive: true });
+    shotsEl.addEventListener("touchstart", onPointerDown, { passive: true });
+    shotsEl.addEventListener("pointerdown", onPointerDown, { passive: true });
+    document.addEventListener("visibilitychange", onVisibility);
+
+    shotsEl.addEventListener("click", (e) => {
+      const btn = e.target.closest(".works-shot");
+      if (!btn) return;
+      pause();
+      const left = btn.offsetLeft - (shotsEl.clientWidth - btn.getBoundingClientRect().width)/2;
+      shotsEl.scrollTo({ left, behavior: "smooth" });
+      setActive(shotsEl, btn);
+      syncCopy(btn.dataset.project);
+    });
+
+    start();
+
+    state = { cleanup(){ stop(); document.removeEventListener("visibilitychange", onVisibility); } };
+  }
+
+  function unmount(){
+    if (!state) return;
+    state.cleanup();
+    state = null;
+  }
+
+  if (MQ.matches) mount();
+  MQ.addEventListener?.("change", (e) => e.matches ? mount() : unmount());
+})();
 </script>
 
 
