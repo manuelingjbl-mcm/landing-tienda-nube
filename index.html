@@ -402,9 +402,12 @@ header::after{
   }
 
  /* Aire SOLO entre el 1er párrafo y los botones */
-.hero-content p:first-of-type{
-  margin: 0 0 18px;
+.hero-content{
+  display: flex;
+  flex-direction: column;
+  gap: 14px; /* 👈 acá separás todo hacia abajo */
 }
+
 
   .hero-actions{
     display:flex;
