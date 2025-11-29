@@ -2318,66 +2318,83 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
     
 /* =========================
-   WORKS / Nuestros trabajos — MOBILE (sin recorte + “flotando”)
+   WORKS — Mobile “stacked slideshow” (superpuesto, sin recorte)
    ========================= */
 @media (max-width: 900px){
 
-  /* 1) Evitar recortes por ancestros (solo en esta sección) */
-  .section-featured.works,
-  .section-featured.works .wrapper,
-  .section-featured.works .works-split,
-  .section-featured.works .works-shots{
+  /* Evitar recortes por ancestros */
+  .works-shots,
+  .works-split,
+  .section,
+  .wrapper{
     overflow: visible !important;
   }
 
-  /* 2) Track scrolleable horizontal + espacio para que NO corte arriba */
-  .section-featured.works .works-shots{
-    display: flex;
-    gap: 14px;
-    overflow-x: auto !important;
-    overflow-y: visible !important;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-    scroll-padding-left: 16px;
+  /* Stage fijo (no scroll horizontal) */
+  .works-shots{
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    margin: 10px auto 0;
+    padding: 18px 16px 22px;   /* aire para sombras (top/bottom) */
 
-    /* ESTE padding-top suele ser la clave del “recorte arriba” */
-    padding: 20px 16px 18px !important;
+    /* Ajustá si tus mockups son más altas/ancho */
+    aspect-ratio: 9 / 16;
 
-    scrollbar-width: none;
-  }
-  .section-featured.works .works-shots::-webkit-scrollbar{ display:none; }
-
-  /* 3) Cada slide: sin “marco” del botón (background/border/padding) */
-  .section-featured.works .works-shot{
-    flex: 0 0 82%;
-    scroll-snap-align: center;
-
+    /* ya no hay carrusel scrolleable */
     overflow: visible !important;
+  }
+
+  /* Cada “slide” ocupa el mismo lugar, superpuesto */
+  .works-shot{
+    position: absolute;
+    inset: 18px 16px 22px;  /* coincide con el padding del stage */
+    display: block;
+
     background: transparent !important;
     border: 0 !important;
-    outline: none !important;
     padding: 0 !important;
     border-radius: 0 !important;
     box-shadow: none !important;
 
-    -webkit-tap-highlight-color: transparent;
+    opacity: 0;
+    transform: translateY(10px) scale(.96);
+    transition: opacity .35s ease, transform .35s ease;
+    pointer-events: none; /* solo el activo recibe clicks */
   }
 
-  /* 4) La imagen es la que “flota” (radio + sombra + zoom) */
-  .section-featured.works .works-shot img{
-    display: block;
+  .works-shot img{
     width: 100%;
-    height: auto;
-
+    height: 100%;
+    object-fit: contain;         /* no corta la imagen */
+    display: block;
     border-radius: 18px;
-    box-shadow: 0 18px 45px rgba(0,0,0,.18);
 
-    /* Zoom sin recorte */
-    transform: translateY(2px) scale(1.06);
-    transform-origin: center;
-    will-change: transform;
+    /* sombra “premium” (y no depende del contenedor) */
+    filter: drop-shadow(0 18px 45px rgba(0,0,0,.18));
   }
+
+  /* Capas */
+  .works-shot.is-prev,
+  .works-shot.is-next{
+    opacity: .22;
+    transform: translateY(18px) scale(.92);
+    z-index: 1;
+  }
+
+  .works-shot.is-active{
+    opacity: 1;
+    transform: translateY(0) scale(1.02);
+    z-index: 3;
+    pointer-events: auto;
+  }
+
+  /* Opcional: un poquito de “profundidad” hacia atrás */
+  .works-shot.is-prev{ transform: translateY(22px) scale(.90); }
+  .works-shot.is-next{ transform: translateY(16px) scale(.93); }
+
 }
+
 
 
   
@@ -3268,7 +3285,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  // Solo MOBILE (no tocamos desktop)
   const isMobile = window.matchMedia("(max-width: 900px)").matches;
   if (!isMobile) return;
 
@@ -3352,82 +3368,65 @@ document.addEventListener("DOMContentLoaded", function () {
     linkEl.textContent = data.linkLabel;
   }
 
-  function setActiveByIndex(i, smooth) {
-    index = (i + shots.length) % shots.length;
+  function applyClasses(i){
+    const n = shots.length;
+    const active = (i + n) % n;
+    const prev   = (active - 1 + n) % n;
+    const next   = (active + 1) % n;
 
-    shots.forEach(s => s.classList.remove("is-active"));
-    const btn = shots[index];
-    btn.classList.add("is-active");
+    shots.forEach(s => s.classList.remove("is-active","is-prev","is-next"));
+    shots[prev].classList.add("is-prev");
+    shots[next].classList.add("is-next");
+    shots[active].classList.add("is-active");
 
-    // Sync texto
-    const key = btn.getAttribute("data-project");
+    const key = shots[active].getAttribute("data-project");
     setProject(key);
 
-    // Center del slide
-    const left = btn.offsetLeft - (track.clientWidth - btn.clientWidth) / 2;
-    track.scrollTo({ left, behavior: smooth ? "smooth" : "auto" });
+    index = active;
   }
 
-  function pause(ms) {
-    pausedUntil = Date.now() + (ms || 5200);
-  }
+  function pause(ms){ pausedUntil = Date.now() + (ms || 5200); }
 
-  function startAutoplay() {
+  function startAutoplay(){
     if (prefersReduced) return;
     stopAutoplay();
     timer = setInterval(() => {
       if (Date.now() < pausedUntil) return;
-      setActiveByIndex(index + 1, true);
+      applyClasses(index + 1);
     }, 3200);
   }
 
-  function stopAutoplay() {
+  function stopAutoplay(){
     if (timer) clearInterval(timer);
     timer = null;
   }
 
-  // Click manual
+  // Click: cambia el activo (y sincroniza texto)
   shots.forEach((btn, i) => {
-    btn.addEventListener("click", function () {
+    btn.addEventListener("click", () => {
       pause(4500);
-      setActiveByIndex(i, true);
+      applyClasses(i);
     });
   });
 
-  // Si el usuario scrollea a mano: pausamos y recalculamos el slide más centrado
-  let scrollT;
-  function updateIndexFromCenter() {
-    const cx = track.scrollLeft + track.clientWidth / 2;
-    let best = 0, bestDist = Infinity;
-
-    shots.forEach((s, idx) => {
-      const scx = s.offsetLeft + s.clientWidth / 2;
-      const d = Math.abs(scx - cx);
-      if (d < bestDist) { bestDist = d; best = idx; }
-    });
-
-    setActiveByIndex(best, false); // actualiza texto sin animación
-  }
-
-  track.addEventListener("scroll", () => {
-    pause(2500);
-    clearTimeout(scrollT);
-    scrollT = setTimeout(updateIndexFromCenter, 120);
-  }, { passive: true });
-
-  ["touchstart","pointerdown","mousedown","wheel"].forEach(evt =>
-    track.addEventListener(evt, () => pause(5200), { passive: true })
-  );
+  // Gestos básicos (swipe izquierda/derecha, pero sin “correr” el track)
+  let startX = null;
+  track.addEventListener("pointerdown", (e) => { startX = e.clientX; pause(5200); }, { passive:true });
+  track.addEventListener("pointerup", (e) => {
+    if (startX === null) return;
+    const dx = e.clientX - startX;
+    startX = null;
+    if (Math.abs(dx) < 35) return;
+    applyClasses(index + (dx < 0 ? 1 : -1));
+  }, { passive:true });
 
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) stopAutoplay();
     else { pause(1200); startAutoplay(); }
   });
 
-  // Init (arranca en el que esté activo, y si no, en viacloud)
-  const initialKey = shots[index]?.getAttribute("data-project") || "viacloud";
-  const initialIdx = Math.max(0, shots.findIndex(b => b.getAttribute("data-project") === initialKey));
-  setActiveByIndex(initialIdx, false);
+  // Init: respeta el que esté marcado activo en HTML
+  applyClasses(index);
   startAutoplay();
 });
 </script>
