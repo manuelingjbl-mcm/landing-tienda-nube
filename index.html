@@ -2383,23 +2383,23 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     
 @media (max-width: 900px){
 
-  /* transición suave */
-  .works-shots .works-float{
-    transition: transform .22s ease, box-shadow .22s ease;
-    transform-origin: center;
+  /* 1) Slide más grande (antes era 86%) */
+  .works-shots .works-shot{
+    flex: 0 0 98% !important;   /* <- probá 96% a 100% */
   }
 
-  /* crece la seleccionada */
+  /* 2) Más aire para que NO se corte al escalar */
+  .works-shots{
+    padding: 18px 58px 96px !important; /* <- laterales y bottom más grandes */
+    overflow-y: visible !important;
+  }
+
+  /* 3) Zoom más notorio al click */
   .works-shots .works-shot.is-active .works-float{
-    transform: scale(1.08);
-    box-shadow: 0 24px 62px rgba(0,0,0,.22) !important;
-  }
-
-  /* opcional: que las no activas queden apenas más “light” */
-  .works-shots .works-shot:not(.is-active) .works-float{
-    transform: scale(0.995);
+    transform: scale(1.10) !important;  /* <- 1.08 / 1.10 / 1.12 */
   }
 }
+
  
     
   </style>
