@@ -2321,7 +2321,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 /* WORKS — Mobile carrusel nativo (horizontal + vertical) con sombra sin recorte */
 @media (max-width: 900px){
 
-  /* Si algún padre está cortando, lo abrimos en mobile */
+  /* que ningún padre corte */
   section#trabajos,
   section#trabajos .wrapper,
   section#trabajos .works-split{
@@ -2333,32 +2333,41 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     gap:14px !important;
 
     overflow-x:auto !important;
+    overflow-y:visible !important;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type:x mandatory;
 
-    /* 👇 MÁS padding abajo = la sombra “entra” y deja de verse cortada */
-    padding: 16px 16px 70px !important;
+    /* 👇 CLAVE: más aire a los costados y abajo para que la sombra NO se corte */
+    padding: 18px 38px 78px !important;
 
     background: transparent !important;
+
+    /* 👇 permite ambos gestos (x + y) */
+    touch-action: pan-x pan-y !important;
   }
   .works-shots::-webkit-scrollbar{ display:none; }
 
   .works-shot{
     flex:0 0 86% !important;
     scroll-snap-align:center;
+
     border:0 !important;
     background:transparent !important;
     padding:0 !important;
     margin:0 !important;
+
+    /* importante en móviles */
+    touch-action: pan-x pan-y !important;
   }
 
-  /* Sombra flotante */
+  /* sombra flotante */
   .works-float{
     display:block !important;
     border-radius:18px !important;
-    box-shadow: 0 18px 45px rgba(0,0,0,.16) !important;
+    box-shadow: 0 18px 45px rgba(0,0,0,.18) !important;
   }
 
+  /* redondeo real */
   .works-float > img{
     display:block !important;
     width:100% !important;
@@ -2367,7 +2376,10 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
-   
+@media (max-width:900px){
+  .works-float, .works-float img{ pointer-events:none !important; }
+}
+  
   
     
   </style>
@@ -3257,41 +3269,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const track = document.querySelector(".works-shots");
-  if (!track) return;
-
-  let sx=0, sy=0, lastX=0, lock=null;
-
-  track.addEventListener("touchstart", (e) => {
-    const t = e.touches[0];
-    sx = lastX = t.clientX;
-    sy = t.clientY;
-    lock = null;
-  }, { passive:true });
-
-  track.addEventListener("touchmove", (e) => {
-    const t = e.touches[0];
-    const dx = t.clientX - sx;
-    const dy = t.clientY - sy;
-
-    if (!lock) {
-      if (Math.abs(dx) > Math.abs(dy) * 1.15) lock = "x";
-      else if (Math.abs(dy) > Math.abs(dx) * 1.15) lock = "y";
-    }
-
-    if (lock === "x") {
-      e.preventDefault();                 // evitamos scroll vertical
-      track.scrollLeft -= (t.clientX - lastX); // scroll horizontal suave
-      lastX = t.clientX;
-    }
-    // si lock === "y" NO hacemos nada -> la página scrollea vertical normal
-  }, { passive:false });
-});
-</script>
-
 
     
 </body>
