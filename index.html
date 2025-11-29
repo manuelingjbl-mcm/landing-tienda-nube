@@ -3498,13 +3498,20 @@ document.addEventListener("DOMContentLoaded", function () {
   }, {passive:true});
 
   /* ====== FIX TEMBLOR: mientras hay scroll, apagamos transiciones ====== */
-  let st;
-  window.addEventListener("scroll", () => {
-    track.classList.add("is-scrolling");
-    clearTimeout(st);
-    st = setTimeout(() => track.classList.remove("is-scrolling"), 160);
-  }, { passive:true });
+let st;
+const markScrolling = () => {
+  if (!track) return;
+  track.classList.add("is-scrolling");
+  clearTimeout(st);
+  st = setTimeout(() => track.classList.remove("is-scrolling"), 160);
+};
 
+window.addEventListener("scroll", markScrolling, { passive: true });
+
+// iOS/Android: cuando el dedo arrastra sobre el bloque, a veces ayuda
+track.addEventListener("touchmove", markScrolling, { passive: true });
+track.addEventListener("pointermove", markScrolling, { passive: true });
+  
 </script>
 
 
