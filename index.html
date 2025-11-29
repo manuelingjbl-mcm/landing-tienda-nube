@@ -2318,97 +2318,65 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
     
 /* =========================
-   WORKS (Nuestros trabajos) — MOBILE carousel + sin recorte
-   Reemplaza el @media (max-width: 900px) anterior
-========================= */
+   WORKS / Nuestros trabajos — MOBILE (sin recorte + “flotando”)
+   ========================= */
 @media (max-width: 900px){
 
-  .works-split{
-    grid-template-columns: 1fr;
-    gap: 16px;
-    overflow-x: clip; /* evita que la página “se corra” */
+  /* 1) Evitar recortes por ancestros (solo en esta sección) */
+  .section-featured.works,
+  .section-featured.works .wrapper,
+  .section-featured.works .works-split,
+  .section-featured.works .works-shots{
+    overflow: visible !important;
   }
 
-  /* Texto arriba, carrusel abajo (como lo tenían) */
-  .works-copy{ order: 1; }
-
-  /* Fijamos altura mínima para que NO “suba/baje” el resto de la landing */
-  .works-copy{
-    min-height: 320px; /* ajustá: 300-360 según tu copy más largo */
-  }
-
-  /* Carrusel horizontal scrolleable */
-  .works-shots{
-    order: 2;
+  /* 2) Track scrolleable horizontal + espacio para que NO corte arriba */
+  .section-featured.works .works-shots{
     display: flex;
-    gap: 16px;
-
-    padding: 10px 16px 26px;
-    overflow-x: auto;
-    overflow-y: visible;
-
-    scroll-snap-type: x mandatory;
-    scroll-padding: 16px;
-
+    gap: 14px;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
     -webkit-overflow-scrolling: touch;
-    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 16px;
+
+    /* ESTE padding-top suele ser la clave del “recorte arriba” */
+    padding: 20px 16px 18px !important;
 
     scrollbar-width: none;
   }
-  .works-shots::-webkit-scrollbar{ display:none; }
+  .section-featured.works .works-shots::-webkit-scrollbar{ display:none; }
 
-  /* Cada “slide” grande y centrado */
-  .works-shot{
-    flex: 0 0 78%;
-    border: 0;
-    background: transparent;
-    padding: 0;
-    cursor: pointer;
+  /* 3) Cada slide: sin “marco” del botón (background/border/padding) */
+  .section-featured.works .works-shot{
+    flex: 0 0 82%;
+    scroll-snap-align: center;
 
-    /* CLAVE: no recortar */
-    overflow: visible;
-    border-radius: 0;
-    box-shadow: none;
+    overflow: visible !important;
+    background: transparent !important;
+    border: 0 !important;
+    outline: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
 
-    /* No uses transforms acá (pueden generar overflow raro) */
-    transform: none !important;
-    filter: none !important;
-    opacity: 1;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  /* El recorte + sombra van en la IMAGEN (no en el botón) */
-  .works-shot img{
+  /* 4) La imagen es la que “flota” (radio + sombra + zoom) */
+  .section-featured.works .works-shot img{
     display: block;
     width: 100%;
-    max-width: none;
     height: auto;
 
-    border-radius: 26px;
-    box-shadow: 0 28px 70px rgba(15,23,42,.45);
+    border-radius: 18px;
+    box-shadow: 0 18px 45px rgba(0,0,0,.18);
 
-    /* Zoom “rico” sin encuadre */
-    transform: scale(1.06);
+    /* Zoom sin recorte */
+    transform: translateY(2px) scale(1.06);
     transform-origin: center;
     will-change: transform;
   }
-
-  /* Estado no-activo (sutil, sin mover layout) */
-  .works-shot:not(.is-active) img{
-    opacity: .84;
-    filter: blur(.2px);
-    transform: scale(1.03);
-  }
-
-  /* Activo (un toque más grande) */
-  .works-shot.is-active img{
-    opacity: 1;
-    filter: none;
-    transform: scale(1.085);
-    box-shadow: 0 34px 80px rgba(15,23,42,.55);
-  }
-
-  /* Snap centrado */
-  .works-shot{ scroll-snap-align: center; }
 }
 
 
@@ -2621,7 +2589,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   <div class="works-split">
 
     <!-- Mockups verticales -->
- <div class="works-shots">
+ <div class="works-shots" aria-label="Nuestros trabajos (carrusel)">
    <!-- Nueva landing VIACLOUDSTUDIO -->
   <button class="works-shot is-active" data-project="viacloud" type="button">
     <img src="via-clod.png" alt="Landing VIACLOUDSTUDIO · diseño y optimización Tienda Nube">
@@ -3299,111 +3267,169 @@ document.addEventListener('DOMContentLoaded', () => {
 <!-- ...tu HTML... -->
 
 <script>
-(() => {
-  const MQ = window.matchMedia("(max-width: 900px)");
-  const shotsWrap = document.querySelector(".works-shots");
-  if (!shotsWrap) return;
+document.addEventListener("DOMContentLoaded", function () {
+  // Solo MOBILE (no tocamos desktop)
+  const isMobile = window.matchMedia("(max-width: 900px)").matches;
+  if (!isMobile) return;
 
-  const qsa = (sel, root=document) => [...root.querySelectorAll(sel)];
+  const track   = document.querySelector(".works-shots");
+  const shots   = Array.from(document.querySelectorAll(".works-shot"));
 
-  let idx = 0;
+  const tagEl    = document.getElementById("works-tag");
+  const titleEl  = document.getElementById("works-title");
+  const descEl   = document.getElementById("works-description");
+  const pointsEl = document.getElementById("works-points");
+  const linkEl   = document.getElementById("works-link");
+
+  if (!track || !shots.length || !tagEl || !titleEl || !descEl || !pointsEl || !linkEl) return;
+
+  const projects = {
+    viacloud: {
+      tag: "Landing servicio Tienda Nube",
+      title: "Landing VIA CLOUD STUDIO",
+      description:
+        "Landing propia para presentar el servicio de diseño y optimización de Tienda Nube, pensada para captar leads calientes desde campañas y contenido orgánico.",
+      points: [
+        "Hero con propuesta de valor clara, orientada a emprendedores y marcas que quieren escalar.",
+        "Explica el proceso de trabajo, tipos de proyectos y stack de herramientas en un recorrido simple.",
+        "Incluye CTA principales y formulario de consulta rápido conectado a WhatsApp."
+      ],
+      link: "#contacto",
+      linkLabel: "Quiero una landing como esta"
+    },
+
+    landing: {
+      tag: "Landing Tienda Nube",
+      title: "Landing VIA SHOP",
+      description:
+        "Landing enfocada en servicios de diseño y optimización de Tienda Nube, lista para recibir tráfico de campañas y convertir visitas en consultas.",
+      points: [
+        "Hero mobile first con propuesta clara y CTA principal.",
+        "Secciones de servicios, casos y stack de integraciones.",
+        "Formulario de contacto optimizado para leads rápidos."
+      ],
+      link: "#contacto",
+      linkLabel: "Ver landing en esta página"
+    },
+
+    newsletter: {
+      tag: "Newsletter & automatizaciones",
+      title: "Newsletter DISTRI HOME",
+      description:
+        "Newsletter diseñado para Marketing Nube, con foco en productos destacados, ofertas y derivación a la tienda online.",
+      points: [
+        "Diseño mobile first que se lee perfecto en correo.",
+        "Bloques de productos y beneficios claros.",
+        "Listo para integrarse con flujos básicos de bienvenida y promos."
+      ],
+      link: "#contacto",
+      linkLabel: "Ver cómo trabajamos newsletters"
+    }
+  };
+
+  let index = Math.max(0, shots.findIndex(b => b.classList.contains("is-active")));
   let timer = null;
-  let userInteracting = false;
+  let pausedUntil = 0;
 
-  function shots(){ return qsa(".works-shot", shotsWrap); }
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // Si tu código ya tiene syncCopy(project), la usamos
-  function sync(project){
-    if (typeof syncCopy === "function") syncCopy(project);
+  function setProject(key) {
+    const data = projects[key];
+    if (!data) return;
+
+    tagEl.textContent   = data.tag;
+    titleEl.textContent = data.title;
+    descEl.textContent  = data.description;
+
+    pointsEl.innerHTML = "";
+    data.points.forEach(function (txt) {
+      const li = document.createElement("li");
+      li.textContent = txt;
+      pointsEl.appendChild(li);
+    });
+
+    linkEl.href        = data.link;
+    linkEl.textContent = data.linkLabel;
   }
 
-  function centerOn(btn, behavior="smooth"){
-    const left = btn.offsetLeft - (shotsWrap.clientWidth - btn.clientWidth) / 2;
-    shotsWrap.scrollTo({ left, behavior });
-  }
+  function setActiveByIndex(i, smooth) {
+    index = (i + shots.length) % shots.length;
 
-  function setActive(i, behavior="smooth"){
-    const all = shots();
-    if (!all.length) return;
-
-    idx = (i + all.length) % all.length;
-
-    all.forEach(b => b.classList.remove("is-active"));
-    const btn = all[idx];
+    shots.forEach(s => s.classList.remove("is-active"));
+    const btn = shots[index];
     btn.classList.add("is-active");
 
-    centerOn(btn, behavior);
-    sync(btn.dataset.project);
+    // Sync texto
+    const key = btn.getAttribute("data-project");
+    setProject(key);
+
+    // Center del slide
+    const left = btn.offsetLeft - (track.clientWidth - btn.clientWidth) / 2;
+    track.scrollTo({ left, behavior: smooth ? "smooth" : "auto" });
   }
 
-  function start(){
-    stop();
+  function pause(ms) {
+    pausedUntil = Date.now() + (ms || 5200);
+  }
+
+  function startAutoplay() {
+    if (prefersReduced) return;
+    stopAutoplay();
     timer = setInterval(() => {
-      if (!MQ.matches || userInteracting) return;
-      setActive(idx + 1, "smooth");
-    }, 2600); // velocidad del autoplay
+      if (Date.now() < pausedUntil) return;
+      setActiveByIndex(index + 1, true);
+    }, 3200);
   }
 
-  function stop(){
-    if (timer){ clearInterval(timer); timer = null; }
+  function stopAutoplay() {
+    if (timer) clearInterval(timer);
+    timer = null;
   }
 
-  // Click/tap: cambia slide y reinicia autoplay
-  shotsWrap.addEventListener("click", (e) => {
-    const btn = e.target.closest(".works-shot");
-    if (!btn) return;
-    const all = shots();
-    setActive(all.indexOf(btn), "smooth");
-    start();
-  }, { passive: true });
-
-  // Si el usuario scrollea a mano, detectamos el slide más cercano al centro
-  let raf = null;
-  shotsWrap.addEventListener("scroll", () => {
-    if (!MQ.matches) return;
-
-    userInteracting = true;
-    stop();
-
-    cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(() => {
-      const all = shots();
-      if (!all.length) return;
-
-      const center = shotsWrap.scrollLeft + shotsWrap.clientWidth/2;
-      let best = 0, bestDist = Infinity;
-
-      all.forEach((b, i) => {
-        const bCenter = b.offsetLeft + b.clientWidth/2;
-        const d = Math.abs(center - bCenter);
-        if (d < bestDist){ bestDist = d; best = i; }
-      });
-
-      all.forEach(b => b.classList.remove("is-active"));
-      all[best].classList.add("is-active");
-      idx = best;
-
-      // pequeña “liberación” para que vuelva el autoplay
-      setTimeout(() => { userInteracting = false; start(); }, 900);
+  // Click manual
+  shots.forEach((btn, i) => {
+    btn.addEventListener("click", function () {
+      pause(4500);
+      setActiveByIndex(i, true);
     });
-  }, { passive: true });
+  });
 
-  function enable(){
-    if (!MQ.matches){ stop(); return; }
+  // Si el usuario scrollea a mano: pausamos y recalculamos el slide más centrado
+  let scrollT;
+  function updateIndexFromCenter() {
+    const cx = track.scrollLeft + track.clientWidth / 2;
+    let best = 0, bestDist = Infinity;
 
-    const all = shots();
-    const active = all.findIndex(b => b.classList.contains("is-active"));
-    idx = active >= 0 ? active : 0;
+    shots.forEach((s, idx) => {
+      const scx = s.offsetLeft + s.clientWidth / 2;
+      const d = Math.abs(scx - cx);
+      if (d < bestDist) { bestDist = d; best = idx; }
+    });
 
-    // primer centrado sin animación (evita saltos)
-    setActive(idx, "auto");
-    start();
+    setActiveByIndex(best, false); // actualiza texto sin animación
   }
 
-  MQ.addEventListener?.("change", enable);
-  window.addEventListener("load", enable);
-  enable();
-})();
+  track.addEventListener("scroll", () => {
+    pause(2500);
+    clearTimeout(scrollT);
+    scrollT = setTimeout(updateIndexFromCenter, 120);
+  }, { passive: true });
+
+  ["touchstart","pointerdown","mousedown","wheel"].forEach(evt =>
+    track.addEventListener(evt, () => pause(5200), { passive: true })
+  );
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) stopAutoplay();
+    else { pause(1200); startAutoplay(); }
+  });
+
+  // Init (arranca en el que esté activo, y si no, en viacloud)
+  const initialKey = shots[index]?.getAttribute("data-project") || "viacloud";
+  const initialIdx = Math.max(0, shots.findIndex(b => b.getAttribute("data-project") === initialKey));
+  setActiveByIndex(initialIdx, false);
+  startAutoplay();
+});
 </script>
 
 
