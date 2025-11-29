@@ -2406,6 +2406,38 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
+@media (max-width: 900px){
+
+  /* Mata cualquier estilo del button que haga “marco” */
+  .works-shots .works-shot{
+    background: transparent !important;
+    border: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    outline: none !important;
+  }
+
+  /* Redondeo REAL en la imagen + sombra bien */
+  .works-shots .works-shot > img{
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain;
+
+    border-radius: 18px !important;
+    overflow: hidden !important;
+    clip-path: inset(0 round 18px) !important;
+    -webkit-clip-path: inset(0 round 18px) !important;
+
+    /* sombra que respeta el radio */
+    box-shadow: 0 18px 45px rgba(0,0,0,.18) !important;
+
+    /* por si quedó algún drop-shadow viejo */
+    filter: none !important;
+    background: transparent !important;
+  }
+}
 
   
     
@@ -3428,6 +3460,24 @@ document.addEventListener("DOMContentLoaded", function () {
   applyClasses(index);
   start();
 });
+  
+let maxCopyH = 0;
+const copyBox =
+  document.getElementById("works-tag")?.closest(".works-copy") ||
+  document.getElementById("works-tag")?.parentElement ||
+  document.body;
+
+function lockCopyHeight(){
+  requestAnimationFrame(() => {
+    const h = copyBox.scrollHeight;
+    if (h > maxCopyH) {
+      maxCopyH = h;
+      copyBox.style.minHeight = maxCopyH + "px";
+    }
+  });
+}
+
+  
 </script>
 
 
