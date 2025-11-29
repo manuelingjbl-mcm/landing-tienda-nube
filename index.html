@@ -2318,7 +2318,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
     
 /* =========================
-   WORKS — Mobile “stacked slideshow” (superpuesto, sin recorte)
+   WORKS — Mobile stacked (peek + radius real + fade + scroll OK)
    ========================= */
 @media (max-width: 900px){
 
@@ -2326,30 +2326,29 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   .works-shots,
   .works-split,
   .section,
-  .wrapper{
-    overflow: visible !important;
-  }
+  .wrapper{ overflow: visible !important; }
 
-  /* Stage fijo (no scroll horizontal) */
+  /* Stage fijo (sin carrusel horizontal) */
   .works-shots{
     position: relative;
     width: 100%;
     max-width: 420px;
     margin: 10px auto 0;
-    padding: 18px 16px 22px;   /* aire para sombras (top/bottom) */
 
-    /* Ajustá si tus mockups son más altas/ancho */
+    /* aire para sombras + “peek” */
+    padding: 22px 14px 22px 28px !important;
+
     aspect-ratio: 9 / 16;
-
-    /* ya no hay carrusel scrolleable */
     overflow: visible !important;
+
+    /* CLAVE: permitir scroll vertical de la página aunque toques el stage */
+    touch-action: pan-y !important;
   }
 
-  /* Cada “slide” ocupa el mismo lugar, superpuesto */
+  /* Slides superpuestos */
   .works-shot{
     position: absolute;
-    inset: 18px 16px 22px;  /* coincide con el padding del stage */
-    display: block;
+    inset: 22px 14px 22px 28px;
 
     background: transparent !important;
     border: 0 !important;
@@ -2358,42 +2357,64 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     box-shadow: none !important;
 
     opacity: 0;
-    transform: translateY(10px) scale(.96);
-    transition: opacity .35s ease, transform .35s ease;
-    pointer-events: none; /* solo el activo recibe clicks */
+    transform: translate3d(0,10px,0) scale(.96);
+    transition: opacity .42s ease, transform .42s ease, filter .42s ease;
+
+    /* NO bloquear scroll vertical */
+    touch-action: pan-y !important;
+
+    pointer-events: none; /* solo el activo recibe interacción */
   }
 
   .works-shot img{
     width: 100%;
     height: 100%;
-    object-fit: contain;         /* no corta la imagen */
+    object-fit: contain;
     display: block;
-    border-radius: 18px;
 
-    /* sombra “premium” (y no depende del contenedor) */
+    /* Radius REAL (no depende de overflow del padre) */
+    border-radius: 18px !important;
+    clip-path: inset(0 round 18px);
+
+    /* Sombra pro */
     filter: drop-shadow(0 18px 45px rgba(0,0,0,.18));
+
+    transform: translateZ(0);
   }
 
-  /* Capas */
-  .works-shot.is-prev,
-  .works-shot.is-next{
-    opacity: .22;
-    transform: translateY(18px) scale(.92);
-    z-index: 1;
-  }
-
+  /* Capas para que “asome” el de atrás */
   .works-shot.is-active{
     opacity: 1;
-    transform: translateY(0) scale(1.02);
+    transform: translate3d(0,0,0) scale(1.02);
     z-index: 3;
     pointer-events: auto;
   }
 
-  /* Opcional: un poquito de “profundidad” hacia atrás */
-  .works-shot.is-prev{ transform: translateY(22px) scale(.90); }
-  .works-shot.is-next{ transform: translateY(16px) scale(.93); }
+  .works-shot.is-prev{
+    opacity: .28;
+    transform: translate3d(-34px, 14px, 0) scale(.94); /* ASOMA por la izquierda */
+    z-index: 2;
+    filter: blur(0.6px);
+  }
 
+  .works-shot.is-next{
+    opacity: .16;
+    transform: translate3d(14px, 18px, 0) scale(.92); /* leve atrás */
+    z-index: 1;
+    filter: blur(0.9px);
+  }
+
+  /* Degradé / difuminado para los de atrás (iOS) */
+  .works-shot.is-prev img{
+    -webkit-mask-image: linear-gradient(to right, #000 0%, #000 55%, transparent 100%);
+            mask-image: linear-gradient(to right, #000 0%, #000 55%, transparent 100%);
+  }
+  .works-shot.is-next img{
+    -webkit-mask-image: linear-gradient(to left, #000 0%, #000 55%, transparent 100%);
+            mask-image: linear-gradient(to left, #000 0%, #000 55%, transparent 100%);
+  }
 }
+
 
 
 
@@ -3409,26 +3430,31 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Gestos básicos (swipe izquierda/derecha, pero sin “correr” el track)
-  let startX = null;
-  track.addEventListener("pointerdown", (e) => { startX = e.clientX; pause(5200); }, { passive:true });
-  track.addEventListener("pointerup", (e) => {
-    if (startX === null) return;
-    const dx = e.clientX - startX;
-    startX = null;
-    if (Math.abs(dx) < 35) return;
-    applyClasses(index + (dx < 0 ? 1 : -1));
-  }, { passive:true });
+  // Gestos: swipe solo si es claramente HORIZONTAL (sin bloquear scroll vertical)
+let sx = null, sy = null;
 
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) stopAutoplay();
-    else { pause(1200); startAutoplay(); }
-  });
+track.addEventListener("pointerdown", (e) => {
+  sx = e.clientX; sy = e.clientY;
+  pause(5200);
+}, { passive:true });
 
-  // Init: respeta el que esté marcado activo en HTML
-  applyClasses(index);
-  startAutoplay();
-});
+track.addEventListener("pointerup", (e) => {
+  if (sx === null || sy === null) return;
+
+  const dx = e.clientX - sx;
+  const dy = e.clientY - sy;
+
+  sx = sy = null;
+
+  // Si el gesto fue más vertical que horizontal → NO hacemos nada (deja scrollear)
+  if (Math.abs(dy) > Math.abs(dx) * 1.15) return;
+
+  // Umbral horizontal
+  if (Math.abs(dx) < 35) return;
+
+  applyClasses(index + (dx < 0 ? 1 : -1));
+}, { passive:true });
+
 </script>
 
 
