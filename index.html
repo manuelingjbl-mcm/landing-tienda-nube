@@ -2317,19 +2317,15 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
     
-/* =========================
-   WORKS — Mobile carrusel nativo + zoom al click (limpio)
-   ========================= */
+/* WORKS — Mobile: carrusel nativo + sombra flotante + zoom sin recorte */
 @media (max-width: 900px){
 
-  /* que ningún padre corte sombras/zoom */
   section#trabajos,
   section#trabajos .wrapper,
   section#trabajos .works-split{
     overflow: visible !important;
   }
 
-  /* Track */
   .works-shots{
     display:flex !important;
     gap:14px !important;
@@ -2339,20 +2335,19 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 
     -webkit-overflow-scrolling: touch;
     scroll-snap-type:x mandatory;
+
+    /* Aire real para que el zoom y la sombra NO se recorten */
+    padding: 28px 56px 110px !important;
+
     background: transparent !important;
-
-    /* aire para sombra + scale sin recortes */
-    padding: 18px 70px 110px !important;
-
-    touch-action: pan-x pan-y !important;
+    touch-action: auto !important;          /* clave: no fuerces pan-y acá */
     overscroll-behavior-x: contain;
-    scroll-padding-left: 70px;
   }
   .works-shots::-webkit-scrollbar{ display:none; }
 
-  /* Slide (más grande) */
+  /* más grande en pantalla (esto te da ese “+30%” real) */
   .works-shots .works-shot{
-    flex: 0 0 100% !important;     /* si querés un poco de “peek”: 96% o 98% */
+    flex: 0 0 94% !important;              /* subí a 96/98 si querés más */
     scroll-snap-align: center;
 
     border:0 !important;
@@ -2360,32 +2355,30 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     padding:0 !important;
     margin:0 !important;
 
-    position: static !important;   /* por si quedó algo viejo */
-    inset: auto !important;
-    opacity: 1 !important;
-    transform: none !important;
-    pointer-events: auto !important;
+    position: static !important;
+    inset:auto !important;
+    opacity:1 !important;
+    transform:none !important;
   }
 
-  /* Wrapper flotante */
   .works-shots .works-float{
     display:block !important;
     border-radius:18px !important;
-
     box-shadow: 0 18px 45px rgba(0,0,0,.18) !important;
-
     transition: transform .22s ease, box-shadow .22s ease;
     transform-origin: center;
     will-change: transform;
   }
 
-  /* Zoom activo (click) */
+  /* Zoom al click (sin recorte porque hay padding extra arriba/lados/abajo) */
+  .works-shots .works-shot.is-active{
+    z-index: 3;
+  }
   .works-shots .works-shot.is-active .works-float{
-    transform: scale(1.10) !important; /* más: 1.12 / menos: 1.08 */
+    transform: scale(1.10) !important;     /* 1.12 si querés más */
     box-shadow: 0 28px 70px rgba(0,0,0,.22) !important;
   }
 
-  /* Imagen redondeada */
   .works-shots .works-float > img{
     display:block !important;
     width:100% !important;
@@ -3288,22 +3281,63 @@ document.addEventListener('DOMContentLoaded', () => {
     
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  // Solo mobile
-  if (!window.matchMedia("(max-width: 900px)").matches) return;
+  if (!matchMedia("(max-width: 900px)").matches) return;
 
   const track = document.querySelector(".works-shots");
   const shots = Array.from(document.querySelectorAll(".works-shots .works-shot"));
   if (!track || !shots.length) return;
 
-  // Centrar el slide clickeado (sin interferir con scroll normal)
-  shots.forEach((btn) => {
+  function center(btn){
+    const trackRect = track.getBoundingClientRect();
+    const btnRect = btn.getBoundingClientRect();
+    const delta = (btnRect.left - trackRect.left) - (trackRect.width/2 - btnRect.width/2);
+    track.scrollTo({ left: track.scrollLeft + delta, behavior: "smooth" });
+  }
+
+  shots.forEach(btn => {
     btn.addEventListener("click", () => {
-      // si tu código ya maneja is-active + texto, esto solo centra
-      btn.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-    }, { passive: true });
+      // dejamos que tu JS primero ponga .is-active y cambie el texto
+      setTimeout(() => center(btn), 0);
+    }, { passive:true });
   });
 });
 </script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const track = document.querySelector(".works-shots");
+  if (!track) return;
+
+  let sx=0, sy=0;
+
+  track.addEventListener("touchstart", (e) => {
+    const t = e.touches && e.touches[0];
+    if (!t) return;
+    sx = t.clientX; sy = t.clientY;
+  }, { passive:true });
+
+  track.addEventListener("touchmove", (e) => {
+    const t = e.touches && e.touches[0];
+    if (!t) return;
+
+    const dx = Math.abs(t.clientX - sx);
+    const dy = Math.abs(t.clientY - sy);
+
+    // Si es vertical, soltamos el carrusel para que scrollee la página
+    if (dy > dx * 1.2) {
+      track.style.overflowX = "hidden";
+      clearTimeout(track._vx);
+      track._vx = setTimeout(() => track.style.overflowX = "auto", 180);
+    }
+  }, { passive:true });
+
+  track.addEventListener("touchend", () => {
+    track.style.overflowX = "auto";
+  }, { passive:true });
+});
+</script>
+
 
     
 </body>
