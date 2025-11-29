@@ -931,23 +931,22 @@ header::after{
 
   /* el “clip” no debe aportar fondo blanco */
   #trabajos .works-clip{
-    background: transparent !important;
-    border-radius: 26px !important;
-    overflow: hidden !important;
-  }
-
-  /* refuerzo anti-halo en esquinas (Android/iOS) */
-  #trabajos .works-clip > img{
-  transform: scale(1.005) translateZ(0) !important;
+  background: transparent !important;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
-    /* este es el que suele eliminar el borde blanco */
-    clip-path: inset(0 round 26px) !important;
-    -webkit-clip-path: inset(0 round 26px) !important;
+ /* refuerzo anti-halo en esquinas (Android/iOS) */
+#trabajos .works-clip > img{
+  display: block !important;
+  background: transparent !important;
 
-    /* evita “hairline gap” */
-    transform: translateZ(0);
-  }
+  /* micro-zoom para tapar el “hairline gap” */
+  transform: scale(1.005) translateZ(0) !important;
+
+  /* recorte extra para matar halo blanco */
+  clip-path: inset(0 round 26px) !important;
+  -webkit-clip-path: inset(0 round 26px) !important;
 }
 
     
