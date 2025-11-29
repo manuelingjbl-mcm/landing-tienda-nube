@@ -854,52 +854,72 @@ header::after{
     gap: 18px;
     align-items: start;
   }
-
-  /* Asegura texto arriba / mockups abajo */
   .works-copy{ order: 1; }
   .works-shots{ order: 2; }
 
-  /* Carrusel horizontal real (sin mover toda la página) */
+  /* Carrusel sin bloquear scroll vertical */
   .works-shots{
-    display: flex;
-    justify-content: flex-start;
+    display:flex;
+    justify-content:flex-start;
+    gap:16px;
 
-    gap: 16px;
-
-    overflow-x: auto;
-    overflow-y: hidden;
+    overflow-x:auto !important;
+    overflow-y:visible !important;
     -webkit-overflow-scrolling: touch;
 
-    scroll-snap-type: x mandatory;
+    scroll-snap-type:x mandatory;
     scroll-padding-left: 16px;
 
-    overscroll-behavior-x: contain; /* clave: no “arrastra” la página */
-    touch-action: pan-x;            /* permite swipe horizontal acá */
+    overscroll-behavior-x: contain;
+    touch-action: pan-x pan-y !important; /* clave */
 
-    padding: 10px 16px 18px;
-    margin: 0 -16px;                /* hace que el carrusel “respire” a los bordes */
+    /* Aire extra para sombra + zoom SIN cortes */
+    padding: 18px 56px 84px !important;
+    margin: 0 -16px;
   }
 
-  /* Cada tarjeta: que sea scrolleable (no se aplaste) */
   .works-shot{
     flex: 0 0 auto;
     scroll-snap-align: center;
-    touch-action: pan-x;
+
+    /* IMPORTANTE: no clip acá */
+    overflow: visible !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
   }
 
-  /* Tamaño mobile: una tarjeta grande por vez + asoman laterales */
+  /* Tamaño “tipo desktop” pero mobile */
+  .works-shot .works-float{
+    display:block;
+    box-shadow: 0 18px 45px rgba(15,23,42,.30);
+    transition: transform .22s ease;
+    transform-origin: center;
+  }
+
+  /* Clip interno (redondeo real) */
+  .works-shot .works-clip{
+    display:block;
+    border-radius: 26px;
+    overflow:hidden;
+  }
+
   .works-shot img{
-    width: min(78vw, 320px);
+    width: min(86vw, 360px);
     max-width: none;
     height: auto;
-    display: block;
+    display:block;
   }
 
-  /* En mobile evitamos blur/transform agresivo (a veces “mata” la sensación de swipe) */
+  /* Activa crece sin recorte */
+  .works-shot.is-active .works-float{
+    transform: scale(1.12);
+  }
+
   .works-shot:not(.is-active){
     opacity: .85;
+    transform: none;
     filter: none;
-    transform: translateY(0) scale(.96);
   }
 }
 
@@ -2317,67 +2337,6 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
     
-/* =========================
-   WORKS-SHOTS (mobile only): carrusel nativo + sombra flotante + zoom sin recorte
-   ========================= */
-@media (max-width: 900px){
-
-  #trabajos .works-shots{
-    overflow-x:auto !important;
-    overflow-y:visible !important;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type:x mandatory;
-
-    /* aire para sombra + zoom SIN que se note recorte */
-    padding: 22px 70px 110px !important;
-
-    touch-action: pan-x pan-y !important;
-    overscroll-behavior-x: contain;
-  }
-
-  #trabajos .works-shot{
-    flex: 0 0 96% !important;
-    scroll-snap-align:center;
-    background:transparent !important;
-    border:0 !important;
-    padding:0 !important;
-    margin:0 !important;
-  }
-
-  /* ESTE es el que escala (NO recorta) */
-  #trabajos .works-float{
-    display:block !important;
-    border-radius: 0 !important;      /* importante: no recorta */
-    overflow: visible !important;      /* importante: no recorta */
-    box-shadow: 0 18px 45px rgba(0,0,0,.18) !important;
-    transition: transform .22s ease, box-shadow .22s ease;
-    transform-origin: center;
-    will-change: transform;
-  }
-
-  /* ESTE es el que recorta para redondeo real */
-  #trabajos .works-clip{
-    display:block !important;
-    border-radius: 22px !important;
-    overflow: hidden !important;
-    background: transparent !important;
-  }
-
-  #trabajos .works-clip > img{
-    display:block !important;
-    width:100% !important;
-    height:auto !important;
-    border-radius: 22px !important; /* ok */
-  }
-
-  /* zoom sin recorte */
-  #trabajos .works-shot.is-active .works-float{
-    transform: scale(1.12) !important;   /* subí a 1.14 si querés más */
-    box-shadow: 0 28px 70px rgba(0,0,0,.22) !important;
-  }
-}
-
-
  
     
   </style>
