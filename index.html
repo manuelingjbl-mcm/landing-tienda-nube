@@ -2317,81 +2317,64 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
     
-/* =========================
-   WORKS — Mobile carrusel nativo + sombra flotante (wrapper)
-   ========================= */
+
+/* WORKS — Mobile carrusel nativo (horizontal + vertical) con sombra sin recorte */
 @media (max-width: 900px){
 
-  /* Asegurar que ningún padre corte la sombra */
-  .works,
-  .works-split,
-  .works-media,
-  .works-left{
-    overflow: visible !important;
-  }
-
-  /* Track */
   .works-shots{
     display: flex !important;
     gap: 14px !important;
 
     overflow-x: auto !important;
-    overflow-y: visible !important;
+    overflow-y: hidden !important;          /* scroll container -> clipea, así que damos padding */
 
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
+    scroll-padding-left: 16px;
 
-    padding: 10px 16px 26px !important;
+    /* 👇 padding extra para que NO se corte la sombra (clave) */
+    padding: 16px 16px 46px !important;
+
     background: transparent !important;
 
-    /* permite vertical + horizontal */
-    touch-action: pan-y pinch-zoom !important;
+    /* 👇 permite gesto horizontal y vertical */
+    touch-action: pan-x pan-y !important;
+    overscroll-behavior-x: contain;
   }
   .works-shots::-webkit-scrollbar{ display:none; }
 
-  /* Button reset (SIN all:unset) */
   .works-shots .works-shot{
-    position: relative !important;
-    inset: auto !important;
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-    filter: none !important;
-    pointer-events: auto !important;
+    flex: 0 0 86% !important;
+    scroll-snap-align: center;
 
-    appearance: none !important;
-    -webkit-appearance: none !important;
     border: 0 !important;
     background: transparent !important;
     padding: 0 !important;
     margin: 0 !important;
-    outline: none !important;
 
-    flex: 0 0 86% !important;
-    scroll-snap-align: center;
+    /* por si quedó algo viejo */
+    position: static !important;
+    inset: auto !important;
+    transform: none !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
 
-    /* IMPORTANTE: que no “se coma” el gesto vertical */
-    touch-action: pan-y pinch-zoom !important;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
   }
 
-  /* Wrapper flotante: sombra sin recorte */
+  /* Sombra flotante (no recortada por bordes del slide) */
   .works-shots .works-float{
     display: block !important;
     border-radius: 18px !important;
-
-    /* sombra linda tipo desktop */
     box-shadow: 0 18px 45px rgba(0,0,0,.16) !important;
-
-    /* NO recortar acá */
-    overflow: visible !important;
   }
 
-  /* La imagen se redondea (sin recortar sombra) */
+  /* Redondeo real (aunque la imagen sea cuadrada) */
   .works-shots .works-float > img{
     display: block !important;
     width: 100% !important;
     height: auto !important;
-
     border-radius: 18px !important;
   }
 }
