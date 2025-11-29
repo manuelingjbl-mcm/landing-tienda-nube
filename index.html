@@ -921,6 +921,33 @@ header::after{
     transform: none;
     filter: none;
   }
+
+  /* evita fondo/halo del botón */
+  #trabajos .works-shot{
+    background: transparent !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  /* el “clip” no debe aportar fondo blanco */
+  #trabajos .works-clip{
+    background: transparent !important;
+    border-radius: 26px !important;
+    overflow: hidden !important;
+  }
+
+  /* refuerzo anti-halo en esquinas (Android/iOS) */
+  #trabajos .works-clip > img{
+    display: block !important;
+    background: transparent !important;
+
+    /* este es el que suele eliminar el borde blanco */
+    clip-path: inset(0 round 26px) !important;
+    -webkit-clip-path: inset(0 round 26px) !important;
+
+    /* evita “hairline gap” */
+    transform: translateZ(0);
+  }
 }
 
     
