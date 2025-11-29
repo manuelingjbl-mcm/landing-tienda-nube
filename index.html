@@ -2318,40 +2318,66 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
     
 /* =========================
-   WORKS — Mobile carrusel nativo (sin JS)
+   WORKS — Mobile carrusel nativo + sombra flotante (wrapper)
    ========================= */
-@media (max-width:900px){
+@media (max-width: 900px){
 
+  /* Track: horizontal + permite scroll vertical de la página */
   .works-shots{
-    display:flex !important;
-    gap:14px !important;
-    overflow-x:auto !important;
-    scroll-snap-type:x mandatory;
+    position: static !important;
+    display: flex !important;
+    gap: 14px !important;
+
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+
+    scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
+
     padding: 10px 16px 22px !important;
+    background: transparent !important;
+
+    /* CLAVE: no “secuestra” el scroll vertical */
     touch-action: pan-y pinch-zoom !important;
+    overscroll-behavior-x: contain;
   }
   .works-shots::-webkit-scrollbar{ display:none; }
 
-  .works-shot{
-    flex:0 0 86% !important;
-    scroll-snap-align:center;
-    border:0 !important;
-    background:transparent !important;
-    padding:0 !important;
-    overflow: visible !important; /* para que no corte nada */
+  /* Reset por si venías del modo stacked */
+  .works-shots .works-shot{
+    position: static !important;
+    inset: auto !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    filter: none !important;
+    pointer-events: auto !important;
+
+    border: 0 !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+
+    flex: 0 0 86% !important;
+    scroll-snap-align: center;
   }
 
-  .works-shot img{
-    width:100% !important;
-    height:auto !important;
-    display:block !important;
-    border-radius:18px !important;
+  /* Wrapper flotante: sombra SIN recorte */
+  .works-shots .works-float{
+    display: block !important;
+    border-radius: 18px !important;
+    box-shadow: 0 18px 45px rgba(0,0,0,.16) !important;
+  }
 
-    /* sombra sin recorte */
-    filter: drop-shadow(0 18px 45px rgba(0,0,0,.16));
+  /* Imagen redondeada */
+  .works-shots .works-float > img{
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 18px !important;
   }
 }
+
 
    
   
@@ -2566,17 +2592,23 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
  <div class="works-shots" aria-label="Nuestros trabajos (carrusel)">
    <!-- Nueva landing VIACLOUDSTUDIO -->
   <button class="works-shot is-active" data-project="viacloud" type="button">
+    <span class="works-float">
     <img src="via-clod.png" alt="Landing VIACLOUDSTUDIO · diseño y optimización Tienda Nube">
+   </span>
   </button>
    
   <!-- Landing VIA SHOP -->
   <button class="works-shot" data-project="landing" type="button">
+    <span class="works-float">
     <img src="landing-via.png" alt="Landing VIA SHOP">
+   </span>
   </button>
 
   <!-- Newsletter DISTRI HOME -->
   <button class="works-shot" data-project="newsletter" type="button">
+    <span class="works-float">
     <img src="distri-home.png" alt="Newsletter DISTRI HOME">
+  </span>
   </button>
 </div>
 
