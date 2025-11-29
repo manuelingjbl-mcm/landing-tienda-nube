@@ -938,8 +938,8 @@ header::after{
 
   /* refuerzo anti-halo en esquinas (Android/iOS) */
   #trabajos .works-clip > img{
-    display: block !important;
-    background: transparent !important;
+  transform: scale(1.005) translateZ(0) !important;
+}
 
     /* este es el que suele eliminar el borde blanco */
     clip-path: inset(0 round 26px) !important;
