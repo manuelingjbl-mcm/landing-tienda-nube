@@ -2379,8 +2379,28 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 @media (max-width:900px){
   .works-float, .works-float img{ pointer-events:none !important; }
 }
-  
-  
+
+    
+@media (max-width: 900px){
+
+  /* transición suave */
+  .works-shots .works-float{
+    transition: transform .22s ease, box-shadow .22s ease;
+    transform-origin: center;
+  }
+
+  /* crece la seleccionada */
+  .works-shots .works-shot.is-active .works-float{
+    transform: scale(1.045);
+    box-shadow: 0 24px 62px rgba(0,0,0,.22) !important;
+  }
+
+  /* opcional: que las no activas queden apenas más “light” */
+  .works-shots .works-shot:not(.is-active) .works-float{
+    transform: scale(0.995);
+  }
+}
+ 
     
   </style>
 </head>
@@ -3266,6 +3286,26 @@ document.addEventListener('DOMContentLoaded', () => {
   btn.addEventListener('click', (e) => {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+</script>
+
+    
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Solo mobile
+  if (!window.matchMedia("(max-width: 900px)").matches) return;
+
+  const track = document.querySelector(".works-shots");
+  const shots = Array.from(document.querySelectorAll(".works-shots .works-shot"));
+  if (!track || !shots.length) return;
+
+  // Centrar el slide clickeado (sin interferir con scroll normal)
+  shots.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      // si tu código ya maneja is-active + texto, esto solo centra
+      btn.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    }, { passive: true });
   });
 });
 </script>
