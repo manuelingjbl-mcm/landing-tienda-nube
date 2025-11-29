@@ -2322,65 +2322,48 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 @media (max-width: 900px){
 
   .works-shots{
-    display: flex !important;
-    gap: 14px !important;
-
-    overflow-x: auto !important;
-    overflow-y: hidden !important;          /* scroll container -> clipea, así que damos padding */
-
-    scroll-snap-type: x mandatory;
+    display:flex !important;
+    gap:14px !important;
+    overflow-x:auto !important;
+    overflow-y:visible !important;
     -webkit-overflow-scrolling: touch;
-    scroll-padding-left: 16px;
+    scroll-snap-type:x mandatory;
 
-    /* 👇 padding extra para que NO se corte la sombra (clave) */
-    padding: 16px 16px 46px !important;
-
+    padding: 16px 16px 34px !important;
     background: transparent !important;
 
-    /* 👇 permite gesto horizontal y vertical */
-    touch-action: pan-x pan-y !important;
-    overscroll-behavior-x: contain;
+    /* no bloquees el gesto: lo decide el JS */
+    touch-action: auto !important;
   }
   .works-shots::-webkit-scrollbar{ display:none; }
 
-  .works-shots .works-shot{
+  .works-shot{
     flex: 0 0 86% !important;
-    scroll-snap-align: center;
+    scroll-snap-align:center;
 
-    border: 0 !important;
-    background: transparent !important;
-    padding: 0 !important;
-    margin: 0 !important;
+    border:0 !important;
+    background:transparent !important;
+    padding:0 !important;
+    margin:0 !important;
 
-    /* por si quedó algo viejo */
-    position: static !important;
-    inset: auto !important;
-    transform: none !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
-
+    /* importantísimo: no dejes que el botón “capture” todo */
     -webkit-tap-highlight-color: transparent;
-    user-select: none;
   }
 
-  /* Sombra flotante (no recortada por bordes del slide) */
-  .works-shots .works-float{
-    display: block !important;
-    border-radius: 18px !important;
-    box-shadow: 0 18px 45px rgba(0,0,0,.16) !important;
+  /* sombra FLOTA sin “cuadro recortado” (drop-shadow no se clipea como box-shadow) */
+  .works-float{
+    display:block !important;
+    border-radius:18px !important;
+    filter: drop-shadow(0 18px 45px rgba(0,0,0,.16));
   }
 
-  /* Redondeo real (aunque la imagen sea cuadrada) */
-  .works-shots .works-float > img{
-    display: block !important;
-    width: 100% !important;
-    height: auto !important;
-    border-radius: 18px !important;
+  .works-float > img{
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    border-radius:18px !important;
   }
 }
-
-
-
    
   
     
@@ -3269,6 +3252,35 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const track = document.querySelector(".works-shots");
+  if (!track) return;
+
+  let sx = 0, sy = 0;
+
+  track.addEventListener("touchstart", (e) => {
+    if (!e.touches || !e.touches[0]) return;
+    sx = e.touches[0].clientX;
+    sy = e.touches[0].clientY;
+  }, { passive: true });
+
+  track.addEventListener("touchmove", (e) => {
+    if (!e.touches || !e.touches[0]) return;
+
+    const dx = Math.abs(e.touches[0].clientX - sx);
+    const dy = Math.abs(e.touches[0].clientY - sy);
+
+    // gesto mayormente vertical -> soltamos el scroll de página
+    if (dy > dx * 1.2) {
+      track.style.overflowX = "hidden";
+      clearTimeout(track._t);
+      track._t = setTimeout(() => track.style.overflowX = "auto", 180);
+    }
+  }, { passive: true });
 });
 </script>
 
