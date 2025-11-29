@@ -2320,69 +2320,39 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 /* =========================
    WORKS — Mobile carrusel nativo (sin JS)
    ========================= */
-@media (max-width: 900px){
+@media (max-width:900px){
 
-  /* Reset por si venías del modo stacked */
-  .works-shots{ position: static !important; aspect-ratio: auto !important; }
-  .works-shots .works-shot{
-    position: static !important;
-    inset: auto !important;
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-    filter: none !important;
-    pointer-events: auto !important;
-  }
-
-  /* Carrusel nativo */
   .works-shots{
-    display: flex !important;
-    gap: 14px !important;
-    overflow-x: auto !important;
-    overflow-y: visible !important;
-    scroll-snap-type: x mandatory;
+    display:flex !important;
+    gap:14px !important;
+    overflow-x:auto !important;
+    scroll-snap-type:x mandatory;
     -webkit-overflow-scrolling: touch;
-
-    padding: 10px 16px 18px !important;
-    scrollbar-width: none;
+    padding: 10px 16px 22px !important;
+    touch-action: pan-y pinch-zoom !important;
   }
   .works-shots::-webkit-scrollbar{ display:none; }
 
-  /* Cada slide */
-  .works-shots .works-shot{
-    flex: 0 0 86% !important;
-    scroll-snap-align: center;
-
-    border: 0 !important;
-    background: transparent !important;
-    padding: 0 !important;
-
-    border-radius: 18px !important;
-    overflow: hidden !important;
-
-    /* sombra opcional */
-    box-shadow: none !important;
+  .works-shot{
+    flex:0 0 86% !important;
+    scroll-snap-align:center;
+    border:0 !important;
+    background:transparent !important;
+    padding:0 !important;
+    overflow: visible !important; /* para que no corte nada */
   }
 
-  .works-shots .works-shot > img{
-    width: 100% !important;
-    height: auto !important;
-    display: block !important;
-    border-radius: 18px !important;
+  .works-shot img{
+    width:100% !important;
+    height:auto !important;
+    display:block !important;
+    border-radius:18px !important;
+
+    /* sombra sin recorte */
+    filter: drop-shadow(0 18px 45px rgba(0,0,0,.16));
   }
 }
 
-@media (max-width: 900px){
-  .works-shots{
-    touch-action: pan-y !important;        /* deja pasar scroll vertical */
-    overscroll-behavior-x: contain;
-  }
-
-  /* ayuda extra en iOS */
-  .works-shots .works-shot{
-    touch-action: pan-y !important;
-  }
-}
    
   
     
