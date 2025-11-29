@@ -2322,78 +2322,61 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
    ========================= */
 @media (max-width: 900px){
 
-  /* que el contenedor NO corte sombras/zoom */
-  #trabajos, #trabajos .wrapper, #trabajos .works-split, #trabajos .works-copy{
-    overflow: visible !important;
-  }
-
-  /* Carrusel */
   #trabajos .works-shots{
-    display: flex !important;
-    gap: 14px !important;
-
-    overflow-x: auto !important;
-    overflow-y: visible !important;
-
+    overflow-x:auto !important;
+    overflow-y:visible !important;
     -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type:x mandatory;
 
-    /* Aire real para sombra + zoom (evita “cortes”) */
-    padding: 22px 48px 92px !important;
+    /* aire para sombra + zoom SIN que se note recorte */
+    padding: 22px 70px 110px !important;
 
-    background: transparent !important;
     touch-action: pan-x pan-y !important;
     overscroll-behavior-x: contain;
   }
-  #trabajos .works-shots::-webkit-scrollbar{ display:none; }
 
-  /* Slide (más grande en pantalla) */
   #trabajos .works-shot{
-    flex: 0 0 96% !important;          /* 98% o 100% si querés aún más grande */
-    scroll-snap-align: center;
-
-    border: 0 !important;
-    background: transparent !important;
-    padding: 0 !important;
-    margin: 0 !important;
-
-    position: static !important;
-    inset: auto !important;
-    opacity: 1 !important;
-    transform: none !important;
-
-    -webkit-tap-highlight-color: transparent;
+    flex: 0 0 96% !important;
+    scroll-snap-align:center;
+    background:transparent !important;
+    border:0 !important;
+    padding:0 !important;
+    margin:0 !important;
   }
 
-  /* Tarjeta flotante + redondeo real */
+  /* ESTE es el que escala (NO recorta) */
   #trabajos .works-float{
-    display: block !important;
-    border-radius: 22px !important;
-    overflow: hidden !important; /* redondeo real */
+    display:block !important;
+    border-radius: 0 !important;      /* importante: no recorta */
+    overflow: visible !important;      /* importante: no recorta */
     box-shadow: 0 18px 45px rgba(0,0,0,.18) !important;
-
     transition: transform .22s ease, box-shadow .22s ease;
     transform-origin: center;
     will-change: transform;
   }
 
-  #trabajos .works-float > img{
-    display: block !important;
-    width: 100% !important;
-    height: auto !important;
+  /* ESTE es el que recorta para redondeo real */
+  #trabajos .works-clip{
+    display:block !important;
     border-radius: 22px !important;
+    overflow: hidden !important;
+    background: transparent !important;
   }
 
-  /* Zoom al activo (por tu JS .is-active) */
-  #trabajos .works-shot.is-active{ z-index: 3; }
+  #trabajos .works-clip > img{
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    border-radius: 22px !important; /* ok */
+  }
+
+  /* zoom sin recorte */
   #trabajos .works-shot.is-active .works-float{
-    transform: scale(1.12); /* <- acá ajustás cuánto crece al click */
+    transform: scale(1.12) !important;   /* subí a 1.14 si querés más */
     box-shadow: 0 28px 70px rgba(0,0,0,.22) !important;
   }
-
-  /* opcional: que el texto no “salte” si cambia de largo */
-  #trabajos .works-copy{ min-height: 320px; } /* ajustable */
 }
+
 
  
     
@@ -2608,6 +2591,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
    <!-- Nueva landing VIACLOUDSTUDIO -->
   <button class="works-shot is-active" data-project="viacloud" type="button">
     <span class="works-float">
+    <span class="works-clip">
     <img src="via-clod.png" alt="Landing VIACLOUDSTUDIO · diseño y optimización Tienda Nube">
    </span>
   </button>
@@ -2615,6 +2599,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   <!-- Landing VIA SHOP -->
   <button class="works-shot" data-project="landing" type="button">
     <span class="works-float">
+    <span class="works-clip">
     <img src="landing-via.png" alt="Landing VIA SHOP">
    </span>
   </button>
@@ -2622,6 +2607,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   <!-- Newsletter DISTRI HOME -->
   <button class="works-shot" data-project="newsletter" type="button">
     <span class="works-float">
+    <span class="works-clip">
     <img src="distri-home.png" alt="Newsletter DISTRI HOME">
   </span>
   </button>
