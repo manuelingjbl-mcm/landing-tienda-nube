@@ -2361,7 +2361,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     overflow: hidden !important;
 
     /* sombra opcional */
-    box-shadow: 0 18px 45px rgba(0,0,0,.14);
+    box-shadow: none !important;
   }
 
   .works-shots .works-shot > img{
@@ -2372,6 +2372,17 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
+@media (max-width: 900px){
+  .works-shots{
+    touch-action: pan-y !important;        /* deja pasar scroll vertical */
+    overscroll-behavior-x: contain;
+  }
+
+  /* ayuda extra en iOS */
+  .works-shots .works-shot{
+    touch-action: pan-y !important;
+  }
+}
    
   
     
