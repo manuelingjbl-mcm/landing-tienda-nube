@@ -974,61 +974,47 @@ header::after{
 
   /* ============ ARROWS (MOBILE) ============ */
   /* Las flechas flotan SIEMPRE sobre el carrusel */
-  #trabajos .works-arrows{
+   #trabajos .works-arrows{
     position: absolute;
     left: 0;
     right: 0;
-
-    /* JS setea top dinámico; fallback */
-    top: 55%;
-
+    top: 50%;
     transform: translateY(-50%);
+    z-index: 6;
+
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    padding: 0 12px;
 
-    padding: 0 14px;
-    pointer-events: none;
-    z-index: 20;
+    pointer-events: none; /* para que no bloquee el swipe */
   }
 
   #trabajos .works-arrow{
+    pointer-events: auto; /* volvemos clickeables los botones */
     width: 44px;
     height: 44px;
     border-radius: 999px;
 
-    background: rgba(17,24,39,.92);
-    border: 1px solid rgba(255,255,255,.18);
-    box-shadow: 0 10px 24px rgba(0,0,0,.18);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-    display: grid;
-    place-items: center;
+    background: #ffffff;   /* círculo blanco */
+    color: #111827;        /* flecha negra */
+    border: 1px solid rgba(17,24,39,.14);
+    box-shadow: 0 12px 26px rgba(15,23,42,.22);
 
-    pointer-events: auto;
-    -webkit-tap-highlight-color: transparent;
-
-    opacity: 1;
-    transition: opacity .18s ease, transform .18s ease;
-  }
-
-  #trabajos .works-arrow::before{
-    content: "";
-    color: #fff;
-    font-size: 26px;
+    font-size: 22px;
     line-height: 1;
+    padding: 0;
+
+    -webkit-tap-highlight-color: transparent;
   }
 
-  #trabajos .works-arrow--prev::before{ content: "‹"; transform: translateX(-1px); }
-  #trabajos .works-arrow--next::before{ content: "›"; transform: translateX( 1px); }
-
-  /* ocultado con clase (para que no “salte” el layout) */
-  #trabajos .works-arrow.is-hidden{
-    opacity: 0;
-    pointer-events: none;
-  }
+  /* mini ajuste óptico para que la flecha quede “perfecta” al centro */
+  #trabajos .works-arrow{ transform: translateY(-1px); }
 }
-
-    
+}
 
     
     /* PARTNERS */
