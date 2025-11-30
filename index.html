@@ -1020,6 +1020,12 @@ header::after{
   #trabajos .works-stage .works-arrow[hidden]{ display:none !important; }
 }
 
+/* === WORKS ARROWS: DESKTOP OFF (blindado) === */
+@media (min-width: 901px){
+  #trabajos .works-stage .works-arrows{
+    display: none !important;
+  }
+}
 
     
     /* PARTNERS */
@@ -2674,7 +2680,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   </button>
   </div>
    
-  <!-- Flechas (TIENEN que vivir adentro de works-shots) -->
+  <!-- Flechas: tienen que vivir dentro de works-stage (NO dentro de works-shots) -->
   <div class="works-arrows" aria-hidden="false">
     <button class="works-arrow works-arrow--prev" type="button" aria-label="Anterior">‹</button>
     <button class="works-arrow works-arrow--next" type="button" aria-label="Siguiente">›</button>
