@@ -2441,23 +2441,39 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
     
+/* ===== HEADER MOBILE: subir un poco + laterales a 10px (sin tocar desktop) ===== */
 @media (max-width: 767.98px){
 
-  /* SUBIR logo + hamburguesa */
+  /* laterales del header */
+  .site-header .header-inner{
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  /* sube el bloque logo + hamburguesa */
   .site-header{
-    padding-top: 10px; /* <- subí/bajá acá (8–16px suele ir bien) */
+    padding-top: 10px !important;   /* ajustá 6–12px si querés */
   }
 
-  /* alternativamente o adicionalmente, mueve solo la fila */
+  /* alineación: logo izq / burger der */
   .site-header .logo-row{
-    transform: translateY(-6px); /* <- sube 6px (probá -4 a -12) */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
   }
 
-  /* si al subir cambia el dropdown, acompaño el offset */
+  .site-header .menu-toggle{
+    margin-left: auto !important;
+  }
+
+  /* dropdown calza con los mismos laterales */
   #site-nav.nav{
-    top: calc(100% + 8px); /* antes 10px */
+    left: 10px !important;
+    right: 10px !important;
   }
 }
+
  
     
   </style>
