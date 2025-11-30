@@ -2446,7 +2446,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 
   /* laterales del header */
   .site-header .header-inner{
-    padding-left: 7px !important;
+    padding-left: 10px !important;
     padding-right: 10px !important;
   }
 
@@ -2460,9 +2460,13 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-    width: 96% !important;
+    width: 100% !important;
   }
-
+/* Micro-ajuste extra SOLO para el logo (por si algún estilo lo deja pegado) */
+  .site-header .logo{
+    margin-left: 2px !important;    /* probá 0–6px */
+  }
+  
   .site-header .menu-toggle{
     margin-left: auto !important;
   }
