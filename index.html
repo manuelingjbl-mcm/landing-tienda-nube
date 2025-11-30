@@ -976,8 +976,9 @@ header::after{
  /* ancla: que el absolute se posicione respecto al carrusel */
 #trabajos .works-shots{
     position: relative;
-    --worksTop: 90px;     /* == tu padding-top del carrusel (ajustá) */
-    --worksBottom: 50px;  /* == tu padding-bottom del carrusel (ajustá) */
+    --worksTop: 44px;     /* == tu padding-top del carrusel (ajustá) */
+    --worksBottom: 96px;  /* == tu padding-bottom del carrusel (ajustá) */
+    --worksArrowsOffset: 60px; /* 👈 SUBÍ/BAJÁ esto (positivo = baja) */
   }
 
   /* Overlay de flechas: ocupa el "alto útil" del carrusel y centra verticalmente */
@@ -996,6 +997,8 @@ header::after{
 
     padding: 0 12px;                 /* aire a los laterales */
     pointer-events: none;            /* no bloquea el swipe */
+    
+    transform: translateY(var(--worksArrowsOffset)); /* 👈 */
   }
 
   #trabajos .works-arrow{
