@@ -3465,6 +3465,52 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+  
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const chk   = document.getElementById("nav-toggle");
+  const nav   = document.getElementById("site-nav");
+  const label = document.querySelector('label[for="nav-toggle"]');
+
+  if (!chk || !nav || !label) return;
+
+  const closeMenu = () => {
+    chk.checked = false;
+    // opcional: accesibilidad
+    label.setAttribute("aria-label", "Abrir menú");
+  };
+
+  const openMenu = () => {
+    chk.checked = true;
+    label.setAttribute("aria-label", "Cerrar menú");
+  };
+
+  // Sync por si se abre/cierra tocando el label
+  chk.addEventListener("change", () => (chk.checked ? openMenu() : closeMenu()));
+
+  // 1) Click en links => cerrar
+  nav.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener("click", () => closeMenu(), { passive: true });
+  });
+
+  // 2) Click/tap afuera => cerrar
+  document.addEventListener("pointerdown", (e) => {
+    if (!chk.checked) return;
+    const t = e.target;
+    if (!nav.contains(t) && !label.contains(t) && t !== chk) closeMenu();
+  });
+
+  // 3) Escape => cerrar
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMenu();
+  });
+
+  // 4) Si pasa a desktop => cerrar (evita estados raros)
+  window.addEventListener("resize", () => {
+    if (window.matchMedia("(min-width: 768px)").matches) closeMenu();
+  }, { passive: true });
+});
+</script>
 
 
 
