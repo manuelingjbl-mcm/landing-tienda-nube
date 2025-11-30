@@ -846,22 +846,30 @@ header::after{
   font-size: 0.85rem;
 }
 
+
+/* ===== WORKS ARROWS: DESKTOP OFF (solo desktop) ===== */
+@media (min-width: 901px){
+  #trabajos .works-arrows{ display: none !important; }
+}
+
 /* ===== WORKS (MOBILE): carrusel horizontal + copy arriba (SOLID / sin halo / sin corte) ===== */
 @media (max-width: 900px){
 
-  :root{
+  /* Variables SOLO para #trabajos (evita efectos colaterales) */
+  #trabajos{
     --works-card-w: 92vw;     /* bajá a 88vw si querés más chica */
     --works-gap: 14px;
     --works-radius: 26px;
   }
 
-  .works-split{
+  /* Mobile layout SOLO dentro de #trabajos */
+  #trabajos .works-split{
     grid-template-columns: 1fr;
     gap: 18px;
     align-items: start;
   }
-  .works-copy{ order: 1; }
-  .works-shots{ order: 2; }
+  #trabajos .works-copy{ order: 1; }
+  #trabajos .works-shots{ order: 2; }
 
   /* que ningún padre recorte */
   #trabajos,
@@ -899,7 +907,9 @@ header::after{
     /* Vars para cálculo de flechas (match con tu padding real) */
     --worksTop: 26px;
     --worksBottom: 60px;
-    --worksArrowShift: 0px; /* + baja / - sube */
+
+    /* AJUSTE FINO: + baja / - sube */
+    --worksArrowShift: 0px;
   }
   #trabajos .works-shots::-webkit-scrollbar{ display:none; }
 
@@ -938,7 +948,7 @@ header::after{
     backface-visibility: hidden;
     transform: translateZ(0);
 
-    aspect-ratio: 8 / 14;   /* más alto (si querés apenas menos: 9/15) */
+    aspect-ratio: 8 / 14;
     max-height: 78vh;
   }
 
@@ -1012,18 +1022,9 @@ header::after{
   #trabajos .works-arrow--prev{ margin-right: auto; }
   #trabajos .works-arrow--next{ margin-left: auto; }
 
-  #trabajos .works-arrow > span{
-    display: block;
-    transform: translateY(-1px);
-  }
-
   #trabajos .works-arrow[hidden]{ display:none !important; }
 }
 
-/* ===== WORKS ARROWS: DESKTOP OFF (evita romper layout) ===== */
-#trabajos .works-arrows{
-  display: none;
-}
 
     
     /* PARTNERS */
@@ -2647,7 +2648,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 
   <div class="works-split">
 
-    <!-- Mockups verticales -->
+   <!-- Mockups verticales -->
  <div class="works-shots" aria-label="Nuestros trabajos (carrusel)">
    <!-- Nueva landing VIACLOUDSTUDIO -->
   <button class="works-shot is-active" data-project="viacloud" type="button">
@@ -2677,11 +2678,13 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   </button>
   </div>
 
+    
+  <!-- Flechas (TIENEN que vivir adentro de works-shots) -->
   <div class="works-arrows" aria-hidden="false">
     <button class="works-arrow works-arrow--prev" type="button" aria-label="Anterior">‹</button>
     <button class="works-arrow works-arrow--next" type="button" aria-label="Siguiente">›</button>
   </div>
-  </div>
+ </div>
 
  
 <!-- Texto que cambia -->
