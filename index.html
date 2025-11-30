@@ -846,9 +846,10 @@ header::after{
   font-size: 0.85rem;
 }
 
-/* ===== WORKS (MOBILE): carrusel horizontal + copy arriba ===== */
+/* ===== WORKS (MOBILE): carrusel horizontal + copy arriba (sin halo / sin corte) ===== */
 @media (max-width: 900px){
 
+  /* layout */
   .works-split{
     grid-template-columns: 1fr;
     gap: 18px;
@@ -857,98 +858,105 @@ header::after{
   .works-copy{ order: 1; }
   .works-shots{ order: 2; }
 
-  /* Carrusel sin bloquear scroll vertical */
-  .works-shots{
-    display:flex;
-    justify-content:flex-start;
-    gap:16px;
+  /* importante: que ningún padre recorte sombras/zoom */
+  #trabajos,
+  #trabajos .wrapper,
+  #trabajos .works-split{
+    overflow: visible !important;
+  }
 
-    overflow-x:auto !important;
-    overflow-y:visible !important;
+  /* Carrusel */
+  #trabajos .works-shots{
+    display: flex;
+    justify-content: flex-start;
+    gap: 16px;
+
+    overflow-x: auto !important;
+    overflow-y: visible !important;
     -webkit-overflow-scrolling: touch;
 
-    scroll-snap-type:x mandatory;
+    scroll-snap-type: x mandatory;
     scroll-padding-left: 16px;
 
     overscroll-behavior-x: contain;
-    touch-action: pan-x pan-y !important; /* clave */
+    touch-action: pan-x pan-y !important;
 
-    /* Aire extra para sombra + zoom SIN cortes */
-    padding: 18px 56px 84px !important;
+    /* +padding TOP para que el scale no corte arriba */
+    padding: 34px 56px 96px !important;
     margin: 0 -16px;
   }
 
-  .works-shot{
+  #trabajos .works-shots::-webkit-scrollbar{ display:none; }
+
+  /* Botón/tarjeta: NO recorta, NO fondo, NO halo */
+  #trabajos .works-shot{
     flex: 0 0 auto;
     scroll-snap-align: center;
 
-    /* IMPORTANTE: no clip acá */
     overflow: visible !important;
+    border: 0 !important;
+    padding: 0 !important;
     border-radius: 0 !important;
     box-shadow: none !important;
     background: transparent !important;
+    outline: none !important;
+
+    touch-action: pan-x pan-y !important;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  /* Tamaño “tipo desktop” pero mobile */
-  .works-shot .works-float{
-    display:block;
+  /* Shadow acá (afuera del clip) */
+  #trabajos .works-float{
+    display: block;
+    border-radius: 26px;
     box-shadow: 0 18px 45px rgba(15,23,42,.30);
     transition: transform .22s ease;
     transform-origin: center;
+    will-change: transform;
   }
 
-  /* Clip interno (redondeo real) */
-  .works-shot .works-clip{
-    display:block;
+  /* Clip REAL (adentro) */
+  #trabajos .works-clip{
+    display: block;
     border-radius: 26px;
-    overflow:hidden;
+    overflow: hidden;
+    background: transparent !important;
+
+    /* truco anti “halo/blanco” en bordes redondeados (muy efectivo en mobile) */
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
   }
 
-  .works-shot img{
+  /* Imagen */
+  #trabajos .works-clip > img{
+    display: block;
     width: min(86vw, 360px);
     max-width: none;
     height: auto;
-    display:block;
-  }
 
-  /* Activa crece sin recorte */
-  .works-shot.is-active .works-float{
-    transform: scale(1.12);
-  }
-
-  .works-shot:not(.is-active){
-    opacity: .85;
-    transform: none;
-    filter: none;
-  }
-
-  /* evita fondo/halo del botón */
-  #trabajos .works-shot{
     background: transparent !important;
-    box-shadow: none !important;
-    outline: none !important;
+
+    /* micro-zoom tapa el “hairline gap” (triangulito) */
+    transform: scale(1.01) translateZ(0);
+
+    /* recorte extra (por si el render hace bleeding) */
+    clip-path: inset(0 round 26px);
+    -webkit-clip-path: inset(0 round 26px);
   }
 
-  /* el “clip” no debe aportar fondo blanco */
-  #trabajos .works-clip{
-  background: transparent !important;
-  backface-visibility: hidden;
-  transform: translateZ(0);
+  /* Zoom al activo */
+  #trabajos .works-shot.is-active .works-float{
+    transform: scale(1.12);
+    position: relative;
+    z-index: 3;
+  }
+
+  #trabajos .works-shot:not(.is-active){
+    opacity: .85;
+    filter: none;
+    transform: none;
+  }
 }
 
- /* refuerzo anti-halo en esquinas (Android/iOS) */
-#trabajos .works-clip > img{
-  display: block !important;
-  background: transparent !important;
-
-  /* micro-zoom para tapar el “hairline gap” */
-  transform: scale(1.005) translateZ(0) !important;
-
-  /* recorte extra para matar halo blanco */
-  clip-path: inset(0 round 26px) !important;
-  -webkit-clip-path: inset(0 round 26px) !important;
- }
-}
 
     
     /* PARTNERS */
@@ -2580,6 +2588,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     <span class="works-clip">
     <img src="via-clod.png" alt="Landing VIACLOUDSTUDIO · diseño y optimización Tienda Nube">
    </span>
+   </span>
   </button>
    
   <!-- Landing VIA SHOP -->
@@ -2588,6 +2597,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     <span class="works-clip">
     <img src="landing-via.png" alt="Landing VIA SHOP">
    </span>
+   </span>
   </button>
 
   <!-- Newsletter DISTRI HOME -->
@@ -2595,6 +2605,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     <span class="works-float">
     <span class="works-clip">
     <img src="distri-home.png" alt="Newsletter DISTRI HOME">
+  </span>
   </span>
   </button>
 </div>
