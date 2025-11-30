@@ -975,62 +975,61 @@ header::after{
   /* ============ ARROWS (MOBILE) ============ */
  /* ancla: que el absolute se posicione respecto al carrusel */
 #trabajos .works-shots{
-  position: relative;
-}
+    position: relative;
+    --worksTop: 44px;     /* == tu padding-top del carrusel (ajustá) */
+    --worksBottom: 96px;  /* == tu padding-bottom del carrusel (ajustá) */
+  }
 
-/* overlay de flechas */
-#trabajos .works-arrows{
-  position: absolute;
-  left: 0;
-  right: 0;
+  /* Overlay de flechas: ocupa el "alto útil" del carrusel y centra verticalmente */
+  #trabajos .works-arrows{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: var(--worksTop);
+    bottom: var(--worksBottom);
 
-  /* mové ESTE valor para bajarlas/subirlas */
-  top: 70%;
-  transform: translateY(-40%);
+    z-index: 6;
 
-  z-index: 6;
-  display: flex;
+    display: flex;
+    align-items: center;              /* centra vertical */
+    justify-content: space-between;   /* una a cada lado */
 
-  /* clave: con 1 botón visible no se va a la izquierda */
-  justify-content: flex-start;
+    padding: 0 12px;                 /* aire a los laterales */
+    pointer-events: none;            /* no bloquea el swipe */
+  }
 
-  padding: 0 12px;
-  pointer-events: none; /* no bloquea el swipe */
-}
+  #trabajos .works-arrow{
+    pointer-events: auto;            /* vuelve clickeables */
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
 
-#trabajos .works-arrow{
-  pointer-events: auto;
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+    background: #fff;
+    color: #111827;
+    border: 1px solid rgba(17,24,39,.14);
+    box-shadow: 0 12px 26px rgba(15,23,42,.22);
 
-  background: #ffffff;
-  color: #111827;
-  border: 1px solid rgba(17,24,39,.14);
-  box-shadow: 0 12px 26px rgba(15,23,42,.22);
+    font-size: 22px;
+    line-height: 1;
+    padding: 0;
 
-  font-size: 22px;
-  line-height: 1;
-  padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
 
-  -webkit-tap-highlight-color: transparent;
-}
+  /* Mini ajuste óptico de la flecha (si tu HTML tiene <span> dentro) */
+  #trabajos .works-arrow > span{
+    display: block;
+    transform: translateY(-1px);
+  }
 
-/* empuja cada flecha a su lado */
-#trabajos .works-arrow--prev{ margin-right: auto; }
-#trabajos .works-arrow--next{ margin-left: auto; }
-
-/* mini ajuste óptico de la flechita */
-#trabajos .works-arrow > span{ transform: translateY(-1px); display:block; }
-
-/* respeta hidden */
-#trabajos .works-arrow[hidden]{
-  display: none !important;
- }
+  /* Respeta hidden del JS (primero / último slide) */
+  #trabajos .works-arrow[hidden]{
+    display: none !important;
+  }
 }
 
     
