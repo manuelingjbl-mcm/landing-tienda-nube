@@ -967,61 +967,64 @@ header::after{
     transform: none;
   }
 
-  /* el track es el “ancla” para posicionar flechas */
-  #trabajos .works-shots{
+   /* el bloque completo donde viven shots+arrows tiene que ser referencia */
+  #trabajos .works-split{
     position: relative;
   }
 
-  /* overlay de flechas (no scrollea con el track) */
+  /* ============ ARROWS (MOBILE) ============ */
+  /* Las flechas flotan SIEMPRE sobre el carrusel */
   #trabajos .works-arrows{
     position: absolute;
     left: 0;
     right: 0;
 
-    /* 👇 ajustá este top si querés bajarlas/subirlas */
-    top: 50%;
-    transform: translateY(-50%);
+    /* JS setea top dinámico; fallback */
+    top: 55%;
 
+    transform: translateY(-50%);
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    padding: 0 10px;
-    pointer-events: none; /* el overlay no bloquea el swipe */
-    z-index: 10;
+    padding: 0 14px;
+    pointer-events: none;
+    z-index: 20;
   }
 
   #trabajos .works-arrow{
-    pointer-events: auto; /* los botones sí clickeables */
     width: 44px;
     height: 44px;
     border-radius: 999px;
 
-    background: rgba(255,255,255,.92);
-    border: 1px solid rgba(17,24,39,.18);
-    box-shadow: 0 10px 26px rgba(15,23,42,.18);
+    background: rgba(17,24,39,.92);
+    border: 1px solid rgba(255,255,255,.18);
+    box-shadow: 0 10px 24px rgba(0,0,0,.18);
 
     display: grid;
     place-items: center;
 
-    color: #111827; /* icono negro */
-    font-size: 18px;
-    line-height: 1;
-
+    pointer-events: auto;
     -webkit-tap-highlight-color: transparent;
+
+    opacity: 1;
+    transition: opacity .18s ease, transform .18s ease;
   }
 
-  #trabajos .works-arrow:active{
-    transform: scale(.98);
+  #trabajos .works-arrow::before{
+    content: "";
+    color: #fff;
+    font-size: 26px;
+    line-height: 1;
   }
 
-  /* iconos */
-  #trabajos .works-arrow--prev::before{ content: "‹"; }
-  #trabajos .works-arrow--next::before{ content: "›"; }
+  #trabajos .works-arrow--prev::before{ content: "‹"; transform: translateX(-1px); }
+  #trabajos .works-arrow--next::before{ content: "›"; transform: translateX( 1px); }
 
-  /* que hidden realmente oculte */
-  #trabajos .works-arrow[hidden]{
-    display: none !important;
+  /* ocultado con clase (para que no “salte” el layout) */
+  #trabajos .works-arrow.is-hidden{
+    opacity: 0;
+    pointer-events: none;
   }
 }
 
@@ -2677,11 +2680,11 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   </span>
   </span>
   </button>
+  </div>
 
-  <div class="works-arrows" aria-hidden="false">
+ <div class="works-arrows" aria-hidden="false">
     <button class="works-arrow works-arrow--prev" type="button" aria-label="Anterior">‹</button>
     <button class="works-arrow works-arrow--next" type="button" aria-label="Siguiente">›</button>
-  </div>
   </div>
 
 <!-- Texto que cambia -->
@@ -3393,13 +3396,19 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   if (!matchMedia("(max-width: 900px)").matches) return;
 
-  const track = document.querySelector("#trabajos .works-shots");
-  const shots = Array.from(document.querySelectorAll("#trabajos .works-shots .works-shot"));
-  const prevBtn = document.querySelector("#trabajos .works-arrow--prev");
-  const nextBtn = document.querySelector("#trabajos .works-arrow--next");
-  if (!track || shots.length < 2 || !prevBtn || !nextBtn) return;
+  const section = document.querySelector("#trabajos");
+  const track   = section?.querySelector(".works-shots");
+  const shots   = Array.from(section?.querySelectorAll(".works-shots .works-shot") || []);
+  const prevBtn = section?.querySelector(".works-arrow--prev");
+  const nextBtn = section?.querySelector(".works-arrow--next");
+  const arrows  = section?.querySelector(".works-arrows");
 
-  function center(btn, smooth = true){
+  if (!section || !track || shots.length < 2 || !prevBtn || !nextBtn || !arrows) return;
+
+  let current = Math.max(0, shots.findIndex(b => b.classList.contains("is-active")));
+  let programmatic = false;
+
+  function center(btn, smooth=true){
     const trackRect = track.getBoundingClientRect();
     const btnRect = btn.getBoundingClientRect();
     const delta = (btnRect.left - trackRect.left) - (trackRect.width/2 - btnRect.width/2);
@@ -3408,72 +3417,94 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function activeIndex(){
     const i = shots.findIndex(b => b.classList.contains("is-active"));
-    return i >= 0 ? i : 0;
+    return i >= 0 ? i : current;
   }
 
-  function updateArrows(){
-    const i = activeIndex();
-    prevBtn.hidden = (i === 0);
-    nextBtn.hidden = (i === shots.length - 1);
+  function clampIndex(i){
+    return Math.max(0, Math.min(shots.length - 1, i));
   }
 
-  function goToIndex(i, smooth = true){
-    const clamped = Math.max(0, Math.min(shots.length - 1, i));
-    const btn = shots[clamped];
-
-    // dispara tu lógica existente (is-active + texto)
-    btn.click();
-
-    // centra la nueva activa
-    center(btn, smooth);
-
-    // actualiza flechas
-    updateArrows();
+  function updateArrows(i = activeIndex()){
+    prevBtn.classList.toggle("is-hidden", i <= 0);
+    nextBtn.classList.toggle("is-hidden", i >= shots.length - 1);
   }
 
-  // Flechas (sin wrap-around)
-  prevBtn.addEventListener("click", () => goToIndex(activeIndex() - 1, true));
-  nextBtn.addEventListener("click", () => goToIndex(activeIndex() + 1, true));
+  function updateArrowsY(i = activeIndex()){
+    // baja/sube las flechas a la altura del “frame” de la imagen activa
+    const clip = shots[i]?.querySelector(".works-clip") || shots[i];
+    const clipRect = clip.getBoundingClientRect();
+    const splitRect = section.querySelector(".works-split")?.getBoundingClientRect();
+    if (!splitRect) return;
 
-  // Si el usuario clickea una card manualmente, centramos y actualizamos flechas
-  shots.forEach(btn => {
+    const y = (clipRect.top + clipRect.height * 0.5) - splitRect.top;
+    arrows.style.top = `${y}px`;
+  }
+
+  function setIndex(i, smooth=true){
+    const idx = clampIndex(i);
+    if (idx === current) return;
+
+    programmatic = true;
+    shots[idx].click();              // usa tu lógica existente (is-active + texto)
+    center(shots[idx], smooth);
+    current = idx;
+
+    // deja que tu handler marque is-active antes de recalcular
+    setTimeout(() => {
+      updateArrows(current);
+      updateArrowsY(current);
+      programmatic = false;
+    }, 60);
+  }
+
+  // Click en flechas: 1 a 1 (sin loop)
+  prevBtn.addEventListener("click", () => setIndex(activeIndex() - 1, true));
+  nextBtn.addEventListener("click", () => setIndex(activeIndex() + 1, true));
+
+  // Click en cards: centrar + refrescar flechas
+  shots.forEach((btn, idx) => {
     btn.addEventListener("click", () => {
-      // dejamos que tu handler marque is-active primero
-      setTimeout(() => {
-        center(btn, true);
-        updateArrows();
-      }, 0);
-    });
+      current = idx;
+      center(btn, true);
+      setTimeout(() => { updateArrows(current); updateArrowsY(current); }, 40);
+    }, { passive:true });
   });
 
-  // Swipe: al parar el scroll, activamos la más centrada + flechas
+  // Swipe: al soltar, detecta la más centrada y sincroniza flechas/estado
   let t = null;
   track.addEventListener("scroll", () => {
+    if (programmatic) return;
     clearTimeout(t);
     t = setTimeout(() => {
       const centerX = track.getBoundingClientRect().left + track.clientWidth / 2;
+      let bestI = 0, bestD = Infinity;
 
-      let best = shots[0], bestD = Infinity;
-      shots.forEach(btn => {
+      shots.forEach((btn, i) => {
         const r = btn.getBoundingClientRect();
         const mid = r.left + r.width / 2;
         const d = Math.abs(mid - centerX);
-        if (d < bestD){ bestD = d; best = btn; }
+        if (d < bestD){ bestD = d; bestI = i; }
       });
 
-      if (!best.classList.contains("is-active")) {
-        best.click();
+      if (bestI !== current){
+        current = bestI;
+        shots[bestI].click();
       }
-      center(best, false);
-      updateArrows();
+
+      updateArrows(current);
+      updateArrowsY(current);
     }, 120);
-  }, { passive: true });
+  }, { passive:true });
 
   // Estado inicial
   setTimeout(() => {
-    center(shots[activeIndex()], false);
-    updateArrows();
-  }, 60);
+    center(shots[current], false);
+    updateArrows(current);
+    updateArrowsY(current);
+  }, 80);
+
+  // Si cambia el tamaño, recalcular altura de flechas
+  window.addEventListener("resize", () => updateArrowsY(current), { passive:true });
 });
 </script>
 
