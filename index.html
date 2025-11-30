@@ -973,52 +973,64 @@ header::after{
   }
 
   /* ============ ARROWS (MOBILE) ============ */
-  /* Las flechas flotan SIEMPRE sobre el carrusel */
-   #trabajos .works-arrows{
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 70%;
-    transform: translateY(-50%);
-    z-index: 6;
-
-    display: flex;
-    justify-content: space-between;
-    padding: 0 12px;
-
-    pointer-events: none; /* para que no bloquee el swipe */
-  }
-
-  #trabajos .works-arrow{
-    pointer-events: auto; /* volvemos clickeables los botones */
-    width: 44px;
-    height: 44px;
-    border-radius: 999px;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #ffffff;   /* círculo blanco */
-    color: #111827;        /* flecha negra */
-    border: 1px solid rgba(17,24,39,.14);
-    box-shadow: 0 12px 26px rgba(15,23,42,.22);
-
-    font-size: 22px;
-    line-height: 1;
-    padding: 0;
-
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  /* mini ajuste óptico para que la flecha quede “perfecta” al centro */
-  #trabajos .works-arrow{ transform: translateY(-1px); }
+ /* ancla: que el absolute se posicione respecto al carrusel */
+#trabajos .works-shots{
+  position: relative;
 }
 
-/* RESPETAR hidden aunque .works-arrow tenga display */
+/* overlay de flechas */
+#trabajos .works-arrows{
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  /* mové ESTE valor para bajarlas/subirlas */
+  top: 58%;
+  transform: translateY(-50%);
+
+  z-index: 6;
+  display: flex;
+
+  /* clave: con 1 botón visible no se va a la izquierda */
+  justify-content: flex-start;
+
+  padding: 0 12px;
+  pointer-events: none; /* no bloquea el swipe */
+}
+
+#trabajos .works-arrow{
+  pointer-events: auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff;
+  color: #111827;
+  border: 1px solid rgba(17,24,39,.14);
+  box-shadow: 0 12px 26px rgba(15,23,42,.22);
+
+  font-size: 22px;
+  line-height: 1;
+  padding: 0;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* empuja cada flecha a su lado */
+#trabajos .works-arrow--prev{ margin-right: auto; }
+#trabajos .works-arrow--next{ margin-left: auto; }
+
+/* mini ajuste óptico de la flechita */
+#trabajos .works-arrow > span{ transform: translateY(-1px); display:block; }
+
+/* respeta hidden */
 #trabajos .works-arrow[hidden]{
-  display:none !important;
-}
+  display: none !important;
+ }
 }
 
     
