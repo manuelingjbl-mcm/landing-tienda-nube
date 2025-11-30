@@ -967,44 +967,62 @@ header::after{
     transform: none;
   }
 
-  /* Para posicionar flechas encima del carrusel */
-  #trabajos .works-shots{ position: relative; }
-
-  /* Capa contenedora */
-  #trabajos .works-arrows{
-    position: absolute;
-    left: 0; right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 6;
-    pointer-events: none; /* solo clic en botones */
+  /* el track es el “ancla” para posicionar flechas */
+  #trabajos .works-shots{
+    position: relative;
   }
 
-  /* Botones */
+  /* overlay de flechas (no scrollea con el track) */
+  #trabajos .works-arrows{
+    position: absolute;
+    left: 0;
+    right: 0;
+
+    /* 👇 ajustá este top si querés bajarlas/subirlas */
+    top: 50%;
+    transform: translateY(-50%);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 10px;
+    pointer-events: none; /* el overlay no bloquea el swipe */
+    z-index: 10;
+  }
+
   #trabajos .works-arrow{
-    pointer-events: auto;
+    pointer-events: auto; /* los botones sí clickeables */
     width: 44px;
     height: 44px;
     border-radius: 999px;
-    border: 0;
-    background: rgba(255,255,255,.95); /* círculo blanco */
-    color: #111827;                   /* flecha negra */
-    box-shadow: 0 12px 30px rgba(0,0,0,.18);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size: 22px;
+
+    background: rgba(255,255,255,.92);
+    border: 1px solid rgba(17,24,39,.18);
+    box-shadow: 0 10px 26px rgba(15,23,42,.18);
+
+    display: grid;
+    place-items: center;
+
+    color: #111827; /* icono negro */
+    font-size: 18px;
     line-height: 1;
+
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* Ubicación izquierda/derecha */
-  #trabajos .works-arrow--prev{ position:absolute; left: 10px; }
-  #trabajos .works-arrow--next{ position:absolute; right: 10px; }
+  #trabajos .works-arrow:active{
+    transform: scale(.98);
+  }
 
-  /* Opcional: un poquito más “pro” */
-  #trabajos .works-arrow:active{ transform: scale(.96); }
-}
+  /* iconos */
+  #trabajos .works-arrow--prev::before{ content: "‹"; }
+  #trabajos .works-arrow--next::before{ content: "›"; }
+
+  /* que hidden realmente oculte */
+  #trabajos .works-arrow[hidden]{
+    display: none !important;
+  }
 }
 
     
@@ -3381,13 +3399,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const nextBtn = document.querySelector("#trabajos .works-arrow--next");
   if (!track || shots.length < 2 || !prevBtn || !nextBtn) return;
 
-  const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
-
-  function activeIndex(){
-    const i = shots.findIndex(b => b.classList.contains("is-active"));
-    return i >= 0 ? i : 0;
-  }
-
   function center(btn, smooth = true){
     const trackRect = track.getBoundingClientRect();
     const btnRect = btn.getBoundingClientRect();
@@ -3395,59 +3406,77 @@ document.addEventListener("DOMContentLoaded", () => {
     track.scrollTo({ left: track.scrollLeft + delta, behavior: smooth ? "smooth" : "auto" });
   }
 
-  function updateArrows(){
-    const i = activeIndex();
-    prevBtn.hidden = (i === 0);                 // en el primero, NO prev
-    nextBtn.hidden = (i === shots.length - 1);  // en el último, NO next
+  function activeIndex(){
+    const i = shots.findIndex(b => b.classList.contains("is-active"));
+    return i >= 0 ? i : 0;
   }
 
-  function setActive(i, smooth = true){
-    i = clamp(i, 0, shots.length - 1);
-    shots[i].click();              // dispara tu setProject() y setea is-active
-    center(shots[i], smooth);
+  function updateArrows(){
+    const i = activeIndex();
+    prevBtn.hidden = (i === 0);
+    nextBtn.hidden = (i === shots.length - 1);
+  }
+
+  function goToIndex(i, smooth = true){
+    const clamped = Math.max(0, Math.min(shots.length - 1, i));
+    const btn = shots[clamped];
+
+    // dispara tu lógica existente (is-active + texto)
+    btn.click();
+
+    // centra la nueva activa
+    center(btn, smooth);
+
+    // actualiza flechas
     updateArrows();
   }
 
-  prevBtn.addEventListener("click", () => setActive(activeIndex() - 1, true));
-  nextBtn.addEventListener("click", () => setActive(activeIndex() + 1, true));
+  // Flechas (sin wrap-around)
+  prevBtn.addEventListener("click", () => goToIndex(activeIndex() - 1, true));
+  nextBtn.addEventListener("click", () => goToIndex(activeIndex() + 1, true));
 
-  // click directo a una card: centrar + flechas
+  // Si el usuario clickea una card manualmente, centramos y actualizamos flechas
   shots.forEach(btn => {
     btn.addEventListener("click", () => {
-      center(btn, true);
-      updateArrows();
-    }, { passive: true });
+      // dejamos que tu handler marque is-active primero
+      setTimeout(() => {
+        center(btn, true);
+        updateArrows();
+      }, 0);
+    });
   });
 
-  // swipe: al terminar, activar la más centrada
+  // Swipe: al parar el scroll, activamos la más centrada + flechas
   let t = null;
   track.addEventListener("scroll", () => {
     clearTimeout(t);
     t = setTimeout(() => {
-      const trackRect = track.getBoundingClientRect();
-      const centerX = trackRect.left + trackRect.width / 2;
+      const centerX = track.getBoundingClientRect().left + track.clientWidth / 2;
 
       let best = shots[0], bestD = Infinity;
       shots.forEach(btn => {
         const r = btn.getBoundingClientRect();
         const mid = r.left + r.width / 2;
         const d = Math.abs(mid - centerX);
-        if (d < bestD) { bestD = d; best = btn; }
+        if (d < bestD){ bestD = d; best = btn; }
       });
 
-      if (!best.classList.contains("is-active")) best.click();
+      if (!best.classList.contains("is-active")) {
+        best.click();
+      }
       center(best, false);
       updateArrows();
     }, 120);
   }, { passive: true });
 
-  // init
+  // Estado inicial
   setTimeout(() => {
     center(shots[activeIndex()], false);
     updateArrows();
   }, 60);
 });
 </script>
+
 
 
 
