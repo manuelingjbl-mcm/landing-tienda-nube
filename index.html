@@ -962,7 +962,23 @@ header::after{
   }
 
   /* ============ ARROWS (MOBILE) ============ */
-  #trabajos .works-arrows{
+  /* wrapper fijo (no scrollea) */
+  #trabajos .works-stage{
+    position: relative;
+
+    /* match con tu padding-top/bottom real del carrusel */
+    --worksTop: 26px;
+    --worksBottom: 60px;
+    --worksArrowShift: 0px; /* + baja / - sube */
+  }
+
+  /* el carrusel sigue scrolleando */
+  #trabajos .works-stage .works-shots{
+    position: relative; /* opcional */
+  }
+
+  /* overlay fijo siempre visible */
+  #trabajos .works-stage .works-arrows{
     position: absolute;
     left: 0;
     right: 0;
@@ -974,18 +990,16 @@ header::after{
     transform: translateY(-50%);
 
     display: flex;
-    justify-content: flex-start; /* evita “pegado” raro cuando uno está hidden */
+    justify-content: flex-start;
     padding: 0 12px;
-
     pointer-events: none;
   }
 
-  #trabajos .works-arrow{
+  #trabajos .works-stage .works-arrow{
     pointer-events: auto;
     width: 48px;
     height: 48px;
     border-radius: 999px;
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -995,20 +1009,15 @@ header::after{
     border: 1px solid rgba(17,24,39,.14);
     box-shadow: 0 12px 26px rgba(15,23,42,.22);
 
-    font-size: 26px;     /* más legible */
+    font-size: 26px;
     line-height: 1;
-    padding: 0;
-
-    -webkit-tap-highlight-color: transparent;
+    padding-bottom: 2px; /* centra flechita */
   }
 
-  /* centra óptico la flecha sin <span> */
-  #trabajos .works-arrow{ padding-bottom: 2px; }
+  #trabajos .works-stage .works-arrow--prev{ margin-right: auto; }
+  #trabajos .works-stage .works-arrow--next{ margin-left: auto; }
 
-  #trabajos .works-arrow--prev{ margin-right: auto; }
-  #trabajos .works-arrow--next{ margin-left: auto; }
-
-  #trabajos .works-arrow[hidden]{ display:none !important; }
+  #trabajos .works-stage .works-arrow[hidden]{ display:none !important; }
 }
 
 
@@ -2635,7 +2644,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   <div class="works-split">
 
    <!-- Mockups verticales -->
- <div class="works-shots" aria-label="Nuestros trabajos (carrusel)">
+ <div class="works-stage" aria-label="Nuestros trabajos (carrusel)">
    <!-- Nueva landing VIACLOUDSTUDIO -->
   <button class="works-shot is-active" data-project="viacloud" type="button">
     <span class="works-float">
