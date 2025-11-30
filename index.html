@@ -883,7 +883,7 @@ header::after{
 
     /* +padding TOP para que el scale no corte arriba */
     padding: 34px 56px 96px !important;
-    margin: 0 -16px;
+    scroll-padding-inline: 86px;    /* <- centra sin pegarse a bordes */
   }
 
   #trabajos .works-shots::-webkit-scrollbar{ display:none; }
@@ -926,22 +926,24 @@ header::after{
     -webkit-mask-image: -webkit-radial-gradient(white, black);
   }
 
-  /* Imagen */
-  #trabajos .works-clip > img{
-    display: block;
-    width: min(86vw, 360px);
-    max-width: none;
-    height: auto;
+  /* más “bajita” (probar 4/5 o 3/4) */
+#trabajos .works-clip{
+  aspect-ratio: 4 / 5;          /* <- baja el alto */
+  max-height: 70vh;             /* <- evita que se dispare */
+}
 
-    background: transparent !important;
+/* la imagen se adapta al frame y entra completa */
+#trabajos .works-clip > img{
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important; /* <- NO recorta ancho */
+  display: block !important;
 
-    /* micro-zoom tapa el “hairline gap” (triangulito) */
-    transform: scale(1.01) translateZ(0);
-
-    /* recorte extra (por si el render hace bleeding) */
-    clip-path: inset(0 round 26px);
-    -webkit-clip-path: inset(0 round 26px);
-  }
+  background: transparent !important;
+  transform: scale(1.01) translateZ(0);
+  clip-path: inset(0 round 26px);
+  -webkit-clip-path: inset(0 round 26px);
+}
 
   /* Zoom al activo */
   #trabajos .works-shot.is-active .works-float{
