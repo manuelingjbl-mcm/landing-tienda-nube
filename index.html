@@ -2441,6 +2441,23 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
     
+@media (max-width: 767.98px){
+
+  /* SUBIR logo + hamburguesa */
+  .site-header{
+    padding-top: 10px; /* <- subí/bajá acá (8–16px suele ir bien) */
+  }
+
+  /* alternativamente o adicionalmente, mueve solo la fila */
+  .site-header .logo-row{
+    transform: translateY(-6px); /* <- sube 6px (probá -4 a -12) */
+  }
+
+  /* si al subir cambia el dropdown, acompaño el offset */
+  #site-nav.nav{
+    top: calc(100% + 8px); /* antes 10px */
+  }
+}
  
     
   </style>
