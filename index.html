@@ -850,8 +850,8 @@ header::after{
 @media (max-width: 900px){
 
   :root{
-    --works-card-w: 92vw;     /* <-- tamaño de la card (bajá a 88vw si querés más chica) */
-    --works-gap: 14px;        /* <-- separación real entre cards */
+    --works-card-w: 92vw;     /* bajá a 88vw si querés más chica */
+    --works-gap: 14px;
     --works-radius: 26px;
   }
 
@@ -872,6 +872,8 @@ header::after{
 
   /* Carrusel */
   #trabajos .works-shots{
+    position: relative; /* ancla para flechas */
+
     display: flex;
     justify-content: flex-start;
     gap: var(--works-gap);
@@ -893,6 +895,11 @@ header::after{
     overscroll-behavior-x: contain;
     touch-action: pan-x pan-y !important;
     margin: 0 !important;
+
+    /* Vars para cálculo de flechas (match con tu padding real) */
+    --worksTop: 26px;
+    --worksBottom: 60px;
+    --worksArrowShift: 0px; /* + baja / - sube */
   }
   #trabajos .works-shots::-webkit-scrollbar{ display:none; }
 
@@ -916,23 +923,25 @@ header::after{
   #trabajos .works-float{
     display: block;
     border-radius: var(--works-radius);
-    box-shadow: none !important;        /* <-- sin sombras */
+    box-shadow: none !important;
     transition: transform .18s ease;
     transform-origin: center;
   }
 
-  /* Clip real (si existe works-clip) */
+  /* Clip real */
   #trabajos .works-clip{
     display: block;
     border-radius: var(--works-radius);
     overflow: hidden;
-    background: inherit;                 /* <-- evita “borde” claro en algunos Android */
+    background: inherit;
     -webkit-mask-image: -webkit-radial-gradient(white, black);
     backface-visibility: hidden;
     transform: translateZ(0);
+
+    aspect-ratio: 8 / 14;   /* más alto (si querés apenas menos: 9/15) */
+    max-height: 78vh;
   }
 
-  /* Si NO tenés works-clip en el HTML, igual recortamos el <img> */
   #trabajos .works-float > img,
   #trabajos .works-clip > img{
     width: 100% !important;
@@ -942,21 +951,14 @@ header::after{
     border-radius: var(--works-radius);
     background: transparent !important;
 
-    /* anti “hairline/triangulito” */
     transform: translateZ(0);
     clip-path: inset(0 round var(--works-radius));
     -webkit-clip-path: inset(0 round var(--works-radius));
   }
 
-  /* Tu ratio “más alto” (ajustalo acá) */
-  #trabajos .works-clip{
-    aspect-ratio: 8 / 14;   /* <-- más alto (si querés apenas menos: 9/15) */
-    max-height: 78vh;
-  }
-
-  /* Zoom al activo (suave, sin romper nada) */
+  /* Zoom al activo */
   #trabajos .works-shot.is-active .works-float{
-    transform: scale(1.06); /* <-- subí a 1.08 si querés un toque más */
+    transform: scale(1.06);
     z-index: 2;
     position: relative;
   }
@@ -967,39 +969,27 @@ header::after{
     transform: none;
   }
 
-   /* el bloque completo donde viven shots+arrows tiene que ser referencia */
-  #trabajos .works-split{
-    position: relative;
-  }
-
   /* ============ ARROWS (MOBILE) ============ */
- /* ancla: que el absolute se posicione respecto al carrusel */
-#trabajos .works-shots{
-    position: relative;
-    --worksTop: 80px;     /* == tu padding-top del carrusel (ajustá) */
-    --worksBottom: 60px;  /* == tu padding-bottom del carrusel (ajustá) */
-   }
-
-  /* Overlay de flechas: ocupa el "alto útil" del carrusel y centra verticalmente */
   #trabajos .works-arrows{
     position: absolute;
     left: 0;
     right: 0;
-    top: var(--worksTop);
-    bottom: var(--worksBottom);
-
     z-index: 6;
 
-    display: flex;
-    align-items: center;              /* centra vertical */
-    justify-content: space-between;   /* una a cada lado */
+    top: calc(
+      var(--worksTop) + (100% - var(--worksTop) - var(--worksBottom)) / 2 + var(--worksArrowShift)
+    );
+    transform: translateY(-50%);
 
-    padding: 0 12px;                 /* aire a los laterales */
-    pointer-events: none;            /* no bloquea el swipe */
+    display: flex;
+    justify-content: flex-start; /* con 1 botón visible no se pega mal */
+    padding: 0 12px;
+
+    pointer-events: none;
   }
 
   #trabajos .works-arrow{
-    pointer-events: auto;            /* vuelve clickeables */
+    pointer-events: auto;
     width: 48px;
     height: 48px;
     border-radius: 999px;
@@ -1016,21 +1006,20 @@ header::after{
     font-size: 22px;
     line-height: 1;
     padding: 0;
-
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* Mini ajuste óptico de la flecha (si tu HTML tiene <span> dentro) */
+  #trabajos .works-arrow--prev{ margin-right: auto; }
+  #trabajos .works-arrow--next{ margin-left: auto; }
+
   #trabajos .works-arrow > span{
     display: block;
     transform: translateY(-1px);
   }
 
-  /* Respeta hidden del JS (primero / último slide) */
-  #trabajos .works-arrow[hidden]{
-    display: none !important;
-  }
+  #trabajos .works-arrow[hidden]{ display:none !important; }
 }
+
 
     
     /* PARTNERS */
@@ -2679,16 +2668,18 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     <span class="works-float">
     <span class="works-clip">
     <img src="distri-home.png" alt="Newsletter DISTRI HOME">
-  </span>
-  </span>
+    </span>
+   </span>
   </button>
   </div>
 
- <div class="works-arrows" aria-hidden="false">
+  <div class="works-arrows" aria-hidden="false">
     <button class="works-arrow works-arrow--prev" type="button" aria-label="Anterior">‹</button>
     <button class="works-arrow works-arrow--next" type="button" aria-label="Siguiente">›</button>
   </div>
+  </div>
 
+ 
 <!-- Texto que cambia -->
 <div class="works-copy" id="works-copy">
   <p class="works-tag" id="works-tag">Landing Tienda Nube</p>
