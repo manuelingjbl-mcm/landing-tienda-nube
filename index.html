@@ -847,31 +847,23 @@ header::after{
 }
 
 
-/* ===== WORKS ARROWS: DESKTOP OFF (solo desktop) ===== */
-@media (min-width: 901px){
-  #trabajos .works-arrows{ display: none !important; }
-}
-
-/* ===== WORKS (MOBILE): carrusel horizontal + copy arriba (SOLID / sin halo / sin corte) ===== */
+/* ===== WORKS (MOBILE): carrusel horizontal + copy arriba (SOLID) ===== */
 @media (max-width: 900px){
 
-  /* Variables SOLO para #trabajos (evita efectos colaterales) */
-  #trabajos{
-    --works-card-w: 92vw;     /* bajá a 88vw si querés más chica */
+  :root{
+    --works-card-w: 92vw;
     --works-gap: 14px;
     --works-radius: 26px;
   }
 
-  /* Mobile layout SOLO dentro de #trabajos */
-  #trabajos .works-split{
+  .works-split{
     grid-template-columns: 1fr;
     gap: 18px;
     align-items: start;
   }
-  #trabajos .works-copy{ order: 1; }
-  #trabajos .works-shots{ order: 2; }
+  .works-copy{ order: 1; }
+  .works-shots{ order: 2; }
 
-  /* que ningún padre recorte */
   #trabajos,
   #trabajos .wrapper,
   #trabajos .works-split{
@@ -880,7 +872,7 @@ header::after{
 
   /* Carrusel */
   #trabajos .works-shots{
-    position: relative; /* ancla para flechas */
+    position: relative; /* ancla de flechas */
 
     display: flex;
     justify-content: flex-start;
@@ -892,11 +884,9 @@ header::after{
 
     scroll-snap-type: x mandatory;
 
-    /* centra 1 card sin JS */
     padding-left: max(16px, calc((100vw - var(--works-card-w)) / 2)) !important;
     padding-right: max(16px, calc((100vw - var(--works-card-w)) / 2)) !important;
 
-    /* aire arriba/abajo para que no corte */
     padding-top: 26px !important;
     padding-bottom: 60px !important;
 
@@ -904,16 +894,14 @@ header::after{
     touch-action: pan-x pan-y !important;
     margin: 0 !important;
 
-    /* Vars para cálculo de flechas (match con tu padding real) */
+    /* vars para centrar flechas SOLO sobre el área útil (sin padding) */
     --worksTop: 26px;
     --worksBottom: 60px;
-
-    /* AJUSTE FINO: + baja / - sube */
-    --worksArrowShift: 0px;
+    --worksArrowShift: 0px; /* + baja / - sube */
   }
+
   #trabajos .works-shots::-webkit-scrollbar{ display:none; }
 
-  /* Botón/tarjeta */
   #trabajos .works-shot{
     flex: 0 0 var(--works-card-w);
     scroll-snap-align: center;
@@ -929,7 +917,6 @@ header::after{
     touch-action: pan-x pan-y !important;
   }
 
-  /* “Card sólida”: SIN sombra */
   #trabajos .works-float{
     display: block;
     border-radius: var(--works-radius);
@@ -938,7 +925,6 @@ header::after{
     transform-origin: center;
   }
 
-  /* Clip real */
   #trabajos .works-clip{
     display: block;
     border-radius: var(--works-radius);
@@ -952,31 +938,27 @@ header::after{
     max-height: 78vh;
   }
 
-  #trabajos .works-float > img,
   #trabajos .works-clip > img{
     width: 100% !important;
-    height: auto !important;
+    height: 100% !important;
     display: block !important;
+    object-fit: contain !important;
 
-    border-radius: var(--works-radius);
     background: transparent !important;
-
     transform: translateZ(0);
+
     clip-path: inset(0 round var(--works-radius));
     -webkit-clip-path: inset(0 round var(--works-radius));
   }
 
-  /* Zoom al activo */
   #trabajos .works-shot.is-active .works-float{
     transform: scale(1.06);
-    z-index: 2;
     position: relative;
+    z-index: 2;
   }
 
   #trabajos .works-shot:not(.is-active){
     opacity: .92;
-    filter: none;
-    transform: none;
   }
 
   /* ============ ARROWS (MOBILE) ============ */
@@ -992,7 +974,7 @@ header::after{
     transform: translateY(-50%);
 
     display: flex;
-    justify-content: flex-start; /* con 1 botón visible no se pega mal */
+    justify-content: flex-start; /* evita “pegado” raro cuando uno está hidden */
     padding: 0 12px;
 
     pointer-events: none;
@@ -1013,11 +995,15 @@ header::after{
     border: 1px solid rgba(17,24,39,.14);
     box-shadow: 0 12px 26px rgba(15,23,42,.22);
 
-    font-size: 22px;
+    font-size: 26px;     /* más legible */
     line-height: 1;
     padding: 0;
+
     -webkit-tap-highlight-color: transparent;
   }
+
+  /* centra óptico la flecha sin <span> */
+  #trabajos .works-arrow{ padding-bottom: 2px; }
 
   #trabajos .works-arrow--prev{ margin-right: auto; }
   #trabajos .works-arrow--next{ margin-left: auto; }
