@@ -967,39 +967,43 @@ header::after{
     transform: none;
   }
 
-  /* flechas encima del carrusel (no arriba del texto) */
+  /* Para posicionar flechas encima del carrusel */
   #trabajos .works-shots{ position: relative; }
 
+  /* Capa contenedora */
   #trabajos .works-arrows{
     position: absolute;
     left: 0; right: 0;
     top: 50%;
     transform: translateY(-50%);
-    display: flex;
-    justify-content: space-between;
-    padding: 0 10px;
     z-index: 6;
-    pointer-events: none; /* no bloquea el swipe/scroll */
+    pointer-events: none; /* solo clic en botones */
   }
 
+  /* Botones */
   #trabajos .works-arrow{
-    pointer-events: auto; /* el botón sí clickeable */
+    pointer-events: auto;
     width: 44px;
     height: 44px;
     border-radius: 999px;
     border: 0;
-    background: rgba(17,24,39,.55);
-    color: #fff;
+    background: rgba(255,255,255,.95); /* círculo blanco */
+    color: #111827;                   /* flecha negra */
+    box-shadow: 0 12px 30px rgba(0,0,0,.18);
+    display:flex;
+    align-items:center;
+    justify-content:center;
     font-size: 22px;
     line-height: 1;
-    display: grid;
-    place-items: center;
     -webkit-tap-highlight-color: transparent;
-    backdrop-filter: blur(6px);
   }
 
-  /* ocultar cuando lo setea el JS */
-  #trabajos .works-arrow[hidden]{ display: none !important; }
+  /* Ubicación izquierda/derecha */
+  #trabajos .works-arrow--prev{ position:absolute; left: 10px; }
+  #trabajos .works-arrow--next{ position:absolute; right: 10px; }
+
+  /* Opcional: un poquito más “pro” */
+  #trabajos .works-arrow:active{ transform: scale(.96); }
 }
 }
 
@@ -3377,92 +3381,75 @@ document.addEventListener("DOMContentLoaded", () => {
   const nextBtn = document.querySelector("#trabajos .works-arrow--next");
   if (!track || shots.length < 2 || !prevBtn || !nextBtn) return;
 
-  function center(btn, smooth=true){
-    const trackRect = track.getBoundingClientRect();
-    const btnRect = btn.getBoundingClientRect();
-    const delta = (btnRect.left - trackRect.left) - (trackRect.width/2 - btnRect.width/2);
-    track.scrollTo({ left: track.scrollLeft + delta, behavior: smooth ? "smooth" : "auto" });
-  }
-
-  function getActiveIndex(){
-    const i = shots.findIndex(b => b.classList.contains("is-active"));
-    return i >= 0 ? i : 0;
-  }
-
-  function go(dir){
-    const i = getActiveIndex();
-    const next = (i + dir + shots.length) % shots.length;
-
-    // esto mantiene tu lógica: is-active + texto (porque dispara tu listener existente)
-    shots[next].click();
-    center(shots[next], true);
-  }
-
-  prevBtn.addEventListener("click", () => go(-1));
-  nextBtn.addEventListener("click", () => go( 1));
-
-  // si querés que al cargar quede centrada la activa:
-  setTimeout(() => center(shots[getActiveIndex()], false), 60);
-});
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  if (!matchMedia("(max-width: 900px)").matches) return;
-
-  const track = document.querySelector("#trabajos .works-shots");
-  const shots = Array.from(document.querySelectorAll("#trabajos .works-shots .works-shot"));
-  const prevBtn = document.querySelector("#trabajos .works-arrow--prev");
-  const nextBtn = document.querySelector("#trabajos .works-arrow--next");
-  if (!track || shots.length < 2 || !prevBtn || !nextBtn) return;
-
-  function center(btn, smooth=true){
-    const trackRect = track.getBoundingClientRect();
-    const btnRect = btn.getBoundingClientRect();
-    const delta = (btnRect.left - trackRect.left) - (trackRect.width/2 - btnRect.width/2);
-    track.scrollTo({ left: track.scrollLeft + delta, behavior: smooth ? "smooth" : "auto" });
-  }
+  const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
 
   function activeIndex(){
     const i = shots.findIndex(b => b.classList.contains("is-active"));
     return i >= 0 ? i : 0;
   }
 
-  function updateArrows(){
-    const i = activeIndex();
-    prevBtn.hidden = (i === 0);
-    nextBtn.hidden = (i === shots.length - 1);
+  function center(btn, smooth = true){
+    const trackRect = track.getBoundingClientRect();
+    const btnRect = btn.getBoundingClientRect();
+    const delta = (btnRect.left - trackRect.left) - (trackRect.width/2 - btnRect.width/2);
+    track.scrollTo({ left: track.scrollLeft + delta, behavior: smooth ? "smooth" : "auto" });
   }
 
-  prevBtn.addEventListener("click", () => {
+  function updateArrows(){
     const i = activeIndex();
-    if (i <= 0) return;
-    shots[i - 1].click();     // usa tu lógica (is-active + texto)
-    center(shots[i - 1], true);
+    prevBtn.hidden = (i === 0);                 // en el primero, NO prev
+    nextBtn.hidden = (i === shots.length - 1);  // en el último, NO next
+  }
+
+  function setActive(i, smooth = true){
+    i = clamp(i, 0, shots.length - 1);
+    shots[i].click();              // dispara tu setProject() y setea is-active
+    center(shots[i], smooth);
     updateArrows();
+  }
+
+  prevBtn.addEventListener("click", () => setActive(activeIndex() - 1, true));
+  nextBtn.addEventListener("click", () => setActive(activeIndex() + 1, true));
+
+  // click directo a una card: centrar + flechas
+  shots.forEach(btn => {
+    btn.addEventListener("click", () => {
+      center(btn, true);
+      updateArrows();
+    }, { passive: true });
   });
 
-  nextBtn.addEventListener("click", () => {
-    const i = activeIndex();
-    if (i >= shots.length - 1) return;
-    shots[i + 1].click();
-    center(shots[i + 1], true);
-    updateArrows();
-  });
-
-  // cuando cambia por click directo en la card
-  shots.forEach(btn => btn.addEventListener("click", updateArrows, { passive:true }));
-
-  // cuando cambia por swipe (si tu script hace click al “más centrado”, esto también se actualiza)
+  // swipe: al terminar, activar la más centrada
   let t = null;
   track.addEventListener("scroll", () => {
     clearTimeout(t);
-    t = setTimeout(updateArrows, 120);
-  }, { passive:true });
+    t = setTimeout(() => {
+      const trackRect = track.getBoundingClientRect();
+      const centerX = trackRect.left + trackRect.width / 2;
 
-  updateArrows(); // estado inicial
+      let best = shots[0], bestD = Infinity;
+      shots.forEach(btn => {
+        const r = btn.getBoundingClientRect();
+        const mid = r.left + r.width / 2;
+        const d = Math.abs(mid - centerX);
+        if (d < bestD) { bestD = d; best = btn; }
+      });
+
+      if (!best.classList.contains("is-active")) best.click();
+      center(best, false);
+      updateArrows();
+    }, 120);
+  }, { passive: true });
+
+  // init
+  setTimeout(() => {
+    center(shots[activeIndex()], false);
+    updateArrows();
+  }, 60);
 });
 </script>
+
+
 
     
 </body>
