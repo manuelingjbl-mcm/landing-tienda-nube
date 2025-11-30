@@ -1014,6 +1014,11 @@ header::after{
   /* mini ajuste óptico para que la flecha quede “perfecta” al centro */
   #trabajos .works-arrow{ transform: translateY(-1px); }
 }
+
+/* RESPETAR hidden aunque .works-arrow tenga display */
+#trabajos .works-arrow[hidden]{
+  display:none !important;
+}
 }
 
     
@@ -3382,17 +3387,12 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   if (!matchMedia("(max-width: 900px)").matches) return;
 
-  const section = document.querySelector("#trabajos");
-  const track   = section?.querySelector(".works-shots");
-  const shots   = Array.from(section?.querySelectorAll(".works-shots .works-shot") || []);
-  const prevBtn = section?.querySelector(".works-arrow--prev");
-  const nextBtn = section?.querySelector(".works-arrow--next");
-  const arrows  = section?.querySelector(".works-arrows");
-
-  if (!section || !track || shots.length < 2 || !prevBtn || !nextBtn || !arrows) return;
-
-  let current = Math.max(0, shots.findIndex(b => b.classList.contains("is-active")));
-  let programmatic = false;
+  const root   = document.querySelector("#trabajos");
+  const track  = root?.querySelector(".works-shots");
+  const shots  = Array.from(root?.querySelectorAll(".works-shots .works-shot") || []);
+  const prevBtn = root?.querySelector(".works-arrow--prev");
+  const nextBtn = root?.querySelector(".works-arrow--next");
+  if (!track || shots.length < 2 || !prevBtn || !nextBtn) return;
 
   function center(btn, smooth=true){
     const trackRect = track.getBoundingClientRect();
@@ -3403,94 +3403,55 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function activeIndex(){
     const i = shots.findIndex(b => b.classList.contains("is-active"));
-    return i >= 0 ? i : current;
+    return i >= 0 ? i : 0;
   }
 
-  function clampIndex(i){
-    return Math.max(0, Math.min(shots.length - 1, i));
+  function updateArrows(){
+    const i = activeIndex();
+    prevBtn.hidden = (i === 0);
+    nextBtn.hidden = (i === shots.length - 1);
   }
 
-  function updateArrows(i = activeIndex()){
-    prevBtn.classList.toggle("is-hidden", i <= 0);
-    nextBtn.classList.toggle("is-hidden", i >= shots.length - 1);
+  function goTo(i){
+    i = Math.max(0, Math.min(shots.length - 1, i));
+    shots[i].click();          // mantiene tu lógica (texto + is-active)
+    center(shots[i], true);
+    updateArrows();
   }
 
-  function updateArrowsY(i = activeIndex()){
-    // baja/sube las flechas a la altura del “frame” de la imagen activa
-    const clip = shots[i]?.querySelector(".works-clip") || shots[i];
-    const clipRect = clip.getBoundingClientRect();
-    const splitRect = section.querySelector(".works-split")?.getBoundingClientRect();
-    if (!splitRect) return;
+  prevBtn.addEventListener("click", () => goTo(activeIndex() - 1));
+  nextBtn.addEventListener("click", () => goTo(activeIndex() + 1));
 
-    const y = (clipRect.top + clipRect.height * 0.5) - splitRect.top;
-    arrows.style.top = `${y}px`;
-  }
+  // si hacen click directo en una card
+  shots.forEach(btn => btn.addEventListener("click", () => {
+    setTimeout(() => { center(btn, true); updateArrows(); }, 0);
+  }, { passive:true }));
 
-  function setIndex(i, smooth=true){
-    const idx = clampIndex(i);
-    if (idx === current) return;
-
-    programmatic = true;
-    shots[idx].click();              // usa tu lógica existente (is-active + texto)
-    center(shots[idx], smooth);
-    current = idx;
-
-    // deja que tu handler marque is-active antes de recalcular
-    setTimeout(() => {
-      updateArrows(current);
-      updateArrowsY(current);
-      programmatic = false;
-    }, 60);
-  }
-
-  // Click en flechas: 1 a 1 (sin loop)
-  prevBtn.addEventListener("click", () => setIndex(activeIndex() - 1, true));
-  nextBtn.addEventListener("click", () => setIndex(activeIndex() + 1, true));
-
-  // Click en cards: centrar + refrescar flechas
-  shots.forEach((btn, idx) => {
-    btn.addEventListener("click", () => {
-      current = idx;
-      center(btn, true);
-      setTimeout(() => { updateArrows(current); updateArrowsY(current); }, 40);
-    }, { passive:true });
-  });
-
-  // Swipe: al soltar, detecta la más centrada y sincroniza flechas/estado
+  // si cambian por swipe: detecto la más centrada y la activo
   let t = null;
   track.addEventListener("scroll", () => {
-    if (programmatic) return;
     clearTimeout(t);
     t = setTimeout(() => {
-      const centerX = track.getBoundingClientRect().left + track.clientWidth / 2;
-      let bestI = 0, bestD = Infinity;
+      const centerX = track.getBoundingClientRect().left + track.clientWidth/2;
+      let best = 0, bestD = Infinity;
 
-      shots.forEach((btn, i) => {
+      shots.forEach((btn, idx) => {
         const r = btn.getBoundingClientRect();
-        const mid = r.left + r.width / 2;
+        const mid = r.left + r.width/2;
         const d = Math.abs(mid - centerX);
-        if (d < bestD){ bestD = d; bestI = i; }
+        if (d < bestD){ bestD = d; best = idx; }
       });
 
-      if (bestI !== current){
-        current = bestI;
-        shots[bestI].click();
-      }
-
-      updateArrows(current);
-      updateArrowsY(current);
+      if (!shots[best].classList.contains("is-active")) shots[best].click();
+      center(shots[best], false);
+      updateArrows();
     }, 120);
   }, { passive:true });
 
-  // Estado inicial
   setTimeout(() => {
-    center(shots[current], false);
-    updateArrows(current);
-    updateArrowsY(current);
-  }, 80);
-
-  // Si cambia el tamaño, recalcular altura de flechas
-  window.addEventListener("resize", () => updateArrowsY(current), { passive:true });
+    center(shots[activeIndex()], false);
+    updateArrows();
+  }, 60);
 });
 </script>
 
