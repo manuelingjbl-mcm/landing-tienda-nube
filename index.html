@@ -968,7 +968,7 @@ header::after{
   }
 }
 
-
+    
 
     
     /* PARTNERS */
@@ -2384,7 +2384,44 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
     
- 
+ @media (max-width: 900px){
+  #trabajos{ position: relative; }
+
+  /* contenedor flotante (no bloquea el scroll) */
+  #trabajos .works-arrows{
+    position: absolute;
+    left: 0; right: 0;
+    top: 56%;                 /* ajustá si querés más arriba/abajo */
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  #trabajos .works-arrow{
+    pointer-events: auto;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    border: 0;
+    background: rgba(17,24,39,.72);
+    color: #fff;
+    font-size: 26px;
+    line-height: 44px;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 12px 26px rgba(0,0,0,.25);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  #trabajos .works-arrow:active{ transform: scale(.96); }
+
+  /* opcional: ocultarlas si preferís en pantallas muy chicas */
+  /* @media (max-width: 360px){ #trabajos .works-arrows{ display:none; } } */
+}
+
     
   </style>
 </head>
@@ -2621,6 +2658,11 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   </span>
   </button>
 </div>
+
+    <div class="works-arrows" aria-hidden="false">
+    <button class="works-arrow works-arrow--prev" type="button" aria-label="Anterior">‹</button>
+    <button class="works-arrow works-arrow--next" type="button" aria-label="Siguiente">›</button>
+  </div>
 
 <!-- Texto que cambia -->
 <div class="works-copy" id="works-copy">
@@ -3327,6 +3369,44 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  if (!matchMedia("(max-width: 900px)").matches) return;
+
+  const track = document.querySelector("#trabajos .works-shots");
+  const shots = Array.from(document.querySelectorAll("#trabajos .works-shots .works-shot"));
+  const prevBtn = document.querySelector("#trabajos .works-arrow--prev");
+  const nextBtn = document.querySelector("#trabajos .works-arrow--next");
+  if (!track || shots.length < 2 || !prevBtn || !nextBtn) return;
+
+  function center(btn, smooth=true){
+    const trackRect = track.getBoundingClientRect();
+    const btnRect = btn.getBoundingClientRect();
+    const delta = (btnRect.left - trackRect.left) - (trackRect.width/2 - btnRect.width/2);
+    track.scrollTo({ left: track.scrollLeft + delta, behavior: smooth ? "smooth" : "auto" });
+  }
+
+  function getActiveIndex(){
+    const i = shots.findIndex(b => b.classList.contains("is-active"));
+    return i >= 0 ? i : 0;
+  }
+
+  function go(dir){
+    const i = getActiveIndex();
+    const next = (i + dir + shots.length) % shots.length;
+
+    // esto mantiene tu lógica: is-active + texto (porque dispara tu listener existente)
+    shots[next].click();
+    center(shots[next], true);
+  }
+
+  prevBtn.addEventListener("click", () => go(-1));
+  nextBtn.addEventListener("click", () => go( 1));
+
+  // si querés que al cargar quede centrada la activa:
+  setTimeout(() => center(shots[getActiveIndex()], false), 60);
+});
+</script>
 
 
     
