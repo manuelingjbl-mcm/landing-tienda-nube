@@ -2498,6 +2498,30 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
 
 
+/* LOGO IMG (responsive) */
+.site-header .logo{
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;           /* evita “saltos” por baseline */
+  text-decoration: none;
+}
+
+.site-header .logo img{
+  display: block;
+  height: clamp(22px, 3.2vw, 34px); /* responsive */
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* MOBILE tweak: un pelín más chico y con aire */
+@media (max-width: 767.98px){
+  .site-header .logo img{
+    height: 24px;           /* ajustá 22–28px si querés */
+  }
+}
+
+    
     
   </style>
 </head>
@@ -2507,8 +2531,10 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 <header class="site-header">
   <div class="header-inner">
     <div class="logo-row">
-      <div class="logo">viacloudstudio</div>
-
+    <a class="logo" href="#top" aria-label="VIACLOUDSTUDIO (Inicio)">
+  <img src="vclouds-logo.png" alt="VIACLOUDSTUDIO" decoding="async" loading="eager">
+</a>
+      
 <!-- Botón hamburguesa (label) -->
 <input id="nav-toggle" class="nav-toggle" type="checkbox" aria-hidden="true">
 <label for="nav-toggle" class="menu-toggle" aria-label="Abrir menú" aria-controls="site-nav">
