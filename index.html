@@ -2932,40 +2932,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
 
       <!-- COLUMNA DERECHA: FORMULARIO -->
-      <form id="contact-form" method="POST">
-        <input type="hidden" name="_subject"
-               value="Consulta desde landing VIACLOUDSTUDIO" />
+      <form id="contact-form"
+      method="POST"
+      action="https://formspree.io/f/mzzodepb">
 
-        <div>
-          <label>Nombre y marca</label>
-          <input type="text" name="nombre_marca"
-                 placeholder="Nombre y marca" required />
-        </div>
+  <input type="hidden" name="_subject"
+         value="Consulta desde landing VIACLOUDSTUDIO" />
 
-        <div>
-          <label>Email</label>
-          <input type="email" name="email"
-                 placeholder="Email" required />
-        </div>
+  <div>
+    <label>Nombre y marca</label>
+    <input type="text" name="nombre_marca"
+           placeholder="Nombre y marca" required />
+  </div>
 
-        <div>
-          <label>Instagram o sitio actual</label>
-          <input type="text" name="instagram_sitio"
-                 placeholder="Instagram o sitio actual" />
-        </div>
+  <div>
+    <label>Email</label>
+    <input type="email" name="email"
+           placeholder="Email" required />
+  </div>
 
-        <div>
-          <label>Contanos brevemente qué necesitás</label>
-          <textarea name="mensaje"
-                    placeholder="Contanos brevemente qué necesitás"
-                    required></textarea>
-        </div>
+  <div>
+    <label>Instagram o sitio actual</label>
+    <input type="text" name="instagram_sitio"
+           placeholder="Instagram o sitio actual" />
+  </div>
 
-        <button type="submit">Enviar consulta</button>
+  <div>
+    <label>Contanos brevemente qué necesitás</label>
+    <textarea name="mensaje"
+              placeholder="Contanos brevemente qué necesitás"
+              required></textarea>
+  </div>
 
-        <!-- Mensaje de estado -->
-        <p id="form-status" class="form-status" aria-live="polite"></p>
-      </form>
+  <button type="submit">Enviar consulta</button>
+
+  <p id="form-status" class="form-status" aria-live="polite"></p>
+     </form>
     </div> <!-- /contact-grid -->
   </div> <!-- /wrapper -->
  </section>
