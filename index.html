@@ -2984,70 +2984,121 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- SCRIPT ANIMACIONES + FORM + MENÚ -->
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-  /* ==== ANIMACIONES SCROLL ==== */
+document.addEventListener('DOMContentLoaded', () => {
+  /* =========================
+     ANIMACIONES SCROLL
+  ========================== */
   const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('reveal-visible');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  reveals.forEach(el => observer.observe(el));
+  if (reveals.length) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
 
-  /* ==== ENVÍO DE FORMULARIO A FORMSPREE SIN REDIRECT ==== */
+    reveals.forEach(el => observer.observe(el));
+  }
+
+  /* =========================
+     FORM -> FORMSPREE (AJAX)
+  ========================== */
   const form = document.getElementById('contact-form');
   const statusEl = document.getElementById('form-status');
   if (!form || !statusEl) return;
 
-  // Si el form no tiene action, frenamos y avisamos (evita “romperse silenciosamente”)
+  // botón submit (si existe) para bloquear doble envío
+  const submitBtn = form.querySelector('[type="submit"]');
+
+  const setStatus = (msg, type) => {
+    statusEl.textContent = msg;
+    statusEl.className = 'form-status';
+    if (type) statusEl.classList.add(`form-status--${type}`);
+  };
+
+  // Validación mínima
   if (!form.action) {
-    statusEl.textContent = 'Falta configurar el formulario (action). Contactanos por WhatsApp.';
-    statusEl.classList.add('form-status--error');
+    setStatus('Falta configurar el formulario (action). Contactanos por WhatsApp.', 'error');
     return;
   }
 
+  // Evita dobles envíos
+  let isSending = false;
+
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
+    if (isSending) return;
 
-    const data = new FormData(form);
-    statusEl.textContent = 'Enviando tu consulta...';
-    statusEl.className = 'form-status';
+    isSending = true;
+    if (submitBtn) submitBtn.disabled = true;
+
+    setStatus('Enviando tu consulta...', '');
+
+    // Timeout para evitar quedarse colgado
+    const controller = new AbortController();
+    const timeoutMs = 12000;
+    const t = setTimeout(() => controller.abort(), timeoutMs);
 
     try {
+      const data = new FormData(form);
+
       const response = await fetch(form.action, {
         method: (form.method || 'POST').toUpperCase(),
         headers: { 'Accept': 'application/json' },
-        body: data
+        body: data,
+        signal: controller.signal
       });
 
+      clearTimeout(t);
+
+      // ✅ Éxito
       if (response.ok) {
-        statusEl.textContent = '¡Gracias! Tu consulta fue enviada con éxito. Te responderemos a la brevedad.';
-        statusEl.classList.add('form-status--ok');
+        setStatus('¡Gracias! Tu consulta fue enviada con éxito. Te responderemos a la brevedad.', 'ok');
         form.reset();
         return;
       }
 
-      let errText = 'Ups, hubo un error al enviar. Probá de nuevo o escribinos por WhatsApp.';
+      // ❌ Error con respuesta (Formspree suele devolver JSON)
+      let errText = `Error ${response.status}. Probá de nuevo o escribinos por WhatsApp.`;
       try {
         const errJson = await response.json();
         if (errJson?.errors?.length) {
           errText = errJson.errors.map(e => e.message).join(' | ');
         }
-      } catch (e) {}
+      } catch (_) {
+        // Si no hay JSON, intentamos texto plano
+        try {
+          const errPlain = await response.text();
+          if (errPlain) errText = `${errText} (${errPlain.slice(0, 140)})`;
+        } catch (_) {}
+      }
 
-      statusEl.textContent = errText;
-      statusEl.classList.add('form-status--error');
+      setStatus(errText, 'error');
 
     } catch (error) {
-      statusEl.textContent = 'No pudimos enviar el formulario. Revisá tu conexión o contáctanos por WhatsApp.';
-      statusEl.classList.add('form-status--error');
+      clearTimeout(t);
+
+      // 🔎 Diagnóstico PRO
+      const isAbort = error?.name === 'AbortError';
+      const msg =
+        isAbort
+          ? 'Se agotó el tiempo de envío (timeout). Probá de nuevo o escribinos por WhatsApp.'
+          : `No pudimos enviar el formulario (bloqueo de red/CORS/CSP). Probá en incógnito sin extensiones o escribinos por WhatsApp.`;
+
+      setStatus(msg, 'error');
+
+      // Log para ver el error real en consola (F12)
+      console.error('Form submit error:', error);
+    } finally {
+      isSending = false;
+      if (submitBtn) submitBtn.disabled = false;
     }
   });
 });
 </script>
+
 
  
 <script>
