@@ -3053,12 +3053,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
       clearTimeout(t);
 
-      // ✅ Éxito
       if (response.ok) {
-        setStatus('¡Gracias! Tu consulta fue enviada con éxito. Te responderemos a la brevedad.', 'ok');
-        form.reset();
-        return;
-      }
+
+  // ✅ EVENTO GA4 – FORMULARIO ENVIADO
+  if (window.gtag) {
+    gtag('event', 'form_submit', {
+      event_category: 'contact',
+      event_label: 'landing_form',
+      transport_type: 'beacon'
+    });
+  }
+
+  setStatus('¡Gracias! Tu consulta fue enviada con éxito. Te responderemos a la brevedad.', 'ok');
+  form.reset();
+  return;
+}
+
 
       // ❌ Error con respuesta (Formspree suele devolver JSON)
       let errText = `Error ${response.status}. Probá de nuevo o escribinos por WhatsApp.`;
