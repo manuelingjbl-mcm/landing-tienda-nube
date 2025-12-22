@@ -2895,7 +2895,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <!-- ICONOS + EMAIL -->
         <div class="contact-social-row">
-          <a class="contact-social-item"
+          <a class="contact-social-item js-whatsapp"
              href="https://wa.me/5491159288093"
              target="_blank" rel="noopener noreferrer">
             <span class="contact-social-icon">
@@ -3287,21 +3287,21 @@ document.addEventListener('DOMContentLoaded', () => {
     'https://wa.me/' + WHATSAPP_PHONE +
     '?text=' + encodeURIComponent(WHATSAPP_TEXT);
 
- function goToWhatsApp() {
+  document.addEventListener('DOMContentLoaded', () => {
+  const waLink = document.querySelector('.js-whatsapp');
+  if (!waLink) return;
 
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
-    event: 'whatsapp_click',
-    event_category: 'contact',
-    event_label: 'chat_whatsapp',
-    link_url: WHATSAPP_URL
+  waLink.addEventListener('click', () => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'whatsapp_click',
+      event_category: 'contact',
+      event_label: 'chat_whatsapp',
+      link_url: waLink.href
+    });
   });
+});
 
-  // micro delay para que GTM/GA4 alcance a enviar el hit
-  setTimeout(() => {
-    window.open(WHATSAPP_URL, '_blank');
-  }, 120);
-}
 
   const faqs = [
     {
