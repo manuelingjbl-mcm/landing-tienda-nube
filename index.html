@@ -3289,7 +3289,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
  function goToWhatsApp() {
 
-  // ✅ EVENTO PARA GTM/GA4 (recomendado cuando GA4 está vía GTM)
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
     event: 'whatsapp_click',
@@ -3298,10 +3297,11 @@ document.addEventListener('DOMContentLoaded', () => {
     link_url: WHATSAPP_URL
   });
 
-  // 👉 Abrimos WhatsApp
-  window.open(WHATSAPP_URL, '_blank');
+  // micro delay para que GTM/GA4 alcance a enviar el hit
+  setTimeout(() => {
+    window.open(WHATSAPP_URL, '_blank');
+  }, 120);
 }
-
 
   const faqs = [
     {
