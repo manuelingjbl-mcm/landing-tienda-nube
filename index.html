@@ -3287,25 +3287,21 @@ document.addEventListener('DOMContentLoaded', () => {
     'https://wa.me/' + WHATSAPP_PHONE +
     '?text=' + encodeURIComponent(WHATSAPP_TEXT);
 
-  /* =========================
-     FUNCIÓN: ENVIAR A WHATSAPP
-     + TRACKING GA4
-  ========================== */
+ function goToWhatsApp() {
 
-  function goToWhatsApp() {
+  // ✅ EVENTO PARA GTM/GA4 (recomendado cuando GA4 está vía GTM)
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: 'whatsapp_click',
+    event_category: 'contact',
+    event_label: 'chat_whatsapp',
+    link_url: WHATSAPP_URL
+  });
 
-    // 🔥 EVENTO GA4 (NO depende de GTM)
-    if (window.gtag) {
-      gtag('event', 'whatsapp_click', {
-        event_category: 'contact',
-        event_label: 'chat_whatsapp',
-        transport_type: 'beacon'
-      });
-    }
+  // 👉 Abrimos WhatsApp
+  window.open(WHATSAPP_URL, '_blank');
+}
 
-    // 👉 Abrimos WhatsApp
-    window.open(WHATSAPP_URL, '_blank');
-  }
 
   const faqs = [
     {
