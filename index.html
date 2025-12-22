@@ -3266,10 +3266,36 @@ document.addEventListener('DOMContentLoaded', () => {
   const faqsEl   = document.getElementById('vs-chat-faqs');
   const typingEl = document.getElementById('vs-chat-typing');
 
-  // 👉 reemplazá por tu número si hiciera falta
+  /* =========================
+     WHATSAPP CONFIG
+  ========================== */
+
+  const WHATSAPP_PHONE = '5491159288093';
+  const WHATSAPP_TEXT  = 'Hola, vengo desde la landing de VIA CLOUD STUDIO 🙂';
+
   const WHATSAPP_URL =
-    'https://wa.me/5491159288093?text=' +
-    encodeURIComponent('Hola, vengo desde la landing de VIA CLOUD STUDIO 🙂');
+    'https://wa.me/' + WHATSAPP_PHONE +
+    '?text=' + encodeURIComponent(WHATSAPP_TEXT);
+
+  /* =========================
+     FUNCIÓN: ENVIAR A WHATSAPP
+     + TRACKING GA4
+  ========================== */
+
+  function goToWhatsApp() {
+
+    // 🔥 EVENTO GA4 (NO depende de GTM)
+    if (window.gtag) {
+      gtag('event', 'whatsapp_click', {
+        event_category: 'contact',
+        event_label: 'chat_whatsapp',
+        transport_type: 'beacon'
+      });
+    }
+
+    // 👉 Abrimos WhatsApp
+    window.open(WHATSAPP_URL, '_blank');
+  }
 
   const faqs = [
     {
