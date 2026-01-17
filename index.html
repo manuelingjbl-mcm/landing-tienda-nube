@@ -1449,24 +1449,15 @@ section#trabajos .wrapper {
   text-decoration: none;
 }
 
-.contact-social-icon{
-  width: 24px;
-  height: 24px;
-  background: transparent;
-  border: 0;
-  padding: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.contact-social-icon img{
+.contact-social-icon img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: none;            /* importante: si tus PNG ya son blancos */
+  filter: invert(1);
+  opacity: .95;
 }
+
 
 /* Email debajo para copiar fácil */
 .contact-email-copy{
