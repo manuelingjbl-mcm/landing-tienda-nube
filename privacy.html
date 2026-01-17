@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <link rel="icon" href="/favicon.icon.png" sizes="any">
+  <link rel="apple-touch-icon" href="/favicon.icon.png">
+
+  <meta charset="UTF-8" />
+  <title>Política de Privacidad | VIA CLOUD STUDIO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="Política de Privacidad de VIA CLOUD STUDIO." />
+  <meta name="facebook-domain-verification" content="u8j1ch87vy74yb23zjmipdanqiswpn" />
+
+  <style>
+    :root{
+      --azul:#0056ff;
+      --azul-oscuro:#030712;
+      --gris:#f5f5f5;
+      --texto:#111827;
+      --radio:18px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--texto);
+      background:#ffffff;
+      line-height:1.5;
+    }
+    html{ scroll-behavior:smooth; }
+    a{text-decoration:none;color:inherit;}
+    img{max-width:100%;display:block;}
+
+    .wrapper{
+      max-width:1120px;
+      margin:0 auto;
+      padding:0 16px;
+    }
+
+    /* HEADER (versión compacta para páginas legales) */
+    header{
+      background:
+        radial-gradient(circle at top left, rgba(118,169,250,0.40) 0, transparent 45%),
+        linear-gradient(135deg,#020617 0%, #0033c7 20%, #5b21ff 55%);
+      color:#fff;
+      padding:18px 0;
+      position:relative;
+      overflow:hidden;
+    }
+    header::after{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background:
+        linear-gradient(180deg,rgba(3,7,18,0.80),rgba(3,7,18,0.60)),
+        url("bg-viacloudstudio-dev.jpg") center/cover no-repeat;
+      opacity:0.35;
+      mix-blend-mode:soft-light;
+      pointer-events:none;
+    }
+    .header-inner{
+      position:relative;
+      z-index:1;
+      max-width:1320px;
+      margin:0 auto;
+      padding:0 16px;
+    }
+    .logo-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .logo{
+      display:inline-flex;
+      align-items:center;
+      line-height:0;
+    }
+    .logo img{
+      height: 26px;
+      width:auto;
+      object-fit:contain;
+    }
+
+    .nav{
+      display:flex;
+      gap:18px;
+      font-size:14px;
+      opacity:.92;
+      align-items:center;
+    }
+    .nav a{
+      position:relative;
+      padding-bottom:4px;
+      color:#fff;
+      opacity:.95;
+    }
+    .nav a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:0;
+      width:0;
+      height:2px;
+      background:#ffffff;
+      transition:width .22s ease;
+    }
+    .nav a:hover::after{ width:100%; }
+
+    /* Botón pill */
+    .btn-pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 16px;
+      border-radius:999px;
+      background:#fff;
+      color:#111827;
+      font-weight:700;
+      font-size:13px;
+      border:0;
+      box-shadow:0 10px 30px rgba(0,0,0,.20);
+      white-space:nowrap;
+    }
+    .btn-pill:hover{ transform: translateY(-1px); }
+
+    /* Mobile menu (simple) */
+    .nav-toggle{
+      position:absolute;width:1px;height:1px;margin:-1px;border:0;opacity:0;overflow:hidden;clip:rect(0 0 0 0);
+    }
+    .menu-toggle{
+      display:none;
+      width:44px;height:44px;
+      align-items:center;justify-content:center;
+      flex-direction:column;gap:6px;
+      cursor:pointer;
+      -webkit-tap-highlight-color:transparent;
+      user-select:none;
+    }
+    .menu-toggle span{
+      display:block;
+      width:22px;height:2px;
+      background: rgba(255,255,255,.92);
+      border-radius: 2px;
+      transition: transform .22s ease, opacity .2s ease;
+    }
+
+    @media (max-width: 767.98px){
+      .menu-toggle{ display:inline-flex; }
+
+      #site-nav.nav{
+        position:absolute;
+        top:calc(100% + 10px);
+        left:16px;
+        right:16px;
+        padding:12px 14px;
+        border-radius:14px;
+        background:#050b2a;
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+        opacity:0;
+        pointer-events:none;
+        transform: translateY(-6px);
+        transition: opacity .22s ease, transform .22s ease;
+        box-shadow:0 18px 40px rgba(15,23,42,.35);
+      }
+      .nav-toggle:checked ~ #site-nav.nav{
+        opacity:1;
+        pointer-events:auto;
+        transform: translateY(0);
+      }
+      .nav a{ padding:8px 2px; }
+      .nav .btn-pill{ width:100%; }
+
+      .nav-toggle:checked + .menu-toggle span:nth-child(1){ transform: translateY(8px) rotate(45deg); }
+      .nav-toggle:checked + .menu-toggle span:nth-child(2){ opacity:0; }
+      .nav-toggle:checked + .menu-toggle span:nth-child(3){ transform: translateY(-8px) rotate(-45deg); }
+    }
+
+    /* MAIN legal */
+    main{
+      padding: 42px 0 64px;
+      background: #ffffff;
+    }
+    .legal-kicker{
+      font-size:12px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:#6b7280;
+      margin-bottom:12px;
+    }
+    .legal-title{
+      font-size: clamp(28px, 3vw, 42px);
+      line-height:1.12;
+      margin-bottom:10px;
+      color:#0f172a;
+    }
+    .legal-updated{
+      color:#6b7280;
+      font-size:13px;
+      margin-bottom:22px;
+    }
+
+    .legal-body{
+      max-width: 85ch;
+      line-height: 1.75;
+      color:#111827;
+    }
+    .legal-body h2{
+      margin: 22px 0 8px;
+      font-size: 18px;
+      color:#0f172a;
+    }
+    .legal-body p{ margin: 10px 0; color:#374151; }
+    .legal-body ul{ margin: 10px 0 10px 18px; color:#374151; }
+    .legal-body li{ margin: 6px 0; }
+
+    .legal-actions{
+      margin-top:28px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .btn-outline{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(17,24,39,.20);
+      color:#111827;
+      font-weight:700;
+      font-size:13px;
+      background:#fff;
+    }
+
+    /* Footer simple */
+    .footer-divider{
+      width:100%;
+      height:2px;
+      background: linear-gradient(to right, rgba(14,165,233,0), #0b63e8, rgba(14,165,233,0));
+    }
+    .footer{
+      background:#fff;
+      padding:16px 0 28px;
+      color:#6b7280;
+      font-size:12px;
+    }
+    .footer .row{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+  </style>
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PK8M6BPF');</script>
+  <!-- End Google Tag Manager -->
+</head>
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PK8M6BPF"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo-row">
+        <a class="logo" href="/" aria-label="VIACLOUDSTUDIO (Inicio)">
+          <img src="vclouds-logo.png" alt="VIACLOUDSTUDIO" decoding="async" loading="eager">
+        </a>
+
+        <input id="nav-toggle" class="nav-toggle" type="checkbox" aria-hidden="true">
+        <label for="nav-toggle" class="menu-toggle" aria-label="Abrir menú" aria-controls="site-nav">
+          <span></span><span></span><span></span>
+        </label>
+
+        <nav id="site-nav" class="nav" aria-label="Navegación">
+          <a href="/">Inicio</a>
+          <a href="/privacy.html" aria-current="page">Privacidad</a>
+          <a class="btn-pill" href="/#contacto">Agendar consultoría</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrapper">
+      <div class="legal-kicker">LEGAL</div>
+      <h1 class="legal-title">Política de Privacidad</h1>
+      <div class="legal-updated">Última actualización: 17/01/2026</div>
+
+      <div class="legal-body">
+        <p>
+          En VIA CLOUD STUDIO (“VIA CLOUD STUDIO”, “nosotros”) valoramos tu privacidad.
+          Esta Política describe qué datos recopilamos, cómo los usamos y qué derechos tenés
+          cuando visitás nuestro sitio web y te contactás por nuestros canales.
+        </p>
+
+        <h2>1. Responsable del tratamiento</h2>
+        <p>
+          Responsable: VIA CLOUD STUDIO.<br>
+          Contacto: <a href="mailto:viacloudstudio@gmail.com">viacloudstudio@gmail.com</a>
+        </p>
+
+        <h2>2. Datos que recopilamos</h2>
+        <p>Podemos recopilar los siguientes datos, según cómo interactúes con el sitio:</p>
+        <ul>
+          <li><strong>Datos de contacto:</strong> nombre, email, teléfono/WhatsApp, mensaje o consulta (si los ingresás).</li>
+          <li><strong>Datos técnicos:</strong> dirección IP aproximada, tipo de dispositivo, navegador, sistema operativo.</li>
+          <li><strong>Datos de uso:</strong> páginas visitadas, interacciones (clics), fuente de tráfico, eventos de conversión.</li>
+        </ul>
+
+        <h2>3. Cómo obtenemos los datos</h2>
+        <ul>
+          <li>Cuando completás un formulario en el sitio.</li>
+          <li>Cuando nos escribís por WhatsApp u otros canales vinculados.</li>
+          <li>Mediante herramientas de analítica y medición (por ejemplo Google Tag Manager/Google Analytics) y/o píxeles publicitarios (por ejemplo Meta).</li>
+        </ul>
+
+        <h2>4. Finalidades del tratamiento</h2>
+        <p>Usamos tus datos para:</p>
+        <ul>
+          <li>Responder consultas, coordinar reuniones y enviarte información sobre nuestros servicios.</li>
+          <li>Preparar propuestas comerciales y seguimiento de contactos (“leads”).</li>
+          <li>Mejorar el sitio, medir rendimiento, detectar errores y optimizar conversiones.</li>
+          <li>Medición de campañas publicitarias y atribución (si corresponde).</li>
+        </ul>
+
+        <h2>5. Base legal</h2>
+        <p>
+          Tratamos datos con base en tu consentimiento (por ejemplo, al enviar formularios),
+          en nuestro interés legítimo (mejorar el sitio y gestionar consultas), y/o para
+          ejecutar medidas precontractuales (por ejemplo, cotizaciones o propuestas).
+        </p>
+
+        <h2>6. Cookies y tecnologías similares</h2>
+        <p>
+          Podemos utilizar cookies y/o tecnologías similares para analítica, medición y mejora
+          de experiencia. Estas tecnologías pueden recopilar información de navegación y eventos.
+          Podés configurar tu navegador para bloquear o eliminar cookies; esto puede afectar el funcionamiento del sitio.
+        </p>
+
+        <h2>7. Herramientas y terceros</h2>
+        <p>
+          Para operar el sitio y medir su rendimiento podemos apoyarnos en proveedores (por ejemplo, hosting,
+          analítica, medición y formularios). Estos proveedores pueden procesar datos en nuestro nombre, bajo sus
+          propias políticas y medidas de seguridad. No vendemos tus datos personales.
+        </p>
+
+        <h2>8. Transferencias internacionales</h2>
+        <p>
+          Algunos proveedores tecnológicos pueden almacenar o procesar datos en servidores ubicados fuera de tu país.
+          En esos casos, procuramos trabajar con servicios que implementen medidas de seguridad y estándares razonables
+          para protección de datos.
+        </p>
+
+        <h2>9. Conservación de datos</h2>
+        <p>
+          Conservamos los datos el tiempo necesario para responder tu consulta, mantener el seguimiento comercial
+          y cumplir obligaciones legales. Si solicitás la eliminación, evaluaremos la petición según el marco aplicable
+          y las necesidades operativas.
+        </p>
+
+        <h2>10. Seguridad</h2>
+        <p>
+          Implementamos medidas razonables para proteger la información contra accesos no autorizados, alteración o pérdida.
+          Sin embargo, ningún sistema es 100% infalible.
+        </p>
+
+        <h2>11. Tus derechos</h2>
+        <p>
+          Podés solicitar acceso, actualización, rectificación o eliminación de tus datos, y/o limitar u oponerte al tratamiento,
+          según corresponda. Para ejercerlos, escribinos a:
+          <a href="mailto:viacloudstudio@gmail.com">viacloudstudio@gmail.com</a>
+        </p>
+
+        <h2>12. Cambios en esta Política</h2>
+        <p>
+          Podemos actualizar esta Política para reflejar mejoras o cambios normativos. La fecha de “Última actualización”
+          indica cuándo fue modificada por última vez.
+        </p>
+      </div>
+
+      <div class="legal-actions">
+        <a class="btn-outline" href="/">← Volver al inicio</a>
+        <a class="btn-outline" href="/#contacto">Contactar</a>
+      </div>
+    </div>
+  </main>
+
+  <div class="footer-divider"></div>
+  <footer class="footer">
+    <div class="wrapper">
+      <div class="row">
+        <span>© 2026 VIA CLOUD STUDIO</span>
+        <span><a href="/privacy.html">Política de Privacidad</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Cierra menú mobile al clickear un link
+    document.addEventListener("DOMContentLoaded", () => {
+      const chk = document.getElementById("nav-toggle");
+      const nav = document.getElementById("site-nav");
+      if (!chk || !nav) return;
+      nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => { chk.checked = false; }));
+    });
+  </script>
+</body>
+</html>
