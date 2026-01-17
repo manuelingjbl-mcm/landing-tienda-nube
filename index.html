@@ -2629,21 +2629,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ====== VIA CLOUD STUDIO | Socio Partner Tiendanube (Mini Hero Full Width) ====== -->
 <section id="partner-tiendanube" class="reveal" style="
   padding: 56px 0;
-  margin-top: -8px;
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(1200px 600px at 20% 30%, rgba(120,173,255,.26), rgba(0,0,0,0)),
-  radial-gradient(900px 520px at 85% 20%, rgba(150,120,255,.20), rgba(0,0,0,0)),
-  linear-gradient(135deg, rgba(10,60,255,.42), rgba(110,60,255,.38)),
-  linear-gradient(180deg, rgba(6, 24, 70, .66), rgba(6, 24, 70, .28));
+    radial-gradient(1200px 600px at 20% 30%, rgba(120,173,255,.24), rgba(0,0,0,0)),
+    radial-gradient(900px 520px at 85% 20%, rgba(150,120,255,.18), rgba(0,0,0,0)),
+    linear-gradient(135deg, rgba(10,60,255,.40), rgba(110,60,255,.34)),
+    linear-gradient(180deg, rgba(6, 24, 70, .72), rgba(6, 24, 70, .32));
 ">
+
+  <!-- CSS puntual para mobile (solo afecta esta sección) -->
+  <style>
+    @media (max-width: 640px){
+      #partner-tiendanube .tn-cta-row{
+        flex-direction: column;
+        align-items: stretch !important;
+        gap: 10px !important;
+      }
+      #partner-tiendanube .tn-cta-primary,
+      #partner-tiendanube .tn-cta-secondary{
+        width: 100% !important;
+        display: flex !important;
+      }
+      #partner-tiendanube .tn-cta-primary{
+        padding: 14px 16px !important;
+        border-radius: 16px !important;
+      }
+      #partner-tiendanube .tn-cta-secondary{
+        padding: 13px 16px !important;
+        border-radius: 16px !important;
+        font-weight: 800 !important; /* menos “pegado” */
+        opacity: .95;
+      }
+    }
+  </style>
 
   <!-- Detalle decorativo suave (opcional) -->
   <div aria-hidden="true" style="
     position:absolute; inset:-2px;
     background: linear-gradient(90deg, rgba(255,255,255,.06), rgba(255,255,255,0), rgba(255,255,255,.06));
-    opacity:.35;
+    opacity:.16;
     pointer-events:none;
     transform: rotate(-2deg);
   "></div>
@@ -2663,20 +2688,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           display:inline-flex;
           align-items:center;
           gap:10px;
-          padding: 8px 12px;
+          padding: 6px 10px;
           border-radius: 999px;
           background: rgba(255,255,255,.10);
           border: 1px solid rgba(255,255,255,.12);
           margin-bottom: 14px;
         ">
           <span style="
-            width:10px; height:10px; border-radius:99px;
+            width:8px; height:8px; border-radius:99px;
             background: linear-gradient(135deg, rgba(120,173,255,.98), rgba(150,120,255,.78));
-            box-shadow: 0 0 0 5px rgba(120,173,255,.14);
+            box-shadow: 0 0 0 4px rgba(120,173,255,.14);
             display:inline-block;
           "></span>
           <span style="
-            font-size: 12px;
+            font-size: 11.5px;
             letter-spacing: .18px;
             color: rgba(255,255,255,.86);
             font-weight: 800;
@@ -2686,8 +2711,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <h2 style="
           margin: 0 0 12px 0;
-          font-size: 42px;
-          line-height: 1.04;
+          font-size: clamp(30px, 4.2vw, 58px);
+          line-height: 1.02;
           letter-spacing: -0.6px;
           color: rgba(255,255,255,.98);
           font-weight: 900;
@@ -2701,16 +2726,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           margin: 0 0 18px 0;
           font-size: 16px;
           line-height: 1.6;
-          color: rgba(255,255,255,.88);
+          color: rgba(255,255,255,.90);
           max-width: 70ch;
           font-family: inherit;
+          text-shadow: 0 1px 10px rgba(0,0,0,.16);
         ">
           Creá tu tienda en Tiendanube y empezá a vender 24/7. El descuento aplica
-          <strong style="color: rgba(255,255,255,.92);">al primer mes</strong> de cualquier plan al registrarte desde nuestro enlace oficial.
+          <strong style="color: rgba(255,255,255,.94);">al primer mes</strong> de cualquier plan al registrarte desde nuestro enlace oficial.
         </p>
 
-        <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+        <div class="tn-cta-row" style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
           <a
+            class="tn-cta-primary"
             href="https://www.tiendanube.com/partners/via-cloud-studio"
             target="_blank"
             rel="noopener noreferrer"
@@ -2721,21 +2748,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               gap:10px;
               padding: 13px 18px;
               border-radius: 14px;
-              background: rgba(120,173,255,.95);
+              background: linear-gradient(135deg, rgba(120,173,255,.98), rgba(150,120,255,.78));
               color: rgba(10,18,40,1);
               text-decoration: none;
               font-weight: 900;
               font-size: 14px;
               letter-spacing: .2px;
-              box-shadow: 0 12px 28px rgba(120,173,255,.22);
+              box-shadow: 0 10px 22px rgba(120,173,255,.18);
               border: 1px solid rgba(255,255,255,.18);
               font-family: inherit;
+              transform: translateZ(0);
             "
           >
             Crear tienda con 25% OFF <span aria-hidden="true">→</span>
           </a>
 
           <a
+            class="tn-cta-secondary"
             href="#contacto"
             style="
               display:inline-flex;
@@ -2746,7 +2775,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               background: rgba(255,255,255,.08);
               color: rgba(255,255,255,.92);
               text-decoration: none;
-              font-weight: 900;
+              font-weight: 800;
               font-size: 14px;
               border: 1px solid rgba(255,255,255,.12);
               font-family: inherit;
@@ -2756,7 +2785,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </a>
         </div>
 
-        <div style="margin-top: 16px; display:flex; gap:10px; flex-wrap:wrap;">
+        <div style="margin-top: 14px; display:flex; gap:10px; flex-wrap:wrap;">
           <span style="
             display:inline-flex; align-items:center; gap:8px;
             padding: 8px 12px;
@@ -2795,13 +2824,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
 
-      <!-- DER: bloque simple (sin “card” gigante) -->
+      <!-- DER -->
       <div style="flex: 0 1 360px; min-width: 280px;">
         <div style="
           padding: 18px;
           border-radius: 20px;
-          background: rgba(255,255,255,.06);
-          border: 1px solid rgba(255,255,255,.12);
+          background: rgba(255,255,255,.045);
+          border: 1px solid rgba(255,255,255,.08);
         ">
           <div style="
             font-weight: 900;
@@ -2831,7 +2860,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             padding: 12px;
             border-radius: 16px;
             background: rgba(120,173,255,.12);
-            border: 1px solid rgba(120,173,255,.20);
+            border: 1px solid rgba(120,173,255,.18);
             color: rgba(255,255,255,.86);
             font-size: 12.8px;
             line-height: 1.45;
@@ -2846,6 +2875,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 <!-- ====== /Socio Partner Tiendanube ====== -->
+
 
 
 
