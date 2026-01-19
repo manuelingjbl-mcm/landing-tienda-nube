@@ -1570,13 +1570,27 @@ text-underline-offset: 3px;
   }
 }
 
-html{
-  scroll-behavior: smooth;
-  scroll-padding-top: 72px; /* desktop: alto real del header */
+:root{
+  --anchor-offset: 78px; /* desktop: alto real del header sticky */
 }
 
 @media (max-width: 768px){
-  html{ scroll-padding-top: 84px; } /* mobile: un toque más */
+  :root{ --anchor-offset: 92px; } /* mobile */
+}
+
+/* Ancla perfecta para #contacto */
+#contacto{
+  position: relative;
+  scroll-margin-top: 0 !important; /* por las dudas */
+}
+
+/* “sube” el ancla sin mostrar el bloque anterior */
+#contacto::before{
+  content: "";
+  display: block;
+  height: var(--anchor-offset);
+  margin-top: calc(-1 * var(--anchor-offset));
+  background: #020617; /* mismo fondo del bloque contacto */
 }
 
 
