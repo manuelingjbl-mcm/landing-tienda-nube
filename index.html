@@ -1529,7 +1529,6 @@ text-underline-offset: 3px;
   opacity: .9;
 }
 
-    
 /* ===== Línea divisora antes del footer ===== */
 .footer-full-divider {
   width: 100%;
@@ -3981,27 +3980,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <script>
 (function () {
-  function goToHash() {
-    if (!location.hash) return;
-
-    var id = location.hash.slice(1);
-    var el = document.getElementById(id);
-    if (!el) return;
-
-    var header = document.querySelector('header');
-    var offset = (header ? header.getBoundingClientRect().height : 0) + 12;
-
-    var y = el.getBoundingClientRect().top + window.pageYOffset - offset;
-
-    window.scrollTo({ top: y, behavior: 'smooth' });
+  function getHeaderOffset() {
+    const header = document.querySelector("header");
+    if (!header) return 0;
+    const pos = getComputedStyle(header).position;
+    if (pos !== "sticky" && pos !== "fixed") return 0;
+    return Math.ceil(header.getBoundingClientRect().height);
   }
 
-  window.addEventListener('load', function () {
-    setTimeout(goToHash, 80);
-  });
+  function jumpToHashWithOffset() {
+    if (!location.hash) return;
 
-  window.addEventListener('hashchange', function () {
-    setTimeout(goToHash, 0);
+    const id = decodeURIComponent(location.hash.slice(1));
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    const y = target.getBoundingClientRect().top + window.pageYOffset - getHeaderOffset();
+    window.scrollTo({ top: y, behavior: "auto" });
+  }
+
+  window.addEventListener("load", function () {
+    // espera un pelín por fonts/imagenes
+    setTimeout(jumpToHashWithOffset, 80);
   });
 })();
 </script>
