@@ -1570,21 +1570,15 @@ text-underline-offset: 3px;
   }
 }
 
-/* ===== Sección de contacto ===== */
-#contacto{
-  margin-bottom: 0;
-  padding-bottom: 72px;
-
-  /* ✅ Ajuste de ancla para header sticky */
-  scroll-margin-top: 78px;   /* desktop */
+html{
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px; /* desktop: alto real del header */
 }
 
-/* Mobile */
 @media (max-width: 768px){
-  #contacto{
-    scroll-margin-top: 92px; /* mobile */
-  }
+  html{ scroll-padding-top: 84px; } /* mobile: un toque más */
 }
+
 
    
 /* ==== CONTACTO: alinear solo el formulario con el título ==== */
