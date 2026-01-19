@@ -3981,34 +3981,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <script>
 (function () {
-  function scrollToHash() {
+  function goToHash() {
     if (!location.hash) return;
 
     var id = location.hash.slice(1);
     var el = document.getElementById(id);
     if (!el) return;
 
-    var header = document.querySelector("header");
-    var headerH = header ? Math.ceil(header.getBoundingClientRect().height) : 0;
+    var header = document.querySelector('header');
+    var offset = (header ? header.getBoundingClientRect().height : 0) + 12;
 
-    // Aire para que no quede pegadísimo debajo del header
-    var extra = 10;
+    var y = el.getBoundingClientRect().top + window.pageYOffset - offset;
 
-    var y = window.pageYOffset + el.getBoundingClientRect().top - headerH - extra;
-
-    window.scrollTo({ top: y, left: 0, behavior: "auto" });
+    window.scrollTo({ top: y, behavior: 'smooth' });
   }
 
-  // Al cargar (a veces el layout termina después)
-  window.addEventListener("load", function () {
-    setTimeout(scrollToHash, 0);
-    setTimeout(scrollToHash, 120);
-    setTimeout(scrollToHash, 350);
+  window.addEventListener('load', function () {
+    setTimeout(goToHash, 80);
   });
 
-  // Si cambia el hash estando en la página
-  window.addEventListener("hashchange", function () {
-    setTimeout(scrollToHash, 0);
+  window.addEventListener('hashchange', function () {
+    setTimeout(goToHash, 0);
   });
 })();
 </script>
