@@ -10,7 +10,7 @@
   <meta name="description" content="Política de Privacidad de VIA CLOUD STUDIO." />
   <meta name="facebook-domain-verification" content="u8j1ch87vy74yb23zjmipdanqiswpn" />
 
-  <style>
+<style>
   :root{
     --azul:#0056ff;
     --azul-oscuro:#030712;
@@ -18,14 +18,19 @@
     --texto:#111827;
     --radio:18px;
   }
+
   *{box-sizing:border-box;margin:0;padding:0;}
+
+  html{ scroll-behavior:smooth; }
+
   body{
     font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
     color:var(--texto);
     background:#ffffff;
     line-height:1.5;
+    overflow-x:hidden; /* evita “corrimientos” en Android */
   }
-  html{ scroll-behavior:smooth; }
+
   a{text-decoration:none;color:inherit;}
   img{max-width:100%;display:block;}
 
@@ -33,19 +38,24 @@
     max-width:1120px;
     margin:0 auto;
     padding:0 16px;
+    text-align:left; /* fuerza alineación como home */
   }
 
-  /* HEADER (versión compacta para páginas legales) */
+  /* =========================
+     HEADER (legal)
+     ========================= */
   header{
     background:
       radial-gradient(circle at top left, rgba(118,169,250,0.40) 0, transparent 45%),
       linear-gradient(135deg,#020617 0%, #0033c7 20%, #5b21ff 55%);
     color:#fff;
     padding:18px 0;
-    position:relative;
-    overflow:visible;                 /* ✅ FIX: antes estaba hidden y recortaba el menú */
-    z-index:9999;                     /* ✅ FIX: header por encima del contenido */
+    position:sticky; /* queda pro y evita saltos */
+    top:0;
+    z-index:1000;
+    overflow:visible; /* importante: no recortar dropdown */
   }
+
   header::after{
     content:"";
     position:absolute;
@@ -54,9 +64,11 @@
       linear-gradient(180deg,rgba(3,7,18,0.80),rgba(3,7,18,0.60)),
       url("bg-viacloudstudio-dev.jpg") center/cover no-repeat;
     opacity:0.35;
-    mix-blend-mode:soft-light;
+    mix-blend-mode:normal; /* evita artefactos/banda en mobile */
     pointer-events:none;
+    z-index:0;
   }
+
   .header-inner{
     position:relative;
     z-index:1;
@@ -64,19 +76,24 @@
     margin:0 auto;
     padding:0 16px;
   }
+
   .logo-row{
     display:flex;
     align-items:center;
     justify-content:space-between;
     gap:12px;
+    position:relative;
+    z-index:2;
   }
+
   .logo{
     display:inline-flex;
     align-items:center;
     line-height:0;
   }
+
   .logo img{
-    height: 26px;
+    height:26px;
     width:auto;
     object-fit:contain;
   }
@@ -88,12 +105,14 @@
     opacity:.92;
     align-items:center;
   }
+
   .nav a{
     position:relative;
     padding-bottom:4px;
     color:#fff;
     opacity:.95;
   }
+
   .nav a::after{
     content:"";
     position:absolute;
@@ -104,9 +123,10 @@
     background:#ffffff;
     transition:width .22s ease;
   }
+
   .nav a:hover::after{ width:100%; }
 
-  /* Botón pill */
+  /* Botón pill (solo desktop si lo usás) */
   .btn-pill{
     display:inline-flex;
     align-items:center;
@@ -121,39 +141,53 @@
     box-shadow:0 10px 30px rgba(0,0,0,.20);
     white-space:nowrap;
   }
+
   .btn-pill:hover{ transform: translateY(-1px); }
 
-  /* Mobile menu (simple) */
+  /* =========================
+     MOBILE MENU
+     ========================= */
   .nav-toggle{
-    position:absolute;width:1px;height:1px;margin:-1px;border:0;opacity:0;overflow:hidden;clip:rect(0 0 0 0);
+    position:absolute;
+    width:1px;height:1px;
+    margin:-1px;border:0;
+    opacity:0;
+    overflow:hidden;
+    clip:rect(0 0 0 0);
   }
+
   .menu-toggle{
     display:none;
     width:44px;height:44px;
-    align-items:center;justify-content:center;
-    flex-direction:column;gap:6px;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:6px;
     cursor:pointer;
     -webkit-tap-highlight-color:transparent;
     user-select:none;
-    position:relative;               /* ✅ FIX */
-    z-index:10001;                   /* ✅ FIX: el botón por arriba */
+    position:relative;
+    z-index:1101;
   }
+
   .menu-toggle span{
     display:block;
     width:22px;height:2px;
     background: rgba(255,255,255,.92);
-    border-radius: 2px;
+    border-radius:2px;
     transition: transform .22s ease, opacity .2s ease;
   }
 
   @media (max-width: 767.98px){
     .menu-toggle{ display:inline-flex; }
 
+    /* Dropdown pegado al header, SIN “banda gris” */
     #site-nav.nav{
-      position:fixed;                /* ✅ FIX: antes absolute (se cortaba/ocultaba) */
-      top:72px;                      /* ✅ FIX: ajustá si tu header es más alto/bajo */
+      position:absolute;
+      top:100%;
       left:16px;
       right:16px;
+      margin-top:10px; /* si querés 0 banda 100%, ponelo en 0 */
       padding:12px 14px;
       border-radius:14px;
       background:#050b2a;
@@ -165,60 +199,76 @@
       transform: translateY(-6px);
       transition: opacity .22s ease, transform .22s ease;
       box-shadow:0 18px 40px rgba(15,23,42,.35);
-      z-index:10000;                 /* ✅ FIX: menú arriba del contenido */
+      z-index:1100;
     }
+
     .nav-toggle:checked ~ #site-nav.nav{
       opacity:1;
       pointer-events:auto;
       transform: translateY(0);
     }
+
     .nav a{ padding:8px 2px; }
     .nav .btn-pill{ width:100%; }
 
-    .nav-toggle:checked + .menu-toggle span:nth-child(1){ transform: translateY(8px) rotate(45deg); }
+    .nav-toggle:checked + .menu-toggle span:nth-child(1){
+      transform: translateY(8px) rotate(45deg);
+    }
     .nav-toggle:checked + .menu-toggle span:nth-child(2){ opacity:0; }
-    .nav-toggle:checked + .menu-toggle span:nth-child(3){ transform: translateY(-8px) rotate(-45deg); }
+    .nav-toggle:checked + .menu-toggle span:nth-child(3){
+      transform: translateY(-8px) rotate(-45deg);
+    }
   }
 
-  /* MAIN legal */
+  /* =========================
+     MAIN LEGAL
+     ========================= */
   main{
-    padding: 42px 0 64px;
-    background: #ffffff;
-    position:relative;               /* ✅ FIX */
-    z-index:0;                       /* ✅ FIX: nunca por encima del header/nav */
+    padding:42px 0 64px;
+    background:#ffffff;
+    text-align:left; /* fuerza */
   }
+
   .legal-kicker{
     font-size:12px;
     letter-spacing:.18em;
     text-transform:uppercase;
     color:#6b7280;
     margin-bottom:12px;
+    text-align:left;
   }
+
   .legal-title{
     font-size: clamp(28px, 3vw, 42px);
     line-height:1.12;
     margin-bottom:10px;
     color:#0f172a;
+    text-align:left;
   }
+
   .legal-updated{
     color:#6b7280;
     font-size:13px;
     margin-bottom:22px;
+    text-align:left;
   }
 
   .legal-body{
-    max-width: 85ch;
-    line-height: 1.75;
+    max-width:85ch;
+    line-height:1.75;
     color:#111827;
+    text-align:left;
   }
+
   .legal-body h2{
-    margin: 22px 0 8px;
-    font-size: 18px;
+    margin:22px 0 8px;
+    font-size:18px;
     color:#0f172a;
   }
-  .legal-body p{ margin: 10px 0; color:#374151; }
-  .legal-body ul{ margin: 10px 0 10px 18px; color:#374151; }
-  .legal-body li{ margin: 6px 0; }
+
+  .legal-body p{ margin:10px 0; color:#374151; }
+  .legal-body ul{ margin:10px 0 10px 18px; color:#374151; }
+  .legal-body li{ margin:6px 0; }
 
   .legal-actions{
     margin-top:28px;
@@ -226,6 +276,7 @@
     gap:10px;
     flex-wrap:wrap;
   }
+
   .btn-outline{
     display:inline-flex;
     align-items:center;
@@ -239,86 +290,30 @@
     background:#fff;
   }
 
-  /* Footer simple */
+  /* =========================
+     FOOTER SIMPLE
+     ========================= */
   .footer-divider{
     width:100%;
     height:2px;
     background: linear-gradient(to right, rgba(14,165,233,0), #0b63e8, rgba(14,165,233,0));
   }
+
   .footer{
     background:#fff;
     padding:16px 0 28px;
     color:#6b7280;
     font-size:12px;
   }
+
   .footer .row{
     display:flex;
     justify-content:space-between;
     gap:12px;
     flex-wrap:wrap;
   }
-
-/* =========================
-   FIXES PRIVACIDAD (mobile)
-   ========================= */
-
-/* Evita scroll horizontal raro (y corrimientos en Android) */
-html, body{
-  overflow-x: hidden;
-  background:#fff;
-}
-
-/* Asegura que header + menú estén por encima del contenido */
-header{
-  position: relative;
-  z-index: 50;
-}
-.header-inner{
-  position: relative;
-  z-index: 60;
-}
-
-/* Mobile nav: arriba de TODO */
-@media (max-width: 767.98px){
-  #site-nav.nav{
-    z-index: 9999;
-  }
-  .menu-toggle{
-    position: relative;
-    z-index: 10000;
-  }
-}
-
-/* “Tapa” la franja gris entre header y contenido */
-main{
-  position: relative;
-  z-index: 1;
-  background:#fff;
-}
-main::before{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  top:-80px;       /* ajustable: 60–100px */
-  height:80px;     /* ajustable: 60–100px */
-  background:#fff; /* mismo color del main */
-}
-
-/* Forzar alineación a la izquierda (kicker/títulos/texto) */
-.wrapper,
-.legal-kicker,
-.legal-title,
-.legal-updated,
-.legal-body,
-.legal-body p,
-.legal-body ul,
-.legal-body li{
-  text-align: left !important;
-}
-
-
 </style>
+
 
 
   <!-- Google Tag Manager -->
