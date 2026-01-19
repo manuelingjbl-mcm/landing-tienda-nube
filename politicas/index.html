@@ -41,184 +41,134 @@
     text-align:left; /* fuerza alineación como home */
   }
 
-  /* =========================
-     HEADER (legal)
-     ========================= */
-  header{
-    background:
-      radial-gradient(circle at top left, rgba(118,169,250,0.40) 0, transparent 45%),
-      linear-gradient(135deg,#020617 0%, #0033c7 20%, #5b21ff 55%);
-    color:#fff;
-    padding:18px 0;
-    position:sticky; /* queda pro y evita saltos */
-    top:0;
-    z-index:1000;
-    overflow:visible; /* importante: no recortar dropdown */
-  }
+  /* HEADER (legal) — limpio y sin franja rara */
+header{
+  background:
+    radial-gradient(circle at top left, rgba(118,169,250,0.40) 0, transparent 45%),
+    linear-gradient(135deg,#020617 0%, #0033c7 20%, #5b21ff 55%);
+  color:#fff;
+  padding:18px 0;
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+  overflow: hidden; /* ✅ evita que el ::after “se derrame” y haga franja */
+}
 
-  header::after{
-    content:"";
-    position:absolute;
-    inset:-40%;
-    background:
-      linear-gradient(180deg,rgba(3,7,18,0.80),rgba(3,7,18,0.60)),
-      url("bg-viacloudstudio-dev.jpg") center/cover no-repeat;
-    opacity:0.35;
-    mix-blend-mode:normal; /* evita artefactos/banda en mobile */
-    pointer-events:none;
-    z-index:0;
-  }
+/* ✅ el overlay queda “dentro” del header (NO inset:-40%) */
+header::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg,rgba(3,7,18,0.80),rgba(3,7,18,0.60)),
+    url("/bg-viacloudstudio-dev.jpg") center/cover no-repeat;
+  opacity:0.35;
+  mix-blend-mode:soft-light;
+  pointer-events:none;
+}
 
-  .header-inner{
-    position:relative;
-    z-index:1;
-    max-width:1320px;
-    margin:0 auto;
-    padding:0 16px;
-  }
+.header-inner{
+  position:relative;
+  z-index:1;
+  max-width:1320px;
+  margin:0 auto;
+  padding:0 16px;
+}
 
-  .logo-row{
+.logo-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.logo{ display:inline-flex; align-items:center; line-height:0; }
+.logo img{ height:26px; width:auto; object-fit:contain; }
+
+.nav{
+  display:flex;
+  gap:18px;
+  font-size:14px;
+  opacity:.92;
+  align-items:center;
+}
+
+/* Mobile toggle */
+.nav-toggle{
+  position:absolute;width:1px;height:1px;margin:-1px;border:0;opacity:0;overflow:hidden;clip:rect(0 0 0 0);
+}
+.menu-toggle{
+  display:none;
+  width:44px;height:44px;
+  align-items:center;justify-content:center;
+  flex-direction:column;gap:6px;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+  position:relative;
+  z-index:10002; /* arriba */
+}
+.menu-toggle span{
+  display:block;
+  width:22px;height:2px;
+  background: rgba(255,255,255,.92);
+  border-radius: 2px;
+  transition: transform .22s ease, opacity .2s ease;
+}
+
+/* Botón pill */
+.btn-pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 16px;
+  border-radius:999px;
+  background:#fff;
+  color:#111827;
+  font-weight:700;
+  font-size:13px;
+  border:0;
+  box-shadow:0 10px 30px rgba(0,0,0,.20);
+  white-space:nowrap;
+}
+
+@media (max-width: 767.98px){
+  .menu-toggle{ display:inline-flex; }
+
+  /* ✅ Menú FIXED (no lo recorta el header) */
+  #site-nav.nav{
+    position: fixed;
+    top: calc(64px + env(safe-area-inset-top, 0px));
+    left: 16px;
+    right: 16px;
+    padding: 14px;
+    border-radius: 16px;
+    background: #050b2a;
     display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    position:relative;
-    z-index:2;
-  }
-
-  .logo{
-    display:inline-flex;
-    align-items:center;
-    line-height:0;
-  }
-
-  .logo img{
-    height:26px;
-    width:auto;
-    object-fit:contain;
-  }
-
-  .nav{
-    display:flex;
-    gap:18px;
-    font-size:14px;
-    opacity:.92;
-    align-items:center;
-  }
-
-  .nav a{
-    position:relative;
-    padding-bottom:4px;
-    color:#fff;
-    opacity:.95;
-  }
-
-  .nav a::after{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:0;
-    width:0;
-    height:2px;
-    background:#ffffff;
-    transition:width .22s ease;
-  }
-
-  .nav a:hover::after{ width:100%; }
-
-  /* Botón pill (solo desktop si lo usás) */
-  .btn-pill{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    padding:10px 16px;
-    border-radius:999px;
-    background:#fff;
-    color:#111827;
-    font-weight:700;
-    font-size:13px;
-    border:0;
-    box-shadow:0 10px 30px rgba(0,0,0,.20);
-    white-space:nowrap;
-  }
-
-  .btn-pill:hover{ transform: translateY(-1px); }
-
-  /* =========================
-     MOBILE MENU
-     ========================= */
-  .nav-toggle{
-    position:absolute;
-    width:1px;height:1px;
-    margin:-1px;border:0;
-    opacity:0;
-    overflow:hidden;
-    clip:rect(0 0 0 0);
-  }
-
-  .menu-toggle{
-    display:none;
-    width:44px;height:44px;
-    align-items:center;
-    justify-content:center;
     flex-direction:column;
-    gap:6px;
-    cursor:pointer;
-    -webkit-tap-highlight-color:transparent;
-    user-select:none;
-    position:relative;
-    z-index:1101;
+    gap:10px;
+    opacity:0;
+    pointer-events:none;
+    transform: translateY(-6px);
+    transition: opacity .22s ease, transform .22s ease;
+    box-shadow:0 18px 40px rgba(15,23,42,.35);
+    z-index:10001;
   }
 
-  .menu-toggle span{
-    display:block;
-    width:22px;height:2px;
-    background: rgba(255,255,255,.92);
-    border-radius:2px;
-    transition: transform .22s ease, opacity .2s ease;
+  .nav-toggle:checked ~ #site-nav.nav{
+    opacity:1;
+    pointer-events:auto;
+    transform: translateY(0);
   }
 
-  @media (max-width: 767.98px){
-    .menu-toggle{ display:inline-flex; }
+  .nav a{ padding:10px 6px; }
+  .nav .btn-pill{ width:100%; }
 
-    /* Dropdown pegado al header, SIN “banda gris” */
-    #site-nav.nav{
-      position:absolute;
-      top:100%;
-      left:16px;
-      right:16px;
-      margin-top:10px; /* si querés 0 banda 100%, ponelo en 0 */
-      padding:12px 14px;
-      border-radius:14px;
-      background:#050b2a;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      opacity:0;
-      pointer-events:none;
-      transform: translateY(-6px);
-      transition: opacity .22s ease, transform .22s ease;
-      box-shadow:0 18px 40px rgba(15,23,42,.35);
-      z-index:1100;
-    }
+  .nav-toggle:checked + .menu-toggle span:nth-child(1){ transform: translateY(8px) rotate(45deg); }
+  .nav-toggle:checked + .menu-toggle span:nth-child(2){ opacity:0; }
+  .nav-toggle:checked + .menu-toggle span:nth-child(3){ transform: translateY(-8px) rotate(-45deg); }
+}
 
-    .nav-toggle:checked ~ #site-nav.nav{
-      opacity:1;
-      pointer-events:auto;
-      transform: translateY(0);
-    }
-
-    .nav a{ padding:8px 2px; }
-    .nav .btn-pill{ width:100%; }
-
-    .nav-toggle:checked + .menu-toggle span:nth-child(1){
-      transform: translateY(8px) rotate(45deg);
-    }
-    .nav-toggle:checked + .menu-toggle span:nth-child(2){ opacity:0; }
-    .nav-toggle:checked + .menu-toggle span:nth-child(3){
-      transform: translateY(-8px) rotate(-45deg);
-    }
-  }
 
   /* =========================
      MAIN LEGAL
