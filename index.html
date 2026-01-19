@@ -1508,6 +1508,7 @@ section#trabajos .wrapper {
 #contacto {
   margin-bottom: 0;
   padding-bottom: 72px;
+  scroll-margin-top: 16px;
   background: #020617; /* mismo fondo oscuro del resto */
 }
 
@@ -1563,38 +1564,16 @@ text-underline-offset: 3px;
   #contacto .contact-grid {
     grid-template-columns: 1fr;
   }
-
+ #contacto{
+    scroll-margin-top: 92px; /* o 80px */
+  }
   .footer {
     flex-direction: column;
     text-align: center;
   }
 }
 
-:root{
-  --anchor-offset: 78px; /* desktop: alto real del header sticky */
-}
 
-@media (max-width: 768px){
-  :root{ --anchor-offset: 92px; } /* mobile */
-}
-
-/* Ancla perfecta para #contacto */
-#contacto{
-  position: relative;
-  scroll-margin-top: 0 !important; /* por las dudas */
-}
-
-/* “sube” el ancla sin mostrar el bloque anterior */
-#contacto::before{
-  content: "";
-  display: block;
-  height: var(--anchor-offset);
-  margin-top: calc(-1 * var(--anchor-offset));
-  background: #020617; /* mismo fondo del bloque contacto */
-}
-
-
-   
 /* ==== CONTACTO: alinear solo el formulario con el título ==== */
 
 /* 1) Dejamos la grilla sin desplazamientos raros */
@@ -4000,6 +3979,39 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+<script>
+(function () {
+  function scrollToHash() {
+    if (!location.hash) return;
+
+    var id = location.hash.slice(1);
+    var el = document.getElementById(id);
+    if (!el) return;
+
+    var header = document.querySelector("header");
+    var headerH = header ? Math.ceil(header.getBoundingClientRect().height) : 0;
+
+    // Aire para que no quede pegadísimo debajo del header
+    var extra = 10;
+
+    var y = window.pageYOffset + el.getBoundingClientRect().top - headerH - extra;
+
+    window.scrollTo({ top: y, left: 0, behavior: "auto" });
+  }
+
+  // Al cargar (a veces el layout termina después)
+  window.addEventListener("load", function () {
+    setTimeout(scrollToHash, 0);
+    setTimeout(scrollToHash, 120);
+    setTimeout(scrollToHash, 350);
+  });
+
+  // Si cambia el hash estando en la página
+  window.addEventListener("hashchange", function () {
+    setTimeout(scrollToHash, 0);
+  });
+})();
+</script>
 
 
     
