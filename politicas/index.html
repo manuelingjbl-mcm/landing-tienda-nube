@@ -257,6 +257,25 @@
     gap:12px;
     flex-wrap:wrap;
   }
+
+/* ✅ iOS/Safari: a veces muestra el background del <html> como “gris” */
+html, body{
+  background:#ffffff !important;
+}
+
+/* ✅ Pegamos el contenido al header (sin franja rara) */
+main{
+  margin: 0 !important;
+  padding: 28px 0 64px !important; /* antes 42px: baja el “colchón” superior */
+  background:#ffffff !important;
+}
+
+/* por si algún estilo global mete separación */
+main .wrapper{
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
 </style>
 
 
