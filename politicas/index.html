@@ -265,6 +265,46 @@ header::after{
     gap:12px;
     flex-wrap:wrap;
   }
+
+  /* ===== NAV LINKS (desktop) ===== */
+.nav a{
+  position:relative;
+  padding-bottom:4px;
+  color:#fff;
+  opacity:.95;
+}
+
+/* subrayado “dibujado” SOLO desktop */
+.nav a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:0;
+  height:2px;
+  background:#ffffff;
+  transition:width .22s ease;
+}
+.nav a:hover::after{ width:100%; }
+
+/* ===== MOBILE MENU: alineado a la izquierda ===== */
+@media (max-width: 767.98px){
+  #site-nav.nav{
+    align-items:flex-start;   /* ✅ clave: deja de centrar los items */
+  }
+
+  #site-nav.nav a{
+    width:100%;               /* ocupa todo el ancho */
+    text-align:left;          /* texto a la izquierda */
+    padding:10px 6px;
+  }
+
+  /* en mobile, sin subrayado animado */
+  #site-nav.nav a::after{
+    content:none;
+  }
+}
+
 </style>
 
 
