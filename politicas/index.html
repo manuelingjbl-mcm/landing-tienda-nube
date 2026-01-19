@@ -258,23 +258,65 @@
     flex-wrap:wrap;
   }
 
-/* ✅ iOS/Safari: a veces muestra el background del <html> como “gris” */
+/* =========================
+   FIXES PRIVACIDAD (mobile)
+   ========================= */
+
+/* Evita scroll horizontal raro (y corrimientos en Android) */
 html, body{
-  background:#ffffff !important;
+  overflow-x: hidden;
+  background:#fff;
 }
 
-/* ✅ Pegamos el contenido al header (sin franja rara) */
+/* Asegura que header + menú estén por encima del contenido */
+header{
+  position: relative;
+  z-index: 50;
+}
+.header-inner{
+  position: relative;
+  z-index: 60;
+}
+
+/* Mobile nav: arriba de TODO */
+@media (max-width: 767.98px){
+  #site-nav.nav{
+    z-index: 9999;
+  }
+  .menu-toggle{
+    position: relative;
+    z-index: 10000;
+  }
+}
+
+/* “Tapa” la franja gris entre header y contenido */
 main{
-  margin: 0 !important;
-  padding: 28px 0 64px !important; /* antes 42px: baja el “colchón” superior */
-  background:#ffffff !important;
+  position: relative;
+  z-index: 1;
+  background:#fff;
+}
+main::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:-80px;       /* ajustable: 60–100px */
+  height:80px;     /* ajustable: 60–100px */
+  background:#fff; /* mismo color del main */
 }
 
-/* por si algún estilo global mete separación */
-main .wrapper{
-  margin-top: 0 !important;
-  padding-top: 0 !important;
+/* Forzar alineación a la izquierda (kicker/títulos/texto) */
+.wrapper,
+.legal-kicker,
+.legal-title,
+.legal-updated,
+.legal-body,
+.legal-body p,
+.legal-body ul,
+.legal-body li{
+  text-align: left !important;
 }
+
 
 </style>
 
