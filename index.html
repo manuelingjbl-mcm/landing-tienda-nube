@@ -4096,6 +4096,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function animateMetric(el){
     const target = parseInt(el.dataset.target || '0', 10);
+    const prefix = el.dataset.prefix || '';
     const suffix = el.dataset.suffix || '';
     const duration = 850; // ms
     const start = performance.now();
@@ -4103,7 +4104,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // flicker random
     const flicker = setInterval(() => {
       const r = Math.max(0, Math.floor(Math.random() * (target + 20)));
-      el.textContent = (suffix === '+') ? ('+' + r) : (r + suffix);
+      el.textContent = `${prefix}${r}${suffix}`;
     }, 50);
 
     function tick(now){
@@ -4114,7 +4115,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if(p >= 1){
         clearInterval(flicker);
-        el.textContent = (suffix === '+') ? ('+' + target) : (target + suffix);
+        el.textContent = `${prefix}${target}${suffix}`;
         return;
       }
       requestAnimationFrame(tick);
