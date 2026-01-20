@@ -2710,6 +2710,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
 }
 
+/* ✅ Métricas: mismas alturas + alineación prolija */
+.section-about .about-metrics{
+  align-items: stretch;          /* estira items */
+}
+
+.section-about .about-metric{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* num arriba, label abajo */
+  min-height: 108px;             /* ajustá este valor a gusto */
+}
+
+/* Ajuste fino de tipografías para que no “salte” la altura */
+.section-about .about-metric__num{
+  line-height: 1.05;
+  margin-bottom: 6px;
+}
+
+.section-about .about-metric__label{
+  margin-top: auto;              /* empuja el label al fondo */
+  line-height: 1.25;
+}
+
+/* Mobile: un poco más compacto */
+@media (max-width: 768px){
+  .section-about .about-metric{
+    min-height: 90px;
+  }
+}
 
 
    
