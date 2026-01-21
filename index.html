@@ -4101,7 +4101,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const duration = 850; // ms
     const start = performance.now();
 
-    // flicker random
     const flicker = setInterval(() => {
       const r = Math.max(0, Math.floor(Math.random() * (target + 20)));
       el.textContent = `${prefix}${r}${suffix}`;
@@ -4109,7 +4108,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function tick(now){
       const p = Math.min(1, (now - start) / duration);
-      // easeOutCubic
       const eased = 1 - Math.pow(1 - p, 3);
       const val = Math.round(target * eased);
 
@@ -4128,7 +4126,12 @@ document.addEventListener("DOMContentLoaded", () => {
     entries.forEach(entry => {
       if(entry.isIntersecting && !fired){
         fired = true;
-        metrics.forEach(animateMetric);
+
+        // ✅ delay escalonado
+        metrics.forEach((el, i) => {
+          setTimeout(() => animateMetric(el), i * 140); // 0ms, 140ms, 280ms
+        });
+
         io.disconnect();
       }
     });
@@ -4138,6 +4141,7 @@ document.addEventListener("DOMContentLoaded", () => {
   io.observe(anchor);
 })();
 </script>
+
 
 
     
