@@ -2522,9 +2522,13 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   transition: opacity .18s ease, transform .18s ease, filter .18s ease;
 }
 
-.scroll-top-btn:hover{
-  filter: brightness(1.08);
+@media (hover:hover) and (pointer:fine){
+  .scroll-top-btn:hover{
+    filter: brightness(1.08);
+    transform: translateY(-2px);
+  }
 }
+
 
 .scroll-top-btn.is-visible{
   opacity: 1;
