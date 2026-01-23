@@ -2038,10 +2038,17 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   margin-top: 24px;
 }
 
+/* 2 columnas fijas en desktop (2 y 2) */
+@media (min-width: 900px){
+  #servicios .services{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 /* ==== CARD BASE ==== */
 #servicios.section-dark .service-card{
   position: relative;
-  padding: 28px 28px 24px;
+  padding: 26px 26px 22px; /* un toque menos */
   border-radius: 22px;
   background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.06), transparent 55%),
               rgba(15, 23, 42, 0.92);
@@ -2051,15 +2058,28 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 
   /* estado inicial animación (JS usa .is-visible) */
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(24px); /* menos desplazamiento */
   transition:
-    opacity 0.6s ease,
-    transform 0.6s ease,
-    box-shadow 0.25s ease,
-    border-color 0.25s ease;
+    opacity 0.45s ease,
+    transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
 }
 
-/* brillo interno (si ya tenías ::before en otro bloque, lo dejamos acá) */
+/* Tipografías un toque más compactas */
+#servicios.section-dark .service-card h3{
+  font-size: 17px;
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+
+#servicios.section-dark .service-card p{
+  font-size: 13.5px;
+  line-height: 1.52;
+  color: rgba(230,239,255,0.88);
+}
+
+/* brillo interno */
 #servicios.section-dark .service-card::before{
   content:"";
   position:absolute;
@@ -2069,10 +2089,9 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   pointer-events:none;
 }
 
-/* Accent line sutil (sin pintar la card) */
-#servicios.section-dark .service-card{
-  --acc: rgba(120,210,255,1);
-}
+/* Accent line sutil */
+#servicios.section-dark .service-card{ --acc: rgba(120,210,255,1); }
+
 #servicios.section-dark .service-card::after{
   content:"";
   position:absolute;
@@ -2096,10 +2115,10 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   transform: translateY(0) !important;
 }
 
-/* Hover suave en desktop (solo cuando ya es visible) */
+/* Hover más liviano */
 @media (hover:hover) and (pointer:fine){
   #servicios.section-dark .service-card.is-visible:hover{
-    transform: translateY(-4px) !important;
+    transform: translateY(-3px) !important; /* antes -4 */
     box-shadow: 0 26px 60px rgba(15, 23, 42, 0.95);
     border-color: rgba(129, 140, 248, 0.7);
   }
@@ -2109,12 +2128,16 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 #servicios.section-dark .service-card .pill{
   display: inline-flex;
   align-items: center;
-  margin-top: 18px;
-  padding: 6px 16px;
+  margin-top: 16px;
+  padding: 6px 14px;
   border-radius: 999px;
-  font-size: 13px;
+  font-size: 12px;
   letter-spacing: 0.02em;
-  white-space: nowrap;
+
+  /* clave: que NO se corte */
+  white-space: normal;     /* antes nowrap */
+  line-height: 1.2;
+  max-width: 100%;
 
   background: rgba(37, 99, 235, 0.22);
   color: #c7d2fe;
@@ -2123,10 +2146,11 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
 
 /* ==== Equal height “percibida” (solo desktop) ==== */
+/* bajamos clamp a 3 para que no corte tanto */
 @media (min-width: 900px){
   #servicios.section-dark .service-card:not(.service-card--featured) p{
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 3; /* antes 4 */
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -2137,7 +2161,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 ========================= */
 #servicios.section-dark .service-card--featured{
   grid-column: 1 / -1;
-  padding: 30px 30px 24px;
+  padding: 28px 28px 22px; /* acompaña al resto */
   border-color: rgba(148, 163, 184, 0.40);
 }
 
@@ -2178,7 +2202,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   font-size: 18px;
 }
 
-/* kicker opcional (si lo agregás en HTML) */
+/* kicker opcional */
 #servicios.section-dark .service-kicker{
   font-size: 11px;
   letter-spacing: .18em;
@@ -2227,6 +2251,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   color: #f5f7ff;
   font-weight: 600;
   letter-spacing: .01em;
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
 }
 
 #servicios.section-dark .service-cta:hover{
@@ -2246,6 +2271,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   border-color: rgba(129,140,248,0.95);
   color: #c7d2fe;
 }
+
 
 
 /* ==== BOTÓN FLOTANTE VOLVER ARRIBA ==== */
