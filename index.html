@@ -1318,7 +1318,20 @@ section#trabajos .wrapper {
   margin-top: 10px;     /* probá entre 32px y 56px hasta que lo veas equilibrado */
   padding-top: 50px;     
 }
+   
+/* Landing destacada full width */
+.section-dark .service-card--featured{
+  grid-column: 1 / -1;
+}
 
+/* Mobile: ya es 1 columna, pero lo dejamos prolijo */
+@media (max-width: 768px){
+  .section-dark .service-card--featured{
+    grid-column: auto;
+  }
+}
+
+   
     
     /* ===== QUIÉN ESTÁ DETRÁS / ABOUT ===== */
 .section-about .about-grid {
