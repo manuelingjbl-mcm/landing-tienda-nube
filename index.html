@@ -2318,55 +2318,64 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
 
 /* =========================
-   LANDING DESTACADA — FIX MOBILE
+   FIX MOBILE — ICONO DESTACADA (anti SVG gigante)
 ========================= */
 @media (max-width: 768px){
 
-  /* Head: icono + textos en fila, bien alineados */
-  #servicios.section-dark .service-head{
-    align-items: center;
+  /* fuerza layout del head */
+  #servicios.section-dark .service-card--featured .service-head{
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
   }
 
-  /* Evita que el icono crezca o se deforme */
-  #servicios.section-dark .service-ico{
-    flex: 0 0 36px;
-    width: 36px;
-    height: 36px;
-    overflow: hidden;
+  /* caja del icono: NO puede crecer */
+  #servicios.section-dark .service-card--featured .service-ico{
+    width: 36px !important;
+    height: 36px !important;
+    max-width: 36px !important;
+    max-height: 36px !important;
+    flex: 0 0 36px !important;
+    display: grid !important;
+    place-items: center !important;
+    overflow: hidden !important;
   }
 
-  /* Evita el SVG gigante (esto mata el bug del círculo enorme) */
-  #servicios.section-dark .service-ico svg{
+  /* el svg adentro: NO puede estirarse */
+  #servicios.section-dark .service-card--featured .service-ico svg{
     width: 18px !important;
     height: 18px !important;
     max-width: 18px !important;
     max-height: 18px !important;
-    display: block;
+    display: block !important;
+    flex: 0 0 auto !important;
   }
 
-  /* Bullets: que no queden “apretadas” */
-  #servicios.section-dark .service-bullets{
-    margin-top: 14px;
-    font-size: 13.5px;
+  /* asegura el fill correcto (si estaba perdiendo) */
+  #servicios.section-dark .service-card--featured .service-ico .ico-svg--fill{
+    fill: rgba(199,210,254,0.95) !important;
+    stroke: none !important;
+    opacity: .95 !important;
   }
 
-  /* Footer: apilado, CTA full width */
-  #servicios.section-dark .service-foot{
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
+  /* footer responsive */
+  #servicios.section-dark .service-card--featured .service-foot{
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
   }
 
-  #servicios.section-dark .service-cta{
-    width: 100%;
-    text-align: center;
+  #servicios.section-dark .service-card--featured .service-cta{
+    width: 100% !important;
+    text-align: center !important;
   }
 
-  /* Pill: que no corte ni empuje el layout */
-  #servicios.section-dark .service-card .pill{
-    white-space: normal;
+  /* pills: que no corten raro */
+  #servicios.section-dark .service-card--featured .pill{
+    white-space: normal !important;
   }
 }
+
 
 
 /* ==== BOTÓN FLOTANTE VOLVER ARRIBA ==== */
