@@ -2060,10 +2060,10 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   opacity: 0;
   transform: translateY(24px); /* menos desplazamiento */
   transition:
-    opacity 0.45s ease,
-    transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
-    box-shadow 0.18s ease,
-    border-color 0.18s ease;
+  opacity 0.45s ease,
+  transform 0.22s cubic-bezier(0.2, 0.9, 0.2, 1),
+  box-shadow 0.12s ease,
+  border-color 0.12s ease;
 }
 
 /* Tipografías un toque más compactas */
@@ -2155,6 +2155,17 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     overflow: hidden;
   }
 }
+
+@media (hover:hover) and (pointer:fine){
+  #servicios.section-dark .service-card.is-visible{
+    transition:
+      opacity 0.45s ease,
+      transform 0.22s cubic-bezier(0.2, 0.9, 0.2, 1),
+      box-shadow 0.12s ease,
+      border-color 0.12s ease;
+  }
+}
+ 
 
 /* =========================
    LANDING DESTACADA
