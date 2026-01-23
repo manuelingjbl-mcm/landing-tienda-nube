@@ -2168,21 +2168,40 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
  
 
 /* =========================
-   LANDING DESTACADA
+   LANDING DESTACADA (FINAL)
 ========================= */
 #servicios.section-dark .service-card--featured{
   grid-column: 1 / -1;
-  padding: 28px 28px 22px; /* acompaña al resto */
-  border-color: rgba(148, 163, 184, 0.40);
+  padding: 28px 28px 22px;
+  border-color: rgba(148, 163, 184, 0.55);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.55);
 }
 
-/* “usa” el ancho: 2 columnas internas en desktop */
+/* más glow interno SOLO en la destacada */
+#servicios.section-dark .service-card--featured::before{
+  opacity: 0.78;
+}
+
+/* Desktop: 2 columnas + separador sutil */
 @media (min-width: 900px){
   #servicios.section-dark .service-card--featured{
     display: grid;
     grid-template-columns: 1.25fr 0.75fr;
     column-gap: 28px;
     align-items: start;
+    position: relative; /* necesario para el separador */
+  }
+
+  /* separador vertical entre columnas (sutil) */
+  #servicios.section-dark .service-card--featured::after{
+    content:"";
+    position:absolute;
+    top: 18px;
+    bottom: 18px;
+    left: calc(100% * 1.25 / (1.25 + 0.75));
+    width: 1px;
+    background: rgba(255,255,255,0.06);
+    pointer-events:none;
   }
 }
 
@@ -2191,6 +2210,11 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   #servicios.section-dark .service-card--featured{
     grid-column: auto;
     padding: 24px 20px;
+  }
+
+  /* en mobile no necesitamos separador */
+  #servicios.section-dark .service-card--featured::after{
+    display:none;
   }
 }
 
@@ -2261,9 +2285,9 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   flex-wrap: wrap;
 }
 
-/* CTA botón */
+/* CTA botón (FINAL) */
 #servicios.section-dark .service-cta{
-  text-decoration:none;
+  text-decoration: none;
   padding: 10px 14px;
   border-radius: 12px;
   border: 1px solid rgba(255,255,255,.14);
@@ -2271,12 +2295,16 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   color: #f5f7ff;
   font-weight: 600;
   letter-spacing: .01em;
-  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+
+  /* feel premium */
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
 #servicios.section-dark .service-cta:hover{
   background: rgba(255,255,255,.09);
   border-color: rgba(255,255,255,.22);
+  box-shadow: 0 14px 34px rgba(0,0,0,.35);
 }
 
 @media (hover:hover) and (pointer:fine){
@@ -2284,6 +2312,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     transform: translateY(-1px);
   }
 }
+
 
 /* pill fuerte (landing) */
 #servicios.section-dark .pill--strong{
@@ -3203,6 +3232,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </svg>
 </span>
             <div>
+             <div class="service-kicker">LANDING</div>
               <h3>Landing Page de alta conversión</h3>
               <p class="service-sub">
                 Una landing 1-página para captar leads o vender un producto. Copy + estructura + medición lista para campañas.
