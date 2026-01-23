@@ -2318,47 +2318,49 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
 
 /* =========================
-   FIX MOBILE — ICONO DESTACADA (anti SVG gigante)
+   FIX MOBILE — SERVICIOS (anti SVG gigante + layout)
 ========================= */
 @media (max-width: 768px){
 
-  /* fuerza layout del head */
+  /* La destacada deja de ser “2 columnas internas” en mobile */
+  #servicios.section-dark .service-card--featured{
+    display: block !important;
+  }
+
+  /* Head: icono + textos alineados */
   #servicios.section-dark .service-card--featured .service-head{
     display: flex !important;
     align-items: flex-start !important;
     gap: 12px !important;
   }
 
-  /* caja del icono: NO puede crecer */
+  /* Caja del icono: tamaño fijo */
   #servicios.section-dark .service-card--featured .service-ico{
     width: 36px !important;
     height: 36px !important;
-    max-width: 36px !important;
-    max-height: 36px !important;
     flex: 0 0 36px !important;
     display: grid !important;
     place-items: center !important;
     overflow: hidden !important;
   }
 
-  /* el svg adentro: NO puede estirarse */
-  #servicios.section-dark .service-card--featured .service-ico svg{
+  /* SVG: fijo sí o sí (mata cualquier svg{width:100%}) */
+  #servicios.section-dark .service-card--featured .service-ico > svg{
     width: 18px !important;
     height: 18px !important;
     max-width: 18px !important;
     max-height: 18px !important;
     display: block !important;
-    flex: 0 0 auto !important;
   }
 
-  /* asegura el fill correcto (si estaba perdiendo) */
-  #servicios.section-dark .service-card--featured .service-ico .ico-svg--fill{
+  /* Fill correcto */
+  #servicios.section-dark .service-card--featured .service-ico > svg{
     fill: rgba(199,210,254,0.95) !important;
     stroke: none !important;
     opacity: .95 !important;
   }
 
-  /* footer responsive */
+  /* Footer: todo apilado y CTA full */
   #servicios.section-dark .service-card--featured .service-foot{
     flex-direction: column !important;
     align-items: stretch !important;
@@ -2370,11 +2372,12 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     text-align: center !important;
   }
 
-  /* pills: que no corten raro */
+  /* Pills: que no corten */
   #servicios.section-dark .service-card--featured .pill{
     white-space: normal !important;
   }
 }
+
 
 
 
