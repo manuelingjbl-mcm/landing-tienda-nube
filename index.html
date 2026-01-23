@@ -2318,34 +2318,55 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
 
 /* =========================
-   FIX MOBILE — SERVICIOS (anti SVG gigante + layout)
+   SERVICIOS — FIX MOBILE AISLADO (NO rompe hero/float)
 ========================= */
+#servicios.section-dark .service-card--featured .service-ico{
+  width:36px;
+  height:36px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.10);
+  overflow:hidden;
+}
+
+#servicios.section-dark .service-card--featured .service-ico > svg{
+  width:18px;
+  height:18px;
+  display:block;
+  fill: rgba(199,210,254,0.95);
+  stroke:none;
+  opacity:.95;
+}
+
+/* MOBILE: apila la destacada sin tocar el resto */
 @media (max-width: 768px){
-
-  /* El icono NO puede ser un “bloque” gigante */
-  #servicios.section-dark .service-card--featured .service-ico{
-    width: 36px !important;
-    height: 36px !important;
-    min-width: 36px !important;
-    min-height: 36px !important;
-    max-width: 36px !important;
-    max-height: 36px !important;
-
-    flex: 0 0 36px !important;
-    align-self: flex-start !important;
-
-    display: grid !important;
-    place-items: center !important;
-
-    overflow: hidden !important;
+  #servicios.section-dark .service-card--featured{
+    display:block; /* mata cualquier grid interno en mobile */
   }
 
-  /* El SVG queda fijo y centrado */
-  #servicios.section-dark .service-card--featured .service-ico > svg{
-    width: 18px !important;
-    height: 18px !important;
-    display: block !important;
-    fill: rgba(199,210,254,0.95) !important;
+  #servicios.section-dark .service-card--featured .service-head{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    margin-bottom:10px;
+  }
+
+  #servicios.section-dark .service-card--featured .service-foot{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    align-items:stretch;
+  }
+
+  #servicios.section-dark .service-card--featured .service-cta{
+    width:100%;
+    text-align:center;
+  }
+
+  #servicios.section-dark .service-card--featured .pill{
+    white-space: normal;
   }
 }
 
