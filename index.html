@@ -2194,16 +2194,11 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 
   /* separador sin usar ::after (así no pisa la línea superior) */
 #servicios.section-dark .service-card--featured{
-  background:
-    linear-gradient(
-      90deg,
-      transparent calc(62.5% - 0.5px),
-      rgba(255,255,255,0.06) 62.5%,
-      transparent calc(62.5% + 0.5px)
-    ),
-    radial-gradient(circle at top left, rgba(255,255,255,0.06), transparent 55%),
-    rgba(15, 23, 42, 0.92);
-}
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    column-gap: 28px;
+    align-items: start;
+  }
 
 
 /* Mobile */
@@ -2322,6 +2317,56 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   color: #c7d2fe;
 }
 
+/* =========================
+   LANDING DESTACADA — FIX MOBILE
+========================= */
+@media (max-width: 768px){
+
+  /* Head: icono + textos en fila, bien alineados */
+  #servicios.section-dark .service-head{
+    align-items: center;
+  }
+
+  /* Evita que el icono crezca o se deforme */
+  #servicios.section-dark .service-ico{
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+    overflow: hidden;
+  }
+
+  /* Evita el SVG gigante (esto mata el bug del círculo enorme) */
+  #servicios.section-dark .service-ico svg{
+    width: 18px !important;
+    height: 18px !important;
+    max-width: 18px !important;
+    max-height: 18px !important;
+    display: block;
+  }
+
+  /* Bullets: que no queden “apretadas” */
+  #servicios.section-dark .service-bullets{
+    margin-top: 14px;
+    font-size: 13.5px;
+  }
+
+  /* Footer: apilado, CTA full width */
+  #servicios.section-dark .service-foot{
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  #servicios.section-dark .service-cta{
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Pill: que no corte ni empuje el layout */
+  #servicios.section-dark .service-card .pill{
+    white-space: normal;
+  }
+}
 
 
 /* ==== BOTÓN FLOTANTE VOLVER ARRIBA ==== */
