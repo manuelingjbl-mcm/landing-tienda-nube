@@ -2208,18 +2208,19 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   display:grid;
   place-items:center;
   border-radius: 12px;
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.06);
 }
 
-#servicios.section-dark .ico-svg{
+#servicios.section-dark .ico-svg--fill{
   width:18px;
   height:18px;
   display:block;
-  fill: none;
-  stroke: rgba(199,210,254,0.95); /* mismo tono que tus pills */
-  stroke-width: 2;
+  fill: rgba(199,210,254,0.95);
+  stroke: none;
+  opacity: .95;
 }
+
 
 /* kicker opcional */
 #servicios.section-dark .service-kicker{
@@ -3195,7 +3196,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="service-card service-card--featured" data-accent="landing">
           <div class="service-head">
             <span class="service-ico" aria-hidden="true">
-  <svg class="ico-svg" viewBox="0 0 24 24" aria-hidden="true">
+  <svg class="ico-svg ico-svg--fill" viewBox="0 0 24 24" aria-hidden="true">
     <circle cx="12" cy="12" r="9"></circle>
     <circle cx="12" cy="12" r="5"></circle>
     <circle cx="12" cy="12" r="1.6"></circle>
