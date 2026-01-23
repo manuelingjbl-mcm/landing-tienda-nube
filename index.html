@@ -3015,7 +3015,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </p>
   <div class="pill">Ideal para marcas que quieren escalar sin sumar equipo
   </div>
-      </div>
+
+     <!-- ⭐ Landing destacada (PEGAR ACÁ) -->
+        <div class="service-card service-card--featured" data-accent="landing">
+          <div class="service-head">
+            <span class="service-ico" aria-hidden="true">🎯</span>
+            <div>
+              <h3>Landing Page de alta conversión</h3>
+              <p class="service-sub">
+                Una landing 1-página para captar leads o vender un producto. Copy + estructura + medición lista para campañas.
+              </p>
+            </div>
+          </div>
+
+          <ul class="service-bullets">
+            <li>Hero + propuesta clara (sin humo)</li>
+            <li>Formulario + WhatsApp (derivación)</li>
+            <li>Tracking: Meta Pixel + GA4</li>
+          </ul>
+
+          <div class="service-foot">
+            <div class="pill pill--strong">Ideal para campañas y lanzamientos</div>
+            <a class="service-cta" href="#contacto">Quiero mi landing →</a>
+          </div>
+        </div>
+         
+         
+   </div>
     </div>
   </section>
 
@@ -3839,10 +3865,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const cards = document.querySelectorAll(".section-dark .service-card");
+    const cards = document.querySelectorAll("#servicios .service-card");
     if (!cards.length) return;
 
-    // Delay en cascada para cada card
     cards.forEach(function (card, index) {
       card.style.transitionDelay = (index * 120) + "ms";
     });
@@ -3852,12 +3877,12 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target); // no hace falta observarla más
+            observer.unobserve(entry.target);
           }
         });
       },
       {
-        threshold: 0.15,      // con 15% visible ya dispara
+        threshold: 0.15,
         rootMargin: "0px 0px -10% 0px"
       }
     );
@@ -3867,6 +3892,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 </script>
+
 
 
     
