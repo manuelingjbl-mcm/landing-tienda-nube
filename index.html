@@ -2541,6 +2541,16 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   .scroll-top-btn{ bottom: 96px; }
 }
 
+ /* FIX mobile: que no lo tape el chat + safe-area iPhone */
+@media (max-width: 768px){
+  .scroll-top-btn{
+    z-index: 99999; /* por si el widget de chat tiene z-index alto */
+    bottom: calc(170px + env(safe-area-inset-bottom)); /* sube arriba del chat */
+    right: 16px;
+  }
+}
+
+
 /* ===== HERO DESKTOP: recuperar estilos originales (CTA pill + tamaños) ===== */
 @media (min-width: 768px){
 
