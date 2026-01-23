@@ -2322,65 +2322,34 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 ========================= */
 @media (max-width: 768px){
 
-  /* La destacada deja de ser “2 columnas internas” en mobile */
-  #servicios.section-dark .service-card--featured{
-    display: block !important;
-  }
-
-  /* Head: icono + textos alineados */
-  #servicios.section-dark .service-card--featured .service-head{
-    display: flex !important;
-    align-items: flex-start !important;
-    gap: 12px !important;
-  }
-
-  /* Caja del icono: tamaño fijo */
+  /* El icono NO puede ser un “bloque” gigante */
   #servicios.section-dark .service-card--featured .service-ico{
     width: 36px !important;
     height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+    max-width: 36px !important;
+    max-height: 36px !important;
+
     flex: 0 0 36px !important;
+    align-self: flex-start !important;
+
     display: grid !important;
     place-items: center !important;
+
     overflow: hidden !important;
   }
 
-  /* SVG: fijo sí o sí (mata cualquier svg{width:100%}) */
+  /* El SVG queda fijo y centrado */
   #servicios.section-dark .service-card--featured .service-ico > svg{
     width: 18px !important;
     height: 18px !important;
-    max-width: 18px !important;
-    max-height: 18px !important;
     display: block !important;
-  }
-
-  /* Fill correcto */
-  #servicios.section-dark .service-card--featured .service-ico > svg{
     fill: rgba(199,210,254,0.95) !important;
-    stroke: none !important;
-    opacity: .95 !important;
-  }
-
-  /* Footer: todo apilado y CTA full */
-  #servicios.section-dark .service-card--featured .service-foot{
-    flex-direction: column !important;
-    align-items: stretch !important;
-    gap: 10px !important;
-  }
-
-  #servicios.section-dark .service-card--featured .service-cta{
-    width: 100% !important;
-    text-align: center !important;
-  }
-
-  /* Pills: que no corten */
-  #servicios.section-dark .service-card--featured .pill{
-    white-space: normal !important;
   }
 }
 
-
-
-
+ 
 /* ==== BOTÓN FLOTANTE VOLVER ARRIBA ==== */
 .scroll-top-btn {
   position: fixed;
