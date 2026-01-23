@@ -1319,19 +1319,6 @@ section#trabajos .wrapper {
   padding-top: 50px;     
 }
    
-/* Landing destacada full width */
-.section-dark .service-card--featured{
-  grid-column: 1 / -1;
-}
-
-/* Mobile: ya es 1 columna, pero lo dejamos prolijo */
-@media (max-width: 768px){
-  .section-dark .service-card--featured{
-    grid-column: auto;
-  }
-}
-
-   
     
     /* ===== QUIÉN ESTÁ DETRÁS / ABOUT ===== */
 .section-about .about-grid {
@@ -2039,44 +2026,87 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
 
 
+/* =========================
+   SERVICIOS (FINAL LIMPIO)
+========================= */
+
 /* ==== GRID SERVICIOS ==== */
-.services {
+#servicios .services{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 24px;
+  margin-top: 24px;
 }
 
-/* Card base (fondo un poco más claro) */
-.service-card {
+/* ==== CARD BASE ==== */
+#servicios.section-dark .service-card{
   position: relative;
   padding: 28px 28px 24px;
   border-radius: 22px;
   background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.06), transparent 55%),
-              rgba(15, 23, 42, 0.92); /* azul oscuro pero un poco más claro */
+              rgba(15, 23, 42, 0.92);
   box-shadow: 0 22px 45px rgba(0, 0, 0, 0.45);
   border: 1px solid rgba(148, 163, 184, 0.28);
   overflow: hidden;
 
-  /* estado inicial animación */
+  /* estado inicial animación (JS usa .is-visible) */
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(30px);
   transition:
-    opacity 0.55s ease-out,
-    transform 0.55s ease-out,
-    box-shadow 0.25s ease-out,
-    border-color 0.25s ease-out;
+    opacity 0.6s ease,
+    transform 0.6s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
-/* Hover suave en desktop */
-@media (hover: hover) {
-  .service-card:hover {
+/* brillo interno (si ya tenías ::before en otro bloque, lo dejamos acá) */
+#servicios.section-dark .service-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: radial-gradient(circle at top right, rgba(180, 255, 255, 0.18), transparent 55%);
+  opacity: 0.6;
+  pointer-events:none;
+}
+
+/* Accent line sutil (sin pintar la card) */
+#servicios.section-dark .service-card{
+  --acc: rgba(120,210,255,1);
+}
+#servicios.section-dark .service-card::after{
+  content:"";
+  position:absolute;
+  top:0; left:0; right:0;
+  height:2px;
+  opacity:.85;
+  background: linear-gradient(90deg, var(--acc), rgba(255,255,255,0));
+  pointer-events:none;
+}
+
+/* accents por orden */
+#servicios.section-dark .services .service-card:nth-child(1){ --acc: rgba(93,173,255,1); }
+#servicios.section-dark .services .service-card:nth-child(2){ --acc: rgba(167,121,255,1); }
+#servicios.section-dark .services .service-card:nth-child(3){ --acc: rgba(120,255,177,1); }
+#servicios.section-dark .services .service-card:nth-child(4){ --acc: rgba(255,186,120,1); }
+#servicios.section-dark .services .service-card--featured{ --acc: rgba(120,210,255,1); }
+
+/* Visible (clase que agrega tu JS) */
+#servicios.section-dark .service-card.is-visible{
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Hover suave en desktop (solo cuando ya es visible) */
+@media (hover:hover) and (pointer:fine){
+  #servicios.section-dark .service-card.is-visible:hover{
+    transform: translateY(-4px) !important;
     box-shadow: 0 26px 60px rgba(15, 23, 42, 0.95);
     border-color: rgba(129, 140, 248, 0.7);
   }
 }
 
-/* === PILL interna (azul, más marcada) === */
-.service-card .pill {
+/* ==== PILL ==== */
+#servicios.section-dark .service-card .pill{
   display: inline-flex;
   align-items: center;
   margin-top: 18px;
@@ -2086,50 +2116,137 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   letter-spacing: 0.02em;
   white-space: nowrap;
 
-  background: rgba(37, 99, 235, 0.22);       /* azul más visible */
-  color: #c7d2fe;                             /* texto azul clarito */
+  background: rgba(37, 99, 235, 0.22);
+  color: #c7d2fe;
   border: 1px solid rgba(129, 140, 248, 0.85);
   box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.75);
 }
 
-/* Cuando la card entra en viewport */
-.service-card.service-card--visible {
-  opacity: 1;
-  transform: translateY(0);
+/* ==== Equal height “percibida” (solo desktop) ==== */
+@media (min-width: 900px){
+  #servicios.section-dark .service-card:not(.service-card--featured) p{
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
 
-/* === ANIMACIÓN CARDS "NUESTROS SERVICIOS" === */
-.section-dark .service-card {
-  /* Estado inicial oculto y ligeramente abajo */
-  opacity: 0 !important;
-  transform: translateY(30px) !important;
-
-  /* Transiciones: incluimos transform y opacity */
-  transition:
-    opacity 0.6s ease,
-    transform 0.6s ease,
-    box-shadow 0.25s ease,
-    background 0.25s ease !important;
+/* =========================
+   LANDING DESTACADA
+========================= */
+#servicios.section-dark .service-card--featured{
+  grid-column: 1 / -1;
+  padding: 30px 30px 24px;
+  border-color: rgba(148, 163, 184, 0.40);
 }
 
-/* Cuando se hace visible (clase que agrega el JS) */
-.section-dark .service-card.is-visible {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
+/* “usa” el ancho: 2 columnas internas en desktop */
+@media (min-width: 900px){
+  #servicios.section-dark .service-card--featured{
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    column-gap: 28px;
+    align-items: start;
+  }
 }
 
-/* Hover solo después de visible */
-.section-dark .service-card.is-visible:hover {
-  transform: translateY(-4px) !important;
+/* Mobile */
+@media (max-width: 768px){
+  #servicios.section-dark .service-card--featured{
+    grid-column: auto;
+    padding: 24px 20px;
+  }
 }
 
-    
-/* ====== CONTAINER GENÉRICO (por si se perdió) ====== */
-.wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 32px;
+/* Estructura interna */
+#servicios.section-dark .service-head{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  margin-bottom: 10px;
 }
+
+#servicios.section-dark .service-ico{
+  width:36px;
+  height:36px;
+  display:grid;
+  place-items:center;
+  border-radius: 12px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.10);
+  font-size: 18px;
+}
+
+/* kicker opcional (si lo agregás en HTML) */
+#servicios.section-dark .service-kicker{
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  opacity: .7;
+  margin-bottom: 6px;
+}
+
+#servicios.section-dark .service-sub{
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: rgba(230,239,255,0.86);
+}
+
+#servicios.section-dark .service-bullets{
+  margin: 14px 0 0;
+  padding-left: 18px;
+  color: rgba(230,239,255,0.90);
+  font-size: 14px;
+}
+#servicios.section-dark .service-bullets li{ margin: 6px 0; }
+
+@media (min-width: 900px){
+  #servicios.section-dark .service-card--featured .service-bullets{
+    margin-top: 6px;
+  }
+}
+
+#servicios.section-dark .service-foot{
+  margin-top: 16px;
+  display:flex;
+  gap: 12px;
+  align-items:center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* CTA botón */
+#servicios.section-dark .service-cta{
+  text-decoration:none;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  color: #f5f7ff;
+  font-weight: 600;
+  letter-spacing: .01em;
+}
+
+#servicios.section-dark .service-cta:hover{
+  background: rgba(255,255,255,.09);
+  border-color: rgba(255,255,255,.22);
+}
+
+@media (hover:hover) and (pointer:fine){
+  #servicios.section-dark .service-cta:hover{
+    transform: translateY(-1px);
+  }
+}
+
+/* pill fuerte (landing) */
+#servicios.section-dark .pill--strong{
+  background: rgba(37,99,235,0.28);
+  border-color: rgba(129,140,248,0.95);
+  color: #c7d2fe;
+}
+
 
 /* ==== BOTÓN FLOTANTE VOLVER ARRIBA ==== */
 .scroll-top-btn {
