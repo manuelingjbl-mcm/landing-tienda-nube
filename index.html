@@ -2192,18 +2192,19 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     position: relative; /* necesario para el separador */
   }
 
-  /* separador vertical entre columnas (sutil) */
-  #servicios.section-dark .service-card--featured::after{
-    content:"";
-    position:absolute;
-    top: 18px;
-    bottom: 18px;
-    left: calc(100% * 1.25 / (1.25 + 0.75));
-    width: 1px;
-    background: rgba(255,255,255,0.06);
-    pointer-events:none;
-  }
+  /* separador sin usar ::after (así no pisa la línea superior) */
+#servicios.section-dark .service-card--featured{
+  background:
+    linear-gradient(
+      90deg,
+      transparent calc(62.5% - 0.5px),
+      rgba(255,255,255,0.06) 62.5%,
+      transparent calc(62.5% + 0.5px)
+    ),
+    radial-gradient(circle at top left, rgba(255,255,255,0.06), transparent 55%),
+    rgba(15, 23, 42, 0.92);
 }
+
 
 /* Mobile */
 @media (max-width: 768px){
