@@ -2356,6 +2356,37 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
+/* =========================
+   SERVICIOS — Reveal de CARDS (2da capa)
+   (no usa .reveal para no chocar con el reveal global del bloque)
+========================= */
+
+#servicios.section-dark .services .service-card{
+  /* estado normal visible (por defecto) */
+  opacity: 1;
+  transform: translateY(0);
+
+  transition:
+    opacity 0.45s ease,
+    transform 0.34s cubic-bezier(0.2, 0.9, 0.2, 1),
+    box-shadow 0.12s ease,
+    border-color 0.12s ease;
+
+  will-change: opacity, transform;
+}
+
+/* estado inicial SOLO para la animación de cards */
+#servicios.section-dark .services .service-card.svc-reveal{
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+/* visible (lo agrega el JS de cards) */
+#servicios.section-dark .services .service-card.svc-visible{
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+ 
 
 /* =========================
    NAV (checkbox) — ESTABLE
@@ -4382,6 +4413,100 @@ document.addEventListener("DOMContentLoaded", () => {
   const anchor = document.getElementById('about-metrics') || metrics[0];
   io.observe(anchor);
 })();
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const section = document.querySelector("#servicios.section-dark");
+  const grid = document.querySelector("#servicios.section-dark .services");
+  if (!section || !grid) return;
+
+  const cards = Array.from(grid.querySelectorAll(".service-card"));
+  if (!cards.length) return;
+
+  let initialized = false;
+
+  // Delay por fila (2 arriba, 2 medio, luego destacada según offsetTop)
+  function setupRowDelays() {
+    const tol = 10;
+    const rows = new Map();
+
+    cards.forEach(card => {
+      const top = card.offsetTop;
+      let key = null;
+      for (const k of rows.keys()) {
+        if (Math.abs(k - top) <= tol) { key = k; break; }
+      }
+      if (key === null) key = top;
+      if (!rows.has(key)) rows.set(key, []);
+      rows.get(key).push(card);
+    });
+
+    rows.forEach(row => {
+      row.sort((a,b)=>a.offsetLeft - b.offsetLeft);
+      row.forEach((card,i)=> card.dataset.svcDelay = String(i * 110)); // 0 / 110
+    });
+  }
+
+  function initCardsReveal() {
+    if (initialized) return;
+    initialized = true;
+
+    // estado inicial SOLO para cards (clases propias)
+    cards.forEach(card => {
+      card.classList.add("svc-reveal");
+      card.classList.remove("svc-visible");
+      card.style.transitionDelay = "0ms";
+    });
+
+    setupRowDelays();
+
+    // asegurar que el browser pinte el estado inicial antes de animar
+    requestAnimationFrame(() => {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.style.transitionDelay = (entry.target.dataset.svcDelay || "0") + "ms";
+          entry.target.classList.add("svc-visible");
+          entry.target.classList.remove("svc-reveal");
+          io.unobserve(entry.target);
+        });
+      }, {
+        threshold: 0.2,
+        rootMargin: "0px 0px -55% 0px"
+      });
+
+      cards.forEach(card => io.observe(card));
+    });
+
+    window.addEventListener("resize", setupRowDelays);
+  }
+
+  // ✅ Espera a que el reveal global marque el bloque como visible (reveal-visible)
+  // Si tu global usa otro nombre, ajustamos esa string.
+  if (section.classList.contains("reveal-visible")) {
+    setTimeout(initCardsReveal, 180);
+    return;
+  }
+
+  const watch = new MutationObserver(() => {
+    if (section.classList.contains("reveal-visible")) {
+      watch.disconnect();
+      setTimeout(initCardsReveal, 180);
+    }
+  });
+  watch.observe(section, { attributes: true, attributeFilter: ["class"] });
+
+  // fallback: si por algún motivo no se agrega la clase, lo activamos igual al entrar en viewport
+  const fallbackIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      fallbackIO.disconnect?.();
+      setTimeout(initCardsReveal, 180);
+    });
+  }, { threshold: 0.15, rootMargin: "0px 0px -35% 0px" });
+  fallbackIO.observe(section);
+});
 </script>
 
  
