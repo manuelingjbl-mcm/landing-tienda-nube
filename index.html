@@ -4068,67 +4068,64 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 </script>
 
-    
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  const scope = document.querySelector("#servicios.section-dark .services");
+  // Scope correcto (en tu CSS aparece #servicios.section-dark .services ...)
+  const scope =
+    document.querySelector("#servicios.section-dark .services") ||
+    document.querySelector("#servicios .services") ||
+    document.querySelector("#servicios");
+
   if (!scope) return;
 
   const cards = Array.from(scope.querySelectorAll(".service-card"));
   if (!cards.length) return;
 
-  const featured = scope.querySelector(".service-card--featured");
-  const normals = cards.filter(c => c !== featured);
+  // 1) Reset delays (por si quedó algo viejo)
+  cards.forEach(card => (card.style.transitionDelay = "0ms"));
 
-  // arma filas por posición real (top)
-  const tol = 18;
-  const rows = [];
-  normals.forEach(el => {
-    const rect = el.getBoundingClientRect();
-    let row = rows.find(r => Math.abs(r.top - rect.top) <= tol);
-    if (!row) { row = { top: rect.top, items: [] }; rows.push(row); }
-    row.items.push(el);
+  // 2) Stagger SOLO dentro de cada fila (sin romper el orden visual)
+  // agrupamos por offsetTop (fila real)
+  const tol = 12;
+  const rows = new Map();
+
+  cards.forEach(card => {
+    const top = card.offsetTop;
+    let key = null;
+    for (const k of rows.keys()) {
+      if (Math.abs(k - top) <= tol) { key = k; break; }
+    }
+    if (key === null) key = top;
+    if (!rows.has(key)) rows.set(key, []);
+    rows.get(key).push(card);
   });
 
-  rows.sort((a,b)=>a.top-b.top);
-  rows.forEach(r => r.items.sort((a,b)=>a.getBoundingClientRect().left - b.getBoundingClientRect().left));
+  // dentro de cada fila: izquierda->derecha con delay suave
+  [...rows.values()].forEach(rowCards => {
+    rowCards.sort((a,b)=> a.offsetLeft - b.offsetLeft);
+    rowCards.forEach((card, i) => {
+      card.dataset.rowDelay = String(i * 90); // 0ms, 90ms
+    });
+  });
 
-  // 1) fila 1, 2) fila 2, 3) destacado
-  const sequence = rows.map(r => r.items);
-  if (featured) sequence.push([featured]);
-
-  // reset delays
-  cards.forEach(c => c.style.transitionDelay = "0ms");
-
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+  // 3) Observer: dispara tarde para que no “entren todas juntas”
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
-
-      const group = entry.target.__group;
-      if (group && group.length) {
-        group.forEach((card, i) => {
-          card.style.transitionDelay = (i * 90) + "ms"; // stagger dentro de la fila
-          card.classList.add("is-visible");
-        });
-      }
-      revealObserver.unobserve(entry.target);
+      const d = entry.target.dataset.rowDelay || "0";
+      entry.target.style.transitionDelay = d + "ms";
+      entry.target.classList.add("is-visible");
+      observer.unobserve(entry.target);
     });
   }, {
-    threshold: 0.01,
-    rootMargin: "0px 0px -40% 0px" // 🔥 dispara tarde -> no “todo junto”
+    threshold: 0.15,
+    rootMargin: "0px 0px -55% 0px" // 🔥 clave: activa cuando ya bajaste bastante
   });
 
-  // sentinels por grupo (uno por fila)
-  sequence.forEach(group => {
-    const sentinel = document.createElement("div");
-    sentinel.style.cssText = "height:1px; margin:0; padding:0;";
-    sentinel.__group = group;
-    group[0].parentNode.insertBefore(sentinel, group[0]);
-    revealObserver.observe(sentinel);
-  });
+  cards.forEach(card => observer.observe(card));
 });
 </script>
-
+    
     
 <!-- Botón flotante "volver arriba" -->
 <button class="scroll-top-btn" aria-label="Volver arriba">
