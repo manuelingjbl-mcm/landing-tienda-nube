@@ -4070,23 +4070,64 @@ document.addEventListener('DOMContentLoaded', () => {
 
     
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const cards = document.querySelectorAll("#servicios.section-dark .service-card, #servicios .service-card");
-    if (!cards.length) return;
+document.addEventListener("DOMContentLoaded", function () {
+  const scope = document.querySelector("#servicios.section-dark .services");
+  if (!scope) return;
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15, rootMargin: "0px 0px -10% 0px" });
+  const cards = Array.from(scope.querySelectorAll(".service-card"));
+  if (!cards.length) return;
 
-    cards.forEach((card) => observer.observe(card));
+  const featured = scope.querySelector(".service-card--featured");
+  const normals = cards.filter(c => c !== featured);
+
+  // arma filas por posición real (top)
+  const tol = 18;
+  const rows = [];
+  normals.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    let row = rows.find(r => Math.abs(r.top - rect.top) <= tol);
+    if (!row) { row = { top: rect.top, items: [] }; rows.push(row); }
+    row.items.push(el);
   });
-</script>
 
+  rows.sort((a,b)=>a.top-b.top);
+  rows.forEach(r => r.items.sort((a,b)=>a.getBoundingClientRect().left - b.getBoundingClientRect().left));
+
+  // 1) fila 1, 2) fila 2, 3) destacado
+  const sequence = rows.map(r => r.items);
+  if (featured) sequence.push([featured]);
+
+  // reset delays
+  cards.forEach(c => c.style.transitionDelay = "0ms");
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+
+      const group = entry.target.__group;
+      if (group && group.length) {
+        group.forEach((card, i) => {
+          card.style.transitionDelay = (i * 90) + "ms"; // stagger dentro de la fila
+          card.classList.add("is-visible");
+        });
+      }
+      revealObserver.unobserve(entry.target);
+    });
+  }, {
+    threshold: 0.01,
+    rootMargin: "0px 0px -40% 0px" // 🔥 dispara tarde -> no “todo junto”
+  });
+
+  // sentinels por grupo (uno por fila)
+  sequence.forEach(group => {
+    const sentinel = document.createElement("div");
+    sentinel.style.cssText = "height:1px; margin:0; padding:0;";
+    sentinel.__group = group;
+    group[0].parentNode.insertBefore(sentinel, group[0]);
+    revealObserver.observe(sentinel);
+  });
+});
+</script>
 
     
 <!-- Botón flotante "volver arriba" -->
