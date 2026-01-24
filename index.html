@@ -1978,12 +1978,10 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
 
 
+/* ====== SERVICIOS · RESETEO (SIN ROMPER ANIMACIÓN) ====== */
 
-
-    /* ====== SERVICIOS · RESETEO VISIBILIDAD ====== */
-
-/* Grid de servicios */
-.section-dark .services {
+/* Grid de servicios (genérico, OK) */
+.section-dark .services{
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 24px;
@@ -1991,32 +1989,31 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
 
 /* En desktop, 2 columnas */
-@media (min-width: 992px) {
-  .section-dark .services {
+@media (min-width: 992px){
+  .section-dark .services{
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-/* Card base SIEMPRE visible (sin depender de JS) */
-.section-dark .service-card {
+/* Card base genérica (NO forzar opacity/transform acá) */
+.section-dark .service-card{
   background: #0f172a;
   border-radius: 18px;
   padding: 24px;
   box-shadow: 0 22px 45px rgba(0, 0, 0, 0.45);
-
   color: #f9fafb;
-  opacity: 1 !important;          /* 👈 por si algún CSS viejo la dejaba en 0 */
-  transform: none !important;     /* 👈 por si había animación con translateY */
+}
+
+/* Si querés “reseteo” para otras secciones, excluí Servicios */
+section.section-dark:not(#servicios) .service-card{
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 /* Títulos y texto dentro de la card */
-.section-dark .service-card h3 {
-  margin-bottom: 12px;
-}
+.section-dark .service-card h3{ margin-bottom: 12px; }
+.section-dark .service-card p{ margin-bottom: 16px; }
 
-.section-dark .service-card p {
-  margin-bottom: 16px;
-}
 
 /* Pill dentro de cada servicio */
 .section-dark .service-card .pill {
