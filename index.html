@@ -2173,6 +2173,21 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
       border-color 0.12s ease;
   }
 }
+
+ /* =========================
+   SERVICIOS — KILL SWITCH
+   Evita que el SECTION/WRAPPER se anime como bloque (reveal global)
+========================= */
+#servicios.section-dark.reveal,
+#servicios.section-dark.reveal.reveal-visible,
+#servicios.section-dark .wrapper.reveal,
+#servicios.section-dark .wrapper.reveal.reveal-visible{
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+  filter: none !important;
+}
+
  
 /* =========================
    LANDING DESTACADA (FINAL) — FIX línea top + dot mobile
