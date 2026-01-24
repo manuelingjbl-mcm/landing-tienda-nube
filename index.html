@@ -4103,8 +4103,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 1) Estado inicial
   cards.forEach(card => {
-    card.classList.add("reveal");
-    card.classList.remove("reveal-visible");
+    card.classList.add("svc-reveal");
+    card.classList.remove("svc-visible");
     card.classList.remove("is-visible");
   });
 
@@ -4137,7 +4137,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // 👇 clave: próximo frame => animación suave (evita “golpe”)
       requestAnimationFrame(() => {
-        entry.target.classList.add("reveal-visible");
+        entry.target.classList.add("svc-visible");
       });
 
       obs.unobserve(entry.target);
