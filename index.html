@@ -2054,7 +2054,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 /* ==== CARD BASE ==== */
 #servicios.section-dark .service-card{
   position: relative;
-  padding: 26px 26px 22px; /* un toque menos */
+  padding: 26px 26px 22px;
   border-radius: 22px;
   background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.06), transparent 55%),
               rgba(15, 23, 42, 0.92);
@@ -2062,23 +2062,32 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   border: 1px solid rgba(148, 163, 184, 0.28);
   overflow: hidden;
 
-  /* estado inicial animación (JS usa .is-visible) */
-  opacity: 0;
-  transform: translateY(24px); /* menos desplazamiento */
+  /* transición base (sin esconder por defecto) */
   transition:
-  opacity 0.45s ease,
-  transform 0.22s cubic-bezier(0.2, 0.9, 0.2, 1),
-  box-shadow 0.12s ease,
-  border-color 0.12s ease;
+    opacity 0.45s ease,
+    transform 0.34s cubic-bezier(0.2, 0.9, 0.2, 1),
+    box-shadow 0.12s ease,
+    border-color 0.12s ease;
 }
 
-/* Tipografías un toque más compactas */
+/* ✅ Estado inicial SOLO cuando el JS la marca como "reveal" */
+#servicios.section-dark .service-card.reveal{
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+/* ✅ Visible (clase que agrega tu JS) */
+#servicios.section-dark .service-card.reveal.is-visible{
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Tipografías */
 #servicios.section-dark .service-card h3{
   font-size: 17px;
   line-height: 1.25;
   margin-bottom: 10px;
 }
-
 #servicios.section-dark .service-card p{
   font-size: 13.5px;
   line-height: 1.52;
@@ -2097,7 +2106,6 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 
 /* Accent line sutil */
 #servicios.section-dark .service-card{ --acc: rgba(120,210,255,1); }
-
 #servicios.section-dark .service-card::after{
   content:"";
   position:absolute;
@@ -2115,16 +2123,10 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 #servicios.section-dark .services .service-card:nth-child(4){ --acc: rgba(255,186,120,1); }
 #servicios.section-dark .services .service-card--featured{ --acc: rgba(120,210,255,1); }
 
-/* Visible (clase que agrega tu JS) */
-#servicios.section-dark .service-card.is-visible{
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-}
-
-/* Hover más liviano */
+/* Hover */
 @media (hover:hover) and (pointer:fine){
-  #servicios.section-dark .service-card.is-visible:hover{
-    transform: translateY(-3px) !important; /* antes -4 */
+  #servicios.section-dark .service-card.reveal.is-visible:hover{
+    transform: translateY(-3px) !important;
     box-shadow: 0 26px 60px rgba(15, 23, 42, 0.95);
     border-color: rgba(129, 140, 248, 0.7);
   }
@@ -4070,25 +4072,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  // Scope correcto (en tu CSS aparece #servicios.section-dark .services ...)
-  const scope =
-    document.querySelector("#servicios.section-dark .services") ||
-    document.querySelector("#servicios .services") ||
-    document.querySelector("#servicios");
-
-  if (!scope) return;
-
-  const cards = Array.from(scope.querySelectorAll(".service-card"));
+  const cards = document.querySelectorAll("#servicios.section-dark .services .service-card");
   if (!cards.length) return;
 
-  // 1) Reset delays (por si quedó algo viejo)
-  cards.forEach(card => (card.style.transitionDelay = "0ms"));
+  // Marcar como "reveal" (estado inicial) SOLO en Servicios
+  cards.forEach(card => card.classList.add("reveal"));
 
-  // 2) Stagger SOLO dentro de cada fila (sin romper el orden visual)
-  // agrupamos por offsetTop (fila real)
-  const tol = 12;
+  // Delay por fila (izq->der dentro de la misma fila)
+  const tol = 10;
   const rows = new Map();
-
   cards.forEach(card => {
     const top = card.offsetTop;
     let key = null;
@@ -4099,32 +4091,27 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!rows.has(key)) rows.set(key, []);
     rows.get(key).push(card);
   });
-
-  // dentro de cada fila: izquierda->derecha con delay suave
-  [...rows.values()].forEach(rowCards => {
-    rowCards.sort((a,b)=> a.offsetLeft - b.offsetLeft);
-    rowCards.forEach((card, i) => {
-      card.dataset.rowDelay = String(i * 90); // 0ms, 90ms
-    });
+  rows.forEach(row => {
+    row.sort((a,b)=>a.offsetLeft - b.offsetLeft);
+    row.forEach((card,i)=> card.dataset.delay = String(i * 110));
   });
 
-  // 3) Observer: dispara tarde para que no “entren todas juntas”
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
+    entries.forEach(entry => {
       if (!entry.isIntersecting) return;
-      const d = entry.target.dataset.rowDelay || "0";
-      entry.target.style.transitionDelay = d + "ms";
+      entry.target.style.transitionDelay = (entry.target.dataset.delay || "0") + "ms";
       entry.target.classList.add("is-visible");
       observer.unobserve(entry.target);
     });
   }, {
-    threshold: 0.15,
-    rootMargin: "0px 0px -55% 0px" // 🔥 clave: activa cuando ya bajaste bastante
+    threshold: 0.2,
+    rootMargin: "0px 0px -55% 0px"
   });
 
   cards.forEach(card => observer.observe(card));
 });
 </script>
+
     
     
 <!-- Botón flotante "volver arriba" -->
