@@ -2356,38 +2356,6 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
-/* =========================
-   SERVICIOS — Reveal de CARDS (2da capa)
-   (no usa .reveal para no chocar con el reveal global del bloque)
-========================= */
-
-#servicios.section-dark .services .service-card{
-  /* estado normal visible (por defecto) */
-  opacity: 1;
-  transform: translateY(0);
-
-  transition:
-    opacity 0.45s ease,
-    transform 0.34s cubic-bezier(0.2, 0.9, 0.2, 1),
-    box-shadow 0.12s ease,
-    border-color 0.12s ease;
-
-  will-change: opacity, transform;
-}
-
-/* estado inicial SOLO para la animación de cards */
-#servicios.section-dark .services .service-card.svc-reveal{
-  opacity: 0;
-  transform: translateY(18px);
-}
-
-/* visible (lo agrega el JS de cards) */
-#servicios.section-dark .services .service-card.svc-visible{
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-}
-
-
 
 /* =========================
    NAV (checkbox) — ESTABLE
@@ -4143,98 +4111,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const section = document.querySelector("#servicios.section-dark");
-  const grid = document.querySelector("#servicios.section-dark .services");
-  if (!section || !grid) return;
-
-  const cards = Array.from(grid.querySelectorAll(".service-card"));
-  if (!cards.length) return;
-
-  // Si el reveal global llega a meter .reveal en las CARDS, lo removemos (pero NO tocamos el bloque)
-  const stripRevealFromCards = () => {
-    cards.forEach(c => c.classList.remove("reveal", "reveal-visible"));
-  };
-  stripRevealFromCards();
-
-  const mo = new MutationObserver(stripRevealFromCards);
-  cards.forEach(c => mo.observe(c, { attributes: true, attributeFilter: ["class"] }));
-
-  // Prepara delays por fila (2 cards por fila en desktop, etc.)
-  function setupRowDelays() {
-    const tol = 10;
-    const rows = new Map();
-
-    cards.forEach(card => {
-      const top = card.offsetTop;
-      let key = null;
-      for (const k of rows.keys()) {
-        if (Math.abs(k - top) <= tol) { key = k; break; }
-      }
-      if (key === null) key = top;
-      if (!rows.has(key)) rows.set(key, []);
-      rows.get(key).push(card);
-    });
-
-    rows.forEach(row => {
-      row.sort((a,b)=>a.offsetLeft - b.offsetLeft);
-      row.forEach((card,i)=> card.dataset.svcDelay = String(i * 110)); // 0 / 110
-    });
-  }
-
-  function initCardsReveal() {
-    // 1) Marcar estado inicial de cards
-    cards.forEach(card => {
-      card.classList.remove("svc-visible");
-      card.classList.add("svc-reveal");
-      card.style.transitionDelay = "0ms";
-    });
-
-    setupRowDelays();
-
-    // 2) Esperar un frame para que el browser pinte el estado oculto
-    requestAnimationFrame(() => {
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          entry.target.style.transitionDelay = (entry.target.dataset.svcDelay || "0") + "ms";
-          entry.target.classList.add("svc-visible");
-          entry.target.classList.remove("svc-reveal");
-          io.unobserve(entry.target);
-        });
-      }, {
-        threshold: 0.2,
-        rootMargin: "0px 0px -55% 0px" // dispara tarde => se siente por filas mientras scrolleás
-      });
-
-      cards.forEach(card => io.observe(card));
-    });
-  }
-
-  // ✅ Capa 1: cuando el bloque Servicios entra (reveal global del bloque)
-  // ✅ Capa 2: recién ahí inicializamos el reveal de cards
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-
-      // Dejá que el bloque haga su reveal primero, y luego activamos cards
-      setTimeout(initCardsReveal, 180); // ajustable: 120–220ms según cómo se sienta
-      sectionObserver.unobserve(section);
-    });
-  }, {
-    threshold: 0.15,
-    rootMargin: "0px 0px -35% 0px"
-  });
-
-  sectionObserver.observe(section);
-
-  // Si cambia el layout (resize), recalculamos delays (no reiniciamos animación ya hecha)
-  window.addEventListener("resize", () => setupRowDelays());
-});
-</script>
-    
-    
+ 
 <!-- Botón flotante "volver arriba" -->
 <button class="scroll-top-btn" aria-label="Volver arriba">
   ↑
