@@ -1122,7 +1122,23 @@ header::after{
   opacity: 1;
   transform: translateY(0) scale(1);
 }
-   
+
+/* =========================
+   OVERRIDE REVEAL — SOLO SERVICIOS (cards más rápidas y sin scale)
+========================= */
+#servicios.section-dark .services .service-card.reveal{
+  opacity: 0;
+  transform: translateY(14px); /* antes 32px + scale */
+  transition: opacity .32s ease, transform .28s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+#servicios.section-dark .services .service-card.reveal.reveal-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+ 
 .whatsapp-float{
     right:12px;
     bottom:12px;
@@ -2048,7 +2064,7 @@ section.section-dark:not(#servicios) .service-card{
   }
 }
 
-/* ==== CARD BASE ==== */
+/* ==== CARD BASE (UNIFICADO CON REVEAL GLOBAL) ==== */
 #servicios.section-dark .service-card{
   position: relative;
   padding: 26px 26px 22px;
@@ -2059,22 +2075,23 @@ section.section-dark:not(#servicios) .service-card{
   border: 1px solid rgba(148, 163, 184, 0.28);
   overflow: hidden;
 
-  /* transición base (sin esconder por defecto) */
+  /* transición base (misma lógica que el reveal global, pero afinada para cards) */
   transition:
-    opacity 0.45s ease,
-    transform 0.34s cubic-bezier(0.2, 0.9, 0.2, 1),
+    opacity 0.32s ease,
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.12s ease,
     border-color 0.12s ease;
+  will-change: opacity, transform;
 }
 
-/* ✅ Estado inicial SOLO cuando el JS la marca como "reveal" */
+/* ✅ Estado inicial SOLO cuando el JS marca la card como "reveal" */
 #servicios.section-dark .service-card.reveal{
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(14px); /* más uniforme (antes 18px) */
 }
 
-/* ✅ Visible (clase que agrega tu JS) */
-#servicios.section-dark .service-card.reveal.is-visible{
+/* ✅ Visible (MISMA clase que usa el reveal global) */
+#servicios.section-dark .service-card.reveal.reveal-visible{
   opacity: 1 !important;
   transform: translateY(0) !important;
 }
@@ -2085,6 +2102,7 @@ section.section-dark:not(#servicios) .service-card{
   line-height: 1.25;
   margin-bottom: 10px;
 }
+
 #servicios.section-dark .service-card p{
   font-size: 13.5px;
   line-height: 1.52;
@@ -2103,6 +2121,7 @@ section.section-dark:not(#servicios) .service-card{
 
 /* Accent line sutil */
 #servicios.section-dark .service-card{ --acc: rgba(120,210,255,1); }
+
 #servicios.section-dark .service-card::after{
   content:"";
   position:absolute;
@@ -2120,9 +2139,9 @@ section.section-dark:not(#servicios) .service-card{
 #servicios.section-dark .services .service-card:nth-child(4){ --acc: rgba(255,186,120,1); }
 #servicios.section-dark .services .service-card--featured{ --acc: rgba(120,210,255,1); }
 
-/* Hover */
+/* Hover (solo cuando ya está visible) */
 @media (hover:hover) and (pointer:fine){
-  #servicios.section-dark .service-card.reveal.is-visible:hover{
+  #servicios.section-dark .service-card.reveal.reveal-visible:hover{
     transform: translateY(-3px) !important;
     box-shadow: 0 26px 60px rgba(15, 23, 42, 0.95);
     border-color: rgba(129, 140, 248, 0.7);
@@ -2139,8 +2158,7 @@ section.section-dark:not(#servicios) .service-card{
   font-size: 12px;
   letter-spacing: 0.02em;
 
-  /* clave: que NO se corte */
-  white-space: normal;     /* antes nowrap */
+  white-space: normal;
   line-height: 1.2;
   max-width: 100%;
 
@@ -2151,25 +2169,15 @@ section.section-dark:not(#servicios) .service-card{
 }
 
 /* ==== Equal height “percibida” (solo desktop) ==== */
-/* bajamos clamp a 3 para que no corte tanto */
 @media (min-width: 900px){
   #servicios.section-dark .service-card:not(.service-card--featured) p{
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* antes 4 */
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
 }
 
-@media (hover:hover) and (pointer:fine){
-  #servicios.section-dark .service-card.is-visible{
-    transition:
-      opacity 0.45s ease,
-      transform 0.22s cubic-bezier(0.2, 0.9, 0.2, 1),
-      box-shadow 0.12s ease,
-      border-color 0.12s ease;
-  }
-}
 
 /* =========================
    LANDING DESTACADA (FINAL) — FIX línea top + dot mobile
@@ -4094,12 +4102,17 @@ document.addEventListener("DOMContentLoaded", function () {
   const cards = document.querySelectorAll("#servicios.section-dark .services .service-card");
   if (!cards.length) return;
 
-  // Marcar como "reveal" (estado inicial) SOLO en Servicios
-  cards.forEach(card => card.classList.add("reveal"));
+  // 1) Marcar como reveal (estado inicial) SOLO en Servicios
+  cards.forEach(card => {
+    card.classList.add("reveal");
+    card.classList.remove("is-visible");       // limpieza por si quedó viejo
+    card.classList.remove("reveal-visible");   // limpieza por si recargaste/duplicaste
+  });
 
-  // Delay por fila (izq->der dentro de la misma fila)
+  // 2) Delay por fila (izq->der dentro de la misma fila)
   const tol = 10;
   const rows = new Map();
+
   cards.forEach(card => {
     const top = card.offsetTop;
     let key = null;
@@ -4110,26 +4123,29 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!rows.has(key)) rows.set(key, []);
     rows.get(key).push(card);
   });
+
   rows.forEach(row => {
     row.sort((a,b)=>a.offsetLeft - b.offsetLeft);
-    row.forEach((card,i)=> card.dataset.delay = String(i * 110));
+    row.forEach((card,i)=> card.dataset.delay = String(i * 60)); // 0/60ms (antes 110)
   });
 
-  const observer = new IntersectionObserver((entries) => {
+  // 3) Observer SOLO de Servicios: agrega reveal-visible (igual que el global)
+  const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       entry.target.style.transitionDelay = (entry.target.dataset.delay || "0") + "ms";
-      entry.target.classList.add("is-visible");
-      observer.unobserve(entry.target);
+      entry.target.classList.add("reveal-visible");
+      obs.unobserve(entry.target);
     });
   }, {
-    threshold: 0.2,
-    rootMargin: "0px 0px -55% 0px"
+    threshold: 0.12,                 // más temprano (antes 0.2)
+    rootMargin: "0px 0px -20% 0px"   // menos tarde (antes -55%)
   });
 
   cards.forEach(card => observer.observe(card));
 });
 </script>
+
 
  
 <!-- Botón flotante "volver arriba" -->
@@ -4404,41 +4420,7 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 </script>
 
-  /* =========================
-     SERVICIOS: DELAY POR FILA (usa el reveal global)
-     - no crea otro observer
-     - solo asigna transition-delay
-  ========================== */
- <script>
-  const serviceCards = document.querySelectorAll('#servicios.section-dark .services .service-card.reveal');
-  if (serviceCards.length) {
-    const cards = Array.from(serviceCards);
-
-    // agrupar por filas (offsetTop)
-    const tol = 10;
-    const rows = new Map();
-
-    cards.forEach(card => {
-      const top = card.offsetTop;
-      let key = null;
-      for (const k of rows.keys()) {
-        if (Math.abs(k - top) <= tol) { key = k; break; }
-      }
-      if (key === null) key = top;
-      if (!rows.has(key)) rows.set(key, []);
-      rows.get(key).push(card);
-    });
-
-    // ordenar izq->der y setear delay 0/60ms
-    rows.forEach(row => {
-      row.sort((a,b)=>a.offsetLeft - b.offsetLeft);
-      row.forEach((card,i)=> {
-        card.style.transitionDelay = (i * 60) + 'ms';
-      });
-    });
-  }
-</script>
-
+ 
  
 </body>
 </html>
