@@ -2355,34 +2355,26 @@ section.section-dark:not(#servicios) .service-card{
 
 /* =========================
    SERVICIOS — Reveal de CARDS (2da capa)
-   (no usa .reveal para no chocar con el reveal global del bloque)
 ========================= */
 
+/* Reveal 2da capa SOLO cards (tuning más rápido y suave) */
 #servicios.section-dark .services .service-card{
-  /* estado normal visible (por defecto) */
-  opacity: 1;
-  transform: translateY(0);
-
   transition:
-    opacity 0.45s ease,
-    transform 0.34s cubic-bezier(0.2, 0.9, 0.2, 1),
-    box-shadow 0.12s ease,
-    border-color 0.12s ease;
-
+    opacity .32s ease,
+    transform .28s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
 
-/* estado inicial SOLO para la animación de cards */
 #servicios.section-dark .services .service-card.svc-reveal{
-  opacity: 0;
-  transform: translateY(18px);
+  opacity: 0 !important;
+  transform: translateY(10px) !important;  /* antes 18px */
 }
 
-/* visible (lo agrega el JS de cards) */
 #servicios.section-dark .services .service-card.svc-visible{
   opacity: 1 !important;
   transform: translateY(0) !important;
 }
+
  
 
 /* =========================
