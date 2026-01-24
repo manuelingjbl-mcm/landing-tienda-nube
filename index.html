@@ -2172,38 +2172,32 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
  
-
 /* =========================
-   LANDING DESTACADA (FINAL) — FIX línea azul + icono mobile
+   LANDING DESTACADA (FINAL) — FIX línea top + dot mobile
 ========================= */
 #servicios.section-dark .service-card--featured{
   grid-column: 1 / -1;
   padding: 28px 28px 22px;
   border-color: rgba(148, 163, 184, 0.55);
-  box-shadow: 0 30px 80px rgba(0,0,0,0.55);
 
-  position: relative;  /* necesario para la línea superior */
-  overflow: hidden;    /* respeta el radio del card */
+  /* ✅ Línea azul EXACTA en el borde superior (no baja con padding) */
+  box-shadow:
+    inset 0 2px 0 rgba(37,99,235,0.95),
+    0 30px 80px rgba(0,0,0,0.55);
+
+  position: relative;
+  overflow: hidden;
 }
 
-/* más glow interno SOLO en la destacada (asume que ya existe ::before global) */
+/* glow interno SOLO en la destacada (si tu card base ya usa ::before) */
 #servicios.section-dark .service-card--featured::before{
   opacity: 0.78;
 }
 
-/* ✅ Línea azul finita arriba (igual en desktop y mobile) */
+/* ❌ Por las dudas: apagamos cualquier "línea" extra que venga de antes */
 #servicios.section-dark .service-card--featured::after{
-  content:"";
-  position:absolute;
-  left: 18px;
-  right: 18px;
-  top: 12px;
-  height: 2px;
-  border-radius: 999px;
-  background: rgba(37,99,235,0.95); /* azul */
-  opacity: 0.95;
-  pointer-events:none;
-  z-index: 2;
+  display:none !important;
+  content:none !important;
 }
 
 /* Desktop: 2 columnas */
@@ -2221,14 +2215,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   #servicios.section-dark .service-card--featured{
     grid-column: auto;
     padding: 24px 20px;
-    display:block; /* apila la destacada sin tocar el resto */
-  }
-
-  /* la línea se mantiene (no la apagamos) */
-  #servicios.section-dark .service-card--featured::after{
-    left: 16px;
-    right: 16px;
-    top: 10px;
+    display:block;
   }
 }
 
@@ -2242,38 +2229,28 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   margin-bottom: 10px;
 }
 
-#servicios.section-dark .service-ico{
-  width:36px;
-  height:36px;
-  display:grid;
-  place-items:center;
-  border-radius: 12px;
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.06);
-}
-
-/* ✅ FIX “puntito/target” en mobile:
-   Mantener el estilo suave (no borde duro) también en la destacada */
+/* ✅ FIX “puntito/target” solo en la destacada:
+   resetea pseudo-elementos/outlines que suelen aparecer en mobile */
 #servicios.section-dark .service-card--featured .service-ico{
   width:36px;
   height:36px;
   display:grid;
   place-items:center;
-  border-radius:12px;
-  background: rgba(255,255,255,.06);  /* igual que base */
-  border: 1px solid rgba(255,255,255,.06); /* igual que base */
+  border-radius: 12px;
+
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.06);
+
+  outline: 0 !important;
+  box-shadow: none !important;
+  transform: none !important;
   overflow:hidden;
-  box-shadow: none;
-  transform: none;
 }
 
-#servicios.section-dark .ico-svg--fill{
-  width:18px;
-  height:18px;
-  display:block;
-  fill: rgba(199,210,254,0.95);
-  stroke: none;
-  opacity: .95;
+#servicios.section-dark .service-card--featured .service-ico::before,
+#servicios.section-dark .service-card--featured .service-ico::after{
+  content: none !important;
+  display: none !important;
 }
 
 #servicios.section-dark .service-card--featured .service-ico > svg{
@@ -2325,7 +2302,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   flex-wrap: wrap;
 }
 
-/* CTA botón (FINAL) */
+/* CTA botón */
 #servicios.section-dark .service-cta{
   text-decoration: none;
   padding: 10px 14px;
@@ -2335,7 +2312,6 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   color: #f5f7ff;
   font-weight: 600;
   letter-spacing: .01em;
-
   box-shadow: 0 10px 24px rgba(0,0,0,.25);
   transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
 }
@@ -2359,17 +2335,8 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   color: #c7d2fe;
 }
 
-/* =========================
-   MOBILE: layout interno del pie (sin romper el resto)
-========================= */
+/* Mobile: pie apilado */
 @media (max-width: 768px){
-  #servicios.section-dark .service-card--featured .service-head{
-    display:flex;
-    align-items:flex-start;
-    gap:12px;
-    margin-bottom:10px;
-  }
-
   #servicios.section-dark .service-card--featured .service-foot{
     display:flex;
     flex-direction:column;
@@ -2386,6 +2353,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
     white-space: normal;
   }
 }
+
 
 
 /* =========================
