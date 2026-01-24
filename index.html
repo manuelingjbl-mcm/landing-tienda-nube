@@ -2356,6 +2356,42 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
+/* =========================
+   SERVICIOS — REVEAL INDEPENDIENTE (sin chocar con .reveal global)
+========================= */
+
+/* Base: visible por defecto (importante para que no quede “soldado”) */
+#servicios.section-dark .services .service-card{
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.45s ease,
+    transform 0.38s cubic-bezier(0.2, 0.9, 0.2, 1),
+    box-shadow 0.12s ease,
+    border-color 0.12s ease;
+  will-change: opacity, transform;
+}
+
+/* Estado inicial SOLO para el reveal de servicios */
+#servicios.section-dark .services .service-card.svc-reveal{
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+/* Visible (lo agrega nuestro JS) */
+#servicios.section-dark .services .service-card.svc-visible{
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Hover (solo cuando ya está visible) */
+@media (hover:hover) and (pointer:fine){
+  #servicios.section-dark .services .service-card.svc-visible:hover{
+    transform: translateY(-3px) !important;
+    box-shadow: 0 26px 60px rgba(15, 23, 42, 0.95);
+    border-color: rgba(129, 140, 248, 0.7);
+  }
+}
 
 
 /* =========================
