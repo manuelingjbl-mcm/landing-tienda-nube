@@ -737,8 +737,7 @@ header::after{
 }
 
 /* =========================
-   PORTFOLIO — (Sansay) + ajustes finos
-   (NO rompe las cards existentes)
+   PORTFOLIO — Sansay destacada + 3 (FIX mobile)
 ========================= */
 
 .grid-portfolio{
@@ -751,11 +750,15 @@ header::after{
 /* destacada a lo ancho */
 .grid-portfolio .portfolio-link--featured{
   grid-column: 1 / -1;
+  width: 100%;
+  justify-self: stretch;
 }
 
 /* las 3 normales: 4 columnas cada una */
 .grid-portfolio .portfolio-link:not(.portfolio-link--featured){
   grid-column: span 4;
+  width: 100%;
+  justify-self: stretch;
 }
 
 /* alturas coherentes */
@@ -769,17 +772,28 @@ header::after{
   }
 }
 
-/* mobile: 1 por fila */
+/* mobile: 1 por fila (FIX “card angosta”) */
 @media (max-width: 800px){
   .grid-portfolio{
     grid-template-columns: 1fr;
   }
+
   .grid-portfolio .portfolio-link,
   .grid-portfolio .portfolio-link--featured{
     grid-column: auto;
+    width: 100% !important;
+    max-width: none !important;
+    justify-self: stretch !important;
   }
-  .grid-portfolio .portfolio-thumb{ height: 240px; }
-  .grid-portfolio .portfolio-link--featured .portfolio-thumb{ height: 260px; }
+
+  .grid-portfolio .portfolio-thumb{
+    width: 100%;
+    height: 240px;
+  }
+
+  .grid-portfolio .portfolio-link--featured .portfolio-thumb{
+    height: 260px;
+  }
 }
 
 
