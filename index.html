@@ -2077,23 +2077,22 @@ section.section-dark:not(#servicios) .service-card{
 
   /* transición base (misma lógica que el reveal global, pero afinada para cards) */
   transition:
-    opacity 0.32s ease,
-    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.7s ease-out,
+    transform 0.7s ease-out,
     box-shadow 0.12s ease,
     border-color 0.12s ease;
-  will-change: opacity, transform;
 }
 
 /* ✅ Estado inicial SOLO cuando el JS marca la card como "reveal" */
 #servicios.section-dark .service-card.reveal{
   opacity: 0;
-  transform: translateY(14px); /* más uniforme (antes 18px) */
+  transform: translateY(32px) scale(0.98);
 }
 
 /* ✅ Visible (MISMA clase que usa el reveal global) */
 #servicios.section-dark .service-card.reveal.reveal-visible{
   opacity: 1 !important;
-  transform: translateY(0) !important;
+  transform: translateY(0) scale(1) !important;
 }
 
 /* Tipografías */
