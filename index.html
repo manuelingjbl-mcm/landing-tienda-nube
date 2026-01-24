@@ -2174,21 +2174,18 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
- /* =========================
-   SERVICIOS — KILL SWITCH
-   Evita que el SECTION/WRAPPER se anime como bloque (reveal global)
+/* =========================
+   SERVICIOS — KILL SWITCH (SOFT)
+   Evita que el SECTION se anime como bloque,
+   pero deja vivas las transiciones internas.
 ========================= */
 #servicios.section-dark.reveal,
-#servicios.section-dark.reveal.reveal-visible,
-#servicios.section-dark .wrapper.reveal,
-#servicios.section-dark .wrapper.reveal.reveal-visible{
+#servicios.section-dark.reveal.reveal-visible{
   opacity: 1 !important;
   transform: none !important;
-  transition: none !important;
   filter: none !important;
 }
 
- 
 /* =========================
    LANDING DESTACADA (FINAL) — FIX línea top + dot mobile
 ========================= */
