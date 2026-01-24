@@ -2489,63 +2489,68 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
 }
 
 /* =========================
-   BOTÓN FLOTANTE: VOLVER ARRIBA (AZUL + MÁS GRANDE)
+   BOTÓN FLOTANTE: VOLVER ARRIBA   (robusto + iOS friendly)
 ========================= */
-.scroll-top-btn{
+button.scroll-top-btn{
   position: fixed;
   right: 16px;
   bottom: 92px;
 
-  width: 56px;                 /* 👈 más grande */
-  height: 56px;                /* 👈 más grande */
+  width: 56px;
+  height: 56px;
   border-radius: 999px;
 
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
 
-  background: #0b63e8;         /* 👈 azul estilo VIA */
+  background: #0b63e8;
   color: #fff;
-  border: none;
+  border: 0;
 
-  font-size: 20px;             /* 👈 flecha más grande */
+  font-size: 20px;
   font-weight: 800;
   line-height: 1;
 
   cursor: pointer;
-  z-index: 9500;
+  z-index: 99999;
+
   box-shadow: 0 18px 45px rgba(11,99,232,.35);
 
   opacity: 0;
   transform: translateY(10px);
   pointer-events: none;
+
   transition: opacity .18s ease, transform .18s ease, filter .18s ease;
+
+  /* anti “botón raro” mobile */
+  -webkit-appearance: none;
+  appearance: none;
+  touch-action: manipulation;
 }
 
-@media (hover:hover) and (pointer:fine){
-  .scroll-top-btn:hover{
-    filter: brightness(1.08);
-    transform: translateY(-2px);
-  }
-}
-
-
-.scroll-top-btn.is-visible{
+button.scroll-top-btn.is-visible{
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
 }
 
-/* Si querés un poquito más abajo en desktop */
-@media (min-width: 768px){
-  .scroll-top-btn{ bottom: 96px; }
+@media (hover:hover) and (pointer:fine){
+  button.scroll-top-btn:hover{
+    filter: brightness(1.08);
+    transform: translateY(-2px);
+  }
 }
 
- /* FIX mobile: que no lo tape el chat + safe-area iPhone */
+/* Desktop: apenas más abajo */
+@media (min-width: 768px){
+  button.scroll-top-btn{ bottom: 96px; }
+}
+
+/* Mobile: lo subimos por el chat + safe area */
 @media (max-width: 768px){
-  .scroll-top-btn{
-    z-index: 99999; /* por si el widget de chat tiene z-index alto */
-    bottom: calc(170px + env(safe-area-inset-bottom)); /* sube arriba del chat */
+  button.scroll-top-btn{
+    bottom: calc(170px + env(safe-area-inset-bottom));
     right: 16px;
   }
 }
@@ -2733,12 +2738,6 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
-/* TEST: si ves borde verde, este CSS está activo */
-button.scroll-top-btn{
-  outline: 3px solid lime !important;
-}
-
- 
 </style> 
  
 
