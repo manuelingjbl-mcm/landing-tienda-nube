@@ -590,16 +590,57 @@ header::after{
       font-size:11px;
     }
 
-    /* PORTFOLIO */
-    /* ===== PORTFOLIO — cards con imagen de fondo ===== */
+   /* =========================
+   PORTFOLIO — Sansay destacada + 3 (UNIFICADO)
+   (Reemplazar TODO el CSS viejo de Portfolio por este)
+========================= */
+
+/* ===== GRID (layout) ===== */
 .grid-portfolio{
   margin-top:32px;
   display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:32px;
+  gap:24px;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 
-/* el link envuelve toda la card */
+/* destacada a lo ancho (soporta ambas clases) */
+.grid-portfolio .portfolio-link.portfolio-featured,
+.grid-portfolio .portfolio-link--featured{
+  grid-column: 1 / -1;
+  width: 100%;
+  justify-self: stretch;
+}
+
+/* 3 normales: 4 columnas cada una */
+.grid-portfolio .portfolio-link:not(.portfolio-featured):not(.portfolio-link--featured){
+  grid-column: span 4;
+  width: 100%;
+  justify-self: stretch;
+}
+
+/* tablet: 2 por fila */
+@media (max-width: 992px){
+  .grid-portfolio .portfolio-link:not(.portfolio-featured):not(.portfolio-link--featured){
+    grid-column: span 6;
+  }
+}
+
+/* mobile: 1 por fila + 100% ancho sí o sí */
+@media (max-width: 800px){
+  .grid-portfolio{
+    grid-template-columns: 1fr;
+    gap:20px;
+  }
+
+  .grid-portfolio .portfolio-link{
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    max-width: none !important;
+    justify-self: stretch !important;
+  }
+}
+
+/* ===== CARD / LINK ===== */
 .portfolio-link{
   display:block;
   text-decoration:none;
@@ -611,10 +652,23 @@ header::after{
 /* contenedor imagen + overlay */
 .portfolio-thumb{
   position:relative;
-  height:260px;
+  height:240px;
   background:#050816;
   border-radius:24px;
   overflow:hidden;
+  width:100%;
+}
+
+/* destacada un toque más alta */
+.grid-portfolio .portfolio-link.portfolio-featured .portfolio-thumb,
+.grid-portfolio .portfolio-link--featured .portfolio-thumb{
+  height:320px;
+}
+@media (max-width: 800px){
+  .grid-portfolio .portfolio-link.portfolio-featured .portfolio-thumb,
+  .grid-portfolio .portfolio-link--featured .portfolio-thumb{
+    height:260px;
+  }
 }
 
 .portfolio-thumb img{
@@ -639,15 +693,12 @@ header::after{
   background:rgba(0,0,0,0.65);
   color:#f5f7ff;
 
-  /* efecto de aparición */
   opacity:0;
   transform:translateY(-6px);
-  transition:
-    opacity 0.25s ease,
-    transform 0.25s ease;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-    /* En desktop: mostrar pill al hacer hover/focus */
+/* En desktop: mostrar pill al hover/focus */
 @media (hover:hover) and (pointer:fine){
   .portfolio-link:hover .portfolio-thumb img{
     transform:scale(1.08);
@@ -660,14 +711,13 @@ header::after{
   }
 }
 
-/* En mobile: que el pill esté siempre visible */
+/* En mobile: pill siempre visible */
 @media (hover:none) and (pointer:coarse){
   .portfolio-pill{
     opacity:1;
     transform:none;
   }
 }
-
 
 /* overlay inferior con nombre + subtítulo */
 .portfolio-overlay{
@@ -696,106 +746,22 @@ header::after{
   color:rgba(235,241,255,0.9);
 }
 
-/* hover desktop */
-@media (hover:hover) and (pointer:fine){
-  .portfolio-link:hover .portfolio-thumb img{
-    transform:scale(1.08);
-  }
+/* Variante para piezas verticales (landing + newsletter) */
+.portfolio-thumb--tall{
+  height:360px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#050816;
 }
-
-/* mobile: 1 por fila */
-@media (max-width:800px){
-  .grid-portfolio{
-    grid-template-columns:1fr;
-    gap:20px;
-  }
-  .portfolio-thumb{
-    height:240px;
-  }
+.portfolio-thumb--tall img{
+  width:auto;
+  height:100%;
+  object-fit:contain;
 }
-
-    /* Variante para piezas verticales (landing + newsletter) */
-.portfolio-thumb--tall {
-  height: 360px;                        /* más alta que las otras */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #050816;
-}
-
-.portfolio-thumb--tall img {
-  width: auto;
-  height: 100%;
-  object-fit: contain;                  /* se ve la imagen completa */
-}
-
-/* En mobile podemos bajar un toque la altura */
-@media (max-width: 800px) {
-  .portfolio-thumb--tall {
-    height: 320px;
-  }
-}
-
-/* =========================
-   PORTFOLIO — Sansay destacada + 3 (FIX mobile)
-========================= */
-
-.grid-portfolio{
-  margin-top:32px;
-  display:grid;
-  gap:24px;
-  grid-template-columns: repeat(12, minmax(0,1fr));
-}
-
-/* destacada a lo ancho */
-.grid-portfolio .portfolio-link--featured{
-  grid-column: 1 / -1;
-  width: 100%;
-  justify-self: stretch;
-}
-
-/* las 3 normales: 4 columnas cada una */
-.grid-portfolio .portfolio-link:not(.portfolio-link--featured){
-  grid-column: span 4;
-  width: 100%;
-  justify-self: stretch;
-}
-
-/* alturas coherentes */
-.grid-portfolio .portfolio-thumb{ height: 240px; }
-.grid-portfolio .portfolio-link--featured .portfolio-thumb{ height: 320px; }
-
-/* tablet: 2 por fila */
-@media (max-width: 992px){
-  .grid-portfolio .portfolio-link:not(.portfolio-link--featured){
-    grid-column: span 6;
-  }
-}
-
-/* mobile: 1 por fila (FIX “card angosta”) */
 @media (max-width: 800px){
-  .grid-portfolio{
-    grid-template-columns: 1fr;
-  }
-
-  .grid-portfolio .portfolio-link,
-  .grid-portfolio .portfolio-link--featured{
-    grid-column: auto;
-    width: 100% !important;
-    max-width: none !important;
-    justify-self: stretch !important;
-  }
-
-  .grid-portfolio .portfolio-thumb{
-    width: 100%;
-    height: 240px;
-  }
-
-  .grid-portfolio .portfolio-link--featured .portfolio-thumb{
-    height: 260px;
-  }
+  .portfolio-thumb--tall{ height:320px; }
 }
-
 
  
 /* ===== BLOQUE LANDING + NEWSLETTER (tipo Zurbrand) ===== */
