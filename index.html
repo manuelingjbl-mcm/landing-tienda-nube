@@ -737,7 +737,7 @@ header::after{
 }
 
 /* =========================
-   PORTFOLIO — DESTACADA (Sansay) + ajustes finos
+   PORTFOLIO — (Sansay) + ajustes finos
    (NO rompe las cards existentes)
 ========================= */
 
@@ -746,36 +746,40 @@ header::after{
   display:grid;
   gap:24px;
   grid-template-columns: repeat(12, minmax(0,1fr));
-  align-items: stretch;
 }
 
-/* destacada izquierda */
+/* destacada a lo ancho */
 .grid-portfolio .portfolio-link--featured{
-  grid-column: 1 / span 7;
+  grid-column: 1 / -1;
 }
-.grid-portfolio .portfolio-link--featured .portfolio-thumb{ height: 420px; }
 
-/* las otras 3 a la derecha */
+/* las 3 normales: 4 columnas cada una */
 .grid-portfolio .portfolio-link:not(.portfolio-link--featured){
-  grid-column: 8 / -1;
-}
-.grid-portfolio .portfolio-link:not(.portfolio-link--featured) .portfolio-thumb{
-  height: 132px;              /* 3 x 132 + gaps ≈ alto de la destacada */
+  grid-column: span 4;
 }
 
-/* tablet/mobile vuelve a grilla normal */
+/* alturas coherentes */
+.grid-portfolio .portfolio-thumb{ height: 240px; }
+.grid-portfolio .portfolio-link--featured .portfolio-thumb{ height: 320px; }
+
+/* tablet: 2 por fila */
 @media (max-width: 992px){
+  .grid-portfolio .portfolio-link:not(.portfolio-link--featured){
+    grid-column: span 6;
+  }
+}
+
+/* mobile: 1 por fila */
+@media (max-width: 800px){
   .grid-portfolio{
-    grid-template-columns: repeat(2, minmax(0,1fr));
+    grid-template-columns: 1fr;
   }
   .grid-portfolio .portfolio-link,
   .grid-portfolio .portfolio-link--featured{
     grid-column: auto;
   }
   .grid-portfolio .portfolio-thumb{ height: 240px; }
-}
-@media (max-width: 800px){
-  .grid-portfolio{ grid-template-columns: 1fr; }
+  .grid-portfolio .portfolio-link--featured .portfolio-thumb{ height: 260px; }
 }
 
 
