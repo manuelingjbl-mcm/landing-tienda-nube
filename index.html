@@ -2086,7 +2086,7 @@ section.section-dark:not(#servicios) .service-card{
 /* ✅ Estado inicial SOLO cuando el JS marca la card como "reveal" */
 #servicios.section-dark .service-card.reveal{
   opacity: 0;
-  transform: translateY(32px);
+  transform: translateY(32px) scale(0.98);
 }
 
 /* ✅ Visible (MISMA clase que usa el reveal global) */
@@ -4101,11 +4101,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const cards = document.querySelectorAll("#servicios.section-dark .services .service-card");
   if (!cards.length) return;
 
-  // 1) Marcar como reveal (estado inicial) SOLO en Servicios
+  // 1) Estado inicial
   cards.forEach(card => {
     card.classList.add("reveal");
-    card.classList.remove("is-visible");       // limpieza por si quedó viejo
-    card.classList.remove("reveal-visible");   // limpieza por si recargaste/duplicaste
+    card.classList.remove("reveal-visible");
+    card.classList.remove("is-visible");
   });
 
   // 2) Delay por fila (izq->der dentro de la misma fila)
@@ -4125,26 +4125,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
   rows.forEach(row => {
     row.sort((a,b)=>a.offsetLeft - b.offsetLeft);
-    row.forEach((card,i)=> card.dataset.delay = String(i * 60)); // 0/60ms (antes 110)
+    row.forEach((card,i)=> card.dataset.delay = String(i * 110)); // tu delay actual (ok)
   });
 
-  // 3) Observer SOLO de Servicios: agrega reveal-visible (igual que el global)
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
+
+      // seteo delay primero
       entry.target.style.transitionDelay = (entry.target.dataset.delay || "0") + "ms";
-      entry.target.classList.add("reveal-visible");
+
+      // 👇 clave: próximo frame => animación suave (evita “golpe”)
+      requestAnimationFrame(() => {
+        entry.target.classList.add("reveal-visible");
+      });
+
       obs.unobserve(entry.target);
     });
   }, {
-    threshold: 0.12,                 // más temprano (antes 0.2)
-    rootMargin: "0px 0px -20% 0px"   // menos tarde (antes -55%)
+    threshold: 0.12,
+    rootMargin: "0px 0px -20% 0px"
   });
 
-  cards.forEach(card => observer.observe(card));
+  // 👇 clave: observar en el próximo frame (garantiza que el estado inicial pinte)
+  requestAnimationFrame(() => {
+    cards.forEach(card => observer.observe(card));
+  });
 });
 </script>
-
 
  
 <!-- Botón flotante "volver arriba" -->
