@@ -736,6 +736,44 @@ header::after{
   }
 }
 
+/* =========================
+   PORTFOLIO — DESTACADA (Sansay) + ajustes finos
+   (NO rompe las cards existentes)
+========================= */
+
+/* Card destacada: ocupa 2 columnas en desktop */
+.grid-portfolio .portfolio-link--featured{
+  grid-column: 1 / -1;
+}
+
+/* Más “hero” visual para la destacada */
+.grid-portfolio .portfolio-link--featured .portfolio-thumb{
+  height: 360px;              /* destacada más alta */
+}
+
+/* Zoom un poquito más suave en destacada (menos brusco) */
+.grid-portfolio .portfolio-link--featured .portfolio-thumb img{
+  transform: scale(1.02);
+}
+
+/* Hover: mismo comportamiento pero más fino en destacada */
+@media (hover:hover) and (pointer:fine){
+  .grid-portfolio .portfolio-link--featured:hover .portfolio-thumb img{
+    transform: scale(1.06);
+  }
+}
+
+/* Mobile: todo vuelve a 1 columna (y la destacada no se “rompe”) */
+@media (max-width:800px){
+  .grid-portfolio .portfolio-link--featured{
+    grid-column: auto;
+  }
+  .grid-portfolio .portfolio-link--featured .portfolio-thumb{
+    height: 300px;            /* un toque más chica en mobile */
+  }
+}
+
+ 
 /* ===== BLOQUE LANDING + NEWSLETTER (tipo Zurbrand) ===== */
 
 .works-split {
@@ -3279,8 +3317,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
-  <!-- TRABAJOS -->
-  <section id="trabajos" class="section reveal">
+ <!-- TRABAJOS -->
+<section id="trabajos" class="section reveal">
   <div class="wrapper">
     <div class="section-title">Nuestros trabajos</div>
     <h2>Algunos tipos de proyectos que podemos desarrollar.</h2>
@@ -3290,39 +3328,71 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </p>
 
     <div class="grid-portfolio">
-  <!-- VIA SHOP -->
-  <a class="portfolio-link"
-     href="https://www.via-shop.com/"
-     target="_blank"
-     rel="noopener noreferrer">
-    <div class="portfolio-thumb">
-      <img src="gadget-viashop.png" alt="Mockup tienda VIA SHOP">
-      <span class="portfolio-pill">Mockup Tienda Nube</span>
+      <!-- SANSAY (DESTACADA) -->
+     <a class="portfolio-link portfolio-link--featured"
+   href="https://sansayaromas.com.ar/"
+   target="_blank"
+   rel="noopener noreferrer">
+  <div class="portfolio-thumb">
+    <img src="sansay-aromas.png" alt="Mockup tienda Sansay Aromas">
+    <span class="portfolio-pill">Caso destacado</span>
 
-      <div class="portfolio-overlay">
-        <h3>VIA SHOP</h3>
-        <p>Hogar, bazar y tecnología · Tienda Nube lista para producción</p>
-      </div>
+    <div class="portfolio-overlay">
+      <h3>SANSAY AROMAS</h3>
+      <p>Sahumerios, velas y rituales · estética premium + navegación clara</p>
     </div>
-  </a>
+  </div>
+</a>
 
-  <!-- CASA OADA -->
-  <a class="portfolio-link"
-     href="https://www.casaoada.com.ar/"
-     target="_blank"
-     rel="noopener noreferrer">
-    <div class="portfolio-thumb">
-      <img src="ferreteria-oada.png" alt="Mockup tienda CASA OADA">
-      <span class="portfolio-pill">Mockup Tienda Nube</span>
+      <!-- VIA SHOP -->
+      <a class="portfolio-link"
+         href="https://www.via-shop.com/"
+         target="_blank"
+         rel="noopener noreferrer">
+        <div class="portfolio-thumb">
+          <img src="gadget-viashop.png" alt="Mockup tienda VIA SHOP">
+          <span class="portfolio-pill">Mockup Tienda Nube</span>
 
-      <div class="portfolio-overlay">
-        <h3>CASA OADA</h3>
-        <p>Ferretería y hogar · Tienda Nube lista para campañas de tráfico pago</p>
-      </div>
+          <div class="portfolio-overlay">
+            <h3>VIA SHOP</h3>
+            <p>Hogar, bazar y tecnología · Tienda Nube lista para producción</p>
+          </div>
+        </div>
+      </a>
+
+      <!-- CASA OADA -->
+      <a class="portfolio-link"
+         href="https://www.casaoada.com.ar/"
+         target="_blank"
+         rel="noopener noreferrer">
+        <div class="portfolio-thumb">
+          <img src="ferreteria-oada.png" alt="Mockup tienda CASA OADA">
+          <span class="portfolio-pill">Mockup Tienda Nube</span>
+
+          <div class="portfolio-overlay">
+            <h3>CASA OADA</h3>
+            <p>Ferretería y hogar · Tienda Nube lista para campañas de tráfico pago</p>
+          </div>
+        </div>
+      </a>
+
+      <!-- FERRE CEPPI -->
+      <a class="portfolio-link"
+         href="https://www.ferreceppi.com/" 
+         target="_blank"
+         rel="noopener noreferrer">
+        <div class="portfolio-thumb">
+          <img src="ferre-ceppi.png" alt="Mockup tienda Ferre CEPPI">
+          <span class="portfolio-pill">Mockup Tienda Nube</span>
+
+          <div class="portfolio-overlay">
+            <h3>FERRE CEPPI</h3>
+            <p>Catálogo grande · categorías + usabilidad pensada para búsqueda</p>
+          </div>
+        </div>
+      </a>
     </div>
-  </a>
-</div>
-
+  
   <div class="works-split">
 
    <!-- Mockups verticales -->
