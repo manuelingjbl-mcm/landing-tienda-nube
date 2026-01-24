@@ -741,37 +741,43 @@ header::after{
    (NO rompe las cards existentes)
 ========================= */
 
-/* Card destacada: ocupa 2 columnas en desktop */
+.grid-portfolio{
+  margin-top:32px;
+  display:grid;
+  gap:24px;
+  grid-template-columns: repeat(12, minmax(0,1fr));
+  align-items: stretch;
+}
+
+/* destacada izquierda */
 .grid-portfolio .portfolio-link--featured{
-  grid-column: 1 / -1;
+  grid-column: 1 / span 7;
+}
+.grid-portfolio .portfolio-link--featured .portfolio-thumb{ height: 420px; }
+
+/* las otras 3 a la derecha */
+.grid-portfolio .portfolio-link:not(.portfolio-link--featured){
+  grid-column: 8 / -1;
+}
+.grid-portfolio .portfolio-link:not(.portfolio-link--featured) .portfolio-thumb{
+  height: 132px;              /* 3 x 132 + gaps ≈ alto de la destacada */
 }
 
-/* Más “hero” visual para la destacada */
-.grid-portfolio .portfolio-link--featured .portfolio-thumb{
-  height: 360px;              /* destacada más alta */
-}
-
-/* Zoom un poquito más suave en destacada (menos brusco) */
-.grid-portfolio .portfolio-link--featured .portfolio-thumb img{
-  transform: scale(1.02);
-}
-
-/* Hover: mismo comportamiento pero más fino en destacada */
-@media (hover:hover) and (pointer:fine){
-  .grid-portfolio .portfolio-link--featured:hover .portfolio-thumb img{
-    transform: scale(1.06);
+/* tablet/mobile vuelve a grilla normal */
+@media (max-width: 992px){
+  .grid-portfolio{
+    grid-template-columns: repeat(2, minmax(0,1fr));
   }
-}
-
-/* Mobile: todo vuelve a 1 columna (y la destacada no se “rompe”) */
-@media (max-width:800px){
+  .grid-portfolio .portfolio-link,
   .grid-portfolio .portfolio-link--featured{
     grid-column: auto;
   }
-  .grid-portfolio .portfolio-link--featured .portfolio-thumb{
-    height: 300px;            /* un toque más chica en mobile */
-  }
+  .grid-portfolio .portfolio-thumb{ height: 240px; }
 }
+@media (max-width: 800px){
+  .grid-portfolio{ grid-template-columns: 1fr; }
+}
+
 
  
 /* ===== BLOQUE LANDING + NEWSLETTER (tipo Zurbrand) ===== */
