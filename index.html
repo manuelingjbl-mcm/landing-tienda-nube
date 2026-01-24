@@ -1151,126 +1151,63 @@ header::after{
   transform: translateY(0) scale(1);
 }
 
-/* =========================
-   OVERRIDE REVEAL — SOLO SERVICIOS (cards más rápidas y sin scale)
-========================= */
-#servicios.section-dark .services .service-card.reveal{
-  opacity: 0;
-  transform: translateY(14px); /* antes 32px + scale */
-  transition: opacity .32s ease, transform .28s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
-}
-
-#servicios.section-dark .services .service-card.reveal.reveal-visible{
-  opacity: 1;
-  transform: translateY(0);
-}
-
- 
-.whatsapp-float{
-    right:12px;
-    bottom:12px;
-    padding:9px 14px;
-    font-size:13px;
-  }
-
-
-    /* Grid de servicios */
-.services-section .services-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 32px;
-  margin-top: 40px;
-}
-
-/* Cápsula de cada servicio */
-.service-card {
+/* ===== SERVICIOS: UNIFICADO (sin CSS global que pise) ===== */
+#servicios.section-dark .services .service-card{
   position: relative;
   border-radius: 22px;
-  padding: 22px 24px 20px;
-  background: radial-gradient(circle at top left,
-              rgba(111, 176, 255, 0.20),
-              rgba(10, 14, 26, 0.95));
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65);
+  padding: 26px 26px 22px;
   overflow: hidden;
 
-  /* Estado inicial (antes de entrar en viewport) */
-  opacity: 0;
-  transform: translateY(40px);
+  background: radial-gradient(circle at top left,
+              rgba(111, 176, 255, 0.55),
+              rgba(18, 28, 56, 1));
+  border: 1px solid rgba(148, 196, 255, 0.55);
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.75);
+
   transition:
     opacity 600ms ease-out,
     transform 600ms cubic-bezier(0.22, 0.61, 0.36, 1),
     box-shadow 300ms ease-out,
     border-color 300ms ease-out;
+
+  will-change: opacity, transform;
 }
 
-/* Pequeño brillo interno */
-.service-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
+#servicios.section-dark .services .service-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
   background: radial-gradient(circle at top right,
               rgba(180, 255, 255, 0.18),
               transparent 55%);
   opacity: 0.6;
-  pointer-events: none;
+  pointer-events:none;
 }
 
-/* Hover desktop: que flote un poquito */
-@media (hover: hover) and (pointer: fine) {
-  .service-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 24px 55px rgba(0, 0, 0, 0.85);
-    border-color: rgba(121, 207, 255, 0.9);
-  }
+/* Estado inicial SOLO cuando el JS agrega .reveal */
+#servicios.section-dark .services .service-card.reveal{
+  opacity: 0;
+  transform: translateY(14px);
 }
 
-/* Cuando entra en viewport (clase que pone JS) */
-.service-card.in-view {
+/* Visible (lo agrega el JS: .reveal-visible) */
+#servicios.section-dark .services .service-card.reveal.reveal-visible{
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Etiqueta/chip de abajo */
-.service-tag {
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 14px;
-  margin-top: 16px;
-  border-radius: 999px;
-  font-size: 0.85rem;
-  background: rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-/* Responsive: 1 columna en mobile */
-@media (max-width: 900px) {
-  .services-section .services-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+/* Hover: con especificidad + !important para ganarle al estado visible */
+@media (hover:hover) and (pointer:fine){
+  #servicios.section-dark .services .service-card.reveal.reveal-visible:hover{
+    transform: translateY(-6px) !important;
+    box-shadow: 0 24px 55px rgba(0, 0, 0, 0.85) !important;
+    border-color: rgba(121, 207, 255, 0.9) !important;
   }
 }
 
-/* ===== Ajuste de luminosidad en las cards ===== */
-.service-card {
-  background: radial-gradient(circle at top left,
-              rgba(111, 176, 255, 0.55),   /* más luz en la esquina */
-              rgba(18, 28, 56, 1));        /* azul más claro que el fondo */
-  border: 1px solid rgba(148, 196, 255, 0.55);
-  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.75);
-}
-
-/* Texto un poco más claro dentro de las cards */
-.service-card p {
+/* Texto */
+#servicios.section-dark .services .service-card p{
   color: rgba(230, 239, 255, 0.92);
-}
-
-/* Pill inferior más clara */
-.service-tag {
-  background: rgba(11, 22, 46, 0.95);
-  border-color: rgba(148, 196, 255, 0.6);
-  color: rgba(228, 240, 255, 0.96);
 }
 
     
