@@ -4374,7 +4374,27 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 </script>
 
+ 
+<script>
+(() => {
+  const cards = document.querySelectorAll('#servicios.section-dark .service-card');
+  if (!cards.length) return;
 
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -10% 0px'
+  });
+
+  cards.forEach(card => io.observe(card));
+})();
+</script>
 
     
 </body>
