@@ -4404,19 +4404,17 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 </script>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const section = document.querySelector("#servicios.section-dark");
-  const grid = document.querySelector("#servicios.section-dark .services");
-  if (!section || !grid) return;
+  /* =========================
+     SERVICIOS: DELAY POR FILA (usa el reveal global)
+     - no crea otro observer
+     - solo asigna transition-delay
+  ========================== */
+ <script>
+  const serviceCards = document.querySelectorAll('#servicios.section-dark .services .service-card.reveal');
+  if (serviceCards.length) {
+    const cards = Array.from(serviceCards);
 
-  const cards = Array.from(grid.querySelectorAll(".service-card"));
-  if (!cards.length) return;
-
-  let initialized = false;
-  let io = null;
-
-  function setupRowDelays() {
+    // agrupar por filas (offsetTop)
     const tol = 10;
     const rows = new Map();
 
@@ -4431,76 +4429,14 @@ document.addEventListener("DOMContentLoaded", () => {
       rows.get(key).push(card);
     });
 
+    // ordenar izq->der y setear delay 0/60ms
     rows.forEach(row => {
       row.sort((a,b)=>a.offsetLeft - b.offsetLeft);
-      row.forEach((card,i)=> card.dataset.svcDelay = String(i * 110)); // 0 / 110
-    });
-  }
-
-  function initCardsReveal() {
-    if (initialized) return;
-    initialized = true;
-
-    // 1) Limpieza total de clases viejas que te pisan la animación
-    cards.forEach(card => {
-      card.classList.remove("is-visible", "reveal", "reveal-visible", "reveal-show");
-      card.classList.remove("svc-visible");
-      card.classList.add("svc-reveal");
-      card.style.transitionDelay = "0ms";
-    });
-
-    setupRowDelays();
-
-    // 2) Forzar que el browser "pinte" el estado oculto antes de observar
-    // (reflow + doble frame = cero "jump")
-    void grid.offsetHeight;
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        io = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            entry.target.style.transitionDelay = (entry.target.dataset.svcDelay || "0") + "ms";
-            entry.target.classList.add("svc-visible");
-            entry.target.classList.remove("svc-reveal");
-            io.unobserve(entry.target);
-          });
-        }, {
-          threshold: 0.2,
-          rootMargin: "0px 0px -55% 0px"
-        });
-
-        cards.forEach(card => io.observe(card));
+      row.forEach((card,i)=> {
+        card.style.transitionDelay = (i * 60) + 'ms';
       });
     });
-
-    window.addEventListener("resize", setupRowDelays);
   }
-
-  // Disparar cuando el bloque global queda visible
-  if (section.classList.contains("reveal-visible")) {
-    setTimeout(initCardsReveal, 180);
-  } else {
-    const watch = new MutationObserver(() => {
-      if (section.classList.contains("reveal-visible")) {
-        watch.disconnect();
-        setTimeout(initCardsReveal, 180);
-      }
-    });
-    watch.observe(section, { attributes: true, attributeFilter: ["class"] });
-
-    // fallback por si tu global usa otra clase
-    const fallback = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        fallback.disconnect?.();
-        setTimeout(initCardsReveal, 180);
-      });
-    }, { threshold: 0.15, rootMargin: "0px 0px -35% 0px" });
-
-    fallback.observe(section);
-  }
-});
 </script>
 
  
