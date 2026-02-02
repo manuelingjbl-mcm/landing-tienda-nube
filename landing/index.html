@@ -779,7 +779,76 @@ main{ background: transparent; } /* por si ya lo tenías raro */
   font-size: 13px;
 }
 
+/* ===== Social row (Instagram + Facebook) ===== */
+.social-row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:flex-end; /* si querés alineado a la derecha como en tu captura */
+}
 
+.sbtn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(148,163,184,.22);
+  background: rgba(15, 23, 42, .55);
+  color: #e5e7eb;
+  text-decoration:none;
+  transition: transform .15s ease, filter .15s ease, background .15s ease;
+}
+
+.sbtn img{
+  width:18px;
+  height:18px;
+  opacity:.9;
+}
+
+@media (hover:hover) and (pointer:fine){
+  .sbtn:hover{
+    filter: brightness(1.06);
+    transform: translateY(-1px);
+    background: rgba(15, 23, 42, .7);
+  }
+}
+
+/* ===== WhatsApp Floating Button ===== */
+.wa-float{
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(34, 197, 94, .95);
+  box-shadow: 0 18px 35px rgba(0,0,0,.35);
+  z-index: 9999;
+  border: 1px solid rgba(255,255,255,.18);
+  text-decoration:none;
+}
+
+.wa-float img{
+  width: 28px;
+  height: 28px;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.25));
+}
+
+/* Ajuste “safe area” iPhone + evitar tapar cosas en mobile */
+@media (max-width: 640px){
+  .wa-float{
+    right: 14px;
+    bottom: calc(14px + env(safe-area-inset-bottom));
+    width: 54px;
+    height: 54px;
+  }
+}
+
+    
     
   </style>
 </head>
@@ -1080,15 +1149,16 @@ main{ background: transparent; } /* por si ya lo tenías raro */
             Si querés, mandame tu link de anuncio + destino y lo miro rápido para detectar fricciones.
           </div>
         </div>
-        <div class="social-row" style="margin:0;">
-          <a class="sbtn" href="https://www.instagram.com/" target="_blank" rel="noopener">
-            <img src="/icon-instagram.png" alt="" aria-hidden="true"> Instagram
-          </a>
-          <a class="sbtn" href="https://wa.me/" target="_blank" rel="noopener">
-            <img src="/icon-whatsapp.png" alt="" aria-hidden="true"> WhatsApp
-          </a>
-        </div>
-      </div>
+        <div class="social-row" aria-label="Redes sociales">
+  <a class="sbtn" href="https://www.instagram.com/manuelrubis" target="_blank" rel="noopener">
+    <img src="/icon-instagram.png" alt="" aria-hidden="true"> Instagram
+  </a>
+
+  <a class="sbtn" href="https://www.facebook.com/manuelcmdigital" target="_blank" rel="noopener">
+    <img src="/icon-facebook.png" alt="" aria-hidden="true"> Facebook
+  </a>
+  </div>
+  </div>
     </div>
   </section>
 
@@ -1135,6 +1205,15 @@ main{ background: transparent; } /* por si ya lo tenías raro */
       item.classList.toggle('open');
     });
   </script>
+  
+
+<a class="wa-float"
+   href="https://wa.me/5491159288093?text=Hola%20Manu%2C%20quiero%20mi%20landing%20enfocada%20en%20conversi%C3%B3n"
+   target="_blank"
+   rel="noopener"
+   aria-label="Abrir WhatsApp">
+  <img src="/icon-whatsapp.png" alt="" aria-hidden="true">
+</a>
 
 
 
