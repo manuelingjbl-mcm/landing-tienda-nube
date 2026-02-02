@@ -547,6 +547,48 @@
       background: rgba(16,24,40,.08);
       margin: 6px 0 0;
     }
+
+.hero-stack{
+  display:grid;
+  gap:14px;
+}
+
+.hero-copy{
+  padding: 6px 2px;
+}
+
+.hero-copy h1{
+  max-width: 20ch;
+}
+
+.hero-copy .lead{
+  max-width: 70ch;
+}
+
+.hero-side--wide{
+  width:100%;
+}
+
+/* mejora pro en desktop: la card wide se vuelve “panorámica” */
+@media (min-width: 920px){
+  .hero-side--wide{
+    display:grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap:14px;
+    align-items:start;
+  }
+  .hero-side--wide .divider{
+    display:none;
+  }
+}
+
+.side-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+    
   </style>
 </head>
 
@@ -568,61 +610,71 @@
   <!-- HERO (dark) -->
   <header class="hero" id="top">
     <div class="wrap hero-pad">
-      <div class="hero-grid">
-        <div class="hero-card reveal">
-          <div class="kicker"><span class="dot"></span> Landing pages para campañas · 1 acción, 0 distracciones</div>
-          <h1>Una landing no es una web.<br>Es una página diseñada para convertir.</h1>
-          <p class="lead">
-            Si invertís en anuncios y no convertís, muchas veces el problema no es el anuncio:
-            es lo que pasa <strong>después del clic</strong>.
-            Armamos una landing enfocada en una sola acción, con estructura clara, CTA fuerte y medición lista para optimizar.
-          </p>
+      <div class="hero-stack">
+  <!-- TITULO FULL WIDTH (sin card) -->
+  <div class="hero-copy reveal">
+    <div class="kicker">
+      <span class="dot"></span>
+      Landing pages para campañas · 1 acción, 0 distracciones
+    </div>
 
-          <div class="hero-ctas">
-            <a class="btn btn-primary" href="#contacto">Quiero mi landing</a>
-            <a class="btn" href="#incluye">Qué incluye</a>
-            <a class="btn" href="#proceso">Cómo trabajamos</a>
-          </div>
-        </div>
+    <h1>Una landing no es una web.<br>Es una página diseñada para convertir.</h1>
 
-        <aside class="hero-side reveal">
-          <div>
-            <div class="side-title">Hecha para tráfico frío</div>
-            <ul class="checklist">
-              <li>
-                <span class="tick" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M20 7L10 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </span>
-                <span>Ideal para Meta/Google cuando necesitás que el usuario entienda y actúe en segundos.</span>
-              </li>
-              <li>
-                <span class="tick" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M20 7L10 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </span>
-                <span>Copy + estructura alineados al anuncio (1 objetivo → 1 CTA → 1 conversión).</span>
-              </li>
-              <li>
-                <span class="tick" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M20 7L10 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </span>
-                <span>Eventos listos para optimizar: scroll, click de CTA y envío de formulario.</span>
-              </li>
-            </ul>
-          </div>
+    <p class="lead">
+      Si invertís en anuncios y no convertís, muchas veces el problema no es el anuncio:
+      es lo que pasa <strong>después del clic</strong>.
+      Armamos una landing enfocada en una sola acción, con estructura clara, CTA fuerte y medición lista para optimizar.
+    </p>
 
-          <div class="divider"></div>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#contacto">Quiero mi landing</a>
+      <a class="btn" href="#incluye">Qué incluye</a>
+      <a class="btn" href="#proceso">Cómo trabajamos</a>
+    </div>
+  </div>
 
-          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
-            <a class="btn" href="#por-que">Por qué no convierte</a>
-            <a class="btn" href="#contacto">Hablemos</a>
-          </div>
-        </aside>
+  <!-- TRÁFICO FRÍO FULL WIDTH (debajo) -->
+  <aside class="hero-side hero-side--wide reveal">
+    <div>
+      <div class="side-title">Hecha para tráfico frío</div>
+
+      <ul class="checklist">
+        <li>
+          <span class="tick" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M20 7L10 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span>Ideal para Meta/Google cuando necesitás que el usuario entienda y actúe en segundos.</span>
+        </li>
+
+        <li>
+          <span class="tick" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M20 7L10 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span>Copy + estructura alineados al anuncio (1 objetivo → 1 CTA → 1 conversión).</span>
+        </li>
+
+        <li>
+          <span class="tick" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M20 7L10 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span>Eventos listos para optimizar: scroll, click de CTA y envío de formulario.</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="side-actions">
+      <a class="btn" href="#por-que">Por qué no convierte</a>
+      <a class="btn" href="#contacto">Hablemos</a>
+    </div>
+  </aside>
       </div>
     </div>
   </header>
