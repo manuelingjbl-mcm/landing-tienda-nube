@@ -2,653 +2,712 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Vía Cloud Studio · Landing enfocada en conversión</title>
-  <meta name="description" content="Landing pages enfocadas en conversión para campañas. 1 objetivo, 1 CTA, medición con Pixel/GA4 y optimización continua." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vía Cloud Studio · Landing Pages para campañas</title>
 
-  <!-- Favicons (rutas absolutas para que funcionen en /landing) -->
+  <!-- Favicons (rutas ABSOLUTAS para que funcionen dentro de /landing) -->
   <link rel="icon" href="/favicon.icon.png" sizes="any">
   <link rel="apple-touch-icon" href="/favicon.icon.png">
 
+  <meta name="description" content="Landing pages enfocadas en conversión: 1 objetivo, 1 CTA, medición con Pixel/GA4 y estructura lista para optimizar." />
+
   <style>
     :root{
-      --bg:#070A13;
-      --panel:#0B1022;
-      --panel2:#0E1634;
-      --text:#E9EEFF;
-      --muted:#AAB4D6;
-      --line:rgba(170,180,214,.18);
-      --brand1:#0056ff;
-      --brand2:#7A5CFF;
-      --ok:#4ade80;
-      --danger:#ff6b6b;
+      --bg0:#070A12;
+      --bg1:#0B1020;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(10,14,28,.55);
+      --stroke: rgba(255,255,255,.10);
+      --text:#EAF0FF;
+      --muted: rgba(234,240,255,.74);
 
-      --radius:22px;
-      --radius2:28px;
-      --shadow: 0 18px 55px rgba(0,0,0,.45);
-      --shadow2: 0 16px 40px rgba(0,0,0,.30);
-      --max: 1160px;
+      --ink:#0C0F1A;
+      --ink2:#11182B;
+      --light:#F6F8FF;
+      --line: rgba(16,24,40,.12);
 
-      --headerH: 84px; /* para scroll offset */
+      --blue:#2D5BFF;
+      --blue2:#7AA0FF;
+
+      --r: 22px;
+      --shadow: 0 24px 70px rgba(0,0,0,.45);
     }
 
-    *{ box-sizing:border-box; margin:0; padding:0; }
-    html{ scroll-behavior:smooth; background: var(--bg); }
+    /* Anti “se va para los lados” */
+    *, *::before, *::after{ box-sizing:border-box; }
+    html, body{ height:100%; }
     body{
+      margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text);
-      background: radial-gradient(1200px 800px at 15% -10%, rgba(0,86,255,.32), transparent 55%),
-                  radial-gradient(900px 700px at 80% 0%, rgba(122,92,255,.26), transparent 55%),
-                  var(--bg);
-      overflow-x:hidden;
+      color: var(--ink);
+      background: #fff;
+      overflow-x:hidden; /* CLAVE */
+    }
+    img{ max-width:100%; height:auto; display:block; }
+    a{ color:inherit; text-decoration:none; }
+    button{ font-family:inherit; }
+
+    /* Contenedor seguro (nada de 100vw) */
+    .wrap{
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+    @media (max-width:520px){
+      .wrap{ width: calc(100% - 28px); }
     }
 
-    a{ color: inherit; text-decoration:none; }
-    .container{ width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
-    .pill{
-      display:inline-flex; align-items:center; gap:10px;
-      padding: 10px 14px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      border-radius: 999px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .dot{
-      width:8px; height:8px; border-radius:99px;
-      background: linear-gradient(135deg, var(--brand1), var(--brand2));
-      box-shadow: 0 0 0 5px rgba(0,86,255,.10);
-    }
-
-    /* ===== HEADER ===== */
-    .site-header{
-      position: sticky; top:0; z-index: 50;
+    /* Header */
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(8,10,18,.72);
       backdrop-filter: blur(14px);
-      background: rgba(7,10,19,.55);
-      border-bottom: 1px solid rgba(170,180,214,.14);
+      border-bottom: 1px solid rgba(255,255,255,.08);
     }
-    .header-inner{
-      height: var(--headerH);
-      display:flex; align-items:center; justify-content:space-between;
-      gap:16px;
+    .topbar .inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 12px 0;
+      gap: 12px;
     }
     .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight: 800;
-      letter-spacing: .2px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width: 0;
     }
     .brand img{
-      height: 22px; width:auto;
-      display:block;
+      width: 150px;
+      height:auto;
     }
-    .nav-actions{
-      display:flex; align-items:center; gap:10px;
-    }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
+    .nav{
+      display:flex;
+      align-items:center;
       gap:10px;
-      padding: 12px 16px;
-      border-radius: 14px;
-      border: 1px solid rgba(170,180,214,.20);
-      background: rgba(255,255,255,.04);
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
       color: var(--text);
-      font-weight: 650;
-      font-size: 14px;
-      transition: transform .18s ease, filter .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
-      will-change: transform;
+      background: rgba(255,255,255,.06);
+      transition: transform .18s ease, filter .18s ease, background .18s ease;
+      white-space: nowrap;
     }
-    .btn:hover{
-      transform: translateY(-2px);
-      filter: brightness(1.05);
-      box-shadow: 0 14px 35px rgba(0,0,0,.30);
-      border-color: rgba(170,180,214,.30);
+    .pill:hover{ transform: translateY(-1px); filter: brightness(1.08); }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 11px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      transition: transform .18s ease, filter .18s ease, background .18s ease;
+      white-space: nowrap;
     }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.10); }
     .btn-primary{
-      border: none;
-      background: linear-gradient(135deg, var(--brand1), var(--brand2));
-      box-shadow: 0 14px 35px rgba(0,86,255,.18);
-    }
-    .btn-primary:hover{
-      box-shadow: 0 18px 42px rgba(0,86,255,.22);
+      background: linear-gradient(135deg, var(--blue) 0%, #1F2CFF 45%, #7B5CFF 100%);
+      border-color: rgba(255,255,255,.18);
+      box-shadow: 0 18px 40px rgba(45,91,255,.25);
     }
 
-    /* ===== HERO (full width) ===== */
+    /* Hero (oscuro) */
     .hero{
       position: relative;
-      padding: 54px 0 34px;
-    }
-    .hero::before{
-      content:"";
-      position:absolute; inset:-60% -15%;
-      background:
-        radial-gradient(700px 520px at 18% 20%, rgba(0,86,255,.22), transparent 55%),
-        radial-gradient(640px 520px at 75% 25%, rgba(122,92,255,.20), transparent 58%);
-      pointer-events:none;
-      filter: blur(0px);
-    }
-    .hero-grid{
-      position:relative;
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 26px;
-      align-items: end;
-      padding: 28px;
-      border-radius: var(--radius2);
-      border: 1px solid rgba(170,180,214,.18);
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      box-shadow: var(--shadow);
+      background: radial-gradient(1200px 600px at 30% -10%, rgba(45,91,255,.38), transparent 65%),
+                  radial-gradient(900px 500px at 85% 15%, rgba(123,92,255,.34), transparent 62%),
+                  linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
+      color: var(--text);
       overflow:hidden;
     }
-    .hero-grid::after{
+    .hero::after{
       content:"";
       position:absolute;
-      inset:-25%;
-      background: radial-gradient(circle at 30% 10%, rgba(255,255,255,.10), transparent 35%),
-                  radial-gradient(circle at 70% 10%, rgba(255,255,255,.06), transparent 42%);
+      inset:-120px -120px auto auto;
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle at 30% 30%, rgba(122,160,255,.30), transparent 55%);
+      filter: blur(2px);
       pointer-events:none;
-      opacity: .55;
+      transform: rotate(12deg);
     }
-    .hero h1{
-      position:relative;
-      font-size: clamp(34px, 4.8vw, 64px);
-      line-height: 1.02;
-      letter-spacing: -0.8px;
-      margin-top: 10px;
+    .hero-pad{ padding: 46px 0 30px; }
+    @media (max-width:720px){
+      .hero-pad{ padding: 30px 0 18px; }
     }
-    .hero p{
-      position:relative;
-      margin-top: 14px;
-      color: var(--muted);
-      font-size: clamp(15px, 1.5vw, 18px);
-      line-height: 1.55;
-      max-width: 58ch;
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+      align-items: stretch;
     }
-    .hero-cta{
+    @media (max-width:920px){
+      .hero-grid{ grid-template-columns: 1fr; }
+    }
+
+    .hero-card{
+      border-radius: calc(var(--r) + 8px);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow);
+      padding: 22px 22px 18px;
       position:relative;
-      margin-top: 18px;
-      display:flex;
-      gap: 12px;
-      flex-wrap: wrap;
+      overflow:hidden;
+    }
+    .kicker{
+      display:inline-flex;
       align-items:center;
+      gap:10px;
+      font-size: 12px;
+      color: rgba(234,240,255,.78);
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      border-radius: 999px;
+      padding: 8px 10px;
+      width: fit-content;
     }
-    .hero-side{
-      position:relative;
-      padding: 18px 18px 16px;
-      border-radius: 18px;
-      background: rgba(10,16,34,.55);
-      border: 1px solid rgba(170,180,214,.16);
-      box-shadow: var(--shadow2);
+    .dot{
+      width:8px; height:8px; border-radius:999px;
+      background: radial-gradient(circle, #9BC3FF 0%, #2D5BFF 70%);
+      box-shadow: 0 0 0 4px rgba(45,91,255,.18);
+      flex: 0 0 auto;
     }
-    .hero-side h3{
-      font-size: 14px;
-      letter-spacing: .4px;
-      color: #DCE3FF;
-      opacity:.9;
-      text-transform: uppercase;
+    h1{
+      margin: 12px 0 10px;
+      font-size: clamp(32px, 4.2vw, 54px);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
     }
-    .mini{
+    .lead{
+      margin: 0 0 14px;
+      color: rgba(234,240,255,.78);
+      font-size: 15px;
+      line-height: 1.55;
+      max-width: 64ch;
+    }
+    .hero-ctas{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
       margin-top: 10px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.6;
+    }
+
+    .hero-side{
+      border-radius: calc(var(--r) + 8px);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(10,14,28,.55);
+      padding: 18px;
+      box-shadow: 0 22px 55px rgba(0,0,0,.35);
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:14px;
+    }
+    .side-title{
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(234,240,255,.72);
+      margin: 0 0 8px;
     }
     .checklist{
-      margin-top: 14px;
       display:grid;
-      gap: 10px;
+      gap:10px;
+      margin:0;
+      padding:0;
+      list-style:none;
+      color: rgba(234,240,255,.82);
+      font-size: 13px;
+      line-height: 1.45;
     }
-    .check{
-      display:flex; gap:10px; align-items:flex-start;
-      font-size: 14px; color: #DCE3FF;
+    .checklist li{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
     }
-    .check b{ color: #fff; }
     .tick{
-      width:18px; height:18px; border-radius: 6px;
-      background: rgba(74,222,128,.16);
-      border: 1px solid rgba(74,222,128,.35);
-      display:inline-flex; align-items:center; justify-content:center;
-      flex: 0 0 18px;
+      width:18px; height:18px;
+      border-radius: 6px;
+      background: rgba(45,91,255,.18);
+      border: 1px solid rgba(45,91,255,.38);
+      display:grid;
+      place-items:center;
+      flex: 0 0 auto;
       margin-top: 1px;
     }
-    .tick::after{ content:"✓"; font-size: 12px; color: var(--ok); font-weight: 800; }
+    .tick svg{ width:12px; height:12px; }
 
-    /* ===== SECTION BASE ===== */
-    section{
-      padding: 56px 0;
+    /* Secciones claras */
+    .section{
+      padding: 42px 0;
+      background: #fff;
+    }
+    .section.light{
+      background: linear-gradient(180deg, #FFFFFF 0%, #F6F8FF 100%);
     }
     .section-title{
-      display:flex; align-items:baseline; justify-content:space-between;
-      gap: 16px;
-      margin-bottom: 18px;
+      font-size: clamp(22px, 2.4vw, 30px);
+      margin: 0 0 6px;
+      letter-spacing: -0.01em;
+      color: var(--ink);
     }
-    .section-title h2{
-      font-size: clamp(22px, 2.2vw, 32px);
-      letter-spacing: -0.35px;
-      line-height: 1.15;
-    }
-    .section-title p{
-      color: var(--muted);
+    .section-sub{
+      margin: 0 0 18px;
+      color: rgba(12,15,26,.68);
       font-size: 14px;
-      max-width: 52ch;
+      line-height: 1.55;
+      max-width: 70ch;
     }
 
-    /* ===== CARDS ===== */
     .grid-3{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
     }
-    .card{
-      border-radius: var(--radius);
-      border: 1px solid rgba(170,180,214,.16);
-      background: rgba(255,255,255,.03);
-      box-shadow: 0 10px 30px rgba(0,0,0,.20);
-      padding: 18px 18px 16px;
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, filter .18s ease;
-      position:relative;
-      overflow:hidden;
-      min-height: 140px;
+    @media (max-width:960px){
+      .grid-3{ grid-template-columns: 1fr; }
     }
-    .card::before{
-      content:"";
-      position:absolute; inset:-35%;
-      background: radial-gradient(circle at 25% 20%, rgba(0,86,255,.18), transparent 45%),
-                  radial-gradient(circle at 80% 10%, rgba(122,92,255,.12), transparent 55%);
-      opacity: .0;
-      transition: opacity .18s ease;
-      pointer-events:none;
+
+    .card{
+      border-radius: var(--r);
+      background: #fff;
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 50px rgba(16,24,40,.06);
+      padding: 16px;
+      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+      overflow:hidden;
     }
     .card:hover{
-      transform: translateY(-3px);
-      box-shadow: 0 18px 45px rgba(0,0,0,.34);
-      border-color: rgba(170,180,214,.28);
-      filter: brightness(1.03);
+      transform: translateY(-2px);
+      box-shadow: 0 26px 70px rgba(16,24,40,.10);
+      filter: brightness(1.02);
     }
-    .card:hover::before{ opacity: .75; }
-    .kicker{
-      color: rgba(233,238,255,.72);
-      font-size: 12px;
-      letter-spacing:.5px;
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size: 11px;
+      letter-spacing: .08em;
       text-transform: uppercase;
+      color: rgba(12,15,26,.70);
+      border: 1px solid rgba(16,24,40,.14);
+      background: rgba(16,24,40,.03);
+      border-radius: 999px;
+      padding: 7px 10px;
+      width: fit-content;
+      margin-bottom: 10px;
     }
     .card h3{
-      margin-top: 10px;
+      margin: 0 0 6px;
       font-size: 16px;
-      letter-spacing: -0.2px;
+      color: var(--ink);
+      letter-spacing: -0.01em;
     }
     .card p{
-      margin-top: 8px;
-      color: var(--muted);
-      font-size: 14px;
+      margin: 0;
+      color: rgba(12,15,26,.68);
+      font-size: 13px;
       line-height: 1.55;
     }
 
-    /* ===== DARK BAND ===== */
-    .band{
-      border-top: 1px solid rgba(170,180,214,.10);
-      border-bottom: 1px solid rgba(170,180,214,.10);
-      background: linear-gradient(180deg, rgba(11,16,34,.75), rgba(11,16,34,.92));
+    /* Secciones oscuras “bloque” para contraste */
+    .section.dark{
+      background: radial-gradient(1100px 450px at 10% -10%, rgba(45,91,255,.22), transparent 60%),
+                  linear-gradient(180deg, #070A12 0%, #0B1020 100%);
+      color: var(--text);
+    }
+    .section.dark .section-title{ color: var(--text); }
+    .section.dark .section-sub{ color: rgba(234,240,255,.72); }
+    .section.dark .card{
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.10);
+      box-shadow: 0 22px 55px rgba(0,0,0,.35);
+    }
+    .section.dark .card h3{ color: var(--text); }
+    .section.dark .card p{ color: rgba(234,240,255,.74); }
+    .section.dark .badge{
+      color: rgba(234,240,255,.72);
+      border-color: rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
     }
 
-    /* ===== PROCESS (full width feel) ===== */
-    .process{
+    /* Proceso */
+    .steps{
       display:grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-top: 18px;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    @media (max-width:980px){
+      .steps{ grid-template-columns: 1fr; }
     }
     .step{
-      border-radius: 18px;
-      border: 1px solid rgba(170,180,214,.14);
-      background: rgba(255,255,255,.025);
-      padding: 16px 14px;
-      transition: transform .18s ease, border-color .18s ease;
+      border-radius: var(--r);
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 14px;
+      box-shadow: 0 18px 50px rgba(16,24,40,.06);
+      transition: transform .18s ease, box-shadow .18s ease;
+      min-width: 0;
     }
-    .step:hover{
-      transform: translateY(-2px);
-      border-color: rgba(170,180,214,.24);
-    }
+    .step:hover{ transform: translateY(-2px); box-shadow: 0 26px 70px rgba(16,24,40,.10); }
     .num{
-      width: 34px; height: 34px;
-      display:flex; align-items:center; justify-content:center;
-      border-radius: 12px;
-      background: rgba(0,86,255,.18);
-      border: 1px solid rgba(0,86,255,.35);
-      color: #DCE3FF;
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      display:grid;
+      place-items:center;
       font-weight: 800;
+      color: #fff;
+      background: linear-gradient(135deg, var(--blue), #7B5CFF);
+      box-shadow: 0 14px 30px rgba(45,91,255,.22);
+      margin-bottom: 10px;
     }
-    .step h4{ margin-top: 10px; font-size: 15px; }
-    .step p{ margin-top: 6px; color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .step h4{ margin: 0 0 6px; font-size: 15px; letter-spacing: -0.01em; }
+    .step p{ margin: 0; font-size: 13px; color: rgba(12,15,26,.68); line-height: 1.55; }
 
-    /* ===== FULL-WIDTH FAQ ===== */
-    .faq-wrap{
-      border-radius: var(--radius2);
-      border: 1px solid rgba(170,180,214,.16);
-      background: rgba(255,255,255,.02);
+    /* FAQ full width (acordeón) */
+    .faq-shell{
+      border-radius: calc(var(--r) + 10px);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 26px 70px rgba(0,0,0,.35);
       overflow:hidden;
-      box-shadow: 0 18px 45px rgba(0,0,0,.20);
     }
     .faq-item{
-      border-top: 1px solid rgba(170,180,214,.12);
-      padding: 18px 18px;
-      background: rgba(255,255,255,.01);
+      border-top: 1px solid rgba(255,255,255,.10);
     }
     .faq-item:first-child{ border-top:none; }
     .faq-q{
-      width: 100%;
-      display:flex; align-items:center; justify-content:space-between;
-      gap: 16px;
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      padding: 16px 16px;
       background: transparent;
       border: none;
       color: var(--text);
-      font-weight: 750;
-      font-size: 15px;
-      cursor:pointer;
       text-align:left;
-      padding: 0;
+      cursor:pointer;
+      font-weight: 700;
+      font-size: 14px;
     }
+    .faq-q span{ opacity:.92; }
     .chev{
-      width: 34px; height: 34px;
-      border-radius: 12px;
-      border:1px solid rgba(170,180,214,.18);
-      display:flex; align-items:center; justify-content:center;
-      transition: transform .18s ease, background .18s ease, border-color .18s ease;
-      background: rgba(255,255,255,.03);
-      flex: 0 0 34px;
-    }
-    .faq-item[aria-expanded="true"] .chev{
-      transform: rotate(180deg);
-      border-color: rgba(170,180,214,.28);
+      width: 22px; height: 22px;
+      border-radius: 8px;
+      display:grid;
+      place-items:center;
+      border: 1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.06);
+      flex: 0 0 auto;
+      transition: transform .18s ease;
     }
     .faq-a{
-      max-height: 0px;
+      max-height: 0;
       overflow: hidden;
-      transition: max-height .22s ease;
+      transition: max-height .26s ease;
     }
-    .faq-a p{
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.65;
-      max-width: 95ch;
+    .faq-a .pad{
+      padding: 0 16px 16px;
+      color: rgba(234,240,255,.74);
+      font-size: 13px;
+      line-height: 1.6;
+      max-width: 88ch;
     }
+    .faq-item.open .faq-a{ max-height: 240px; }
+    .faq-item.open .chev{ transform: rotate(180deg); }
 
-    /* ===== CONTACT FULL WIDTH ===== */
+    /* Contacto + Form (full width) */
     .contact-grid{
       display:grid;
-      grid-template-columns: 1fr 1.05fr;
-      gap: 16px;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 14px;
       align-items: stretch;
-      margin-top: 16px;
+    }
+    @media (max-width:980px){
+      .contact-grid{ grid-template-columns: 1fr; }
     }
     .panel{
-      border-radius: var(--radius2);
-      border: 1px solid rgba(170,180,214,.16);
-      background: rgba(255,255,255,.02);
-      box-shadow: 0 18px 45px rgba(0,0,0,.20);
-      padding: 18px;
-      overflow:hidden;
-      position:relative;
+      border-radius: calc(var(--r) + 8px);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 26px 70px rgba(0,0,0,.35);
+      padding: 16px;
+      min-width: 0;
     }
-    .panel::before{
-      content:"";
-      position:absolute; inset:-35%;
-      background: radial-gradient(circle at 25% 10%, rgba(0,86,255,.14), transparent 50%),
-                  radial-gradient(circle at 70% 0%, rgba(122,92,255,.10), transparent 60%);
-      opacity:.55;
-      pointer-events:none;
-    }
-    .panel > *{ position:relative; }
+    .panel h3{ margin: 0 0 6px; color: var(--text); font-size: 18px; letter-spacing:-0.01em; }
+    .panel p{ margin: 0 0 10px; color: rgba(234,240,255,.74); font-size: 13px; line-height: 1.55; }
 
-    .contact-left h3{
-      font-size: 20px;
-      letter-spacing: -0.25px;
-      line-height:1.2;
+    .social-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      margin-top: 12px;
     }
-    .contact-left p{
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-    .micro{
-      margin-top: 10px;
-      color: rgba(233,238,255,.75);
+    .sbtn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      transition: transform .18s ease, filter .18s ease;
       font-size: 13px;
+      white-space: nowrap;
     }
+    .sbtn:hover{ transform: translateY(-1px); filter: brightness(1.08); }
+    .sbtn img{ width: 18px; height: 18px; }
 
     form{
       display:grid;
+      gap: 10px;
+    }
+    .row2{
+      display:grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      margin-top: 4px;
     }
-    .field{
-      display:flex;
-      flex-direction:column;
-      gap: 6px;
-    }
-    .field.full{ grid-column: 1 / -1; }
-    label{
-      color: rgba(233,238,255,.75);
-      font-size: 12px;
-      letter-spacing: .2px;
+    @media (max-width:560px){
+      .row2{ grid-template-columns: 1fr; }
     }
     input, select, textarea{
       width:100%;
       padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(170,180,214,.18);
-      background: rgba(0,0,0,.22);
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(10,14,28,.45);
       color: var(--text);
-      outline:none;
-      transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease, filter .18s ease;
+      outline: none;
+      font-size: 13px;
     }
     textarea{ min-height: 110px; resize: vertical; }
-    input:focus, select:focus, textarea:focus{
-      border-color: rgba(122,92,255,.55);
-      box-shadow: 0 0 0 6px rgba(122,92,255,.12);
-      filter: brightness(1.02);
-    }
-
-    .form-actions{
-      grid-column: 1 / -1;
+    input::placeholder, textarea::placeholder{ color: rgba(234,240,255,.52); }
+    .form-foot{
       display:flex;
+      gap: 12px;
       align-items:center;
       justify-content:space-between;
-      gap: 12px;
-      margin-top: 2px;
-      flex-wrap: wrap;
+      flex-wrap:wrap;
+      margin-top: 6px;
     }
-    .privacy{
-      color: rgba(233,238,255,.60);
-      font-size: 12px;
+    .fine{
+      font-size: 11px;
+      color: rgba(234,240,255,.60);
+      line-height: 1.4;
     }
-    .status{
-      margin-top: 10px;
-      font-size: 13px;
-      color: rgba(233,238,255,.72);
-    }
-    .status.ok{ color: var(--ok); }
-    .status.err{ color: var(--danger); }
 
-    /* ===== FOOTER ===== */
-    footer{
-      padding: 26px 0 32px;
-      color: rgba(233,238,255,.55);
-      border-top: 1px solid rgba(170,180,214,.10);
-      font-size: 12px;
+    /* Footer full width */
+    .footer{
+      padding: 26px 0;
+      background: #070A12;
+      color: rgba(234,240,255,.70);
+      border-top: 1px solid rgba(255,255,255,.08);
     }
-    .footer-row{
+    .footer .inner{
       display:flex;
+      flex-wrap:wrap;
+      align-items:center;
       justify-content:space-between;
-      gap: 14px;
-      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 12px;
     }
 
-    /* ===== REVEAL ON SCROLL (fail-safe) ===== */
-    /* Por defecto: visible (si JS falla, no se oculta nada) */
+    /* Reveal on scroll (fail-safe) */
     .reveal{ opacity: 1; transform: none; }
-    /* Solo ocultar cuando JS está activo (agregamos .js al <html>) */
-    .js .reveal{
+    html.js .reveal{
       opacity: 0;
-      transform: translateY(28px) scale(.985);
-      transition: opacity .7s ease-out, transform .7s cubic-bezier(.22, 1, .36, 1);
-      will-change: transform, opacity;
+      transform: translateY(22px) scale(.99);
+      transition: opacity .65s ease, transform .65s ease;
     }
-    .js .reveal.reveal-visible{
+    html.js .reveal.reveal-visible{
       opacity: 1;
       transform: translateY(0) scale(1);
     }
 
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 980px){
-      .hero-grid{ grid-template-columns: 1fr; }
-      .grid-3{ grid-template-columns: 1fr; }
-      .process{ grid-template-columns: 1fr; }
-      .contact-grid{ grid-template-columns: 1fr; }
-      form{ grid-template-columns: 1fr; }
-      :root{ --headerH: 74px; }
+    /* Separador suave */
+    .divider{
+      height: 1px;
+      background: rgba(16,24,40,.08);
+      margin: 6px 0 0;
     }
   </style>
 </head>
 
-<body class="page-landing">
-  <a id="top"></a>
-
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="/#top" aria-label="VIACLOUDSTUDIO (Inicio)">
+<body>
+  <!-- TOP -->
+  <div class="topbar">
+    <div class="wrap inner">
+      <a class="brand" href="#top" aria-label="VIACLOUDSTUDIO (Inicio)">
         <img src="/vclouds-logo.png" alt="VIACLOUDSTUDIO" loading="eager" decoding="async">
       </a>
-      <div class="nav-actions">
-        <a class="btn" href="#faq">FAQ</a>
+
+      <div class="nav">
+        <a class="pill" href="#faq">FAQ</a>
         <a class="btn btn-primary" href="#contacto">Quiero mi landing</a>
       </div>
     </div>
-  </header>
+  </div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-grid reveal">
-        <div>
-          <span class="pill"><span class="dot"></span> Landing pages para campañas · 1 acción, 0 distracciones</span>
+  <!-- HERO (dark) -->
+  <header class="hero" id="top">
+    <div class="wrap hero-pad">
+      <div class="hero-grid">
+        <div class="hero-card reveal">
+          <div class="kicker"><span class="dot"></span> Landing pages para campañas · 1 acción, 0 distracciones</div>
           <h1>Una landing no es una web.<br>Es una página diseñada para convertir.</h1>
-          <p>
-            Si invertís en anuncios y no convertís, el problema muchas veces no es el anuncio:
-            es lo que pasa <b>después del clic</b>. Te armamos una landing enfocada en una sola acción,
-            con estructura clara, CTA fuerte y medición lista para optimizar.
+          <p class="lead">
+            Si invertís en anuncios y no convertís, muchas veces el problema no es el anuncio:
+            es lo que pasa <strong>después del clic</strong>.
+            Armamos una landing enfocada en una sola acción, con estructura clara, CTA fuerte y medición lista para optimizar.
           </p>
-          <div class="hero-cta">
+
+          <div class="hero-ctas">
             <a class="btn btn-primary" href="#contacto">Quiero mi landing</a>
             <a class="btn" href="#incluye">Qué incluye</a>
-            <span class="pill">Entrega rápida · sin humo · lista para escalar</span>
+            <a class="btn" href="#proceso">Cómo trabajamos</a>
           </div>
         </div>
 
-        <aside class="hero-side">
-          <h3>Hecha para tráfico frío</h3>
-          <p class="mini">Ideal para campañas en Meta/Google cuando necesitás que el usuario entienda y actúe en segundos.</p>
-          <div class="checklist">
-            <div class="check"><span class="tick"></span><span><b>1 objetivo</b> → 1 CTA → 1 conversión.</span></div>
-            <div class="check"><span class="tick"></span><span>Copy y estructura alineados al anuncio.</span></div>
-            <div class="check"><span class="tick"></span><span>Eventos y medición para optimizar (scroll/click/form).</span></div>
+        <aside class="hero-side reveal">
+          <div>
+            <div class="side-title">Hecha para tráfico frío</div>
+            <ul class="checklist">
+              <li>
+                <span class="tick" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M20 7L10 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span>Ideal para Meta/Google cuando necesitás que el usuario entienda y actúe en segundos.</span>
+              </li>
+              <li>
+                <span class="tick" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M20 7L10 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span>Copy + estructura alineados al anuncio (1 objetivo → 1 CTA → 1 conversión).</span>
+              </li>
+              <li>
+                <span class="tick" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M20 7L10 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span>Eventos listos para optimizar: scroll, click de CTA y envío de formulario.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="divider"></div>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+            <a class="btn" href="#por-que">Por qué no convierte</a>
+            <a class="btn" href="#contacto">Hablemos</a>
           </div>
         </aside>
       </div>
     </div>
-  </section>
+  </header>
 
-  <!-- POR QUÉ NO CONVIERTE -->
-  <section>
-    <div class="container">
-      <div class="section-title reveal">
-        <div>
-          <h2>Por qué tu tráfico no convierte</h2>
-          <p>Lo típico: el usuario llega, no entiende, se distrae o no confía. Una landing elimina fricción.</p>
-        </div>
-      </div>
+  <!-- POR QUÉ NO CONVIERTE (light) -->
+  <section class="section light" id="por-que">
+    <div class="wrap">
+      <h2 class="section-title reveal">Por qué tu tráfico no convierte</h2>
+      <p class="section-sub reveal">Lo típico: el usuario llega, no entiende, se distrae o no confía. Una landing elimina fricción.</p>
 
       <div class="grid-3">
         <article class="card reveal">
-          <div class="kicker">Problema</div>
+          <div class="badge">Problema</div>
           <h3>Demasiadas opciones</h3>
-          <p>Menú, secciones infinitas y varios CTAs = menos decisiones… y menos conversiones.</p>
+          <p>Menús, secciones infinitas y varios CTAs → más decisiones… y menos conversiones.</p>
         </article>
+
         <article class="card reveal">
-          <div class="kicker">Problema</div>
+          <div class="badge">Problema</div>
           <h3>Mensaje desalineado</h3>
-          <p>Si el anuncio promete A y la landing habla de B, el usuario rebota en segundos.</p>
+          <p>El anuncio promete A y la página habla de B. Rebote en segundos.</p>
         </article>
+
         <article class="card reveal">
-          <div class="kicker">Problema</div>
+          <div class="badge">Problema</div>
           <h3>Sin medición real</h3>
-          <p>Sin eventos (scroll/click/form) estás “optimizando a ojo”. Y el presupuesto se va.</p>
+          <p>Si no medís scroll/click/form, optimizás “a ciegas” y el presupuesto se va.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- QUÉ INCLUYE (band oscuro) -->
-  <section id="incluye" class="band">
-    <div class="container">
-      <div class="section-title reveal">
-        <div>
-          <h2>Qué incluye el diseño de la landing</h2>
-          <p>Todo lo necesario para convertir y después mejorar con datos.</p>
-        </div>
-      </div>
+  <!-- QUÉ INCLUYE (dark) -->
+  <section class="section dark" id="incluye">
+    <div class="wrap">
+      <h2 class="section-title reveal">Qué incluye el diseño de la landing</h2>
+      <p class="section-sub reveal">Todo lo necesario para convertir y después mejorar con datos (sin inflar la página).</p>
 
       <div class="grid-3">
         <article class="card reveal">
-          <div class="kicker">Estructura</div>
+          <div class="badge">Estructura</div>
           <h3>Objetivo + CTA claros</h3>
           <p>Definimos la acción principal y armamos el recorrido para que el usuario llegue sin fricción.</p>
         </article>
+
         <article class="card reveal">
-          <div class="kicker">Copy</div>
+          <div class="badge">Copy</div>
           <h3>Texto orientado a acción</h3>
           <p>Hook fuerte, bullets útiles, objeciones resueltas y CTA repetido donde importa.</p>
         </article>
+
         <article class="card reveal">
-          <div class="kicker">Medición</div>
+          <div class="badge">Medición</div>
           <h3>Eventos listos para optimizar</h3>
           <p>Scroll, clicks, envío de formulario y puntos clave para iterar con claridad.</p>
         </article>
 
         <article class="card reveal">
-          <div class="kicker">Diseño</div>
+          <div class="badge">Diseño</div>
           <h3>Visual profesional</h3>
-          <p>Estética moderna, jerarquía y microinteracciones (hover/reveal) sin “pesar” la página.</p>
+          <p>Estética moderna + microinteracciones (hover/reveal) sin “pesar” la página.</p>
         </article>
+
         <article class="card reveal">
-          <div class="kicker">Performance</div>
+          <div class="badge">Performance</div>
           <h3>Rápida y mobile-first</h3>
-          <p>Diseño adaptado a celular (donde vive tu tráfico). Sin cosas que distraigan o frenen.</p>
+          <p>Diseño adaptado a celular (donde vive tu tráfico). Sin cosas que distraigan.</p>
         </article>
+
         <article class="card reveal">
-          <div class="kicker">Entrega</div>
+          <div class="badge">Entrega</div>
           <h3>Lista para publicar</h3>
-          <p>Te la dejamos deployada y con checklist para seguir optimizando después del lanzamiento.</p>
+          <p>Te la dejamos deployada y con checklist para seguir optimizando luego del lanzamiento.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- PROCESO -->
-  <section>
-    <div class="container">
-      <div class="section-title reveal">
-        <div>
-          <h2>Cómo trabajamos</h2>
-          <p>Un proceso simple, rápido y sin vueltas.</p>
-        </div>
-      </div>
+  <!-- PROCESO (light) -->
+  <section class="section light" id="proceso">
+    <div class="wrap">
+      <h2 class="section-title reveal">Cómo trabajamos</h2>
+      <p class="section-sub reveal">Un proceso simple, rápido y sin vueltas.</p>
 
-      <div class="process">
+      <div class="steps">
         <div class="step reveal">
           <div class="num">1</div>
           <h4>Definimos el objetivo</h4>
@@ -657,7 +716,7 @@
         <div class="step reveal">
           <div class="num">2</div>
           <h4>Copy + estructura</h4>
-          <p>Armamos el mensaje para que se entienda en 5–10 segundos.</p>
+          <p>Alineamos mensaje con el anuncio para que se entienda en segundos.</p>
         </div>
         <div class="step reveal">
           <div class="num">3</div>
@@ -673,229 +732,183 @@
     </div>
   </section>
 
-  <!-- FAQ FULL WIDTH -->
-  <section id="faq">
-    <div class="container">
-      <div class="section-title reveal">
-        <div>
-          <h2>FAQ</h2>
-          <p>Las preguntas que siempre aparecen antes de avanzar.</p>
-        </div>
-      </div>
+  <!-- FAQ (dark, full width visual) -->
+  <section class="section dark" id="faq">
+    <div class="wrap">
+      <h2 class="section-title reveal">FAQ</h2>
+      <p class="section-sub reveal">Las preguntas que siempre aparecen antes de avanzar.</p>
 
-      <div class="faq-wrap reveal">
-        <div class="faq-item" aria-expanded="false">
+      <div class="faq-shell reveal" role="region" aria-label="Preguntas frecuentes">
+        <div class="faq-item">
           <button class="faq-q" type="button">
-            ¿Esto reemplaza mi web?
-            <span class="chev">⌄</span>
+            <span>¿Esto reemplaza mi web?</span>
+            <span class="chev" aria-hidden="true">▾</span>
           </button>
           <div class="faq-a">
-            <p>No. La landing es una página para campañas (una acción). Tu web puede seguir existiendo para branding, portfolio, etc.</p>
+            <div class="pad">
+              No. Una landing es para campañas y conversiones. Tu web puede seguir cumpliendo el rol institucional/servicios.
+            </div>
           </div>
         </div>
 
-        <div class="faq-item" aria-expanded="false">
+        <div class="faq-item">
           <button class="faq-q" type="button">
-            ¿Sirve para Meta y Google Ads?
-            <span class="chev">⌄</span>
+            <span>¿Sirve para Meta y Google Ads?</span>
+            <span class="chev" aria-hidden="true">▾</span>
           </button>
           <div class="faq-a">
-            <p>Sí. La estructura está pensada para tráfico frío, con mensaje claro, CTA directo y medición para optimizar.</p>
+            <div class="pad">
+              Sí. Está pensada para tráfico frío y páginas rápidas. Copy y medición listos para optimizar campañas.
+            </div>
           </div>
         </div>
 
-        <div class="faq-item" aria-expanded="false">
+        <div class="faq-item">
           <button class="faq-q" type="button">
-            ¿Incluye la medición / eventos?
-            <span class="chev">⌄</span>
+            <span>¿Incluye medición / eventos?</span>
+            <span class="chev" aria-hidden="true">▾</span>
           </button>
           <div class="faq-a">
-            <p>Incluimos eventos base (scroll/click/form) y dejamos listo para conectar Pixel/GA4 según tu configuración.</p>
+            <div class="pad">
+              Incluimos el setup de eventos clave (scroll, click de CTA, envío de formulario) para que puedas iterar con datos.
+            </div>
           </div>
         </div>
 
-        <div class="faq-item" aria-expanded="false">
+        <div class="faq-item">
           <button class="faq-q" type="button">
-            ¿Se puede iterar después?
-            <span class="chev">⌄</span>
+            <span>¿Se puede iterar después?</span>
+            <span class="chev" aria-hidden="true">▾</span>
           </button>
           <div class="faq-a">
-            <p>Obvio. Lo ideal es: lanzar → medir → ajustar. Por eso dejamos estructura y tracking preparados para mejorar.</p>
+            <div class="pad">
+              Sí. Lo ideal es lanzar una primera versión, medir, y ajustar copy/estructura con base en comportamiento real.
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACTO + FORM FULL WIDTH -->
-  <section id="contacto" class="band">
-    <div class="container">
-      <div class="section-title reveal">
-        <div>
-          <h2>Solicitá tu landing enfocada en conversión</h2>
-          <p>Contame qué querés lograr y te respondo con próximos pasos.</p>
-        </div>
-      </div>
+  <!-- CONTACTO + FORM (dark, full width visual) -->
+  <section class="section dark" id="contacto">
+    <div class="wrap">
+      <h2 class="section-title reveal">Solicitá tu landing enfocada en conversión</h2>
+      <p class="section-sub reveal">Contame qué querés lograr y te respondo con próximos pasos.</p>
 
       <div class="contact-grid">
-        <div class="panel contact-left reveal">
+        <div class="panel reveal">
           <h3>Lo importante: una sola acción</h3>
           <p>
             Para que una landing convierta, el usuario tiene que entender rápido:
-            <b>qué ofrecés</b>, <b>para quién</b> y <b>qué tiene que hacer</b>.
-            Nosotros lo ordenamos y lo medimos.
+            qué ofrecés, para quién y qué tiene que hacer. Nosotros lo ordenamos y lo medimos.
           </p>
-          <p class="micro">Tiempo estimado de respuesta: <b>24–48 hs hábiles</b>.</p>
+          <p><strong>Tiempo estimado de respuesta:</strong> 24–48 hs hábiles.</p>
+
+          <!-- Redes full (en este bloque y repetidas abajo “a todo lo ancho”) -->
+          <div class="social-row" aria-label="Redes sociales">
+            <a class="sbtn" href="https://www.instagram.com/" target="_blank" rel="noopener">
+              <img src="/icon-instagram.png" alt="" aria-hidden="true"> Instagram
+            </a>
+            <a class="sbtn" href="https://wa.me/" target="_blank" rel="noopener">
+              <img src="/icon-whatsapp.png" alt="" aria-hidden="true"> WhatsApp
+            </a>
+          </div>
         </div>
 
         <div class="panel reveal">
-          <form id="leadForm" action="https://formspree.io/f/mzzodepb" method="POST">
-            <div class="field">
-              <label for="name">Nombre y marca</label>
-              <input id="name" name="name" type="text" placeholder="Nombre y marca" required>
-            </div>
-            <div class="field">
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" placeholder="Email" required>
+          <form action="https://formspree.io/f/mzzodepb" method="POST">
+            <div class="row2">
+              <input type="text" name="name" placeholder="Nombre y marca" required>
+              <input type="email" name="email" placeholder="Email" required>
             </div>
 
-            <div class="field">
-              <label for="ig">Instagram o sitio actual</label>
-              <input id="ig" name="instagram_or_site" type="text" placeholder="Instagram o sitio actual">
-            </div>
-
-            <div class="field">
-              <label for="goal">Objetivo de la landing</label>
-              <select id="goal" name="goal" required>
-                <option value="" selected disabled>Seleccionar una opción</option>
-                <option value="leads">Generar leads (clientes potenciales)</option>
-                <option value="ventas">Vender un producto/servicio</option>
-                <option value="turnos">Agendar llamados / turnos</option>
-                <option value="whatsapp">Llevar a WhatsApp</option>
+            <div class="row2">
+              <input type="text" name="instagram" placeholder="Instagram o sitio actual (opcional)">
+              <select name="goal" required>
+                <option value="" selected disabled>Objetivo de la landing</option>
+                <option>Generar leads (clientes potenciales)</option>
+                <option>Vender un producto/servicio</option>
+                <option>Mensajes (WhatsApp / DM)</option>
+                <option>Otro (explicarlo abajo)</option>
               </select>
             </div>
 
-            <div class="field full">
-              <label for="msg">Contame brevemente qué necesitás</label>
-              <textarea id="msg" name="message" placeholder="Ej: hago campañas en Meta, quiero leads para servicio, tengo estilo pero no convierte." required></textarea>
-            </div>
+            <textarea name="message" placeholder="Contame brevemente qué necesitás (campaña, oferta, público, qué te duele hoy)." required></textarea>
 
-            <div class="form-actions">
+            <div class="form-foot">
               <button class="btn btn-primary" type="submit">Quiero mi landing</button>
-              <span class="privacy">No compartimos tus datos. Solo para responderte.</span>
+              <div class="fine">No compartimos tus datos. Solo para responderte.</div>
             </div>
-
-            <div id="formStatus" class="status" aria-live="polite"></div>
           </form>
         </div>
       </div>
     </div>
   </section>
 
-  <footer>
-    <div class="container footer-row">
-      <span>© <span id="year"></span> Vía Cloud Studio · Landing Pages para campañas.</span>
-      <span>Hecho en Argentina · pensado para convertir.</span>
+  <!-- REDES FULL WIDTH al final (como pediste) -->
+  <section class="section dark" aria-label="Redes al final">
+    <div class="wrap">
+      <div class="panel reveal" style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+        <div style="min-width: 240px;">
+          <div class="side-title" style="margin:0 0 6px;">Conectemos</div>
+          <div style="color: rgba(234,240,255,.74); font-size:13px; line-height:1.5;">
+            Si querés, mandame tu link de anuncio + destino y lo miro rápido para detectar fricciones.
+          </div>
+        </div>
+        <div class="social-row" style="margin:0;">
+          <a class="sbtn" href="https://www.instagram.com/" target="_blank" rel="noopener">
+            <img src="/icon-instagram.png" alt="" aria-hidden="true"> Instagram
+          </a>
+          <a class="sbtn" href="https://wa.me/" target="_blank" rel="noopener">
+            <img src="/icon-whatsapp.png" alt="" aria-hidden="true"> WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap inner">
+      <div>© 2026 Vía Cloud Studio · Landing pages para campañas.</div>
+      <div>Hecho en Argentina · pensado para convertir.</div>
     </div>
   </footer>
 
   <script>
-    // Marca que JS está activo (para reveal fail-safe)
+    // Marca JS activo (para reveal fail-safe)
     document.documentElement.classList.add('js');
 
-    // Año footer
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Smooth anchor con offset (header sticky)
-    const HEADER_OFFSET = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--headerH')) || 84;
-    function scrollToWithOffset(id){
-      const el = document.getElementById(id);
-      if(!el) return;
-      const y = el.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', (ev)=>{
-        const href = a.getAttribute('href');
-        const id = href && href.startsWith('#') ? href.slice(1) : '';
-        if(!id) return;
-        if(!document.getElementById(id)) return;
-        ev.preventDefault();
-        scrollToWithOffset(id);
-      });
-    });
-
     // Reveal on scroll
-    const revealEls = document.querySelectorAll('.reveal');
-    if(revealEls.length){
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{
+    document.addEventListener('DOMContentLoaded', () => {
+      const els = document.querySelectorAll('.reveal');
+      if(!els.length) return;
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
           if(e.isIntersecting){
             e.target.classList.add('reveal-visible');
             io.unobserve(e.target);
           }
         });
       }, { threshold: 0.12 });
-      revealEls.forEach(el=> io.observe(el));
-    }
 
-    // FAQ accordion
-    document.querySelectorAll('.faq-item').forEach(item=>{
-      const btn = item.querySelector('.faq-q');
-      const ans = item.querySelector('.faq-a');
-      if(!btn || !ans) return;
-
-      btn.addEventListener('click', ()=>{
-        const open = item.getAttribute('aria-expanded') === 'true';
-        // cerrar todos (estilo limpio)
-        document.querySelectorAll('.faq-item').forEach(i=>{
-          i.setAttribute('aria-expanded', 'false');
-          const a = i.querySelector('.faq-a');
-          if(a) a.style.maxHeight = '0px';
-        });
-        if(!open){
-          item.setAttribute('aria-expanded', 'true');
-          ans.style.maxHeight = (ans.scrollHeight + 14) + 'px';
-        }
-      });
+      els.forEach(el => io.observe(el));
     });
 
-    // Formspree AJAX (mantiene tu endpoint)
-    const form = document.getElementById('leadForm');
-    const statusEl = document.getElementById('formStatus');
+    // FAQ accordion
+    document.addEventListener('click', (ev) => {
+      const btn = ev.target.closest('.faq-q');
+      if(!btn) return;
+      const item = btn.closest('.faq-item');
+      if(!item) return;
 
-    form.addEventListener('submit', async (e)=>{
-      e.preventDefault();
-      statusEl.className = 'status';
-      statusEl.textContent = 'Enviando...';
+      // cerrar otros (opcional: dejalo si querés uno abierto a la vez)
+      document.querySelectorAll('.faq-item.open').forEach(x => {
+        if(x !== item) x.classList.remove('open');
+      });
 
-      try{
-        const res = await fetch(form.action, {
-          method: 'POST',
-          headers: { 'Accept': 'application/json' },
-          body: new FormData(form)
-        });
-
-        if(res.ok){
-          statusEl.className = 'status ok';
-          statusEl.textContent = 'Listo ✅ Te respondemos en 24–48 hs hábiles.';
-          form.reset();
-
-          // Si después querés trackear GA4/GTM, acá es el lugar:
-          // window.dataLayer = window.dataLayer || [];
-          // window.dataLayer.push({ event: 'form_submit', event_category:'contact', event_label:'landing_form' });
-
-        } else {
-          const data = await res.json().catch(()=>null);
-          statusEl.className = 'status err';
-          statusEl.textContent = (data && data.errors && data.errors[0] && data.errors[0].message)
-            ? ('Error: ' + data.errors[0].message)
-            : 'Ups, no se pudo enviar. Probá de nuevo en un minuto.';
-        }
-      }catch(err){
-        statusEl.className = 'status err';
-        statusEl.textContent = 'Sin conexión o error de red. Probá de nuevo.';
-      }
+      item.classList.toggle('open');
     });
   </script>
 </body>
