@@ -936,6 +936,21 @@ main{ background: transparent; } /* por si ya lo tenías raro */
 
 html{ scroll-behavior: smooth; }
     
+/* ====== ANCHORS (scroll sin aire) ====== */
+.anchor{
+  position: relative;
+  height: 0;
+  /* Ajuste fino default (desktop) */
+  top: -92px;
+}
+
+@media (max-width: 919px){
+  .anchor{
+    /* En mobile suele ser un poco más alto por header/espaciados */
+    top: -104px;
+  }
+}
+
     
   </style>
 </head>
@@ -1055,8 +1070,11 @@ html{ scroll-behavior: smooth; }
     </div>
   </section>
 
+  <!-- ANCHOR (para scroll perfecto) -->
+<div id="incluye" class="anchor"></div>
+ 
   <!-- QUÉ INCLUYE (dark) -->
-  <section class="section dark" id="incluye">
+  <section class="section dark">
     <div class="wrap">
       <h2 class="section-title reveal">Qué incluye el diseño de la landing</h2>
       <p class="section-sub reveal">Todo lo necesario para convertir y después mejorar con datos (sin inflar la página).</p>
