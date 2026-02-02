@@ -684,10 +684,6 @@
     min-width: 0;
   }
 
-  .hero-side--wide .side-title{
-    padding-left: 26px; /* o el valor que estés afinando */
-  }
-  
   /* CTAs a la derecha y “abajo” */
   .hero-side--wide .side-actions{
     justify-self:end;
@@ -721,6 +717,12 @@
   /* Sacar divisor si existe (porque ahora es 2 columnas) */
   .hero-side--wide .divider{
     display:none !important;
+  }
+}
+    
+@media (min-width: 920px){
+  .hero-side--wide .side-title{
+    transform: translateX(-6px);
   }
 }
 
