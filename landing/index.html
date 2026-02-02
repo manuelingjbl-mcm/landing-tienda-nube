@@ -934,6 +934,7 @@ main{ background: transparent; } /* por si ya lo tenías raro */
   }
 }
 
+html{ scroll-behavior: smooth; }
     
     
   </style>
@@ -1301,6 +1302,41 @@ main{ background: transparent; } /* por si ya lo tenías raro */
   <img src="/icon-whatsapp.png" alt="" aria-hidden="true">
 </a>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Ajustá este valor según tu header sticky (probá 84–110)
+  const HEADER_OFFSET = () => {
+    const h = document.querySelector('.site-header');
+    return h ? Math.ceil(h.getBoundingClientRect().height) + 10 : 90;
+  };
+
+  function smoothScrollToId(id){
+    const el = document.getElementById(id);
+    if(!el) return;
+
+    const y = el.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET();
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+
+  // Intercepta solo links internos (#algo)
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (ev) => {
+      const href = a.getAttribute('href');
+      const id = href && href.length > 1 ? href.slice(1) : '';
+      if(!id) return;
+
+      const target = document.getElementById(id);
+      if(!target) return;
+
+      ev.preventDefault();
+      history.pushState(null, '', href);
+      smoothScrollToId(id);
+    });
+  });
+
+});
+</script>
 
 
   
