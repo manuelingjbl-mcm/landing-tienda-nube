@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
- <link rel="/icon" href="/favicon.icon.png" sizes="any">
- <link rel="/apple-touch-icon" href="/favicon.icon.png">
+ <link rel="icon" href="/favicon.icon.png" sizes="any">
+ <link rel="apple-touch-icon" href="/favicon.icon.png">
 
   
   <meta charset="UTF-8" />
@@ -1999,12 +1999,14 @@ section.section-dark:not(#servicios) .service-card{
 
 /* ✅ Estado inicial SOLO cuando el JS marca la card como "reveal" */
 #servicios.section-dark .service-card.reveal{
+  opacity: 1;
+  transform: none;
+}
+.js #servicios.section-dark .service-card.reveal{
   opacity: 0;
   transform: translateY(32px) scale(0.98);
 }
-
-/* ✅ Visible (MISMA clase que usa el reveal global) */
-#servicios.section-dark .service-card.reveal.reveal-visible{
+.js #servicios.section-dark .service-card.reveal.reveal-visible{
   opacity: 1 !important;
   transform: translateY(0) scale(1) !important;
 }
