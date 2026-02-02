@@ -650,47 +650,70 @@
   }
 }
 
-/* ===== HERO SIDE (TRÁFICO FRÍO) — AJUSTE PRO ===== */
+/* ===== HERO SIDE (TRÁFICO FRÍO) COMPACTO ===== */
 .hero-side--wide{
-  padding: 18px 22px;
-  border-radius: 22px;
+  width:100%;
 }
 
-.hero-side--wide .side-title{
-  text-align: left;
-  margin-bottom: 10px;
-}
-
-.hero-side--wide .checklist{
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  max-width: 760px; /* evita que las líneas sean larguísimas */
-}
-
-.hero-side--wide .checklist li{
-  display: grid;
-  grid-template-columns: 26px 1fr;
-  gap: 10px;
-  align-items: start;
-  padding: 8px 0;
-}
-
+/* Mobile / base: todo apilado */
 .hero-side--wide .side-actions{
-  justify-content: flex-end;
-  align-items: center;
-  gap: 12px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
 }
 
+/* Desktop: checklist izq + CTAs der */
 @media (min-width: 920px){
+
+  /* El card se convierte en 2 columnas */
   .hero-side--wide{
-    grid-template-columns: 1.25fr .75fr;
+    display:grid;
+    grid-template-columns: 1fr auto; /* izq flexible + der ajustado a contenido */
+    column-gap: 28px;
+    align-items:end; /* baja el bloque derecho */
   }
+
+  /* El bloque izquierdo NO se estira raro */
+  .hero-side--wide > div:first-child{
+    min-width: 0;
+  }
+
+  /* CTAs a la derecha y “abajo” */
   .hero-side--wide .side-actions{
-    flex-direction: column;
-    align-items: flex-end;
+    justify-self:end;
+    align-self:end;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+  }
+
+  /* Compactar checklist */
+  .hero-side--wide .checklist{
+    margin: 10px 0 0;
+    padding: 0;
+    display:grid;
+    gap: 10px;
+  }
+
+  /* Cada item más compacto */
+  .hero-side--wide .checklist li{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+  }
+
+  /* Icono más alineado */
+  .hero-side--wide .tick{
+    margin-top: 2px;
+  }
+
+  /* Sacar divisor si existe (porque ahora es 2 columnas) */
+  .hero-side--wide .divider{
+    display:none !important;
   }
 }
+
 
 
     
