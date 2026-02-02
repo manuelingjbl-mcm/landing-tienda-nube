@@ -650,6 +650,47 @@
   }
 }
 
+/* ===== HERO SIDE (TRÁFICO FRÍO) — AJUSTE PRO ===== */
+.hero-side--wide{
+  padding: 18px 22px;
+  border-radius: 22px;
+}
+
+.hero-side--wide .side-title{
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.hero-side--wide .checklist{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: 760px; /* evita que las líneas sean larguísimas */
+}
+
+.hero-side--wide .checklist li{
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 8px 0;
+}
+
+.hero-side--wide .side-actions{
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+}
+
+@media (min-width: 920px){
+  .hero-side--wide{
+    grid-template-columns: 1.25fr .75fr;
+  }
+  .hero-side--wide .side-actions{
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
 
 
     
