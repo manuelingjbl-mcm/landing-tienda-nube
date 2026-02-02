@@ -597,22 +597,26 @@
 }
 
     
- /* ====== CENTER LAYOUT (DESKTOP) ====== */
-.wrap{
-  max-width: 1140px;
-  margin: 0 auto;
-  padding-left: 24px;
-  padding-right: 24px;
+/* ===== FIX CENTRADO HERO (DESKTOP) ===== */
+@media (min-width: 920px){
+  header.hero{
+    width: 100%;
+    display: block !important;          /* por si estaba en flex */
+  }
+
+  header.hero .wrap.hero-pad{
+    /* esto fuerza el contenedor real, aunque esté dentro de flex o tenga width:100% */
+    width: min(1140px, calc(100% - 48px)) !important;
+    max-width: 1140px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+    /* anti “me estiro por flex” */
+    flex: 0 0 auto !important;
+    align-self: center !important;
+  }
 }
 
-.wrap.hero-pad{
-  max-width: 1140px; /* mismo ancho que el resto */
-}
-
-/* por si el hero tiene padding raro o el background hace “full bleed” */
-.hero{
-  width: 100%;
-}
 
     
   </style>
