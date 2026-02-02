@@ -1136,20 +1136,28 @@ header::after{
       color:#f97373;
     }
 
-    /* ==== REVEAL ON SCROLL ==== */
-    .reveal {
+    /* ===== REVEAL ON SCROLL (fail-safe) ===== */
+/* Por defecto: visible (si JS falla, no se oculta nada) */
+.reveal{
+  opacity: 1;
+  transform: none;
+}
+
+/* Solo ocultar cuando JS está activo (agregamos .js al <html>) */
+.js .reveal{
   opacity: 0;
-  transform: translateY(32px) scale(0.98);  /* más abajo y un poquito más chico */
+  transform: translateY(32px) scale(0.98);
   transition:
     opacity 0.7s ease-out,
     transform 0.7s ease-out;
 }
 
 /* Cuando el observer agrega la clase */
-.reveal-visible {
+.js .reveal-visible{
   opacity: 1;
   transform: translateY(0) scale(1);
 }
+
 
    
     /* ===== FONDO SECCIÓN NUESTROS TRABAJOS ===== */
@@ -2666,21 +2674,6 @@ button.scroll-top-btn.is-visible{
   }
 }
 
-/* ===== DEBUG: mostrar todo aunque falle el JS de reveal ===== */
-.reveal,
-.reveal-on-scroll,
-[data-reveal],
-[data-animate],
-.animate,
-.fade-in,
-.fade-up {
-  opacity: 1 !important;
-  transform: none !important;
-  filter: none !important;
-  visibility: visible !important;
-}
- 
-
 </style>
 
  
@@ -3006,6 +2999,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <!-- SCRIPTS (reducidos y enfocados a conversión) -->
 <script>
+document.documentElement.classList.add('js');
+ 
 document.addEventListener('DOMContentLoaded', () => {
   /* =========================
      REVEAL ON SCROLL
@@ -3015,7 +3010,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
-          e.target.classList.add('is-visible');
+          e.target.classList.add('reveal-visible');
           io.unobserve(e.target);
         }
       });
