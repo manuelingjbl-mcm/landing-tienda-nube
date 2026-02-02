@@ -1305,21 +1305,46 @@ html{ scroll-behavior: smooth; }
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Ajustá este valor según tu header sticky (probá 84–110)
+  // Offset inteligente según header real + ajuste fino por breakpoint
   const HEADER_OFFSET = () => {
     const h = document.querySelector('.site-header');
-    return h ? Math.ceil(h.getBoundingClientRect().height) - 6 : 72;
+    const hh = h ? Math.ceil(h.getBoundingClientRect().height) : 0;
+
+    // Ajuste fino: en mobile suele necesitar un toque más porque el header “respira”
+    const extra = window.matchMedia('(min-width: 920px)').matches ? 6 : 14;
+
+    // Si tu header es transparente/blur y NO tapa tanto, restá un poquito:
+    // (si te queda aire arriba, bajá este número; si te tapa, subilo)
+    const fudge = window.matchMedia('(min-width: 920px)').matches ? 10 : 6;
+
+    return (hh || 70) + extra - fudge;
   };
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function getYForEl(el){
+    return el.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET();
+  }
 
   function smoothScrollToId(id){
     const el = document.getElementById(id);
     if(!el) return;
 
-    const y = el.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET();
-    window.scrollTo({ top: y, behavior: 'smooth' });
+    // Primer scroll
+    const y1 = getYForEl(el);
+    window.scrollTo({ top: y1, behavior: prefersReduced ? 'auto' : 'smooth' });
+
+    // “Fix pass”: al terminar el smooth (o casi) recalculamos por si cambió el header / layout
+    // Esto suele eliminar el “aire” que estás viendo.
+    window.setTimeout(() => {
+      const y2 = getYForEl(el);
+      if (Math.abs(window.pageYOffset - y2) > 8) {
+        window.scrollTo({ top: y2, behavior: 'auto' });
+      }
+    }, prefersReduced ? 0 : 380);
   }
 
-  // Intercepta solo links internos (#algo)
+  // Intercepta links internos (#algo)
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', (ev) => {
       const href = a.getAttribute('href');
@@ -1335,8 +1360,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Si entran con hash en la URL (ej: /#incluye), lo acomodamos también
+  if (location.hash && location.hash.length > 1) {
+    const id = location.hash.slice(1);
+    const target = document.getElementById(id);
+    if (target) {
+      window.setTimeout(() => smoothScrollToId(id), 60);
+    }
+  }
 });
 </script>
+
 
 
   
