@@ -597,25 +597,36 @@
 }
 
     
-/* ===== FIX CENTRADO HERO (DESKTOP) ===== */
+/* ===== FIX: HERO CENTRADO REAL (DESKTOP) ===== */
 @media (min-width: 920px){
+
+  /* el hero ocupa todo el ancho */
   header.hero{
     width: 100%;
-    display: block !important;          /* por si estaba en flex */
+    display: block !important;
   }
 
-  header.hero .wrap.hero-pad{
-    /* esto fuerza el contenedor real, aunque esté dentro de flex o tenga width:100% */
+  /* ESTE es tu contenedor real */
+  header.hero > .wrap.hero-pad{
+    /* anti “me lo pisan con position/float” */
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    float: none !important;
+    display: block !important;
+
+    /* centrado sí o sí */
     width: min(1140px, calc(100% - 48px)) !important;
     max-width: 1140px !important;
     margin-left: auto !important;
     margin-right: auto !important;
 
-    /* anti “me estiro por flex” */
+    /* anti flex-stretch por si el padre se vuelve flex */
     flex: 0 0 auto !important;
     align-self: center !important;
   }
 }
+
 
 
     
