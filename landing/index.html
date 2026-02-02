@@ -864,6 +864,75 @@ main{ background: transparent; } /* por si ya lo tenías raro */
   }
 }
 
+/* ===== HERO MOBILE: más aire + CTAs full-width en columna ===== */
+@media (max-width: 640px){
+
+  /* más aire general del hero */
+  .hero{
+    padding-top: 18px; /* si tenés header sticky, subilo a 26-32px */
+  }
+
+  /* el contenedor del hero: respira mejor */
+  .wrap.hero-pad{
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  /* separaciones internas */
+  .hero-copy{
+    padding: 6px 0;
+    text-align: center; /* opcional: queda prolijo en mobile */
+  }
+
+  .kicker{
+    margin-bottom: 12px;
+    justify-content: center; /* por si es flex */
+  }
+
+  .hero-copy h1{
+    margin-top: 10px;
+    margin-bottom: 14px;
+    line-height: 1.05;
+  }
+
+  .hero-copy .lead{
+    margin-top: 0;
+    margin-bottom: 16px;
+    line-height: 1.55;
+  }
+
+  /* CTAs: uno debajo del otro + a lo ancho */
+  .hero-ctas{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-top: 6px;
+  }
+
+  .hero-ctas .btn{
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    padding: 14px 14px; /* más “tocables” */
+    border-radius: 14px;
+  }
+
+  /* si el botón primario queda muy alto, lo ajustamos también */
+  .hero-ctas .btn-primary{
+    padding: 14px 14px;
+  }
+
+  /* aire extra entre hero-copy y la card de tráfico frío */
+  .hero-stack{
+    gap: 16px;
+  }
+
+  /* card de tráfico frío: un poco más de padding */
+  .hero-side--wide{
+    padding: 16px 14px;
+  }
+}
 
     
     
