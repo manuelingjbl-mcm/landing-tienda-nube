@@ -1308,7 +1308,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Ajustá este valor según tu header sticky (probá 84–110)
   const HEADER_OFFSET = () => {
     const h = document.querySelector('.site-header');
-    return h ? Math.ceil(h.getBoundingClientRect().height) + 10 : 90;
+    return h ? Math.ceil(h.getBoundingClientRect().height) - 6 : 72;
   };
 
   function smoothScrollToId(id){
