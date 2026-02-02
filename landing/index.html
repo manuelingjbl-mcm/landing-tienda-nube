@@ -726,6 +726,36 @@
   }
 }
 
+/* ===== HEADER FIX (siempre visible + blur) ===== */
+.site-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  z-index: 9999;
+  opacity: 1 !important;
+  transform: none !important;
+
+  /* Fondo por defecto (inicio) */
+  background: rgba(10, 12, 20, .55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border-bottom: 1px solid rgba(255,255,255,.10);
+  transition: background .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+/* cuando scrolleás: un poco más sólido */
+.site-header.is-scrolled{
+  background: rgba(10, 12, 20, .82);
+  border-bottom-color: rgba(255,255,255,.14);
+  box-shadow: 0 14px 40px rgba(0,0,0,.35);
+}
+
+/* Evita que el contenido quede "debajo" del header */
+:root{ --header-h: 76px; } /* ajustá si tu header es más alto */
+body{ padding-top: var(--header-h); }
 
 
     
@@ -1103,5 +1133,19 @@
       item.classList.toggle('open');
     });
   </script>
+
+
+<script>
+const header = document.querySelector('.site-header');
+if(header){
+  const onScroll = () => {
+    header.classList.toggle('is-scrolled', window.scrollY > 10);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+}
+</script>
+
+  
 </body>
 </html>
