@@ -739,6 +739,46 @@ main{ background: transparent; } /* por si ya lo tenías raro */
 .section-white{ background:#fff; }
 
 
+/* CONTACTO: form full width */
+#contacto .panel--form{
+  width:100%;
+  max-width:none;
+}
+
+/* Si tus .row2 ya existen, ok. Si no, esto lo deja prolijo y responsive */
+#contacto .row2{
+  display:grid;
+  gap:12px;
+}
+
+@media (min-width: 920px){
+  #contacto .row2{
+    grid-template-columns: 1fr 1fr;
+    gap:14px;
+  }
+}
+
+/* Textarea ocupa ancho y respira */
+#contacto textarea{
+  width:100%;
+  min-height: 140px;
+  resize: vertical;
+}
+
+/* Footer del form: botón + disclaimer alineados */
+#contacto .form-foot{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+#contacto .fine{
+  opacity:.75;
+  font-size: 13px;
+}
+
 
     
   </style>
@@ -999,26 +1039,6 @@ main{ background: transparent; } /* por si ya lo tenías raro */
     <div class="wrap">
       <h2 class="section-title reveal">Solicitá tu landing enfocada en conversión</h2>
       <p class="section-sub reveal">Contame qué querés lograr y te respondo con próximos pasos.</p>
-
-      <div class="contact-grid">
-        <div class="panel reveal">
-          <h3>Lo importante: una sola acción</h3>
-          <p>
-            Para que una landing convierta, el usuario tiene que entender rápido:
-            qué ofrecés, para quién y qué tiene que hacer. Nosotros lo ordenamos y lo medimos.
-          </p>
-          <p><strong>Tiempo estimado de respuesta:</strong> 24–48 hs hábiles.</p>
-
-          <!-- Redes full (en este bloque y repetidas abajo “a todo lo ancho”) -->
-          <div class="social-row" aria-label="Redes sociales">
-            <a class="sbtn" href="https://www.instagram.com/" target="_blank" rel="noopener">
-              <img src="/icon-instagram.png" alt="" aria-hidden="true"> Instagram
-            </a>
-            <a class="sbtn" href="https://wa.me/" target="_blank" rel="noopener">
-              <img src="/icon-whatsapp.png" alt="" aria-hidden="true"> WhatsApp
-            </a>
-          </div>
-        </div>
 
         <div class="panel reveal">
           <form action="https://formspree.io/f/mzzodepb" method="POST">
