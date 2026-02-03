@@ -1423,18 +1423,13 @@ html{ scroll-behavior: smooth; }
 </section>
 
 
-  <!-- CONTACTO + FORM (dark, full width visual) -->
-  <section class="section dark" id="contacto">
-    <div class="wrap">
-      <h2 class="section-title reveal">Solicitá tu landing enfocada en conversión</h2>
-      <p class="section-sub reveal">Contame qué querés lograr y te respondo con próximos pasos.</p>
+ <!-- CONTACTO + FORM (dark, full width visual) -->
 <section class="section dark" id="contacto">
   <div class="wrap">
     <h2 class="section-title reveal">Solicitá tu landing enfocada en conversión</h2>
     <p class="section-sub reveal">Contame qué querés lograr y te respondo con próximos pasos.</p>
 
     <div class="panel reveal">
-
       <form id="contact-form" action="https://formspree.io/f/mzzodepb" method="POST">
         <div class="row2">
           <input type="hidden" name="_subject" value="Consulta desde landing VIACLOUDSTUDIO" />
@@ -1459,52 +1454,53 @@ html{ scroll-behavior: smooth; }
           <button class="btn btn-primary" type="submit">Quiero mi landing</button>
           <div class="fine">No compartimos tus datos. Solo para responderte.</div>
         </div>
-
-        <!-- ✅ FEEDBACK ADENTRO del panel/card -->
-        <div id="form-feedback" class="form-feedback" aria-live="polite">
-          <div id="form-success" class="form-success" hidden>
-            <strong>¡Gracias!</strong> Ya recibimos tu consulta. Te respondo en breve 🙌
-          </div>
-
-          <div id="form-error" class="form-error" hidden>
-            <strong>Ups…</strong> No se pudo enviar. Probá de nuevo en un minuto.
-          </div>
-        </div>
       </form>
 
+      <!-- ✅ FEEDBACK prolijo (dentro del panel, pero FUERA del form) -->
+      <div id="form-feedback" class="form-feedback" aria-live="polite">
+        <div id="form-success" class="form-success" hidden>
+          <strong>¡Gracias!</strong> Ya recibimos tu consulta. Te respondo en breve 🙌
+        </div>
+
+        <div id="form-error" class="form-error" hidden>
+          <strong>Ups…</strong> No se pudo enviar. Probá de nuevo en un minuto.
+        </div>
+      </div>
     </div><!-- /.panel -->
   </div><!-- /.wrap -->
 </section>
 
-  <!-- REDES FULL WIDTH al final (como pediste) -->
-  <section class="section dark" aria-label="Redes al final">
-    <div class="wrap">
-      <div class="panel reveal" style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
-        <div style="min-width: 240px;">
-          <div class="side-title" style="margin:0 0 6px;">Conectemos</div>
-          <div style="color: rgba(234,240,255,.74); font-size:13px; line-height:1.5;">
-            ¿Tenés una idea o campaña en mente? Escribime por Instagram o Facebook y lo vemos.
-          </div>
+<!-- REDES FULL WIDTH al final -->
+<section class="section dark" aria-label="Redes al final">
+  <div class="wrap">
+    <div class="panel reveal" style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+      <div style="min-width: 240px;">
+        <div class="side-title" style="margin:0 0 6px;">Conectemos</div>
+        <div style="color: rgba(234,240,255,.74); font-size:13px; line-height:1.5;">
+          ¿Tenés una idea o campaña en mente? Escribime por Instagram o Facebook y lo vemos.
         </div>
-        <div class="social-row" aria-label="Redes sociales">
-  <a class="sbtn" href="https://www.instagram.com/manuelrubis" target="_blank" rel="noopener">
-    <img src="/icon-instagram.png" alt="" aria-hidden="true"> Instagram
-  </a>
+      </div>
 
-  <a class="sbtn" href="https://www.facebook.com/manuelcmdigital" target="_blank" rel="noopener">
-    <img src="/icon-facebook.png" alt="" aria-hidden="true"> Facebook
-  </a>
-  </div>
-  </div>
-    </div>
-  </section>
+      <div class="social-row" aria-label="Redes sociales">
+        <a class="sbtn" href="https://www.instagram.com/manuelrubis" target="_blank" rel="noopener">
+          <img src="/icon-instagram.png" alt="" aria-hidden="true"> Instagram
+        </a>
 
-  <footer class="footer">
-    <div class="wrap inner">
-      <div>© 2026 Vía Cloud Studio · Landing pages para campañas.</div>
-      <div>Hecho en Argentina · pensado para convertir.</div>
+        <a class="sbtn" href="https://www.facebook.com/manuelcmdigital" target="_blank" rel="noopener">
+          <img src="/icon-facebook.png" alt="" aria-hidden="true"> Facebook
+        </a>
+      </div>
     </div>
-  </footer>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap inner">
+    <div>© 2026 Vía Cloud Studio · Landing pages para campañas.</div>
+    <div>Hecho en Argentina · pensado para convertir.</div>
+  </div>
+</footer>
+
 
   <script>
     // Marca JS activo (para reveal fail-safe)
@@ -1616,6 +1612,7 @@ document.addEventListener('click', (e) => {
 });
 </script>
 
+  
 <script>
 (() => {
   const form = document.getElementById('contact-form');
@@ -1625,8 +1622,8 @@ document.addEventListener('click', (e) => {
   const errorBox = document.getElementById('form-error');
   const submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
 
-  const show = (el) => { if (el) el.style.display = 'block'; };
-  const hide = (el) => { if (el) el.style.display = 'none'; };
+  const show = (el) => { if (el) el.hidden = false; };
+  const hide = (el) => { if (el) el.hidden = true; };
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -1634,7 +1631,6 @@ document.addEventListener('click', (e) => {
     hide(successBox);
     hide(errorBox);
 
-    // UX: deshabilitar botón mientras envía
     const oldText = submitBtn ? submitBtn.textContent : '';
     if (submitBtn) {
       submitBtn.disabled = true;
@@ -1653,8 +1649,6 @@ document.addEventListener('click', (e) => {
       if (res.ok) {
         show(successBox);
         form.reset();
-
-        // opcional: llevar un poquito al usuario al mensaje
         document.getElementById('form-feedback')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
         show(errorBox);
@@ -1670,6 +1664,7 @@ document.addEventListener('click', (e) => {
   });
 })();
 </script>
+
 
 
   
