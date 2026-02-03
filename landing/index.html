@@ -938,20 +938,20 @@ main{ background: transparent; } /* por si ya lo tenías raro */
 
 /* Override SOLO para el H1 del hero (evita que el h1 global meta aire) */
 .hero-copy h1{
-  margin: 0;              /* clave: mata el aire del h1 global */
-  line-height: 1.02;      /* compacto */
+  margin: 0; !important;             /* clave: mata el aire del h1 global */
+  line-height: 1.02; !important;     /* compacto */
   text-align: center;
 }
 
 /* Cada línea como bloque (control total del stack) */
 .hero-copy h1 .hero-line{
   display: block;
-  margin: 0;
+  margin: 0; !important;
 }
 
 /* Gap entre líneas (desktop) */
 .hero-copy h1 .hero-line + .hero-line{
-  margin-top: .14em;
+  margin-top: .08em; !important;
 }
 
 /* Pill: no debe empujar el layout */
@@ -1003,13 +1003,9 @@ main{ background: transparent; } /* por si ya lo tenías raro */
 
 /* ===== Mobile: pill en segunda línea, sin aire ===== */
 @media (max-width:560px){
-  .hero-copy h1{
-    line-height: 1.03;
-  }
+  .hero-copy h1{ line-height: 1.03; } !important;
 
-  .hero-copy h1 .hero-line + .hero-line{
-    margin-top: .10em;
-  }
+  .hero-copy h1 .hero-line + .hero-line{ margin-top: .06em; } !important;
 
   /* pill sola en su línea, pero pegada */
   .hero-copy h1 .pill-tilt{
