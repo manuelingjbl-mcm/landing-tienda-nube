@@ -934,6 +934,79 @@ main{ background: transparent; } /* por si ya lo tenías raro */
   }
 }
 
+/* Cada línea como bloque, evita que se “mezcle” el texto */
+.hero-title .hero-line{
+  display:block;
+  text-align:center; /* asumí que tu hero está centrado */
+}
+
+/* Pill: no debe empujar el layout */
+.pill-tilt{
+  display:inline-block;
+  position:relative;
+  padding:.18em .55em;
+  margin-left:.18em;
+  border-radius:999px;
+  white-space:nowrap;
+  vertical-align:middle;
+  line-height:1;         /* clave para que no “abra” la línea */
+}
+
+/* Sticker inclinado */
+.pill-tilt::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:999px;
+  background: rgba(91,124,255,.22);
+  border: 1px solid rgba(91,124,255,.40);
+  box-shadow: 0 10px 26px rgba(0,0,0,.35);
+  transform: rotate(-3deg);
+  transform-origin:center;
+  z-index:0;
+}
+
+/* Brillo suave */
+.pill-tilt::after{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:999px;
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.22), transparent 55%);
+  transform: rotate(-3deg);
+  transform-origin:center;
+  opacity:.85;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* Texto recto */
+.pill-text{
+  position:relative;
+  z-index:1;
+}
+
+/* Mobile: que “no es una web.” quede en la segunda línea, sin separar de lo siguiente */
+@media (max-width:560px){
+  /* 1ra línea: “Una landing” */
+  .hero-title .hero-line:first-child{
+    display:block;
+  }
+
+  /* Forzamos que el pill pase abajo, pero pegadito */
+  .pill-tilt{
+    display:block;
+    width:fit-content;
+    margin:.18em auto 0;
+  }
+
+  /* reducimos separación entre líneas en mobile si tu h1 tiene mucho line-height */
+  .hero-title{
+    line-height:1.06;
+  }
+}
+
+    
 /* ===== ANCHORS (scroll parejo, sin aire) ===== */
 :root{ --header-offset: -20px; }
 @media (max-width: 919px){
@@ -982,72 +1055,6 @@ html{ scroll-behavior: smooth; }
   }
 }
 
-/* Solo el pill inclinado, texto recto */
-.pill-tilt{
-  display:inline-block;
-  position:relative;
-  margin-left:.18em;
-  padding:.18em .55em;
-  border-radius:999px;
-  white-space:nowrap;
-}
-
-/* el “sticker” (fondo/borde) se inclina */
-.pill-tilt::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:999px;
-  background: rgba(91,124,255,.22);
-  border: 1px solid rgba(91,124,255,.40);
-  box-shadow: 0 10px 26px rgba(0,0,0,.35);
-  transform: rotate(-3deg);
-  transform-origin: left center;
-  z-index:0;
-}
-
-/* brillo suave (también inclinado) */
-.pill-tilt::after{
-  content:"";
-  position:absolute;
-  inset:-2px;
-  border-radius:999px;
-  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.22), transparent 55%);
-  transform: rotate(-3deg);
-  transform-origin: left center;
-  opacity:.9;
-  pointer-events:none;
-  z-index:0;
-}
-
-/* el texto queda recto */
-.pill-text{
-  position:relative;
-  z-index:1;
-}
-    
-/* por defecto, no hay salto extra en desktop */
-.br-m{ display:none; }
-
-@media (max-width:560px){
-  .br-m{ display:block; }
-
-  /* que el pill quede solo, pero sin “bajar” tanto */
-  .pill-tilt{
-    display:block;
-    width:fit-content;
-    margin: .18em auto .08em; /* menos espacio abajo para que fluya */
-  }
-
-  /* si tu h1 tiene line-height grande, bajamos un toque solo en mobile */
-  .hero-title{
-    line-height: 1.05;  /* ajustable: 1.03–1.10 */
-  }
-}
-
-
-
-
 
     
   </style>
@@ -1080,11 +1087,10 @@ html{ scroll-behavior: smooth; }
     </div>
 
     <h1 class="hero-title">
-  Una landing <span class="pill-tilt"><span class="pill-text">no es una web.</span></span><br class="br-m">
-  Es una página diseñada<br>
-  para convertir.
+  <span class="hero-line">Una landing <span class="pill-tilt"><span class="pill-text">no es una web.</span></span></span>
+  <span class="hero-line">Es una página diseñada</span>
+  <span class="hero-line">para convertir.</span>
 </h1>
-
 
 
     <p class="lead">
