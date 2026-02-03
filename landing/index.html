@@ -1043,7 +1043,7 @@ html{ scroll-behavior: smooth; }
   vertical-align:middle;
 
   /* micro ajuste de altura */
-  transform: translateY(-0.02em);
+  transform: translateY(-0.04em);
 }
 
 /* Fondo inclinado (solo fondo) — “parejo” a ambos lados */
@@ -1058,7 +1058,8 @@ html{ scroll-behavior: smooth; }
   box-shadow: 0 10px 26px rgba(0,0,0,.35);
 
   /* clave para que no “corte” raro: inclinamos desde el centro y escalamos un pelín */
-  transform: rotate(-2deg) skewX(-10deg) scaleX(1.02);
+  transform: translateY(0.10em) rotate(-2deg) skewX(-10deg) scaleX(1.02);
+
   transform-origin:center;
 
   z-index:0;
