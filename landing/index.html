@@ -1155,19 +1155,15 @@ html{ scroll-behavior: smooth; }
   .form-status{ justify-content:flex-start; }
 }
 
-    /* Igualar tipografía del feedback con la línea .fine */
-.form-foot__meta .form-status,
-.form-foot__meta .form-status__text{
-  font-size: inherit;
-  font-weight: inherit;
-  line-height: inherit;
-  color: inherit;
+    /* Igualar feedback al estilo de .fine (mismo tamaño/grosor/color) */
+#form-feedback,
+#form-feedback .form-status__text{
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: rgba(234,240,255,.60);
 }
 
-/* Por si .fine usa un color/opacity específico, lo copiamos */
-.form-foot__meta .form-status{
-  opacity: .75; /* ajustá a lo que tenga .fine si es distinto */
-}
 
 
     
