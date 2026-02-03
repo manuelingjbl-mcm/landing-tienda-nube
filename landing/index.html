@@ -1430,34 +1430,44 @@ html{ scroll-behavior: smooth; }
       <p class="section-sub reveal">Contame qué querés lograr y te respondo con próximos pasos.</p>
 
         <div class="panel reveal">
-          <form action="https://formspree.io/f/mzzodepb" method="POST">
-            <div class="row2">
-              <input type="text" name="name" placeholder="Nombre y marca" required>
-              <input type="email" name="email" placeholder="Email" required>
-            </div>
+        <form id="contact-form" action="https://formspree.io/f/mzzodepb" method="POST">
+  <div class="row2">
+    <input type="hidden" name="_subject" value="Consulta desde landing VIACLOUDSTUDIO" />
 
-            <div class="row2">
-              <input type="text" name="instagram" placeholder="Instagram o sitio actual (opcional)">
-              <select name="goal" required>
-                <option value="" selected disabled>Objetivo de la landing</option>
-                <option>Generar leads (clientes potenciales)</option>
-                <option>Vender un producto/servicio</option>
-                <option>Mensajes (WhatsApp / DM)</option>
-                <option>Otro (explicarlo abajo)</option>
-              </select>
-            </div>
+    <input type="text" name="name" placeholder="Nombre y marca" required>
+    <input type="email" name="email" placeholder="Email" required>
+  </div>
 
-            <textarea name="message" placeholder="Contame brevemente qué necesitás (campaña, oferta, público, qué te duele hoy)." required></textarea>
+  <div class="row2">
+    <input type="text" name="instagram" placeholder="Instagram o sitio actual (opcional)">
 
-            <div class="form-foot">
-              <button class="btn btn-primary" type="submit">Quiero mi landing</button>
-              <div class="fine">No compartimos tus datos. Solo para responderte.</div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
+    <select name="goal" required>
+      <option value="" selected disabled>Objetivo de la landing</option>
+      <option value="Generar leads">Generar leads (clientes potenciales)</option>
+      <option value="Vender">Vender un producto/servicio</option>
+      <option value="Mensajes">Mensajes (WhatsApp / DM)</option>
+      <option value="Otro">Otro (explicarlo abajo)</option>
+    </select>
+  </div>
+
+  <textarea name="message" placeholder="Contame brevemente qué necesitás (campaña, oferta, público, qué te duele hoy)." required></textarea>
+
+  <div class="form-foot">
+    <button class="btn btn-primary" type="submit">Quiero mi landing</button>
+    <div class="fine">No compartimos tus datos. Solo para responderte.</div>
+  </div>
+</form>
+
+<div id="form-feedback" class="form-feedback" aria-live="polite">
+  <div id="form-success" class="form-success" style="display:none;">
+    <strong>¡Gracias!</strong> Ya recibimos tu consulta. Te respondo en breve 🙌
+  </div>
+
+  <div id="form-error" class="form-error" style="display:none;">
+    <strong>Ups…</strong> No se pudo enviar. Probá de nuevo en un minuto.
+  </div>
+</div>
+
 
   <!-- REDES FULL WIDTH al final (como pediste) -->
   <section class="section dark" aria-label="Redes al final">
@@ -1597,6 +1607,61 @@ document.addEventListener('click', (e) => {
   // Borra el hash de la URL (así al refrescar NO vuelve a bajar)
   history.replaceState(null, '', url.pathname + url.search);
 });
+</script>
+
+<script>
+(() => {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+
+  const successBox = document.getElementById('form-success');
+  const errorBox = document.getElementById('form-error');
+  const submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
+
+  const show = (el) => { if (el) el.style.display = 'block'; };
+  const hide = (el) => { if (el) el.style.display = 'none'; };
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    hide(successBox);
+    hide(errorBox);
+
+    // UX: deshabilitar botón mientras envía
+    const oldText = submitBtn ? submitBtn.textContent : '';
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
+    }
+
+    try {
+      const formData = new FormData(form);
+
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        show(successBox);
+        form.reset();
+
+        // opcional: llevar un poquito al usuario al mensaje
+        document.getElementById('form-feedback')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        show(errorBox);
+      }
+    } catch (err) {
+      show(errorBox);
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = oldText || 'Quiero mi landing';
+      }
+    }
+  });
+})();
 </script>
 
 
