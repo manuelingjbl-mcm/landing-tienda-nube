@@ -934,88 +934,6 @@ main{ background: transparent; } /* por si ya lo tenías raro */
   }
 }
 
-/* ===== HERO TITLE: líneas + pill inclinada (fix definitivo) ===== */
-
-/* Override SOLO para el H1 del hero (evita que el h1 global meta aire) */
-.hero-copy h1{
-  margin: 0; !important;             /* clave: mata el aire del h1 global */
-  line-height: 1.02; !important;     /* compacto */
-  text-align: center;
-}
-
-/* Cada línea como bloque (control total del stack) */
-.hero-copy h1 .hero-line{
-  display: block;
-  margin: 0; !important;
-}
-
-/* Gap entre líneas (desktop) */
-.hero-copy h1 .hero-line + .hero-line{
-  margin-top: .08em; !important;
-}
-
-/* Pill: no debe empujar el layout */
-.hero-copy h1 .pill-tilt{
-  display: inline-block;
-  position: relative;
-  padding: .15em .50em;     /* fina */
-  margin-left: .18em;
-  border-radius: 999px;
-  white-space: nowrap;
-  vertical-align: middle;
-  line-height: 1;
-  top: -0.04em;             /* sube un toque (ajustable -0.02 a -0.06) */
-}
-
-/* Sticker inclinado (solo fondo/borde) */
-.hero-copy h1 .pill-tilt::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:999px;
-  background: rgba(91,124,255,.22);
-  border: 1px solid rgba(91,124,255,.40);
-  box-shadow: 0 10px 26px rgba(0,0,0,.35);
-  transform: rotate(-3deg);
-  transform-origin: center;
-  z-index: 0;
-}
-
-/* Brillo suave */
-.hero-copy h1 .pill-tilt::after{
-  content:"";
-  position:absolute;
-  inset:-2px;
-  border-radius:999px;
-  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.22), transparent 55%);
-  transform: rotate(-3deg);
-  transform-origin: center;
-  opacity: .85;
-  pointer-events:none;
-  z-index: 0;
-}
-
-/* Texto recto */
-.hero-copy h1 .pill-text{
-  position: relative;
-  z-index: 1;
-}
-
-/* ===== Mobile: pill en segunda línea, sin aire ===== */
-@media (max-width:560px){
-  .hero-copy h1{ line-height: 1.03; } !important;
-
-  .hero-copy h1 .hero-line + .hero-line{ margin-top: .06em; } !important;
-
-  /* pill sola en su línea, pero pegada */
-  .hero-copy h1 .pill-tilt{
-    display: block;
-    width: fit-content;
-    margin: .12em auto .02em;
-    top: 0;
-  }
-}
-    
 /* ===== ANCHORS (scroll parejo, sin aire) ===== */
 :root{ --header-offset: -20px; }
 @media (max-width: 919px){
@@ -1064,8 +982,89 @@ html{ scroll-behavior: smooth; }
   }
 }
 
-.hero-copy h1 .hero-line{ outline:2px solid lime !important; }
-.hero-copy h1 .pill-tilt{ outline:2px solid cyan !important; }
+/* ===== HERO H1: stack compacto + pill inclinada (FINAL) ===== */
+
+.hero-copy h1{
+  margin: 0 !important;
+  line-height: 1.01 !important;   /* un toque más compacto */
+  text-align: center;
+}
+
+/* cada span directo del H1 es una línea */
+.hero-copy h1 > span{
+  display: block !important;
+  margin: 0 !important;
+}
+
+/* gap entre líneas (desktop) */
+.hero-copy h1 > span + span{
+  margin-top: .035em !important;  /* más pegado */
+}
+
+/* pill: más chata y sin empujar altura */
+.hero-copy h1 .pill-tilt{
+  display: inline-block !important;
+  position: relative;
+  padding: .10em .46em !important; /* más fina */
+  margin-left: .18em !important;
+  border-radius: 999px;
+  white-space: nowrap;
+  vertical-align: middle;
+  line-height: 1 !important;
+  top: -0.08em !important;         /* sube un poco más en desktop */
+}
+
+/* fondo inclinado */
+.hero-copy h1 .pill-tilt::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:999px;
+  background: rgba(91,124,255,.22);
+  border: 1px solid rgba(91,124,255,.40);
+  box-shadow: 0 10px 22px rgba(0,0,0,.30);
+  transform: rotate(-3deg);
+  transform-origin:center;
+  z-index:0;
+}
+
+/* brillo: sin inset negativo (eso agranda la caja y mete aire) */
+.hero-copy h1 .pill-tilt::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:999px;
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.18), transparent 55%);
+  transform: rotate(-3deg);
+  transform-origin:center;
+  opacity:.8;
+  pointer-events:none;
+  z-index:0;
+}
+
+.hero-copy h1 .pill-text{
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Mobile: aún más compacto y pill pegada ===== */
+@media (max-width:560px){
+  .hero-copy h1{
+    line-height: 1.02 !important;
+  }
+
+  .hero-copy h1 > span + span{
+    margin-top: .02em !important; /* reduce el aire entre 1ra y 3ra */
+  }
+
+  /* pill sola en su línea, pegadita */
+  .hero-copy h1 .pill-tilt{
+    display: block !important;
+    width: fit-content;
+    margin: .06em auto 0 !important;
+    top: 0 !important;
+  }
+}
 
 
     
