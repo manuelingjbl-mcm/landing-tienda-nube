@@ -942,19 +942,19 @@ main{ background: transparent; } /* por si ya lo tenías raro */
 }
 
 /* Cada línea como bloque (control total del stack) */
-.hero-title .hero-line{
+.hero-copy h1 .hero-line{
   display:block;
   text-align:center;
   margin: 0; /* evita aire fantasma */
 }
 
 /* Gap entre líneas (desktop) */
-.hero-title .hero-line + .hero-line{
+.hero-copy h1 .hero-line + .hero-line{
   margin-top: .14em;
 }
 
 /* Pill: no debe empujar el layout */
-.pill-tilt{
+.hero-copy h1 .pill-tilt{
   display:inline-block;
   position:relative;
   padding:.15em .50em;     /* más fina (antes .18/.55) */
@@ -967,7 +967,7 @@ main{ background: transparent; } /* por si ya lo tenías raro */
 }
 
 /* Sticker inclinado (solo fondo/borde) */
-.pill-tilt::before{
+.hero-copy h1 .pill-tilt::before{
   content:"";
   position:absolute;
   inset:0;
@@ -981,7 +981,7 @@ main{ background: transparent; } /* por si ya lo tenías raro */
 }
 
 /* Brillo suave */
-.pill-tilt::after{
+.hero-copy h1 .pill-tilt::after{
   content:"";
   position:absolute;
   inset:-2px;
@@ -995,7 +995,7 @@ main{ background: transparent; } /* por si ya lo tenías raro */
 }
 
 /* Texto recto */
-.pill-text{
+.hero-copy h1 .pill-text{
   position:relative;
   z-index:1;
 }
@@ -1004,24 +1004,17 @@ main{ background: transparent; } /* por si ya lo tenías raro */
 @media (max-width:560px){
 
   /* un poco más compacto el stack */
-  .hero-title{
-    line-height: 1.03;
-  }
-
-  .hero-title .hero-line + .hero-line{
-    margin-top: .10em;
-  }
+  .hero-copy h1{ line-height:1.03; }
+  .hero-copy h1 .hero-line + .hero-line{ margin-top:.10em; }
 
   /* pill sola en su línea, pero pegada (sin “bajar” tanto) */
-  .pill-tilt{
+  .hero-copy h1 .pill-tilt{
     display:block;
     width:fit-content;
-    margin: .12em auto .02em;  /* menos aire que antes */
-    top: 0;                    /* en mobile no la subimos */
-    padding: .14em .50em;
+    margin:.12em auto .02em;
+    top:0;
   }
 }
-
 
     
 /* ===== ANCHORS (scroll parejo, sin aire) ===== */
