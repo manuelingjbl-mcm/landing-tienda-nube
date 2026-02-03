@@ -982,74 +982,26 @@ html{ scroll-behavior: smooth; }
   }
 }
 
-/* ===== HERO TITLE + PILL (DESKTOP OK + MOBILE 2da línea) ===== */
-
-/* Base del título del hero (le ganamos al h1 global) */
-.hero-copy .hero-title{
+/* ===== FIX: HERO TITLE desktop (no cortar por max-width) ===== */
+.hero-copy h1.hero-title{
+  max-width: 40ch;     /* subilo/bajalo: 34ch–46ch */
+  margin: 0 auto;      /* mata el margin global de h1 */
   line-height: 1.02;
   text-align: center;
 }
 
-/* Pill inline en desktop: NO baja de línea, NO se corre a la derecha */
-.hero-copy .hero-title .pill-tilt{
-  display: inline-flex;
-  align-items: center;
-  position: relative;
-  padding: .14em .52em;
-  border-radius: 999px;
-  white-space: nowrap;
-  line-height: 1;
-  vertical-align: baseline;     /* más natural con texto grande */
-  margin: 0 .06em;              /* separa sin empujar el centrado */
-  top: -0.02em;                 /* micro ajuste (0 a -0.04em) */
-}
-
-/* Fondo inclinado (solo el sticker) */
-.hero-copy .hero-title .pill-tilt::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:999px;
-  background: rgba(91,124,255,.22);
-  border: 1px solid rgba(91,124,255,.40);
-  box-shadow: 0 10px 26px rgba(0,0,0,.35);
-  transform: rotate(-3deg);
-  transform-origin:center;
-  z-index:0;
-}
-
-/* Brillito */
-.hero-copy .hero-title .pill-tilt::after{
-  content:"";
-  position:absolute;
-  inset:-2px;
-  border-radius:999px;
-  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.22), transparent 55%);
-  transform: rotate(-3deg);
-  transform-origin:center;
-  opacity:.85;
-  pointer-events:none;
-  z-index:0;
-}
-
-/* Texto recto */
-.hero-copy .hero-title .pill-text{
-  position: relative;
-  z-index: 1;
-}
-
-/* ===== Mobile: pill en 2da línea, pegadita, y sin “aire” ===== */
-@media (max-width: 560px){
-  .hero-copy .hero-title{
-    line-height: 1.03;
+/* Ajuste fino para desktop grande: que "Una landing + pill" no se parta */
+@media (min-width: 920px){
+  .hero-copy h1.hero-title{
+    max-width: 46ch;   /* suele dejar la 1ra línea completa */
   }
+}
 
-  /* el pill baja SOLO en mobile */
-  .hero-copy .hero-title .pill-tilt{
-    display: block;
-    width: fit-content;
-    margin: .14em auto .06em;   /* controla el aire entre pill y 2da frase */
-    top: 0;
+/* Mobile: mantenemos compacto y con buen flujo */
+@media (max-width: 560px){
+  .hero-copy h1.hero-title{
+    max-width: 22ch;   /* acá sí conviene cortar */
+    line-height: 1.03;
   }
 }
 
