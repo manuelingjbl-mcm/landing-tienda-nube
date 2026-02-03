@@ -937,19 +937,22 @@ main{ background: transparent; } /* por si ya lo tenías raro */
 html{ scroll-behavior: smooth; }
     
 /* ====== ANCHORS (scroll sin aire) ====== */
-.anchor{
-  position: relative;
-  height: 0;
-  /* Ajuste fino default (desktop) */
-  top: -80px;
+:root{
+  --header-offset: 92px;   /* desktop */
+}
+@media (max-width: 919px){
+  :root{ --header-offset: 104px; }  /* mobile */
 }
 
-@media (max-width: 919px){
-  .anchor{
-    /* En mobile suele ser un poco más alto por header/espaciados */
-    top: -120px;
-  }
+html{ scroll-behavior: smooth; }
+
+/* el offset lo maneja scroll-margin, no top negativo */
+.anchor{
+  height: 0;
+  scroll-margin-top: var(--header-offset);
 }
+
+
 
     
   </style>
