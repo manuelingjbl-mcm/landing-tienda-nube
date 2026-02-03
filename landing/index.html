@@ -942,11 +942,17 @@ html{ scroll-behavior: smooth; }
 
 html{ scroll-behavior: smooth; }
 
+/* todos los hashes, mismo offset */
+[id]{
+  scroll-margin-top: var(--header-offset);
+}
+
+/* si usás anchors vacíos */
 .anchor{
   height: 1px;
   margin-top: -1px;
-  scroll-margin-top: var(--header-offset);
 }
+
 
 
 
