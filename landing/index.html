@@ -934,18 +934,19 @@ main{ background: transparent; } /* por si ya lo tenías raro */
   }
 }
 
-/* ===== HERO TITLE: líneas + pill inclinada (sin desconfigurar) ===== */
+/* ===== HERO TITLE: líneas + pill inclinada (fix definitivo) ===== */
 
-/* Control del título (si ya lo tenés en otro lado, dejá solo 1) */
-.hero-title{
-  line-height: 1.02;
+/* Override SOLO para el H1 del hero (evita que el h1 global meta aire) */
+.hero-copy h1{
+  margin: 0;              /* clave: mata el aire del h1 global */
+  line-height: 1.02;      /* compacto */
+  text-align: center;
 }
 
 /* Cada línea como bloque (control total del stack) */
 .hero-copy h1 .hero-line{
-  display:block;
-  text-align:center;
-  margin: 0; /* evita aire fantasma */
+  display: block;
+  margin: 0;
 }
 
 /* Gap entre líneas (desktop) */
@@ -955,15 +956,15 @@ main{ background: transparent; } /* por si ya lo tenías raro */
 
 /* Pill: no debe empujar el layout */
 .hero-copy h1 .pill-tilt{
-  display:inline-block;
-  position:relative;
-  padding:.15em .50em;     /* más fina (antes .18/.55) */
-  margin-left:.18em;
-  border-radius:999px;
-  white-space:nowrap;
-  vertical-align:middle;
-  line-height:1;
-  top: -0.04em;            /* sube el pill (ajustable -0.02 a -0.06) */
+  display: inline-block;
+  position: relative;
+  padding: .15em .50em;     /* fina */
+  margin-left: .18em;
+  border-radius: 999px;
+  white-space: nowrap;
+  vertical-align: middle;
+  line-height: 1;
+  top: -0.04em;             /* sube un toque (ajustable -0.02 a -0.06) */
 }
 
 /* Sticker inclinado (solo fondo/borde) */
@@ -976,8 +977,8 @@ main{ background: transparent; } /* por si ya lo tenías raro */
   border: 1px solid rgba(91,124,255,.40);
   box-shadow: 0 10px 26px rgba(0,0,0,.35);
   transform: rotate(-3deg);
-  transform-origin:center;
-  z-index:0;
+  transform-origin: center;
+  z-index: 0;
 }
 
 /* Brillo suave */
@@ -988,34 +989,36 @@ main{ background: transparent; } /* por si ya lo tenías raro */
   border-radius:999px;
   background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.22), transparent 55%);
   transform: rotate(-3deg);
-  transform-origin:center;
-  opacity:.85;
+  transform-origin: center;
+  opacity: .85;
   pointer-events:none;
-  z-index:0;
+  z-index: 0;
 }
 
 /* Texto recto */
 .hero-copy h1 .pill-text{
-  position:relative;
-  z-index:1;
+  position: relative;
+  z-index: 1;
 }
 
 /* ===== Mobile: pill en segunda línea, sin aire ===== */
 @media (max-width:560px){
+  .hero-copy h1{
+    line-height: 1.03;
+  }
 
-  /* un poco más compacto el stack */
-  .hero-copy h1{ line-height:1.03; }
-  .hero-copy h1 .hero-line + .hero-line{ margin-top:.10em; }
+  .hero-copy h1 .hero-line + .hero-line{
+    margin-top: .10em;
+  }
 
-  /* pill sola en su línea, pero pegada (sin “bajar” tanto) */
+  /* pill sola en su línea, pero pegada */
   .hero-copy h1 .pill-tilt{
-    display:block;
-    width:fit-content;
-    margin:.12em auto .02em;
-    top:0;
+    display: block;
+    width: fit-content;
+    margin: .12em auto .02em;
+    top: 0;
   }
 }
-
     
 /* ===== ANCHORS (scroll parejo, sin aire) ===== */
 :root{ --header-offset: -20px; }
