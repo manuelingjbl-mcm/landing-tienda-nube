@@ -934,24 +934,23 @@ main{ background: transparent; } /* por si ya lo tenías raro */
   }
 }
 
-html{ scroll-behavior: smooth; }
-    
-/* ====== ANCHORS (scroll sin aire) ====== */
-:root{ --header-offset: 92px; }
-@media (max-width:919px){ :root{ --header-offset: 104px; } }
+/* ===== ANCHORS (scroll parejo, sin aire) ===== */
+:root{ --header-offset: 72px; }
+@media (max-width: 919px){
+  :root{ --header-offset: 84px; }
+}
 
 html{ scroll-behavior: smooth; }
 
 /* todos los hashes, mismo offset */
-[id]{
-  scroll-margin-top: var(--header-offset);
-}
+[id]{ scroll-margin-top: var(--header-offset); }
 
-/* si usás anchors vacíos */
+/* anchors vacíos */
 .anchor{
   height: 1px;
   margin-top: -1px;
 }
+
 
 
 
