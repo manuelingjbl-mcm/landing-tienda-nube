@@ -1059,7 +1059,6 @@ html{ scroll-behavior: smooth; }
 
   /* clave para que no “corte” raro: inclinamos desde el centro y escalamos un pelín */
   transform: translateY(0.10em) rotate(-2deg) skewX(-10deg) scaleX(1.02);
-
   transform-origin:center;
 
   z-index:0;
@@ -1073,7 +1072,7 @@ html{ scroll-behavior: smooth; }
   border-radius:999px;
 
   background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.22), transparent 55%);
-  transform: rotate(-2deg) skewX(-10deg) scaleX(1.02);
+  transform: translateY(0.10em) rotate(-2deg) skewX(-10deg) scaleX(1.02);
   transform-origin:center;
 
   opacity:.85;
