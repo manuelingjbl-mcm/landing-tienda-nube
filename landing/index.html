@@ -934,25 +934,39 @@ main{ background: transparent; } /* por si ya lo tenías raro */
   }
 }
 
-/* Cada línea como bloque, evita que se “mezcle” el texto */
+/* ===== HERO TITLE: líneas + pill inclinada (sin desconfigurar) ===== */
+
+/* Control del título (si ya lo tenés en otro lado, dejá solo 1) */
+.hero-title{
+  line-height: 1.02;
+}
+
+/* Cada línea como bloque (control total del stack) */
 .hero-title .hero-line{
   display:block;
-  text-align:center; /* asumí que tu hero está centrado */
+  text-align:center;
+  margin: 0; /* evita aire fantasma */
+}
+
+/* Gap entre líneas (desktop) */
+.hero-title .hero-line + .hero-line{
+  margin-top: .14em;
 }
 
 /* Pill: no debe empujar el layout */
 .pill-tilt{
   display:inline-block;
   position:relative;
-  padding:.18em .55em;
+  padding:.15em .50em;     /* más fina (antes .18/.55) */
   margin-left:.18em;
   border-radius:999px;
   white-space:nowrap;
   vertical-align:middle;
-  line-height:1;         /* clave para que no “abra” la línea */
+  line-height:1;
+  top: -0.04em;            /* sube el pill (ajustable -0.02 a -0.06) */
 }
 
-/* Sticker inclinado */
+/* Sticker inclinado (solo fondo/borde) */
 .pill-tilt::before{
   content:"";
   position:absolute;
@@ -986,25 +1000,28 @@ main{ background: transparent; } /* por si ya lo tenías raro */
   z-index:1;
 }
 
-/* Mobile: que “no es una web.” quede en la segunda línea, sin separar de lo siguiente */
+/* ===== Mobile: pill en segunda línea, sin aire ===== */
 @media (max-width:560px){
-  /* 1ra línea: “Una landing” */
-  .hero-title .hero-line:first-child{
-    display:block;
+
+  /* un poco más compacto el stack */
+  .hero-title{
+    line-height: 1.03;
   }
 
-  /* Forzamos que el pill pase abajo, pero pegadito */
+  .hero-title .hero-line + .hero-line{
+    margin-top: .10em;
+  }
+
+  /* pill sola en su línea, pero pegada (sin “bajar” tanto) */
   .pill-tilt{
     display:block;
     width:fit-content;
-    margin:.18em auto 0;
-  }
-
-  /* reducimos separación entre líneas en mobile si tu h1 tiene mucho line-height */
-  .hero-title{
-    line-height:1.06;
+    margin: .12em auto .02em;  /* menos aire que antes */
+    top: 0;                    /* en mobile no la subimos */
+    padding: .14em .50em;
   }
 }
+
 
     
 /* ===== ANCHORS (scroll parejo, sin aire) ===== */
