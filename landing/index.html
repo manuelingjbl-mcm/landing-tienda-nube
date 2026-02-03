@@ -1428,46 +1428,53 @@ html{ scroll-behavior: smooth; }
     <div class="wrap">
       <h2 class="section-title reveal">Solicitá tu landing enfocada en conversión</h2>
       <p class="section-sub reveal">Contame qué querés lograr y te respondo con próximos pasos.</p>
+<section class="section dark" id="contacto">
+  <div class="wrap">
+    <h2 class="section-title reveal">Solicitá tu landing enfocada en conversión</h2>
+    <p class="section-sub reveal">Contame qué querés lograr y te respondo con próximos pasos.</p>
 
-        <div class="panel reveal">
-        <form id="contact-form" action="https://formspree.io/f/mzzodepb" method="POST">
-  <div class="row2">
-    <input type="hidden" name="_subject" value="Consulta desde landing VIACLOUDSTUDIO" />
+    <div class="panel reveal">
 
-    <input type="text" name="name" placeholder="Nombre y marca" required>
-    <input type="email" name="email" placeholder="Email" required>
-  </div>
+      <form id="contact-form" action="https://formspree.io/f/mzzodepb" method="POST">
+        <div class="row2">
+          <input type="hidden" name="_subject" value="Consulta desde landing VIACLOUDSTUDIO" />
+          <input type="text" name="name" placeholder="Nombre y marca" required>
+          <input type="email" name="email" placeholder="Email" required>
+        </div>
 
-  <div class="row2">
-    <input type="text" name="instagram" placeholder="Instagram o sitio actual (opcional)">
+        <div class="row2">
+          <input type="text" name="instagram" placeholder="Instagram o sitio actual (opcional)">
+          <select name="goal" required>
+            <option value="" selected disabled>Objetivo de la landing</option>
+            <option>Generar leads (clientes potenciales)</option>
+            <option>Vender un producto/servicio</option>
+            <option>Mensajes (WhatsApp / DM)</option>
+            <option>Otro (explicarlo abajo)</option>
+          </select>
+        </div>
 
-    <select name="goal" required>
-      <option value="" selected disabled>Objetivo de la landing</option>
-      <option value="Generar leads">Generar leads (clientes potenciales)</option>
-      <option value="Vender">Vender un producto/servicio</option>
-      <option value="Mensajes">Mensajes (WhatsApp / DM)</option>
-      <option value="Otro">Otro (explicarlo abajo)</option>
-    </select>
-  </div>
+        <textarea name="message" placeholder="Contame brevemente qué necesitás (campaña, oferta, público, qué te duele hoy)." required></textarea>
 
-  <textarea name="message" placeholder="Contame brevemente qué necesitás (campaña, oferta, público, qué te duele hoy)." required></textarea>
+        <div class="form-foot">
+          <button class="btn btn-primary" type="submit">Quiero mi landing</button>
+          <div class="fine">No compartimos tus datos. Solo para responderte.</div>
+        </div>
 
-  <div class="form-foot">
-    <button class="btn btn-primary" type="submit">Quiero mi landing</button>
-    <div class="fine">No compartimos tus datos. Solo para responderte.</div>
-  </div>
-</form>
+        <!-- ✅ FEEDBACK ADENTRO del panel/card -->
+        <div id="form-feedback" class="form-feedback" aria-live="polite">
+          <div id="form-success" class="form-success" hidden>
+            <strong>¡Gracias!</strong> Ya recibimos tu consulta. Te respondo en breve 🙌
+          </div>
 
-<div id="form-feedback" class="form-feedback" aria-live="polite">
-  <div id="form-success" class="form-success" style="display:none;">
-    <strong>¡Gracias!</strong> Ya recibimos tu consulta. Te respondo en breve 🙌
-  </div>
+          <div id="form-error" class="form-error" hidden>
+            <strong>Ups…</strong> No se pudo enviar. Probá de nuevo en un minuto.
+          </div>
+        </div>
+      </form>
 
-  <div id="form-error" class="form-error" style="display:none;">
-    <strong>Ups…</strong> No se pudo enviar. Probá de nuevo en un minuto.
-  </div>
-</div>
-
+    </div><!-- /.panel -->
+  </div><!-- /.wrap -->
+</section>
 
   <!-- REDES FULL WIDTH al final (como pediste) -->
   <section class="section dark" aria-label="Redes al final">
