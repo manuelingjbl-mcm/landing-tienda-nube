@@ -1113,46 +1113,46 @@ html{ scroll-behavior: smooth; }
   }
 }
 
-/* === Feedback PRO: alineado a la derecha del botón y sin layout shift === */
 .form-foot{
   display:flex;
   align-items:center;
+  justify-content:space-between;
   gap:14px;
-  flex-wrap:wrap;
 }
 
-/* Reserva altura para que no “salte” cuando aparece el mensaje */
+.form-foot__meta{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:6px;
+  flex:1;
+}
+
 .form-status{
-  flex: 1 1 auto;
-  min-height: 20px;
+  margin:0;
+  min-height: 22px;
   display:flex;
   align-items:center;
   justify-content:flex-end;
+  visibility:hidden;
+  opacity:0;
+  transform: translateY(2px);
+  transition: opacity .18s ease, transform .18s ease, visibility 0s linear .18s;
 }
 
-/* Estilo finito (sin “bloque” pesado) */
-.form-success,
-.form-error{
-  font-size: 13px;
-  line-height: 1.2;
-  font-weight: 500;
-  color: rgba(234,240,255,.82);
-  white-space: nowrap;        /* evita que rompa la card en desktop */
-  overflow: hidden;
-  text-overflow: ellipsis;    /* si es largo, queda prolijo */
+.form-status.is-visible{
+  visibility:visible;
+  opacity:1;
+  transform: translateY(0);
+  transition: opacity .18s ease, transform .18s ease, visibility 0s;
 }
 
-/* en mobile: que el mensaje baje debajo del botón (más natural) */
-@media (max-width: 560px){
-  .form-status{
-    flex-basis: 100%;
-    justify-content:flex-start;
-    min-height: 18px;
-  }
-  .form-success,
-  .form-error{
-    white-space: normal; /* permitimos 2 líneas si hace falta */
-  }
+.form-status__text{ white-space:nowrap; }
+
+@media (max-width: 720px){
+  .form-foot{ flex-direction:column; align-items:stretch; }
+  .form-foot__meta{ align-items:flex-start; }
+  .form-status{ justify-content:flex-start; }
 }
 
 
@@ -1492,23 +1492,23 @@ html{ scroll-behavior: smooth; }
         <textarea name="message" placeholder="Contame brevemente qué necesitás (campaña, oferta, público, qué te duele hoy)." required></textarea>
 
         <div class="form-foot">
-          <button class="btn btn-primary" type="submit">Quiero mi landing</button>
-          <div class="fine">No compartimos tus datos. Solo para responderte.</div>
-        </div>
-      </form>
-      
-  <!-- ✅ feedback a la derecha del botón -->
-  <div id="form-feedback" class="form-status" aria-live="polite">
-    <div id="form-success" class="form-success" hidden>
-      ✅ ¡Listo! Ya recibimos tu consulta.
-    </div>
-    <div id="form-error" class="form-error" hidden>
-      ⚠️ Ups… No se pudo enviar. Probá de nuevo.
+  <button class="btn btn-primary" type="submit">Quiero mi landing</button>
+
+  <div class="form-foot__meta">
+    <div class="fine">No compartimos tus datos. Solo para responderte.</div>
+
+    <!-- ✅ feedback inline (sin salto) -->
+    <div id="form-feedback" class="form-status" aria-live="polite">
+      <span id="form-feedback-text" class="form-status__text">&nbsp;</span>
     </div>
   </div>
-  </div><!-- /.panel -->
- </div><!-- /.wrap -->
+</div>
+</form>
+
+</div><!-- /.panel -->
+</div><!-- /.wrap -->
 </section>
+
 
 <!-- REDES FULL WIDTH al final -->
 <section class="section dark" aria-label="Redes al final">
@@ -1652,24 +1652,54 @@ document.addEventListener('click', (e) => {
 });
 </script>
 
-  
 <script>
 (() => {
   const form = document.getElementById('contact-form');
   if (!form) return;
 
-  const successBox = document.getElementById('form-success');
-  const errorBox = document.getElementById('form-error');
+  const feedback = document.getElementById('form-feedback');
+  const feedbackText = document.getElementById('form-feedback-text');
   const submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
 
-  const show = (el) => { if (el) el.hidden = false; };
-  const hide = (el) => { if (el) el.hidden = true; };
+  if (!feedback || !feedbackText) return;
+
+  const showStatus = (msg) => {
+    feedbackText.textContent = msg;
+    feedback.classList.add('is-visible');
+  };
+
+  const clearStatus = () => {
+    feedbackText.innerHTML = '&nbsp;';
+    feedback.classList.remove('is-visible');
+  };
+
+  // ✅ Mejora: al empezar a editar, limpia el feedback (1 sola vez)
+  let clearArmed = false;
+  const armClearOnEdit = () => {
+    if (clearArmed) return;
+    clearArmed = true;
+
+    const onEdit = (e) => {
+      const t = e.target;
+      // Solo si editan un campo del form (no cualquier click)
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT')) {
+        clearStatus();
+        form.removeEventListener('input', onEdit, true);
+        form.removeEventListener('change', onEdit, true);
+        clearArmed = false;
+      }
+    };
+
+    // capture=true para agarrar eventos aunque haya stops
+    form.addEventListener('input', onEdit, true);
+    form.addEventListener('change', onEdit, true);
+  };
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    hide(successBox);
-    hide(errorBox);
+    // limpia estado anterior sin mover layout
+    clearStatus();
 
     const oldText = submitBtn ? submitBtn.textContent : '';
     if (submitBtn) {
@@ -1687,14 +1717,16 @@ document.addEventListener('click', (e) => {
       });
 
       if (res.ok) {
-        show(successBox);
+        showStatus('✅ ¡Listo! Ya recibimos tu consulta.');
         form.reset();
-        document.getElementById('form-feedback')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        armClearOnEdit(); // ✅ arma limpieza cuando vuelvan a escribir
       } else {
-        show(errorBox);
+        showStatus('⚠️ Ups… No se pudo enviar. Probá de nuevo.');
+        armClearOnEdit();
       }
     } catch (err) {
-      show(errorBox);
+      showStatus('⚠️ Ups… No se pudo enviar. Probá de nuevo.');
+      armClearOnEdit();
     } finally {
       if (submitBtn) {
         submitBtn.disabled = false;
@@ -1704,7 +1736,6 @@ document.addEventListener('click', (e) => {
   });
 })();
 </script>
-
 
 
   
