@@ -1113,6 +1113,47 @@ html{ scroll-behavior: smooth; }
   }
 }
 
+/* === Feedback PRO: alineado a la derecha del botón y sin layout shift === */
+.form-foot{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+/* Reserva altura para que no “salte” cuando aparece el mensaje */
+.form-status{
+  flex: 1 1 auto;
+  min-height: 20px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+}
+
+/* Estilo finito (sin “bloque” pesado) */
+.form-success,
+.form-error{
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 500;
+  color: rgba(234,240,255,.82);
+  white-space: nowrap;        /* evita que rompa la card en desktop */
+  overflow: hidden;
+  text-overflow: ellipsis;    /* si es largo, queda prolijo */
+}
+
+/* en mobile: que el mensaje baje debajo del botón (más natural) */
+@media (max-width: 560px){
+  .form-status{
+    flex-basis: 100%;
+    justify-content:flex-start;
+    min-height: 18px;
+  }
+  .form-success,
+  .form-error{
+    white-space: normal; /* permitimos 2 líneas si hace falta */
+  }
+}
 
 
     
@@ -1455,19 +1496,18 @@ html{ scroll-behavior: smooth; }
           <div class="fine">No compartimos tus datos. Solo para responderte.</div>
         </div>
       </form>
-
-      <!-- ✅ FEEDBACK prolijo (dentro del panel, pero FUERA del form) -->
-      <div id="form-feedback" class="form-feedback" aria-live="polite">
-        <div id="form-success" class="form-success" hidden>
-          <strong>¡Gracias!</strong> Ya recibimos tu consulta. Te respondo en breve 🙌
-        </div>
-
-        <div id="form-error" class="form-error" hidden>
-          <strong>Ups…</strong> No se pudo enviar. Probá de nuevo en un minuto.
-        </div>
-      </div>
-    </div><!-- /.panel -->
-  </div><!-- /.wrap -->
+      
+  <!-- ✅ feedback a la derecha del botón -->
+  <div id="form-feedback" class="form-status" aria-live="polite">
+    <div id="form-success" class="form-success" hidden>
+      ✅ ¡Listo! Ya recibimos tu consulta.
+    </div>
+    <div id="form-error" class="form-error" hidden>
+      ⚠️ Ups… No se pudo enviar. Probá de nuevo.
+    </div>
+  </div>
+  </div><!-- /.panel -->
+ </div><!-- /.wrap -->
 </section>
 
 <!-- REDES FULL WIDTH al final -->
