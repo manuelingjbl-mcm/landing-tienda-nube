@@ -951,6 +951,36 @@ html{ scroll-behavior: smooth; }
   margin-top: -1px;
 }
 
+/* ===== Social buttons: más contraste (Instagram/Facebook) ===== */
+:root{
+  --social-blue: #5B7CFF;
+  --social-blue-hover: #7A92FF;
+}
+
+/* Botón */
+.social-row .sbtn{
+  border-color: rgba(91, 124, 255, 0.30);
+  background: rgba(91, 124, 255, 0.12);
+}
+
+/* Icono (si es <img>) -> lo “pintamos” con filtro para que quede azul y visible */
+.social-row .sbtn img{
+  filter: brightness(0) saturate(100%) invert(56%) sepia(88%) saturate(1650%) hue-rotate(205deg) brightness(105%) contrast(102%);
+}
+
+/* Hover */
+.social-row .sbtn:hover{
+  border-color: rgba(91, 124, 255, 0.55);
+  background: rgba(91, 124, 255, 0.18);
+}
+
+/* Mobile: un poquito más fuerte todavía */
+@media (max-width: 560px){
+  .social-row .sbtn{
+    border-color: rgba(91, 124, 255, 0.42);
+    background: rgba(91, 124, 255, 0.16);
+  }
+}
 
 
 
@@ -1293,7 +1323,7 @@ html{ scroll-behavior: smooth; }
         <div style="min-width: 240px;">
           <div class="side-title" style="margin:0 0 6px;">Conectemos</div>
           <div style="color: rgba(234,240,255,.74); font-size:13px; line-height:1.5;">
-            Si querés, mandame tu link de anuncio + destino y lo miro rápido para detectar fricciones.
+            ¿Tenés una idea o campaña en mente? Escribime por Instagram o Facebook y lo vemos.
           </div>
         </div>
         <div class="social-row" aria-label="Redes sociales">
