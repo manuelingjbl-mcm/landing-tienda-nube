@@ -982,77 +982,74 @@ html{ scroll-behavior: smooth; }
   }
 }
 
-/* ===== HERO TITLE (desktop inline, mobile pill abajo) ===== */
-.hero-copy h1.hero-title{
-  margin: 0 !important;
+/* ===== HERO TITLE + PILL (DESKTOP OK + MOBILE 2da línea) ===== */
+
+/* Base del título del hero (le ganamos al h1 global) */
+.hero-copy .hero-title{
+  line-height: 1.02;
   text-align: center;
-  line-height: 1.02 !important;
 }
 
-.hero-copy h1.hero-title > span{
-  display:block;
-  margin:0;
+/* Pill inline en desktop: NO baja de línea, NO se corre a la derecha */
+.hero-copy .hero-title .pill-tilt{
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  padding: .14em .52em;
+  border-radius: 999px;
+  white-space: nowrap;
+  line-height: 1;
+  vertical-align: baseline;     /* más natural con texto grande */
+  margin: 0 .06em;              /* separa sin empujar el centrado */
+  top: -0.02em;                 /* micro ajuste (0 a -0.04em) */
 }
 
-/* espacio entre líneas */
-.hero-copy h1.hero-title > span + span{
-  margin-top: .03em;
-}
-
-/* pill inline (desktop) */
-.hero-copy h1.hero-title .pill-tilt{
-  display:inline-block;
-  position:relative;
-  padding:.10em .46em;
-  margin-left:.18em;
-  border-radius:999px;
-  white-space:nowrap;
-  line-height:1;
-  vertical-align:middle;
-  top:-0.06em;
-}
-
-.hero-copy h1.hero-title .pill-tilt::before{
+/* Fondo inclinado (solo el sticker) */
+.hero-copy .hero-title .pill-tilt::before{
   content:"";
   position:absolute;
   inset:0;
   border-radius:999px;
   background: rgba(91,124,255,.22);
   border: 1px solid rgba(91,124,255,.40);
-  box-shadow: 0 10px 22px rgba(0,0,0,.30);
+  box-shadow: 0 10px 26px rgba(0,0,0,.35);
   transform: rotate(-3deg);
+  transform-origin:center;
   z-index:0;
 }
 
-.hero-copy h1.hero-title .pill-tilt::after{
+/* Brillito */
+.hero-copy .hero-title .pill-tilt::after{
   content:"";
   position:absolute;
-  inset:0;
+  inset:-2px;
   border-radius:999px;
-  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.18), transparent 55%);
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.22), transparent 55%);
   transform: rotate(-3deg);
-  opacity:.8;
+  transform-origin:center;
+  opacity:.85;
+  pointer-events:none;
   z-index:0;
 }
 
-.hero-copy h1.hero-title .pill-text{
-  position:relative;
-  z-index:1;
+/* Texto recto */
+.hero-copy .hero-title .pill-text{
+  position: relative;
+  z-index: 1;
 }
 
-/* ===== Mobile: pill baja a 2da línea, pegadita ===== */
-@media (max-width:560px){
-  /* pill sola abajo de "Una landing" */
-  .hero-copy h1.hero-title > span:first-child .pill-tilt{
-    display:block;
-    width:fit-content;
-    margin:.08em auto 0;
-    top:0;
+/* ===== Mobile: pill en 2da línea, pegadita, y sin “aire” ===== */
+@media (max-width: 560px){
+  .hero-copy .hero-title{
+    line-height: 1.03;
   }
 
-  /* compacta el stack mobile */
-  .hero-copy h1.hero-title > span + span{
-    margin-top: .02em;
+  /* el pill baja SOLO en mobile */
+  .hero-copy .hero-title .pill-tilt{
+    display: block;
+    width: fit-content;
+    margin: .14em auto .06em;   /* controla el aire entre pill y 2da frase */
+    top: 0;
   }
 }
 
@@ -1088,13 +1085,10 @@ html{ scroll-behavior: smooth; }
     </div>
 
     <h1 class="hero-title">
-  <span>
-    Una landing
-    <span class="pill-tilt"><span class="pill-text">no es una web.</span></span>
-  </span>
-  <span>Es una página diseñada</span>
-  <span>para convertir.</span>
+  Una landing <span class="pill-tilt"><span class="pill-text">no es una web.</span></span><br>
+  Es una página diseñada para convertir.
 </h1>
+
 
 
 
