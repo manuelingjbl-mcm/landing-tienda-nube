@@ -1575,43 +1575,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
   
 <script>
-(() => {
-  const stripHash = () => {
-    history.replaceState(null, "", window.location.pathname + window.location.search);
-  };
+document.addEventListener('click', (e) => {
+  const a = e.target.closest('a[href]');
+  if (!a) return;
 
-  document.addEventListener("click", (e) => {
-    const a = e.target.closest('a[href*="#"]');
-    if (!a) return;
+  // Convertimos el href a URL absoluta para poder comparar bien
+  const url = new URL(a.getAttribute('href'), window.location.href);
 
-    // Si querés excluir alguno, agregale data-keep-hash al link
-    if (a.hasAttribute("data-keep-hash")) return;
+  // Solo mismo dominio + misma página + con hash
+  if (url.origin !== window.location.origin) return;
+  if (url.pathname !== window.location.pathname) return;
+  if (!url.hash || url.hash === '#') return;
 
-    const href = a.getAttribute("href");
-    if (!href) return;
+  const target = document.querySelector(url.hash);
+  if (!target) return;
 
-    // soporta "#contacto" y "/landing#contacto" y URLs completas
-    let url;
-    try { url = new URL(href, location.href); } catch { return; }
+  // Evita el salto "default" y hace scroll suave (tu offset CSS sigue aplicando)
+  e.preventDefault();
+  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-    const samePage =
-      url.origin === location.origin &&
-      url.pathname === location.pathname &&
-      url.hash;
-
-    if (!samePage) return;
-
-    // dejá que haga el scroll normal (tu CSS/anchor ya lo gestiona)
-    setTimeout(stripHash, 600);
-  });
-
-  // Si alguien entra ya con hash (ej anuncio a /landing#contacto)
-  // y querés que NO quede pegado luego de cargar:
-  if (location.hash) {
-    setTimeout(stripHash, 800);
-  }
-})();
+  // Borra el hash de la URL (así al refrescar NO vuelve a bajar)
+  history.replaceState(null, '', url.pathname + url.search);
+});
 </script>
+
 
   
 </body>
