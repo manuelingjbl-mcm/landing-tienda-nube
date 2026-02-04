@@ -3839,30 +3839,25 @@ document.addEventListener('DOMContentLoaded', () => {
     'https://wa.me/' + WHATSAPP_PHONE +
     '?text=' + encodeURIComponent(WHATSAPP_TEXT);
 
-  document.addEventListener('DOMContentLoaded', () => {
-  const selectors = ['.js-whatsapp', '.wa-float'];
-  const waLinks = document.querySelectorAll(selectors.join(','));
-  if (!waLinks.length) return;
+ document.addEventListener('click', (e) => {
+  const waLink = e.target.closest('a.js-whatsapp, a.wa-float');
+  if (!waLink) return;
 
-  waLinks.forEach((waLink) => {
-    waLink.addEventListener('click', () => {
-      // Tip PRO: identificar qué botón fue
-      const wa_button =
-        waLink.classList.contains('wa-float') ? 'floating_button' :
-        waLink.classList.contains('js-whatsapp') ? 'header_or_footer_icon' :
-        'unknown';
+  const wa_button = waLink.classList.contains('wa-float')
+    ? 'floating_button'
+    : 'header_or_footer_icon';
 
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: 'whatsapp_click',
-        event_category: 'contact',
-        event_label: 'chat_whatsapp',
-        link_url: waLink.href,
-        wa_button: wa_button
-      });
-    });
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: 'whatsapp_click',
+    event_category: 'contact',
+    event_label: 'chat_whatsapp',
+    wa_button: wa_button,
+    link_url: waLink.href,
+    page_path: location.pathname
   });
-});
+}, true);
+
 
   const faqs = [
     {
