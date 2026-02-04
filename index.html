@@ -3840,20 +3840,24 @@ document.addEventListener('DOMContentLoaded', () => {
     '?text=' + encodeURIComponent(WHATSAPP_TEXT);
 
   document.addEventListener('DOMContentLoaded', () => {
-  const waLink = document.querySelector('.js-whatsapp');
-  if (!waLink) return;
+  const waLinks = document.querySelectorAll('a.js-whatsapp, a.wa-float');
+  if (!waLinks.length) return;
 
-  waLink.addEventListener('click', () => {
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: 'whatsapp_click',
-      event_category: 'contact',
-      event_label: 'chat_whatsapp',
-      link_url: waLink.href
+  waLinks.forEach((waLink) => {
+    waLink.addEventListener('click', () => {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'whatsapp_click',
+        event_category: 'contact',
+        event_label: 'chat_whatsapp',
+        link_url: waLink.href,
+
+        // Tip PRO: qué botón fue
+        placement: waLink.classList.contains('wa-float') ? 'float' : 'footer'
+      });
     });
   });
 });
-
 
   const faqs = [
     {
