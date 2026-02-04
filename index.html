@@ -3839,24 +3839,66 @@ document.addEventListener('DOMContentLoaded', () => {
     'https://wa.me/' + WHATSAPP_PHONE +
     '?text=' + encodeURIComponent(WHATSAPP_TEXT);
 
- document.addEventListener('click', (e) => {
-  const waLink = e.target.closest('a.js-whatsapp, a.wa-float');
-  if (!waLink) return;
-
-  const wa_button = waLink.classList.contains('wa-float')
-    ? 'floating_button'
-    : 'header_or_footer_icon';
-
+(function () {
+  // Siempre aseguramos dataLayer
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
-    event: 'whatsapp_click',
-    event_category: 'contact',
-    event_label: 'chat_whatsapp',
-    wa_button: wa_button,
-    link_url: waLink.href,
-    page_path: location.pathname
-  });
-}, true);
+
+  // Detecta links reales de WhatsApp por URL
+  function isWhatsAppLink(href) {
+    return /^(https?:\/\/)?(wa\.me|api\.whatsapp\.com|web\.whatsapp\.com)\//i.test(href || '');
+  }
+
+  // Tip PRO: identificar qué botón fue (si hay clases conocidas)
+  function getWaButtonType(el) {
+    // Links conocidos
+    if (el.classList && el.classList.contains('wa-float')) return 'floating_button';
+    if (el.classList && el.classList.contains('js-whatsapp')) return 'header_or_footer_icon';
+
+    // Botón del chat (button)
+    if (el.classList && el.classList.contains('vs-chat-wa-btn')) return 'chat_button';
+
+    return 'unknown_button';
+  }
+
+  // Delegación: escucha cualquier click en la página (captura antes de navegar)
+  document.addEventListener(
+    'click',
+    function (e) {
+      // 1) Caso LINK <a>
+      const a = e.target.closest && e.target.closest('a');
+      if (a) {
+        const href = a.href || a.getAttribute('href') || '';
+        if (!isWhatsAppLink(href)) return;
+
+        window.dataLayer.push({
+          event: 'whatsapp_click',
+          event_category: 'contact',
+          event_label: 'chat_whatsapp',
+          link_url: href,
+          wa_button: getWaButtonType(a)
+        });
+        return;
+      }
+
+      // 2) Caso BOTÓN del chat (<button>) que abre WhatsApp con window.open
+      const btn = e.target.closest && e.target.closest('button.vs-chat-wa-btn');
+      if (btn) {
+        // Intentamos leer la URL desde data-attribute si existe (opcional),
+        // y si no, dejamos vacío (igual te trackea el click + origen).
+        const url = btn.getAttribute('data-wa-url') || '';
+
+        window.dataLayer.push({
+          event: 'whatsapp_click',
+          event_category: 'contact',
+          event_label: 'chat_whatsapp',
+          link_url: url,
+          wa_button: getWaButtonType(btn)
+        });
+      }
+    },
+    true // CAPTURE: ayuda a que llegue antes de abrir otra página
+  );
+})();
 
 
   const faqs = [
@@ -3906,6 +3948,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'vs-chat-wa-btn';
+    btn.setAttribute('data-wa-url', WHATSAPP_URL);
     btn.textContent = 'Seguir por WhatsApp';
     btn.addEventListener('click', function () {
       window.open(WHATSAPP_URL, '_blank');
