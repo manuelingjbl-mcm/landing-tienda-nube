@@ -3840,66 +3840,38 @@ document.addEventListener('DOMContentLoaded', () => {
     '?text=' + encodeURIComponent(WHATSAPP_TEXT);
 
 (function () {
-  // Siempre aseguramos dataLayer
   window.dataLayer = window.dataLayer || [];
 
-  // Detecta links reales de WhatsApp por URL
   function isWhatsAppLink(href) {
-    return /^(https?:\/\/)?(wa\.me|api\.whatsapp\.com|web\.whatsapp\.com)\//i.test(href || '');
+    return /^(https?:\/\/)?(wa\.me|api\.whatsapp\.com|web\.whatsapp\.com)(\/|\?|$)/i.test(href || '');
   }
 
-  // Tip PRO: identificar qué botón fue (si hay clases conocidas)
-  function getWaButtonType(el) {
-    // Links conocidos
-    if (el.classList && el.classList.contains('wa-float')) return 'floating_button';
-    if (el.classList && el.classList.contains('js-whatsapp')) return 'header_or_footer_icon';
-
-    // Botón del chat (button)
-    if (el.classList && el.classList.contains('vs-chat-wa-btn')) return 'chat_button';
-
+  function getWaButtonType(a) {
+    if (a.classList.contains('wa-float')) return 'floating_button';
+    if (a.classList.contains('js-whatsapp')) return 'header_or_footer_icon';
     return 'unknown_button';
   }
 
-  // Delegación: escucha cualquier click en la página (captura antes de navegar)
   document.addEventListener(
     'click',
     function (e) {
-      // 1) Caso LINK <a>
-      const a = e.target.closest && e.target.closest('a');
-      if (a) {
-        const href = a.href || a.getAttribute('href') || '';
-        if (!isWhatsAppLink(href)) return;
+      const a = e.target.closest('a');
+      if (!a) return;
 
-        window.dataLayer.push({
-          event: 'whatsapp_click',
-          event_category: 'contact',
-          event_label: 'chat_whatsapp',
-          link_url: href,
-          wa_button: getWaButtonType(a)
-        });
-        return;
-      }
+      const hrefAttr = a.getAttribute('href') || '';
+      if (!isWhatsAppLink(hrefAttr)) return;
 
-      // 2) Caso BOTÓN del chat (<button>) que abre WhatsApp con window.open
-      const btn = e.target.closest && e.target.closest('button.vs-chat-wa-btn');
-      if (btn) {
-        // Intentamos leer la URL desde data-attribute si existe (opcional),
-        // y si no, dejamos vacío (igual te trackea el click + origen).
-        const url = btn.getAttribute('data-wa-url') || '';
-
-        window.dataLayer.push({
-          event: 'whatsapp_click',
-          event_category: 'contact',
-          event_label: 'chat_whatsapp',
-          link_url: url,
-          wa_button: getWaButtonType(btn)
-        });
-      }
+      window.dataLayer.push({
+        event: 'whatsapp_click',
+        event_category: 'contact',
+        event_label: 'chat_whatsapp',
+        link_url: a.href,
+        wa_button: getWaButtonType(a)
+      });
     },
-    true // CAPTURE: ayuda a que llegue antes de abrir otra página
+    true
   );
 })();
-
 
   const faqs = [
     {
