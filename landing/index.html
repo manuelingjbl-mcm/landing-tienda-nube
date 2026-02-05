@@ -1191,10 +1191,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </a>
 
       <div class="nav">
-        <a class="pill" href="#faq">FAQ</a>
-        <a class="btn btn-primary" href="#contacto">Quiero mi landing</a>
-      </div>
-    </div>
+  <a class="pill js-cta" data-cta="faq" data-loc="nav" href="#faq">FAQ</a>
+  <a class="btn btn-primary js-cta" data-cta="quiero_landing" data-loc="nav" href="#contacto">Quiero mi landing</a>
+</div>
+ </div>
   </div>
 
   <!-- HERO (dark) -->
@@ -1231,11 +1231,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </p>
 
     <div class="hero-ctas">
-      <a class="btn btn-primary" href="#contacto">Quiero mi landing</a>
-      <a class="btn" href="#incluye">Qué incluye</a>
-      <a class="btn" href="#proceso">Cómo trabajamos</a>
-    </div>
-  </div>
+  <a class="btn btn-primary js-cta" data-cta="quiero_landing" data-loc="hero" href="#contacto">Quiero mi landing</a>
+  <a class="btn js-cta" data-cta="que_incluye" data-loc="hero" href="#incluye">Qué incluye</a>
+  <a class="btn js-cta" data-cta="como_trabajamos" data-loc="hero" href="#proceso">Cómo trabajamos</a>
+</div>
+
 
   <!-- TRÁFICO FRÍO FULL WIDTH (debajo) -->
   <aside class="hero-side hero-side--wide reveal">
@@ -1275,9 +1275,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="divider"></div>
 
     <div class="side-actions">
-      <a class="btn" href="#por-que">Por qué no convierte</a>
-      <a class="btn" href="#contacto">Hablemos</a>
-    </div>
+  <a class="btn js-cta" data-cta="porque_no_convierte" data-loc="header" href="#por-que">Por qué no convierte</a>
+  <a class="btn js-cta" data-cta="hablemos" data-loc="header" href="#contacto">Hablemos</a>
+</div>
   </aside>
       </div>
     </div>
@@ -1515,7 +1515,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <textarea name="message" placeholder="Contame brevemente qué necesitás (campaña, oferta, público, qué te duele hoy)." required></textarea>
 
         <div class="form-foot">
-  <button class="btn btn-primary" type="submit">Quiero mi landing</button>
+  <button
+  class="btn btn-primary js-form-submit"
+  type="submit"
+  data-cta="quiero_landing"
+  data-loc="form_submit"
+>
+  Quiero mi landing
+</button>
 
   <div class="form-foot__meta">
     <div class="fine">No compartimos tus datos. Solo para responderte.</div>
@@ -1679,6 +1686,8 @@ document.addEventListener('click', (e) => {
 
 <script>
 (() => {
+  window.dataLayer = window.dataLayer || [];
+
   const form = document.getElementById('contact-form');
   if (!form) return;
 
@@ -1698,7 +1707,6 @@ document.addEventListener('click', (e) => {
     feedback.classList.remove('is-visible');
   };
 
-  // ✅ Mejora: al empezar a editar, limpia el feedback (1 sola vez)
   let clearArmed = false;
   const armClearOnEdit = () => {
     if (clearArmed) return;
@@ -1706,7 +1714,6 @@ document.addEventListener('click', (e) => {
 
     const onEdit = (e) => {
       const t = e.target;
-      // Solo si editan un campo del form (no cualquier click)
       if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT')) {
         clearStatus();
         form.removeEventListener('input', onEdit, true);
@@ -1715,15 +1722,12 @@ document.addEventListener('click', (e) => {
       }
     };
 
-    // capture=true para agarrar eventos aunque haya stops
     form.addEventListener('input', onEdit, true);
     form.addEventListener('change', onEdit, true);
   };
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
-    // limpia estado anterior sin mover layout
     clearStatus();
 
     const oldText = submitBtn ? submitBtn.textContent : '';
@@ -1742,14 +1746,36 @@ document.addEventListener('click', (e) => {
       });
 
       if (res.ok) {
+        // ✅ Evento REAL (envío exitoso)
+        window.dataLayer.push({
+          event: 'form_submit',
+          form_name: 'landing_form',
+          source: 'tn_landing'
+        });
+
         showStatus('✅ ¡Listo! Ya recibimos tu consulta.');
         form.reset();
-        armClearOnEdit(); // ✅ arma limpieza cuando vuelvan a escribir
+        armClearOnEdit();
       } else {
+        // (Opcional) para medir fallos
+        window.dataLayer.push({
+          event: 'form_error',
+          form_name: 'landing_form',
+          source: 'tn_landing',
+          status: res.status || 'unknown'
+        });
+
         showStatus('⚠️ Ups… No se pudo enviar. Probá de nuevo.');
         armClearOnEdit();
       }
     } catch (err) {
+      window.dataLayer.push({
+        event: 'form_error',
+        form_name: 'landing_form',
+        source: 'tn_landing',
+        status: 'network_error'
+      });
+
       showStatus('⚠️ Ups… No se pudo enviar. Probá de nuevo.');
       armClearOnEdit();
     } finally {
@@ -1760,6 +1786,26 @@ document.addEventListener('click', (e) => {
     }
   });
 })();
+</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  document.addEventListener('click', function(e){
+    var el = e.target.closest('a.js-cta, button.js-cta');
+    if(!el) return;
+
+    var cta = el.getAttribute('data-cta') || (el.textContent || '').trim() || 'unknown';
+    var loc = el.getAttribute('data-loc') || 'unknown';
+    var href = el.getAttribute('href') || '';
+
+    window.dataLayer.push({
+      event: 'cta_click',
+      cta_name: cta,
+      cta_location: loc,
+      link_url: href
+    });
+  }, true);
 </script>
 
 
