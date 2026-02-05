@@ -2666,6 +2666,30 @@ button.scroll-top-btn.is-visible{
   }
 }
 
+/* =========================
+   FIX iPad / tablets (sin tocar desktop grande ni mobile)
+   ========================= */
+
+/* Tablets y pantallas intermedias */
+@media (min-width: 768px) and (max-width: 1100px){
+  header.site-header{
+    min-height: 100vh;   /* fallback */
+    min-height: 100svh;  /* iOS visible */
+    min-height: 100dvh;  /* dinámico */
+  }
+}
+
+/* Tablets/landscape o pantallas “bajitas”: no fuerces full-height */
+@media (min-width: 768px) and (max-width: 1100px) and (max-height: 820px){
+  header.site-header{
+    min-height: auto;
+    padding-top: 24px;
+    padding-bottom: 40px;
+  }
+}
+
+ 
+
 </style>
 
  
