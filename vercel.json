@@ -9,8 +9,19 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/landing/",
+      "destination": "/landing",
+      "permanent": true
+    },
+    {
+      "source": "/politicas/",
+      "destination": "/politicas",
+      "permanent": true
+    }
   ]
 }
-
 
 
