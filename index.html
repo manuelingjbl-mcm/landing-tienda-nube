@@ -3607,7 +3607,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (response.ok) {
 
-  // ✅ Evento REAL (envío exitoso) + anti-duplicado
+// ✅ Evento REAL (envío exitoso) + anti-duplicado
 window.dataLayer = window.dataLayer || [];
 
 // Armamos nombres consistentes (sirve para home + landing)
@@ -3635,7 +3635,7 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
     event_label: formName
   });
 
-  // 2) (Opcional) Mantener el evento anterior para no romper triggers viejos
+  // 2) Mantener el evento anterior para no romper triggers viejos
   window.dataLayer.push({
     event: "form_submit",
     form_name: formName,
@@ -3644,7 +3644,7 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
     event_label: formName
   });
 }
-
+ 
   setStatus('¡Gracias! Tu consulta fue enviada con éxito. Te responderemos a la brevedad.', 'ok');
   form.reset();
   return;
