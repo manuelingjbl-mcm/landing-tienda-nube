@@ -1766,12 +1766,44 @@ document.addEventListener('click', (e) => {
       });
 
       if (res.ok) {
-        // ✅ Evento REAL (envío exitoso)
-        window.dataLayer.push({
-          event: 'form_submit',
-          form_name: 'landing_form',
-          source: 'tn_landing'
-        });
+        
+        // ✅ Evento REAL (envío exitoso) + anti-duplicado
+window.dataLayer = window.dataLayer || [];
+
+// Armamos nombres consistentes (sirve para home + landing)
+const formName =
+  (form && form.getAttribute && form.getAttribute("data-form-name")) ||
+  (form && form.id) ||
+  "landing_form";
+
+const leadSource =
+  (form && form.getAttribute && form.getAttribute("data-lead-source")) ||
+  (location.pathname.includes("landing") ? "tn_landing" : "web_home");
+
+// Anti doble-disparo (por listeners duplicados / reintentos)
+if (form && form.dataset && form.dataset.leadSent === "1") {
+  // ya lo enviamos una vez, no vuelvas a trackear
+} else {
+  if (form && form.dataset) form.dataset.leadSent = "1";
+
+  // 1) Evento principal para conversiones (GTM/GA4/Meta)
+  window.dataLayer.push({
+    event: "lead",
+    form_name: formName,
+    lead_source: leadSource,
+    event_category: "contact",
+    event_label: formName
+  });
+
+  // 2) (Opcional) Mantener el evento anterior para no romper triggers viejos
+  window.dataLayer.push({
+    event: "form_submit",
+    form_name: formName,
+    source: leadSource,
+    event_category: "contact",
+    event_label: formName
+  });
+}
 
         showStatus('✅ ¡Listo! Ya recibimos tu consulta.');
         form.reset();
