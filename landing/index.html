@@ -1795,7 +1795,7 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
     event_label: formName
   });
 
-  // 2) (Opcional) Mantener el evento anterior para no romper triggers viejos
+  // 2) Mantener el evento anterior para no romper triggers viejos
   window.dataLayer.push({
     event: "form_submit",
     form_name: formName,
