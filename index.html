@@ -2932,6 +2932,38 @@ select{
   margin-bottom: 0 !important;
 }
 
+ /* ===== FOOTER (FIX: sin hueco abajo + alineado al wrapper) ===== */
+.footer{
+  background:#020617;
+  margin:0 !important;
+  padding: 12px 0 10px !important;   /* más pegado abajo */
+  min-height: 0 !important;          /* por si algún style viejo metió height */
+}
+
+.footer .footer-inner{
+  max-width: 1100px;                 /* usá el mismo ancho que tus cards */
+  margin: 0 auto;
+  padding: 0 24px;                   /* respira en laterales */
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+}
+
+.footer span{ 
+  margin:0;
+  line-height:1.25;
+}
+
+/* Mobile */
+@media (max-width: 768px){
+  .footer .footer-inner{
+    flex-direction:column;
+    text-align:center;
+    gap:8px;
+  }
+}
+
  
 </style>
 
