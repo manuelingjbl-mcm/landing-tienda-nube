@@ -2666,6 +2666,38 @@ button.scroll-top-btn.is-visible{
   }
 }
 
+/* ✅ Grid de campos SOLO dentro del formulario (no rompe tu layout general) */
+#contact-form .contact-grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:12px;
+  margin-top:0;
+}
+
+/* Full width helper si usás grid-column inline (sirve igual) */
+#contact-form .contact-grid > div[style*="grid-column"]{
+  width:100%;
+}
+
+/* ✅ Select igual a inputs (importante para look PRO) */
+select{
+  width:100%;
+  border-radius:10px;
+  border:1px solid #374151;
+  background:#020617;
+  padding:8px 10px;
+  font-size:14px;
+  color:#e5e7eb;
+}
+
+/* ✅ Responsive */
+@media (max-width: 820px){
+  #contact-form .contact-grid{
+    grid-template-columns: 1fr;
+  }
+}
+ 
+ 
 </style>
 
  
