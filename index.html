@@ -2696,7 +2696,43 @@ select{
     grid-template-columns: 1fr;
   }
 }
- 
+
+ /* labels invisibles, pero accesibles */
+#contact-form label{
+  position:absolute !important;
+  width:1px !important;
+  height:1px !important;
+  padding:0 !important;
+  margin:-1px !important;
+  overflow:hidden !important;
+  clip:rect(0, 0, 0, 0) !important;
+  white-space:nowrap !important;
+  border:0 !important;
+}
+#contact-form .contact-grid > div{ position:relative; }
+
+/* Select con look de input */
+#contact-form select{
+  width:100%;
+  border-radius:10px;
+  border:1px solid #374151;
+  background:#020617;
+  padding:8px 10px;
+  font-size:14px;
+  color:#e5e7eb;
+}
+
+/* Que el “placeholder option” se vea como placeholder */
+#contact-form select:required:invalid{
+  color:#6b7280;
+}
+
+/* Placeholders input/textarea */
+#contact-form input::placeholder,
+#contact-form textarea::placeholder{
+  color:#6b7280;
+}
+
  
 </style>
 
@@ -3500,34 +3536,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <div>
-          <label>WhatsApp (opcional)</label>
-          <input type="tel" name="whatsapp"
-                 placeholder="+54 9 ..." inputmode="tel" />
-        </div>
+  <label for="whatsapp">WhatsApp</label>
+  <input id="whatsapp" type="tel" name="whatsapp"
+         placeholder="WhatsApp (opcional) · +54 9 ..."
+         inputmode="tel" autocomplete="tel" />
+</div>
 
         <!-- Filtro 1 -->
         <div>
-          <label>¿En qué etapa estás?</label>
-          <select name="etapa" required>
-            <option value="" selected disabled>Elegí una opción</option>
-            <option value="ya_tengo_tienda_optimizacion">Ya tengo Tienda Nube y quiero optimizar</option>
-            <option value="armando_desde_cero">Estoy armando desde cero</option>
-            <option value="migrar_a_tn">Quiero migrar a Tienda Nube</option>
-            <option value="solo_averiguo">Solo estoy averiguando</option>
-          </select>
-        </div>
+  <label for="etapa">Etapa</label>
+  <select id="etapa" name="etapa" required>
+    <option value="" disabled selected hidden>¿En qué etapa estás?</option>
+    <option value="ya_tengo_tienda_optimizacion">Ya tengo Tienda Nube y quiero optimizar</option>
+    <option value="armando_desde_cero">Estoy armando desde cero</option>
+    <option value="migrar_a_tn">Quiero migrar a Tienda Nube</option>
+    <option value="solo_averiguo">Solo estoy averiguando</option>
+  </select>
+</div>
 
         <!-- Filtro 2 -->
         <div>
-          <label>¿Para cuándo querés tenerlo listo?</label>
-          <select name="plazo" required>
-            <option value="" selected disabled>Elegí un plazo</option>
-            <option value="esta_semana">Esta semana</option>
-            <option value="30_dias">En 30 días</option>
-            <option value="60_90_dias">En 60–90 días</option>
-            <option value="mas_adelante">Más adelante</option>
-          </select>
-        </div>
+  <label for="plazo">Plazo</label>
+  <select id="plazo" name="plazo" required>
+    <option value="" disabled selected hidden>¿Para cuándo querés tenerlo listo?</option>
+    <option value="esta_semana">Esta semana</option>
+    <option value="30_dias">En 30 días</option>
+    <option value="60_90_dias">En 60–90 días</option>
+    <option value="mas_adelante">Más adelante</option>
+  </select>
+</div>
 
         <!-- Textarea full width -->
         <div style="grid-column: 1 / -1;">
@@ -3539,14 +3576,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <!-- Filtro suave opcional -->
         <div style="grid-column: 1 / -1;">
-          <label>Nivel de inversión estimado (opcional)</label>
-          <select name="nivel_inversion">
-            <option value="" selected>Prefiero no decirlo</option>
-            <option value="listo_para_invertir">Estoy listo para invertir</option>
-            <option value="quiero_estimacion">Quiero una estimación para decidir</option>
-            <option value="solo_comparando">Solo estoy comparando por ahora</option>
-          </select>
-        </div>
+  <label for="nivel_inversion">Nivel de inversión</label>
+  <select id="nivel_inversion" name="nivel_inversion">
+    <option value="" selected>Inversión estimada (opcional)</option>
+    <option value="listo_para_invertir">Estoy listo para invertir</option>
+    <option value="quiero_estimacion">Quiero una estimación para decidir</option>
+    <option value="solo_comparando">Solo estoy comparando por ahora</option>
+  </select>
+</div>
 
         <!-- CTA + microcopy -->
         <div style="grid-column: 1 / -1;">
