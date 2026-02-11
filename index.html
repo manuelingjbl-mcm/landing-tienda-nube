@@ -1409,7 +1409,7 @@ text-underline-offset: 3px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:10px;
+  gap:16px;
 }
 
 /* evita que se corten raro, pero permite bajar si hace falta */
@@ -1425,9 +1425,7 @@ text-underline-offset: 3px;
   }
 }
 
-
-
-/* ====== BOTÓN FLOTANTE ====== */
+ /* ====== BOTÓN FLOTANTE ====== */
 .chat-launcher {
   position: fixed;
   right: 24px;
@@ -2926,7 +2924,14 @@ select{
   line-height: 1.4;
 }
 
- 
+ /* 🔧 Recorta el aire extra entre la card de redes y el footer */
+#contacto.contact-shell{
+  padding-bottom: 24px !important; /* probá 18–28 */
+}
+#contacto{
+  margin-bottom: 0 !important;
+}
+
  
 </style>
 
