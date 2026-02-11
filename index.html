@@ -1396,32 +1396,35 @@ text-underline-offset: 3px;
   margin: 0; /* sin espacios extra arriba o abajo */
 }
 
-/* ===== Footer: texto a los lados y fondo oscuro ===== */
-.footer {
-  background: #020617;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 24px 32px;
-  gap: 16px;
-  font-size: 12px;
-  color: #9ca3af;
+/* ===== Footer: alineado al wrapper ===== */
+.footer{
+  background:#020617;
+  padding: 18px 0 32px;          /* sin padding lateral */
+  font-size:12px;
+  color:#9ca3af;
 }
 
-.footer span {
-  white-space: nowrap;
+/* el que alinea con las cards (va dentro del wrapper) */
+.footer .footer-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
 }
 
-/* Mobile: footer centrado y columnas del contacto en una sola */
-@media (max-width: 768px) {
-  #contacto .contact-grid {
-    grid-template-columns: 1fr;
-  }
-  .footer {
-    flex-direction: column;
-    text-align: center;
+/* evita que se corten raro, pero permite bajar si hace falta */
+.footer span{
+  white-space: normal;            /* antes: nowrap */
+}
+
+/* Mobile */
+@media (max-width: 768px){
+  .footer .footer-inner{
+    flex-direction:column;
+    text-align:center;
   }
 }
+
 
 
 /* ====== BOTÓN FLOTANTE ====== */
