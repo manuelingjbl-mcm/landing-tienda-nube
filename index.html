@@ -2844,6 +2844,78 @@ select{
   text-underline-offset: 3px;
 }
 
+/* =========================
+   CONTACTO — PATCH FINAL (CTA + ICONOS + TIPOS + TITULOS)
+   Pegalo AL FINAL del <style>
+   ========================= */
+
+/* 1) Tipografía consistente SOLO en contacto */
+#contacto.contact-shell{
+  font-size:14px;          /* si tu web es más compacta, bajalo a 13px */
+  line-height:1.5;
+}
+
+/* textos dentro del bloque */
+#contacto.contact-shell p{ 
+  font-size:14px;
+  color:#d1d5db;
+}
+
+/* 2) Títulos que se te pusieron grises (suele ser opacity heredada por reveal o estilos globales) */
+#contacto.contact-shell .section-title{
+  color:#9ca3af !important;
+  opacity:1 !important;
+}
+#contacto.contact-shell h2{
+  color:#e5e7eb !important;
+  opacity:1 !important;
+}
+#contacto.contact-shell .contact-meta{
+  color:#9ca3af !important;
+  opacity:1 !important;
+}
+
+/* 3) CTA BUTTON — recupera la “píldora” PRO */
+#contacto .contact-submit{
+  appearance:none;
+  -webkit-appearance:none;
+  border:1px solid rgba(148,163,184,.22);
+  background:#f8fafc;
+  color:#0b1220;
+  border-radius:999px;
+  padding:14px 22px;
+  font-weight:600;
+  cursor:pointer;
+  transition: transform .12s ease, filter .12s ease;
+}
+#contacto .contact-submit:hover{
+  transform: translateY(-1px);
+  filter: brightness(0.98);
+}
+
+/* Mantener comportamiento desktop/mobile que ya tenías */
+#contacto .contact-cta .contact-submit{ width:340px !important; }
+@media (max-width: 920px){
+  #contacto .contact-cta .contact-submit{ width:100% !important; }
+}
+
+/* 4) ICONOS — si se te pusieron negros, esto los “blanquea” */
+#contacto .contact-social-icon img{
+  filter: invert(1);
+  opacity:.95;
+}
+
+/* por si algún ícono es SVG inline */
+#contacto .contact-social-item svg{
+  fill:#e5e7eb;
+}
+
+/* 5) Por si algún style global te achata/rompe el grid del CTA */
+#contacto .contact-cta__copy{
+  margin:0 !important;
+  color:#e5e7eb;
+}
+
  
 </style>
 
