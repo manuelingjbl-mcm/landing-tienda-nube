@@ -2704,7 +2704,14 @@ select{
 /* Sección */
 .contact-shell{
   padding:56px 0 48px;
+
+  /* ✅ Base tipográfica para que NO se vea más grande que el resto del sitio */
+  font-size:14px;     /* ajustá a 13px si tu web va más compacta */
+  line-height:1.5;
 }
+
+/* Normaliza textos dentro del bloque */
+.contact-shell p{ font-size:14px; }
 
 /* Card base (la usan SOLO: form card + redes card) */
 .contact-box{
@@ -2754,6 +2761,11 @@ select{
   margin-top:18px;
 }
 
+/* ✅ ayuda a que cada celda “estire” igual y no te suba Email */
+.contact-grid > div{ display:flex; }
+.contact-grid > div > input,
+.contact-grid > div > select{ flex:1; }
+
 /* spans */
 .contact-span-2{ grid-column: 1 / -1; }
 
@@ -2786,6 +2798,8 @@ select{
   width:100%;
   box-sizing:border-box;
   display:block;
+
+  /* ✅ hereda tamaño del bloque (14px) para que coincida con la página */
   font:inherit;
 
   border-radius:10px;
@@ -2795,12 +2809,17 @@ select{
   outline:none;
 }
 
-/* ✅ FIX ALINEACIÓN: misma altura para inputs + selects (Nombre / Email quedan alineados) */
+/* ✅ FIX ALINEACIÓN: altura consistente SIN line-height gigante */
 .contact-grid input,
 .contact-grid select{
-  height:44px;
-  padding:0 12px;
-  line-height:44px;
+  min-height:44px;
+  padding:10px 12px;   /* centra el texto visualmente */
+  line-height:1.2;     /* evita que Email se vea más “alto” */
+}
+
+/* Select: deja aire para el chevron */
+.contact-grid select{
+  padding-right:40px;
 }
 
 /* Textarea */
