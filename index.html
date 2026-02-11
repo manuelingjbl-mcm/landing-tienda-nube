@@ -2967,6 +2967,11 @@ select{
   .contact-cta .contact-submit{ width:100% !important; }
 }
 
+ .desktop-break{ display:none; }
+@media (min-width: 921px){
+  .desktop-break{ display:inline; }
+}
+
  
 </style>
 
@@ -3816,8 +3821,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
            <button class="contact-submit" type="submit">Recibir plan + presupuesto</button>
 
            <p class="contact-microcopy contact-cta__copy">
-           Todas las consultas las respondo yo, Manuel. Si estás comparando opciones, igual te respondo con próximos pasos claros.
-          </p>
+            Todas las consultas las respondo yo, Manuel.
+          <span class="desktop-break"><br></span>
+         Si estás comparando opciones, igual te respondo con próximos pasos claros
+         </p>
           </div>
 
          <p id="form-status" class="form-status" aria-live="polite"></p>
