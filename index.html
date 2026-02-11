@@ -2697,41 +2697,45 @@ select{
   }
 }
 
- /* labels invisibles, pero accesibles */
-#contact-form label{
+/* Encapsulado tipo landing */
+.contact-shell{ padding:56px 0 48px; }
+.contact-card{
+  border:1px solid rgba(148,163,184,.18);
+  background: radial-gradient(circle at top left, rgba(255,255,255,.06), transparent 55%),
+              rgba(2,6,23,.78);
+  border-radius:22px;
+  padding:26px;
+  box-shadow: 0 22px 45px rgba(0,0,0,.45);
+}
+
+/* textitos */
+.contact-meta{ margin-top:12px; font-size:13px; color:#9ca3af; }
+.contact-microcopy{ margin-top:10px; font-size:13px; color:#9ca3af; }
+.contact-footer{ margin-top:18px; }
+
+/* spans */
+.contact-span-2{ grid-column: 1 / -1; }
+
+/* labels solo accesibilidad */
+.sr-only{
   position:absolute !important;
   width:1px !important;
   height:1px !important;
   padding:0 !important;
   margin:-1px !important;
   overflow:hidden !important;
-  clip:rect(0, 0, 0, 0) !important;
+  clip:rect(0,0,0,0) !important;
   white-space:nowrap !important;
   border:0 !important;
 }
-#contact-form .contact-grid > div{ position:relative; }
 
-/* Select con look de input */
-#contact-form select{
-  width:100%;
-  border-radius:10px;
-  border:1px solid #374151;
-  background:#020617;
-  padding:8px 10px;
-  font-size:14px;
-  color:#e5e7eb;
+/* mobile */
+@media (max-width: 920px){
+  .contact-card{ padding:20px; border-radius:18px; }
+  .contact-grid{ grid-template-columns:1fr; gap:12px; }
+  .contact-span-2{ grid-column:auto; }
 }
-
-/* Que el “placeholder option” se vea como placeholder */
-#contact-form select:required:invalid{
-  color:#6b7280;
-}
-
-/* Placeholders input/textarea */
-#contact-form input::placeholder,
-#contact-form textarea::placeholder{
-  color:#6b7280;
-}
+ 
 
  
 </style>
@@ -3491,151 +3495,154 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 <!-- /QUIÉN ESTÁ DETRÁS -->
 
-    
- <!-- CONTACTO -->
-<section id="contacto" class="contact-section reveal">
+<!-- CONTACTO -->
+<section id="contacto" class="contact-section contact-shell reveal">
   <div class="wrapper">
 
-    <!-- BLOQUE SUPERIOR (tipo landing) -->
-    <div class="section-title">Contacto</div>
-    <h2>Recibí tu Plan + Presupuesto</h2>
-    <p>
-      Contanos en qué etapa estás y qué querés lograr. Te respondo con un
-      <strong>plan de acción + presupuesto estimado</strong>, sin letra chica.
-    </p>
-    <p style="margin-top:12px;font-size:13px;color:#9ca3af;">
-      Tiempo estimado de respuesta: 24/48 hs hábiles.
-    </p>
+    <!-- Encapsulado tipo landing -->
+    <div class="contact-card">
+      <div class="section-title">Contacto</div>
 
-    <!-- FORMULARIO (debajo del bloque superior) -->
-    <form id="contact-form"
-          method="POST"
-          action="https://formspree.io/f/mzzodepb">
-
-      <input type="hidden" name="_subject" value="Plan + Presupuesto — Consulta desde Tienda Vía CLOUD" />
-      <input type="hidden" name="source" value="main_landing" />
-
-      <div class="contact-grid">
-        <!-- Columna 1 -->
-        <div>
-          <label>Nombre y marca</label>
-          <input type="text" name="nombre_marca"
-                 placeholder="Nombre y marca" required />
-        </div>
-
-        <div>
-          <label>Email</label>
-          <input type="email" name="email"
-                 placeholder="Email" required />
-        </div>
-
-        <div>
-          <label>Instagram o sitio actual (opcional)</label>
-          <input type="text" name="instagram_sitio"
-                 placeholder="Instagram o sitio actual" />
-        </div>
-
-        <div>
-  <label for="whatsapp">WhatsApp</label>
-  <input id="whatsapp" type="tel" name="whatsapp"
-         placeholder="WhatsApp (opcional) · +54 9 ..."
-         inputmode="tel" autocomplete="tel" />
-</div>
-
-        <!-- Filtro 1 -->
-        <div>
-  <label for="etapa">Etapa</label>
-  <select id="etapa" name="etapa" required>
-    <option value="" disabled selected hidden>¿En qué etapa estás?</option>
-    <option value="ya_tengo_tienda_optimizacion">Ya tengo Tienda Nube y quiero optimizar</option>
-    <option value="armando_desde_cero">Estoy armando desde cero</option>
-    <option value="migrar_a_tn">Quiero migrar a Tienda Nube</option>
-    <option value="solo_averiguo">Solo estoy averiguando</option>
-  </select>
-</div>
-
-        <!-- Filtro 2 -->
-        <div>
-  <label for="plazo">Plazo</label>
-  <select id="plazo" name="plazo" required>
-    <option value="" disabled selected hidden>¿Para cuándo querés tenerlo listo?</option>
-    <option value="esta_semana">Esta semana</option>
-    <option value="30_dias">En 30 días</option>
-    <option value="60_90_dias">En 60–90 días</option>
-    <option value="mas_adelante">Más adelante</option>
-  </select>
-</div>
-
-        <!-- Textarea full width -->
-        <div style="grid-column: 1 / -1;">
-          <label>Contanos brevemente qué necesitás</label>
-          <textarea name="mensaje"
-                    placeholder="¿Qué vendés? ¿Qué querés mejorar primero (diseño, pagos, envíos, ventas, medición)? ¿Tenés algo ya armado?"
-                    required></textarea>
-        </div>
-
-        <!-- Filtro suave opcional -->
-        <div style="grid-column: 1 / -1;">
-  <label for="nivel_inversion">Nivel de inversión</label>
-  <select id="nivel_inversion" name="nivel_inversion">
-    <option value="" selected>Inversión estimada (opcional)</option>
-    <option value="listo_para_invertir">Estoy listo para invertir</option>
-    <option value="quiero_estimacion">Quiero una estimación para decidir</option>
-    <option value="solo_comparando">Solo estoy comparando por ahora</option>
-  </select>
-</div>
-
-        <!-- CTA + microcopy -->
-        <div style="grid-column: 1 / -1;">
-          <button type="submit">Recibir plan + presupuesto</button>
-          <p id="form-status" class="form-status" aria-live="polite"></p>
-          <p style="margin-top:10px;font-size:13px;color:#9ca3af;">
-            Todas las consultas las respondo yo, Manuel. Si estás comparando opciones, igual te respondo con próximos pasos claros.
-          </p>
-        </div>
-      </div>
-    </form>
-
-    <!-- REDES AL FINAL (como pediste) -->
-    <div style="margin-top:18px;">
-      <div class="contact-social-row">
-        <a class="contact-social-item js-whatsapp"
-           href="https://wa.me/5491159288093"
-           target="_blank" rel="noopener noreferrer">
-          <span class="contact-social-icon">
-            <img src="icon-whatsapp.png" alt="WhatsApp">
-          </span>
-        </a>
-
-        <a class="contact-social-item"
-           href="https://instagram.com/manuelrubis"
-           target="_blank" rel="noopener noreferrer">
-          <span class="contact-social-icon">
-            <img src="icon-instagram.png" alt="Instagram">
-          </span>
-        </a>
-
-        <a class="contact-social-item"
-           href="https://www.facebook.com/manuelcmdigital"
-           target="_blank" rel="noopener noreferrer">
-          <span class="contact-social-icon">
-            <img src="icon-facebook.png" alt="Facebook">
-          </span>
-        </a>
-      </div>
-
-      <p class="contact-email">
-        Email: <a href="mailto:viacloudstudio@gmail.com">viacloudstudio@gmail.com</a>
+      <h2>Recibí tu Plan + Presupuesto</h2>
+      <p>
+        Contanos en qué etapa estás y qué querés lograr. Te respondo con un
+        <strong>plan de acción + presupuesto estimado</strong>, sin letra chica.
+      </p>
+      <p class="contact-meta">
+        Tiempo estimado de respuesta: 24/48 hs hábiles.
       </p>
 
-      <p class="contact-small-note">
-        Al enviar este formulario aceptás nuestra <a href="/politicas/">Política de Privacidad</a>.
-      </p>
+      <!-- FORMULARIO -->
+      <form id="contact-form" method="POST" action="https://formspree.io/f/mzzodepb">
+        <input type="hidden" name="_subject" value="Plan + Presupuesto — Consulta desde Tienda Vía CLOUD" />
+        <input type="hidden" name="source" value="main_landing" />
+
+        <div class="contact-grid">
+          <!-- Nombre y marca -->
+          <div>
+            <label class="sr-only" for="nombre_marca">Nombre y marca</label>
+            <input id="nombre_marca" type="text" name="nombre_marca"
+                   placeholder="Nombre y marca" required />
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label class="sr-only" for="email">Email</label>
+            <input id="email" type="email" name="email"
+                   placeholder="Email" required />
+          </div>
+
+          <!-- Instagram / sitio -->
+          <div>
+            <label class="sr-only" for="instagram_sitio">Instagram o sitio actual</label>
+            <input id="instagram_sitio" type="text" name="instagram_sitio"
+                   placeholder="Instagram o sitio actual (opcional)" />
+          </div>
+
+          <!-- WhatsApp -->
+          <div>
+            <label class="sr-only" for="whatsapp">WhatsApp</label>
+            <input id="whatsapp" type="tel" name="whatsapp"
+                   placeholder="WhatsApp (opcional) · +54 9 ..."
+                   inputmode="tel" autocomplete="tel" />
+          </div>
+
+          <!-- Etapa -->
+          <div>
+            <label class="sr-only" for="etapa">Etapa</label>
+            <select id="etapa" name="etapa" required>
+              <option value="" disabled selected hidden>¿En qué etapa estás?</option>
+              <option value="ya_tengo_tienda_optimizacion">Ya tengo Tienda Nube y quiero optimizar</option>
+              <option value="armando_desde_cero">Estoy armando desde cero</option>
+              <option value="migrar_a_tn">Quiero migrar a Tienda Nube</option>
+              <option value="solo_averiguo">Solo estoy averiguando</option>
+            </select>
+          </div>
+
+          <!-- Plazo -->
+          <div>
+            <label class="sr-only" for="plazo">Plazo</label>
+            <select id="plazo" name="plazo" required>
+              <option value="" disabled selected hidden>¿Para cuándo querés tenerlo listo?</option>
+              <option value="esta_semana">Esta semana</option>
+              <option value="30_dias">En 30 días</option>
+              <option value="60_90_dias">En 60–90 días</option>
+              <option value="mas_adelante">Más adelante</option>
+            </select>
+          </div>
+
+          <!-- Mensaje full -->
+          <div class="contact-span-2">
+            <label class="sr-only" for="mensaje">Contanos brevemente qué necesitás</label>
+            <textarea id="mensaje" name="mensaje"
+                      placeholder="¿Qué vendés? ¿Qué querés mejorar primero (diseño, pagos, envíos, ventas, medición)? ¿Tenés algo ya armado?"
+                      required></textarea>
+          </div>
+
+          <!-- Nivel inversión -->
+          <div class="contact-span-2">
+            <label class="sr-only" for="nivel_inversion">Nivel de inversión</label>
+            <select id="nivel_inversion" name="nivel_inversion">
+              <option value="" selected>Inversión estimada (opcional)</option>
+              <option value="listo_para_invertir">Estoy listo para invertir</option>
+              <option value="quiero_estimacion">Quiero una estimación para decidir</option>
+              <option value="solo_comparando">Solo estoy comparando por ahora</option>
+            </select>
+          </div>
+
+          <!-- CTA -->
+          <div class="contact-span-2">
+            <button type="submit">Recibir plan + presupuesto</button>
+            <p id="form-status" class="form-status" aria-live="polite"></p>
+            <p class="contact-microcopy">
+              Todas las consultas las respondo yo, Manuel. Si estás comparando opciones, igual te respondo con próximos pasos claros.
+            </p>
+          </div>
+        </div>
+      </form>
+
+      <!-- REDES -->
+      <div class="contact-footer">
+        <div class="contact-social-row">
+          <a class="contact-social-item js-whatsapp"
+             href="https://wa.me/5491159288093"
+             target="_blank" rel="noopener noreferrer">
+            <span class="contact-social-icon">
+              <img src="icon-whatsapp.png" alt="WhatsApp">
+            </span>
+          </a>
+
+          <a class="contact-social-item"
+             href="https://instagram.com/manuelrubis"
+             target="_blank" rel="noopener noreferrer">
+            <span class="contact-social-icon">
+              <img src="icon-instagram.png" alt="Instagram">
+            </span>
+          </a>
+
+          <a class="contact-social-item"
+             href="https://www.facebook.com/manuelcmdigital"
+             target="_blank" rel="noopener noreferrer">
+            <span class="contact-social-icon">
+              <img src="icon-facebook.png" alt="Facebook">
+            </span>
+          </a>
+        </div>
+
+        <p class="contact-email">
+          Email: <a href="mailto:viacloudstudio@gmail.com">viacloudstudio@gmail.com</a>
+        </p>
+
+        <p class="contact-small-note">
+          Al enviar este formulario aceptás nuestra <a href="/politicas/">Política de Privacidad</a>.
+        </p>
+      </div>
     </div>
 
-  </div> <!-- /wrapper -->
+  </div>
 </section>
 
+ 
 <!-- DIVISOR ANTES DEL FOOTER -->
 <div class="footer-full-divider"></div>
 
