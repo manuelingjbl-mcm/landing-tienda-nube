@@ -1400,7 +1400,7 @@ text-underline-offset: 3px;
 .footer{
   background:#020617;
   margin:0 !important;
-  padding: 14px 0 16px !important;   /* 👈 aire arriba/abajo */
+  padding: 15px 0 17px !important;   /* 👈 aire arriba/abajo */
   border-top: 1px solid rgba(148,163,184,.14); /* opcional, si querés línea suave */
 }
 
@@ -2937,6 +2937,24 @@ select{
   margin-bottom: 0 !important;
 }
 
+/* ===== FIX: tipografía consistente en el footer ===== */
+.footer{
+  font-size:12px !important;
+  line-height:1.35 !important;
+  color:#9ca3af !important;
+}
+
+.footer span{
+  font-size:inherit !important;
+  line-height:inherit !important;
+  color:inherit !important;
+}
+
+/* por si algún estilo global agranda links */
+.footer a{
+  font-size:inherit !important;
+  line-height:inherit !important;
+}
  
  
 </style>
