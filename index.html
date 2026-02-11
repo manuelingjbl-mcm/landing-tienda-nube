@@ -2702,17 +2702,7 @@ select{
   padding:56px 0 48px;
 }
 
-/* ✅ OJO: .contact-card ahora es SOLO para la card de redes (no para envolver todo el form) */
-.contact-card{
-  border:1px solid rgba(148,163,184,.18);
-  background: radial-gradient(circle at top left, rgba(255,255,255,.06), transparent 55%),
-              rgba(2,6,23,.78);
-  border-radius:22px;
-  padding:18px 18px;
-  box-shadow: 0 22px 45px rgba(0,0,0,.45);
-}
-
-/* ✅ Nueva clase: si querés una “card grande” para envolver FORM + textos */
+/* Panel principal (solo título + texto + form) */
 .contact-panel{
   border:1px solid rgba(148,163,184,.18);
   background: radial-gradient(circle at top left, rgba(255,255,255,.06), transparent 55%),
@@ -2720,6 +2710,21 @@ select{
   border-radius:22px;
   padding:26px;
   box-shadow: 0 22px 45px rgba(0,0,0,.45);
+}
+
+/* Card de redes (solo redes) */
+.contact-card{
+  border:1px solid rgba(148,163,184,.18);
+  background: radial-gradient(circle at top left, rgba(255,255,255,.06), transparent 55%),
+              rgba(2,6,23,.78);
+  border-radius:22px;
+  padding:18px;
+  box-shadow: 0 22px 45px rgba(0,0,0,.45);
+
+  display:grid;
+  grid-template-columns: 1fr auto;
+  gap:16px;
+  align-items:center;
 }
 
 /* textitos */
@@ -2755,33 +2760,7 @@ select{
   border:0 !important;
 }
 
-/* mobile */
-@media (max-width: 920px){
-  .contact-panel{
-    padding:20px;
-    border-radius:18px;
-  }
-  .contact-card{
-    padding:14px;
-    border-radius:18px;
-  }
-  .contact-grid{
-    grid-template-columns:1fr;
-    gap:12px;
-  }
-  .contact-span-2{
-    grid-column:auto;
-  }
-}
- 
-/* Card redes tipo landing */
-.contact-card{
-  display:grid;
-  grid-template-columns: 1fr auto;
-  gap:16px;
-  align-items:center;
-}
-
+/* Redes */
 .contact-social-kicker{
   font-size:12px;
   letter-spacing:.14em;
@@ -2789,21 +2768,18 @@ select{
   color:#9ca3af;
   margin-bottom:6px;
 }
-
 .contact-social-text{
   margin:0;
   font-size:14px;
   color:#d1d5db;
   line-height:1.5;
 }
-
 .contact-social-row{
   display:flex;
   gap:10px;
   align-items:center;
   justify-content:flex-end;
 }
-
 .contact-social-item{
   display:inline-flex;
   align-items:center;
@@ -2815,19 +2791,17 @@ select{
   background: rgba(2,6,23,.55);
   transition: transform .12s ease, border-color .12s ease;
 }
-
 .contact-social-item:hover{
   transform: translateY(-1px);
   border-color: rgba(148,163,184,.42);
 }
-
 .contact-social-icon img{
   width:22px;
   height:22px;
   display:block;
 }
 
-/* línea superior para email + privacidad dentro de la card */
+/* línea inferior dentro de la card de redes */
 .contact-footer-line{
   grid-column: 1 / -1;
   margin-top:10px;
@@ -2839,14 +2813,12 @@ select{
   justify-content:space-between;
   align-items:center;
 }
-
 .contact-email,
 .contact-small-note{
   margin:0;
   font-size:13px;
   color:#9ca3af;
 }
-
 .contact-email a,
 .contact-small-note a{
   color:#e5e7eb;
@@ -2854,11 +2826,24 @@ select{
   text-underline-offset: 3px;
 }
 
-/* Mobile */
+/* mobile */
 @media (max-width: 920px){
+  .contact-panel{
+    padding:20px;
+    border-radius:18px;
+  }
   .contact-card{
+    padding:14px;
+    border-radius:18px;
     grid-template-columns: 1fr;
     justify-items:start;
+  }
+  .contact-grid{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+  .contact-span-2{
+    grid-column:auto;
   }
   .contact-social-row{
     justify-content:flex-start;
@@ -3734,53 +3719,51 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div><!-- /contact-panel -->
 
     <!-- REDES (card tipo landing) -->
-    <div class="contact-footer">
-      <div class="contact-social-card" aria-label="Conectemos">
-        <div class="contact-social-card__left">
-          <div class="contact-social-kicker">CONECTEMOS</div>
-          <p class="contact-social-text">
-            ¿Tenés una idea o campaña en mente? Escribime por Instagram o Facebook y lo vemos.
-          </p>
-        </div>
+<div class="contact-footer">
+  <div class="contact-card" aria-label="Conectemos">
+    <div>
+      <div class="contact-social-kicker">CONECTEMOS</div>
+      <p class="contact-social-text">
+        ¿Tenés una idea o campaña en mente? Escribime por Instagram o Facebook y lo vemos.
+      </p>
+    </div>
 
-        <div class="contact-social-card__right">
-          <div class="contact-social-row">
-            <a class="contact-social-item js-whatsapp"
-               href="https://wa.me/5491159288093"
-               target="_blank" rel="noopener noreferrer">
-              <span class="contact-social-icon">
-                <img src="icon-whatsapp.png" alt="WhatsApp">
-              </span>
-            </a>
+    <div class="contact-social-row">
+      <a class="contact-social-item js-whatsapp"
+         href="https://wa.me/5491159288093"
+         target="_blank" rel="noopener noreferrer">
+        <span class="contact-social-icon">
+          <img src="icon-whatsapp.png" alt="WhatsApp">
+        </span>
+      </a>
 
-            <a class="contact-social-item"
-               href="https://instagram.com/manuelrubis"
-               target="_blank" rel="noopener noreferrer">
-              <span class="contact-social-icon">
-                <img src="icon-instagram.png" alt="Instagram">
-              </span>
-            </a>
+      <a class="contact-social-item"
+         href="https://instagram.com/manuelrubis"
+         target="_blank" rel="noopener noreferrer">
+        <span class="contact-social-icon">
+          <img src="icon-instagram.png" alt="Instagram">
+        </span>
+      </a>
 
-            <a class="contact-social-item"
-               href="https://www.facebook.com/manuelcmdigital"
-               target="_blank" rel="noopener noreferrer">
-              <span class="contact-social-icon">
-                <img src="icon-facebook.png" alt="Facebook">
-              </span>
-            </a>
-          </div>
-        </div>
+      <a class="contact-social-item"
+         href="https://www.facebook.com/manuelcmdigital"
+         target="_blank" rel="noopener noreferrer">
+        <span class="contact-social-icon">
+          <img src="icon-facebook.png" alt="Facebook">
+        </span>
+      </a>
+    </div>
 
-        <div class="contact-social-card__bottom">
-          <p class="contact-email">
-            Email: <a href="mailto:viacloudstudio@gmail.com">viacloudstudio@gmail.com</a>
-          </p>
-          <p class="contact-small-note">
-            Al enviar este formulario aceptás nuestra <a href="/politicas/">Política de Privacidad</a>.
-          </p>
-        </div>
-      </div>
-    </div><!-- /contact-footer -->
+    <div class="contact-footer-line">
+      <p class="contact-email">
+        Email: <a href="mailto:viacloudstudio@gmail.com">viacloudstudio@gmail.com</a>
+      </p>
+      <p class="contact-small-note">
+        Al enviar este formulario aceptás nuestra <a href="/politicas/">Política de Privacidad</a>.
+      </p>
+    </div>
+  </div>
+</div><!-- /contact-footer -->
 
   </div><!-- /wrapper -->
 </section>
