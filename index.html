@@ -2697,27 +2697,32 @@ select{
   }
 }
 
-/* Encapsulado tipo landing */
+/* =========================
+   CONTACTO (LIMPIO + PRO)
+   ========================= */
+
+/* Sección */
 .contact-shell{
   padding:56px 0 48px;
 }
 
-/* ✅ Card base (la usan SOLO: form card + redes card) */
+/* Card base (la usan SOLO: form card + redes card) */
 .contact-box{
   border:1px solid rgba(148,163,184,.18);
-  background: radial-gradient(circle at top left, rgba(255,255,255,.06), transparent 55%),
-              rgba(2,6,23,.78);
+  background:
+    radial-gradient(circle at top left, rgba(255,255,255,.06), transparent 55%),
+    rgba(2,6,23,.78);
   border-radius:22px;
   box-shadow: 0 22px 45px rgba(0,0,0,.45);
 }
 
-/* ✅ Card del FORM (más “grande”, como la de la landing) */
+/* Card del FORM (más grande, como la landing) */
 .contact-form-card{
   padding:26px;
   margin-top:18px;
 }
 
-/* ✅ Card de REDES */
+/* Card de REDES */
 .contact-social-card{
   padding:18px;
   margin-top:18px;
@@ -2728,7 +2733,7 @@ select{
   align-items:center;
 }
 
-/* Textitos */
+/* Textos */
 .contact-meta{
   margin-top:12px;
   font-size:13px;
@@ -2740,7 +2745,7 @@ select{
   color:#9ca3af;
 }
 
-/* Grid del form (si ya lo tenías, dejalo; esto es lo mínimo recomendado) */
+/* Grid del form */
 .contact-grid{
   display:grid;
   grid-template-columns: minmax(0,1fr) minmax(0,1fr);
@@ -2765,7 +2770,7 @@ select{
   border:0 !important;
 }
 
-/* ✅ IMPORTANTE: el <form> NO debe ser una card (evita doble borde/fondo) */
+/* IMPORTANTE: el <form> NO debe ser una card (evita doble borde/fondo) */
 #contact-form{
   background:transparent;
   border:0;
@@ -2774,22 +2779,50 @@ select{
   display:block;
 }
 
-/* Inputs (si ya tenías esto, podés dejarlo tal cual) */
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-textarea,
-select{
+/* Controles (inputs / selects / textarea) */
+.contact-grid input,
+.contact-grid select,
+.contact-grid textarea{
   width:100%;
+  box-sizing:border-box;
+  display:block;
+  font:inherit;
+
   border-radius:10px;
   border:1px solid rgba(148,163,184,.22);
   background: rgba(2,6,23,.55);
-  padding:10px 12px;
-  font-size:14px;
   color:#e5e7eb;
   outline:none;
 }
-textarea{ min-height:110px; resize:vertical; }
+
+/* ✅ FIX ALINEACIÓN: misma altura para inputs + selects (Nombre / Email quedan alineados) */
+.contact-grid input,
+.contact-grid select{
+  height:44px;
+  padding:0 12px;
+  line-height:44px;
+}
+
+/* Textarea */
+.contact-grid textarea{
+  min-height:110px;
+  padding:12px;
+  line-height:1.4;
+  resize:vertical;
+}
+
+/* Placeholders */
+.contact-grid input::placeholder,
+.contact-grid textarea::placeholder{
+  color: rgba(229,231,235,.55);
+}
+
+/* Focus */
+.contact-grid input:focus,
+.contact-grid select:focus,
+.contact-grid textarea:focus{
+  border-color: rgba(148,163,184,.42);
+}
 
 /* Card redes */
 .contact-social-kicker{
@@ -2799,18 +2832,21 @@ textarea{ min-height:110px; resize:vertical; }
   color:#9ca3af;
   margin-bottom:6px;
 }
+
 .contact-social-text{
   margin:0;
   font-size:14px;
   color:#d1d5db;
   line-height:1.5;
 }
+
 .contact-social-row{
   display:flex;
   gap:10px;
   align-items:center;
   justify-content:flex-end;
 }
+
 .contact-social-item{
   display:inline-flex;
   align-items:center;
@@ -2826,6 +2862,7 @@ textarea{ min-height:110px; resize:vertical; }
   transform: translateY(-1px);
   border-color: rgba(148,163,184,.42);
 }
+
 .contact-social-icon img{
   width:22px;
   height:22px;
@@ -2844,12 +2881,14 @@ textarea{ min-height:110px; resize:vertical; }
   justify-content:space-between;
   align-items:center;
 }
+
 .contact-email,
 .contact-small-note{
   margin:0;
   font-size:13px;
   color:#9ca3af;
 }
+
 .contact-email a,
 .contact-small-note a{
   color:#e5e7eb;
@@ -2859,13 +2898,21 @@ textarea{ min-height:110px; resize:vertical; }
 
 /* Mobile */
 @media (max-width: 920px){
-  .contact-form-card{ padding:20px; border-radius:18px; }
-  .contact-social-card{ padding:14px; border-radius:18px; grid-template-columns:1fr; }
-  .contact-grid{ grid-template-columns:1fr; gap:12px; }
+  .contact-form-card{ padding:20px; }
+  .contact-social-card{
+    padding:14px;
+    grid-template-columns:1fr;
+    justify-items:start;
+  }
+  .contact-grid{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
   .contact-span-2{ grid-column:auto; }
   .contact-social-row{ justify-content:flex-start; }
   .contact-footer-line{ justify-content:flex-start; }
 }
+ 
  
  
 </style>
