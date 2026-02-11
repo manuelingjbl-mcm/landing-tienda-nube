@@ -2932,7 +2932,41 @@ select{
   .contact-footer-line{ justify-content:flex-start; }
 }
  
- 
+ /* CTA layout (desktop vs mobile) */
+.contact-cta{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.contact-submit{
+  width:340px;      /* ajustá 300–380 si querés */
+  max-width:100%;
+  flex:0 0 auto;
+}
+
+.contact-cta__copy{
+  flex:1;
+  margin:0;         /* pisa el margin-top del microcopy */
+  text-align:center;
+}
+
+/* Mobile: botón arriba full width */
+@media (max-width: 920px){
+  .contact-cta{
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .contact-submit{ width:100%; }
+  .contact-cta__copy{ text-align:left; }
+}
+
+/* Si tenés un button global que fuerza width:100%, esto lo pisa */
+.contact-cta .contact-submit{ width:340px !important; }
+@media (max-width: 920px){
+  .contact-cta .contact-submit{ width:100% !important; }
+}
+
  
 </style>
 
@@ -3778,12 +3812,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
 
           <div class="contact-span-2">
-            <button type="submit">Recibir plan + presupuesto</button>
-            <p id="form-status" class="form-status" aria-live="polite"></p>
-            <p class="contact-microcopy">
-              Todas las consultas las respondo yo, Manuel. Si estás comparando opciones, igual te respondo con próximos pasos claros.
-            </p>
+           <div class="contact-cta">
+           <button class="contact-submit" type="submit">Recibir plan + presupuesto</button>
+
+           <p class="contact-microcopy contact-cta__copy">
+           Todas las consultas las respondo yo, Manuel. Si estás comparando opciones, igual te respondo con próximos pasos claros.
+          </p>
           </div>
+
+         <p id="form-status" class="form-status" aria-live="polite"></p>
+         </div>
         </div>
       </form>
     </div>
