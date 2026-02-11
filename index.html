@@ -1359,79 +1359,6 @@ section#trabajos .wrapper {
   border-top: 1px solid rgba(148, 163, 184, 0.35); /* gris muy suave */
 }
 
-    
-/* ===== CONTACTO: ICONOS (SIN CÍRCULO) + EMAIL ===== */
-.contact-social-row{
-  margin-top: 20px;
-  margin-bottom: 12px;     /* aire hacia el email */
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 24px;
-}
-
-.contact-social-item{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-}
-
-.contact-social-icon img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  filter: invert(1);
-  opacity: .95;
-}
-
-
-/* Email debajo para copiar fácil */
-.contact-email-copy{
-  margin-top: 10px;
-  font-size: 0.9rem;
-  color: #e5e7eb;
-  text-align: left;
-}
-
-.contact-email-copy a{
-  color: #e5e7eb;
-  text-decoration: none;
-}
-
-.contact-email-copy a:hover{
-  text-decoration: underline;
-}
-
-@media (max-width: 768px){
-  .contact-social-row{ margin-top: 16px; }
-}
-
-    
-/* ===== Sección de contacto: sin hueco blanco debajo ===== */
-#contacto {
-  margin-bottom: 0;      /* nada de espacio blanco externo */
-  padding-bottom: 72px;  /* respiración interna con fondo oscuro */
-  }
-
-/* ===== CONTACTO: columnas alineadas arriba ===== */
-#contacto .contact-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.3fr);
-  gap: 40px;
-  align-items: flex-start;
-}
-
-/* Botón de envío ancho completo como antes */
-#contact-form button {
-  width: 100%;
-  display: block;
-  margin-top: 24px;
-  padding: 14px 24px;
-  border-radius: 999px;
-}
-
 /* El contacto termina justo antes del footer, sin “hueco blanco” */
 #contacto {
   margin-bottom: 0;
@@ -1496,56 +1423,6 @@ text-underline-offset: 3px;
   }
 }
 
-
-/* ==== CONTACTO: alinear solo el formulario con el título ==== */
-
-/* 1) Dejamos la grilla sin desplazamientos raros */
-#contacto .contact-grid {
-  align-items: flex-start;  /* columnas arriba */
-  margin-top: 0;           /* importante: resetea el margen que lo subía todo */
-}
-
-/* 2) Subimos SOLO el formulario para que se acerque al h2 */
-#contacto .contact-grid > form {
-  margin-top: -28px;       /* probá -32px; si lo ves muy alto, cambiá a -24px */
-}
-
-/* 3) Opcional: un poco de aire al bloque de texto bajo el título */
-#contacto .contact-grid > div:first-child {
-  margin-top: 8px;         /* que “Contanos en qué estado...” respire bajo el h2 */
-}
-
-/* ==== ICONOS DE REDES SIN CÍRCULO ==== */
-
-.contact-social-row {
-  display: flex;
-  align-items: center;
-  gap: 24px;              /* separa los iconos entre sí */
-margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
-}
-
-.contact-social-item {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* acá sacamos el círculo */
-.contact-social-icon {
-  width: 24px;
-  height: 24px;
-  border: none;
-  border-radius: 0;
-  padding: 0;
-  background: transparent;
-}
-
-/* aseguramos que el PNG ocupe todo sin deformarse */
-.contact-social-icon img {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
 
 /* ====== BOTÓN FLOTANTE ====== */
 .chat-launcher {
@@ -2701,17 +2578,20 @@ select{
    CONTACTO (LIMPIO + PRO)
    ========================= */
 
-/* Sección */
+/* Sección (no forzamos tamaño; heredá del sitio) */
 .contact-shell{
   padding:56px 0 48px;
-
-  /* ✅ Base tipográfica para que NO se vea más grande que el resto del sitio */
-  font-size:14px;     /* ajustá a 13px si tu web va más compacta */
-  line-height:1.5;
+  font-family:inherit;
+  font-size:inherit;     /* ✅ clave: iguala con el resto del sitio */
+  line-height:inherit;
+  color:inherit;
 }
 
 /* Normaliza textos dentro del bloque */
-.contact-shell p{ font-size:14px; }
+.contact-shell p{ margin:0; }
+.contact-shell .section-title{ margin:0 0 10px; }
+.contact-shell h2{ margin:0 0 10px; }
+.contact-shell > .wrapper > p{ margin:0; }
 
 /* Card base (la usan SOLO: form card + redes card) */
 .contact-box{
@@ -2740,15 +2620,16 @@ select{
   align-items:center;
 }
 
-/* Textos */
+/* Textos (más chicos a propósito) */
 .contact-meta{
   margin-top:12px;
   font-size:13px;
+  line-height:1.5;
   color:#9ca3af;
 }
 .contact-microcopy{
-  margin-top:10px;
   font-size:13px;
+  line-height:1.5;
   color:#9ca3af;
 }
 
@@ -2757,14 +2638,9 @@ select{
   display:grid;
   grid-template-columns: minmax(0,1fr) minmax(0,1fr);
   gap:12px 14px;
-  align-items:start;
+  align-items:stretch;     /* ✅ ayuda a que “calcen” parejo */
   margin-top:18px;
 }
-
-/* ✅ ayuda a que cada celda “estire” igual y no te suba Email */
-.contact-grid > div{ display:flex; }
-.contact-grid > div > input,
-.contact-grid > div > select{ flex:1; }
 
 /* spans */
 .contact-span-2{ grid-column: 1 / -1; }
@@ -2782,7 +2658,7 @@ select{
   border:0 !important;
 }
 
-/* IMPORTANTE: el <form> NO debe ser una card (evita doble borde/fondo) */
+/* IMPORTANTE: el <form> NO debe ser una card */
 #contact-form{
   background:transparent;
   border:0;
@@ -2798,8 +2674,6 @@ select{
   width:100%;
   box-sizing:border-box;
   display:block;
-
-  /* ✅ hereda tamaño del bloque (14px) para que coincida con la página */
   font:inherit;
 
   border-radius:10px;
@@ -2809,15 +2683,15 @@ select{
   outline:none;
 }
 
-/* ✅ FIX ALINEACIÓN: altura consistente SIN line-height gigante */
+/* ✅ FIX ALINEACIÓN (Email vs Nombre): altura + padding + line-height homogéneo */
 .contact-grid input,
 .contact-grid select{
   min-height:44px;
-  padding:10px 12px;   /* centra el texto visualmente */
-  line-height:1.2;     /* evita que Email se vea más “alto” */
+  padding:10px 12px;
+  line-height:1.2;
 }
 
-/* Select: deja aire para el chevron */
+/* Select: aire para el chevron */
 .contact-grid select{
   padding-right:40px;
 }
@@ -2843,20 +2717,75 @@ select{
   border-color: rgba(148,163,184,.42);
 }
 
-/* Card redes */
+/* -------------------------
+   CTA layout (desktop vs mobile)
+   ------------------------- */
+.contact-cta{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.contact-submit{
+  width:340px;          /* ajustá 300–380 si querés */
+  max-width:100%;
+  flex:0 0 auto;
+}
+
+/* OJO: este párrafo ya tiene .contact-microcopy */
+.contact-cta__copy{
+  flex:1;
+  margin:0;
+  text-align:center;
+}
+
+/* Si tu tema fuerza botones a 100%, esto lo pisa SOLO acá */
+.contact-shell .contact-submit{ width:340px; }
+@media (max-width: 920px){
+  .contact-shell .contact-submit{ width:100%; }
+}
+
+/* Mobile: botón arriba full width */
+@media (max-width: 920px){
+  .contact-form-card{ padding:20px; }
+
+  .contact-cta{
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .contact-cta__copy{ text-align:left; }
+
+  .contact-social-card{
+    padding:14px;
+    grid-template-columns:1fr;
+    justify-items:start;
+  }
+
+  .contact-grid{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+  .contact-span-2{ grid-column:auto; }
+
+  .contact-social-row{ justify-content:flex-start; }
+  .contact-footer-line{ justify-content:flex-start; }
+}
+
+/* -------------------------
+   Card redes
+   ------------------------- */
 .contact-social-kicker{
   font-size:12px;
   letter-spacing:.14em;
   text-transform:uppercase;
   color:#9ca3af;
-  margin-bottom:6px;
+  margin:0 0 6px;
 }
-
 .contact-social-text{
   margin:0;
   font-size:14px;
-  color:#d1d5db;
   line-height:1.5;
+  color:#d1d5db;
 }
 
 .contact-social-row{
@@ -2881,7 +2810,6 @@ select{
   transform: translateY(-1px);
   border-color: rgba(148,163,184,.42);
 }
-
 .contact-social-icon img{
   width:22px;
   height:22px;
@@ -2905,6 +2833,7 @@ select{
 .contact-small-note{
   margin:0;
   font-size:13px;
+  line-height:1.5;
   color:#9ca3af;
 }
 
@@ -2913,63 +2842,6 @@ select{
   color:#e5e7eb;
   text-decoration: underline;
   text-underline-offset: 3px;
-}
-
-/* Mobile */
-@media (max-width: 920px){
-  .contact-form-card{ padding:20px; }
-  .contact-social-card{
-    padding:14px;
-    grid-template-columns:1fr;
-    justify-items:start;
-  }
-  .contact-grid{
-    grid-template-columns:1fr;
-    gap:12px;
-  }
-  .contact-span-2{ grid-column:auto; }
-  .contact-social-row{ justify-content:flex-start; }
-  .contact-footer-line{ justify-content:flex-start; }
-}
- 
- /* CTA layout (desktop vs mobile) */
-.contact-cta{
-  display:flex;
-  align-items:center;
-  gap:16px;
-}
-
-.contact-submit{
-  width:340px;      /* ajustá 300–380 si querés */
-  max-width:100%;
-  flex:0 0 auto;
-}
-
-.contact-cta__copy{
-  flex:1;
-  margin:0;         /* pisa el margin-top del microcopy */
-  text-align:center;
-}
-
-/* Mobile: botón arriba full width */
-@media (max-width: 920px){
-  .contact-cta{
-    flex-direction:column;
-    align-items:stretch;
-  }
-  .contact-submit{ width:100%; }
-  .contact-cta__copy{ text-align:left; }
-}
-
-/* Si tenés un button global que fuerza width:100%, esto lo pisa */
-.contact-cta .contact-submit{ width:340px !important; }
-@media (max-width: 920px){
-  .contact-cta .contact-submit{ width:100% !important; }
-}
-
- .desktop-break{ display:none; }
-@media (min-width: 921px){
-  .desktop-break{ display:inline; }
 }
 
  
