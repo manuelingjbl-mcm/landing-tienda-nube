@@ -1396,32 +1396,37 @@ text-underline-offset: 3px;
   margin: 0; /* sin espacios extra arriba o abajo */
 }
 
-/* ===== Footer: alineado al wrapper ===== */
+/* ===== FOOTER (PRO: pegado pero con aire) ===== */
 .footer{
   background:#020617;
-  padding: 18px 0 18px;          /* sin padding lateral */
-  font-size:12px;
-  color:#9ca3af;
+  margin:0 !important;
+  padding: 14px 0 16px !important;   /* 👈 aire arriba/abajo */
+  border-top: 1px solid rgba(148,163,184,.14); /* opcional, si querés línea suave */
 }
 
-/* el que alinea con las cards (va dentro del wrapper) */
 .footer .footer-inner{
+  max-width: 1100px;     /* mismo ancho que las cards */
+  margin: 0 auto;
+  padding: 0 24px;       /* aire lateral */
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:16px;
 }
 
-/* evita que se corten raro, pero permite bajar si hace falta */
 .footer span{
-  white-space: normal;            /* antes: nowrap */
+  margin:0;
+  line-height:1.35;      /* 👈 que respire */
+  color:#9ca3af;
 }
 
 /* Mobile */
 @media (max-width: 768px){
+  .footer{ padding: 14px 0 18px !important; }
   .footer .footer-inner{
     flex-direction:column;
     text-align:center;
+    gap:8px;
   }
 }
 
@@ -2932,38 +2937,7 @@ select{
   margin-bottom: 0 !important;
 }
 
- /* ===== FOOTER (FIX: sin hueco abajo + alineado al wrapper) ===== */
-.footer{
-  background:#020617;
-  margin:0 !important;
-  padding: 12px 0 10px !important;   /* más pegado abajo */
-  min-height: 0 !important;          /* por si algún style viejo metió height */
-}
-
-.footer .footer-inner{
-  max-width: 1100px;                 /* usá el mismo ancho que tus cards */
-  margin: 0 auto;
-  padding: 0 24px;                   /* respira en laterales */
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:16px;
-}
-
-.footer span{ 
-  margin:0;
-  line-height:1.25;
-}
-
-/* Mobile */
-@media (max-width: 768px){
-  .footer .footer-inner{
-    flex-direction:column;
-    text-align:center;
-    gap:8px;
-  }
-}
-
+ 
  
 </style>
 
