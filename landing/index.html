@@ -1746,6 +1746,19 @@ document.addEventListener('click', (e) => {
     form.addEventListener('change', onEdit, true);
   };
 
+  // ✅ Identificadores consistentes (1 sola vez, no adentro del submit)
+  const formName =
+    form.getAttribute('data-form-name') ||
+    form.id ||
+    'landing_form';
+
+  // ✅ Source BLINDADO: lo define el HTML (data-lead-source)
+  // Recomendado: data-lead-source="landing" o "tn_landing"
+  const leadSource =
+    form.getAttribute('data-lead-source') ||
+    (form.dataset ? form.dataset.leadSource : '') ||
+    'landing';
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     clearStatus();
@@ -1766,54 +1779,38 @@ document.addEventListener('click', (e) => {
       });
 
       if (res.ok) {
-        
         // ✅ Evento REAL (envío exitoso) + anti-duplicado
-window.dataLayer = window.dataLayer || [];
+        if (form?.dataset?.leadSent !== '1') {
+          if (form?.dataset) form.dataset.leadSent = '1';
 
-// Armamos nombres consistentes (sirve para home + landing)
-const formName =
-  (form && form.getAttribute && form.getAttribute("data-form-name")) ||
-  (form && form.id) ||
-  "landing_form";
+          // 1) Evento principal
+          window.dataLayer.push({
+            event: 'lead',
+            form_name: formName,
+            lead_source: leadSource,
+            event_category: 'contact',
+            event_label: formName
+          });
 
-const leadSource =
-  (form && form.getAttribute && form.getAttribute("data-lead-source")) ||
-  (location.pathname.includes("landing") ? "tn_landing" : "web_home");
-
-// Anti doble-disparo (por listeners duplicados / reintentos)
-if (form && form.dataset && form.dataset.leadSent === "1") {
-  // ya lo enviamos una vez, no vuelvas a trackear
-} else {
-  if (form && form.dataset) form.dataset.leadSent = "1";
-
-  // 1) Evento principal para conversiones (GTM/GA4/Meta)
-  window.dataLayer.push({
-    event: "lead",
-    form_name: formName,
-    lead_source: leadSource,
-    event_category: "contact",
-    event_label: formName
-  });
-
-  // 2) Mantener el evento anterior para no romper triggers viejos
-  window.dataLayer.push({
-    event: "form_submit",
-    form_name: formName,
-    source: leadSource,
-    event_category: "contact",
-    event_label: formName
-  });
-}
+          // 2) Evento legacy
+          window.dataLayer.push({
+            event: 'form_submit',
+            form_name: formName,
+            source: leadSource,
+            event_category: 'contact',
+            event_label: formName
+          });
+        }
 
         showStatus('✅ ¡Listo! Ya recibimos tu consulta.');
         form.reset();
         armClearOnEdit();
       } else {
-        // (Opcional) para medir fallos
+        // ✅ Error medible, sin hardcode
         window.dataLayer.push({
           event: 'form_error',
-          form_name: 'landing_form',
-          source: 'tn_landing',
+          form_name: formName,
+          source: leadSource,
           status: res.status || 'unknown'
         });
 
@@ -1823,8 +1820,8 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
     } catch (err) {
       window.dataLayer.push({
         event: 'form_error',
-        form_name: 'landing_form',
-        source: 'tn_landing',
+        form_name: formName,
+        source: leadSource,
         status: 'network_error'
       });
 
@@ -1840,6 +1837,7 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
 })();
 </script>
 
+  
 <script>
   window.dataLayer = window.dataLayer || [];
 
