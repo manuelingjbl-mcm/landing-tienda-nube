@@ -614,7 +614,8 @@ header::after{
 .grid-portfolio{
   margin-top:32px;
   display:grid;
-  gap:24px;
+  column-gap:28px;
+  row-gap:30px;
   grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 
@@ -644,7 +645,7 @@ header::after{
 @media (max-width: 800px){
   .grid-portfolio{
     grid-template-columns: 1fr;
-    gap:20px;
+    gap:22px;
   }
 
   .grid-portfolio .portfolio-link{
@@ -675,7 +676,7 @@ header::after{
 /* contenedor imagen + overlay */
 .portfolio-thumb{
   position:relative;
-  height:240px;
+  height:280px;
   background:#050816;
   border-radius:24px;
   overflow:hidden;
@@ -697,12 +698,16 @@ header::after{
 /* destacada un toque más alta */
 .grid-portfolio .portfolio-link.portfolio-featured .portfolio-thumb,
 .grid-portfolio .portfolio-link--featured .portfolio-thumb{
-  height:320px;
+  height:340px;
 }
 @media (max-width: 800px){
+  .portfolio-thumb{
+    height:280px;
+  }
+
   .grid-portfolio .portfolio-link.portfolio-featured .portfolio-thumb,
   .grid-portfolio .portfolio-link--featured .portfolio-thumb{
-    height:260px;
+    height:280px;
   }
 }
 
@@ -759,7 +764,7 @@ header::after{
   flex-direction:column;
   justify-content:flex-end;
   align-items:flex-start;
-  padding:22px 24px 24px;
+  padding:24px 28px 28px;
   background:linear-gradient(
     to top,
     rgba(2,6,23,0.88),
@@ -816,7 +821,7 @@ header::after{
 @media (max-width:800px){
   .portfolio-overlay{
     min-height:66%;
-    padding:20px;
+    padding:22px 20px;
   }
 
   .portfolio-overlay p{
