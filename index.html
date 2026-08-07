@@ -662,6 +662,13 @@ header::after{
   color:inherit;
   border-radius:24px;
   overflow:hidden;
+  width:100%;
+  border:0;
+  padding:0;
+  background:transparent;
+  font:inherit;
+  text-align:left;
+  cursor:pointer;
 }
 
 /* contenedor imagen + overlay */
@@ -759,6 +766,204 @@ header::after{
   margin:0;
   font-size:0.85rem;
   color:rgba(235,241,255,0.9);
+}
+
+.portfolio-action{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  margin-top:10px;
+  font-size:0.78rem;
+  font-weight:700;
+  letter-spacing:.02em;
+  color:#fff;
+  opacity:.92;
+}
+
+.portfolio-link:focus-visible{
+  outline:3px solid rgba(37,99,235,.75);
+  outline-offset:4px;
+}
+
+.portfolio-modal{
+  position:fixed;
+  inset:0;
+  z-index:100000;
+  display:grid;
+  place-items:center;
+  padding:24px;
+  background:rgba(3,7,18,.72);
+  backdrop-filter:blur(10px);
+}
+
+.portfolio-modal[hidden]{
+  display:none;
+}
+
+.portfolio-modal__panel{
+  width:min(920px, 100%);
+  max-height:min(86vh, 760px);
+  display:grid;
+  grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);
+  overflow:hidden;
+  border-radius:24px;
+  background:#0b1020;
+  color:#f8fafc;
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 34px 90px rgba(0,0,0,.55);
+}
+
+.portfolio-modal__media{
+  min-height:420px;
+  background:#020617;
+}
+
+.portfolio-modal__media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.portfolio-modal__content{
+  position:relative;
+  overflow:auto;
+  padding:34px;
+}
+
+.portfolio-modal__close{
+  position:absolute;
+  top:18px;
+  right:18px;
+  width:38px;
+  height:38px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  font-size:24px;
+  line-height:1;
+  cursor:pointer;
+}
+
+.portfolio-modal__tag{
+  display:inline-flex;
+  margin-bottom:12px;
+  padding:6px 12px;
+  border-radius:999px;
+  background:rgba(37,99,235,.20);
+  border:1px solid rgba(129,140,248,.55);
+  color:#c7d2fe;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.portfolio-modal__content h3{
+  margin:0 42px 10px 0;
+  font-size:clamp(26px,3vw,38px);
+  line-height:1.05;
+}
+
+.portfolio-modal__summary{
+  margin:0 0 22px;
+  color:rgba(226,232,240,.86);
+  font-size:15px;
+  line-height:1.65;
+}
+
+.portfolio-modal__grid{
+  display:grid;
+  gap:14px;
+  margin:22px 0;
+}
+
+.portfolio-modal__block{
+  padding:16px;
+  border-radius:16px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.10);
+}
+
+.portfolio-modal__label{
+  display:block;
+  margin-bottom:8px;
+  color:#93c5fd;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+}
+
+.portfolio-modal__block p,
+.portfolio-modal__block ul{
+  margin:0;
+  color:rgba(226,232,240,.88);
+  font-size:14px;
+  line-height:1.6;
+}
+
+.portfolio-modal__block ul{
+  padding-left:18px;
+}
+
+.portfolio-modal__actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:24px;
+}
+
+.portfolio-modal__link,
+.portfolio-modal__secondary{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:42px;
+  padding:10px 16px;
+  border-radius:999px;
+  font-size:14px;
+  font-weight:700;
+}
+
+.portfolio-modal__link{
+  background:#fff;
+  color:#0f172a;
+}
+
+.portfolio-modal__secondary{
+  border:1px solid rgba(255,255,255,.16);
+  color:#f8fafc;
+  background:rgba(255,255,255,.06);
+}
+
+body.portfolio-modal-open{
+  overflow:hidden;
+}
+
+@media (max-width:800px){
+  .portfolio-modal{
+    padding:12px;
+  }
+
+  .portfolio-modal__panel{
+    grid-template-columns:1fr;
+    max-height:90vh;
+  }
+
+  .portfolio-modal__media{
+    min-height:210px;
+    max-height:260px;
+  }
+
+  .portfolio-modal__content{
+    padding:24px 20px;
+  }
+
+  .portfolio-modal__content h3{
+    margin-right:44px;
+  }
 }
 
 /* Variante para piezas verticales (landing + newsletter) */
@@ -3516,10 +3721,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="grid-portfolio">
       <!-- SANSAY (DESTACADA) -->
-     <a class="portfolio-link portfolio-link--featured"
-   href="https://sansayaromas.com.ar/"
-   target="_blank"
-   rel="noopener noreferrer">
+     <button class="portfolio-link portfolio-link--featured" type="button" data-case="sansay">
   <div class="portfolio-thumb">
     <img src="sansay-aromas.png" alt="Mockup tienda Sansay Aromas">
     <span class="portfolio-pill">Caso destacado</span>
@@ -3527,15 +3729,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="portfolio-overlay">
       <h3>SANSAY AROMAS</h3>
       <p>Sahumerios, velas y rituales · estética premium + navegación clara</p>
+      <span class="portfolio-action">Ver caso &rarr;</span>
     </div>
   </div>
-</a>
+</button>
 
       <!-- VIA SHOP -->
-      <a class="portfolio-link"
-         href="https://www.via-shop.com/"
-         target="_blank"
-         rel="noopener noreferrer">
+      <button class="portfolio-link" type="button" data-case="viashop">
         <div class="portfolio-thumb">
           <img src="gadget-viashop.png" alt="Mockup tienda VIA SHOP">
           <span class="portfolio-pill">Mockup Tienda Nube</span>
@@ -3543,15 +3743,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="portfolio-overlay">
             <h3>VIA SHOP</h3>
             <p>Hogar, bazar y tecnología · Tienda Nube lista para producción</p>
+            <span class="portfolio-action">Ver caso &rarr;</span>
           </div>
         </div>
-      </a>
+      </button>
 
       <!-- CASA OADA -->
-      <a class="portfolio-link"
-         href="https://www.casaoada.com.ar/"
-         target="_blank"
-         rel="noopener noreferrer">
+      <button class="portfolio-link" type="button" data-case="casaoada">
         <div class="portfolio-thumb">
           <img src="ferreteria-oada.png" alt="Mockup tienda CASA OADA">
           <span class="portfolio-pill">Mockup Tienda Nube</span>
@@ -3559,15 +3757,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="portfolio-overlay">
             <h3>CASA OADA</h3>
             <p>Ferretería y hogar · Tienda Nube lista para campañas de tráfico pago</p>
+            <span class="portfolio-action">Ver caso &rarr;</span>
           </div>
         </div>
-      </a>
+      </button>
 
       <!-- FERRE CEPPI -->
-      <a class="portfolio-link"
-         href="https://www.ferreceppi.com/" 
-         target="_blank"
-         rel="noopener noreferrer">
+      <button class="portfolio-link" type="button" data-case="ferreceppi">
         <div class="portfolio-thumb">
           <img src="ferre-ceppi.png" alt="Mockup tienda Ferre CEPPI">
           <span class="portfolio-pill">Mockup Tienda Nube</span>
@@ -3575,11 +3771,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="portfolio-overlay">
             <h3>FERRE CEPPI</h3>
             <p>Catálogo grande · categorías + usabilidad pensada para búsqueda</p>
+            <span class="portfolio-action">Ver caso &rarr;</span>
           </div>
         </div>
-      </a>
+      </button>
     </div>
-  
+
   <div class="works-split">
 
    <!-- Mockups verticales -->
@@ -4787,6 +4984,181 @@ document.addEventListener("DOMContentLoaded", () => {
   const anchor = document.getElementById('about-metrics') || metrics[0];
   io.observe(anchor);
 })();
+</script>
+
+<div class="portfolio-modal" id="portfolio-modal" hidden>
+  <div class="portfolio-modal__panel" role="dialog" aria-modal="true" aria-labelledby="portfolio-modal-title">
+    <div class="portfolio-modal__media">
+      <img id="portfolio-modal-img" src="" alt="">
+    </div>
+
+    <div class="portfolio-modal__content">
+      <button class="portfolio-modal__close" type="button" aria-label="Cerrar caso">&times;</button>
+      <span class="portfolio-modal__tag" id="portfolio-modal-tag"></span>
+      <h3 id="portfolio-modal-title"></h3>
+      <p class="portfolio-modal__summary" id="portfolio-modal-summary"></p>
+
+      <div class="portfolio-modal__grid">
+        <div class="portfolio-modal__block">
+          <span class="portfolio-modal__label">Qué hicimos</span>
+          <ul id="portfolio-modal-work"></ul>
+        </div>
+
+        <div class="portfolio-modal__block">
+          <span class="portfolio-modal__label">Foco del proyecto</span>
+          <p id="portfolio-modal-focus"></p>
+        </div>
+      </div>
+
+      <div class="portfolio-modal__actions">
+        <a class="portfolio-modal__link" id="portfolio-modal-link" href="#" target="_blank" rel="noopener noreferrer">Ver tienda &rarr;</a>
+        <a class="portfolio-modal__secondary" href="#contacto">Quiero algo así</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const cases = {
+      sansay: {
+        tag: 'Caso destacado',
+        title: 'SANSAY AROMAS',
+        image: 'sansay-aromas.png',
+        imageAlt: 'Mockup tienda Sansay Aromas',
+        url: 'https://sansayaromas.com.ar/',
+        summary:
+          'Tienda de sahumerios, velas y rituales trabajada para transmitir calma, marca premium y una experiencia de compra simple desde el primer vistazo.',
+        focus:
+          'Ordenar el universo visual de la marca, reforzar confianza y facilitar que el visitante encuentre productos por intención de compra.',
+        work: [
+          'Diseño visual alineado a un rubro sensorial y premium.',
+          'Jerarquía de categorías para mejorar exploración.',
+          'Presentación de productos pensada para compra rápida.'
+        ]
+      },
+      viashop: {
+        tag: 'Tienda Nube',
+        title: 'VIA SHOP',
+        image: 'gadget-viashop.png',
+        imageAlt: 'Mockup tienda VIA SHOP',
+        url: 'https://www.via-shop.com/',
+        summary:
+          'Proyecto de hogar, bazar y tecnología preparado para una lectura clara de productos y una estructura lista para salir a producción.',
+        focus:
+          'Lograr una tienda práctica, comercial y fácil de recorrer, con categorías entendibles y foco en conversión.',
+        work: [
+          'Estructura comercial para catálogo variado.',
+          'Organización visual de productos y beneficios.',
+          'Base optimizada para campañas y tráfico pago.'
+        ]
+      },
+      casaoada: {
+        tag: 'Ferretería y hogar',
+        title: 'CASA OADA',
+        image: 'ferreteria-oada.png',
+        imageAlt: 'Mockup tienda CASA OADA',
+        url: 'https://www.casaoada.com.ar/',
+        summary:
+          'Tienda orientada a ferretería y hogar, con una estructura pensada para que el usuario llegue rápido a la categoría correcta.',
+        focus:
+          'Reducir fricción en la búsqueda de productos técnicos y preparar la tienda para captar demanda desde campañas.',
+        work: [
+          'Categorías más claras para productos de uso cotidiano.',
+          'Comunicación visual directa para decisión rápida.',
+          'Preparación del recorrido para tráfico de anuncios.'
+        ]
+      },
+      ferreceppi: {
+        tag: 'Catálogo grande',
+        title: 'FERRE CEPPI',
+        image: 'ferre-ceppi.png',
+        imageAlt: 'Mockup tienda Ferre CEPPI',
+        url: 'https://www.ferreceppi.com/',
+        summary:
+          'Proyecto de catálogo amplio donde la prioridad fue ordenar información, mejorar usabilidad y facilitar búsquedas frecuentes.',
+        focus:
+          'Hacer que una tienda con muchos productos se sienta clara, confiable y fácil de navegar.',
+        work: [
+          'Estructura pensada para navegación por rubros.',
+          'Mejora de lectura en categorías y fichas.',
+          'Experiencia más simple para compradores recurrentes.'
+        ]
+      }
+    };
+
+    const modal = document.getElementById('portfolio-modal');
+    if (!modal) return;
+
+    const title = document.getElementById('portfolio-modal-title');
+    const tag = document.getElementById('portfolio-modal-tag');
+    const summary = document.getElementById('portfolio-modal-summary');
+    const focus = document.getElementById('portfolio-modal-focus');
+    const work = document.getElementById('portfolio-modal-work');
+    const image = document.getElementById('portfolio-modal-img');
+    const link = document.getElementById('portfolio-modal-link');
+    const closeBtn = modal.querySelector('.portfolio-modal__close');
+    const contactLink = modal.querySelector('.portfolio-modal__secondary');
+    let previousTrigger = null;
+
+    function fillCase(data) {
+      title.textContent = data.title;
+      tag.textContent = data.tag;
+      summary.textContent = data.summary;
+      focus.textContent = data.focus;
+      image.src = data.image;
+      image.alt = data.imageAlt;
+      link.href = data.url;
+      work.textContent = '';
+
+      data.work.forEach(function (item) {
+        const li = document.createElement('li');
+        li.textContent = item;
+        work.appendChild(li);
+      });
+    }
+
+    function openCase(trigger) {
+      const data = cases[trigger.dataset.case];
+      if (!data) return;
+
+      previousTrigger = trigger;
+      fillCase(data);
+      modal.hidden = false;
+      document.body.classList.add('portfolio-modal-open');
+      closeBtn.focus();
+    }
+
+    function closeCase() {
+      modal.hidden = true;
+      document.body.classList.remove('portfolio-modal-open');
+
+      if (previousTrigger) {
+        previousTrigger.focus();
+        previousTrigger = null;
+      }
+    }
+
+    document.querySelectorAll('.portfolio-link[data-case]').forEach(function (trigger) {
+      trigger.addEventListener('click', function () {
+        openCase(trigger);
+      });
+    });
+
+    closeBtn.addEventListener('click', closeCase);
+
+    modal.addEventListener('click', function (event) {
+      if (event.target === modal) closeCase();
+    });
+
+    if (contactLink) {
+      contactLink.addEventListener('click', closeCase);
+    }
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && !modal.hidden) closeCase();
+    });
+  })();
 </script>
 
  
