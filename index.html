@@ -661,7 +661,7 @@ header::after{
   text-decoration:none;
   color:inherit;
   border-radius:24px;
-  overflow:hidden;
+  overflow:visible;
   width:100%;
   border:0;
   padding:0;
@@ -669,6 +669,7 @@ header::after{
   font:inherit;
   text-align:left;
   cursor:pointer;
+  transition:transform .28s ease, filter .28s ease;
 }
 
 /* contenedor imagen + overlay */
@@ -679,6 +680,18 @@ header::after{
   border-radius:24px;
   overflow:hidden;
   width:100%;
+  box-shadow:0 18px 42px rgba(15,23,42,.18);
+  isolation:isolate;
+}
+
+.portfolio-thumb::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  border:1px solid rgba(255,255,255,.20);
+  border-radius:inherit;
+  pointer-events:none;
 }
 
 /* destacada un toque más alta */
@@ -699,7 +712,7 @@ header::after{
   display:block;
   object-fit:cover;
   transform:scale(1.04);
-  transition:transform 400ms ease-out;
+  transition:transform 500ms ease-out, filter 500ms ease-out;
 }
 
 /* badge arriba (minimal + animado) */
@@ -707,37 +720,30 @@ header::after{
   position:absolute;
   top:16px;
   left:16px;
-  padding:4px 12px;
+  z-index:3;
+  padding:7px 13px;
   border-radius:999px;
   font-size:0.75rem;
-  letter-spacing:0.06em;
+  font-weight:700;
+  letter-spacing:0.05em;
   text-transform:uppercase;
-  background:rgba(0,0,0,0.65);
+  background:rgba(15,23,42,.72);
+  border:1px solid rgba(255,255,255,.22);
   color:#f5f7ff;
-
-  opacity:0;
-  transform:translateY(-6px);
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  backdrop-filter:blur(10px);
+  box-shadow:0 10px 24px rgba(2,6,23,.18);
 }
 
 /* En desktop: mostrar pill al hover/focus */
 @media (hover:hover) and (pointer:fine){
+  .portfolio-link:hover{
+    transform:translateY(-5px);
+    filter:saturate(1.04);
+  }
+
   .portfolio-link:hover .portfolio-thumb img{
-    transform:scale(1.08);
-  }
-
-  .portfolio-link:hover .portfolio-pill,
-  .portfolio-link:focus-within .portfolio-pill{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-/* En mobile: pill siempre visible */
-@media (hover:none) and (pointer:coarse){
-  .portfolio-pill{
-    opacity:1;
-    transform:none;
+    transform:scale(1.09);
+    filter:contrast(1.04);
   }
 }
 
@@ -747,37 +753,79 @@ header::after{
   left:0;
   right:0;
   bottom:0;
-  padding:18px 20px 20px;
+  z-index:2;
+  min-height:58%;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  align-items:flex-start;
+  padding:22px 24px 24px;
   background:linear-gradient(
     to top,
-    rgba(0,0,0,0.78),
-    rgba(0,0,0,0.25),
+    rgba(2,6,23,0.88),
+    rgba(2,6,23,0.36),
     transparent
   );
   color:#f5f7ff;
 }
 
 .portfolio-overlay h3{
-  margin:0 0 4px;
-  font-size:1.05rem;
+  margin:0 0 6px;
+  font-size:clamp(1.05rem, 1.5vw, 1.32rem);
+  line-height:1.05;
+  text-shadow:0 2px 18px rgba(0,0,0,.35);
 }
 
 .portfolio-overlay p{
   margin:0;
-  font-size:0.85rem;
+  max-width:620px;
+  font-size:.92rem;
+  line-height:1.45;
   color:rgba(235,241,255,0.9);
+  text-shadow:0 2px 16px rgba(0,0,0,.35);
 }
 
 .portfolio-action{
   display:inline-flex;
   align-items:center;
-  gap:6px;
-  margin-top:10px;
-  font-size:0.78rem;
+  justify-content:center;
+  gap:8px;
+  margin-top:14px;
+  min-height:34px;
+  padding:7px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.12);
+  backdrop-filter:blur(10px);
+  font-size:0.8rem;
   font-weight:700;
   letter-spacing:.02em;
   color:#fff;
-  opacity:.92;
+  box-shadow:0 10px 24px rgba(2,6,23,.20);
+}
+
+.portfolio-action::after{
+  content:"";
+  width:6px;
+  height:6px;
+  border-top:2px solid currentColor;
+  border-right:2px solid currentColor;
+  transform:rotate(45deg);
+}
+
+@media (max-width:800px){
+  .portfolio-overlay{
+    min-height:66%;
+    padding:20px;
+  }
+
+  .portfolio-overlay p{
+    font-size:.88rem;
+  }
+
+  .portfolio-action{
+    min-height:32px;
+  }
 }
 
 .portfolio-link:focus-visible{
@@ -3724,12 +3772,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      <button class="portfolio-link portfolio-link--featured" type="button" data-case="sansay">
   <div class="portfolio-thumb">
     <img src="sansay-aromas.png" alt="Mockup tienda Sansay Aromas">
-    <span class="portfolio-pill">Caso destacado</span>
+    <span class="portfolio-pill">Estética premium</span>
 
     <div class="portfolio-overlay">
       <h3>SANSAY AROMAS</h3>
       <p>Sahumerios, velas y rituales · estética premium + navegación clara</p>
-      <span class="portfolio-action">Ver caso &rarr;</span>
+      <span class="portfolio-action">Ver caso</span>
     </div>
   </div>
 </button>
@@ -3738,12 +3786,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <button class="portfolio-link" type="button" data-case="viashop">
         <div class="portfolio-thumb">
           <img src="gadget-viashop.png" alt="Mockup tienda VIA SHOP">
-          <span class="portfolio-pill">Mockup Tienda Nube</span>
+          <span class="portfolio-pill">Lista para vender</span>
 
           <div class="portfolio-overlay">
             <h3>VIA SHOP</h3>
             <p>Hogar, bazar y tecnología · Tienda Nube lista para producción</p>
-            <span class="portfolio-action">Ver caso &rarr;</span>
+            <span class="portfolio-action">Ver caso</span>
           </div>
         </div>
       </button>
@@ -3752,12 +3800,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <button class="portfolio-link" type="button" data-case="casaoada">
         <div class="portfolio-thumb">
           <img src="ferreteria-oada.png" alt="Mockup tienda CASA OADA">
-          <span class="portfolio-pill">Mockup Tienda Nube</span>
+          <span class="portfolio-pill">Campañas + tráfico</span>
 
           <div class="portfolio-overlay">
             <h3>CASA OADA</h3>
             <p>Ferretería y hogar · Tienda Nube lista para campañas de tráfico pago</p>
-            <span class="portfolio-action">Ver caso &rarr;</span>
+            <span class="portfolio-action">Ver caso</span>
           </div>
         </div>
       </button>
@@ -3766,12 +3814,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <button class="portfolio-link" type="button" data-case="ferreceppi">
         <div class="portfolio-thumb">
           <img src="ferre-ceppi.png" alt="Mockup tienda Ferre CEPPI">
-          <span class="portfolio-pill">Mockup Tienda Nube</span>
+          <span class="portfolio-pill">Catálogo grande</span>
 
           <div class="portfolio-overlay">
             <h3>FERRE CEPPI</h3>
             <p>Catálogo grande · categorías + usabilidad pensada para búsqueda</p>
-            <span class="portfolio-action">Ver caso &rarr;</span>
+            <span class="portfolio-action">Ver caso</span>
           </div>
         </div>
       </button>
