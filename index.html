@@ -14,14 +14,15 @@
 
 <meta property="og:url" content="https://www.viacloudstudio.com/" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Via Cloud Studio · Diseño y optimización Tienda Nube" />
+<meta property="og:title" content="Vía Cloud Studio · Diseño y optimización Tienda Nube" />
 <meta property="og:description" content="Diseñamos y optimizamos tiendas Tienda Nube a medida para tu marca. Home, categorías, PDP y landings listas para convertir visitas en ventas." />
-<meta property="og:image" content="https://www.viacloudstudio.com/vclouds-logo.png" />
+<meta property="og:image" content="https://www.viacloudstudio.com/hero-mobile-mcmdigital.png" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Via Cloud Studio · Diseño y optimización Tienda Nube" />
+<meta name="twitter:title" content="Vía Cloud Studio · Diseño y optimización Tienda Nube" />
 <meta name="twitter:description" content="Diseñamos y optimizamos tiendas Tienda Nube a medida para tu marca. Home, categorías, PDP y landings listas para convertir visitas en ventas." />
-<meta name="twitter:image" content="https://www.viacloudstudio.com/favicon.icon.png" />
+<meta name="twitter:image" content="https://www.viacloudstudio.com/hero-mobile-mcmdigital.png" />
+<link rel="preload" as="image" href="/hero-mobile-mcmdigital.png" fetchpriority="high" />
 
 <meta name="facebook-domain-verification" content="u8j1ch87vy74yb23zjmipdanqiswpn" />
 
@@ -2997,7 +2998,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="header-inner">
     <div class="logo-row">
     <a class="logo" href="#top" aria-label="VIACLOUDSTUDIO (Inicio)">
-  <img src="vclouds-logo.png" alt="VIACLOUDSTUDIO" decoding="async" loading="eager">
+  <img src="vclouds-logo.png" alt="VIACLOUDSTUDIO" width="1580" height="220" decoding="async" loading="eager">
 </a>
       
 <!-- Botón hamburguesa (label) -->
@@ -3021,7 +3022,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <!-- ================== HERO ================== -->
-<section id="hero" .hero-mobile-overlay{ display:flex !important; }>
+<section id="hero">
   <div class="wrapper">
     <div class="hero reveal">
       <div class="hero-content">
@@ -3049,18 +3050,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <img
             src="hero-mobile-mcmdigital.png"
             alt="Mockup de tienda online pensada para mobile first"
+            width="1000"
+            height="843"
+            decoding="async"
+            loading="eager"
+            fetchpriority="high"
           />
 
           <!-- Overlay SOLO mobile -->
-          <div class="hero-mobile-overlay">
+          <div class="hero-mobile-overlay" aria-hidden="true">
             <span class="hero-mobile-kicker">
               Tienda Nube · Estudio especializado
             </span>
-            <h1 class="hero-mobile-title">
+            <p class="hero-mobile-title">
               Diseñamos<br>
               tu tienda online<br>
               a medida de tu marca.
-            </h1>
+            </p>
           </div>
         </div>
 
@@ -3753,19 +3759,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div>
             <label class="sr-only" for="nombre_marca">Nombre y marca</label>
             <input id="nombre_marca" type="text" name="nombre_marca"
-                   placeholder="Nombre y marca" required />
+                   placeholder="Nombre y marca" autocomplete="name" required />
           </div>
 
           <div>
             <label class="sr-only" for="email">Email</label>
             <input id="email" type="email" name="email"
-                   placeholder="Email" required />
+                   placeholder="Email" autocomplete="email" required />
           </div>
 
           <div>
             <label class="sr-only" for="instagram_sitio">Instagram o sitio actual</label>
             <input id="instagram_sitio" type="text" name="instagram_sitio"
-                   placeholder="Instagram o sitio actual (opcional)" />
+                   placeholder="Instagram o sitio actual (opcional)" autocomplete="url" />
           </div>
 
           <div>
@@ -3801,6 +3807,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <label class="sr-only" for="mensaje">Contanos brevemente qué necesitás</label>
             <textarea id="mensaje" name="mensaje"
               placeholder="¿Qué vendés? ¿Qué querés mejorar primero (diseño, pagos, envíos, ventas, medición)? ¿Tenés algo ya armado?"
+              autocomplete="off"
               required></textarea>
           </div>
 
@@ -4196,11 +4203,12 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
          class="vs-chat-input"
          type="text"
          name="message"
+         aria-label="Escribí tu consulta"
          placeholder="Escribí tu consulta..."
          autocomplete="off"
          required />
 
-  <button type="submit" class="vs-chat-send-btn">➤</button>
+  <button type="submit" class="vs-chat-send-btn" aria-label="Enviar consulta">➤</button>
 </form>
 
 </div>
