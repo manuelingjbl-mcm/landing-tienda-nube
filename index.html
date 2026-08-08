@@ -1333,6 +1333,320 @@ body.portfolio-modal-open{
   }
 }
 
+/* Showcase interactivo: landings, newsletters y automatizaciones */
+#trabajos .works-showcase-head{
+  margin:68px 0 24px;
+  display:grid;
+  grid-template-columns:minmax(0, .9fr) minmax(280px, .65fr);
+  gap:28px;
+  align-items:center;
+}
+
+#trabajos .works-showcase-kicker{
+  margin:0 0 10px;
+  color:#2563eb;
+  font-size:.78rem;
+  font-weight:800;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+#trabajos .works-showcase-head h3{
+  margin:0;
+  max-width:720px;
+  color:#0f172a;
+  font-size:clamp(28px, 3vw, 42px);
+  line-height:1.05;
+  letter-spacing:0;
+}
+
+#trabajos .works-showcase-head > p{
+  margin:0;
+  color:#475569;
+  line-height:1.65;
+}
+
+#trabajos .works-showcase{
+  position:relative;
+  margin-top:0;
+  padding:34px;
+  grid-template-columns:minmax(0,1.12fr) minmax(430px,.88fr);
+  gap:30px;
+  border-radius:32px;
+  background:
+    radial-gradient(circle at 20% 16%, rgba(37,99,235,.14), transparent 34%),
+    radial-gradient(circle at 78% 24%, rgba(124,58,237,.13), transparent 30%),
+    rgba(255,255,255,.66);
+  border:1px solid rgba(37,99,235,.13);
+  box-shadow:0 26px 70px rgba(15,23,42,.09);
+  backdrop-filter:blur(14px);
+}
+
+#trabajos .works-stage{
+  position:relative;
+  min-width:0;
+}
+
+#trabajos .works-showcase .works-shots{
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  min-height:430px;
+  isolation:isolate;
+}
+
+#trabajos .works-showcase .works-shot{
+  overflow:visible;
+  border-radius:28px;
+  opacity:.66;
+  filter:saturate(.82);
+  transform:translateY(18px) scale(.9) rotate(-1.5deg);
+  z-index:1;
+}
+
+#trabajos .works-showcase .works-shot:nth-child(2){
+  transform:translateY(8px) scale(.94) rotate(.7deg);
+}
+
+#trabajos .works-showcase .works-shot:nth-child(3){
+  transform:translateY(18px) scale(.9) rotate(1.5deg);
+}
+
+#trabajos .works-showcase .works-shot.is-active{
+  opacity:1;
+  filter:none;
+  transform:translateY(-2px) scale(1.08) rotate(0deg);
+  z-index:3;
+}
+
+#trabajos .works-showcase .works-float,
+#trabajos .works-showcase .works-clip{
+  display:block;
+  border-radius:28px;
+}
+
+#trabajos .works-showcase .works-clip{
+  position:relative;
+  overflow:hidden;
+  background:#f8fafc;
+  box-shadow:0 28px 70px rgba(15,23,42,.22);
+}
+
+#trabajos .works-showcase .works-shot img{
+  width:clamp(190px, 14.4vw, 250px);
+  border-radius:28px;
+  box-shadow:none;
+}
+
+#trabajos .works-showcase .works-shot::after{
+  content:attr(data-label);
+  position:absolute;
+  left:50%;
+  top:14px;
+  z-index:4;
+  max-width:calc(100% - 28px);
+  padding:8px 12px;
+  border-radius:999px;
+  background:rgba(15,23,42,.74);
+  color:#fff;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  box-shadow:0 10px 24px rgba(15,23,42,.18);
+  transform:translateX(-50%);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  pointer-events:none;
+}
+
+#trabajos .works-copy{
+  position:relative;
+  align-self:center;
+  padding:30px;
+  border-radius:28px;
+  background:rgba(255,255,255,.82);
+  border:1px solid rgba(37,99,235,.14);
+  box-shadow:0 22px 54px rgba(15,23,42,.08);
+}
+
+#trabajos .works-copy-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:12px;
+}
+
+#trabajos .works-copy-top .works-tag{
+  margin:0;
+}
+
+#trabajos #works-count{
+  flex:0 0 auto;
+  padding:6px 10px;
+  border-radius:999px;
+  background:#eef4ff;
+  color:#2563eb;
+  font-size:12px;
+  font-weight:800;
+}
+
+#trabajos .works-copy h3{
+  margin:0 0 12px;
+  font-size:clamp(24px, 2.5vw, 34px);
+  line-height:1.1;
+  letter-spacing:0;
+}
+
+#trabajos .works-copy > p{
+  font-size:1rem;
+  line-height:1.65;
+}
+
+#trabajos .works-points{
+  margin:18px 0 20px;
+  padding:0;
+  list-style:none;
+  display:grid;
+  gap:10px;
+}
+
+#trabajos .works-points li{
+  position:relative;
+  padding-left:30px;
+  line-height:1.5;
+}
+
+#trabajos .works-points li::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:.35em;
+  width:18px;
+  height:18px;
+  border-radius:999px;
+  background:#dbeafe;
+  box-shadow:inset 0 0 0 5px #eff6ff;
+}
+
+#trabajos .works-link{
+  min-height:44px;
+  padding:10px 18px;
+  border-color:rgba(37,99,235,.32);
+  background:#2563eb;
+  color:#fff;
+  font-weight:800;
+  box-shadow:0 16px 34px rgba(37,99,235,.22);
+}
+
+#trabajos .works-link::after{
+  content:">";
+  width:16px;
+  height:16px;
+  border-radius:999px;
+  background:rgba(255,255,255,.28);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  line-height:1;
+}
+
+#trabajos .works-dots{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:16px;
+}
+
+#trabajos .works-dot{
+  width:9px;
+  height:9px;
+  padding:0;
+  border:0;
+  border-radius:999px;
+  background:rgba(37,99,235,.22);
+  cursor:pointer;
+  transition:width .18s ease, background-color .18s ease;
+}
+
+#trabajos .works-dot.is-active{
+  width:28px;
+  background:#2563eb;
+}
+
+@media (max-width:900px){
+  #trabajos .works-showcase-head{
+    grid-template-columns:1fr;
+    margin-top:54px;
+    gap:14px;
+  }
+
+  #trabajos .works-showcase{
+    grid-template-columns:1fr;
+    padding:20px;
+    border-radius:26px;
+    gap:22px;
+  }
+
+  #trabajos .works-showcase .works-copy{
+    min-width:0;
+    width:100%;
+    padding:22px;
+    border-radius:24px;
+  }
+
+  #trabajos .works-showcase .works-shots{
+    min-height:0;
+    justify-content:flex-start;
+  }
+
+  #trabajos .works-showcase .works-shot,
+  #trabajos .works-showcase .works-shot:nth-child(2),
+  #trabajos .works-showcase .works-shot:nth-child(3){
+    transform:none;
+    opacity:.78;
+    filter:saturate(.86);
+  }
+
+  #trabajos .works-showcase .works-shot.is-active{
+    transform:none;
+    opacity:1;
+    filter:none;
+  }
+
+  #trabajos .works-showcase .works-shot img{
+    width:100% !important;
+  }
+
+  #trabajos .works-showcase .works-copy-top{
+    align-items:flex-start;
+  }
+}
+
+@media (max-width:560px){
+  #trabajos .works-showcase-head h3{
+    font-size:28px;
+  }
+
+  #trabajos .works-showcase{
+    padding:16px;
+    margin-left:-2px;
+    margin-right:-2px;
+  }
+
+  #trabajos .works-showcase .works-copy{
+    padding:20px 18px;
+  }
+
+  #trabajos .works-link{
+    width:100%;
+    justify-content:center;
+  }
+}
+
     
     /* PARTNERS */
     .partner-row{
@@ -4155,13 +4469,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </button>
     </div>
 
-  <div class="works-split">
+  <div class="works-showcase-head">
+    <div>
+      <p class="works-showcase-kicker">Landings, newsletters y automatizaciones</p>
+      <h3>Proyectos digitales listos para campañas, ventas y seguimiento.</h3>
+    </div>
+    <p>
+      Mostramos piezas reales y el trabajo que hay detrás: estructura, lectura mobile,
+      CTAs claros y preparación para conectar con Tienda Nube, Marketing Nube o WhatsApp.
+    </p>
+  </div>
+
+  <div class="works-split works-showcase">
 
    <!-- Mockups verticales -->
  <div class="works-stage" aria-label="Nuestros trabajos (carrusel)">
   <div class="works-shots">
    <!-- Nueva landing VIACLOUDSTUDIO -->
-  <button class="works-shot is-active" data-project="viacloud" type="button">
+  <button class="works-shot is-active" data-project="viacloud" data-label="Landing propia" type="button" aria-label="Ver caso Landing VIA CLOUD STUDIO">
     <span class="works-float">
     <span class="works-clip">
     <img src="via-clod.png" alt="Landing VIACLOUDSTUDIO · diseño y optimización Tienda Nube">
@@ -4170,7 +4495,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </button>
    
   <!-- Landing VIA SHOP -->
-  <button class="works-shot" data-project="landing" type="button">
+  <button class="works-shot" data-project="landing" data-label="Landing venta" type="button" aria-label="Ver caso Landing VIA SHOP">
     <span class="works-float">
     <span class="works-clip">
     <img src="landing-via.png" alt="Landing VIA SHOP">
@@ -4179,7 +4504,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </button>
 
   <!-- Newsletter DISTRI HOME -->
-  <button class="works-shot" data-project="newsletter" type="button">
+  <button class="works-shot" data-project="newsletter" data-label="Newsletter" type="button" aria-label="Ver caso Newsletter DISTRI HOME">
     <span class="works-float">
     <span class="works-clip">
     <img src="distri-home.png" alt="Newsletter DISTRI HOME">
@@ -4193,13 +4518,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <button class="works-arrow works-arrow--prev" type="button" aria-label="Anterior">‹</button>
     <button class="works-arrow works-arrow--next" type="button" aria-label="Siguiente">›</button>
   </div>
+  <div class="works-dots" aria-label="Proyectos del carrusel">
+    <button class="works-dot is-active" type="button" data-project="viacloud" aria-label="Ver proyecto 1" aria-current="true"></button>
+    <button class="works-dot" type="button" data-project="landing" aria-label="Ver proyecto 2"></button>
+    <button class="works-dot" type="button" data-project="newsletter" aria-label="Ver proyecto 3"></button>
+  </div>
  </div>
 
  
 <!-- Texto que cambia -->
 <div class="works-copy" id="works-copy">
-  <p class="works-tag" id="works-tag">Landing Tienda Nube</p>
-  <h3 id="works-title">Landing VIA SHOP</h3>
+  <div class="works-copy-top">
+  <p class="works-tag" id="works-tag">Landing servicio Tienda Nube</p>
+  <span id="works-count">1 / 3</span>
+  </div>
+  <h3 id="works-title">Landing VIA CLOUD STUDIO</h3>
   <p id="works-description">
     Landing enfocada en servicios de diseño y optimización de Tienda Nube,
     lista para recibir tráfico de campañas y convertir visitas en consultas.
@@ -4908,6 +5241,8 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
   const descEl   = document.getElementById("works-description");
   const pointsEl = document.getElementById("works-points");
   const linkEl   = document.getElementById("works-link");
+  const dots     = document.querySelectorAll(".works-dot");
+  const countEl  = document.getElementById("works-count");
 
   if (!shots.length) return;
 
@@ -4977,16 +5312,50 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
 
     linkEl.href        = data.link;
     linkEl.textContent = data.linkLabel;
+
+    const index = Array.from(shots).findIndex(function (btn) {
+      return btn.getAttribute("data-project") === key;
+    });
+
+    if (countEl && index >= 0) {
+      countEl.textContent = `${index + 1} / ${shots.length}`;
+    }
+
+    dots.forEach(function (dot) {
+      const active = dot.getAttribute("data-project") === key;
+      dot.classList.toggle("is-active", active);
+      if (active) {
+        dot.setAttribute("aria-current", "true");
+      } else {
+        dot.removeAttribute("aria-current");
+      }
+    });
   }
 
   shots.forEach(function (btn) {
     btn.addEventListener("click", function () {
       const key = btn.getAttribute("data-project");
       // visual
-      shots.forEach(s => s.classList.remove("is-active"));
+      shots.forEach(function (s) {
+        const active = s === btn;
+        s.classList.toggle("is-active", active);
+        if (active) {
+          s.setAttribute("aria-current", "true");
+        } else {
+          s.removeAttribute("aria-current");
+        }
+      });
       btn.classList.add("is-active");
       // contenido
       setProject(key);
+    });
+  });
+
+  dots.forEach(function (dot) {
+    dot.addEventListener("click", function () {
+      const key = dot.getAttribute("data-project");
+      const target = document.querySelector(`.works-shot[data-project="${key}"]`);
+      if (target) target.click();
     });
   });
 
