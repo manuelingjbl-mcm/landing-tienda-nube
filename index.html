@@ -1153,180 +1153,6 @@ body.portfolio-modal-open{
 }
 
 
-/* ===== WORKS (MOBILE): carrusel horizontal + copy arriba (SOLID) ===== */
-@media (max-width: 900px){
-
-  :root{
-    --works-card-w: 92vw;
-    --works-gap: 14px;
-    --works-radius: 26px;
-  }
-
-  .works-split{
-    grid-template-columns: 1fr;
-    gap: 18px;
-    align-items: start;
-  }
-  .works-copy{ order: 1; }
-  .works-shots{ order: 2; }
-
-  #trabajos,
-  #trabajos .wrapper,
-  #trabajos .works-split{
-    overflow: visible !important;
-  }
-
-  /* Carrusel */
-  #trabajos .works-shots{
-    position: relative; /* ancla de flechas */
-
-    display: flex;
-    justify-content: flex-start;
-    gap: var(--works-gap);
-
-    overflow-x: auto !important;
-    overflow-y: visible !important;
-    -webkit-overflow-scrolling: touch;
-
-    scroll-snap-type: x proximity;
-
-    padding-left: max(16px, calc((100vw - var(--works-card-w)) / 2)) !important;
-    padding-right: max(16px, calc((100vw - var(--works-card-w)) / 2)) !important;
-
-    padding-top: 26px !important;
-    padding-bottom: 60px !important;
-
-    overscroll-behavior-x: contain;
-    overscroll-behavior-y: auto;
-    touch-action: pan-x pan-y !important;
-    margin: 0 !important;
-
-    /* vars para centrar flechas SOLO sobre el área útil (sin padding) */
-    --worksTop: 26px;
-    --worksBottom: 60px;
-    --worksArrowShift: 0px; /* + baja / - sube */
-  }
-
-  #trabajos .works-shots::-webkit-scrollbar{ display:none; }
-
-  #trabajos .works-shot{
-    flex: 0 0 var(--works-card-w);
-    scroll-snap-align: center;
-
-    border: 0 !important;
-    padding: 0 !important;
-    background: transparent !important;
-    box-shadow: none !important;
-    outline: none !important;
-    overflow: visible !important;
-
-    -webkit-tap-highlight-color: transparent;
-    touch-action: pan-x pan-y !important;
-  }
-
-  #trabajos .works-float{
-    display: block;
-    border-radius: var(--works-radius);
-    box-shadow: none !important;
-    transition: transform .18s ease;
-    transform-origin: center;
-  }
-
-  #trabajos .works-clip{
-    display: block;
-    border-radius: var(--works-radius);
-    overflow: hidden;
-    background: inherit;
-    -webkit-mask-image: -webkit-radial-gradient(white, black);
-    backface-visibility: hidden;
-    transform: translateZ(0);
-
-    aspect-ratio: 8 / 14;
-    max-height: 78vh;
-  }
-
-  #trabajos .works-clip > img{
-    width: 100% !important;
-    height: 100% !important;
-    display: block !important;
-    object-fit: contain !important;
-
-    background: transparent !important;
-    transform: translateZ(0);
-
-    clip-path: inset(0 round var(--works-radius));
-    -webkit-clip-path: inset(0 round var(--works-radius));
-  }
-
-  #trabajos .works-shot.is-active .works-float{
-    transform: scale(1.06);
-    position: relative;
-    z-index: 2;
-  }
-
-  #trabajos .works-shot:not(.is-active){
-    opacity: .92;
-  }
-
-  /* ============ ARROWS (MOBILE) ============ */
-  /* wrapper fijo (no scrollea) */
-  #trabajos .works-stage{
-    position: relative;
-
-    /* match con tu padding-top/bottom real del carrusel */
-    --worksTop: 26px;
-    --worksBottom: 60px;
-    --worksArrowShift: 0px; /* + baja / - sube */
-  }
-
-  /* el carrusel sigue scrolleando */
-  #trabajos .works-stage .works-shots{
-    position: relative; /* opcional */
-  }
-
-  /* overlay fijo siempre visible */
-  #trabajos .works-stage .works-arrows{
-    position: absolute;
-    left: 0;
-    right: 0;
-    z-index: 6;
-
-    top: calc(
-      var(--worksTop) + (100% - var(--worksTop) - var(--worksBottom)) / 2 + var(--worksArrowShift)
-    );
-    transform: translateY(-50%);
-
-    display: flex;
-    justify-content: flex-start;
-    padding: 0 12px;
-    pointer-events: none;
-  }
-
-  #trabajos .works-stage .works-arrow{
-    pointer-events: auto;
-    width: 60px;
-    height: 60px;
-    border-radius: 999px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #fff;
-    color: #111827;
-    border: 1px solid rgba(17,24,39,.14);
-    box-shadow: 0 12px 26px rgba(15,23,42,.22);
-
-    font-size: 26px;
-    line-height: 1;
-    padding-bottom: 2px; /* centra flechita */
-  }
-
-  #trabajos .works-stage .works-arrow--prev{ margin-right: auto; transform: translateX(-26px); }
-  #trabajos .works-stage .works-arrow--next{ margin-left:  auto; transform: translateX( 26px); }
-
-  #trabajos .works-stage .works-arrow[hidden]{ display:none !important; }
-}
-
 /* === WORKS ARROWS: DESKTOP OFF (blindado) === */
 @media (min-width: 901px){
   #trabajos .works-stage .works-arrows{
@@ -1579,6 +1405,12 @@ body.portfolio-modal-open{
 }
 
 @media (max-width:900px){
+  #trabajos.reveal{
+    opacity:1 !important;
+    transform:none !important;
+    transition:none !important;
+  }
+
   #trabajos .works-showcase-head{
     grid-template-columns:1fr;
     margin-top:54px;
@@ -1586,91 +1418,100 @@ body.portfolio-modal-open{
   }
 
   #trabajos .works-showcase{
-    grid-template-columns:1fr;
-    padding:20px;
+    display:block;
+    padding:18px;
     border-radius:26px;
-    gap:22px;
-    overflow:hidden;
+    background:rgba(255,255,255,.74);
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+    box-shadow:0 18px 44px rgba(15,23,42,.08);
+    overflow:visible !important;
   }
 
   #trabajos .works-showcase .works-copy{
-    min-width:0;
-    width:100%;
-    padding:22px;
-    border-radius:24px;
+    display:none;
   }
 
   #trabajos .works-showcase .works-shots{
     position:relative !important;
-    display:block !important;
+    display:grid !important;
+    grid-template-columns:1fr;
+    gap:16px;
     width:100%;
     height:auto;
     min-height:0;
-    padding:8px 0 18px !important;
+    padding:0 !important;
     margin:0 !important;
     overflow:visible !important;
     scroll-snap-type:none !important;
+    overscroll-behavior:auto !important;
     touch-action:auto !important;
-    justify-content:flex-start;
+    isolation:auto;
   }
 
   #trabajos .works-showcase .works-float,
   #trabajos .works-showcase .works-clip{
+    display:block;
     height:auto;
+    transform:none !important;
+    transition:none !important;
   }
 
+  #trabajos .works-showcase .works-shot.is-active,
+  #trabajos .works-showcase .works-shot.is-prev,
+  #trabajos .works-showcase .works-shot.is-next,
+  #trabajos .works-showcase .works-shot.is-hidden,
   #trabajos .works-showcase .works-shot,
   #trabajos .works-showcase .works-shot:nth-child(2),
   #trabajos .works-showcase .works-shot:nth-child(3){
     position:relative;
     inset:auto;
-    display:none;
-    width:min(64vw, 260px);
+    display:block !important;
+    width:100%;
+    max-width:330px;
     height:auto;
     margin:0 auto;
     opacity:1;
     filter:none;
-    transform:none;
-    transition:transform .28s ease, opacity .28s ease, filter .28s ease;
+    transform:none !important;
+    transition:none !important;
     pointer-events:none;
     touch-action:auto !important;
+    scroll-snap-align:none;
     z-index:1;
   }
 
-  #trabajos .works-showcase .works-shot.is-active{
-    display:block;
-    transform:none;
-    opacity:1;
-    filter:none;
-    pointer-events:none;
-    z-index:3;
-  }
-
-  #trabajos .works-showcase .works-shot.is-active .works-float{
-    transform:translateY(-3px) scale(1.01) !important;
-  }
-
-  #trabajos .works-showcase .works-shot.is-prev{
-    display:none;
-  }
-
-  #trabajos .works-showcase .works-shot.is-next{
-    display:none;
-  }
-
-  #trabajos .works-showcase .works-shot.is-prev,
-  #trabajos .works-showcase .works-shot.is-next{
-    pointer-events:none;
+  #trabajos .works-showcase .works-clip{
+    overflow:hidden;
+    border-radius:24px;
+    background:#f8fbff;
+    box-shadow:0 16px 36px rgba(15,23,42,.12);
+    -webkit-mask-image:none;
+    clip-path:none;
+    -webkit-clip-path:none;
   }
 
   #trabajos .works-showcase .works-shot img{
+    display:block !important;
     width:100% !important;
     height:auto !important;
+    max-height:410px;
     object-fit:contain !important;
+    border-radius:24px;
+    transform:none !important;
+    clip-path:none;
+    -webkit-clip-path:none;
+    background:#f8fbff;
   }
 
-  #trabajos .works-showcase .works-copy-top{
-    align-items:flex-start;
+  #trabajos .works-showcase .works-shot::after{
+    top:12px;
+    max-width:calc(100% - 24px);
+  }
+
+  #trabajos .works-showcase .works-arrows,
+  #trabajos .works-showcase .works-dots{
+    display:none !important;
   }
 }
 
@@ -1680,18 +1521,17 @@ body.portfolio-modal-open{
   }
 
   #trabajos .works-showcase{
-    padding:16px;
+    padding:14px;
     margin-left:-2px;
     margin-right:-2px;
   }
 
-  #trabajos .works-showcase .works-copy{
-    padding:20px 18px;
+  #trabajos .works-showcase .works-shot{
+    max-width:100%;
   }
 
-  #trabajos .works-link{
-    width:100%;
-    justify-content:center;
+  #trabajos .works-showcase .works-shot img{
+    max-height:none;
   }
 }
 
@@ -2645,52 +2485,6 @@ text-underline-offset: 3px;
   transform: translateY(-8px) scale(1.03);
   box-shadow: 0 30px 60px rgba(15, 23, 42, 0.65);
 }
-
-/* ====== MOBILE: carrusel horizontal ====== */
-@media (max-width: 767.98px) {
-
-  /* Una sola columna: texto arriba, mockups abajo */
-  .works-split {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 28px;
-  }
-
-  /* Contenedor scrollable horizontal */
-  .works-shots {
-    justify-content: flex-start;
-    overflow-x: auto;
-    padding: 0 20px 24px;   /* aire a los lados y abajo */
-    margin: 0;             /* quitamos el margen negativo */
-    gap: 18px;
-    scroll-snap-type: x mandatory;
-    scroll-padding: 0 20px; /* para que primera y última centren mejor */
-  }
-
-  .works-shots::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Cada tarjeta ocupa buena parte del ancho, sigue siendo vertical */
-  .works-shot {
-    flex: 0 0 50vw;        /* ancho visible (puedes probar 70–72vw si la querés más grande) */
-    max-width: 280px;      /* límite para que no explote en pantallas grandes */
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
-  }
-
-  .works-shot img {
-    width: 100%;
-    height: auto;          /* respeta el formato vertical del mockup */
-    border-radius: 24px;
-  }
-
-  /* En mobile NO escalamos para que no se corten al crecer */
-  .works-shot.is-active {
-    transform: none;
-    box-shadow: 0 24px 50px rgba(15, 23, 42, 0.55);
-  }
-}
-
 
 /* ====== SERVICIOS · RESETEO (SIN ROMPER ANIMACIÓN) ====== */
 
@@ -5815,47 +5609,6 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
-});
-</script>
-
-    
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const root   = document.querySelector("#trabajos");
-  const shots  = Array.from(root?.querySelectorAll(".works-shots .works-shot") || []);
-  const prevBtn = root?.querySelector(".works-arrow--prev");
-  const nextBtn = root?.querySelector(".works-arrow--next");
-  const stage = root?.querySelector(".works-stage");
-  if (!stage || shots.length < 2 || !prevBtn || !nextBtn) return;
-
-  function activeIndex(){
-    const i = shots.findIndex(b => b.classList.contains("is-active"));
-    return i >= 0 ? i : 0;
-  }
-
-  function updateArrows(){
-    const i = activeIndex();
-    prevBtn.hidden = (i === 0);
-    nextBtn.hidden = (i === shots.length - 1);
-  }
-
-  function goTo(i){
-    i = Math.max(0, Math.min(shots.length - 1, i));
-    shots[i].click();
-    updateArrows();
-  }
-
-  prevBtn.addEventListener("click", () => goTo(activeIndex() - 1));
-  nextBtn.addEventListener("click", () => goTo(activeIndex() + 1));
-
-  shots.forEach((btn, idx) => {
-    btn.addEventListener("click", () => {
-      if (idx !== activeIndex()) goTo(idx);
-      updateArrows();
-    });
-  });
-
-  updateArrows();
 });
 </script>
 
