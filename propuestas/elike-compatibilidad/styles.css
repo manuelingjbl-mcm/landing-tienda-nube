@@ -1085,6 +1085,62 @@ tbody tr:last-child td {
   color: #d7e0ee;
 }
 
+.implementation-requirement {
+  margin-top: 18px;
+  padding: clamp(18px, 3vw, 26px);
+  border: 1px solid rgba(27, 99, 255, 0.22);
+  border-left: 5px solid var(--blue);
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ffffff 0%, #eef5ff 100%);
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
+}
+
+.implementation-requirement span {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 0.76rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.implementation-requirement h3 {
+  max-width: 860px;
+  margin: 14px 0 8px;
+  color: var(--navy);
+  font-size: clamp(1.25rem, 2.4vw, 1.85rem);
+  line-height: 1.12;
+}
+
+.implementation-requirement p {
+  max-width: 940px;
+  margin: 0;
+  color: #44546a;
+}
+
+.implementation-requirement ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.implementation-requirement li {
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--navy);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
 .option-grid {
   grid-template-columns: repeat(2, 1fr);
 }
@@ -1509,7 +1565,8 @@ blockquote {
 
   .choice-grid,
   .demo-options,
-  .pros-cons {
+  .pros-cons,
+  .implementation-requirement ul {
     grid-template-columns: 1fr;
   }
 

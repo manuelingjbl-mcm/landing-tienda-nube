@@ -413,10 +413,20 @@
             <p>Las reglas finales deben definirse junto a ELIKE para garantizar recomendaciones técnicamente correctas.</p>
           </div>
         </div>
-        <p class="disclaimer">
-          Las preguntas y reglas reales deberán validarse previamente con ELIKE antes de implementar
-          cualquier recomendación automática.
-        </p>
+        <div class="implementation-requirement">
+          <span>Información necesaria para implementación</span>
+          <h3>Para bajarlo correctamente a código, ELIKE deberá validar la lógica técnica real.</h3>
+          <p>
+            El demo muestra el recorrido conceptual. Antes de desarrollar el motor de recomendaciones
+            necesitamos confirmar con ELIKE las preguntas definitivas, las reglas de compatibilidad y
+            las especificaciones reales por modelo.
+          </p>
+          <ul>
+            <li>Preguntas que debe responder el cliente: material, espesor, marco, conectividad y uso.</li>
+            <li>Reglas de compatibilidad: qué combinación habilita, descarta o deriva a validación humana.</li>
+            <li>Datos por producto: rangos admitidos, restricciones de instalación y alternativas recomendadas.</li>
+          </ul>
+        </div>
       </section>
 
       <section class="section implementation" id="implementacion">
