@@ -1590,6 +1590,7 @@ body.portfolio-modal-open{
     padding:20px;
     border-radius:26px;
     gap:22px;
+    overflow:hidden;
   }
 
   #trabajos .works-showcase .works-copy{
@@ -1600,30 +1601,75 @@ body.portfolio-modal-open{
   }
 
   #trabajos .works-showcase .works-shots{
-    min-height:0;
+    position:relative !important;
+    display:block !important;
+    width:100%;
+    height:min(72vh, 640px);
+    min-height:520px;
+    padding:0 !important;
+    margin:0 !important;
+    overflow:hidden !important;
+    scroll-snap-type:none !important;
+    touch-action:pan-y !important;
+    overscroll-behavior:contain;
     justify-content:flex-start;
+  }
+
+  #trabajos .works-showcase .works-float,
+  #trabajos .works-showcase .works-clip{
+    height:100%;
   }
 
   #trabajos .works-showcase .works-shot,
   #trabajos .works-showcase .works-shot:nth-child(2),
   #trabajos .works-showcase .works-shot:nth-child(3){
-    transform:none;
-    opacity:.78;
+    position:absolute;
+    top:0;
+    left:50%;
+    width:min(78vw, 320px);
+    height:100%;
+    opacity:0;
     filter:saturate(.86);
+    transform:translateX(-50%) scale(.82);
+    transition:transform .28s ease, opacity .28s ease, filter .28s ease;
+    pointer-events:none;
+    touch-action:pan-y !important;
+    z-index:1;
   }
 
   #trabajos .works-showcase .works-shot.is-active{
-    transform:none;
+    transform:translateX(-50%) scale(1);
     opacity:1;
     filter:none;
+    pointer-events:auto;
+    z-index:3;
   }
 
   #trabajos .works-showcase .works-shot.is-active .works-float{
-    transform:none !important;
+    transform:translateY(-4px) scale(1.015) !important;
+  }
+
+  #trabajos .works-showcase .works-shot.is-prev{
+    transform:translateX(-134%) scale(.84);
+    opacity:.52;
+    z-index:2;
+  }
+
+  #trabajos .works-showcase .works-shot.is-next{
+    transform:translateX(34%) scale(.84);
+    opacity:.52;
+    z-index:2;
+  }
+
+  #trabajos .works-showcase .works-shot.is-prev,
+  #trabajos .works-showcase .works-shot.is-next{
+    pointer-events:auto;
   }
 
   #trabajos .works-showcase .works-shot img{
     width:100% !important;
+    height:100% !important;
+    object-fit:contain !important;
   }
 
   #trabajos .works-showcase .works-copy-top{
@@ -5246,7 +5292,8 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
   const descEl   = document.getElementById("works-description");
   const pointsEl = document.getElementById("works-points");
   const linkEl   = document.getElementById("works-link");
-  const dots     = document.querySelectorAll(".works-dot");
+  const dotsWrap = document.querySelector(".works-dots");
+  let dots       = [];
   const countEl  = document.getElementById("works-count");
 
   if (!shots.length) return;
@@ -5299,6 +5346,21 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
 };
 
 
+  function updateSlideClasses(index) {
+    shots.forEach(function (shot, idx) {
+      shot.classList.toggle("is-active", idx === index);
+      shot.classList.toggle("is-prev", idx === index - 1);
+      shot.classList.toggle("is-next", idx === index + 1);
+      shot.classList.toggle("is-hidden", idx < index - 1 || idx > index + 1);
+
+      if (idx === index) {
+        shot.setAttribute("aria-current", "true");
+      } else {
+        shot.removeAttribute("aria-current");
+      }
+    });
+  }
+
   function setProject(key) {
     const data = projects[key];
     if (!data) return;
@@ -5324,6 +5386,7 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
 
     if (countEl && index >= 0) {
       countEl.textContent = `${index + 1} / ${shots.length}`;
+      updateSlideClasses(index);
     }
 
     dots.forEach(function (dot) {
@@ -5337,21 +5400,22 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
     });
   }
 
+  if (dotsWrap) {
+    dotsWrap.innerHTML = "";
+    shots.forEach(function (shot, index) {
+      const dot = document.createElement("button");
+      dot.className = "works-dot";
+      dot.type = "button";
+      dot.dataset.project = shot.getAttribute("data-project") || "";
+      dot.setAttribute("aria-label", `Ver proyecto ${index + 1}`);
+      dotsWrap.appendChild(dot);
+    });
+    dots = Array.from(dotsWrap.querySelectorAll(".works-dot"));
+  }
+
   shots.forEach(function (btn) {
     btn.addEventListener("click", function () {
       const key = btn.getAttribute("data-project");
-      // visual
-      shots.forEach(function (s) {
-        const active = s === btn;
-        s.classList.toggle("is-active", active);
-        if (active) {
-          s.setAttribute("aria-current", "true");
-        } else {
-          s.removeAttribute("aria-current");
-        }
-      });
-      btn.classList.add("is-active");
-      // contenido
       setProject(key);
     });
   });
@@ -5760,21 +5824,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  if (!matchMedia("(max-width: 900px)").matches) return;
-
   const root   = document.querySelector("#trabajos");
-  const track  = root?.querySelector(".works-shots");
   const shots  = Array.from(root?.querySelectorAll(".works-shots .works-shot") || []);
   const prevBtn = root?.querySelector(".works-arrow--prev");
   const nextBtn = root?.querySelector(".works-arrow--next");
-  if (!track || shots.length < 2 || !prevBtn || !nextBtn) return;
-
-  function center(btn, smooth=true){
-    const trackRect = track.getBoundingClientRect();
-    const btnRect = btn.getBoundingClientRect();
-    const delta = (btnRect.left - trackRect.left) - (trackRect.width/2 - btnRect.width/2);
-    track.scrollTo({ left: track.scrollLeft + delta, behavior: smooth ? "smooth" : "auto" });
-  }
+  const stage = root?.querySelector(".works-stage");
+  if (!stage || shots.length < 2 || !prevBtn || !nextBtn) return;
 
   function activeIndex(){
     const i = shots.findIndex(b => b.classList.contains("is-active"));
@@ -5789,23 +5844,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function goTo(i){
     i = Math.max(0, Math.min(shots.length - 1, i));
-    shots[i].click();          // mantiene tu lógica (texto + is-active)
-    center(shots[i], true);
+    shots[i].click();
     updateArrows();
   }
 
   prevBtn.addEventListener("click", () => goTo(activeIndex() - 1));
   nextBtn.addEventListener("click", () => goTo(activeIndex() + 1));
 
-  // si hacen click directo en una card
-  shots.forEach(btn => btn.addEventListener("click", () => {
-    setTimeout(() => { center(btn, true); updateArrows(); }, 0);
-  }, { passive:true }));
+  shots.forEach((btn, idx) => {
+    btn.addEventListener("click", () => {
+      if (idx !== activeIndex()) goTo(idx);
+      updateArrows();
+    });
+  });
 
-  setTimeout(() => {
-    center(shots[activeIndex()], false);
-    updateArrows();
-  }, 60);
+  let startX = 0;
+  let startY = 0;
+  let tracking = false;
+
+  stage.addEventListener("touchstart", (event) => {
+    const touch = event.touches[0];
+    startX = touch.clientX;
+    startY = touch.clientY;
+    tracking = true;
+  }, { passive:true });
+
+  stage.addEventListener("touchend", (event) => {
+    if (!tracking) return;
+    tracking = false;
+    const touch = event.changedTouches[0];
+    const dx = touch.clientX - startX;
+    const dy = touch.clientY - startY;
+
+    if (Math.abs(dx) < 44 || Math.abs(dx) < Math.abs(dy) * 1.15) return;
+    goTo(activeIndex() + (dx < 0 ? 1 : -1));
+  }, { passive:true });
+
+  updateArrows();
 });
 </script>
 
