@@ -1604,71 +1604,68 @@ body.portfolio-modal-open{
     position:relative !important;
     display:block !important;
     width:100%;
-    height:min(72vh, 640px);
-    min-height:520px;
-    padding:0 !important;
+    height:auto;
+    min-height:0;
+    padding:8px 0 18px !important;
     margin:0 !important;
-    overflow:hidden !important;
+    overflow:visible !important;
     scroll-snap-type:none !important;
-    touch-action:pan-y !important;
-    overscroll-behavior:contain;
+    touch-action:auto !important;
     justify-content:flex-start;
   }
 
   #trabajos .works-showcase .works-float,
   #trabajos .works-showcase .works-clip{
-    height:100%;
+    height:auto;
   }
 
   #trabajos .works-showcase .works-shot,
   #trabajos .works-showcase .works-shot:nth-child(2),
   #trabajos .works-showcase .works-shot:nth-child(3){
-    position:absolute;
-    top:0;
-    left:50%;
-    width:min(78vw, 320px);
-    height:100%;
-    opacity:0;
-    filter:saturate(.86);
-    transform:translateX(-50%) scale(.82);
+    position:relative;
+    inset:auto;
+    display:none;
+    width:min(64vw, 260px);
+    height:auto;
+    margin:0 auto;
+    opacity:1;
+    filter:none;
+    transform:none;
     transition:transform .28s ease, opacity .28s ease, filter .28s ease;
     pointer-events:none;
-    touch-action:pan-y !important;
+    touch-action:auto !important;
     z-index:1;
   }
 
   #trabajos .works-showcase .works-shot.is-active{
-    transform:translateX(-50%) scale(1);
+    display:block;
+    transform:none;
     opacity:1;
     filter:none;
-    pointer-events:auto;
+    pointer-events:none;
     z-index:3;
   }
 
   #trabajos .works-showcase .works-shot.is-active .works-float{
-    transform:translateY(-4px) scale(1.015) !important;
+    transform:translateY(-3px) scale(1.01) !important;
   }
 
   #trabajos .works-showcase .works-shot.is-prev{
-    transform:translateX(-134%) scale(.84);
-    opacity:.52;
-    z-index:2;
+    display:none;
   }
 
   #trabajos .works-showcase .works-shot.is-next{
-    transform:translateX(34%) scale(.84);
-    opacity:.52;
-    z-index:2;
+    display:none;
   }
 
   #trabajos .works-showcase .works-shot.is-prev,
   #trabajos .works-showcase .works-shot.is-next{
-    pointer-events:auto;
+    pointer-events:none;
   }
 
   #trabajos .works-showcase .works-shot img{
     width:100% !important;
-    height:100% !important;
+    height:auto !important;
     object-fit:contain !important;
   }
 
@@ -5857,28 +5854,6 @@ document.addEventListener("DOMContentLoaded", () => {
       updateArrows();
     });
   });
-
-  let startX = 0;
-  let startY = 0;
-  let tracking = false;
-
-  stage.addEventListener("touchstart", (event) => {
-    const touch = event.touches[0];
-    startX = touch.clientX;
-    startY = touch.clientY;
-    tracking = true;
-  }, { passive:true });
-
-  stage.addEventListener("touchend", (event) => {
-    if (!tracking) return;
-    tracking = false;
-    const touch = event.changedTouches[0];
-    const dx = touch.clientX - startX;
-    const dy = touch.clientY - startY;
-
-    if (Math.abs(dx) < 44 || Math.abs(dx) < Math.abs(dy) * 1.15) return;
-    goTo(activeIndex() + (dx < 0 ? 1 : -1));
-  }, { passive:true });
 
   updateArrows();
 });
