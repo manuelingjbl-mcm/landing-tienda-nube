@@ -1188,7 +1188,7 @@ body.portfolio-modal-open{
     overflow-y: visible !important;
     -webkit-overflow-scrolling: touch;
 
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x proximity;
 
     padding-left: max(16px, calc((100vw - var(--works-card-w)) / 2)) !important;
     padding-right: max(16px, calc((100vw - var(--works-card-w)) / 2)) !important;
@@ -1197,6 +1197,7 @@ body.portfolio-modal-open{
     padding-bottom: 60px !important;
 
     overscroll-behavior-x: contain;
+    overscroll-behavior-y: auto;
     touch-action: pan-x pan-y !important;
     margin: 0 !important;
 
@@ -5753,52 +5754,6 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
     
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  if (!matchMedia("(max-width: 900px)").matches) return;
-
-  const track = document.querySelector("#trabajos .works-shots");
-  const shots = Array.from(document.querySelectorAll("#trabajos .works-shots .works-shot"));
-  if (!track || shots.length < 2) return;
-
-  // Centrar un slide en el carrusel
-  function center(btn, smooth=true){
-    const trackRect = track.getBoundingClientRect();
-    const btnRect = btn.getBoundingClientRect();
-    const delta = (btnRect.left - trackRect.left) - (trackRect.width/2 - btnRect.width/2);
-    track.scrollTo({ left: track.scrollLeft + delta, behavior: smooth ? "smooth" : "auto" });
-  }
-
-  // Al click: centrar (tu JS ya setea is-active + actualiza texto)
-  shots.forEach(btn => {
-    btn.addEventListener("click", () => center(btn, true), { passive:true });
-  });
-
-  // Al finalizar swipe: elegir el más centrado y “clickearlo” para sincronizar texto
-  let t = null;
-  track.addEventListener("scroll", () => {
-    clearTimeout(t);
-    t = setTimeout(() => {
-      const centerX = track.getBoundingClientRect().left + track.clientWidth/2;
-      let best = shots[0], bestD = Infinity;
-
-      shots.forEach(btn => {
-        const r = btn.getBoundingClientRect();
-        const mid = r.left + r.width/2;
-        const d = Math.abs(mid - centerX);
-        if (d < bestD){ bestD = d; best = btn; }
-      });
-
-      if (!best.classList.contains("is-active")) {
-        best.click();          // dispara tu setProject() + is-active
-        center(best, false);   // lo deja perfecto centrado
-      }
-    }, 120);
-  }, { passive:true });
-});
-</script>
-
-
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   if (!matchMedia("(max-width: 900px)").matches) return;
