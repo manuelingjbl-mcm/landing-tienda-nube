@@ -448,10 +448,21 @@ button:hover,
 }
 
 .compat-card.floating {
-  position: absolute;
-  right: 22px;
-  bottom: 22px;
-  width: min(330px, calc(100% - 56px));
+  position: relative;
+  right: auto;
+  bottom: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  column-gap: 18px;
+  align-items: center;
+  width: 100%;
+  margin: 18px 0 0;
+  padding: 18px;
+}
+
+.compat-card.floating button {
+  width: 100%;
+  margin-top: 0;
 }
 
 .compat-card h3 {
@@ -1407,12 +1418,17 @@ blockquote {
 
   .compat-card.floating {
     position: relative;
+    display: block;
     right: auto;
     bottom: auto;
     width: 100%;
     margin-top: 14px;
     padding: 16px;
     box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
+  }
+
+  .compat-card.floating button {
+    margin-top: 14px;
   }
 
   .compat-card h3 {
