@@ -1418,7 +1418,9 @@ body.portfolio-modal-open{
   }
 
   #trabajos .works-showcase{
-    display:block;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:18px;
     padding:18px;
     border-radius:26px;
     background:rgba(255,255,255,.74);
@@ -1428,15 +1430,24 @@ body.portfolio-modal-open{
     overflow:visible !important;
   }
 
+  #trabajos .works-stage{
+    position:relative;
+    min-width:0;
+    padding-bottom:34px;
+  }
+
   #trabajos .works-showcase .works-copy{
-    display:none;
+    display:block;
+    min-width:0;
+    width:100%;
+    padding:20px 18px;
+    border-radius:24px;
+    box-shadow:0 14px 34px rgba(15,23,42,.07);
   }
 
   #trabajos .works-showcase .works-shots{
     position:relative !important;
-    display:grid !important;
-    grid-template-columns:1fr;
-    gap:16px;
+    display:block !important;
     width:100%;
     height:auto;
     min-height:0;
@@ -1466,9 +1477,9 @@ body.portfolio-modal-open{
   #trabajos .works-showcase .works-shot:nth-child(3){
     position:relative;
     inset:auto;
-    display:block !important;
+    display:none !important;
     width:100%;
-    max-width:330px;
+    max-width:310px;
     height:auto;
     margin:0 auto;
     opacity:1;
@@ -1479,6 +1490,10 @@ body.portfolio-modal-open{
     touch-action:auto !important;
     scroll-snap-align:none;
     z-index:1;
+  }
+
+  #trabajos .works-showcase .works-shot.is-active{
+    display:block !important;
   }
 
   #trabajos .works-showcase .works-clip{
@@ -1509,9 +1524,43 @@ body.portfolio-modal-open{
     max-width:calc(100% - 24px);
   }
 
-  #trabajos .works-showcase .works-arrows,
   #trabajos .works-showcase .works-dots{
-    display:none !important;
+    display:flex !important;
+    margin-top:14px;
+  }
+
+  #trabajos .works-showcase .works-arrows{
+    position:absolute;
+    left:8px;
+    right:8px;
+    top:calc(50% - 48px);
+    z-index:5;
+    display:flex !important;
+    justify-content:space-between;
+    pointer-events:none;
+  }
+
+  #trabajos .works-showcase .works-arrow{
+    width:44px;
+    height:44px;
+    border-radius:999px;
+    border:1px solid rgba(15,23,42,.12);
+    background:rgba(255,255,255,.94);
+    color:#111827;
+    box-shadow:0 12px 26px rgba(15,23,42,.18);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    line-height:1;
+    pointer-events:auto;
+    touch-action:manipulation;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  #trabajos .works-showcase .works-arrow[hidden]{
+    opacity:.35;
+    visibility:hidden;
   }
 }
 
@@ -1527,11 +1576,20 @@ body.portfolio-modal-open{
   }
 
   #trabajos .works-showcase .works-shot{
-    max-width:100%;
+    max-width:min(100%, 300px);
   }
 
   #trabajos .works-showcase .works-shot img{
     max-height:none;
+  }
+
+  #trabajos .works-showcase .works-copy{
+    padding:18px 16px;
+  }
+
+  #trabajos .works-link{
+    width:100%;
+    justify-content:center;
   }
 }
 
@@ -5084,7 +5142,10 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
   const pointsEl = document.getElementById("works-points");
   const linkEl   = document.getElementById("works-link");
   const dotsWrap = document.querySelector(".works-dots");
+  const prevBtn  = document.querySelector("#trabajos .works-arrow--prev");
+  const nextBtn  = document.querySelector("#trabajos .works-arrow--next");
   let dots       = [];
+  let activeProjectIndex = 0;
   const countEl  = document.getElementById("works-count");
 
   if (!shots.length) return;
@@ -5176,6 +5237,7 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
     });
 
     if (countEl && index >= 0) {
+      activeProjectIndex = index;
       countEl.textContent = `${index + 1} / ${shots.length}`;
       updateSlideClasses(index);
     }
@@ -5218,6 +5280,24 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
       if (target) target.click();
     });
   });
+
+  function goToProject(index) {
+    const normalizedIndex = (index + shots.length) % shots.length;
+    const key = shots[normalizedIndex].getAttribute("data-project");
+    setProject(key);
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", function () {
+      goToProject(activeProjectIndex - 1);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", function () {
+      goToProject(activeProjectIndex + 1);
+    });
+  }
 
   // Estado inicial
   setProject("viacloud"); // Si querés que arranque en VIACLOUDSTUDIO, cambialo a "viacloud"
