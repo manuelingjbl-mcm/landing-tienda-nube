@@ -1618,6 +1618,10 @@ body.portfolio-modal-open{
     filter:none;
   }
 
+  #trabajos .works-showcase .works-shot.is-active .works-float{
+    transform:none !important;
+  }
+
   #trabajos .works-showcase .works-shot img{
     width:100% !important;
   }
@@ -5797,27 +5801,6 @@ document.addEventListener("DOMContentLoaded", () => {
   shots.forEach(btn => btn.addEventListener("click", () => {
     setTimeout(() => { center(btn, true); updateArrows(); }, 0);
   }, { passive:true }));
-
-  // si cambian por swipe: detecto la más centrada y la activo
-  let t = null;
-  track.addEventListener("scroll", () => {
-    clearTimeout(t);
-    t = setTimeout(() => {
-      const centerX = track.getBoundingClientRect().left + track.clientWidth/2;
-      let best = 0, bestD = Infinity;
-
-      shots.forEach((btn, idx) => {
-        const r = btn.getBoundingClientRect();
-        const mid = r.left + r.width/2;
-        const d = Math.abs(mid - centerX);
-        if (d < bestD){ bestD = d; best = idx; }
-      });
-
-      if (!shots[best].classList.contains("is-active")) shots[best].click();
-      center(shots[best], false);
-      updateArrows();
-    }, 120);
-  }, { passive:true });
 
   setTimeout(() => {
     center(shots[activeIndex()], false);
