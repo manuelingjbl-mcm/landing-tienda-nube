@@ -1153,13 +1153,6 @@ body.portfolio-modal-open{
 }
 
 
-/* === WORKS ARROWS: DESKTOP OFF (blindado) === */
-@media (min-width: 901px){
-  #trabajos .works-stage .works-arrows{
-    display: none !important;
-  }
-}
-
 /* Showcase interactivo: landings, newsletters y automatizaciones */
 #trabajos .works-showcase-head{
   margin:68px 0 24px;
@@ -1212,38 +1205,52 @@ body.portfolio-modal-open{
 #trabajos .works-stage{
   position:relative;
   min-width:0;
+  min-height:560px;
+  padding-bottom:44px;
 }
 
 #trabajos .works-showcase .works-shots{
-  align-items:center;
-  justify-content:center;
-  gap:14px;
-  min-height:430px;
+  position:relative;
+  display:block;
+  min-height:520px;
   isolation:isolate;
 }
 
 #trabajos .works-showcase .works-shot{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:clamp(240px, 18vw, 330px);
   overflow:visible;
   border-radius:28px;
-  opacity:.66;
-  filter:saturate(.82);
-  transform:translateY(18px) scale(.9) rotate(-1.5deg);
-  z-index:1;
+  opacity:0;
+  filter:saturate(.76);
+  transform:translate(-50%, -50%) translateX(220px) scale(.72) rotate(5deg);
+  transition:opacity .34s ease, filter .34s ease, transform .44s cubic-bezier(.22, 1, .36, 1);
+  pointer-events:none;
+  z-index:0;
 }
 
-#trabajos .works-showcase .works-shot:nth-child(2){
-  transform:translateY(8px) scale(.94) rotate(.7deg);
+#trabajos .works-showcase .works-shot.is-prev{
+  opacity:.44;
+  filter:saturate(.78) blur(.25px);
+  transform:translate(-50%, -50%) translateX(-142px) translateY(20px) scale(.82) rotate(-4deg);
+  z-index:2;
 }
 
-#trabajos .works-showcase .works-shot:nth-child(3){
-  transform:translateY(18px) scale(.9) rotate(1.5deg);
+#trabajos .works-showcase .works-shot.is-next{
+  opacity:.62;
+  filter:saturate(.86);
+  transform:translate(-50%, -50%) translateX(142px) translateY(18px) scale(.84) rotate(4deg);
+  z-index:3;
 }
 
 #trabajos .works-showcase .works-shot.is-active{
   opacity:1;
   filter:none;
-  transform:translateY(-2px) scale(1.08) rotate(0deg);
-  z-index:3;
+  transform:translate(-50%, -50%) translateX(0) translateY(-4px) scale(1);
+  pointer-events:auto;
+  z-index:4;
 }
 
 #trabajos .works-showcase .works-float,
@@ -1257,10 +1264,15 @@ body.portfolio-modal-open{
   overflow:hidden;
   background:#f8fafc;
   box-shadow:0 28px 70px rgba(15,23,42,.22);
+  height:clamp(430px, 34vw, 560px);
 }
 
 #trabajos .works-showcase .works-shot img{
-  width:clamp(190px, 14.4vw, 250px);
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:top center;
   border-radius:28px;
   box-shadow:none;
 }
@@ -1404,6 +1416,41 @@ body.portfolio-modal-open{
   background:#2563eb;
 }
 
+#trabajos .works-showcase .works-arrows{
+  position:absolute;
+  left:18px;
+  right:18px;
+  top:50%;
+  z-index:6;
+  display:flex;
+  justify-content:space-between;
+  pointer-events:none;
+  transform:translateY(-50%);
+}
+
+#trabajos .works-showcase .works-arrow{
+  width:52px;
+  height:52px;
+  border-radius:999px;
+  border:1px solid rgba(15,23,42,.12);
+  background:rgba(255,255,255,.95);
+  color:#111827;
+  box-shadow:0 16px 34px rgba(15,23,42,.18);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  line-height:1;
+  pointer-events:auto;
+  cursor:pointer;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+
+#trabajos .works-showcase .works-arrow:hover{
+  background:#fff;
+}
+
 @media (max-width:900px){
   #trabajos.reveal{
     opacity:1 !important;
@@ -1433,6 +1480,7 @@ body.portfolio-modal-open{
   #trabajos .works-stage{
     position:relative;
     min-width:0;
+    min-height:0;
     padding-bottom:34px;
   }
 
@@ -1474,7 +1522,8 @@ body.portfolio-modal-open{
   #trabajos .works-showcase .works-shot.is-hidden,
   #trabajos .works-showcase .works-shot,
   #trabajos .works-showcase .works-shot:nth-child(2),
-  #trabajos .works-showcase .works-shot:nth-child(3){
+  #trabajos .works-showcase .works-shot:nth-child(3),
+  #trabajos .works-showcase .works-shot:nth-child(4){
     position:relative;
     inset:auto;
     display:none !important;
@@ -1504,14 +1553,16 @@ body.portfolio-modal-open{
     -webkit-mask-image:none;
     clip-path:none;
     -webkit-clip-path:none;
+    height:min(105vw, 470px);
   }
 
   #trabajos .works-showcase .works-shot img{
     display:block !important;
     width:100% !important;
-    height:auto !important;
+    height:100% !important;
     max-height:410px;
-    object-fit:contain !important;
+    object-fit:cover !important;
+    object-position:top center;
     border-radius:24px;
     transform:none !important;
     clip-path:none;
@@ -1541,8 +1592,8 @@ body.portfolio-modal-open{
   }
 
   #trabajos .works-showcase .works-arrow{
-    width:44px;
-    height:44px;
+    width:54px;
+    height:54px;
     border-radius:999px;
     border:1px solid rgba(15,23,42,.12);
     background:rgba(255,255,255,.94);
@@ -1551,7 +1602,7 @@ body.portfolio-modal-open{
     display:inline-flex;
     align-items:center;
     justify-content:center;
-    font-size:24px;
+    font-size:28px;
     line-height:1;
     pointer-events:auto;
     touch-action:manipulation;
@@ -4385,11 +4436,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
    <!-- Mockups verticales -->
  <div class="works-stage" aria-label="Nuestros trabajos (carrusel)">
   <div class="works-shots">
-   <!-- Nueva landing VIACLOUDSTUDIO -->
-  <button class="works-shot is-active" data-project="viacloud" data-label="Landing propia" type="button" aria-label="Ver caso Landing VIA CLOUD STUDIO">
+   <!-- Servicio Landing Pages -->
+  <button class="works-shot is-active" data-project="campanas" data-label="Servicio landing" type="button" aria-label="Ver caso Landing pages para campañas">
     <span class="works-float">
     <span class="works-clip">
-    <img src="via-clod.png" alt="Landing VIACLOUDSTUDIO · diseño y optimización Tienda Nube">
+    <img src="landing-pages-campanas.webp" alt="Landing pages para campañas · VIA CLOUD STUDIO">
    </span>
    </span>
   </button>
@@ -4399,6 +4450,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="works-float">
     <span class="works-clip">
     <img src="landing-via.png" alt="Landing VIA SHOP">
+   </span>
+   </span>
+  </button>
+
+  <!-- Landing Dagger Store -->
+  <button class="works-shot" data-project="dagger" data-label="Tienda Nube" type="button" aria-label="Ver caso Landing Dagger Store">
+    <span class="works-float">
+    <span class="works-clip">
+    <img src="dagger-landing.webp" alt="Landing Dagger Store dentro de Tienda Nube">
    </span>
    </span>
   </button>
@@ -4419,9 +4479,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <button class="works-arrow works-arrow--next" type="button" aria-label="Siguiente">›</button>
   </div>
   <div class="works-dots" aria-label="Proyectos del carrusel">
-    <button class="works-dot is-active" type="button" data-project="viacloud" aria-label="Ver proyecto 1" aria-current="true"></button>
+    <button class="works-dot is-active" type="button" data-project="campanas" aria-label="Ver proyecto 1" aria-current="true"></button>
     <button class="works-dot" type="button" data-project="landing" aria-label="Ver proyecto 2"></button>
-    <button class="works-dot" type="button" data-project="newsletter" aria-label="Ver proyecto 3"></button>
+    <button class="works-dot" type="button" data-project="dagger" aria-label="Ver proyecto 3"></button>
+    <button class="works-dot" type="button" data-project="newsletter" aria-label="Ver proyecto 4"></button>
   </div>
  </div>
 
@@ -4430,20 +4491,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="works-copy" id="works-copy">
   <div class="works-copy-top">
   <p class="works-tag" id="works-tag">Landing servicio Tienda Nube</p>
-  <span id="works-count">1 / 3</span>
+  <span id="works-count">1 / 4</span>
   </div>
-  <h3 id="works-title">Landing VIA CLOUD STUDIO</h3>
+  <h3 id="works-title">Landing pages para campañas</h3>
   <p id="works-description">
-    Landing enfocada en servicios de diseño y optimización de Tienda Nube,
-    lista para recibir tráfico de campañas y convertir visitas en consultas.
+    Landing de servicio pensada para explicar una oferta puntual, reducir distracciones y convertir tráfico de campañas en consultas.
   </p>
   <ul class="works-points" id="works-points">
-    <li>Diseño pensado para tráfico desde campañas.</li>
-    <li>Estructura clara: hero, propuesta, servicios, trabajos y contacto.</li>
-    <li>Optimizada para leer bien en mobile.</li>
+    <li>Mensaje directo: una acción principal y CTAs claros.</li>
+    <li>Bloques preparados para explicar problema, solución, proceso y FAQ.</li>
+    <li>Base lista para medir scroll, clicks y envío de formulario.</li>
   </ul>
-  <a id="works-link" class="works-link" href="#contacto">
-    Ver landing en esta página
+  <a id="works-link" class="works-link" href="https://www.viacloudstudio.com/landing">
+    Ver servicio de landing
   </a>
 </div>
 </div>
@@ -5151,19 +5211,19 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
   if (!shots.length) return;
 
   const projects = {
-    // VIACLOUDSTUDIO
-  viacloud: {
-    tag: "Landing servicio Tienda Nube",
-    title: "Landing VIA CLOUD STUDIO",
+    // LANDING PAGES PARA CAMPAÑAS
+  campanas: {
+    tag: "Landing pages para campañas",
+    title: "Landing de servicio para convertir",
     description:
-      "Landing propia para presentar el servicio de diseño y optimización de Tienda Nube, pensada para captar leads calientes desde campañas y contenido orgánico.",
+      "Página pensada para una sola acción: explicar una oferta concreta, reducir distracciones y convertir tráfico de campañas en consultas.",
     points: [
-      "Hero con propuesta de valor clara, orientada a emprendedores y marcas que quieren escalar.",
-      "Explica el proceso de trabajo, tipos de proyectos y stack de herramientas en un recorrido simple.",
-      "Incluye CTA principales y formulario de consulta rápido conectado a WhatsApp."
+      "Estructura clara para Meta/Google: problema, propuesta, beneficios, proceso y FAQ.",
+      "CTAs repetidos en puntos clave para no perder intención de contacto.",
+      "Base preparada para medir scroll, clicks y envío de formulario."
     ],
-    link: "#contacto",
-    linkLabel: "Quiero una landing como esta"
+    link: "https://www.viacloudstudio.com/landing",
+    linkLabel: "Ver servicio de landing"
   },
 
   // VIA SHOP
@@ -5179,6 +5239,21 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
     ],
     link: "#contacto",
     linkLabel: "Ver landing en esta página"
+  },
+
+  // DAGGER STORE
+  dagger: {
+    tag: "Landing dentro de Tienda Nube",
+    title: "Dagger Store",
+    description:
+      "Landing comercial montada dentro de Tienda Nube para una campaña puntual, conectando storytelling, categorías y productos reales de la tienda.",
+    points: [
+      "Hero de campaña con foco en la fecha comercial y beneficios visibles.",
+      "Secciones por intención de compra para ordenar productos y acelerar la decisión.",
+      "Diseño alineado a Tienda Nube, con compra directa, cuotas y stock actualizado."
+    ],
+    link: "#contacto",
+    linkLabel: "Quiero una campaña así"
   },
 
   // DISTRI HOME
@@ -5199,13 +5274,19 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
 
 
   function updateSlideClasses(index) {
+    const total = shots.length;
     shots.forEach(function (shot, idx) {
-      shot.classList.toggle("is-active", idx === index);
-      shot.classList.toggle("is-prev", idx === index - 1);
-      shot.classList.toggle("is-next", idx === index + 1);
-      shot.classList.toggle("is-hidden", idx < index - 1 || idx > index + 1);
+      const offset = (idx - index + total) % total;
+      const isActive = offset === 0;
+      const isNext = offset === 1;
+      const isPrev = offset === total - 1;
 
-      if (idx === index) {
+      shot.classList.toggle("is-active", isActive);
+      shot.classList.toggle("is-prev", isPrev);
+      shot.classList.toggle("is-next", isNext);
+      shot.classList.toggle("is-hidden", !isActive && !isPrev && !isNext);
+
+      if (isActive) {
         shot.setAttribute("aria-current", "true");
       } else {
         shot.removeAttribute("aria-current");
@@ -5300,7 +5381,7 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
   }
 
   // Estado inicial
-  setProject("viacloud"); // Si querés que arranque en VIACLOUDSTUDIO, cambialo a "viacloud"
+  setProject("campanas");
 });
 </script>
 
