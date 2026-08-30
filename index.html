@@ -26,6 +26,9 @@
 
 <meta name="facebook-domain-verification" content="u8j1ch87vy74yb23zjmipdanqiswpn" />
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
     :root{
       --azul:#0056ff;
@@ -36,7 +39,7 @@
     }
     *{box-sizing:border-box;margin:0;padding:0;}
     body{
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+     font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
       color:var(--texto);
       background:#ffffff;
       line-height:1.5;
@@ -55,7 +58,7 @@
     }
 
   /* HEADER con degradado azul → violeta */
-header{
+.site-header{
   background:
     radial-gradient(circle at top left, rgba(118,169,250,0.40) 0, transparent 45%),
     linear-gradient(135deg,#020617 0%, #0033c7 20%, #5b21ff 55%);
@@ -67,7 +70,7 @@ header{
 }
 
 /* Textura / foto de fondo con la imagen nueva */
-header::after{
+.site-header::after{
   content:"";
   position:absolute;
   inset:-40%;
@@ -1153,6 +1156,186 @@ body.portfolio-modal-open{
 }
 
 
+/* ===== WORKS (MOBILE): carrusel horizontal + copy arriba (SOLID) ===== */
+@media (max-width: 900px){
+
+  :root{
+    --works-card-w: 92vw;
+    --works-gap: 14px;
+    --works-radius: 26px;
+  }
+
+  .works-split{
+    grid-template-columns: 1fr;
+    gap: 18px;
+    align-items: start;
+  }
+  .works-copy{ order: 1; }
+  .works-shots{ order: 2; }
+
+  #trabajos,
+  #trabajos .wrapper,
+  #trabajos .works-split{
+    overflow: visible !important;
+  }
+
+  /* Carrusel */
+  #trabajos .works-shots{
+    position: relative; /* ancla de flechas */
+
+    display: flex;
+    justify-content: flex-start;
+    gap: var(--works-gap);
+
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch;
+
+    scroll-snap-type: x mandatory;
+
+    padding-left: max(16px, calc((100vw - var(--works-card-w)) / 2)) !important;
+    padding-right: max(16px, calc((100vw - var(--works-card-w)) / 2)) !important;
+
+    padding-top: 26px !important;
+    padding-bottom: 60px !important;
+
+    overscroll-behavior-x: contain;
+    touch-action: pan-x pan-y !important;
+    margin: 0 !important;
+
+    /* vars para centrar flechas SOLO sobre el área útil (sin padding) */
+    --worksTop: 26px;
+    --worksBottom: 60px;
+    --worksArrowShift: 0px; /* + baja / - sube */
+  }
+
+  #trabajos .works-shots::-webkit-scrollbar{ display:none; }
+
+  #trabajos .works-shot{
+    flex: 0 0 var(--works-card-w);
+    scroll-snap-align: center;
+
+    border: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    outline: none !important;
+    overflow: visible !important;
+
+    -webkit-tap-highlight-color: transparent;
+    touch-action: pan-x pan-y !important;
+  }
+
+  #trabajos .works-float{
+    display: block;
+    border-radius: var(--works-radius);
+    box-shadow: none !important;
+    transition: transform .18s ease;
+    transform-origin: center;
+  }
+
+  #trabajos .works-clip{
+    display: block;
+    border-radius: var(--works-radius);
+    overflow: hidden;
+    background: inherit;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    backface-visibility: hidden;
+    transform: translateZ(0);
+
+    aspect-ratio: 8 / 14;
+    max-height: 78vh;
+  }
+
+  #trabajos .works-clip > img{
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    object-fit: contain !important;
+
+    background: transparent !important;
+    transform: translateZ(0);
+
+    clip-path: inset(0 round var(--works-radius));
+    -webkit-clip-path: inset(0 round var(--works-radius));
+  }
+
+  #trabajos .works-shot.is-active .works-float{
+    transform: scale(1.06);
+    position: relative;
+    z-index: 2;
+  }
+
+  #trabajos .works-shot:not(.is-active){
+    opacity: .92;
+  }
+
+  /* ============ ARROWS (MOBILE) ============ */
+  /* wrapper fijo (no scrollea) */
+  #trabajos .works-stage{
+    position: relative;
+
+    /* match con tu padding-top/bottom real del carrusel */
+    --worksTop: 26px;
+    --worksBottom: 60px;
+    --worksArrowShift: 0px; /* + baja / - sube */
+  }
+
+  /* el carrusel sigue scrolleando */
+  #trabajos .works-stage .works-shots{
+    position: relative; /* opcional */
+  }
+
+  /* overlay fijo siempre visible */
+  #trabajos .works-stage .works-arrows{
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 6;
+
+    top: calc(
+      var(--worksTop) + (100% - var(--worksTop) - var(--worksBottom)) / 2 + var(--worksArrowShift)
+    );
+    transform: translateY(-50%);
+
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 12px;
+    pointer-events: none;
+  }
+
+  #trabajos .works-stage .works-arrow{
+    pointer-events: auto;
+    width: 60px;
+    height: 60px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff;
+    color: #111827;
+    border: 1px solid rgba(17,24,39,.14);
+    box-shadow: 0 12px 26px rgba(15,23,42,.22);
+
+    font-size: 26px;
+    line-height: 1;
+    padding-bottom: 2px; /* centra flechita */
+  }
+
+  #trabajos .works-stage .works-arrow--prev{ margin-right: auto; transform: translateX(-26px); }
+  #trabajos .works-stage .works-arrow--next{ margin-left:  auto; transform: translateX( 26px); }
+
+  #trabajos .works-stage .works-arrow[hidden]{ display:none !important; }
+}
+
+/* === WORKS ARROWS: DESKTOP OFF (blindado) === */
+@media (min-width: 901px){
+  #trabajos .works-stage .works-arrows{
+    display: none !important;
+  }
+}
+
 /* Showcase interactivo: landings, newsletters y automatizaciones */
 #trabajos .works-showcase-head{
   margin:68px 0 24px;
@@ -1205,52 +1388,38 @@ body.portfolio-modal-open{
 #trabajos .works-stage{
   position:relative;
   min-width:0;
-  min-height:560px;
-  padding-bottom:44px;
 }
 
 #trabajos .works-showcase .works-shots{
-  position:relative;
-  display:block;
-  min-height:520px;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  min-height:430px;
   isolation:isolate;
 }
 
 #trabajos .works-showcase .works-shot{
-  position:absolute;
-  left:50%;
-  top:50%;
-  width:clamp(240px, 18vw, 330px);
   overflow:visible;
   border-radius:28px;
-  opacity:0;
-  filter:saturate(.76);
-  transform:translate(-50%, -50%) translateX(220px) scale(.72) rotate(5deg);
-  transition:opacity .34s ease, filter .34s ease, transform .44s cubic-bezier(.22, 1, .36, 1);
-  pointer-events:none;
-  z-index:0;
+  opacity:.66;
+  filter:saturate(.82);
+  transform:translateY(18px) scale(.9) rotate(-1.5deg);
+  z-index:1;
 }
 
-#trabajos .works-showcase .works-shot.is-prev{
-  opacity:.44;
-  filter:saturate(.78) blur(.25px);
-  transform:translate(-50%, -50%) translateX(-142px) translateY(20px) scale(.82) rotate(-4deg);
-  z-index:2;
+#trabajos .works-showcase .works-shot:nth-child(2){
+  transform:translateY(8px) scale(.94) rotate(.7deg);
 }
 
-#trabajos .works-showcase .works-shot.is-next{
-  opacity:.62;
-  filter:saturate(.86);
-  transform:translate(-50%, -50%) translateX(142px) translateY(18px) scale(.84) rotate(4deg);
-  z-index:3;
+#trabajos .works-showcase .works-shot:nth-child(3){
+  transform:translateY(18px) scale(.9) rotate(1.5deg);
 }
 
 #trabajos .works-showcase .works-shot.is-active{
   opacity:1;
   filter:none;
-  transform:translate(-50%, -50%) translateX(0) translateY(-4px) scale(1);
-  pointer-events:auto;
-  z-index:4;
+  transform:translateY(-2px) scale(1.08) rotate(0deg);
+  z-index:3;
 }
 
 #trabajos .works-showcase .works-float,
@@ -1264,15 +1433,10 @@ body.portfolio-modal-open{
   overflow:hidden;
   background:#f8fafc;
   box-shadow:0 28px 70px rgba(15,23,42,.22);
-  height:clamp(430px, 34vw, 560px);
 }
 
 #trabajos .works-showcase .works-shot img{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:top center;
+  width:clamp(190px, 14.4vw, 250px);
   border-radius:28px;
   box-shadow:none;
 }
@@ -1416,48 +1580,7 @@ body.portfolio-modal-open{
   background:#2563eb;
 }
 
-#trabajos .works-showcase .works-arrows{
-  position:absolute;
-  left:18px;
-  right:18px;
-  top:50%;
-  z-index:6;
-  display:flex;
-  justify-content:space-between;
-  pointer-events:none;
-  transform:translateY(-50%);
-}
-
-#trabajos .works-showcase .works-arrow{
-  width:52px;
-  height:52px;
-  border-radius:999px;
-  border:1px solid rgba(15,23,42,.12);
-  background:rgba(255,255,255,.95);
-  color:#111827;
-  box-shadow:0 16px 34px rgba(15,23,42,.18);
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  font-size:28px;
-  line-height:1;
-  pointer-events:auto;
-  cursor:pointer;
-  touch-action:manipulation;
-  -webkit-tap-highlight-color:transparent;
-}
-
-#trabajos .works-showcase .works-arrow:hover{
-  background:#fff;
-}
-
 @media (max-width:900px){
-  #trabajos.reveal{
-    opacity:1 !important;
-    transform:none !important;
-    transition:none !important;
-  }
-
   #trabajos .works-showcase-head{
     grid-template-columns:1fr;
     margin-top:54px;
@@ -1465,153 +1588,44 @@ body.portfolio-modal-open{
   }
 
   #trabajos .works-showcase{
-    display:grid;
     grid-template-columns:1fr;
-    gap:18px;
-    padding:18px;
+    padding:20px;
     border-radius:26px;
-    background:rgba(255,255,255,.74);
-    backdrop-filter:none;
-    -webkit-backdrop-filter:none;
-    box-shadow:0 18px 44px rgba(15,23,42,.08);
-    overflow:visible !important;
-  }
-
-  #trabajos .works-stage{
-    position:relative;
-    min-width:0;
-    min-height:0;
-    padding-bottom:34px;
+    gap:22px;
   }
 
   #trabajos .works-showcase .works-copy{
-    display:block;
     min-width:0;
     width:100%;
-    padding:20px 18px;
+    padding:22px;
     border-radius:24px;
-    box-shadow:0 14px 34px rgba(15,23,42,.07);
   }
 
   #trabajos .works-showcase .works-shots{
-    position:relative !important;
-    display:block !important;
-    width:100%;
-    height:auto;
     min-height:0;
-    padding:0 !important;
-    margin:0 !important;
-    overflow:visible !important;
-    scroll-snap-type:none !important;
-    overscroll-behavior:auto !important;
-    touch-action:auto !important;
-    isolation:auto;
+    justify-content:flex-start;
   }
 
-  #trabajos .works-showcase .works-float,
-  #trabajos .works-showcase .works-clip{
-    display:block;
-    height:auto;
-    transform:none !important;
-    transition:none !important;
-  }
-
-  #trabajos .works-showcase .works-shot.is-active,
-  #trabajos .works-showcase .works-shot.is-prev,
-  #trabajos .works-showcase .works-shot.is-next,
-  #trabajos .works-showcase .works-shot.is-hidden,
   #trabajos .works-showcase .works-shot,
   #trabajos .works-showcase .works-shot:nth-child(2),
-  #trabajos .works-showcase .works-shot:nth-child(3),
-  #trabajos .works-showcase .works-shot:nth-child(4){
-    position:relative;
-    inset:auto;
-    display:none !important;
-    width:100%;
-    max-width:min(82vw, 340px);
-    height:auto;
-    margin:0 auto;
-    opacity:1;
-    filter:none;
-    transform:none !important;
-    transition:none !important;
-    pointer-events:none;
-    touch-action:auto !important;
-    scroll-snap-align:none;
-    z-index:1;
+  #trabajos .works-showcase .works-shot:nth-child(3){
+    transform:none;
+    opacity:.78;
+    filter:saturate(.86);
   }
 
   #trabajos .works-showcase .works-shot.is-active{
-    display:block !important;
-  }
-
-  #trabajos .works-showcase .works-clip{
-    overflow:hidden;
-    border-radius:24px;
-    background:#f8fbff;
-    box-shadow:0 16px 36px rgba(15,23,42,.12);
-    -webkit-mask-image:none;
-    clip-path:none;
-    -webkit-clip-path:none;
-    height:min(142vw, 560px);
+    transform:none;
+    opacity:1;
+    filter:none;
   }
 
   #trabajos .works-showcase .works-shot img{
-    display:block !important;
     width:100% !important;
-    height:100% !important;
-    max-height:none;
-    object-fit:contain !important;
-    object-position:top center;
-    border-radius:24px;
-    transform:none !important;
-    clip-path:none;
-    -webkit-clip-path:none;
-    background:#f8fbff;
   }
 
-  #trabajos .works-showcase .works-shot::after{
-    top:12px;
-    max-width:calc(100% - 24px);
-  }
-
-  #trabajos .works-showcase .works-dots{
-    display:flex !important;
-    margin-top:14px;
-  }
-
-  #trabajos .works-showcase .works-arrows{
-    position:absolute;
-    left:4px;
-    right:4px;
-    top:calc(50% - 26px);
-    z-index:5;
-    display:flex !important;
-    justify-content:space-between;
-    pointer-events:none;
-  }
-
-  #trabajos .works-showcase .works-arrow{
-    width:58px;
-    height:58px;
-    border-radius:999px;
-    border:1px solid rgba(15,23,42,.12);
-    background:rgba(255,255,255,.94);
-    color:#111827;
-    box-shadow:0 12px 26px rgba(15,23,42,.18);
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    font-size:30px;
-    line-height:1;
-    pointer-events:auto;
-    touch-action:manipulation;
-    -webkit-tap-highlight-color:transparent;
-  }
-
-  #trabajos .works-showcase .works-arrow[hidden]{
-    opacity:.35;
-    visibility:hidden;
+  #trabajos .works-showcase .works-copy-top{
+    align-items:flex-start;
   }
 }
 
@@ -1621,21 +1635,13 @@ body.portfolio-modal-open{
   }
 
   #trabajos .works-showcase{
-    padding:14px;
+    padding:16px;
     margin-left:-2px;
     margin-right:-2px;
   }
 
-  #trabajos .works-showcase .works-shot{
-    max-width:min(100%, 330px);
-  }
-
-  #trabajos .works-showcase .works-shot img{
-    max-height:none;
-  }
-
   #trabajos .works-showcase .works-copy{
-    padding:18px 16px;
+    padding:20px 18px;
   }
 
   #trabajos .works-link{
@@ -2104,8 +2110,120 @@ section#trabajos .wrapper {
   margin-top: 10px;     /* probá entre 32px y 56px hasta que lo veas equilibrado */
   padding-top: 50px;     
 }
+   
+    
+    /* ===== QUIÉN ESTÁ DETRÁS / ABOUT ===== */
+.section-about .about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+}
 
-/* Contacto: spacing before footer */
+.about-list {
+  margin: 18px 0 0;
+  padding-left: 1.1rem;
+  list-style: disc;
+  color: #4b5563;
+  font-size: 0.98rem;      /* igual que el párrafo principal de la sección */
+  line-height: 1.6;        /* para que respiren mejor */
+}
+
+.about-list li {
+  margin-bottom: 6px;
+  opacity: 0.96;       /* antes seguro estaba en 0.4 / 0.5 */
+}
+
+/* Tarjeta lateral con tus datos */
+.about-card {
+  border-radius: 18px;
+  padding: 18px 18px 20px;
+  background: radial-gradient(circle at top left, #0b63e8 0, #020617 55%);
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.8);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.about-card-avatar {
+  width: 64px;              /* o 56px si la querés un poco más chica */
+  height: 64px;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 2px solid rgba(148, 163, 184, 0.55);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.55);
+  background: #020617;
+  flex-shrink: 0;
+}
+
+/* ahora la “inicial” es la foto */
+.about-avatar-initials {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 999px;
+  object-fit: cover;   /* mantiene bien tu cara sin deformar */
+}
+
+
+.about-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.about-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+.about-role {
+  font-size: 12px;
+  color: #cbd5f5;
+}
+
+.about-note {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #e5e7eb;
+}
+
+/* Mobile: se apila todo */
+@media (max-width: 767.98px) {
+  .section-about .about-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .about-card {
+    padding: 16px 16px 18px;
+  }
+}
+    
+/* ABOUT – alineación y desplazamiento en desktop */
+@media (min-width: 900px) {
+
+  /* Asegura que ambas columnas arranquen arriba */
+  .section-about .about-grid {
+    align-items: flex-start;
+  }
+
+  /* Baja visualmente la tarjeta un poquito */
+  .about-card {
+    margin-top: 0;                 /* anulamos el margen que no hacía efecto */
+    transform: translateY(40px);   /* probá entre 10px y 20px según lo veas */
+  }
+}
+
+.section-about {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(148, 163, 184, 0.35); /* gris muy suave */
+}
+
+/* El contacto termina justo antes del footer, sin “hueco blanco” */
 #contacto {
   margin-bottom: 0;
   padding-bottom: 72px;
@@ -2482,6 +2600,52 @@ text-underline-offset: 3px;
   transform: translateY(-8px) scale(1.03);
   box-shadow: 0 30px 60px rgba(15, 23, 42, 0.65);
 }
+
+/* ====== MOBILE: carrusel horizontal ====== */
+@media (max-width: 767.98px) {
+
+  /* Una sola columna: texto arriba, mockups abajo */
+  .works-split {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  /* Contenedor scrollable horizontal */
+  .works-shots {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 0 20px 24px;   /* aire a los lados y abajo */
+    margin: 0;             /* quitamos el margen negativo */
+    gap: 18px;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 20px; /* para que primera y última centren mejor */
+  }
+
+  .works-shots::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Cada tarjeta ocupa buena parte del ancho, sigue siendo vertical */
+  .works-shot {
+    flex: 0 0 50vw;        /* ancho visible (puedes probar 70–72vw si la querés más grande) */
+    max-width: 280px;      /* límite para que no explote en pantallas grandes */
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  .works-shot img {
+    width: 100%;
+    height: auto;          /* respeta el formato vertical del mockup */
+    border-radius: 24px;
+  }
+
+  /* En mobile NO escalamos para que no se corten al crecer */
+  .works-shot.is-active {
+    transform: none;
+    box-shadow: 0 24px 50px rgba(15, 23, 42, 0.55);
+  }
+}
+
 
 /* ====== SERVICIOS · RESETEO (SIN ROMPER ANIMACIÓN) ====== */
 
@@ -3678,266 +3842,3314 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
  
  
-<!-- ================== HEADER ================== -->
-<header id="top" class="site-header">
-  <div class="header-inner">
-    <div class="logo-row">
-    <a class="logo" href="#top" aria-label="VIACLOUDSTUDIO (Inicio)">
-  <img src="vclouds-logo.png" alt="VIACLOUDSTUDIO" width="1580" height="220" decoding="async" loading="eager">
-</a>
-      
-<!-- Botón hamburguesa (label) -->
-<input id="nav-toggle" class="nav-toggle" type="checkbox" aria-hidden="true">
-<label for="nav-toggle" class="menu-toggle" aria-label="Abrir menú" aria-controls="site-nav">
-  <span></span>
-  <span></span>
-  <span></span>
-</label>
+<!-- ================== VIA CLOUD STUDIO V2 | HEADER ================== -->
+<header class="vc2-header" id="top">
+  <div class="vc2-header-shell">
 
-      
-        <nav id="site-nav" class="nav">
-        <a href="#servicios">Servicios</a>
-        <a href="#trabajos">Trabajos</a>
-        <a href="#stack">Stack</a>
-        <a href="#about">Quien está detrás</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
-    </div>
-  </div>
+    <!-- Logo -->
+    <a class="vc2-brand" href="#top" aria-label="VIA Cloud Studio - Inicio">
+      <img
+        src="assets-v2/logo-via-cloud-dark.png"
+        alt="VIA Cloud Studio"
+        width="1580"
+        height="220"
+        decoding="async"
+        loading="eager"
+      >
+    </a>
 
+    <!-- Navegación desktop -->
+    <nav class="vc2-nav" aria-label="Navegación principal">
 
-<!-- ================== HERO ================== -->
-<section id="hero">
-  <div class="wrapper">
-    <div class="hero reveal">
-      <div class="hero-content">
-        <div class="hero-kicker">Tienda Nube · Estudio especializado</div>
-        <h1>Diseñamos tu tienda online a medida de tu marca.</h1>
-        <p>
-          Creamos y optimizamos tiendas Tienda Nube para que se vean profesionales,
-          carguen rápido y conviertan visitas en ventas. Sin plantillas genéricas.
-        </p>
-        <div class="hero-actions">
-          <a href="#contacto" class="btn-primary btn-primary--hero">
-            Agendar consultoría gratuita
+      <div class="vc2-solutions-menu">
+        <button
+          class="vc2-solutions-button"
+          type="button"
+          aria-haspopup="true"
+        >
+          Soluciones
+        </button>
+
+        <div class="vc2-solutions-panel">
+          <a href="#servicios" class="vc2-solution-item">
+            <strong>Ecommerce & Tienda Nube</strong>
+            <span>Diseño, desarrollo y optimización de tiendas online.</span>
           </a>
-          <a class="btn-secondary" href="#trabajos">
-            Ver casos reales <span>↗</span>
+
+          <a href="/landing" class="vc2-solution-item">
+            <strong>Landing Pages</strong>
+            <span>Páginas orientadas a campañas, captación y conversión.</span>
           </a>
-        </div>
-        <div class="hero-tagline">
-          Ideal para marcas de moda, hogar, bazar y lifestyle que quieren dar el salto al e-commerce.
+
+          <a href="#contacto" class="vc2-solution-item">
+            <strong>Audio Studio</strong>
+            <span>Edición y producción de audio para marcas y creadores.</span>
+          </a>
         </div>
       </div>
 
-      <aside class="hero-visual reveal">
-        <div class="hero-phone">
-          <img
-            src="hero-mobile-mcmdigital.png"
-            alt="Mockup de tienda online pensada para mobile first"
-            width="1000"
-            height="843"
-            decoding="async"
-            loading="eager"
-            fetchpriority="high"
-          />
+      <a href="#proyectos" class="vc2-nav-link">Proyectos</a>
+      <a href="#about" class="vc2-nav-link">El estudio</a>
+      <a href="#contacto" class="vc2-nav-link">Contacto</a>
+    </nav>
 
-          <!-- Overlay SOLO mobile -->
-          <div class="hero-mobile-overlay" aria-hidden="true">
-            <span class="hero-mobile-kicker">
-              Tienda Nube · Estudio especializado
-            </span>
-            <p class="hero-mobile-title">
-              Diseñamos<br>
-              tu tienda online<br>
-              a medida de tu marca.
-            </p>
-          </div>
-        </div>
+    <!-- CTA desktop -->
+    <a href="#contacto" class="vc2-header-cta">
+      Hablemos
+      <span aria-hidden="true">→</span>
+    </a>
 
-        <div class="hero-badge">
-          Mobile first · Tienda Nube
-        </div>
-      </aside>
-    </div>
-  </div>
- </header>
+    <!-- Menú mobile -->
+    <input
+      type="checkbox"
+      id="vc2-nav-toggle"
+      class="vc2-nav-toggle"
+      aria-hidden="true"
+    >
 
+    <label
+      for="vc2-nav-toggle"
+      class="vc2-menu-toggle"
+      aria-label="Abrir menú"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
 
+    <nav class="vc2-mobile-menu" aria-label="Navegación móvil">
 
-<section id="partner-tiendanube" class="partner-tn-section reveal">
-  <div class="wrapper">
-    <div class="partner-tn-layout">
-      <div class="partner-tn-copy">
-        <div class="partner-tn-eyebrow">
-          <span class="partner-tn-dot" aria-hidden="true"></span>
-          Socio Partner de Tiendanube
-        </div>
+      <div class="vc2-mobile-solutions">
+        <span>Soluciones</span>
 
-        <h2>
-          Lanzá tu tienda con Tiendanube y obtené
-          <span>25% OFF</span>
-        </h2>
-
-        <p>
-          Usá nuestro enlace oficial para crear tu cuenta y empezar con el primer mes bonificado.
-          Si preferís no hacerlo solo, también podemos armarte la tienda lista para vender.
-        </p>
-
-        <div class="partner-tn-actions">
-          <a
-            class="partner-tn-primary"
-            href="https://www.tiendanube.com/partners/via-cloud-studio"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Crear tienda con 25% OFF
-          </a>
-
-          <a class="partner-tn-secondary" href="#contacto">
-            Quiero que me la armen
-          </a>
-        </div>
-
-        <div class="partner-tn-benefits" aria-label="Beneficios incluidos">
-          <div class="partner-tn-benefit">
-            <span class="partner-tn-check" aria-hidden="true">✓</span>
-            Tienda con carrito, catálogo, checkout, pagos y envíos configurables.
-          </div>
-          <div class="partner-tn-benefit">
-            <span class="partner-tn-check" aria-hidden="true">✓</span>
-            Estructura pensada para vender desde mobile, redes y campañas.
-          </div>
-        </div>
+        <a href="#servicios">Ecommerce & Tienda Nube</a>
+        <a href="/landing">Landing Pages</a>
+        <a href="#contacto">Audio Studio</a>
       </div>
 
-      <aside class="partner-tn-offer" aria-label="Descuento Tiendanube">
-        <div class="partner-tn-offer-kicker">Beneficio de partner</div>
-        <div class="partner-tn-offer-value">25% OFF</div>
-        <p class="partner-tn-offer-text">
-          Aplica al primer mes de cualquier plan al registrarte desde el enlace oficial de Via Cloud Studio.
-        </p>
-        <p class="partner-tn-note">
-          Recomendado si querés empezar con una base profesional y después optimizar diseño, estructura y conversión.
-        </p>
-      </aside>
-    </div>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#about">El estudio</a>
+      <a href="#contacto">Contacto</a>
+
+      <a href="#contacto" class="vc2-mobile-cta">
+        Hablemos →
+      </a>
+    </nav>
+
   </div>
-</section>
+</header>
 
 
+<!-- ================== VIA CLOUD STUDIO V2 | HERO ================== -->
+<section id="hero" class="vc2-hero">
 
+  <!-- Fondo ambiental -->
+  <div class="vc2-hero-glow" aria-hidden="true"></div>
+  <div class="vc2-hero-grid" aria-hidden="true"></div>
 
-<main>
-  <!-- MARCAS -->
- <section class="section reveal audience-section">
-  <div class="wrapper">
-    <div class="section-title">¿Con quién trabajamos?</div>
-    <h2>Desde tu primera tienda online hasta marcas listas para escalar.</h2>
-    <p>
-      Acompañamos a emprendimientos que están lanzando su primera tienda en Tienda Nube
-      y también a marcas que ya venden por redes o en local físico y quieren una tienda
-      profesional: clara, rápida y lista para automatizar procesos y escalar ventas.
-    </p>
+  <div class="vc2-hero-inner">
 
-    <div class="brand-grid">
-      <span class="client-pill">
-        Emprendimientos que dan el salto a su primera tienda online y necesitan ayuda
-        en todo el proceso de creación y puesta a punto.
-      </span>
-      <span class="client-pill">
-        Marcas en crecimiento que ya venden por Instagram, WhatsApp o local físico
-        y buscan una Tienda Nube ordenada y lista para invertir en tráfico pago.
-      </span>
-      <span class="client-pill">
-        Tiendas consolidadas que quieren relanzar su e-commerce, optimizar la experiencia,
-        automatizar tareas y mejorar sus conversiones.
-      </span>
-    </div>
-  </div>
-</section>
+    <!-- Copy -->
+    <div class="vc2-hero-content">
 
-  <!-- SERVICIOS -->
-  <section id="servicios" class="section-dark reveal">
-    <div class="wrapper">
-      <div class="section-title">Nuestros servicios</div>
-      <h2>Desde el diseño hasta la optimización para vender más.</h2>
-      <p>
-        No sólo “montamos” tu tienda: la pensamos como parte de tu embudo de ventas,
-        lista para correr campañas en Meta y Google con una base sólida.
+      <p class="vc2-eyebrow">
+        VIA CLOUD STUDIO · DIGITAL / COMMERCE / AUDIO
       </p>
 
-      <div class="services">
-        <div class="service-card">
-          <h3>Diseño Tienda Nube a medida</h3>
-          <p>
-            Armado completo de la tienda basado en tu identidad visual.
-            Home, categorías, PDP y página de cómo comprar, todo alineado a tu marca y pensado para guiar al usuario hasta la compra.
-          </p>
-          <div class="pill">Ideal para lanzamientos o relanzos de marca</div>
+      <h1 class="vc2-hero-title">
+        <span>Creamos experiencias</span>
+        <span>digitales para</span>
+        <span>
+          <strong class="vc2-accent-blue">vender</strong>,
+          <strong class="vc2-accent-indigo">convertir</strong>
+        </span>
+        <span>
+          y <strong class="vc2-accent-violet">comunicar</strong> mejor.
+        </span>
+      </h1>
+
+      <p class="vc2-hero-copy">
+        Diseñamos tiendas online, landing pages y soluciones de audio profesional
+        para marcas, negocios y creadores que buscan crecer con una presencia
+        digital clara, funcional y bien construida.
+      </p>
+
+      <div class="vc2-hero-actions">
+        <a href="#contacto" class="vc2-btn vc2-btn-primary">
+          Contanos tu proyecto
+          <span aria-hidden="true">→</span>
+        </a>
+
+        <a href="#servicios" class="vc2-btn vc2-btn-secondary">
+          Ver soluciones
+        </a>
+      </div>
+
+      <ul class="vc2-service-strip" aria-label="Áreas de VIA Cloud Studio">
+        <li>Ecommerce & Tienda Nube</li>
+        <li>Landing Pages</li>
+        <li>Audio Studio</li>
+      </ul>
+
+    </div>
+
+
+    <!-- Visual principal -->
+    <div class="vc2-hero-visual">
+
+      <div class="vc2-scene-halo" aria-hidden="true"></div>
+
+      <img
+        src="assets-v2/hero-via-composition.png"
+        class="vc2-hero-scene"
+        alt=""
+        width="1640"
+        height="920"
+        decoding="async"
+        loading="eager"
+        fetchpriority="high"
+      >
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =========================================================
+     VIA CLOUD STUDIO V2 | BLOQUES 02 + 03
+     SOLUCIONES + EXPERIENCIA
+     ========================================================= -->
+
+<section id="soluciones" class="vc2-solutions">
+
+  <div class="vc2-solutions-inner">
+
+    <!-- Encabezado -->
+    <header class="vc2-solutions-heading">
+
+      <p class="vc2-section-kicker">
+        TRES ÁREAS · UN MISMO ESTUDIO
+      </p>
+
+      <h2>
+        Distintas disciplinas.<br>
+        <span>Una misma dirección.</span>
+      </h2>
+
+      <p class="vc2-solutions-intro">
+        Combinamos estrategia, diseño y producción para resolver
+        diferentes necesidades digitales sin perder coherencia entre
+        marca, experiencia y comunicación.
+      </p>
+
+    </header>
+
+
+    <!-- =====================================================
+         ÁREAS
+         ===================================================== -->
+
+    <div class="vc2-solutions-grid">
+
+
+      <!-- ECOMMERCE -->
+
+      <article class="vc2-solution vc2-solution-commerce">
+
+        <div class="vc2-solution-top">
+          <span class="vc2-solution-number">01</span>
+          <span class="vc2-solution-tag">COMMERCE</span>
         </div>
 
-        <div class="service-card">
-          <h3>Optimización de plantillas</h3>
-          <p>
-            Tomamos tu plantilla actual y la ajustamos: layout, tipografías,
-            jerarquía de información, destacados, banners y fichas de producto. Mejora visual y de conversión sin necesidad de cambiar de tema.
-          </p>
-          <div class="pill">Mejoramos lo que ya tenés sin migrar de tema</div>
+        <div class="vc2-solution-media vc2-solution-media-commerce">
+          <img
+            src="assets-v2/solucion-ecommerce.png"
+            alt="Ecommerce y tienda online responsive mostrada en notebook y teléfono"
+            loading="lazy"
+            decoding="async"
+          >
         </div>
 
-        <div class="service-card">
-          <h3>Setup para campañas</h3>
-  <p>
-    Preparación de la tienda para tráfico pago: estructura de categorías,
-    landings de campañas, códigos de seguimiento y buenas prácticas de CRO. Dejá tu Tienda Nube lista para escalar con Meta Ads y Google Ads.
-  </p>
-   <div class="pill">Pensado para Meta Ads & Google Ads</div>
+        <h3>Ecommerce &amp; Tienda Nube</h3>
+
+        <p>
+          Diseñamos, desarrollamos y optimizamos tiendas online pensadas
+          para representar mejor tu marca y facilitar la compra.
+        </p>
+
+        <div class="vc2-solution-benefit">
+          <span>→</span>
+          Tiendas más claras, profesionales y preparadas para vender.
         </div>
-        
-        <div class="service-card">
-  <h3>Automatizaciones, newsletter y Chat Nube</h3>
-  <p>
-    Configuramos newsletters, flujos básicos de bienvenida y carritos abandonados, y dejamos tu Chat Nube listo con respuestas frecuentes, horarios y derivación a WhatsApp para que atiendas 24/7 sin perder el toque humano.
-  </p>
-  <div class="pill">Ideal para marcas que quieren escalar sin sumar equipo</div>
+
+        <a href="#servicios" class="vc2-solution-link">
+          Explorar Ecommerce
+          <span>→</span>
+        </a>
+
+      </article>
+
+
+      <!-- LANDING PAGES -->
+
+      <article class="vc2-solution vc2-solution-landing">
+
+        <div class="vc2-solution-top">
+          <span class="vc2-solution-number">02</span>
+          <span class="vc2-solution-tag">CONVERSIÓN</span>
+        </div>
+
+        <div class="vc2-solution-media vc2-solution-media-landing">
+          <img
+            src="assets-v2/solucion-landing.png"
+            alt="Landing page profesional mostrada como interfaz flotante"
+            loading="lazy"
+            decoding="async"
+          >
+        </div>
+
+        <h3>Landing Pages</h3>
+
+        <p>
+          Creamos páginas enfocadas en campañas, captación y objetivos
+          concretos, con una estructura pensada para reducir fricción.
+        </p>
+
+        <div class="vc2-solution-benefit">
+          <span>→</span>
+          Mensajes más directos y recorridos orientados a conversión.
+        </div>
+
+        <a href="/landing" class="vc2-solution-link">
+          Explorar Landing Pages
+          <span>→</span>
+        </a>
+
+      </article>
+
+
+      <!-- AUDIO -->
+
+      <article class="vc2-solution vc2-solution-audio">
+
+        <div class="vc2-solution-top">
+          <span class="vc2-solution-number">03</span>
+          <span class="vc2-solution-tag">AUDIO</span>
+        </div>
+
+        <div class="vc2-solution-media vc2-solution-media-audio">
+          <img
+            src="assets-v2/solucion-audio.png"
+            alt="Micrófono, auriculares e interfaz de edición de audio profesional"
+            loading="lazy"
+            decoding="async"
+          >
+        </div>
+
+        <h3>Audio Studio</h3>
+
+        <p>
+          Editamos y producimos audio para marcas, medios y creadores:
+          podcasts, programas, piezas comerciales y contenidos audiovisuales.
+        </p>
+
+        <div class="vc2-solution-benefit">
+          <span>→</span>
+          Audio limpio, consistente y preparado para comunicar mejor.
+        </div>
+
+        <a href="#contacto" class="vc2-solution-link">
+          Explorar Audio Studio
+          <span>→</span>
+        </a>
+
+      </article>
+
+    </div>
+
+
+<style>
+/* =========================================================
+   VIA CLOUD STUDIO V2 | BLOQUE 03 — EXPERIENCIA
+   ========================================================= */
+
+.vc3-experience{
+  width:100%;
+  margin:22px 0 0;
+  padding:0 0 clamp(38px,4vw,54px);
+  box-sizing:border-box;
+}
+
+.vc3-experience *,
+.vc3-experience *::before,
+.vc3-experience *::after{
+  box-sizing:border-box;
+}
+
+
+/* =========================
+   CONTENEDOR
+   ========================= */
+
+.vc3-experience-inner{
+  width:100%;
+  margin:0;
+}
+
+
+/* =========================
+   FRANJA
+   ========================= */
+
+.vc3-experience-grid{
+  width:100%;
+
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+
+  background:
+    linear-gradient(
+      105deg,
+      rgba(233,242,255,.94) 0%,
+      rgba(240,246,255,.96) 48%,
+      rgba(241,237,255,.94) 100%
+    );
+
+  border:1px solid rgba(83,99,245,.09);
+  border-radius:16px;
+
+  box-shadow:
+    0 12px 30px rgba(28,51,88,.035);
+
+  overflow:hidden;
+}
+
+
+/* =========================
+   ITEMS
+   ========================= */
+
+.vc3-experience-item{
+  position:relative;
+  min-width:0;
+
+  display:flex;
+  align-items:center;
+
+  gap:16px;
+
+  margin:0;
+  padding:22px 24px;
+}
+
+
+/* Separadores verticales */
+
+.vc3-experience-item:not(:last-child)::after{
+  content:"";
+
+  position:absolute;
+  top:20px;
+  right:0;
+  bottom:20px;
+
+  width:1px;
+
+  background:rgba(83,99,245,.11);
+}
+
+
+/* =========================
+   ICONOS
+   ========================= */
+
+.vc3-experience-icon{
+  flex:0 0 42px;
+
+  width:42px;
+  min-width:42px;
+  max-width:42px;
+
+  height:42px;
+  min-height:42px;
+  max-height:42px;
+
+  margin:0;
+  padding:0;
+
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:contain;
+}
+
+
+/* Proyectos */
+
+.vc3-icon-projects{
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none'%3E%3Cpath d='M7 37V26M17 37V20M27 37V28M37 37V16' stroke='%232D63FF' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M7 17L16 22L25 15L33 19L41 9' stroke='%232D63FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M35 9H41V15' stroke='%232D63FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+
+/* Tienda */
+
+.vc3-icon-store{
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none'%3E%3Cpath d='M10 18H38L35 10H13L10 18Z' stroke='%232D63FF' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M12 19V38H36V19' stroke='%232D63FF' stroke-width='2'/%3E%3Cpath d='M19 38V28H29V38' stroke='%232D63FF' stroke-width='2'/%3E%3Cpath d='M10 18C10 21 12 23 15 23C18 23 20 21 20 18C20 21 22 23 24 23C27 23 29 21 29 18C29 21 31 23 34 23C36 23 38 21 38 18' stroke='%232D63FF' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+
+/* Audio */
+
+.vc3-icon-audio{
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none'%3E%3Cpath d='M9 27V22C9 14 15 8 24 8C33 8 39 14 39 22V27' stroke='%237143F8' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M9 25H14C16 25 17 27 17 29V36C17 38 16 39 14 39H12C10 39 9 38 9 36V25Z' stroke='%237143F8' stroke-width='2'/%3E%3Cpath d='M39 25H34C32 25 31 27 31 29V36C31 38 32 39 34 39H36C38 39 39 38 39 36V25Z' stroke='%237143F8' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+
+/* Valoración */
+
+.vc3-icon-rating{
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none'%3E%3Cpath d='M24 7L29.2 17.7L41 19.4L32.5 27.7L34.5 39.4L24 33.9L13.5 39.4L15.5 27.7L7 19.4L18.8 17.7L24 7Z' stroke='%232D63FF' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+
+/* =========================
+   TEXTO
+   ========================= */
+
+.vc3-experience-copy{
+  min-width:0;
+}
+
+.vc3-experience-number{
+  display:block;
+
+  margin:0 0 4px;
+
+  color:#0b2038;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:clamp(24px,1.8vw,30px);
+  font-weight:800;
+
+  line-height:1;
+  letter-spacing:-.035em;
+}
+
+.vc3-experience-copy p{
+  margin:0;
+
+  color:#526b83;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:clamp(11px,.85vw,13px);
+  font-weight:500;
+
+  line-height:1.4;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width:980px){
+
+  .vc3-experience-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .vc3-experience-item:nth-child(2)::after{
+    display:none;
+  }
+
+  .vc3-experience-item:nth-child(-n+2){
+    border-bottom:1px solid rgba(83,99,245,.10);
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width:620px){
+
+  .vc3-experience{
+    margin-top:18px;
+    padding-bottom:28px;
+  }
+
+  .vc3-experience-grid{
+    grid-template-columns:1fr;
+    border-radius:15px;
+  }
+
+  .vc3-experience-item{
+    gap:15px;
+    padding:18px 20px;
+  }
+
+  .vc3-experience-item:nth-child(-n+2){
+    border-bottom:0;
+  }
+
+  .vc3-experience-item:not(:last-child){
+    border-bottom:1px solid rgba(83,99,245,.10);
+  }
+
+  .vc3-experience-item:not(:last-child)::after{
+    display:none;
+  }
+
+  .vc3-experience-icon{
+    flex-basis:38px;
+
+    width:38px;
+    min-width:38px;
+    max-width:38px;
+
+    height:38px;
+    min-height:38px;
+    max-height:38px;
+  }
+
+  .vc3-experience-number{
+    font-size:25px;
+  }
+
+  .vc3-experience-copy p{
+    font-size:12px;
+  }
+
+}
+
+/* =========================================================
+   AJUSTE FINAL — CIERRE BLOQUES 02 + 03
+   ========================================================= */
+
+/* Ahora Soluciones termina después de las métricas */
+#soluciones.vc2-solutions{
+  padding-bottom:
+    clamp(34px,3.8vw,52px);
+}
+
+/* El bloque de métricas ya no necesita aire extra propio */
+.vc3-experience{
+  padding-bottom:0;
+}
+
+
+/* MOBILE */
+
+@media (max-width:620px){
+
+  #soluciones.vc2-solutions{
+    padding-bottom:36px;
+  }
+
+  .vc3-experience{
+    padding-bottom:0;
+  }
+
+
+/* =========================================================
+   MOBILE — MÉTRICAS 2 x 2
+   ========================================================= */
+
+@media (max-width:620px){
+
+  .vc3-experience{
+    margin-top:18px;
+    padding-bottom:0;
+  }
+
+  .vc3-experience-grid{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+
+    border-radius:15px;
+  }
+
+  .vc3-experience-item{
+    min-height:118px;
+
+    display:flex;
+    align-items:center;
+
+    gap:10px;
+
+    padding:
+      17px
+      13px;
+  }
+
+
+  /* Quitamos lógica de separadores desktop */
+
+  .vc3-experience-item:not(:last-child)::after{
+    display:none;
+  }
+
+
+  /* Separación vertical entre columnas */
+
+  .vc3-experience-item:nth-child(odd){
+    border-right:
+      1px solid rgba(83,99,245,.10);
+  }
+
+
+  /* Separación horizontal entre filas */
+
+  .vc3-experience-item:nth-child(-n+2){
+    border-bottom:
+      1px solid rgba(83,99,245,.10);
+  }
+
+
+  /* ICONOS */
+
+  .vc3-experience-icon{
+    flex:0 0 32px;
+
+    width:32px;
+    min-width:32px;
+    max-width:32px;
+
+    height:32px;
+    min-height:32px;
+    max-height:32px;
+  }
+
+
+  /* NÚMEROS */
+
+  .vc3-experience-number{
+    margin-bottom:5px;
+
+    font-size:22px;
+
+    line-height:1;
+  }
+
+
+  /* TEXTO */
+
+  .vc3-experience-copy p{
+    max-width:none;
+
+    font-size:10px;
+
+    line-height:1.35;
+  }
+
+
+  /* Cierre del conjunto Soluciones + métricas */
+
+  #soluciones.vc2-solutions{
+    padding-bottom:32px;
+  }
+
+}
+
+
+</style>
+
+    <!-- =====================================================
+         BLOQUE 03 — EXPERIENCIA
+         ===================================================== -->
+
+    <div
+      class="vc3-experience"
+      aria-label="Experiencia y trayectoria"
+    >
+
+      <div class="vc3-experience-inner">
+
+        <div class="vc3-experience-grid">
+
+
+          <!-- PROYECTOS DIGITALES -->
+
+          <article class="vc3-experience-item">
+
+            <div
+              class="vc3-experience-icon vc3-icon-projects"
+              aria-hidden="true">
+            </div>
+
+            <div class="vc3-experience-copy">
+
+              <strong class="vc3-experience-number">
+                +138
+              </strong>
+
+              <p>
+                Proyectos digitales<br>
+                realizados
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <!-- TIENDAS ONLINE -->
+
+          <article class="vc3-experience-item">
+
+            <div
+              class="vc3-experience-icon vc3-icon-store"
+              aria-hidden="true">
+            </div>
+
+            <div class="vc3-experience-copy">
+
+              <strong class="vc3-experience-number">
+                4
+              </strong>
+
+              <p>
+                Tiendas online<br>
+                publicadas
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <!-- EXPERIENCIA EN AUDIO -->
+
+          <article class="vc3-experience-item">
+
+            <div
+              class="vc3-experience-icon vc3-icon-audio"
+              aria-hidden="true">
+            </div>
+
+            <div class="vc3-experience-copy">
+
+              <strong class="vc3-experience-number">
+                20+ años
+              </strong>
+
+              <p>
+                En medios, radio<br>
+                y producción de audio
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <!-- VALORACIÓN -->
+
+          <article class="vc3-experience-item">
+
+            <div
+              class="vc3-experience-icon vc3-icon-rating"
+              aria-hidden="true">
+            </div>
+
+            <div class="vc3-experience-copy">
+
+              <strong class="vc3-experience-number">
+                5.0
+              </strong>
+
+              <p>
+                Valoración promedio en<br>
+                proyectos de audio
+              </p>
+
+            </div>
+
+          </article>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+
   </div>
 
-     <!-- ⭐ Landing destacada (PEGAR ACÁ) -->
-        <div class="service-card service-card--featured" data-accent="landing">
-          <div class="service-head">
-            <span class="service-ico" aria-hidden="true">
-  <svg class="ico-svg ico-svg--fill" viewBox="0 0 24 24" aria-hidden="true">
-    <circle cx="12" cy="12" r="9"></circle>
-    <circle cx="12" cy="12" r="5"></circle>
-    <circle cx="12" cy="12" r="1.6"></circle>
-  </svg>
-</span>
-            <div>
-             <div class="service-kicker">LANDING</div>
-              <h3>Landing Page de alta conversión</h3>
-              <p class="service-sub">
-                Una landing 1-página para captar leads o vender un producto. Copy + estructura + medición lista para campañas.
+</section>
+
+
+<!-- =========================================================
+     VIA CLOUD STUDIO V2 | BLOQUE 04 — V2
+     OBJETIVO + SOLUCIONES CONECTADAS
+     ========================================================= -->
+
+<style>
+
+/* =========================================================
+   BLOQUE 04 — BASE / TRANSICIÓN DESDE BLOQUE 03
+   ========================================================= */
+
+.vc4-strategy{
+  position:relative;
+
+  width:100%;
+  margin:-1px 0 0;
+
+  padding:
+    clamp(28px,3.2vw,42px)
+    clamp(24px,5vw,76px)
+    clamp(36px,4.4vw,58px);
+
+  box-sizing:border-box;
+
+  background:#E5DCF7;
+}
+
+/* =========================================================
+   CONTENEDOR MAESTRO
+   Misma lógica de ancho que Bloque 02 + 03
+   ========================================================= */
+
+.vc4-strategy-inner{
+  width:100%;
+  max-width:1280px;
+
+  margin:0 auto;
+}
+
+/* =========================================================
+   CONTENEDOR PRINCIPAL
+   ========================================================= */
+
+.vc4-strategy-grid{
+  display:grid;
+
+  grid-template-columns:
+    minmax(0,1fr)
+    minmax(0,1fr);
+
+  border:
+    1px solid rgba(83,99,245,.08);
+
+  border-radius:22px;
+
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(251,248,255,.98) 0%,
+      rgba(249,250,255,.98) 48%,
+      rgba(244,249,255,.98) 100%
+    );
+
+  box-shadow:
+    0 16px 40px rgba(28,51,88,.045);
+}
+
+
+/* =========================================================
+   MITADES
+   ========================================================= */
+
+.vc4-panel{
+  position:relative;
+
+  min-width:0;
+
+  padding:
+    clamp(32px,3.4vw,46px)
+    clamp(30px,3.5vw,46px);
+}
+
+.vc4-panel-objective{
+  background:
+    linear-gradient(
+      135deg,
+      rgba(250,246,255,.88),
+      rgba(255,255,255,.94)
+    );
+}
+
+.vc4-panel-connect{
+  background:
+    linear-gradient(
+      135deg,
+      rgba(249,252,255,.95),
+      rgba(240,248,255,.92)
+    );
+}
+
+
+/* divisor central */
+
+.vc4-panel-objective::after{
+  content:"";
+
+  position:absolute;
+
+  top:30px;
+  right:0;
+  bottom:30px;
+
+  width:1px;
+
+  background:
+    rgba(83,99,245,.09);
+}
+
+
+/* =========================================================
+   KICKERS
+   ========================================================= */
+
+.vc4-kicker{
+  margin:0 0 13px;
+
+  color:#2863a8;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:11px;
+  font-weight:800;
+
+  letter-spacing:.11em;
+
+  text-transform:uppercase;
+}
+
+
+/* =========================================================
+   TITULARES
+   ========================================================= */
+
+.vc4-title{
+  margin:0;
+
+  color:#0b2038;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:
+    clamp(29px,2.65vw,40px);
+
+  line-height:1.08;
+
+  letter-spacing:-.04em;
+
+  font-weight:800;
+}
+
+.vc4-title span{
+  color:#6757f7;
+}
+
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+.vc4-intro{
+  max-width:555px;
+
+  margin:16px 0 0;
+
+  color:#526b83;
+
+  font-size:
+    clamp(14px,1.05vw,15px);
+
+  line-height:1.6;
+}
+
+
+/* =========================================================
+   OBJETIVOS
+   ========================================================= */
+
+.vc4-goals{
+  margin-top:24px;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  column-gap:26px;
+}
+
+.vc4-goal{
+  display:grid;
+
+  grid-template-columns:
+    auto
+    minmax(0,1fr)
+    auto;
+
+  align-items:center;
+
+  gap:11px;
+
+  min-height:68px;
+
+  padding:11px 0;
+
+  border-bottom:
+    1px solid rgba(83,99,245,.085);
+}
+
+
+/* número */
+
+.vc4-goal-number{
+  width:35px;
+  height:35px;
+
+  display:grid;
+  place-items:center;
+
+  border:
+    1px solid rgba(106,85,247,.34);
+
+  border-radius:50%;
+
+  color:#6757f7;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:12px;
+  font-weight:800;
+}
+
+
+/* copy */
+
+.vc4-goal-copy{
+  min-width:0;
+}
+
+.vc4-goal-copy strong{
+  display:block;
+
+  margin:0 0 3px;
+
+  color:#0b2038;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:11px;
+  font-weight:800;
+
+  letter-spacing:.02em;
+}
+
+.vc4-goal-copy p{
+  margin:0;
+
+  color:#60758a;
+
+  font-size:11px;
+
+  line-height:1.4;
+}
+
+
+/* flecha */
+
+.vc4-goal-arrow{
+  color:#315cff;
+
+  font-size:15px;
+
+  line-height:1;
+}
+
+
+/* =========================================================
+   LINKS / CTA
+   ========================================================= */
+
+.vc4-link{
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  margin-top:20px;
+
+  color:#1e5be0;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:12px;
+  font-weight:700;
+
+  text-decoration:none;
+}
+
+.vc4-link span{
+  transition:
+    transform .2s ease;
+}
+
+.vc4-link:hover span{
+  transform:
+    translateX(4px);
+}
+
+
+/* =========================================================
+   DIAGRAMA
+   ========================================================= */
+
+.vc4-network{
+  position:relative;
+
+  width:min(340px,92%);
+
+  aspect-ratio:1.2/1;
+
+  margin:
+    22px auto
+    14px;
+}
+
+
+/* línea de conexión */
+
+.vc4-network-line{
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  width:64%;
+  height:64%;
+
+  transform:
+    translate(-50%,-50%)
+    rotate(30deg);
+
+  border:
+    1px dashed rgba(83,99,245,.34);
+
+  border-radius:50%;
+}
+
+
+/* =========================================================
+   NODOS
+   ========================================================= */
+
+.vc4-node{
+  position:absolute;
+
+  width:94px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  gap:8px;
+
+  text-align:center;
+}
+
+.vc4-node-icon{
+  position:relative;
+
+  width:58px;
+  height:58px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #286cff,
+      #744cff
+    );
+
+  box-shadow:
+    0 11px 24px rgba(73,88,240,.20);
+}
+
+
+/* iconografía real */
+
+.vc4-node-icon::before{
+  content:"";
+
+  width:27px;
+  height:27px;
+
+  display:block;
+
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size:contain;
+}
+
+
+/* Ecommerce — carrito */
+
+.vc4-icon-commerce::before{
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none'%3E%3Cpath d='M8 10H13L17 30H35L39 17H16' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='20' cy='37' r='2.5' stroke='white' stroke-width='2.4'/%3E%3Ccircle cx='33' cy='37' r='2.5' stroke='white' stroke-width='2.4'/%3E%3C/svg%3E");
+}
+
+
+/* Landing — ventana */
+
+.vc4-icon-landing::before{
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none'%3E%3Crect x='8' y='10' width='32' height='28' rx='3' stroke='white' stroke-width='2.4'/%3E%3Cpath d='M8 17H40' stroke='white' stroke-width='2.4'/%3E%3Ccircle cx='13' cy='13.5' r='1' fill='white'/%3E%3Ccircle cx='17' cy='13.5' r='1' fill='white'/%3E%3Cpath d='M15 25H33M15 30H28' stroke='white' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+
+/* Audio — onda */
+
+.vc4-icon-audio::before{
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none'%3E%3Cpath d='M7 24H11M14 18V30M19 13V35M24 18V30M29 10V38M34 16V32M39 20V28M42 24H45' stroke='white' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+
+.vc4-node strong{
+  color:#0b2038;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:10px;
+  font-weight:800;
+}
+
+
+/* posiciones */
+
+.vc4-node-commerce{
+  left:50%;
+  top:0;
+
+  transform:
+    translateX(-50%);
+}
+
+.vc4-node-landing{
+  left:7%;
+  bottom:2%;
+}
+
+.vc4-node-audio{
+  right:7%;
+  bottom:2%;
+}
+
+
+/* =========================================================
+   COMBINACIONES
+   ========================================================= */
+
+.vc4-combos{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  justify-content:center;
+
+  gap:7px;
+
+  max-width:470px;
+
+  margin:
+    0 auto;
+}
+
+.vc4-combo{
+  display:inline-flex;
+
+  align-items:center;
+
+  min-height:30px;
+
+  padding:
+    6px
+    10px;
+
+  border:
+    1px solid rgba(83,99,245,.13);
+
+  border-radius:999px;
+
+  background:
+    rgba(255,255,255,.74);
+
+  color:#445b73;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:10px;
+  font-weight:700;
+}
+
+
+/* CTA DERECHO */
+
+.vc4-connect-cta{
+  text-align:center;
+}
+
+.vc4-connect-cta .vc4-link{
+  margin-top:18px;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width:980px){
+
+  .vc4-strategy{
+    padding-top:28px;
+  }
+
+  .vc4-strategy-grid{
+    grid-template-columns:1fr;
+  }
+
+  /* divisor pasa a horizontal */
+
+  .vc4-panel-objective::after{
+    top:auto;
+
+    right:28px;
+    bottom:0;
+    left:28px;
+
+    width:auto;
+    height:1px;
+  }
+
+  /* mantenemos objetivos en 2 columnas */
+
+  .vc4-goals{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+  /* compactamos la segunda mitad */
+
+  .vc4-panel-connect{
+    padding-top:34px;
+    padding-bottom:34px;
+  }
+
+  .vc4-network{
+    width:min(340px,100%);
+
+    margin-top:22px;
+    margin-bottom:14px;
+  }
+
+  .vc4-combos{
+    margin-top:0;
+  }
+
+  .vc4-connect-cta .vc4-link{
+    margin-top:18px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width:620px){
+
+  .vc4-strategy{
+    padding:
+      20px
+      18px
+      30px;
+
+    /* Mantiene el mismo fondo definido para Bloque 04 */
+    background:#E5DCF7;
+  }
+
+  .vc4-strategy-grid{
+    border-radius:18px;
+  }
+
+  .vc4-panel{
+    padding:
+      24px
+      20px;
+  }
+
+
+  /* =======================================================
+     TITULARES
+     ======================================================= */
+
+  .vc4-title{
+    font-size:28px;
+    line-height:1.08;
+  }
+
+  .vc4-intro{
+    margin-top:13px;
+
+    font-size:13px;
+    line-height:1.55;
+  }
+
+
+  /* =======================================================
+     OBJETIVOS MOBILE
+     ======================================================= */
+
+  .vc4-goals{
+    grid-template-columns:1fr;
+
+    margin-top:17px;
+  }
+
+  .vc4-goal{
+    min-height:56px;
+
+    padding:8px 0;
+
+    gap:10px;
+  }
+
+  .vc4-goal-number{
+    width:32px;
+    height:32px;
+
+    font-size:11px;
+  }
+
+  .vc4-goal-copy strong{
+    font-size:11px;
+  }
+
+  .vc4-goal-copy p{
+    font-size:10.5px;
+
+    line-height:1.35;
+  }
+
+  .vc4-goal-arrow{
+    font-size:14px;
+  }
+
+
+  /* CTA izquierdo */
+
+  .vc4-panel-objective .vc4-link{
+    margin-top:16px;
+  }
+
+
+  /* =======================================================
+     PANEL CONECTADO
+     ======================================================= */
+
+  .vc4-panel-connect{
+    padding-top:22px;
+    padding-bottom:22px;
+  }
+
+
+  /* =======================================================
+     DIAGRAMA MOBILE
+     ======================================================= */
+
+  .vc4-network{
+    width:min(235px,100%);
+
+    margin:
+      18px auto
+      10px;
+  }
+
+  .vc4-network-line{
+    width:62%;
+    height:62%;
+  }
+
+  .vc4-node{
+    width:72px;
+
+    gap:5px;
+  }
+
+  .vc4-node-icon{
+    width:46px;
+    height:46px;
+  }
+
+  .vc4-node-icon::before{
+    width:21px;
+    height:21px;
+  }
+
+  .vc4-node strong{
+    font-size:8.5px;
+  }
+
+  .vc4-node-landing{
+    left:5%;
+  }
+
+  .vc4-node-audio{
+    right:5%;
+  }
+
+
+  /* =======================================================
+     COMBINACIONES MOBILE
+     ======================================================= */
+
+  .vc4-combos{
+    justify-content:flex-start;
+
+    gap:6px;
+
+    margin-top:0;
+  }
+
+  .vc4-combo{
+    min-height:27px;
+
+    padding:
+      5px
+      8px;
+
+    font-size:8.5px;
+  }
+
+
+  /* CTA derecho */
+
+  .vc4-connect-cta{
+    text-align:left;
+  }
+
+  .vc4-connect-cta .vc4-link{
+    margin-top:15px;
+  }
+
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion:reduce){
+
+  .vc4-link span{
+    transition:none;
+  }
+
+}
+
+
+</style>
+
+
+<section
+  class="vc4-strategy"
+  aria-label="Cómo pensamos cada proyecto"
+>
+
+  <div class="vc4-strategy-inner">
+
+    <div class="vc4-strategy-grid">
+
+
+      <!-- ===================================================
+           IZQUIERDA — OBJETIVO
+           =================================================== -->
+
+      <div class="vc4-panel vc4-panel-objective">
+
+        <p class="vc4-kicker">
+          PRIMERO, EL OBJETIVO
+        </p>
+
+        <h2 class="vc4-title">
+          No empezamos por la herramienta.<br>
+          Empezamos por
+          <span>lo que necesitás lograr.</span>
+        </h2>
+
+        <p class="vc4-intro">
+          Entendemos tu objetivo y diseñamos la solución adecuada para alcanzarlo.
+        </p>
+
+
+        <div class="vc4-goals">
+
+
+          <!-- 01 -->
+
+          <div class="vc4-goal">
+
+            <span class="vc4-goal-number">
+              01
+            </span>
+
+            <div class="vc4-goal-copy">
+
+              <strong>
+                VENDER
+              </strong>
+
+              <p>
+                Crear o mejorar una tienda online.
               </p>
+
             </div>
+
+            <span class="vc4-goal-arrow">
+              →
+            </span>
+
           </div>
 
-          <ul class="service-bullets">
-            <li>Hero + propuesta clara (sin humo)</li>
-            <li>Formulario + WhatsApp (derivación)</li>
-            <li>Tracking: Meta Pixel + GA4</li>
-          </ul>
 
-          <div class="service-foot">
-            <div class="pill pill--strong">Ideal para campañas y lanzamientos</div>
-            <a class="service-cta" href="https://www.viacloudstudio.com/landing">Quiero mi landing →</a>
+          <!-- 04 -->
+
+          <div class="vc4-goal">
+
+            <span class="vc4-goal-number">
+              04
+            </span>
+
+            <div class="vc4-goal-copy">
+
+              <strong>
+                PROFESIONALIZAR
+              </strong>
+
+              <p>
+                Mejorar lo que ya funciona para que funcione mejor.
+              </p>
+
+            </div>
+
+            <span class="vc4-goal-arrow">
+              →
+            </span>
+
           </div>
+
+
+          <!-- 02 -->
+
+          <div class="vc4-goal">
+
+            <span class="vc4-goal-number">
+              02
+            </span>
+
+            <div class="vc4-goal-copy">
+
+              <strong>
+                CONVERTIR
+              </strong>
+
+              <p>
+                Transformar tráfico en consultas o ventas.
+              </p>
+
+            </div>
+
+            <span class="vc4-goal-arrow">
+              →
+            </span>
+
+          </div>
+
+
+          <!-- 05 -->
+
+          <div class="vc4-goal">
+
+            <span class="vc4-goal-number">
+              05
+            </span>
+
+            <div class="vc4-goal-copy">
+
+              <strong>
+                COMUNICAR
+              </strong>
+
+              <p>
+                Hacer que tu mensaje se escuche y conecte.
+              </p>
+
+            </div>
+
+            <span class="vc4-goal-arrow">
+              →
+            </span>
+
+          </div>
+
+
+          <!-- 03 -->
+
+          <div class="vc4-goal">
+
+            <span class="vc4-goal-number">
+              03
+            </span>
+
+            <div class="vc4-goal-copy">
+
+              <strong>
+                LANZAR
+              </strong>
+
+              <p>
+                Presentar una idea, producto o campaña al mundo.
+              </p>
+
+            </div>
+
+            <span class="vc4-goal-arrow">
+              →
+            </span>
+
+          </div>
+
+
         </div>
-      </div>
-    </div>
-  </section>
 
- <!-- TRABAJOS -->
+
+        <a href="#contacto" class="vc4-link">
+          Hablemos de tu objetivo
+          <span>→</span>
+        </a>
+
+      </div>
+
+
+      <!-- ===================================================
+           DERECHA — SOLUCIONES CONECTADAS
+           =================================================== -->
+
+      <div class="vc4-panel vc4-panel-connect">
+
+        <p class="vc4-kicker">
+          SOLUCIONES QUE SE CONECTAN
+        </p>
+
+        <h2 class="vc4-title">
+          Una solución.<br>
+          O varias trabajando
+          <span>juntas.</span>
+        </h2>
+
+        <p class="vc4-intro">
+          Combinamos las áreas que realmente necesita tu proyecto.
+        </p>
+
+
+        <!-- DIAGRAMA -->
+
+        <div
+          class="vc4-network"
+          aria-hidden="true"
+        >
+
+          <div class="vc4-network-line"></div>
+
+
+          <!-- Ecommerce -->
+
+          <div class="vc4-node vc4-node-commerce">
+
+            <div
+              class="vc4-node-icon vc4-icon-commerce">
+            </div>
+
+            <strong>
+              ECOMMERCE
+            </strong>
+
+          </div>
+
+
+          <!-- Landing -->
+
+          <div class="vc4-node vc4-node-landing">
+
+            <div
+              class="vc4-node-icon vc4-icon-landing">
+            </div>
+
+            <strong>
+              LANDING PAGES
+            </strong>
+
+          </div>
+
+
+          <!-- Audio -->
+
+          <div class="vc4-node vc4-node-audio">
+
+            <div
+              class="vc4-node-icon vc4-icon-audio">
+            </div>
+
+            <strong>
+              AUDIO STUDIO
+            </strong>
+
+          </div>
+
+
+        </div>
+
+
+        <!-- COMBINACIONES -->
+
+        <div class="vc4-combos">
+
+          <span class="vc4-combo">
+            Ecommerce + Landing
+          </span>
+
+          <span class="vc4-combo">
+            Landing + Audio
+          </span>
+
+          <span class="vc4-combo">
+            Ecommerce + Audio
+          </span>
+
+          <span class="vc4-combo">
+            Proyecto integral
+          </span>
+
+        </div>
+
+
+        <!-- CTA -->
+
+        <div class="vc4-connect-cta">
+
+          <a href="#contacto" class="vc4-link">
+            Contanos qué estás construyendo
+            <span>→</span>
+          </a>
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     VIA CLOUD STUDIO V2 | BLOQUE 05
+     TRABAJO REAL — PROYECTOS QUE TOMAN FORMA
+     ========================================================= -->
+
+<style>
+
+/* =========================================================
+   BLOQUE 05 — BASE
+   ========================================================= */
+
+.vc5-work{
+  position:relative;
+
+  width:100%;
+  margin:0;
+
+  padding:
+    clamp(64px,7vw,96px)
+    clamp(24px,5vw,76px)
+    clamp(72px,8vw,110px);
+
+  box-sizing:border-box;
+
+  overflow:hidden;
+
+  color:#fff;
+
+  background:
+    radial-gradient(
+      circle at 88% 20%,
+      rgba(85,72,255,.16),
+      transparent 28%
+    ),
+    #081b33;
+}
+
+.vc5-work *,
+.vc5-work *::before,
+.vc5-work *::after{
+  box-sizing:border-box;
+}
+
+.vc5-work-inner{
+  width:100%;
+  max-width:1280px;
+
+  margin:0 auto;
+}
+
+
+/* =========================================================
+   ENCABEZADO
+   ========================================================= */
+
+.vc5-heading{
+  display:grid;
+
+  grid-template-columns:
+    minmax(0,1.25fr)
+    minmax(280px,.75fr);
+
+  gap:48px;
+
+  align-items:end;
+
+   margin-bottom:
+    clamp(34px,3.8vw,48px);
+}
+
+.vc5-kicker{
+  margin:0 0 15px;
+
+  color:#73a7ff;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:11px;
+  font-weight:800;
+
+  letter-spacing:.12em;
+
+  text-transform:uppercase;
+}
+
+.vc5-heading h2{
+  max-width:720px;
+
+  margin:0;
+
+  color:#fff;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:
+    clamp(38px,4.3vw,60px);
+
+  line-height:1.02;
+
+  letter-spacing:-.045em;
+
+  font-weight:800;
+}
+
+.vc5-heading h2 span{
+  color:#7a67ff;
+}
+
+.vc5-heading-side{
+  max-width:420px;
+
+  justify-self:end;
+}
+
+.vc5-heading-side p{
+  margin:0;
+
+  color:#adbed2;
+
+  font-size:
+    clamp(14px,1.15vw,16px);
+
+  line-height:1.65;
+}
+
+.vc5-heading-link{
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  margin-top:20px;
+
+  color:#80aaff;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:12px;
+  font-weight:700;
+
+  text-decoration:none;
+}
+
+.vc5-heading-link span{
+  transition:transform .2s ease;
+}
+
+.vc5-heading-link:hover span{
+  transform:translateX(4px);
+}
+
+
+/* =========================================================
+   SISTEMA EDITORIAL
+   ========================================================= */
+
+.vc5-project{
+  position:relative;
+
+  padding:
+    clamp(30px,3.4vw,44px)
+    0;
+
+  border-top:
+    1px solid rgba(255,255,255,.12);
+}
+
+.vc5-project-meta{
+  display:flex;
+
+  align-items:center;
+
+  gap:14px;
+
+  margin-bottom:18px;
+}
+
+.vc5-project-number{
+  color:#7287a2;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:11px;
+  font-weight:800;
+
+  letter-spacing:.10em;
+}
+
+.vc5-project-tags{
+  color:#7caaff;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:10px;
+  font-weight:800;
+
+  letter-spacing:.10em;
+
+  text-transform:uppercase;
+}
+
+.vc5-project h3{
+  margin:0;
+
+  color:#fff;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:
+    clamp(25px,2.5vw,36px);
+
+  line-height:1.08;
+
+  letter-spacing:-.035em;
+
+  font-weight:800;
+}
+
+.vc5-project-copy{
+  margin:13px 0 0;
+
+  color:#aebed0;
+
+  font-size:
+    clamp(13px,1.05vw,15px);
+
+  line-height:1.6;
+}
+
+.vc5-project-link{
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  margin-top:18px;
+
+  color:#fff;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:12px;
+  font-weight:700;
+
+  text-decoration:none;
+}
+
+.vc5-project-link::after{
+  content:"→";
+
+  color:#6894ff;
+
+  transition:transform .2s ease;
+}
+
+.vc5-project-link:hover::after{
+  transform:translateX(4px);
+}
+
+
+/* =========================================================
+   01 — SANSAY
+   PROYECTO PROTAGONISTA
+   ========================================================= */
+
+.vc5-sansay{
+  padding-top:0;
+
+  border-top:0;
+}
+
+.vc5-sansay-head{
+  display:grid;
+
+  grid-template-columns:
+    minmax(0,1fr)
+    minmax(300px,.65fr);
+
+  gap:48px;
+
+  align-items:end;
+
+  margin-bottom:24px;
+}
+
+.vc5-sansay-copy{
+  max-width:460px;
+
+  justify-self:end;
+}
+
+.vc5-sansay-visual{
+  position:relative;
+
+  width:100%;
+   height:
+    clamp(290px,32vw,410px);
+
+  overflow:hidden;
+
+  border-radius:22px;
+}
+
+.vc5-sansay-visual img{
+  display:block;
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  transition:
+    transform .6s cubic-bezier(.22,1,.36,1);
+}
+
+.vc5-sansay-visual::after{
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  pointer-events:none;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(4,15,30,.30),
+      transparent 45%
+    );
+}
+
+.vc5-sansay-visual:hover img{
+  transform:scale(1.018);
+}
+
+
+/* =========================================================
+   02 — FERRE CEPPI
+   ========================================================= */
+
+.vc5-ferre-grid{
+  display:grid;
+
+  grid-template-columns:
+    minmax(0,1.12fr)
+    minmax(320px,.68fr);
+
+  gap:
+    clamp(44px,6vw,82px);
+
+  align-items:center;
+}
+
+.vc5-ferre-visual{
+  height:
+    clamp(300px,41vw,400px);
+
+  overflow:hidden;
+
+  border-radius:20px;
+}
+
+.vc5-ferre-visual img{
+  display:block;
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  object-position:center;
+}
+
+.vc5-ferre-content{
+  max-width:410px;
+}
+
+
+/* =========================================================
+   03 — LANDING PAGES
+   ========================================================= */
+
+.vc5-landing-grid{
+  display:grid;
+
+  grid-template-columns:
+    minmax(280px,.78fr)
+    minmax(0,1.22fr);
+
+  gap:
+    clamp(34px,5vw,64px);
+
+  align-items:center;
+}
+
+.vc5-landing-content{
+  max-width:410px;
+}
+
+.vc5-landing-visual{
+  position:relative;
+
+  min-height:
+    clamp(430px,44vw,540px);
+}
+
+
+/* =========================================================
+   MOCKUPS
+   ========================================================= */
+
+.vc5-landing-shot{
+  position:absolute;
+
+  overflow:hidden;
+
+  border-radius:16px;
+
+  box-shadow:
+    0 24px 52px rgba(0,0,0,.25);
+
+  background:#fff;
+}
+
+.vc5-landing-shot img{
+  display:block;
+
+  width:100%;
+  height:auto;
+
+  object-fit:contain;
+}
+
+
+/* Landing VIA */
+
+.vc5-landing-shot-main{
+  width:39%;
+
+  left:16%;
+  top:3%;
+
+  transform:rotate(-2.5deg);
+}
+
+
+/* Landing Dagger */
+
+.vc5-landing-shot-secondary{
+  width:35%;
+
+  right:12%;
+  top:11%;
+
+  transform:rotate(2.5deg);
+}
+
+
+/* brillo sutil detrás de mockups */
+
+.vc5-landing-visual::before{
+  content:"";
+
+  position:absolute;
+
+  width:54%;
+  height:56%;
+
+  left:23%;
+  top:18%;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(71,89,255,.20),
+      transparent 68%
+    );
+
+  filter:blur(20px);
+}
+
+
+/* =========================================================
+   04 — AUDIO
+   ========================================================= */
+
+.vc5-audio{
+  padding-bottom:0;
+}
+
+.vc5-audio-visual{
+  position:relative;
+
+  min-height:
+    clamp(280px,29vw,360px);
+
+  margin-top:18px;
+
+  overflow:hidden;
+
+  border-radius:22px;
+
+  background:#030c19;
+}
+
+.vc5-audio-visual img{
+  display:block;
+
+  width:100%;
+  height:100%;
+
+  position:absolute;
+
+  inset:0;
+
+  object-fit:cover;
+
+  object-position:center;
+
+  opacity:.76;
+}
+
+.vc5-audio-visual::after{
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(4,15,30,.96) 0%,
+      rgba(4,15,30,.70) 36%,
+      rgba(4,15,30,.18) 72%,
+      rgba(86,43,255,.22) 100%
+    );
+}
+
+.vc5-audio-overlay{
+  position:relative;
+  z-index:2;
+
+  max-width:500px;
+
+  padding:
+    clamp(28px,4vw,48px);
+
+  display:flex;
+
+  min-height:
+    clamp(280px,29vw,360px);
+
+  flex-direction:column;
+
+  justify-content:center;
+}
+
+.vc5-audio-overlay .vc5-project-meta{
+  margin-bottom:16px;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width:980px){
+
+  /* -------------------------------------------------------
+     ENCABEZADO
+     ------------------------------------------------------- */
+
+  .vc5-heading{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+
+  .vc5-heading-side{
+    max-width:600px;
+    justify-self:start;
+  }
+
+
+  /* -------------------------------------------------------
+     SANSAY
+     ------------------------------------------------------- */
+
+  .vc5-sansay-head{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+
+  .vc5-sansay-copy{
+    max-width:620px;
+    justify-self:start;
+  }
+
+
+  /* -------------------------------------------------------
+     FERRE
+     ------------------------------------------------------- */
+
+  .vc5-ferre-grid{
+    grid-template-columns:1fr;
+    gap:24px;
+  }
+
+  .vc5-ferre-content{
+    max-width:620px;
+  }
+
+
+  /* -------------------------------------------------------
+     LANDING
+     ------------------------------------------------------- */
+
+  .vc5-landing-grid{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+
+  .vc5-landing-content{
+    max-width:620px;
+  }
+
+  .vc5-landing-visual{
+  width:100%;
+
+  min-height:
+    clamp(500px,68vw,580px);
+
+  margin:0 auto;
+}
+
+
+  /* Landing VIA */
+
+  .vc5-landing-shot-main{
+    width:38%;
+
+    left:17%;
+    top:4%;
+
+    transform:rotate(-2.5deg);
+  }
+
+
+  /* Landing Dagger */
+
+  .vc5-landing-shot-secondary{
+    width:34%;
+
+    right:15%;
+    top:10%;
+
+    transform:rotate(2.5deg);
+  }
+
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width:620px){
+
+  .vc5-work{
+    padding:
+      42px
+      18px
+      50px;
+  }
+
+
+  /* =======================================================
+     ENCABEZADO
+     ======================================================= */
+
+  .vc5-heading{
+    margin-bottom:32px;
+  }
+
+  .vc5-heading h2{
+    font-size:34px;
+    line-height:1.04;
+  }
+
+  .vc5-heading-side p{
+    font-size:13px;
+  }
+
+
+  /* =======================================================
+     PROYECTOS
+     ======================================================= */
+
+  .vc5-project{
+    padding:
+      30px
+      0;
+  }
+
+  .vc5-project-meta{
+    gap:9px;
+
+    margin-bottom:11px;
+  }
+
+  .vc5-project-number{
+    font-size:10px;
+  }
+
+  .vc5-project-tags{
+    font-size:9px;
+  }
+
+  .vc5-project h3{
+    font-size:26px;
+  }
+
+  .vc5-project-copy{
+    margin-top:9px;
+
+    font-size:12px;
+    line-height:1.55;
+  }
+
+  .vc5-project-link{
+    margin-top:15px;
+  }
+
+
+  /* =======================================================
+     SANSAY
+     ======================================================= */
+
+  .vc5-sansay{
+    padding-top:0;
+  }
+
+  .vc5-sansay-head{
+    margin-bottom:16px;
+  }
+
+  .vc5-sansay-visual{
+    height:225px;
+
+    border-radius:16px;
+  }
+
+  .vc5-sansay-visual img{
+    object-position:center;
+  }
+
+
+  /* =======================================================
+     FERRE CEPPI
+     ======================================================= */
+
+  .vc5-ferre-grid{
+    gap:18px;
+  }
+
+  .vc5-ferre-visual{
+    height:255px;
+
+    border-radius:16px;
+  }
+
+  .vc5-ferre-visual img{
+    object-position:center;
+  }
+
+
+  /* =======================================================
+     LANDING PAGES
+     ======================================================= */
+
+  .vc5-landing-grid{
+    gap:16px;
+  }
+
+  /*
+     La altura ahora responde al ancho del viewport.
+     Esto evita que los mockups invadan Audio en móviles
+     más anchos.
+  */
+
+ .vc5-landing-visual{
+  min-height:
+    clamp(320px,86vw,470px);
+
+  margin-bottom:0;
+}
+
+  .vc5-landing-shot{
+    border-radius:12px;
+  }
+
+  .vc5-landing-shot img{
+    display:block;
+
+    width:100%;
+    height:auto;
+
+    object-fit:contain;
+  }
+
+
+  /* Landing VIA */
+
+  .vc5-landing-shot-main{
+    width:52%;
+
+    height:auto;
+
+    left:5%;
+    top:2%;
+
+    transform:rotate(-2deg);
+  }
+
+
+  /* Landing Dagger */
+
+  .vc5-landing-shot-secondary{
+    width:47%;
+
+    height:auto;
+
+    right:3%;
+    top:9%;
+
+    transform:rotate(2deg);
+  }
+
+
+  /* =======================================================
+     AUDIO
+     ======================================================= */
+
+  .vc5-audio{
+    padding-bottom:0;
+  }
+
+  .vc5-audio-visual{
+    min-height:275px;
+
+    margin-top:16px;
+
+    border-radius:16px;
+  }
+
+  .vc5-audio-overlay{
+    min-height:275px;
+
+    padding:
+      24px
+      20px;
+  }
+
+  .vc5-audio-overlay .vc5-project-copy{
+    max-width:270px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE ANCHO / DISPOSITIVOS INTERMEDIOS
+   481px → 620px
+   ========================================================= */
+
+@media (min-width:481px) and (max-width:620px){
+
+  /*
+     En estos anchos los mockups no necesitan ocupar tanto
+     porcentaje como en teléfonos más angostos.
+  */
+
+  .vc5-landing-shot-main{
+    width:46%;
+
+    left:10%;
+    top:2%;
+
+    transform:rotate(-2deg);
+  }
+
+  .vc5-landing-shot-secondary{
+    width:42%;
+
+    right:7%;
+    top:8%;
+
+    transform:rotate(2deg);
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion:reduce){
+
+  .vc5-sansay-visual img,
+  .vc5-project-link::after,
+  .vc5-heading-link span{
+    transition:none;
+  }
+
+}
+
+
+/* =========================================================
+   BLOQUE 05 — MICROAJUSTES DESKTOP
+   ========================================================= */
+
+@media (min-width:981px){
+
+  /* -------------------------------------------------------
+     01 → 02
+     Acercamos Ferre un poco al cierre de Sansay
+     ------------------------------------------------------- */
+
+  .vc5-sansay{
+    padding-bottom:
+      clamp(26px,2.6vw,36px);
+  }
+
+  .vc5-sansay + .vc5-project{
+    padding-top:
+      clamp(24px,2.5vw,34px);
+  }
+
+
+  /* -------------------------------------------------------
+     DIVISORES
+     Misma presencia visual en todo el portfolio
+     ------------------------------------------------------- */
+
+  .vc5-project{
+    border-top:
+      1px solid rgba(255,255,255,.11);
+  }
+
+  .vc5-sansay{
+    border-top:0;
+  }
+
+
+  /* -------------------------------------------------------
+     LANDING PAGES
+     Un poco más de aire debajo de los mockups
+     antes del divisor de Audio
+     ------------------------------------------------------- */
+
+  .vc5-landing-visual{
+    margin-bottom:20px;
+  }
+
+
+  /* -------------------------------------------------------
+     AUDIO
+     Dejamos respirar un poco más la imagen hacia la derecha
+     sin perjudicar la lectura del copy
+     ------------------------------------------------------- */
+
+  .vc5-audio-visual::after{
+    background:
+      linear-gradient(
+        90deg,
+        rgba(4,15,30,.96) 0%,
+        rgba(4,15,30,.68) 36%,
+        rgba(4,15,30,.10) 72%,
+        rgba(86,43,255,.10) 100%
+      );
+  }
+
+}
+
+
+</style>
+
+
+<section
+  id="proyectos"
+  class="vc5-work"
+  aria-label="Proyectos realizados por VIA Cloud Studio"
+>
+
+  <div class="vc5-work-inner">
+
+
+    <!-- =====================================================
+         ENCABEZADO
+         ===================================================== -->
+
+    <header class="vc5-heading">
+
+      <div>
+
+        <p class="vc5-kicker">
+          TRABAJO REAL
+        </p>
+
+        <h2>
+          Proyectos que
+          <span>toman forma.</span>
+        </h2>
+
+      </div>
+
+
+      <div class="vc5-heading-side">
+
+        <p>
+          Ecommerce, landings y producción trabajando sobre necesidades
+          reales de marcas, negocios y proyectos.
+        </p>
+
+        <a
+          href="#contacto"
+          class="vc5-heading-link"
+        >
+          Hablemos de tu proyecto
+          <span>→</span>
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         01 — SANSAY AROMAS
+         ===================================================== -->
+
+    <article class="vc5-project vc5-sansay">
+
+      <div class="vc5-sansay-head">
+
+        <div>
+
+          <div class="vc5-project-meta">
+
+            <span class="vc5-project-number">
+              01
+            </span>
+
+            <span class="vc5-project-tags">
+              ECOMMERCE · UX · CONTENIDO
+            </span>
+
+          </div>
+
+          <h3>
+            Sansay Aromas
+          </h3>
+
+        </div>
+
+
+        <div class="vc5-sansay-copy">
+
+          <p class="vc5-project-copy">
+            Una experiencia ecommerce construida alrededor del producto,
+            la navegación y la identidad de marca.
+          </p>
+
+          <a
+            href="https://sansayaromas.com.ar/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="vc5-project-link"
+          >
+            Ver proyecto
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <a
+        href="https://sansayaromas.com.ar/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="vc5-sansay-visual"
+        aria-label="Visitar Sansay Aromas"
+      >
+
+        <img
+          src="assets-v2/sansay-aromas.jpg"
+          alt="Proyecto ecommerce Sansay Aromas"
+          loading="lazy"
+          decoding="async"
+        >
+
+      </a>
+
+    </article>
+
+
+    <!-- =====================================================
+         02 — FERRE CEPPI
+         ===================================================== -->
+
+    <article class="vc5-project">
+
+      <div class="vc5-ferre-grid">
+
+
+        <a
+          href="https://ferreceppi.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="vc5-ferre-visual"
+          aria-label="Visitar Ferre CEPPI"
+        >
+
+          <img
+            src="assets-v2/ferre-ceppi.jpg"
+            alt="Proyecto ecommerce Ferre CEPPI"
+            loading="lazy"
+            decoding="async"
+          >
+
+        </a>
+
+
+        <div class="vc5-ferre-content">
+
+          <div class="vc5-project-meta">
+
+            <span class="vc5-project-number">
+              02
+            </span>
+
+            <span class="vc5-project-tags">
+              ECOMMERCE · CATÁLOGO · UX
+            </span>
+
+          </div>
+
+          <h3>
+            Ferre CEPPI
+          </h3>
+
+          <p class="vc5-project-copy">
+            Un catálogo amplio organizado para hacer más simple encontrar,
+            explorar y comprar.
+          </p>
+
+          <a
+            href="https://ferreceppi.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="vc5-project-link"
+          >
+            Ver proyecto
+          </a>
+
+        </div>
+
+
+      </div>
+
+    </article>
+
+
+    <!-- =====================================================
+         03 — LANDING PAGES
+         ===================================================== -->
+
+    <article class="vc5-project">
+
+      <div class="vc5-landing-grid">
+
+
+        <div class="vc5-landing-content">
+
+          <div class="vc5-project-meta">
+
+            <span class="vc5-project-number">
+              03
+            </span>
+
+            <span class="vc5-project-tags">
+              CAMPAÑAS · CONVERSIÓN
+            </span>
+
+          </div>
+
+          <h3>
+            Landing Pages
+          </h3>
+
+          <p class="vc5-project-copy">
+            Páginas diseñadas para transformar campañas y tráfico en
+            recorridos más claros y orientados a acción.
+          </p>
+
+          <a
+            href="/landing"
+            class="vc5-project-link"
+          >
+            Explorar Landing Pages
+          </a>
+
+        </div>
+
+
+        <a
+          href="/landing"
+          class="vc5-landing-visual"
+          aria-label="Explorar proyectos de Landing Pages"
+        >
+
+          <div class="vc5-landing-shot vc5-landing-shot-main">
+
+            <img
+              src="assets-v2/landing-via.png"
+              alt="Landing Page desarrollada por VIA Cloud Studio"
+              loading="lazy"
+              decoding="async"
+            >
+
+          </div>
+
+
+          <div class="vc5-landing-shot vc5-landing-shot-secondary">
+
+            <img
+              src="assets-v2/dagger-landing.webp"
+              alt="Landing Page desarrollada para Dagger"
+              loading="lazy"
+              decoding="async"
+            >
+
+          </div>
+
+        </a>
+
+
+      </div>
+
+    </article>
+
+
+    <!-- =====================================================
+         04 — AUDIO PRODUCTION
+         ===================================================== -->
+
+    <article class="vc5-project vc5-audio">
+
+      <div class="vc5-audio-visual">
+
+        <img
+          src="assets-v2/edicion-audio-video.jpg"
+          alt="Producción y edición profesional de audio"
+          loading="lazy"
+          decoding="async"
+        >
+
+
+        <div class="vc5-audio-overlay">
+
+          <div class="vc5-project-meta">
+
+            <span class="vc5-project-number">
+              04
+            </span>
+
+            <span class="vc5-project-tags">
+              EDICIÓN · RADIO · PODCAST
+            </span>
+
+          </div>
+
+          <h3>
+            Audio Production
+          </h3>
+
+          <p class="vc5-project-copy">
+            Producción y edición de audio preparada para comunicar con
+            claridad, consistencia y calidad profesional.
+          </p>
+
+          <a
+            href="#contacto"
+            class="vc5-project-link"
+          >
+            Explorar Audio Studio
+          </a>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+  </div>
+
+</section>
+
+
+
+
+
+<!-- ====== VIA CLOUD STUDIO | Socio Partner Tiendanube (Mini Hero Full Width) ====== -->
+
 <section id="trabajos" class="section reveal">
   <div class="wrapper">
     <div class="section-title">Nuestros trabajos</div>
@@ -4021,11 +7233,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
    <!-- Mockups verticales -->
  <div class="works-stage" aria-label="Nuestros trabajos (carrusel)">
   <div class="works-shots">
-   <!-- Servicio Landing Pages -->
-  <button class="works-shot is-active" data-project="campanas" data-label="Servicio landing" type="button" aria-label="Ver caso Landing pages para campañas">
+   <!-- Nueva landing VIACLOUDSTUDIO -->
+  <button class="works-shot is-active" data-project="viacloud" data-label="Landing propia" type="button" aria-label="Ver caso Landing VIA CLOUD STUDIO">
     <span class="works-float">
     <span class="works-clip">
-    <img src="landing-pages-campanas.webp" alt="Landing pages para campañas · VIA CLOUD STUDIO">
+    <img src="via-clod.png" alt="Landing VIACLOUDSTUDIO · diseño y optimización Tienda Nube">
    </span>
    </span>
   </button>
@@ -4035,15 +7247,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="works-float">
     <span class="works-clip">
     <img src="landing-via.png" alt="Landing VIA SHOP">
-   </span>
-   </span>
-  </button>
-
-  <!-- Landing Dagger Store -->
-  <button class="works-shot" data-project="dagger" data-label="Tienda Nube" type="button" aria-label="Ver caso Landing Dagger Store">
-    <span class="works-float">
-    <span class="works-clip">
-    <img src="dagger-landing.webp" alt="Landing Dagger Store dentro de Tienda Nube">
    </span>
    </span>
   </button>
@@ -4064,10 +7267,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <button class="works-arrow works-arrow--next" type="button" aria-label="Siguiente">›</button>
   </div>
   <div class="works-dots" aria-label="Proyectos del carrusel">
-    <button class="works-dot is-active" type="button" data-project="campanas" aria-label="Ver proyecto 1" aria-current="true"></button>
+    <button class="works-dot is-active" type="button" data-project="viacloud" aria-label="Ver proyecto 1" aria-current="true"></button>
     <button class="works-dot" type="button" data-project="landing" aria-label="Ver proyecto 2"></button>
-    <button class="works-dot" type="button" data-project="dagger" aria-label="Ver proyecto 3"></button>
-    <button class="works-dot" type="button" data-project="newsletter" aria-label="Ver proyecto 4"></button>
+    <button class="works-dot" type="button" data-project="newsletter" aria-label="Ver proyecto 3"></button>
   </div>
  </div>
 
@@ -4076,19 +7278,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="works-copy" id="works-copy">
   <div class="works-copy-top">
   <p class="works-tag" id="works-tag">Landing servicio Tienda Nube</p>
-  <span id="works-count">1 / 4</span>
+  <span id="works-count">1 / 3</span>
   </div>
-  <h3 id="works-title">Landing pages para campañas</h3>
+  <h3 id="works-title">Landing VIA CLOUD STUDIO</h3>
   <p id="works-description">
-    Landing de servicio pensada para explicar una oferta puntual, reducir distracciones y convertir tráfico de campañas en consultas.
+    Landing enfocada en servicios de diseño y optimización de Tienda Nube,
+    lista para recibir tráfico de campañas y convertir visitas en consultas.
   </p>
   <ul class="works-points" id="works-points">
-    <li>Mensaje directo: una acción principal y CTAs claros.</li>
-    <li>Bloques preparados para explicar problema, solución, proceso y FAQ.</li>
-    <li>Base lista para medir scroll, clicks y envío de formulario.</li>
+    <li>Diseño pensado para tráfico desde campañas.</li>
+    <li>Estructura clara: hero, propuesta, servicios, trabajos y contacto.</li>
+    <li>Optimizada para leer bien en mobile.</li>
   </ul>
-  <a id="works-link" class="works-link" href="https://www.viacloudstudio.com/landing">
-    Ver servicio de landing
+  <a id="works-link" class="works-link" href="#contacto">
+    Ver landing en esta página
   </a>
 </div>
 </div>
@@ -4453,7 +7656,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 <!-- /QUIÉN ESTÁ DETRÁS -->
 
-<!-- CONTACTO -->
+
 <!-- CONTACTO -->
 <section id="contacto" class="contact-section contact-shell reveal">
   <div class="wrapper">
@@ -4786,29 +7989,25 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
   const descEl   = document.getElementById("works-description");
   const pointsEl = document.getElementById("works-points");
   const linkEl   = document.getElementById("works-link");
-  const dotsWrap = document.querySelector(".works-dots");
-  const prevBtn  = document.querySelector("#trabajos .works-arrow--prev");
-  const nextBtn  = document.querySelector("#trabajos .works-arrow--next");
-  let dots       = [];
-  let activeProjectIndex = 0;
+  const dots     = document.querySelectorAll(".works-dot");
   const countEl  = document.getElementById("works-count");
 
   if (!shots.length) return;
 
   const projects = {
-    // LANDING PAGES PARA CAMPAÑAS
-  campanas: {
-    tag: "Landing pages para campañas",
-    title: "Landing de servicio para convertir",
+    // VIACLOUDSTUDIO
+  viacloud: {
+    tag: "Landing servicio Tienda Nube",
+    title: "Landing VIA CLOUD STUDIO",
     description:
-      "Página pensada para una sola acción: explicar una oferta concreta, reducir distracciones y convertir tráfico de campañas en consultas.",
+      "Landing propia para presentar el servicio de diseño y optimización de Tienda Nube, pensada para captar leads calientes desde campañas y contenido orgánico.",
     points: [
-      "Estructura clara para Meta/Google: problema, propuesta, beneficios, proceso y FAQ.",
-      "CTAs repetidos en puntos clave para no perder intención de contacto.",
-      "Base preparada para medir scroll, clicks y envío de formulario."
+      "Hero con propuesta de valor clara, orientada a emprendedores y marcas que quieren escalar.",
+      "Explica el proceso de trabajo, tipos de proyectos y stack de herramientas en un recorrido simple.",
+      "Incluye CTA principales y formulario de consulta rápido conectado a WhatsApp."
     ],
-    link: "https://www.viacloudstudio.com/landing",
-    linkLabel: "Ver servicio de landing"
+    link: "#contacto",
+    linkLabel: "Quiero una landing como esta"
   },
 
   // VIA SHOP
@@ -4824,21 +8023,6 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
     ],
     link: "#contacto",
     linkLabel: "Ver landing en esta página"
-  },
-
-  // DAGGER STORE
-  dagger: {
-    tag: "Landing dentro de Tienda Nube",
-    title: "Dagger Store",
-    description:
-      "Landing comercial montada dentro de Tienda Nube para una campaña puntual, conectando storytelling, categorías y productos reales de la tienda.",
-    points: [
-      "Hero de campaña con foco en la fecha comercial y beneficios visibles.",
-      "Secciones por intención de compra para ordenar productos y acelerar la decisión.",
-      "Diseño alineado a Tienda Nube, con compra directa, cuotas y stock actualizado."
-    ],
-    link: "#contacto",
-    linkLabel: "Quiero una campaña así"
   },
 
   // DISTRI HOME
@@ -4857,27 +8041,6 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
   }
 };
 
-
-  function updateSlideClasses(index) {
-    const total = shots.length;
-    shots.forEach(function (shot, idx) {
-      const offset = (idx - index + total) % total;
-      const isActive = offset === 0;
-      const isNext = offset === 1;
-      const isPrev = offset === total - 1;
-
-      shot.classList.toggle("is-active", isActive);
-      shot.classList.toggle("is-prev", isPrev);
-      shot.classList.toggle("is-next", isNext);
-      shot.classList.toggle("is-hidden", !isActive && !isPrev && !isNext);
-
-      if (isActive) {
-        shot.setAttribute("aria-current", "true");
-      } else {
-        shot.removeAttribute("aria-current");
-      }
-    });
-  }
 
   function setProject(key) {
     const data = projects[key];
@@ -4903,9 +8066,7 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
     });
 
     if (countEl && index >= 0) {
-      activeProjectIndex = index;
       countEl.textContent = `${index + 1} / ${shots.length}`;
-      updateSlideClasses(index);
     }
 
     dots.forEach(function (dot) {
@@ -4919,22 +8080,21 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
     });
   }
 
-  if (dotsWrap) {
-    dotsWrap.innerHTML = "";
-    shots.forEach(function (shot, index) {
-      const dot = document.createElement("button");
-      dot.className = "works-dot";
-      dot.type = "button";
-      dot.dataset.project = shot.getAttribute("data-project") || "";
-      dot.setAttribute("aria-label", `Ver proyecto ${index + 1}`);
-      dotsWrap.appendChild(dot);
-    });
-    dots = Array.from(dotsWrap.querySelectorAll(".works-dot"));
-  }
-
   shots.forEach(function (btn) {
     btn.addEventListener("click", function () {
       const key = btn.getAttribute("data-project");
+      // visual
+      shots.forEach(function (s) {
+        const active = s === btn;
+        s.classList.toggle("is-active", active);
+        if (active) {
+          s.setAttribute("aria-current", "true");
+        } else {
+          s.removeAttribute("aria-current");
+        }
+      });
+      btn.classList.add("is-active");
+      // contenido
       setProject(key);
     });
   });
@@ -4947,26 +8107,8 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
     });
   });
 
-  function goToProject(index) {
-    const normalizedIndex = (index + shots.length) % shots.length;
-    const key = shots[normalizedIndex].getAttribute("data-project");
-    setProject(key);
-  }
-
-  if (prevBtn) {
-    prevBtn.addEventListener("click", function () {
-      goToProject(activeProjectIndex - 1);
-    });
-  }
-
-  if (nextBtn) {
-    nextBtn.addEventListener("click", function () {
-      goToProject(activeProjectIndex + 1);
-    });
-  }
-
   // Estado inicial
-  setProject("campanas");
+  setProject("viacloud"); // Si querés que arranque en VIACLOUDSTUDIO, cambialo a "viacloud"
 });
 </script>
 
@@ -5358,6 +8500,125 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+    
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  if (!matchMedia("(max-width: 900px)").matches) return;
+
+  const track = document.querySelector("#trabajos .works-shots");
+  const shots = Array.from(document.querySelectorAll("#trabajos .works-shots .works-shot"));
+  if (!track || shots.length < 2) return;
+
+  // Centrar un slide en el carrusel
+  function center(btn, smooth=true){
+    const trackRect = track.getBoundingClientRect();
+    const btnRect = btn.getBoundingClientRect();
+    const delta = (btnRect.left - trackRect.left) - (trackRect.width/2 - btnRect.width/2);
+    track.scrollTo({ left: track.scrollLeft + delta, behavior: smooth ? "smooth" : "auto" });
+  }
+
+  // Al click: centrar (tu JS ya setea is-active + actualiza texto)
+  shots.forEach(btn => {
+    btn.addEventListener("click", () => center(btn, true), { passive:true });
+  });
+
+  // Al finalizar swipe: elegir el más centrado y “clickearlo” para sincronizar texto
+  let t = null;
+  track.addEventListener("scroll", () => {
+    clearTimeout(t);
+    t = setTimeout(() => {
+      const centerX = track.getBoundingClientRect().left + track.clientWidth/2;
+      let best = shots[0], bestD = Infinity;
+
+      shots.forEach(btn => {
+        const r = btn.getBoundingClientRect();
+        const mid = r.left + r.width/2;
+        const d = Math.abs(mid - centerX);
+        if (d < bestD){ bestD = d; best = btn; }
+      });
+
+      if (!best.classList.contains("is-active")) {
+        best.click();          // dispara tu setProject() + is-active
+        center(best, false);   // lo deja perfecto centrado
+      }
+    }, 120);
+  }, { passive:true });
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  if (!matchMedia("(max-width: 900px)").matches) return;
+
+  const root   = document.querySelector("#trabajos");
+  const track  = root?.querySelector(".works-shots");
+  const shots  = Array.from(root?.querySelectorAll(".works-shots .works-shot") || []);
+  const prevBtn = root?.querySelector(".works-arrow--prev");
+  const nextBtn = root?.querySelector(".works-arrow--next");
+  if (!track || shots.length < 2 || !prevBtn || !nextBtn) return;
+
+  function center(btn, smooth=true){
+    const trackRect = track.getBoundingClientRect();
+    const btnRect = btn.getBoundingClientRect();
+    const delta = (btnRect.left - trackRect.left) - (trackRect.width/2 - btnRect.width/2);
+    track.scrollTo({ left: track.scrollLeft + delta, behavior: smooth ? "smooth" : "auto" });
+  }
+
+  function activeIndex(){
+    const i = shots.findIndex(b => b.classList.contains("is-active"));
+    return i >= 0 ? i : 0;
+  }
+
+  function updateArrows(){
+    const i = activeIndex();
+    prevBtn.hidden = (i === 0);
+    nextBtn.hidden = (i === shots.length - 1);
+  }
+
+  function goTo(i){
+    i = Math.max(0, Math.min(shots.length - 1, i));
+    shots[i].click();          // mantiene tu lógica (texto + is-active)
+    center(shots[i], true);
+    updateArrows();
+  }
+
+  prevBtn.addEventListener("click", () => goTo(activeIndex() - 1));
+  nextBtn.addEventListener("click", () => goTo(activeIndex() + 1));
+
+  // si hacen click directo en una card
+  shots.forEach(btn => btn.addEventListener("click", () => {
+    setTimeout(() => { center(btn, true); updateArrows(); }, 0);
+  }, { passive:true }));
+
+  // si cambian por swipe: detecto la más centrada y la activo
+  let t = null;
+  track.addEventListener("scroll", () => {
+    clearTimeout(t);
+    t = setTimeout(() => {
+      const centerX = track.getBoundingClientRect().left + track.clientWidth/2;
+      let best = 0, bestD = Infinity;
+
+      shots.forEach((btn, idx) => {
+        const r = btn.getBoundingClientRect();
+        const mid = r.left + r.width/2;
+        const d = Math.abs(mid - centerX);
+        if (d < bestD){ bestD = d; best = idx; }
+      });
+
+      if (!shots[best].classList.contains("is-active")) shots[best].click();
+      center(shots[best], false);
+      updateArrows();
+    }, 120);
+  }, { passive:true });
+
+  setTimeout(() => {
+    center(shots[activeIndex()], false);
+    updateArrows();
+  }, 60);
+});
+</script>
+
   
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -5657,6 +8918,62 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
  
+<script>
+(function(){
+  const header = document.querySelector('.vc2-header');
+  const navToggle = document.querySelector('#vc2-nav-toggle');
+
+  if (!header) return;
+
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+
+  function updateHeader(){
+    const currentScrollY = window.scrollY;
+
+    /* Si el menú mobile está abierto, el header queda visible */
+    if (navToggle && navToggle.checked){
+      header.classList.remove('vc2-header-hidden');
+      lastScrollY = currentScrollY;
+      ticking = false;
+      return;
+    }
+
+    /* Cerca del inicio siempre visible */
+    if (currentScrollY < 80){
+      header.classList.remove('vc2-header-hidden');
+    }
+    /* Bajando: ocultar */
+    else if (currentScrollY > lastScrollY + 6){
+      header.classList.add('vc2-header-hidden');
+    }
+    /* Subiendo: mostrar */
+    else if (currentScrollY < lastScrollY - 6){
+      header.classList.remove('vc2-header-hidden');
+    }
+
+    lastScrollY = currentScrollY;
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function(){
+    if (!ticking){
+      window.requestAnimationFrame(updateHeader);
+      ticking = true;
+    }
+  }, { passive:true });
+
+  if (navToggle){
+    navToggle.addEventListener('change', function(){
+      if (navToggle.checked){
+        header.classList.remove('vc2-header-hidden');
+      }
+    });
+  }
+})();
+</script>
  
 </body>
 </html>
+
+
