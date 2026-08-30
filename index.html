@@ -7148,6 +7148,2120 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 
+<!-- Estilos definitivos del tramo superior restaurados desde la version local aprobada -->
+<style>
+    @media (max-width: 640px){
+      #partner-tiendanube .tn-cta-row{
+        flex-direction: column;
+        align-items: stretch !important;
+        gap: 10px !important;
+      }
+      #partner-tiendanube .tn-cta-primary,
+      #partner-tiendanube .tn-cta-secondary{
+        width: 100% !important;
+        display: flex !important;
+      }
+      #partner-tiendanube .tn-cta-primary{
+        padding: 14px 16px !important;
+        border-radius: 16px !important;
+      }
+      #partner-tiendanube .tn-cta-secondary{
+        padding: 13px 16px !important;
+        border-radius: 16px !important;
+        font-weight: 800 !important; /* menos “pegado” */
+        opacity: .95;
+      }
+    }
+
+/* ====== MÉTRICAS (Quién está detrás) ====== */
+.about-metrics{
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  align-items: stretch;
+  position: relative;
+  z-index: 3; /* para que no las “pise” la sombra de la card */
+}
+
+.about-metric{
+  padding: 14px 14px 12px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.75);
+  border: 1px solid rgba(2,6,23,.08);
+  box-shadow: 0 10px 30px rgba(2,6,23,.06);
+}
+
+.about-metric__num{
+  font-size: clamp(22px, 3vw, 34px);
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+}
+
+.about-metric__label{
+  margin-top: 6px;
+  font-size: 13px;
+  color: #475569;
+  line-height: 1.35;
+}
+
+.about-metrics__note{
+  grid-column: 1 / -1;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+@media (max-width: 768px){
+  .about-metrics{
+    grid-template-columns: 1fr;
+    margin-top: 12px;
+  }
+}
+
+/* ✅ Dejá aire real debajo del grid para que no invada la sombra */
+.section-about .about-grid{
+  padding-bottom: 34px; /* probá 28–44px */
+}
+
+/* ✅ y separá un poco más las métricas */
+.about-metrics{
+  margin-top: 28px; /* antes 18px, subilo */
+}
+
+
+/* =========================================================
+   VIA CLOUD STUDIO V2
+   HEADER + HERO
+   ========================================================= */
+
+:root{
+  --vc2-text:#0b2038;
+  --vc2-muted:#49657f;
+
+  --vc2-blue:#0868ff;
+  --vc2-cyan:#00aef3;
+  --vc2-indigo:#4d4cf4;
+  --vc2-violet:#8d3cff;
+
+  --vc2-line:rgba(22,91,160,.14);
+  --vc2-white:rgba(255,255,255,.92);
+
+  --vc2-max:1440px;
+}
+
+
+/* =========================
+   HEADER
+   ========================= */
+
+.vc2-header{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:9990;
+
+  display:flex;
+  justify-content:center;
+
+  padding:
+    14px
+    clamp(16px,4vw,52px);
+
+  pointer-events:none;
+}
+
+.vc2-header-shell{
+  width:min(1240px,100%);
+  min-height:64px;
+
+  display:flex;
+  align-items:center;
+
+  padding:10px 12px 10px 18px;
+
+  border:1px solid rgba(255,255,255,.82);
+  border-radius:14px;
+
+  background:rgba(255,255,255,.76);
+
+  box-shadow:
+    0 16px 45px rgba(36,73,130,.10);
+
+  backdrop-filter:
+    blur(18px)
+    saturate(145%);
+
+  -webkit-backdrop-filter:
+    blur(18px)
+    saturate(145%);
+
+  pointer-events:auto;
+}
+
+
+/* Logo */
+
+.vc2-brand{
+  display:flex;
+  align-items:center;
+
+  flex:0 0 auto;
+}
+
+.vc2-brand img{
+  display:block;
+
+  width:132px;
+  max-width:100%;
+
+  height:auto;
+}
+
+
+/* Navegación */
+
+.vc2-nav{
+  margin-left:auto;
+
+  display:flex;
+  align-items:center;
+
+  gap:4px;
+}
+
+.vc2-nav-link,
+.vc2-solutions-button{
+  min-height:42px;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:0 14px;
+
+  border:0;
+  border-radius:9px;
+
+  background:transparent;
+
+  color:#17344f;
+
+  font-size:14px;
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:
+    background .18s ease,
+    color .18s ease,
+    transform .18s ease;
+}
+
+.vc2-nav-link:hover,
+.vc2-solutions-button:hover{
+  color:var(--vc2-blue);
+
+  background:
+    rgba(8,104,255,.07);
+}
+
+
+/* Dropdown soluciones */
+
+.vc2-solutions-menu{
+  position:relative;
+}
+
+.vc2-solutions-button::after{
+  content:"";
+
+  width:7px;
+  height:7px;
+
+  margin-left:8px;
+  margin-top:-4px;
+
+  border-right:2px solid currentColor;
+  border-bottom:2px solid currentColor;
+
+  transform:rotate(45deg);
+}
+
+.vc2-solutions-panel{
+  position:absolute;
+
+  top:calc(100% + 13px);
+  left:50%;
+
+  width:350px;
+
+  padding:10px;
+
+  border:1px solid rgba(29,91,151,.13);
+  border-radius:14px;
+
+  background:rgba(255,255,255,.96);
+
+  box-shadow:
+    0 25px 70px rgba(33,70,125,.16);
+
+  backdrop-filter:blur(18px);
+
+  opacity:0;
+  visibility:hidden;
+
+  transform:
+    translate(-50%,8px);
+
+  transition:
+    opacity .18s ease,
+    transform .18s ease,
+    visibility .18s ease;
+}
+
+.vc2-solutions-menu:hover
+.vc2-solutions-panel,
+
+.vc2-solutions-menu:focus-within
+.vc2-solutions-panel{
+  opacity:1;
+  visibility:visible;
+
+  transform:
+    translate(-50%,0);
+}
+
+.vc2-solution-item{
+  display:block;
+
+  padding:13px 14px;
+
+  border-radius:10px;
+
+  transition:
+    background .18s ease;
+}
+
+.vc2-solution-item:hover{
+  background:
+    linear-gradient(
+      135deg,
+      rgba(8,104,255,.08),
+      rgba(141,60,255,.07)
+    );
+}
+
+.vc2-solution-item strong{
+  display:block;
+
+  color:#14324f;
+
+  font-size:14px;
+}
+
+.vc2-solution-item span{
+  display:block;
+
+  margin-top:4px;
+
+  color:#61778d;
+
+  font-size:12.5px;
+  line-height:1.45;
+}
+
+
+/* CTA header */
+
+.vc2-header-cta{
+  min-height:44px;
+
+  margin-left:14px;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  gap:8px;
+
+  padding:0 19px;
+
+  border-radius:10px;
+
+  color:#fff !important;
+
+  font-size:14px;
+  font-weight:800;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--vc2-blue),
+      var(--vc2-violet)
+    );
+
+  box-shadow:
+    0 13px 27px rgba(68,76,239,.22);
+
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease;
+}
+
+.vc2-header-cta:hover{
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 18px 34px rgba(68,76,239,.28);
+}
+
+
+/* =========================
+   MENÚ MOBILE
+   ========================= */
+
+.vc2-nav-toggle{
+  position:absolute;
+
+  width:1px;
+  height:1px;
+
+  opacity:0;
+  pointer-events:none;
+}
+
+.vc2-menu-toggle{
+  display:none;
+
+  width:44px;
+  height:44px;
+
+  margin-left:auto;
+
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+
+  gap:5px;
+
+  border:1px solid var(--vc2-line);
+  border-radius:10px;
+
+  background:rgba(255,255,255,.86);
+
+  cursor:pointer;
+}
+
+.vc2-menu-toggle span{
+  display:block;
+
+  width:19px;
+  height:2px;
+
+  border-radius:20px;
+
+  background:#14324f;
+
+  transition:
+    transform .18s ease,
+    opacity .18s ease;
+}
+
+.vc2-mobile-menu{
+  display:none;
+}
+
+
+/* =========================
+   HERO
+   ========================= */
+
+#hero.vc2-hero{
+  position:relative;
+
+  width:100%;
+
+  min-height:100svh;
+
+  margin:0;
+
+  padding:
+    118px
+    clamp(24px,5vw,76px)
+    48px;
+
+  display:flex;
+  align-items:center;
+
+  overflow:hidden;
+
+  isolation:isolate;
+
+  background:
+    radial-gradient(
+      circle at 16% 24%,
+      rgba(255,255,255,.98) 0,
+      rgba(255,255,255,.58) 22%,
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 52% 36%,
+      rgba(42,185,255,.34) 0,
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 75% 38%,
+      rgba(17,102,255,.48) 0,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 94% 48%,
+      rgba(153,49,255,.58) 0,
+      transparent 38%
+    ),
+    linear-gradient(
+      112deg,
+      #ffffff 0%,
+      #edf9ff 30%,
+      #c8ebff 48%,
+      #5e9aff 73%,
+      #8c42f5 100%
+    );
+}
+
+
+/* Glow */
+
+.vc2-hero-glow{
+  position:absolute;
+
+  inset:-20% -10% -25% 30%;
+
+  z-index:-3;
+
+  pointer-events:none;
+
+  background:
+    radial-gradient(
+      circle at 35% 45%,
+      rgba(255,255,255,.9),
+      transparent 16%
+    ),
+    radial-gradient(
+      circle at 48% 48%,
+      rgba(0,189,255,.42),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 67% 50%,
+      rgba(18,100,255,.52),
+      transparent 31%
+    ),
+    radial-gradient(
+      circle at 88% 48%,
+      rgba(155,48,255,.58),
+      transparent 32%
+    );
+
+  filter:
+    blur(30px)
+    saturate(135%);
+}
+
+
+/* Grid tecnológico */
+
+.vc2-hero-grid{
+  position:absolute;
+
+  inset:0;
+
+  z-index:-2;
+
+  pointer-events:none;
+
+  opacity:.52;
+
+  background-image:
+    linear-gradient(
+      rgba(8,104,255,.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(8,104,255,.035) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    58px 58px;
+}
+
+
+/* Light trails */
+
+#hero.vc2-hero::before,
+#hero.vc2-hero::after{
+  position:absolute;
+
+  content:"";
+
+  pointer-events:none;
+
+  z-index:-1;
+}
+
+#hero.vc2-hero::before{
+  width:1000px;
+  height:500px;
+
+  top:4%;
+  right:-8%;
+
+  border-radius:50%;
+
+  border-top:
+    2px solid rgba(255,255,255,.56);
+
+  box-shadow:
+    0 -16px 40px rgba(255,255,255,.16);
+
+  transform:
+    rotate(-7deg);
+
+  opacity:.7;
+}
+
+#hero.vc2-hero::after{
+  width:850px;
+  height:360px;
+
+  top:18%;
+  right:-5%;
+
+  border-radius:50%;
+
+  border-top:
+    1px solid rgba(201,224,255,.68);
+
+  transform:
+    rotate(-11deg);
+
+  opacity:.65;
+}
+
+/* =========================================================
+   HERO V2.2 — CONTENIDO / COPY / CTA
+   Balance visual desktop
+   ========================================================= */
+
+
+/* Contenedor */
+
+.vc2-hero-inner{
+  position:relative;
+
+  width:min(var(--vc2-max),100%);
+  margin:0 auto;
+
+  display:grid;
+
+  grid-template-columns:
+    minmax(470px,.94fr)
+    minmax(560px,1.06fr);
+
+  align-items:center;
+
+  gap:clamp(18px,2.4vw,40px);
+}
+
+
+/* =========================
+   COPY
+   ========================= */
+
+.vc2-hero-content{
+  position:relative;
+  z-index:4;
+
+  max-width:650px;
+}
+
+
+/* Eyebrow */
+
+.vc2-eyebrow{
+  margin:0 0 17px;
+
+  color:#245d99;
+
+  font-size:12px;
+  font-weight:900;
+
+  letter-spacing:.075em;
+  text-transform:uppercase;
+}
+
+.vc2-eyebrow::before{
+  content:"";
+
+  display:inline-block;
+
+  width:28px;
+  height:2px;
+
+  margin:0 10px 3px 0;
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--vc2-cyan),
+      var(--vc2-violet)
+    );
+}
+
+
+/* =========================
+   TÍTULO
+   ========================= */
+
+.vc2-hero-title{
+  margin:0;
+
+  color:var(--vc2-text);
+
+font-family:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+
+font-size:clamp(42px,3.25vw,54px);
+
+line-height:1.06;
+
+letter-spacing:-.045em;
+
+font-weight:800;
+}
+
+.vc2-hero-title > span{
+  display:block;
+}
+
+.vc2-hero-title strong{
+  font-weight:800;
+}
+
+
+/* Colores destacados */
+
+.vc2-accent-blue{
+  color:var(--vc2-blue);
+}
+
+.vc2-accent-indigo{
+  color:var(--vc2-indigo);
+}
+
+.vc2-accent-violet{
+  color:var(--vc2-violet);
+}
+
+
+/* =========================
+   TEXTO DESCRIPTIVO
+   ========================= */
+
+.vc2-hero-copy{
+  max-width:610px;
+
+  margin:18px 0 0;
+
+  color:var(--vc2-muted);
+
+  font-size:clamp(16px,1.08vw,17.5px);
+
+  line-height:1.55;
+}
+
+
+/* =========================
+   BOTONES
+   ========================= */
+
+.vc2-hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+
+  gap:13px;
+
+  margin-top:23px;
+}
+
+.vc2-btn{
+  min-height:48px;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  gap:9px;
+
+  padding:0 23px;
+
+  border-radius:10px;
+
+  font-size:14px;
+  font-weight:800;
+
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    background .18s ease;
+}
+
+
+/* CTA principal */
+
+.vc2-btn-primary{
+  color:#fff !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--vc2-blue),
+      var(--vc2-violet)
+    );
+
+  box-shadow:
+    0 17px 35px rgba(48,83,236,.23);
+}
+
+.vc2-btn-primary:hover{
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 21px 42px rgba(48,83,236,.29);
+}
+
+
+/* CTA secundario */
+
+.vc2-btn-secondary{
+  color:#17344f !important;
+
+  border:1px solid rgba(8,104,255,.25);
+
+  background:rgba(255,255,255,.69);
+
+  box-shadow:
+    0 11px 26px rgba(35,70,124,.07);
+}
+
+.vc2-btn-secondary:hover{
+  transform:translateY(-2px);
+
+  background:rgba(255,255,255,.94);
+}
+
+
+/* =========================
+   LÍNEA DE SERVICIOS
+   ========================= */
+
+.vc2-service-strip{
+  display:flex;
+  flex-wrap:wrap;
+
+  gap:8px;
+
+  margin:21px 0 0;
+  padding:0;
+
+  list-style:none;
+
+  color:#315b82;
+
+  font-size:10.5px;
+  font-weight:900;
+
+  letter-spacing:.065em;
+  text-transform:uppercase;
+}
+
+.vc2-service-strip li{
+  display:flex;
+  align-items:center;
+}
+
+.vc2-service-strip li + li::before{
+  content:"";
+
+  width:4px;
+  height:4px;
+
+  margin-right:8px;
+
+  border-radius:50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--vc2-blue),
+      var(--vc2-violet)
+    );
+}
+
+
+/* =========================================================
+   VISUAL HERO V2.1
+   Composición hiperrealista + responsive
+   ========================================================= */
+
+.vc2-hero-visual{
+  position:relative;
+  z-index:3;
+
+  min-width:0;
+  min-height:540px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+
+/* Halo detrás del asset */
+
+.vc2-scene-halo{
+  position:absolute;
+
+  width:88%;
+  aspect-ratio:1.25;
+
+  right:1%;
+  top:50%;
+
+  transform:translateY(-50%);
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 46%,
+      rgba(255,255,255,.75),
+      transparent 22%
+    ),
+    radial-gradient(
+      circle at 52% 48%,
+      rgba(0,190,255,.36),
+      transparent 36%
+    ),
+    radial-gradient(
+      circle at 76% 46%,
+      rgba(32,91,255,.38),
+      transparent 39%
+    ),
+    radial-gradient(
+      circle at 92% 50%,
+      rgba(159,48,255,.45),
+      transparent 40%
+    );
+
+  filter:
+    blur(28px)
+    saturate(125%);
+
+  opacity:.90;
+}
+
+
+/* Composición hiperrealista */
+
+.vc2-hero-scene{
+  position:relative;
+  z-index:2;
+
+  display:block;
+
+  width:min(50vw,790px);
+  max-width:none;
+  height:auto;
+
+  object-fit:contain;
+
+  /*
+    La acercamos ligeramente al centro.
+    El -3% evita que el micrófono quede pegado al borde derecho.
+  */
+  transform:
+    translateX(-3%)
+    translateY(4px);
+
+  filter:
+    drop-shadow(
+      0 26px 32px
+      rgba(12,50,112,.15)
+    )
+    drop-shadow(
+      0 44px 74px
+      rgba(84,45,190,.17)
+    );
+
+  transition:
+    transform .35s ease,
+    filter .35s ease;
+}
+
+
+/* Hover muy sutil */
+
+.vc2-hero-visual:hover .vc2-hero-scene{
+  transform:
+    translateX(-3%)
+    translateY(-2px)
+    scale(1.008);
+
+  filter:
+    drop-shadow(
+      0 29px 36px
+      rgba(12,50,112,.17)
+    )
+    drop-shadow(
+      0 49px 84px
+      rgba(84,45,190,.20)
+    );
+}
+
+/* Tipografía VIA Cloud — navegación y CTA */
+.vc2-nav,
+.vc2-header-cta,
+.vc2-btn{
+  font-family:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+
+/* =========================
+   HEADER — AUTO HIDE SUAVE
+   ========================= */
+
+.vc2-header{
+  transition:
+    transform .62s cubic-bezier(.22,1,.36,1),
+    opacity .48s ease;
+  will-change:transform,opacity;
+}
+
+.vc2-header.vc2-header-hidden{
+  transform:translateY(-82%);
+  opacity:0;
+  pointer-events:none;
+}
+
+
+/* =========================================================
+   VIA CLOUD STUDIO V2
+   BLOQUE 02 — SOLUCIONES
+   ========================================================= */
+
+.vc2-solutions{
+  position:relative;
+
+  padding:
+    clamp(58px,5vw,78px)
+    clamp(24px,5vw,76px)
+    clamp(90px,8vw,126px);
+
+  overflow:hidden;
+
+  background:#DDE6FF;
+}
+
+
+/* Contenedor */
+
+.vc2-solutions-inner{
+  width:min(1280px,100%);
+
+  margin:0 auto;
+}
+
+
+/* =========================
+   ENCABEZADO
+   ========================= */
+
+.vc2-solutions-heading{
+  max-width:800px;
+
+  margin-bottom:
+    clamp(50px,5vw,72px);
+}
+
+.vc2-section-kicker{
+  margin:0 0 18px;
+
+  color:#2863a8;
+
+  font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+
+  font-size:11px;
+  font-weight:800;
+
+  letter-spacing:.11em;
+
+  text-transform:uppercase;
+}
+
+.vc2-solutions-heading h2{
+  margin:0;
+
+  color:#0b2038;
+
+  font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+
+  font-size:
+    clamp(38px,4.2vw,62px);
+
+  line-height:1.03;
+
+  letter-spacing:-.045em;
+
+  font-weight:800;
+}
+
+.vc2-solutions-heading h2 span{
+  color:#5363f5;
+}
+
+.vc2-solutions-intro{
+  max-width:690px;
+
+  margin:22px 0 0;
+
+  color:#526b83;
+
+  font-size:
+    clamp(16px,1.25vw,18px);
+
+  line-height:1.65;
+}
+
+
+/* =========================
+   GRID
+   ========================= */
+
+.vc2-solutions-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
+  gap:
+    clamp(18px,2vw,26px);
+}
+
+
+/* Card base */
+
+.vc2-solution{
+  position:relative;
+
+  min-height:470px;
+
+  display:flex;
+  flex-direction:column;
+
+  padding:
+    clamp(25px,2.5vw,34px);
+
+  border:
+    1px solid rgba(24,84,146,.12);
+
+  border-radius:24px;
+
+  background:
+    rgba(255,255,255,.78);
+
+  box-shadow:
+    0 24px 60px
+    rgba(45,83,135,.07);
+
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+
+  overflow:hidden;
+
+  transition:
+    transform .32s cubic-bezier(.22,1,.36,1),
+    box-shadow .32s ease,
+    border-color .32s ease;
+}
+
+.vc2-solution::before{
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  top:0;
+
+  width:100%;
+  height:4px;
+
+  opacity:.9;
+}
+
+.vc2-solution-commerce::before{
+  background:
+    linear-gradient(
+      90deg,
+      #0875ff,
+      #24b7ff
+    );
+}
+
+.vc2-solution-landing::before{
+  background:
+    linear-gradient(
+      90deg,
+      #5363f5,
+      #8d3cff
+    );
+}
+
+.vc2-solution-audio::before{
+  background:
+    linear-gradient(
+      90deg,
+      #7048f5,
+      #bd43ff
+    );
+}
+
+.vc2-solution:hover{
+  transform:translateY(-6px);
+
+  border-color:
+    rgba(60,93,205,.22);
+
+  box-shadow:
+    0 32px 76px
+    rgba(45,83,135,.12);
+}
+
+
+/* Top */
+
+.vc2-solution-top{
+  display:flex;
+
+  align-items:center;
+  justify-content:space-between;
+
+  gap:16px;
+}
+
+.vc2-solution-number{
+  color:#8ca0b5;
+
+  font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+
+  font-size:13px;
+  font-weight:700;
+}
+
+.vc2-solution-tag{
+  padding:6px 9px;
+
+  border-radius:999px;
+
+  color:#486681;
+
+  background:
+    rgba(224,236,249,.72);
+
+  font-size:9px;
+  font-weight:800;
+
+  letter-spacing:.08em;
+
+  text-transform:uppercase;
+}
+
+
+/* Icono */
+
+.vc2-solution-icon{
+  width:54px;
+  height:54px;
+
+  margin-top:34px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(8,104,255,.10),
+      rgba(141,60,255,.09)
+    );
+}
+
+.vc2-solution-icon svg{
+  width:28px;
+  height:28px;
+
+  fill:none;
+
+  stroke:#426af0;
+
+  stroke-width:1.8;
+
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+
+/* Título */
+
+.vc2-solution h3{
+  margin:25px 0 0;
+
+  color:#10273f;
+
+  font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+
+  font-size:
+    clamp(22px,2vw,28px);
+
+  line-height:1.15;
+
+  letter-spacing:-.025em;
+
+  font-weight:800;
+}
+
+
+/* Texto */
+
+.vc2-solution > p{
+  margin:15px 0 0;
+
+  color:#5b7187;
+
+  font-size:15px;
+
+  line-height:1.65;
+}
+
+
+/* Beneficio */
+
+.vc2-solution-benefit{
+  margin-top:22px;
+
+  padding-top:18px;
+
+  display:flex;
+
+  gap:9px;
+
+  border-top:
+    1px solid rgba(40,92,145,.10);
+
+  color:#314f6d;
+
+  font-size:13px;
+
+  line-height:1.5;
+}
+
+.vc2-solution-benefit span{
+  flex:0 0 auto;
+
+  color:#5363f5;
+
+  font-weight:900;
+}
+
+
+/* Link */
+
+.vc2-solution-link{
+  margin-top:auto;
+  padding-top:28px;
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:9px;
+
+  color:#1e55bd !important;
+
+  font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+
+  font-size:13px;
+
+  font-weight:800;
+}
+
+.vc2-solution-link span{
+  transition:
+    transform .22s ease;
+}
+
+.vc2-solution-link:hover span{
+  transform:
+    translateX(4px);
+}
+
+
+/* =========================================================
+   BLOQUE 02 — IMÁGENES DE SOLUCIONES
+   ========================================================= */
+
+.vc2-solution-media{
+  width:100%;
+  height:245px;
+
+  margin:10px 0 18px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  overflow:hidden;
+}
+
+.vc2-solution-media img{
+  display:block;
+
+  width:100%;
+  height:100%;
+
+  object-fit:contain;
+
+  transform:translateZ(0);
+
+  transition:
+    transform .35s cubic-bezier(.22,1,.36,1);
+}
+
+.vc2-solution:hover .vc2-solution-media img{
+  transform:scale(1.018);
+}
+
+
+/* Ajustes individuales de escala visual */
+
+.vc2-solution-media-commerce img{
+  width:106%;
+}
+
+.vc2-solution-media-landing img{
+  width:101%;
+}
+
+.vc2-solution-media-audio img{
+  width:104%;
+}
+
+
+/* Compactamos un poco la card */
+
+.vc2-solution{
+  min-height:455px;
+}
+
+.vc2-solution h3{
+  margin-top:8px;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width:1050px){
+
+  .vc2-solutions{
+    padding:
+      82px 28px;
+  }
+
+  .vc2-solutions-grid{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+  .vc2-solution-audio{
+  grid-column:1 / -1;
+
+  min-height:auto;
+
+  display:grid;
+
+  grid-template-columns:
+    minmax(0,1fr)
+    minmax(300px,420px);
+
+  grid-template-areas:
+    "top top"
+    "title media"
+    "text media"
+    "benefit media"
+    "link media";
+
+  column-gap:42px;
+  align-items:center;
+}
+
+
+/* Reubicamos cada parte */
+
+.vc2-solution-audio .vc2-solution-top{
+  grid-area:top;
+}
+
+.vc2-solution-audio .vc2-solution-media{
+  grid-area:media;
+
+  height:300px;
+
+  margin:8px 0 0;
+}
+
+.vc2-solution-audio h3{
+  grid-area:title;
+
+  margin-top:24px;
+}
+
+.vc2-solution-audio > p{
+  grid-area:text;
+}
+
+.vc2-solution-audio .vc2-solution-benefit{
+  grid-area:benefit;
+}
+
+.vc2-solution-audio .vc2-solution-link{
+  grid-area:link;
+
+  margin-top:0;
+}
+
+
+/* Imagen más protagonista */
+
+.vc2-solution-audio
+.vc2-solution-media-audio img{
+  width:118%;
+}
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width:640px){
+
+  .vc2-solutions{
+    padding:
+      68px 16px;
+
+    background:
+      linear-gradient(
+        180deg,
+        #f8fbff 0%,
+        #f5f7ff 55%,
+        #faf7ff 100%
+      );
+  }
+
+  .vc2-solutions-heading{
+    margin-bottom:36px;
+  }
+
+  .vc2-section-kicker{
+    margin-bottom:13px;
+
+    font-size:9.5px;
+  }
+
+  .vc2-solutions-heading h2{
+    font-size:
+      clamp(34px,9vw,42px);
+  }
+
+  .vc2-solutions-intro{
+    margin-top:17px;
+
+    font-size:15px;
+
+    line-height:1.55;
+  }
+
+  .vc2-solutions-grid{
+    grid-template-columns:1fr;
+
+    gap:14px;
+  }
+
+  .vc2-solution,
+  .vc2-solution-audio{
+    grid-column:auto;
+
+    min-height:auto;
+
+    padding:24px;
+
+    border-radius:20px;
+  }
+
+  .vc2-solution-icon{
+    margin-top:25px;
+  }
+
+  .vc2-solution h3{
+    margin-top:20px;
+
+    font-size:24px;
+  }
+
+  .vc2-solution-link{
+    padding-top:24px;
+  }
+
+}
+
+
+.vc2-solution-media{
+  height:215px;
+  margin:6px 0 16px;
+}
+
+.vc2-solution-media-commerce img{
+  width:108%;
+}
+
+.vc2-solution-media-landing img{
+  width:104%;
+}
+
+.vc2-solution-media-audio img{
+  width:108%;
+}
+
+.vc2-solution h3{
+  margin-top:4px;
+}
+
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width:1050px){
+
+  .vc2-nav,
+  .vc2-header-cta{
+    display:none;
+  }
+
+  .vc2-menu-toggle{
+    display:flex;
+  }
+
+
+  /* Menú mobile / tablet */
+
+  .vc2-mobile-menu{
+    position:absolute;
+
+    top:calc(100% + 10px);
+    left:0;
+    right:0;
+
+    padding:12px;
+
+    display:grid;
+    gap:5px;
+
+    border:1px solid rgba(255,255,255,.82);
+    border-radius:14px;
+
+    background:rgba(255,255,255,.96);
+
+    box-shadow:
+      0 24px 60px rgba(33,70,125,.16);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    opacity:0;
+    visibility:hidden;
+
+    transform:translateY(-8px);
+
+    transition:
+      opacity .18s ease,
+      transform .18s ease,
+      visibility .18s ease;
+  }
+
+  #vc2-nav-toggle:checked ~ .vc2-mobile-menu{
+    opacity:1;
+    visibility:visible;
+
+    transform:translateY(0);
+  }
+
+  .vc2-mobile-menu > a,
+  .vc2-mobile-solutions a{
+    min-height:44px;
+
+    display:flex;
+    align-items:center;
+
+    padding:0 12px;
+
+    border-radius:9px;
+
+    color:#193650;
+
+    font-size:14px;
+    font-weight:700;
+  }
+
+  .vc2-mobile-menu > a:hover,
+  .vc2-mobile-solutions a:hover{
+    background:rgba(8,104,255,.07);
+  }
+
+  .vc2-mobile-solutions{
+    display:grid;
+    gap:3px;
+
+    padding:8px;
+
+    border-radius:10px;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(8,104,255,.055),
+        rgba(141,60,255,.045)
+      );
+  }
+
+  .vc2-mobile-solutions > span{
+    padding:4px 8px 6px;
+
+    color:#52708d;
+
+    font-size:11px;
+    font-weight:900;
+
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+
+  .vc2-mobile-cta{
+    justify-content:center;
+
+    color:#fff !important;
+
+    background:
+      linear-gradient(
+        135deg,
+        var(--vc2-blue),
+        var(--vc2-violet)
+      );
+  }
+
+
+/* Hero tablet */
+
+#hero.vc2-hero{
+  min-height:auto;
+  padding:112px 28px 36px;
+}
+
+.vc2-hero-inner{
+  grid-template-columns:1fr;
+  gap:4px;
+}
+
+.vc2-hero-content{
+  max-width:760px;
+}
+
+.vc2-hero-title{
+  max-width:720px;
+  font-size:clamp(40px,5.7vw,52px);
+  line-height:1.04;
+}
+
+.vc2-hero-copy{
+  max-width:660px;
+  margin-top:14px;
+}
+
+.vc2-hero-actions{
+  margin-top:20px;
+}
+
+.vc2-service-strip{
+  margin-top:18px;
+}
+
+.vc2-hero-visual{
+  min-height:360px;
+  margin-top:-67px;
+}
+
+.vc2-scene-halo{
+  width:78%;
+  right:10%;
+}
+
+.vc2-hero-scene{
+  width:min(82vw,700px);
+  transform:
+    translateX(0)
+    translateY(-4px);
+}
+
+.vc2-hero-visual:hover .vc2-hero-scene{
+  transform:
+    translateX(0)
+    translateY(-7px)
+    scale(1.004);
+}
+
+} /* ← cierre del @media (max-width:1050px) */
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width:640px){
+
+  .vc2-header{
+    padding:10px 12px;
+  }
+
+  .vc2-header-shell{
+    min-height:58px;
+
+    padding:
+      8px 9px 8px 13px;
+
+    border-radius:12px;
+  }
+
+  .vc2-brand img{
+    width:116px;
+  }
+
+
+ /* =========================
+   MOBILE V2.2
+   ========================= */
+
+@media (max-width:640px){
+
+  #hero.vc2-hero{
+    min-height:auto;
+
+    padding:
+      94px 16px 12px;
+
+    background:
+      radial-gradient(
+        circle at 18% 12%,
+        rgba(255,255,255,.98),
+        transparent 48%
+      ),
+      radial-gradient(
+        circle at 88% 66%,
+        rgba(141,60,255,.28),
+        transparent 55%
+      ),
+      linear-gradient(
+        150deg,
+        #ffffff 0%,
+        #edf9ff 44%,
+        #dcefff 67%,
+        #eee6ff 100%
+      );
+  }
+
+
+  /* Fondo / grid */
+
+  .vc2-hero-grid{
+    opacity:.35;
+    background-size:44px 44px;
+  }
+
+  #hero.vc2-hero::before,
+  #hero.vc2-hero::after{
+    opacity:.34;
+  }
+
+
+  /* Contenedor */
+
+  .vc2-hero-inner{
+    width:100%;
+    gap:8px;
+  }
+
+
+  /* Eyebrow */
+
+  .vc2-eyebrow{
+    margin-bottom:14px;
+
+    font-size:9.5px;
+    line-height:1.4;
+  }
+
+  .vc2-eyebrow::before{
+    width:20px;
+    margin-right:7px;
+  }
+
+
+  /* Título */
+
+  .vc2-hero-title{
+    max-width:100%;
+
+    font-size:
+      clamp(33px,9.2vw,40px);
+
+    line-height:1.035;
+    letter-spacing:-.045em;
+  }
+
+
+  /* Texto */
+
+  .vc2-hero-copy{
+    margin-top:16px;
+
+    font-size:15px;
+    line-height:1.5;
+  }
+
+
+  /* CTA */
+
+  .vc2-hero-actions{
+    width:100%;
+
+    margin-top:21px;
+    gap:9px;
+  }
+
+  .vc2-btn{
+    width:100%;
+    min-height:48px;
+  }
+
+
+  /* Servicios */
+
+  .vc2-service-strip{
+    display:grid;
+
+    gap:4px;
+
+    margin-top:19px;
+
+    font-size:9.5px;
+    line-height:1.35;
+  }
+
+  .vc2-service-strip li + li::before{
+    display:none;
+  }
+
+
+  .vc2-hero-visual{
+  width:calc(100% + 32px);
+
+  min-height:250px;
+
+  margin:
+    -2px -16px 0;
+
+  overflow:hidden;
+}
+
+
+/* Desactivamos el halo en mobile */
+
+.vc2-scene-halo{
+  display:none;
+}
+
+
+/* Imagen principal limpia */
+
+.vc2-hero-scene{
+  width:116%;
+  max-width:none;
+
+  margin-left:-3%;
+
+  transform:translateY(0);
+
+  background:transparent !important;
+
+  box-shadow:none !important;
+
+  filter:none !important;
+
+  -webkit-mask-image:none !important;
+  mask-image:none !important;
+}
+
+
+/* Sin movimiento hover en mobile */
+
+.vc2-hero-visual:hover .vc2-hero-scene{
+  transform:translateY(0);
+}
+
+}
+
+
+/* =========================
+   AUDIO — RESET MOBILE
+   ========================= */
+
+.vc2-solution-audio{
+  display:flex;
+  flex-direction:column;
+
+  grid-column:auto;
+
+  min-height:auto;
+}
+
+/* Cabecera: 03 izquierda / AUDIO derecha */
+
+.vc2-solution-audio .vc2-solution-top{
+  order:1;
+
+  width:100%;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.vc2-solution-audio .vc2-solution-number{
+  margin-right:auto;
+}
+
+.vc2-solution-audio .vc2-solution-tag{
+  margin-left:auto;
+}
+
+/* Imagen */
+
+.vc2-solution-audio .vc2-solution-media{
+  order:2;
+
+  width:100%;
+  height:215px;
+
+  margin:6px 0 16px;
+}
+
+/* Título */
+
+.vc2-solution-audio h3{
+  order:3;
+
+  width:100%;
+  margin-top:4px;
+
+  text-align:left;
+  align-self:flex-start;
+}
+
+/* Texto */
+
+.vc2-solution-audio > p{
+  order:4;
+
+  width:auto;
+}
+
+/* Beneficio */
+
+.vc2-solution-audio .vc2-solution-benefit{
+  order:5;
+
+  width:auto;
+}
+
+/* CTA */
+
+.vc2-solution-audio .vc2-solution-link{
+  order:6;
+
+  width:auto;
+  margin-top:auto;
+}
+
+/* Escala de imagen Audio en mobile */
+
+.vc2-solution-audio
+.vc2-solution-media-audio img{
+  width:108%;
+}
+
+
+/* =========================================================
+   ACCESSIBILITY / MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion:reduce){
+
+  .vc2-header *,
+  .vc2-hero *{
+    animation:none !important;
+    transition:none !important;
+  }
+
+}
+
+
+
+
+   
+  </style>
+
 <!-- CONTACTO -->
 <section id="contacto" class="contact-section contact-shell reveal">
   <div class="wrapper">
@@ -8466,6 +10580,7 @@ document.addEventListener("DOMContentLoaded", () => {
  
 </body>
 </html>
+
 
 
 
