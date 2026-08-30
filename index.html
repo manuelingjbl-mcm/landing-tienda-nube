@@ -9311,6 +9311,59 @@ font-weight:800;
   background:linear-gradient(135deg, rgba(250,252,255,.96), rgba(245,250,255,.94));
 }
 
+/* Presencia sutil para el bloque 4 */
+.vc4-strategy-grid{
+  border-color:rgba(83,99,245,.105);
+  box-shadow:
+    0 22px 54px rgba(28,51,88,.06),
+    inset 0 1px 0 rgba(255,255,255,.92);
+}
+
+.vc4-panel-objective{
+  background:
+    radial-gradient(circle at 0% 0%, rgba(103,87,247,.055), transparent 42%),
+    linear-gradient(135deg, rgba(255,255,255,.96), rgba(250,247,255,.92));
+}
+
+.vc4-panel-connect{
+  background:
+    radial-gradient(circle at 100% 0%, rgba(45,120,255,.06), transparent 42%),
+    linear-gradient(135deg, rgba(252,254,255,.96), rgba(245,250,255,.94));
+}
+
+.vc4-goal{
+  margin-right:4px;
+  padding:12px 10px;
+  border-radius:14px;
+  background:linear-gradient(90deg, rgba(255,255,255,.66), rgba(247,250,255,.26));
+  border-bottom-color:rgba(83,99,245,.10);
+}
+
+.vc4-goal-number{
+  background:rgba(103,87,247,.055);
+  box-shadow:0 8px 18px rgba(83,99,245,.08);
+}
+
+.vc4-network::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:42%;
+  width:58%;
+  height:58%;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(83,99,245,.15), transparent 68%);
+  filter:blur(10px);
+  pointer-events:none;
+}
+
+.vc4-node-icon{
+  box-shadow:
+    0 14px 28px rgba(73,88,240,.24),
+    inset 0 1px 0 rgba(255,255,255,.22);
+}
+
 @media (max-width:620px){
   #soluciones.vc2-solutions{
     background:
@@ -10642,6 +10695,7 @@ document.addEventListener("DOMContentLoaded", () => {
  
 </body>
 </html>
+
 
 
 
