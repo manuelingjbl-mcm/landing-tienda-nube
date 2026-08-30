@@ -9263,7 +9263,7 @@ font-weight:800;
   </style>
 
 <style>
-/* Ajuste preview: continuidad visual entre Servicios, metricas y estrategia */
+/* Ajuste preview: continuidad visual entre Servicios, métricas y estrategia */
 #soluciones.vc2-solutions{
   background:
     radial-gradient(circle at 12% 8%, rgba(45,120,255,.10), transparent 34%),
@@ -9377,6 +9377,228 @@ font-weight:800;
   }
 }
 </style>
+<style>
+/* =========================================================
+   BLOQUE 06 — TAMBIÉN PODEMOS AYUDARTE CON
+   ========================================================= */
+.vc6-support{
+  position:relative;
+  overflow:hidden;
+  padding:clamp(54px,6vw,82px) clamp(24px,5vw,76px);
+  background:
+    radial-gradient(circle at 8% 10%, rgba(83,99,245,.14), transparent 34%),
+    radial-gradient(circle at 92% 20%, rgba(36,183,255,.10), transparent 34%),
+    linear-gradient(180deg, #071d36 0%, #06182d 100%);
+  color:#f8fbff;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+
+.vc6-support::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg, rgba(255,255,255,.035), transparent 28%, transparent 72%, rgba(255,255,255,.025));
+  pointer-events:none;
+}
+
+.vc6-support-inner{
+  position:relative;
+  z-index:1;
+  width:min(1280px,100%);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:minmax(260px,.72fr) minmax(0,1.28fr);
+  gap:clamp(34px,5vw,70px);
+  align-items:start;
+}
+
+.vc6-support-kicker{
+  margin:0 0 14px;
+  color:#80b9ff;
+  font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.vc6-support h2{
+  margin:0;
+  max-width:540px;
+  color:#fff;
+  font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+  font-size:clamp(34px,3.8vw,54px);
+  line-height:1.04;
+  letter-spacing:-.045em;
+  font-weight:800;
+}
+
+.vc6-support h2 span{
+  color:#7c66ff;
+}
+
+.vc6-support-intro{
+  max-width:520px;
+  margin:20px 0 0;
+  color:rgba(224,239,255,.72);
+  font-size:clamp(14px,1.05vw,16px);
+  line-height:1.65;
+}
+
+.vc6-support-link{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-top:24px;
+  color:#dceaff;
+  font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+  font-size:13px;
+  font-weight:800;
+  text-decoration:none;
+}
+
+.vc6-support-link::after{
+  content:">";
+  color:#8da2ff;
+  transition:transform .2s ease;
+}
+
+.vc6-support-link:hover::after{
+  transform:translateX(4px);
+}
+
+.vc6-support-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+
+.vc6-support-item{
+  min-height:190px;
+  padding:22px;
+  border-radius:8px;
+  border:1px solid rgba(170,200,255,.13);
+  background:linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.035));
+  box-shadow:0 18px 44px rgba(0,0,0,.10);
+}
+
+.vc6-support-number{
+  display:block;
+  margin-bottom:28px;
+  color:#7aaeff;
+  font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.12em;
+}
+
+.vc6-support-item h3{
+  margin:0;
+  color:#fff;
+  font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+  font-size:18px;
+  line-height:1.15;
+  letter-spacing:-.02em;
+}
+
+.vc6-support-item p{
+  margin:12px 0 0;
+  color:rgba(224,239,255,.68);
+  font-size:13px;
+  line-height:1.55;
+}
+
+@media (max-width:980px){
+  .vc6-support-inner{
+    grid-template-columns:1fr;
+    gap:28px;
+  }
+
+  .vc6-support-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media (max-width:620px){
+  .vc6-support{
+    padding:42px 18px 46px;
+  }
+
+  .vc6-support h2{
+    font-size:32px;
+  }
+
+  .vc6-support-intro{
+    font-size:13px;
+  }
+
+  .vc6-support-grid{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+
+  .vc6-support-item{
+    min-height:auto;
+    padding:20px;
+  }
+
+  .vc6-support-number{
+    margin-bottom:18px;
+  }
+}
+</style>
+
+<section id="tambien-podemos-ayudarte" class="vc6-support" aria-label="Servicios adicionales de VIA Cloud Studio">
+  <div class="vc6-support-inner">
+    <div class="vc6-support-copy">
+      <p class="vc6-support-kicker">También podemos ayudarte con</p>
+      <h2>Capas extra para que tu proyecto <span>salga más completo.</span></h2>
+      <p class="vc6-support-intro">
+        Si tu tienda, landing o contenido necesita crecer después del primer lanzamiento,
+        podemos sumar piezas puntuales sin convertir el proyecto en algo pesado.
+      </p>
+      <a class="vc6-support-link" href="#contacto">Contanos qué querés sumar</a>
+    </div>
+
+    <div class="vc6-support-grid">
+      <article class="vc6-support-item">
+        <span class="vc6-support-number">01</span>
+        <h3>SEO básico</h3>
+        <p>Títulos, descripciones, estructura y detalles técnicos para que la base quede mejor preparada.</p>
+      </article>
+
+      <article class="vc6-support-item">
+        <span class="vc6-support-number">02</span>
+        <h3>Automatizaciones</h3>
+        <p>Flujos simples para ordenar consultas, respuestas, formularios, WhatsApp o seguimiento de leads.</p>
+      </article>
+
+      <article class="vc6-support-item">
+        <span class="vc6-support-number">03</span>
+        <h3>Newsletters</h3>
+        <p>Piezas para Marketing Nube o email, con foco en lectura mobile, productos y llamados a la acción.</p>
+      </article>
+
+      <article class="vc6-support-item">
+        <span class="vc6-support-number">04</span>
+        <h3>Medición</h3>
+        <p>Eventos, etiquetas y conversiones para entender qué pasa después de cada visita o campaña.</p>
+      </article>
+
+      <article class="vc6-support-item">
+        <span class="vc6-support-number">05</span>
+        <h3>Mantenimiento</h3>
+        <p>Ajustes evolutivos, mejoras visuales y soporte para que el proyecto no quede congelado.</p>
+      </article>
+
+      <article class="vc6-support-item">
+        <span class="vc6-support-number">06</span>
+        <h3>Contenido y carga</h3>
+        <p>Organización de productos, textos, imágenes y secciones para dejar todo listo para publicar.</p>
+      </article>
+    </div>
+  </div>
+</section>
 <!-- CONTACTO -->
 <section id="contacto" class="contact-section contact-shell reveal">
   <div class="wrapper">
@@ -10695,6 +10917,8 @@ document.addEventListener("DOMContentLoaded", () => {
  
 </body>
 </html>
+
+
 
 
 
