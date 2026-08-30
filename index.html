@@ -9384,20 +9384,23 @@ font-weight:800;
 .vc6-support{
   position:relative;
   overflow:hidden;
-  padding:clamp(54px,6vw,82px) clamp(24px,5vw,76px);
+  padding:clamp(60px,6.4vw,92px) clamp(24px,5vw,76px);
   background:
-    radial-gradient(circle at 8% 10%, rgba(83,99,245,.14), transparent 34%),
-    radial-gradient(circle at 92% 20%, rgba(36,183,255,.10), transparent 34%),
-    linear-gradient(180deg, #071d36 0%, #06182d 100%);
-  color:#f8fbff;
-  border-top:1px solid rgba(255,255,255,.08);
+    radial-gradient(circle at 10% 8%, rgba(45,120,255,.10), transparent 34%),
+    radial-gradient(circle at 90% 18%, rgba(124,102,255,.10), transparent 34%),
+    linear-gradient(180deg, #f7fbff 0%, #eef6ff 100%);
+  color:#0b2038;
+  border-top:1px solid rgba(255,255,255,.16);
 }
 
 .vc6-support::before{
   content:"";
   position:absolute;
-  inset:0;
-  background:linear-gradient(90deg, rgba(255,255,255,.035), transparent 28%, transparent 72%, rgba(255,255,255,.025));
+  left:0;
+  right:0;
+  top:0;
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(83,99,245,.22), transparent);
   pointer-events:none;
 }
 
@@ -9407,14 +9410,14 @@ font-weight:800;
   width:min(1280px,100%);
   margin:0 auto;
   display:grid;
-  grid-template-columns:minmax(260px,.72fr) minmax(0,1.28fr);
+  grid-template-columns:minmax(280px,.76fr) minmax(0,1.24fr);
   gap:clamp(34px,5vw,70px);
   align-items:start;
 }
 
 .vc6-support-kicker{
   margin:0 0 14px;
-  color:#80b9ff;
+  color:#2863a8;
   font-family:"Plus Jakarta Sans",system-ui,sans-serif;
   font-size:11px;
   font-weight:800;
@@ -9424,8 +9427,8 @@ font-weight:800;
 
 .vc6-support h2{
   margin:0;
-  max-width:540px;
-  color:#fff;
+  max-width:560px;
+  color:#0b2038;
   font-family:"Plus Jakarta Sans",system-ui,sans-serif;
   font-size:clamp(34px,3.8vw,54px);
   line-height:1.04;
@@ -9434,13 +9437,13 @@ font-weight:800;
 }
 
 .vc6-support h2 span{
-  color:#7c66ff;
+  color:#5363f5;
 }
 
 .vc6-support-intro{
-  max-width:520px;
+  max-width:545px;
   margin:20px 0 0;
-  color:rgba(224,239,255,.72);
+  color:#526b83;
   font-size:clamp(14px,1.05vw,16px);
   line-height:1.65;
 }
@@ -9450,7 +9453,7 @@ font-weight:800;
   align-items:center;
   gap:8px;
   margin-top:24px;
-  color:#dceaff;
+  color:#1e5be0;
   font-family:"Plus Jakarta Sans",system-ui,sans-serif;
   font-size:13px;
   font-weight:800;
@@ -9459,7 +9462,7 @@ font-weight:800;
 
 .vc6-support-link::after{
   content:">";
-  color:#8da2ff;
+  color:#5363f5;
   transition:transform .2s ease;
 }
 
@@ -9470,22 +9473,22 @@ font-weight:800;
 .vc6-support-grid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:12px;
+  gap:14px;
 }
 
 .vc6-support-item{
-  min-height:190px;
+  min-height:188px;
   padding:22px;
-  border-radius:8px;
-  border:1px solid rgba(170,200,255,.13);
-  background:linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.035));
-  box-shadow:0 18px 44px rgba(0,0,0,.10);
+  border-radius:12px;
+  border:1px solid rgba(83,99,245,.11);
+  background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(249,252,255,.78));
+  box-shadow:0 18px 44px rgba(28,51,88,.055);
 }
 
 .vc6-support-number{
   display:block;
-  margin-bottom:28px;
-  color:#7aaeff;
+  margin-bottom:24px;
+  color:#5363f5;
   font-family:"Plus Jakarta Sans",system-ui,sans-serif;
   font-size:11px;
   font-weight:800;
@@ -9494,7 +9497,7 @@ font-weight:800;
 
 .vc6-support-item h3{
   margin:0;
-  color:#fff;
+  color:#0b2038;
   font-family:"Plus Jakarta Sans",system-ui,sans-serif;
   font-size:18px;
   line-height:1.15;
@@ -9503,7 +9506,7 @@ font-weight:800;
 
 .vc6-support-item p{
   margin:12px 0 0;
-  color:rgba(224,239,255,.68);
+  color:#5b7087;
   font-size:13px;
   line-height:1.55;
 }
@@ -9521,7 +9524,7 @@ font-weight:800;
 
 @media (max-width:620px){
   .vc6-support{
-    padding:42px 18px 46px;
+    padding:46px 18px 50px;
   }
 
   .vc6-support h2{
@@ -9543,40 +9546,40 @@ font-weight:800;
   }
 
   .vc6-support-number{
-    margin-bottom:18px;
+    margin-bottom:16px;
   }
 }
 </style>
 
-<section id="tambien-podemos-ayudarte" class="vc6-support" aria-label="Servicios adicionales de VIA Cloud Studio">
+<section id="tambien-podemos-ayudarte" class="vc6-support" aria-label="Capacidades adicionales de VIA Cloud Studio">
   <div class="vc6-support-inner">
     <div class="vc6-support-copy">
       <p class="vc6-support-kicker">También podemos ayudarte con</p>
-      <h2>Capas extra para que tu proyecto <span>salga más completo.</span></h2>
+      <h2>Capas que hacen que tu presencia digital <span>funcione mejor.</span></h2>
       <p class="vc6-support-intro">
-        Si tu tienda, landing o contenido necesita crecer después del primer lanzamiento,
-        podemos sumar piezas puntuales sin convertir el proyecto en algo pesado.
+        Más allá del formato, trabajamos las piezas que conectan estrategia, experiencia,
+        contenido y medición para que cada canal se entienda como parte del mismo sistema.
       </p>
-      <a class="vc6-support-link" href="#contacto">Contanos qué querés sumar</a>
+      <a class="vc6-support-link" href="#contacto">Contanos qué querés potenciar</a>
     </div>
 
     <div class="vc6-support-grid">
       <article class="vc6-support-item">
         <span class="vc6-support-number">01</span>
-        <h3>SEO básico</h3>
-        <p>Títulos, descripciones, estructura y detalles técnicos para que la base quede mejor preparada.</p>
+        <h3>Dirección visual</h3>
+        <p>Criterios de marca, jerarquía, ritmo visual y coherencia entre web, landing, tienda y contenido.</p>
       </article>
 
       <article class="vc6-support-item">
         <span class="vc6-support-number">02</span>
-        <h3>Automatizaciones</h3>
-        <p>Flujos simples para ordenar consultas, respuestas, formularios, WhatsApp o seguimiento de leads.</p>
+        <h3>Contenido comercial</h3>
+        <p>Textos, mensajes, llamados a la acción y estructura para explicar mejor lo que ofrecés.</p>
       </article>
 
       <article class="vc6-support-item">
         <span class="vc6-support-number">03</span>
-        <h3>Newsletters</h3>
-        <p>Piezas para Marketing Nube o email, con foco en lectura mobile, productos y llamados a la acción.</p>
+        <h3>Automatizaciones</h3>
+        <p>Flujos simples para ordenar consultas, formularios, WhatsApp, respuestas y seguimiento de leads.</p>
       </article>
 
       <article class="vc6-support-item">
@@ -9587,14 +9590,14 @@ font-weight:800;
 
       <article class="vc6-support-item">
         <span class="vc6-support-number">05</span>
-        <h3>Mantenimiento</h3>
-        <p>Ajustes evolutivos, mejoras visuales y soporte para que el proyecto no quede congelado.</p>
+        <h3>Producción digital</h3>
+        <p>Piezas para campañas, landings, newsletters, audio, video o lanzamientos puntuales.</p>
       </article>
 
       <article class="vc6-support-item">
         <span class="vc6-support-number">06</span>
-        <h3>Contenido y carga</h3>
-        <p>Organización de productos, textos, imágenes y secciones para dejar todo listo para publicar.</p>
+        <h3>Mejora continua</h3>
+        <p>Ajustes evolutivos, optimización mobile y mantenimiento para que el proyecto siga creciendo.</p>
       </article>
     </div>
   </div>
@@ -10917,6 +10920,7 @@ document.addEventListener("DOMContentLoaded", () => {
  
 </body>
 </html>
+
 
 
 
