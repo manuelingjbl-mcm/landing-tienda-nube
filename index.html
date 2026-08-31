@@ -3503,6 +3503,82 @@ select{
   color:#9ca3af;
 }
 
+.contact-intent{
+  margin:24px 0 0;
+  padding:0;
+  border:0;
+}
+
+.contact-intent legend{
+  margin:0 0 12px;
+  color:#f8fafc;
+  font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+  font-size:14px;
+  font-weight:700;
+}
+
+.contact-intent-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+}
+
+.contact-intent-option{
+  position:relative;
+  min-height:52px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:13px 14px;
+  border:1px solid rgba(148,163,184,.20);
+  border-radius:16px;
+  background:rgba(255,255,255,.045);
+  color:#dbe7ff;
+  font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+  font-size:13px;
+  font-weight:700;
+  line-height:1.2;
+  cursor:pointer;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+  transition:background .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+
+.contact-intent-option::before{
+  content:"";
+  width:12px;
+  height:12px;
+  flex:0 0 auto;
+  border-radius:999px;
+  border:1px solid rgba(143,183,255,.58);
+  background:rgba(2,6,23,.32);
+  box-shadow:0 0 0 4px rgba(83,99,245,0);
+  transition:background .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+.contact-intent-option input{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+}
+
+.contact-intent-option:has(input:checked){
+  border-color:rgba(125,103,255,.72);
+  background:linear-gradient(135deg, rgba(27,117,255,.22), rgba(125,54,255,.18));
+  box-shadow:0 16px 34px rgba(15,23,42,.28);
+  transform:translateY(-1px);
+}
+
+.contact-intent-option:has(input:checked)::before{
+  border-color:#fff;
+  background:#7d67ff;
+  box-shadow:0 0 0 4px rgba(125,103,255,.18);
+}
+
+.contact-intent-option:focus-within{
+  outline:2px solid rgba(143,183,255,.56);
+  outline-offset:3px;
+}
+
 /* Grid del form */
 .contact-grid{
   display:grid;
@@ -3618,6 +3694,10 @@ select{
 /* Mobile: botón arriba full width */
 @media (max-width: 920px){
   .contact-form-card{ padding:20px; }
+
+  .contact-intent-grid{
+    grid-template-columns:1fr 1fr;
+  }
 
   .contact-cta{
     flex-direction:column;
@@ -4349,6 +4429,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   text-shadow:
     0 8px 22px
     rgba(83,99,245,.10);
+}
+
+@media (max-width: 560px){
+  .contact-intent-grid{
+    grid-template-columns:1fr;
+  }
+
+  .contact-intent-option{
+    min-height:48px;
+  }
 }
 
 .vc3-experience-copy p{
@@ -10111,18 +10201,49 @@ font-weight:800;
     <!-- ✅ BLOQUE SUPERIOR SIN CARD -->
     <div class="section-title">Contacto</div>
 
-    <h2>Recibí tu Plan + Presupuesto</h2>
+    <h2>¿Qué estás pensando construir o mejorar?</h2>
     <p>
-      Contanos en qué etapa estás y qué querés lograr. Te respondo con un
-      <strong>plan de acción + presupuesto estimado</strong>, sin letra chica.
+      Contame en qué punto está tu proyecto y te respondo con una dirección clara:
+      próximos pasos, prioridad y <strong>presupuesto estimado</strong>.
     </p>
     <p class="contact-meta">Tiempo estimado de respuesta: 24/48 hs hábiles.</p>
 
     <!-- ✅ CARD SOLO PARA EL FORM -->
     <div class="contact-box contact-form-card">
       <form id="contact-form" method="POST" action="https://formspree.io/f/mzzodepb">
-        <input type="hidden" name="_subject" value="Plan + Presupuesto — Consulta desde Tienda Vía CLOUD" />
+        <input type="hidden" name="_subject" value="Consulta desde VIA Cloud Studio" />
         <input type="hidden" name="source" value="main_landing" />
+        <input type="hidden" name="page" value="inicio" />
+
+        <fieldset class="contact-intent">
+          <legend>¿Qué necesitás resolver primero?</legend>
+          <div class="contact-intent-grid">
+            <label class="contact-intent-option">
+              <input type="radio" name="interes_servicio" value="tienda_online" required>
+              <span>Tienda online</span>
+            </label>
+            <label class="contact-intent-option">
+              <input type="radio" name="interes_servicio" value="landing_page">
+              <span>Landing page</span>
+            </label>
+            <label class="contact-intent-option">
+              <input type="radio" name="interes_servicio" value="audio_contenido">
+              <span>Audio / contenido</span>
+            </label>
+            <label class="contact-intent-option">
+              <input type="radio" name="interes_servicio" value="automatizaciones">
+              <span>Automatizaciones</span>
+            </label>
+            <label class="contact-intent-option">
+              <input type="radio" name="interes_servicio" value="proyecto_combinado">
+              <span>Proyecto combinado</span>
+            </label>
+            <label class="contact-intent-option">
+              <input type="radio" name="interes_servicio" value="no_estoy_seguro">
+              <span>No estoy seguro</span>
+            </label>
+          </div>
+        </fieldset>
 
         <div class="contact-grid">
           <div>
@@ -10154,9 +10275,10 @@ font-weight:800;
             <label class="sr-only" for="etapa">Etapa</label>
             <select id="etapa" name="etapa" required>
               <option value="" disabled selected hidden>¿En qué etapa estás?</option>
-              <option value="ya_tengo_tienda_optimizacion">Ya tengo Tienda Nube y quiero optimizar</option>
+              <option value="tengo_algo_y_quiero_mejorar">Ya tengo algo y quiero mejorarlo</option>
               <option value="armando_desde_cero">Estoy armando desde cero</option>
-              <option value="migrar_a_tn">Quiero migrar a Tienda Nube</option>
+              <option value="necesito_ordenar_ideas">Necesito ordenar ideas y prioridades</option>
+              <option value="quiero_lanzar_campania">Quiero lanzar una campaña o pieza puntual</option>
               <option value="solo_averiguo">Solo estoy averiguando</option>
             </select>
           </div>
@@ -10175,7 +10297,7 @@ font-weight:800;
           <div class="contact-span-2">
             <label class="sr-only" for="mensaje">Contanos brevemente qué necesitás</label>
             <textarea id="mensaje" name="mensaje"
-              placeholder="¿Qué vendés? ¿Qué querés mejorar primero (diseño, pagos, envíos, ventas, medición)? ¿Tenés algo ya armado?"
+              placeholder="¿Qué querés construir o mejorar? Contame objetivo, idea, referencias, urgencia o qué te está trabando ahora."
               autocomplete="off"
               required></textarea>
           </div>
@@ -10192,7 +10314,7 @@ font-weight:800;
 
           <div class="contact-span-2">
            <div class="contact-cta">
-           <button class="contact-submit" type="submit">Recibir plan + presupuesto</button>
+           <button class="contact-submit" type="submit">Enviar consulta</button>
 
            <p class="contact-microcopy contact-cta__copy">
             Todas las consultas las respondo yo, Manuel.
