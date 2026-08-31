@@ -4325,9 +4325,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 }
 
 .vc3-experience-number{
-  display:block;
+  display:inline-flex;
+  align-items:baseline;
 
-  margin:0 0 4px;
+  margin:0 0 6px;
 
   color:#0b2038;
 
@@ -4336,11 +4337,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     system-ui,
     sans-serif;
 
-  font-size:clamp(24px,1.8vw,30px);
-  font-weight:800;
+  font-size:clamp(30px,2.4vw,40px);
+  font-weight:900;
 
   line-height:1;
-  letter-spacing:-.035em;
+  letter-spacing:-.045em;
+
+  font-variant-numeric:
+    tabular-nums;
+
+  text-shadow:
+    0 8px 22px
+    rgba(83,99,245,.10);
 }
 
 .vc3-experience-copy p{
@@ -4427,7 +4435,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
 
   .vc3-experience-number{
-    font-size:25px;
+    font-size:30px;
   }
 
   .vc3-experience-copy p{
@@ -4540,7 +4548,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   .vc3-experience-number{
     margin-bottom:5px;
 
-    font-size:22px;
+    font-size:26px;
 
     line-height:1;
   }
@@ -4593,7 +4601,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <div class="vc3-experience-copy">
 
-              <strong class="vc3-experience-number">
+              <strong class="vc3-experience-number" data-count-target="138" data-count-prefix="+">
                 +138
               </strong>
 
@@ -4618,8 +4626,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <div class="vc3-experience-copy">
 
-              <strong class="vc3-experience-number">
-                4
+              <strong class="vc3-experience-number" data-count-target="5">
+                5
               </strong>
 
               <p>
@@ -4643,7 +4651,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <div class="vc3-experience-copy">
 
-              <strong class="vc3-experience-number">
+              <strong class="vc3-experience-number" data-count-target="20" data-count-suffix="+ años">
                 20+ años
               </strong>
 
@@ -4668,7 +4676,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <div class="vc3-experience-copy">
 
-              <strong class="vc3-experience-number">
+              <strong class="vc3-experience-number" data-count-target="5" data-count-decimals="1">
                 5.0
               </strong>
 
@@ -9984,6 +9992,75 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.12 });
 
     reveals.forEach(el => observer.observe(el));
+  }
+
+  /* =========================
+     CONTADORES BLOQUE 03
+  ========================== */
+  const metricNumbers = document.querySelectorAll('.vc3-experience-number[data-count-target]');
+  if (metricNumbers.length) {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const formatMetric = (el, value) => {
+      const prefix = el.dataset.countPrefix || '';
+      const suffix = el.dataset.countSuffix || '';
+      const decimals = Number(el.dataset.countDecimals || 0);
+      const displayValue = decimals > 0 ? value.toFixed(decimals) : Math.round(value).toString();
+      return `${prefix}${displayValue}${suffix}`;
+    };
+
+    const setMetricValue = (el, value) => {
+      el.textContent = formatMetric(el, value);
+    };
+
+    const animateMetric = (el) => {
+      if (el.dataset.countAnimated === '1') return;
+
+      el.dataset.countAnimated = '1';
+
+      const target = Number(el.dataset.countTarget || 0);
+      const duration = 950;
+      const startTime = performance.now();
+
+      const tick = (now) => {
+        const progress = Math.min(1, (now - startTime) / duration);
+        const eased = 1 - Math.pow(1 - progress, 3);
+
+        setMetricValue(el, target * eased);
+
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          setMetricValue(el, target);
+        }
+      };
+
+      if (prefersReducedMotion) {
+        setMetricValue(el, target);
+        return;
+      }
+
+      setMetricValue(el, 0);
+      requestAnimationFrame(tick);
+    };
+
+    if ('IntersectionObserver' in window) {
+      const metricObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+
+          metricNumbers.forEach((el, index) => {
+            setTimeout(() => animateMetric(el), index * 120);
+          });
+
+          obs.disconnect();
+        });
+      }, { threshold: 0.35 });
+
+      metricObserver.observe(metricNumbers[0].closest('.vc3-experience') || metricNumbers[0]);
+    } else {
+      metricNumbers.forEach(animateMetric);
+    }
   }
 
   /* =========================
