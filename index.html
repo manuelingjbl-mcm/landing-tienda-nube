@@ -9816,6 +9816,294 @@ font-weight:800;
     </ol>
   </div>
 </section>
+<style>
+/* =========================================================
+   BLOQUE 08 — EL ESTUDIO
+   ========================================================= */
+.vc8-studio{
+  position:relative;
+  overflow:hidden;
+  padding:clamp(62px,6vw,96px) clamp(24px,5vw,76px);
+  background:
+    radial-gradient(circle at 82% 22%, rgba(83,99,245,.28), transparent 34%),
+    linear-gradient(135deg, #061327 0%, #081b34 48%, #07162b 100%);
+  color:#f8fbff;
+  border-top:1px solid rgba(83,99,245,.18);
+}
+
+.vc8-studio::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size:86px 86px;
+  opacity:.22;
+  pointer-events:none;
+}
+
+.vc8-studio-inner{
+  position:relative;
+  width:min(1280px,100%);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(320px,.72fr);
+  gap:clamp(34px,5vw,72px);
+  align-items:center;
+}
+
+.vc8-studio-kicker{
+  margin:0 0 12px;
+  color:#8fb7ff;
+  font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+.vc8-studio h2{
+  max-width:760px;
+  margin:0;
+  color:#fff;
+  font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+  font-size:clamp(34px,4.2vw,64px);
+  line-height:.98;
+  letter-spacing:-.055em;
+  font-weight:800;
+}
+
+.vc8-studio h2 span{
+  color:#7d67ff;
+}
+
+.vc8-studio-lead{
+  max-width:680px;
+  margin:22px 0 0;
+  color:rgba(226,238,255,.78);
+  font-size:clamp(15px,1.35vw,18px);
+  line-height:1.65;
+}
+
+.vc8-studio-points{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  margin:30px 0 0;
+  padding:0;
+  list-style:none;
+}
+
+.vc8-studio-point{
+  min-height:112px;
+  padding:18px;
+  border:1px solid rgba(148,183,255,.16);
+  border-radius:18px;
+  background:rgba(255,255,255,.055);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+.vc8-studio-point strong{
+  display:block;
+  color:#fff;
+  font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+  font-size:15px;
+  line-height:1.2;
+}
+
+.vc8-studio-point span{
+  display:block;
+  margin-top:9px;
+  color:rgba(226,238,255,.68);
+  font-size:12px;
+  line-height:1.5;
+}
+
+.vc8-studio-cta{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-top:28px;
+  color:#fff;
+  font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+  font-size:14px;
+  font-weight:800;
+  text-decoration:none;
+}
+
+.vc8-studio-cta span{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:26px;
+  height:26px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#1b75ff,#7d36ff);
+  box-shadow:0 14px 32px rgba(83,99,245,.28);
+  transition:transform .18s ease;
+}
+
+.vc8-studio-cta:hover span{
+  transform:translateX(3px);
+}
+
+.vc8-studio-card{
+  position:relative;
+  justify-self:end;
+  width:min(410px,100%);
+  padding:14px;
+  border-radius:30px;
+  background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.045));
+  border:1px solid rgba(191,213,255,.18);
+  box-shadow:0 32px 80px rgba(0,0,0,.38);
+}
+
+.vc8-studio-photo{
+  position:relative;
+  overflow:hidden;
+  aspect-ratio:4 / 4.55;
+  border-radius:22px;
+  background:#0b1f39;
+}
+
+.vc8-studio-photo img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center top;
+}
+
+.vc8-studio-badge{
+  position:absolute;
+  left:28px;
+  right:28px;
+  bottom:28px;
+  display:grid;
+  gap:4px;
+  padding:16px 18px;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:18px;
+  background:rgba(5,13,29,.78);
+  box-shadow:0 18px 46px rgba(0,0,0,.28);
+  backdrop-filter:blur(14px);
+}
+
+.vc8-studio-badge strong{
+  color:#fff;
+  font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.2;
+}
+
+.vc8-studio-badge span{
+  color:rgba(226,238,255,.72);
+  font-size:12px;
+  line-height:1.4;
+}
+
+@media (max-width:980px){
+  .vc8-studio-inner{
+    grid-template-columns:1fr;
+  }
+
+  .vc8-studio-card{
+    justify-self:start;
+    width:min(520px,100%);
+  }
+}
+
+@media (max-width:720px){
+  .vc8-studio{
+    padding:48px 18px 54px;
+  }
+
+  .vc8-studio h2{
+    font-size:clamp(33px,10vw,46px);
+    line-height:1.02;
+  }
+
+  .vc8-studio-lead{
+    margin-top:18px;
+  }
+
+  .vc8-studio-points{
+    grid-template-columns:1fr;
+    gap:10px;
+    margin-top:24px;
+  }
+
+  .vc8-studio-point{
+    min-height:auto;
+    padding:16px 18px;
+  }
+
+  .vc8-studio-cta{
+    margin-top:22px;
+  }
+
+  .vc8-studio-card{
+    border-radius:24px;
+    padding:10px;
+    max-width:292px;
+    justify-self:start;
+  }
+
+  .vc8-studio-photo{
+    aspect-ratio:1 / 1.08;
+    border-radius:18px;
+  }
+
+  .vc8-studio-badge{
+    left:18px;
+    right:18px;
+    bottom:18px;
+  }
+}
+</style>
+
+<section id="about" class="vc8-studio" aria-label="El estudio">
+  <div class="vc8-studio-inner">
+    <div class="vc8-studio-copy">
+      <p class="vc8-studio-kicker">El estudio</p>
+      <h2>Tecnología, creatividad y experiencia trabajando <span>juntas.</span></h2>
+      <p class="vc8-studio-lead">
+        Hola, soy Manu. Combino más de 20 años en medios, producción y desarrollo digital
+        para crear soluciones claras: sitios, tiendas, landings, automatizaciones y piezas
+        listas para vender, comunicar y crecer con criterio.
+      </p>
+
+      <ul class="vc8-studio-points" aria-label="Fortalezas del estudio">
+        <li class="vc8-studio-point">
+          <strong>Mirada integral</strong>
+          <span>Diseño, contenido, técnica y conversión pensados como parte del mismo sistema.</span>
+        </li>
+        <li class="vc8-studio-point">
+          <strong>Trabajo directo</strong>
+          <span>Hablás conmigo, revisamos prioridades y avanzamos sin vueltas innecesarias.</span>
+        </li>
+        <li class="vc8-studio-point">
+          <strong>Base para crecer</strong>
+          <span>Dejamos estructura, medición y próximos pasos para seguir optimizando.</span>
+        </li>
+      </ul>
+
+      <a class="vc8-studio-cta" href="#contacto">Conversemos tu proyecto <span aria-hidden="true">→</span></a>
+    </div>
+
+    <aside class="vc8-studio-card" aria-label="Manuel, VIA Cloud Studio">
+      <div class="vc8-studio-photo">
+        <img src="avatar-perfil.png" alt="Manuel de VIA Cloud Studio">
+      </div>
+      <div class="vc8-studio-badge">
+        <strong>Manuel · VIA Cloud Studio</strong>
+        <span>Estrategia, diseño, desarrollo y producción digital para proyectos reales.</span>
+      </div>
+    </aside>
+  </div>
+</section>
+
 <!-- CONTACTO -->
 <section id="contacto" class="contact-section contact-shell reveal">
   <div class="wrapper">
