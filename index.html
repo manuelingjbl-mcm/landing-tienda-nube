@@ -9626,7 +9626,7 @@ font-weight:800;
   width:min(1280px,100%);
   margin:0 auto;
   display:grid;
-  grid-template-columns:minmax(250px,.42fr) minmax(0,1fr);
+  grid-template-columns:minmax(250px,.36fr) minmax(0,1fr);
   gap:clamp(24px,4vw,48px);
   align-items:center;
 }
@@ -9656,26 +9656,33 @@ font-weight:800;
   position:relative;
   list-style:none;
   margin:0;
-  padding:10px 0 0;
+  padding:0;
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:0;
-}
-
-.vc7-process-steps::before{
-  content:"";
-  position:absolute;
-  left:15px;
-  right:15px;
-  top:25px;
-  height:1px;
-  background:linear-gradient(90deg, rgba(83,99,245,.18), rgba(83,99,245,.38), rgba(83,99,245,.18));
+  gap:clamp(18px,2.2vw,34px);
 }
 
 .vc7-process-step{
   position:relative;
-  min-height:128px;
-  padding:0 22px 0 0;
+  min-height:118px;
+  padding:0 clamp(18px,2vw,28px) 0 0;
+  display:grid;
+  grid-template-columns:46px minmax(0,1fr);
+  column-gap:14px;
+  align-items:start;
+}
+
+.vc7-process-step:not(:last-child)::after{
+  content:"→";
+  position:absolute;
+  top:13px;
+  right:0;
+  color:#5363f5;
+  font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+  font-size:18px;
+  font-weight:800;
+  line-height:1;
+  opacity:.72;
 }
 
 .vc7-process-number{
@@ -9684,22 +9691,26 @@ font-weight:800;
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  width:32px;
-  height:32px;
-  margin-bottom:20px;
+  width:46px;
+  height:46px;
+  grid-row:1 / span 2;
+  margin:0;
   border-radius:999px;
-  border:1px solid rgba(83,99,245,.18);
-  background:#fff;
+  border:2px solid rgba(83,99,245,.28);
+  background:linear-gradient(180deg, #fff 0%, #f5f8ff 100%);
   color:#5363f5;
-  box-shadow:0 10px 24px rgba(83,99,245,.12);
+  box-shadow:
+    0 12px 28px rgba(83,99,245,.12),
+    inset 0 1px 0 rgba(255,255,255,.95);
   font-family:"Plus Jakarta Sans",system-ui,sans-serif;
-  font-size:11px;
+  font-size:14px;
   font-weight:800;
 }
 
 .vc7-process-step strong{
   display:block;
-  max-width:190px;
+  max-width:180px;
+  margin-top:3px;
   color:#0b2038;
   font-family:"Plus Jakarta Sans",system-ui,sans-serif;
   font-size:15px;
@@ -9707,8 +9718,8 @@ font-weight:800;
 }
 
 .vc7-process-step p{
-  max-width:210px;
-  margin:9px 0 0;
+  max-width:190px;
+  margin:8px 0 0;
   color:#5b7087;
   font-size:12px;
   line-height:1.5;
@@ -9725,7 +9736,7 @@ font-weight:800;
   }
 
   .vc7-process-step{
-    padding-right:18px;
+    padding-right:24px;
   }
 }
 
@@ -9736,36 +9747,32 @@ font-weight:800;
 
   .vc7-process-steps{
     grid-template-columns:1fr;
-    gap:0;
-    padding:0 0 0 14px;
-  }
-
-  .vc7-process-steps::before{
-    left:29px;
-    right:auto;
-    top:16px;
-    bottom:18px;
-    width:1px;
-    height:auto;
-    background:linear-gradient(180deg, rgba(83,99,245,.18), rgba(83,99,245,.38), rgba(83,99,245,.18));
+    gap:18px;
+    padding:0;
   }
 
   .vc7-process-step{
     min-height:auto;
-    padding:0 0 24px 42px;
+    grid-template-columns:44px minmax(0,1fr);
+    column-gap:14px;
+    padding:0 0 0 0;
   }
 
-  .vc7-process-step:last-child{
-    padding-bottom:0;
+  .vc7-process-step:not(:last-child)::after{
+    content:"";
+    left:21px;
+    right:auto;
+    top:50px;
+    bottom:-10px;
+    width:1px;
+    height:auto;
+    background:linear-gradient(180deg, rgba(83,99,245,.30), rgba(83,99,245,.10));
   }
 
   .vc7-process-number{
-    position:absolute;
-    left:0;
-    top:0;
-    width:30px;
-    height:30px;
-    margin:0;
+    width:44px;
+    height:44px;
+    font-size:13px;
   }
 
   .vc7-process-step strong,
