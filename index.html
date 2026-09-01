@@ -10661,6 +10661,37 @@ font-weight:800;
 }
 </style>
 
+<style>
+/* Reveal premium: los bloques asoman suavemente al entrar en pantalla */
+.vc-peek-reveal{
+  opacity:0;
+  transform:translateY(18px);
+  transition:
+    opacity .72s cubic-bezier(.22,1,.36,1),
+    transform .72s cubic-bezier(.22,1,.36,1);
+}
+
+.vc-peek-reveal.vc-peek-visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+@media (max-width:1050px){
+  .vc-peek-reveal{
+    transform:translateY(12px);
+    transition-duration:.52s;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .vc-peek-reveal{
+    opacity:1;
+    transform:none;
+    transition:none;
+  }
+}
+</style>
+
 <section id="about" class="vc8-studio" aria-label="El estudio">
   <div class="vc8-studio-inner">
     <div class="vc8-studio-copy">
@@ -10939,6 +10970,54 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.12 });
 
     reveals.forEach(el => observer.observe(el));
+  }
+
+  /* =========================
+     REVEAL PREMIUM HOME
+  ========================== */
+  const peekTargets = [
+    '.vc2-solutions-heading',
+    '.vc2-solution',
+    '.vc3-experience-grid',
+    '.vc4-strategy-grid',
+    '.vc5-heading',
+    '.vc5-project',
+    '.vc6-support-copy',
+    '.vc6-support-item',
+    '.vc7-process-copy',
+    '.vc7-process-step',
+    '.vc8-studio-copy',
+    '.vc8-studio-card',
+    '#contacto .contact-copy',
+    '#contacto .contact-box'
+  ];
+
+  const peekItems = Array.from(document.querySelectorAll(peekTargets.join(',')));
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (peekItems.length) {
+    peekItems.forEach((item, index) => {
+      item.classList.add('vc-peek-reveal');
+      item.style.transitionDelay = `${Math.min(index % 4, 3) * 70}ms`;
+    });
+
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      peekItems.forEach(item => item.classList.add('vc-peek-visible'));
+    } else {
+      const peekObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+
+          entry.target.classList.add('vc-peek-visible');
+          obs.unobserve(entry.target);
+        });
+      }, {
+        threshold:0.14,
+        rootMargin:'0px 0px -8% 0px'
+      });
+
+      peekItems.forEach(item => peekObserver.observe(item));
+    }
   }
 
   /* =========================
@@ -12144,6 +12223,13 @@ document.addEventListener("DOMContentLoaded", () => {
       if (navToggle.checked){
         header.classList.remove('vc2-header-hidden');
       }
+    });
+
+    header.querySelectorAll('.vc2-mobile-menu a').forEach(function(link){
+      link.addEventListener('click', function(){
+        navToggle.checked = false;
+        header.classList.remove('vc2-header-hidden');
+      });
     });
   }
 })();
