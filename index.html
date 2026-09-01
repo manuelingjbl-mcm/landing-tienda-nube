@@ -4114,6 +4114,50 @@ select{
   border-top-color:rgba(112,144,184,.16);
 }
 
+@media (max-width:768px){
+  .vc2-header{
+    transition:none;
+    will-change:auto;
+  }
+
+  .vc2-header.vc2-header-hidden{
+    opacity:1;
+    transform:none;
+    pointer-events:none;
+  }
+
+  .vc2-header-shell,
+  .vc2-mobile-menu,
+  .vc2-solution,
+  #contacto .contact-box,
+  .vc8-studio-badge{
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+  }
+
+  .vc2-header-shell{
+    background:rgba(255,255,255,.94);
+  }
+
+  .vc2-mobile-menu{
+    background:#fff;
+  }
+
+  .vc2-solution{
+    background:#f8fbff;
+    box-shadow:0 16px 38px rgba(45,83,135,.06);
+  }
+
+  #contacto .contact-box{
+    background:rgba(255,255,255,.92);
+    box-shadow:0 18px 46px rgba(31,56,88,.10);
+  }
+
+  .vc8-studio-badge{
+    background:rgba(5,13,29,.92);
+  }
+}
+
 @media (max-width:980px){
   #contacto .contact-layout{
     grid-template-columns:1fr;
@@ -11913,9 +11957,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let lastScrollY = window.scrollY;
   let ticking = false;
+  const mobileHeaderQuery = window.matchMedia('(max-width: 768px)');
 
   function updateHeader(){
     const currentScrollY = window.scrollY;
+
+    if (mobileHeaderQuery.matches){
+      header.classList.remove('vc2-header-hidden');
+      lastScrollY = currentScrollY;
+      ticking = false;
+      return;
+    }
 
     /* Si el menú mobile está abierto, el header queda visible */
     if (navToggle && navToggle.checked){
