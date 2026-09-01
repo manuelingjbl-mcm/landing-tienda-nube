@@ -10665,22 +10665,15 @@ font-weight:800;
 /* Reveal premium: los bloques asoman suavemente al entrar en pantalla */
 .vc-peek-reveal{
   opacity:0;
-  transform:translateY(18px);
+  transform:translateY(32px) scale(.98);
   transition:
-    opacity .72s cubic-bezier(.22,1,.36,1),
-    transform .72s cubic-bezier(.22,1,.36,1);
+    opacity .7s ease-out,
+    transform .7s ease-out;
 }
 
 .vc-peek-reveal.vc-peek-visible{
   opacity:1;
-  transform:translateY(0);
-}
-
-@media (max-width:1050px){
-  .vc-peek-reveal{
-    transform:translateY(12px);
-    transition-duration:.52s;
-  }
+  transform:translateY(0) scale(1);
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -10976,20 +10969,13 @@ document.addEventListener('DOMContentLoaded', () => {
      REVEAL PREMIUM HOME
   ========================== */
   const peekTargets = [
-    '.vc2-solutions-heading',
-    '.vc2-solution',
-    '.vc3-experience-grid',
-    '.vc4-strategy-grid',
-    '.vc5-heading',
-    '.vc5-project',
-    '.vc6-support-copy',
-    '.vc6-support-item',
-    '.vc7-process-copy',
-    '.vc7-process-step',
-    '.vc8-studio-copy',
-    '.vc8-studio-card',
-    '#contacto .contact-copy',
-    '#contacto .contact-box'
+    '#soluciones',
+    '.vc4-strategy',
+    '#proyectos',
+    '.vc6-support',
+    '.vc7-process',
+    '.vc8-studio',
+    '#contacto'
   ];
 
   const peekItems = Array.from(document.querySelectorAll(peekTargets.join(',')));
@@ -10998,7 +10984,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (peekItems.length) {
     peekItems.forEach((item, index) => {
       item.classList.add('vc-peek-reveal');
-      item.style.transitionDelay = `${Math.min(index % 4, 3) * 70}ms`;
+      item.style.transitionDelay = `${Math.min(index, 3) * 90}ms`;
     });
 
     if (reduceMotion || !('IntersectionObserver' in window)) {
@@ -11012,8 +10998,7 @@ document.addEventListener('DOMContentLoaded', () => {
           obs.unobserve(entry.target);
         });
       }, {
-        threshold:0.14,
-        rootMargin:'0px 0px -8% 0px'
+        threshold:0.12
       });
 
       peekItems.forEach(item => peekObserver.observe(item));
