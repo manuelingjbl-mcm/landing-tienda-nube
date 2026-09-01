@@ -4114,7 +4114,7 @@ select{
   border-top-color:rgba(112,144,184,.16);
 }
 
-@media (max-width:768px){
+@media (max-width:1050px){
   .vc2-header{
     transition:none;
     will-change:auto;
@@ -4900,6 +4900,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     padding-bottom:0;
   }
 
+}
 
 /* =========================================================
    MOBILE — MÉTRICAS 2 x 2
@@ -9678,6 +9679,8 @@ font-weight:800;
 }
 
 
+}
+
 /* =========================================================
    ACCESSIBILITY / MOTION
    ========================================================= */
@@ -10519,6 +10522,91 @@ font-weight:800;
     left:18px;
     right:18px;
     bottom:18px;
+  }
+}
+</style>
+
+<style>
+/* Ajuste mobile: scroll estable en Soluciones, Objetivo y Estudio */
+@media (max-width:1050px){
+  #soluciones.vc2-solutions{
+    background:linear-gradient(180deg,#edf7ff 0%,#f3f6ff 100%);
+    overflow:hidden;
+  }
+
+  .vc2-solution,
+  .vc3-experience-grid,
+  .vc4-strategy-grid,
+  .vc4-panel-objective,
+  .vc4-panel-connect,
+  .vc8-studio-point,
+  .vc8-studio-card{
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+  }
+
+  .vc2-solution{
+    background:#f8fbff;
+    box-shadow:0 12px 28px rgba(45,83,135,.055);
+    transition:none;
+  }
+
+  .vc2-solution-media img{
+    transform:none;
+    transition:none;
+  }
+
+  .vc3-experience-grid{
+    background:#f8fbff;
+    box-shadow:0 10px 24px rgba(28,51,88,.045);
+  }
+
+  .vc4-strategy{
+    background:linear-gradient(180deg,#f3f6ff 0%,#f7f8ff 100%);
+  }
+
+  .vc4-strategy-grid{
+    background:#fbfdff;
+    box-shadow:0 12px 28px rgba(28,51,88,.05);
+  }
+
+  .vc4-panel-objective,
+  .vc4-panel-connect{
+    background:#fbfdff;
+  }
+
+  .vc4-network::before{
+    display:none;
+  }
+
+  .vc4-link span,
+  .vc8-studio-cta span{
+    transition:none;
+  }
+
+  .vc8-studio{
+    background:linear-gradient(135deg,#061327 0%,#081b34 100%);
+  }
+
+  .vc8-studio::before{
+    display:none;
+  }
+
+  .vc8-studio-card{
+    box-shadow:0 18px 46px rgba(0,0,0,.30);
+  }
+
+  .vc8-studio-badge{
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+    background:rgba(5,13,29,.92);
+  }
+}
+
+@media (max-width:1050px) and (hover:none){
+  .vc2-solution:hover,
+  .vc2-solution:hover .vc2-solution-media img{
+    transform:none;
   }
 }
 </style>
@@ -11957,7 +12045,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let lastScrollY = window.scrollY;
   let ticking = false;
-  const mobileHeaderQuery = window.matchMedia('(max-width: 768px)');
+  const mobileHeaderQuery = window.matchMedia('(max-width: 1050px)');
 
   function updateHeader(){
     const currentScrollY = window.scrollY;
