@@ -10529,6 +10529,53 @@ font-weight:800;
 <style>
 /* Ajuste mobile: scroll estable en Soluciones, Objetivo y Estudio */
 @media (max-width:1050px){
+  .vc2-header{
+    transition:none;
+    will-change:auto;
+  }
+
+  .vc2-header.vc2-header-hidden{
+    opacity:1;
+    transform:none;
+    pointer-events:none;
+  }
+
+  .vc2-header-shell,
+  .vc2-mobile-menu{
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+  }
+
+  .vc2-header-shell{
+    background:rgba(255,255,255,.94);
+  }
+
+  .vc2-mobile-menu{
+    background:#fff;
+  }
+
+  #hero.vc2-hero{
+    background:linear-gradient(150deg,#ffffff 0%,#edf9ff 44%,#dcefff 68%,#eee6ff 100%);
+  }
+
+  .vc2-hero-glow,
+  .vc2-hero-grid,
+  .vc2-scene-halo,
+  #hero.vc2-hero::before,
+  #hero.vc2-hero::after{
+    display:none;
+  }
+
+  .vc2-hero-scene{
+    filter:none;
+    transition:none;
+    will-change:auto;
+  }
+
+  .vc2-hero-visual:hover .vc2-hero-scene{
+    filter:none;
+  }
+
   #soluciones.vc2-solutions{
     background:linear-gradient(180deg,#edf7ff 0%,#f3f6ff 100%);
     overflow:hidden;
@@ -10604,6 +10651,9 @@ font-weight:800;
 }
 
 @media (max-width:1050px) and (hover:none){
+  .vc2-btn:hover,
+  .vc2-header-cta:hover,
+  .vc2-hero-visual:hover .vc2-hero-scene,
   .vc2-solution:hover,
   .vc2-solution:hover .vc2-solution-media img{
     transform:none;
