@@ -2293,16 +2293,13 @@ text-underline-offset: 3px;
 .footer-brand-link{
   display:inline-flex;
   align-items:center;
-  padding:9px 11px;
-  border-radius:14px;
-  background:rgba(255,255,255,.96);
-  border:1px solid rgba(255,255,255,.72);
-  box-shadow:0 18px 44px rgba(0,0,0,.16);
+  padding:0;
+  border-radius:0;
 }
 
 .footer-brand-link img{
   display:block;
-  width:150px;
+  width:186px;
   height:auto;
 }
 
@@ -2439,9 +2436,9 @@ text-underline-offset: 3px;
   }
 }
 
-@media (max-width: 620px){
+@media (max-width: 680px){
   .footer{
-    padding:34px 0 22px !important;
+    padding:38px 0 22px !important;
   }
 
   .footer .footer-inner{
@@ -2455,6 +2452,7 @@ text-underline-offset: 3px;
 
   .footer-tagline{
     font-size:17px;
+    max-width:290px;
   }
 
   .footer-bottom{
@@ -3653,17 +3651,6 @@ select{
   margin-top:18px;
 }
 
-/* Card de REDES */
-.contact-social-card{
-  padding:18px;
-  margin-top:18px;
-
-  display:grid;
-  grid-template-columns: 1fr auto;
-  gap:16px;
-  align-items:center;
-}
-
 /* Textos (más chicos a propósito) */
 .contact-meta{
   margin-top:12px;
@@ -3879,93 +3866,11 @@ select{
   }
   .contact-cta__copy{ text-align:left; }
 
-  .contact-social-card{
-    padding:14px;
-    grid-template-columns:1fr;
-    justify-items:start;
-  }
-
   .contact-grid{
     grid-template-columns:1fr;
     gap:12px;
   }
   .contact-span-2{ grid-column:auto; }
-
-  .contact-social-row{ justify-content:flex-start; }
-  .contact-footer-line{ justify-content:flex-start; }
-}
-
-/* -------------------------
-   Card redes
-   ------------------------- */
-.contact-social-kicker{
-  font-size:12px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  color:#9ca3af;
-  margin:0 0 6px;
-}
-.contact-social-text{
-  margin:0;
-  font-size:14px;
-  line-height:1.5;
-  color:#d1d5db;
-}
-
-.contact-social-row{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  justify-content:flex-end;
-}
-
-.contact-social-item{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:44px;
-  height:44px;
-  border-radius:14px;
-  border:1px solid rgba(148,163,184,.22);
-  background: rgba(2,6,23,.55);
-  transition: transform .12s ease, border-color .12s ease;
-}
-.contact-social-item:hover{
-  transform: translateY(-1px);
-  border-color: rgba(148,163,184,.42);
-}
-.contact-social-icon img{
-  width:22px;
-  height:22px;
-  display:block;
-}
-
-/* Footer line dentro de card redes */
-.contact-footer-line{
-  grid-column: 1 / -1;
-  margin-top:10px;
-  padding-top:10px;
-  border-top:1px solid rgba(148,163,184,.14);
-  display:flex;
-  flex-wrap:wrap;
-  gap:14px;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.contact-email,
-.contact-small-note{
-  margin:0;
-  font-size:13px;
-  line-height:1.5;
-  color:#9ca3af;
-}
-
-.contact-email a,
-.contact-small-note a{
-  color:#e5e7eb;
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
 
 /* =========================
@@ -4023,18 +3928,7 @@ select{
   #contacto .contact-cta .contact-submit{ width:100% !important; }
 }
 
-/* 4) ICONOS — si se te pusieron negros, esto los “blanquea” */
-#contacto .contact-social-icon img{
-  filter: invert(1);
-  opacity:.95;
-}
-
-/* por si algún ícono es SVG inline */
-#contacto .contact-social-item svg{
-  fill:#e5e7eb;
-}
-
-/* 5) Por si algún style global te achata/rompe el grid del CTA */
+/* 4) Por si algún style global te achata/rompe el grid del CTA */
 #contacto .contact-cta__copy{
   margin:0 !important;
   color:#e5e7eb;
@@ -4250,42 +4144,23 @@ select{
   color:#5b7087 !important;
 }
 
+#contacto .contact-privacy-note{
+  max-width:none;
+  margin:10px 0 0;
+  color:#6f8196 !important;
+  font-size:12px !important;
+  line-height:1.45;
+  text-align:center;
+}
+
+#contacto .contact-privacy-note a{
+  color:#0f5fe8;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+
 #contacto #form-status.form-status{
   color:#0b2038;
-}
-
-#contacto .contact-social-card{
-  background:rgba(255,255,255,.58);
-  border-radius:22px;
-}
-
-#contacto .contact-social-kicker{
-  color:#2863a8;
-}
-
-#contacto .contact-social-text,
-#contacto .contact-email,
-#contacto .contact-small-note{
-  color:#5b7087 !important;
-}
-
-#contacto .contact-social-item{
-  border-color:rgba(112,144,184,.22);
-  background:#fff;
-}
-
-#contacto .contact-social-icon img{
-  filter:none;
-  opacity:1;
-}
-
-#contacto .contact-email a,
-#contacto .contact-small-note a{
-  color:#0f5fe8;
-}
-
-#contacto .contact-footer-line{
-  border-top-color:rgba(112,144,184,.16);
 }
 
 @media (max-width:1050px){
@@ -11096,55 +10971,14 @@ font-weight:800;
           </div>
 
          <p id="form-status" class="form-status" aria-live="polite"></p>
+         <p class="contact-privacy-note">
+          Al enviar este formulario aceptás nuestra <a href="/politicas/">Política de Privacidad</a>.
+         </p>
          </div>
         </div>
       </form>
     </div>
 
-    <!-- ✅ CARD SOLO PARA REDES -->
-    <div class="contact-box contact-social-card" aria-label="Conectemos">
-      <div>
-        <div class="contact-social-kicker">CONECTEMOS</div>
-        <p class="contact-social-text">
-          ¿Tenés una idea en mente? Escribime por Instagram o Facebook y lo vemos.
-        </p>
-      </div>
-
-      <div class="contact-social-row">
-        <a class="contact-social-item js-whatsapp"
-           href="https://wa.me/5491159288093"
-           target="_blank" rel="noopener noreferrer">
-          <span class="contact-social-icon">
-            <img src="icon-whatsapp.png" alt="WhatsApp">
-          </span>
-        </a>
-
-        <a class="contact-social-item"
-           href="https://instagram.com/manuel.viacloud"
-           target="_blank" rel="noopener noreferrer">
-          <span class="contact-social-icon">
-            <img src="icon-instagram.png" alt="Instagram">
-          </span>
-        </a>
-
-        <a class="contact-social-item"
-           href="https://www.facebook.com/manuel.viacloud"
-           target="_blank" rel="noopener noreferrer">
-          <span class="contact-social-icon">
-            <img src="icon-facebook.png" alt="Facebook">
-          </span>
-        </a>
-      </div>
-
-      <div class="contact-footer-line">
-        <p class="contact-email">
-          Email: <a href="mailto:viacloudstudio@gmail.com">viacloudstudio@gmail.com</a>
-        </p>
-        <p class="contact-small-note">
-          Al enviar este formulario aceptás nuestra <a href="/politicas/">Política de Privacidad</a>.
-        </p>
-      </div>
-    </div><!-- /contact-footer -->
       </div>
     </div>
 
@@ -11162,10 +10996,10 @@ font-weight:800;
       <div class="footer-brand">
         <a class="footer-brand-link" href="#top" aria-label="VIA Cloud Studio - Inicio">
           <img
-            src="assets-v2/logo-via-cloud-dark.png"
+            src="assets-v2/logo-via-cloud-blanco.png"
             alt="VIA Cloud Studio"
-            width="1580"
-            height="220"
+            width="754"
+            height="139"
             loading="lazy"
             decoding="async"
           >
@@ -11221,7 +11055,6 @@ font-weight:800;
       <p>© 2026 VIA Cloud Studio · Argentina.</p>
       <nav class="footer-legal" aria-label="Legal">
         <a href="/politicas/">Política de Privacidad</a>
-        <a href="#top">Volver arriba</a>
       </nav>
     </div>
   </div>
