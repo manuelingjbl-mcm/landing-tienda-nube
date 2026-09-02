@@ -2427,7 +2427,8 @@ text-underline-offset: 3px;
 
 @media (max-width: 920px){
   .footer-main{
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:28px;
   }
 
   .footer-brand{
@@ -4150,13 +4151,19 @@ select{
   color:#6f8196 !important;
   font-size:12px !important;
   line-height:1.45;
-  text-align:center;
+  text-align:left;
 }
 
 #contacto .contact-privacy-note a{
   color:#0f5fe8;
   text-decoration:underline;
   text-underline-offset:3px;
+}
+
+@media (max-width:680px){
+  #contacto .contact-privacy-note{
+    text-align:center;
+  }
 }
 
 #contacto #form-status.form-status{
@@ -10998,8 +11005,8 @@ font-weight:800;
           <img
             src="assets-v2/logo-via-cloud-blanco.png"
             alt="VIA Cloud Studio"
-            width="754"
-            height="139"
+            width="1580"
+            height="220"
             loading="lazy"
             decoding="async"
           >
