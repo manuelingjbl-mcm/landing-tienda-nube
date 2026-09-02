@@ -2260,37 +2260,211 @@ text-underline-offset: 3px;
   margin: 0; /* sin espacios extra arriba o abajo */
 }
 
-/* ===== FOOTER (PRO: pegado pero con aire) ===== */
+/* ===== FOOTER HOME ===== */
 .footer{
-  background:#020617;
   margin:0 !important;
-  padding: 22px 0 24px !important;   /* 👈 aire arriba/abajo */
-  border-top: 1px solid rgba(148,163,184,.14); /* opcional, si querés línea suave */
+  padding:clamp(38px,5vw,62px) 0 24px !important;
+  color:#dbe7f5;
+  background:
+    radial-gradient(circle at 18% 4%, rgba(45,120,255,.16), transparent 34%),
+    radial-gradient(circle at 92% 0%, rgba(141,60,255,.14), transparent 32%),
+    linear-gradient(135deg,#020617 0%,#06162c 58%,#071b39 100%);
+  border-top:1px solid rgba(148,163,184,.16);
 }
 
 .footer .footer-inner{
-  max-width: 1100px;     /* mismo ancho que las cards */
-  margin: 0 auto;
-  padding: 0 24px;       /* aire lateral */
+  width:min(1240px, calc(100% - 48px));
+  max-width:none;
+  margin:0 auto;
+  padding:0;
+}
+
+.footer-main{
+  display:grid;
+  grid-template-columns:minmax(240px,1.18fr) repeat(3,minmax(140px,.55fr));
+  gap:clamp(24px,4vw,56px);
+  align-items:start;
+}
+
+.footer-brand{
+  max-width:330px;
+}
+
+.footer-brand-link{
+  display:inline-flex;
+  align-items:center;
+  padding:9px 11px;
+  border-radius:14px;
+  background:rgba(255,255,255,.96);
+  border:1px solid rgba(255,255,255,.72);
+  box-shadow:0 18px 44px rgba(0,0,0,.16);
+}
+
+.footer-brand-link img{
+  display:block;
+  width:150px;
+  height:auto;
+}
+
+.footer-tagline{
+  margin:18px 0 0;
+  color:#f8fbff;
+  font-size:18px;
+  line-height:1.22;
+  font-weight:800;
+  letter-spacing:0;
+}
+
+.footer-copy{
+  margin:9px 0 0;
+  color:#9fb0c5;
+  font-size:14px;
+  line-height:1.65;
+}
+
+.footer-column{
+  min-width:0;
+}
+
+.footer-heading{
+  margin:0 0 13px;
+  color:#7fb3ff;
+  font-size:11px;
+  line-height:1.2;
+  font-weight:850;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+.footer-list{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  gap:9px;
+}
+
+.footer a{
+  color:#dbe7f5;
+  text-decoration:none;
+  transition:color .18s ease, opacity .18s ease, transform .18s ease;
+}
+
+.footer a:hover{
+  color:#ffffff;
+}
+
+.footer-list a,
+.footer-contact a{
+  display:inline-flex;
+  align-items:center;
+  color:#b9c8db;
+  font-size:14px;
+  line-height:1.35;
+}
+
+.footer-list a:hover,
+.footer-contact a:hover{
+  color:#ffffff;
+  transform:translateX(2px);
+}
+
+.footer-contact{
+  display:grid;
+  gap:10px;
+}
+
+.footer-socials{
+  display:flex;
+  gap:10px;
+  margin-top:4px;
+}
+
+.footer-social{
+  width:38px;
+  height:38px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+}
+
+.footer-social:hover{
+  transform:translateY(-2px);
+  background:rgba(255,255,255,.12);
+}
+
+.footer-social img{
+  width:18px;
+  height:18px;
+  object-fit:contain;
+  filter:invert(1);
+  opacity:.92;
+}
+
+.footer-bottom{
+  margin-top:clamp(26px,3.8vw,42px);
+  padding-top:18px;
+  border-top:1px solid rgba(148,163,184,.14);
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:16px;
+  gap:18px;
+  color:#8798ad;
+  font-size:12px;
+  line-height:1.45;
 }
 
-.footer span{
-  margin:0;
-  line-height:1.35;      /* 👈 que respire */
-  color:#9ca3af;
+.footer-legal{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:14px;
 }
 
-/* Mobile */
-@media (max-width: 768px){
-  .footer{ padding: 14px 0 18px !important; }
+.footer-legal a{
+  color:#9fb0c5;
+}
+
+@media (max-width: 920px){
+  .footer-main{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .footer-brand{
+    grid-column:1 / -1;
+    max-width:460px;
+  }
+}
+
+@media (max-width: 620px){
+  .footer{
+    padding:34px 0 22px !important;
+  }
+
   .footer .footer-inner{
+    width:min(calc(100% - 32px), 520px);
+  }
+
+  .footer-main{
+    grid-template-columns:1fr;
+    gap:24px;
+  }
+
+  .footer-tagline{
+    font-size:17px;
+  }
+
+  .footer-bottom{
+    align-items:flex-start;
     flex-direction:column;
-    text-align:center;
-    gap:8px;
+    gap:10px;
+  }
+
+  .footer-legal{
+    justify-content:flex-start;
   }
 }
 
@@ -4219,23 +4393,14 @@ select{
   }
 }
 
-/* ===== FIX: tipografía consistente en el footer ===== */
+/* ===== FIX: consistencia final del footer ===== */
 .footer{
-  font-size:12px !important;
-  line-height:1.35 !important;
-  color:#9ca3af !important;
+  font-family:"Plus Jakarta Sans",system-ui,sans-serif;
 }
 
-.footer span{
-  font-size:inherit !important;
-  line-height:inherit !important;
-  color:inherit !important;
-}
-
-/* por si algún estilo global agranda links */
-.footer a{
-  font-size:inherit !important;
-  line-height:inherit !important;
+.footer ul,
+.footer-bottom p{
+  margin:0;
 }
  
  
@@ -4289,7 +4454,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </button>
 
         <div class="vc2-solutions-panel">
-          <a href="#servicios" class="vc2-solution-item">
+          <a href="#soluciones" class="vc2-solution-item">
             <strong>Ecommerce & Tienda Nube</strong>
             <span>Diseño, desarrollo y optimización de tiendas online.</span>
           </a>
@@ -4340,7 +4505,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="vc2-mobile-solutions">
         <span>Soluciones</span>
 
-        <a href="#servicios">Ecommerce & Tienda Nube</a>
+        <a href="#soluciones">Ecommerce & Tienda Nube</a>
         <a href="/landing">Landing Pages</a>
         <a href="#contacto">Audio Studio</a>
       </div>
@@ -4398,7 +4563,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span aria-hidden="true">→</span>
         </a>
 
-        <a href="#servicios" class="vc2-btn vc2-btn-secondary">
+        <a href="#soluciones" class="vc2-btn vc2-btn-secondary">
           Ver soluciones
         </a>
       </div>
@@ -4501,7 +4666,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           Tiendas más claras, profesionales y preparadas para vender.
         </div>
 
-        <a href="#servicios" class="vc2-solution-link">
+        <a href="#soluciones" class="vc2-solution-link">
           Explorar Ecommerce
           <span>→</span>
         </a>
@@ -10991,12 +11156,76 @@ font-weight:800;
 <div class="footer-full-divider"></div>
 
 <!-- FOOTER -->
-<div class="footer">
+<footer class="footer" aria-label="Pie de página">
   <div class="wrapper footer-inner">
-    <span>© 2025 Via Cloud Studio · Diseño &amp; optimización Tienda Nube.</span>
-    <span>Hecho en Argentina · pensado para vender online.</span>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a class="footer-brand-link" href="#top" aria-label="VIA Cloud Studio - Inicio">
+          <img
+            src="assets-v2/logo-via-cloud-dark.png"
+            alt="VIA Cloud Studio"
+            width="1580"
+            height="220"
+            loading="lazy"
+            decoding="async"
+          >
+        </a>
+        <p class="footer-tagline">Ideas que toman forma. Soluciones que tienen propósito.</p>
+        <p class="footer-copy">
+          Diseño, desarrollo, automatización y producción digital para marcas que quieren vender,
+          comunicar y crecer con criterio.
+        </p>
+      </div>
+
+      <nav class="footer-column" aria-label="Soluciones">
+        <h2 class="footer-heading">Soluciones</h2>
+        <ul class="footer-list">
+          <li><a href="#soluciones">Ecommerce &amp; Tienda Nube</a></li>
+          <li><a href="/landing/">Landing Pages</a></li>
+          <li><a href="#contacto">Audio Studio</a></li>
+          <li><a href="#contacto">Automatizaciones</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer-column" aria-label="VIA Cloud">
+        <h2 class="footer-heading">VIA Cloud</h2>
+        <ul class="footer-list">
+          <li><a href="#proyectos">Proyectos</a></li>
+          <li><a href="#como-trabajamos">Cómo trabajamos</a></li>
+          <li><a href="#about">El estudio</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-column">
+        <h2 class="footer-heading">Conectemos</h2>
+        <div class="footer-contact">
+          <a href="mailto:viacloudstudio@gmail.com">viacloudstudio@gmail.com</a>
+          <a class="js-whatsapp" href="https://wa.me/5491159288093" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          <div class="footer-socials" aria-label="Redes sociales">
+            <a class="footer-social js-whatsapp" href="https://wa.me/5491159288093" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+              <img src="icon-whatsapp.png" alt="">
+            </a>
+            <a class="footer-social" href="https://instagram.com/manuel.viacloud" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <img src="icon-instagram.png" alt="">
+            </a>
+            <a class="footer-social" href="https://www.facebook.com/manuel.viacloud" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <img src="icon-facebook.png" alt="">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 VIA Cloud Studio · Argentina.</p>
+      <nav class="footer-legal" aria-label="Legal">
+        <a href="/politicas/">Política de Privacidad</a>
+        <a href="#top">Volver arriba</a>
+      </nav>
+    </div>
   </div>
-</div>
+</footer>
 </main>
 
  
