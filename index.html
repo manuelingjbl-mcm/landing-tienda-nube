@@ -11095,7 +11095,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const peekTargets = [
     '#soluciones',
     '.vc4-strategy',
-    '#proyectos .vc5-work-inner',
+    '#proyectos',
     '.vc6-support',
     '.vc7-process',
     '.vc8-studio',
@@ -11113,18 +11113,38 @@ document.addEventListener('DOMContentLoaded', () => {
     if (reduceMotion || !('IntersectionObserver' in window)) {
       peekItems.forEach(item => item.classList.add('vc-peek-visible'));
     } else {
+      const showPeekItem = (entry, obs) => {
+        if (!entry.isIntersecting) return;
+
+        entry.target.classList.add('vc-peek-visible');
+        obs.unobserve(entry.target);
+      };
+
       const peekObserver = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-
-          entry.target.classList.add('vc-peek-visible');
-          obs.unobserve(entry.target);
+          showPeekItem(entry, obs);
         });
       }, {
         threshold:0.12
       });
 
-      peekItems.forEach(item => peekObserver.observe(item));
+      const earlyPeekObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          showPeekItem(entry, obs);
+        });
+      }, {
+        rootMargin:'0px 0px 28% 0px',
+        threshold:0.01
+      });
+
+      peekItems.forEach(item => {
+        if (item.matches('#proyectos')) {
+          earlyPeekObserver.observe(item);
+          return;
+        }
+
+        peekObserver.observe(item);
+      });
     }
   }
 
