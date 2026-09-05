@@ -10818,7 +10818,7 @@ font-weight:800;
 
     <aside class="vc8-studio-card" aria-label="Manuel, VIA Cloud Studio">
       <div class="vc8-studio-photo">
-        <img src="avatar-perfil.png" alt="Manuel de VIA Cloud Studio">
+        <img src="assets-v2/avatar-manu.png" alt="Manuel de VIA Cloud Studio" width="1145" height="1374" loading="lazy" decoding="async">
       </div>
       <div class="vc8-studio-badge">
         <strong>Manuel · VIA Cloud Studio</strong>
@@ -11106,9 +11106,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (peekItems.length) {
-    peekItems.forEach((item, index) => {
+    peekItems.forEach((item) => {
       item.classList.add('vc-peek-reveal');
-      item.style.transitionDelay = `${Math.min(index, 3) * 90}ms`;
     });
 
     if (reduceMotion || !('IntersectionObserver' in window)) {
