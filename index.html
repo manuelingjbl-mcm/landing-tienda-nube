@@ -2414,15 +2414,18 @@ text-underline-offset: 3px;
   line-height:1.45;
 }
 
-.footer-legal{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:flex-end;
-  gap:14px;
+.footer-credit{
+  margin:0;
+  color:#9fb0c5;
 }
 
-.footer-legal a{
-  color:#9fb0c5;
+.footer-credit a{
+  color:#dbe7f5;
+  font-weight:700;
+}
+
+.footer-credit a:hover{
+  color:#ffffff;
 }
 
 @media (max-width: 920px){
@@ -2457,13 +2460,10 @@ text-underline-offset: 3px;
   }
 
   .footer-bottom{
-    align-items:flex-start;
+    align-items:center;
     flex-direction:column;
     gap:10px;
-  }
-
-  .footer-legal{
-    justify-content:flex-start;
+    text-align:center;
   }
 }
 
@@ -11099,9 +11099,7 @@ font-weight:800;
 
     <div class="footer-bottom">
       <p>© 2026 VIA Cloud Studio · Argentina.</p>
-      <nav class="footer-legal" aria-label="Legal">
-        <a href="/politicas/">Política de Privacidad</a>
-      </nav>
+      <p class="footer-credit">Desarrollado por: <a href="#top">VIA Cloud Studio</a></p>
     </div>
   </div>
 </footer>
