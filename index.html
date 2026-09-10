@@ -2546,8 +2546,13 @@ text-underline-offset: 3px;
   }
 
   .wa-float {
-    width: 56px;
-    height: 56px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .wa-float img {
+    width: 30px;
+    height: 30px;
   }
 
   .wa-float-greeting {
@@ -3226,6 +3231,14 @@ button.scroll-top-btn.is-visible{
   }
 }
 
+@media (max-width: 575.98px){
+  button.scroll-top-btn{
+    width: 52px;
+    height: 52px;
+    bottom: calc(92px + env(safe-area-inset-bottom));
+  }
+}
+
 body.is-footer-floating-raised .wa-floating-contact{
   bottom: 56px;
 }
@@ -3244,7 +3257,7 @@ body.is-footer-floating-raised button.scroll-top-btn{
   }
 
   body.is-footer-floating-raised button.scroll-top-btn{
-    bottom: calc(152px + env(safe-area-inset-bottom));
+    bottom: calc(140px + env(safe-area-inset-bottom));
   }
 }
 
