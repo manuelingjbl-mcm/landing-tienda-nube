@@ -2476,6 +2476,7 @@ text-underline-offset: 3px;
   display: flex;
   align-items: center;
   gap: 12px;
+  transition: bottom .22s ease;
 }
 
 .wa-float-greeting {
@@ -3164,7 +3165,7 @@ section.section-dark:not(#servicios) .service-card{
 button.scroll-top-btn{
   position: fixed;
   right: 16px;
-  bottom: 110px; /* 👈 desktop/base */
+  bottom: 110px; /* desktop/base */
 
   width: 56px;
   height: 56px;
@@ -3191,7 +3192,7 @@ button.scroll-top-btn{
   transform: translateY(10px);
   pointer-events: none;
 
-  transition: opacity .18s ease, transform .18s ease, filter .18s ease;
+  transition: opacity .18s ease, transform .18s ease, filter .18s ease, bottom .22s ease;
 
   /* anti “botón raro” mobile */
   -webkit-appearance: none;
@@ -3212,16 +3213,38 @@ button.scroll-top-btn.is-visible{
   }
 }
 
-/* Desktop: apenas más abajo */
+/* Desktop: mantiene distancia con el WhatsApp flotante */
 @media (min-width: 769px){
   button.scroll-top-btn{ bottom: 110px; }
 }
 
-/* Mobile: lo subimos por el chat + safe area */
+/* Mobile: mantiene distancia sin tapar demasiado contenido */
 @media (max-width: 768px){
   button.scroll-top-btn{
     bottom: calc(110px + env(safe-area-inset-bottom));
     right: 16px;
+  }
+}
+
+body.is-footer-floating-raised .wa-floating-contact{
+  bottom: 56px;
+}
+
+body.is-footer-floating-raised .wa-float-greeting{
+  display: none;
+}
+
+body.is-footer-floating-raised button.scroll-top-btn{
+  bottom: 146px;
+}
+
+@media (max-width: 575.98px){
+  body.is-footer-floating-raised .wa-floating-contact{
+    bottom: calc(72px + env(safe-area-inset-bottom));
+  }
+
+  body.is-footer-floating-raised button.scroll-top-btn{
+    bottom: calc(152px + env(safe-area-inset-bottom));
   }
 }
 
@@ -11512,14 +11535,21 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener('DOMContentLoaded', () => {
   const btn = document.querySelector('.scroll-top-btn');
   if (!btn) return;
+  const footer = document.querySelector('.footer');
 
   const toggle = () => {
     const y = window.scrollY || document.documentElement.scrollTop;
     btn.classList.toggle('is-visible', y > 420);
+
+    if (footer) {
+      const rect = footer.getBoundingClientRect();
+      document.body.classList.toggle('is-footer-floating-raised', rect.top < window.innerHeight - 80);
+    }
   };
 
   toggle();
   window.addEventListener('scroll', toggle, { passive: true });
+  window.addEventListener('resize', toggle);
 
   btn.addEventListener('click', (e) => {
     e.preventDefault();
