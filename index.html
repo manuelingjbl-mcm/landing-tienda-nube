@@ -10772,10 +10772,13 @@ font-weight:800;
 
     <!-- ✅ CARD SOLO PARA EL FORM -->
     <div class="contact-box contact-form-card">
-      <form id="contact-form" method="POST" action="https://formspree.io/f/mzzodepb">
+      <form id="contact-form" method="POST" action="https://formspree.io/f/mzzodepb" data-form-name="home_contact_form" data-lead-source="web_home">
         <input type="hidden" name="_subject" value="Consulta desde VIA Cloud Studio" />
         <input type="hidden" name="source" value="main_landing" />
         <input type="hidden" name="page" value="inicio" />
+        <input type="hidden" name="service" value="general" />
+        <input type="hidden" name="route" value="/" />
+        <input type="hidden" name="form_variant" value="home_general" />
 
         <fieldset class="contact-intent">
           <legend>¿Qué necesitás resolver primero?</legend>
