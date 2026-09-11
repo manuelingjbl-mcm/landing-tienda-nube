@@ -2,27 +2,29 @@
 <html lang="es">
 <head>
  <link rel="icon" href="/favicon.icon.png" sizes="any">
- <link rel="apple-touch-icon" href="/favicon.icon.png">
+<link rel="apple-touch-icon" href="/favicon.icon.png">
 
-  
-  <meta charset="UTF-8" />
-  <title>Vía Cloud Studio · Diseño y optimización Tienda Nube</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="description" content="Diseñamos y optimizamos tiendas Tienda Nube a medida para tu marca. Home, categorías, PDP y landings listas para convertir visitas en ventas." />
-  <link rel="canonical" href="https://www.viacloudstudio.com/tienda-nube" />
-  <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#0056ff" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Vía Cloud Studio · Diseño y optimización Tienda Nube" />
-  <meta property="og:description" content="Diseñamos y optimizamos tiendas Tienda Nube a medida para tu marca: claras, rápidas y listas para vender." />
-  <meta property="og:url" content="https://www.viacloudstudio.com/tienda-nube" />
-  <meta property="og:image" content="https://www.viacloudstudio.com/hero-mobile-mcmdigital.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Vía Cloud Studio · Diseño y optimización Tienda Nube" />
-  <meta name="twitter:description" content="Tiendas Tienda Nube a medida, optimizadas para convertir visitas en ventas." />
-  <meta name="twitter:image" content="https://www.viacloudstudio.com/hero-mobile-mcmdigital.png" />
-  <link rel="preload" as="image" href="/hero-mobile-mcmdigital.png" fetchpriority="high" />
-  <meta name="facebook-domain-verification" content="u8j1ch87vy74yb23zjmipdanqiswpn" />
+<meta charset="UTF-8" />
+<title>Vía Cloud Studio · Diseño y optimización Tienda Nube</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content="Diseñamos y optimizamos tiendas Tienda Nube a medida para tu marca. Home, categorías, PDP y landings listas para convertir visitas en ventas." />
+
+<link rel="canonical" href="https://www.viacloudstudio.com/tienda-nube" />
+<meta name="robots" content="index, follow" />
+
+<meta property="og:url" content="https://www.viacloudstudio.com/tienda-nube" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Vía Cloud Studio · Diseño y optimización Tienda Nube" />
+<meta property="og:description" content="Diseñamos y optimizamos tiendas Tienda Nube a medida para tu marca. Home, categorías, PDP y landings listas para convertir visitas en ventas." />
+<meta property="og:image" content="https://www.viacloudstudio.com/hero-mobile-mcmdigital.png" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Vía Cloud Studio · Diseño y optimización Tienda Nube" />
+<meta name="twitter:description" content="Diseñamos y optimizamos tiendas Tienda Nube a medida para tu marca. Home, categorías, PDP y landings listas para convertir visitas en ventas." />
+<meta name="twitter:image" content="https://www.viacloudstudio.com/hero-mobile-mcmdigital.png" />
+<link rel="preload" as="image" href="/hero-mobile-mcmdigital.png" fetchpriority="high" />
+
+<meta name="facebook-domain-verification" content="u8j1ch87vy74yb23zjmipdanqiswpn" />
 
 <style>
     :root{
@@ -482,7 +484,7 @@ header::after{
 
 
 
-    
+
     /* MARCAS */
     .section{
       padding:56px 0;
@@ -518,7 +520,7 @@ header::after{
       text-align:center;
       background:#fff;
     }
-    
+
 /* Píldoras de tipos de clientes (¿Con quién trabajamos?) */
 .brand-grid span.client-pill{
   display:flex;
@@ -612,7 +614,8 @@ header::after{
 .grid-portfolio{
   margin-top:32px;
   display:grid;
-  gap:24px;
+  column-gap:28px;
+  row-gap:30px;
   grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 
@@ -642,7 +645,7 @@ header::after{
 @media (max-width: 800px){
   .grid-portfolio{
     grid-template-columns: 1fr;
-    gap:20px;
+    gap:22px;
   }
 
   .grid-portfolio .portfolio-link{
@@ -659,28 +662,52 @@ header::after{
   text-decoration:none;
   color:inherit;
   border-radius:24px;
-  overflow:hidden;
+  overflow:visible;
+  width:100%;
+  border:0;
+  padding:0;
+  background:transparent;
+  font:inherit;
+  text-align:left;
+  cursor:pointer;
+  transition:transform .28s ease, filter .28s ease;
 }
 
 /* contenedor imagen + overlay */
 .portfolio-thumb{
   position:relative;
-  height:240px;
+  height:280px;
   background:#050816;
   border-radius:24px;
   overflow:hidden;
   width:100%;
+  box-shadow:0 18px 42px rgba(15,23,42,.18);
+  isolation:isolate;
+}
+
+.portfolio-thumb::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  border:1px solid rgba(255,255,255,.20);
+  border-radius:inherit;
+  pointer-events:none;
 }
 
 /* destacada un toque más alta */
 .grid-portfolio .portfolio-link.portfolio-featured .portfolio-thumb,
 .grid-portfolio .portfolio-link--featured .portfolio-thumb{
-  height:320px;
+  height:340px;
 }
 @media (max-width: 800px){
+  .portfolio-thumb{
+    height:280px;
+  }
+
   .grid-portfolio .portfolio-link.portfolio-featured .portfolio-thumb,
   .grid-portfolio .portfolio-link--featured .portfolio-thumb{
-    height:260px;
+    height:280px;
   }
 }
 
@@ -690,7 +717,7 @@ header::after{
   display:block;
   object-fit:cover;
   transform:scale(1.04);
-  transition:transform 400ms ease-out;
+  transition:transform 500ms ease-out, filter 500ms ease-out;
 }
 
 /* badge arriba (minimal + animado) */
@@ -698,37 +725,30 @@ header::after{
   position:absolute;
   top:16px;
   left:16px;
-  padding:4px 12px;
+  z-index:3;
+  padding:7px 13px;
   border-radius:999px;
   font-size:0.75rem;
-  letter-spacing:0.06em;
+  font-weight:700;
+  letter-spacing:0.05em;
   text-transform:uppercase;
-  background:rgba(0,0,0,0.65);
+  background:rgba(15,23,42,.72);
+  border:1px solid rgba(255,255,255,.22);
   color:#f5f7ff;
-
-  opacity:0;
-  transform:translateY(-6px);
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  backdrop-filter:blur(10px);
+  box-shadow:0 10px 24px rgba(2,6,23,.18);
 }
 
 /* En desktop: mostrar pill al hover/focus */
 @media (hover:hover) and (pointer:fine){
+  .portfolio-link:hover{
+    transform:translateY(-5px);
+    filter:saturate(1.04);
+  }
+
   .portfolio-link:hover .portfolio-thumb img{
-    transform:scale(1.08);
-  }
-
-  .portfolio-link:hover .portfolio-pill,
-  .portfolio-link:focus-within .portfolio-pill{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-/* En mobile: pill siempre visible */
-@media (hover:none) and (pointer:coarse){
-  .portfolio-pill{
-    opacity:1;
-    transform:none;
+    transform:scale(1.09);
+    filter:contrast(1.04);
   }
 }
 
@@ -738,25 +758,265 @@ header::after{
   left:0;
   right:0;
   bottom:0;
-  padding:18px 20px 20px;
+  z-index:2;
+  min-height:58%;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  align-items:flex-start;
+  padding:24px 28px 28px;
   background:linear-gradient(
     to top,
-    rgba(0,0,0,0.78),
-    rgba(0,0,0,0.25),
+    rgba(2,6,23,0.88),
+    rgba(2,6,23,0.36),
     transparent
   );
   color:#f5f7ff;
 }
 
 .portfolio-overlay h3{
-  margin:0 0 4px;
-  font-size:1.05rem;
+  margin:0 0 6px;
+  font-size:clamp(1.05rem, 1.5vw, 1.32rem);
+  line-height:1.05;
+  text-shadow:0 2px 18px rgba(0,0,0,.35);
 }
 
 .portfolio-overlay p{
   margin:0;
-  font-size:0.85rem;
+  max-width:620px;
+  font-size:.92rem;
+  line-height:1.45;
   color:rgba(235,241,255,0.9);
+  text-shadow:0 2px 16px rgba(0,0,0,.35);
+}
+
+.portfolio-action{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  margin-top:14px;
+  min-height:34px;
+  padding:7px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.12);
+  backdrop-filter:blur(10px);
+  font-size:0.8rem;
+  font-weight:700;
+  letter-spacing:.02em;
+  color:#fff;
+  box-shadow:0 10px 24px rgba(2,6,23,.20);
+}
+
+.portfolio-action::after{
+  content:"";
+  width:6px;
+  height:6px;
+  border-top:2px solid currentColor;
+  border-right:2px solid currentColor;
+  transform:rotate(45deg);
+}
+
+@media (max-width:800px){
+  .portfolio-overlay{
+    min-height:66%;
+    padding:22px 20px;
+  }
+
+  .portfolio-overlay p{
+    font-size:.88rem;
+  }
+
+  .portfolio-action{
+    min-height:32px;
+  }
+}
+
+.portfolio-link:focus-visible{
+  outline:3px solid rgba(37,99,235,.75);
+  outline-offset:4px;
+}
+
+.portfolio-modal{
+  position:fixed;
+  inset:0;
+  z-index:100000;
+  display:grid;
+  place-items:center;
+  padding:24px;
+  background:rgba(3,7,18,.72);
+  backdrop-filter:blur(10px);
+}
+
+.portfolio-modal[hidden]{
+  display:none;
+}
+
+.portfolio-modal__panel{
+  width:min(920px, 100%);
+  max-height:min(86vh, 760px);
+  display:grid;
+  grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);
+  overflow:hidden;
+  border-radius:24px;
+  background:#0b1020;
+  color:#f8fafc;
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 34px 90px rgba(0,0,0,.55);
+}
+
+.portfolio-modal__media{
+  min-height:420px;
+  background:#020617;
+}
+
+.portfolio-modal__media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.portfolio-modal__content{
+  position:relative;
+  overflow:auto;
+  padding:34px;
+}
+
+.portfolio-modal__close{
+  position:absolute;
+  top:18px;
+  right:18px;
+  width:38px;
+  height:38px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  font-size:24px;
+  line-height:1;
+  cursor:pointer;
+}
+
+.portfolio-modal__tag{
+  display:inline-flex;
+  margin-bottom:12px;
+  padding:6px 12px;
+  border-radius:999px;
+  background:rgba(37,99,235,.20);
+  border:1px solid rgba(129,140,248,.55);
+  color:#c7d2fe;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.portfolio-modal__content h3{
+  margin:0 42px 10px 0;
+  font-size:clamp(26px,3vw,38px);
+  line-height:1.05;
+}
+
+.portfolio-modal__summary{
+  margin:0 0 22px;
+  color:rgba(226,232,240,.86);
+  font-size:15px;
+  line-height:1.65;
+}
+
+.portfolio-modal__grid{
+  display:grid;
+  gap:14px;
+  margin:22px 0;
+}
+
+.portfolio-modal__block{
+  padding:16px;
+  border-radius:16px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.10);
+}
+
+.portfolio-modal__label{
+  display:block;
+  margin-bottom:8px;
+  color:#93c5fd;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+}
+
+.portfolio-modal__block p,
+.portfolio-modal__block ul{
+  margin:0;
+  color:rgba(226,232,240,.88);
+  font-size:14px;
+  line-height:1.6;
+}
+
+.portfolio-modal__block ul{
+  padding-left:18px;
+}
+
+.portfolio-modal__actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:24px;
+}
+
+.portfolio-modal__link,
+.portfolio-modal__secondary{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:42px;
+  padding:10px 16px;
+  border-radius:999px;
+  font-size:14px;
+  font-weight:700;
+}
+
+.portfolio-modal__link{
+  background:#fff;
+  color:#0f172a;
+}
+
+.portfolio-modal__secondary{
+  border:1px solid rgba(255,255,255,.16);
+  color:#f8fafc;
+  background:rgba(255,255,255,.06);
+}
+
+body.portfolio-modal-open{
+  overflow:hidden;
+}
+
+@media (max-width:800px){
+  .portfolio-modal{
+    padding:12px;
+  }
+
+  .portfolio-modal__panel{
+    grid-template-columns:1fr;
+    max-height:90vh;
+  }
+
+  .portfolio-modal__media{
+    min-height:210px;
+    max-height:260px;
+  }
+
+  .portfolio-modal__content{
+    padding:24px 20px;
+  }
+
+  .portfolio-modal__content h3{
+    margin-right:44px;
+  }
 }
 
 /* Variante para piezas verticales (landing + newsletter) */
@@ -776,7 +1036,7 @@ header::after{
   .portfolio-thumb--tall{ height:320px; }
 }
 
- 
+
 /* ===== BLOQUE LANDING + NEWSLETTER (tipo Zurbrand) ===== */
 
 .works-split {
@@ -893,187 +1153,498 @@ header::after{
 }
 
 
-/* ===== WORKS (MOBILE): carrusel horizontal + copy arriba (SOLID) ===== */
-@media (max-width: 900px){
+/* Showcase interactivo: landings, newsletters y automatizaciones */
+#trabajos .works-showcase-head{
+  margin:68px 0 24px;
+  display:grid;
+  grid-template-columns:minmax(0, .9fr) minmax(280px, .65fr);
+  gap:28px;
+  align-items:center;
+}
 
-  :root{
-    --works-card-w: 92vw;
-    --works-gap: 14px;
-    --works-radius: 26px;
+#trabajos .works-showcase-kicker{
+  margin:0 0 10px;
+  color:#2563eb;
+  font-size:.78rem;
+  font-weight:800;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+#trabajos .works-showcase-head h3{
+  margin:0;
+  max-width:720px;
+  color:#0f172a;
+  font-size:clamp(28px, 3vw, 42px);
+  line-height:1.05;
+  letter-spacing:0;
+}
+
+#trabajos .works-showcase-head > p{
+  margin:0;
+  color:#475569;
+  line-height:1.65;
+}
+
+#trabajos .works-showcase{
+  position:relative;
+  margin-top:0;
+  padding:34px;
+  grid-template-columns:minmax(0,1.12fr) minmax(430px,.88fr);
+  gap:30px;
+  border-radius:32px;
+  background:
+    radial-gradient(circle at 20% 16%, rgba(37,99,235,.14), transparent 34%),
+    radial-gradient(circle at 78% 24%, rgba(124,58,237,.13), transparent 30%),
+    rgba(255,255,255,.66);
+  border:1px solid rgba(37,99,235,.13);
+  box-shadow:0 26px 70px rgba(15,23,42,.09);
+  backdrop-filter:blur(14px);
+}
+
+#trabajos .works-stage{
+  position:relative;
+  min-width:0;
+  min-height:560px;
+  padding-bottom:44px;
+}
+
+#trabajos .works-showcase .works-shots{
+  position:relative;
+  display:block;
+  min-height:520px;
+  isolation:isolate;
+}
+
+#trabajos .works-showcase .works-shot{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:clamp(240px, 18vw, 330px);
+  overflow:visible;
+  border-radius:28px;
+  opacity:0;
+  filter:saturate(.76);
+  transform:translate(-50%, -50%) translateX(220px) scale(.72) rotate(5deg);
+  transition:opacity .34s ease, filter .34s ease, transform .44s cubic-bezier(.22, 1, .36, 1);
+  pointer-events:none;
+  z-index:0;
+}
+
+#trabajos .works-showcase .works-shot.is-prev{
+  opacity:.44;
+  filter:saturate(.78) blur(.25px);
+  transform:translate(-50%, -50%) translateX(-142px) translateY(20px) scale(.82) rotate(-4deg);
+  z-index:2;
+}
+
+#trabajos .works-showcase .works-shot.is-next{
+  opacity:.62;
+  filter:saturate(.86);
+  transform:translate(-50%, -50%) translateX(142px) translateY(18px) scale(.84) rotate(4deg);
+  z-index:3;
+}
+
+#trabajos .works-showcase .works-shot.is-active{
+  opacity:1;
+  filter:none;
+  transform:translate(-50%, -50%) translateX(0) translateY(-4px) scale(1);
+  pointer-events:auto;
+  z-index:4;
+}
+
+#trabajos .works-showcase .works-float,
+#trabajos .works-showcase .works-clip{
+  display:block;
+  border-radius:28px;
+}
+
+#trabajos .works-showcase .works-clip{
+  position:relative;
+  overflow:hidden;
+  background:#f8fafc;
+  box-shadow:0 28px 70px rgba(15,23,42,.22);
+  height:clamp(430px, 34vw, 560px);
+}
+
+#trabajos .works-showcase .works-shot img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:top center;
+  border-radius:28px;
+  box-shadow:none;
+}
+
+#trabajos .works-showcase .works-shot::after{
+  content:attr(data-label);
+  position:absolute;
+  left:50%;
+  top:14px;
+  z-index:4;
+  max-width:calc(100% - 28px);
+  padding:8px 12px;
+  border-radius:999px;
+  background:rgba(15,23,42,.74);
+  color:#fff;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  box-shadow:0 10px 24px rgba(15,23,42,.18);
+  transform:translateX(-50%);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  pointer-events:none;
+}
+
+#trabajos .works-copy{
+  position:relative;
+  align-self:center;
+  padding:30px;
+  border-radius:28px;
+  background:rgba(255,255,255,.82);
+  border:1px solid rgba(37,99,235,.14);
+  box-shadow:0 22px 54px rgba(15,23,42,.08);
+}
+
+#trabajos .works-copy-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:12px;
+}
+
+#trabajos .works-copy-top .works-tag{
+  margin:0;
+}
+
+#trabajos #works-count{
+  flex:0 0 auto;
+  padding:6px 10px;
+  border-radius:999px;
+  background:#eef4ff;
+  color:#2563eb;
+  font-size:12px;
+  font-weight:800;
+}
+
+#trabajos .works-copy h3{
+  margin:0 0 12px;
+  font-size:clamp(24px, 2.5vw, 34px);
+  line-height:1.1;
+  letter-spacing:0;
+}
+
+#trabajos .works-copy > p{
+  font-size:1rem;
+  line-height:1.65;
+}
+
+#trabajos .works-points{
+  margin:18px 0 20px;
+  padding:0;
+  list-style:none;
+  display:grid;
+  gap:10px;
+}
+
+#trabajos .works-points li{
+  position:relative;
+  padding-left:30px;
+  line-height:1.5;
+}
+
+#trabajos .works-points li::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:.35em;
+  width:18px;
+  height:18px;
+  border-radius:999px;
+  background:#dbeafe;
+  box-shadow:inset 0 0 0 5px #eff6ff;
+}
+
+#trabajos .works-link{
+  min-height:44px;
+  padding:10px 18px;
+  border-color:rgba(37,99,235,.32);
+  background:#2563eb;
+  color:#fff;
+  font-weight:800;
+  box-shadow:0 16px 34px rgba(37,99,235,.22);
+}
+
+#trabajos .works-link::after{
+  content:">";
+  width:16px;
+  height:16px;
+  border-radius:999px;
+  background:rgba(255,255,255,.28);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  line-height:1;
+}
+
+#trabajos .works-dots{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:16px;
+}
+
+#trabajos .works-dot{
+  width:9px;
+  height:9px;
+  padding:0;
+  border:0;
+  border-radius:999px;
+  background:rgba(37,99,235,.22);
+  cursor:pointer;
+  transition:width .18s ease, background-color .18s ease;
+}
+
+#trabajos .works-dot.is-active{
+  width:28px;
+  background:#2563eb;
+}
+
+#trabajos .works-showcase .works-arrows{
+  position:absolute;
+  left:18px;
+  right:18px;
+  top:50%;
+  z-index:6;
+  display:flex;
+  justify-content:space-between;
+  pointer-events:none;
+  transform:translateY(-50%);
+}
+
+#trabajos .works-showcase .works-arrow{
+  width:52px;
+  height:52px;
+  border-radius:999px;
+  border:1px solid rgba(15,23,42,.12);
+  background:rgba(255,255,255,.95);
+  color:#111827;
+  box-shadow:0 16px 34px rgba(15,23,42,.18);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  line-height:1;
+  pointer-events:auto;
+  cursor:pointer;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+
+#trabajos .works-showcase .works-arrow:hover{
+  background:#fff;
+}
+
+@media (max-width:900px){
+  #trabajos.reveal{
+    opacity:1 !important;
+    transform:none !important;
+    transition:none !important;
   }
 
-  .works-split{
-    grid-template-columns: 1fr;
-    gap: 18px;
-    align-items: start;
-  }
-  .works-copy{ order: 1; }
-  .works-shots{ order: 2; }
-
-  #trabajos,
-  #trabajos .wrapper,
-  #trabajos .works-split{
-    overflow: visible !important;
+  #trabajos .works-showcase-head{
+    grid-template-columns:1fr;
+    margin-top:54px;
+    gap:14px;
   }
 
-  /* Carrusel */
-  #trabajos .works-shots{
-    position: relative; /* ancla de flechas */
-
-    display: flex;
-    justify-content: flex-start;
-    gap: var(--works-gap);
-
-    overflow-x: auto !important;
-    overflow-y: visible !important;
-    -webkit-overflow-scrolling: touch;
-
-    scroll-snap-type: x mandatory;
-
-    padding-left: max(16px, calc((100vw - var(--works-card-w)) / 2)) !important;
-    padding-right: max(16px, calc((100vw - var(--works-card-w)) / 2)) !important;
-
-    padding-top: 26px !important;
-    padding-bottom: 60px !important;
-
-    overscroll-behavior-x: contain;
-    touch-action: pan-x pan-y !important;
-    margin: 0 !important;
-
-    /* vars para centrar flechas SOLO sobre el área útil (sin padding) */
-    --worksTop: 26px;
-    --worksBottom: 60px;
-    --worksArrowShift: 0px; /* + baja / - sube */
+  #trabajos .works-showcase{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:18px;
+    padding:18px;
+    border-radius:26px;
+    background:rgba(255,255,255,.74);
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+    box-shadow:0 18px 44px rgba(15,23,42,.08);
+    overflow:visible !important;
   }
 
-  #trabajos .works-shots::-webkit-scrollbar{ display:none; }
-
-  #trabajos .works-shot{
-    flex: 0 0 var(--works-card-w);
-    scroll-snap-align: center;
-
-    border: 0 !important;
-    padding: 0 !important;
-    background: transparent !important;
-    box-shadow: none !important;
-    outline: none !important;
-    overflow: visible !important;
-
-    -webkit-tap-highlight-color: transparent;
-    touch-action: pan-x pan-y !important;
-  }
-
-  #trabajos .works-float{
-    display: block;
-    border-radius: var(--works-radius);
-    box-shadow: none !important;
-    transition: transform .18s ease;
-    transform-origin: center;
-  }
-
-  #trabajos .works-clip{
-    display: block;
-    border-radius: var(--works-radius);
-    overflow: hidden;
-    background: inherit;
-    -webkit-mask-image: -webkit-radial-gradient(white, black);
-    backface-visibility: hidden;
-    transform: translateZ(0);
-
-    aspect-ratio: 8 / 14;
-    max-height: 78vh;
-  }
-
-  #trabajos .works-clip > img{
-    width: 100% !important;
-    height: 100% !important;
-    display: block !important;
-    object-fit: contain !important;
-
-    background: transparent !important;
-    transform: translateZ(0);
-
-    clip-path: inset(0 round var(--works-radius));
-    -webkit-clip-path: inset(0 round var(--works-radius));
-  }
-
-  #trabajos .works-shot.is-active .works-float{
-    transform: scale(1.06);
-    position: relative;
-    z-index: 2;
-  }
-
-  #trabajos .works-shot:not(.is-active){
-    opacity: .92;
-  }
-
-  /* ============ ARROWS (MOBILE) ============ */
-  /* wrapper fijo (no scrollea) */
   #trabajos .works-stage{
-    position: relative;
-
-    /* match con tu padding-top/bottom real del carrusel */
-    --worksTop: 26px;
-    --worksBottom: 60px;
-    --worksArrowShift: 0px; /* + baja / - sube */
+    position:relative;
+    min-width:0;
+    min-height:0;
+    padding-bottom:34px;
   }
 
-  /* el carrusel sigue scrolleando */
-  #trabajos .works-stage .works-shots{
-    position: relative; /* opcional */
+  #trabajos .works-showcase .works-copy{
+    display:block;
+    min-width:0;
+    width:100%;
+    padding:20px 18px;
+    border-radius:24px;
+    box-shadow:0 14px 34px rgba(15,23,42,.07);
   }
 
-  /* overlay fijo siempre visible */
-  #trabajos .works-stage .works-arrows{
-    position: absolute;
-    left: 0;
-    right: 0;
-    z-index: 6;
-
-    top: calc(
-      var(--worksTop) + (100% - var(--worksTop) - var(--worksBottom)) / 2 + var(--worksArrowShift)
-    );
-    transform: translateY(-50%);
-
-    display: flex;
-    justify-content: flex-start;
-    padding: 0 12px;
-    pointer-events: none;
+  #trabajos .works-showcase .works-shots{
+    position:relative !important;
+    display:block !important;
+    width:100%;
+    height:auto;
+    min-height:0;
+    padding:0 !important;
+    margin:0 !important;
+    overflow:visible !important;
+    scroll-snap-type:none !important;
+    overscroll-behavior:auto !important;
+    touch-action:auto !important;
+    isolation:auto;
   }
 
-  #trabajos .works-stage .works-arrow{
-    pointer-events: auto;
-    width: 60px;
-    height: 60px;
-    border-radius: 999px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #fff;
-    color: #111827;
-    border: 1px solid rgba(17,24,39,.14);
-    box-shadow: 0 12px 26px rgba(15,23,42,.22);
-
-    font-size: 26px;
-    line-height: 1;
-    padding-bottom: 2px; /* centra flechita */
+  #trabajos .works-showcase .works-float,
+  #trabajos .works-showcase .works-clip{
+    display:block;
+    height:auto;
+    transform:none !important;
+    transition:none !important;
   }
 
-  #trabajos .works-stage .works-arrow--prev{ margin-right: auto; transform: translateX(-26px); }
-  #trabajos .works-stage .works-arrow--next{ margin-left:  auto; transform: translateX( 26px); }
+  #trabajos .works-showcase .works-shot.is-active,
+  #trabajos .works-showcase .works-shot.is-prev,
+  #trabajos .works-showcase .works-shot.is-next,
+  #trabajos .works-showcase .works-shot.is-hidden,
+  #trabajos .works-showcase .works-shot,
+  #trabajos .works-showcase .works-shot:nth-child(2),
+  #trabajos .works-showcase .works-shot:nth-child(3),
+  #trabajos .works-showcase .works-shot:nth-child(4){
+    position:relative;
+    inset:auto;
+    display:none !important;
+    width:100%;
+    max-width:min(82vw, 340px);
+    height:auto;
+    margin:0 auto;
+    opacity:1;
+    filter:none;
+    transform:none !important;
+    transition:none !important;
+    pointer-events:none;
+    touch-action:auto !important;
+    scroll-snap-align:none;
+    z-index:1;
+  }
 
-  #trabajos .works-stage .works-arrow[hidden]{ display:none !important; }
+  #trabajos .works-showcase .works-shot.is-active{
+    display:block !important;
+  }
+
+  #trabajos .works-showcase .works-clip{
+    overflow:hidden;
+    border-radius:24px;
+    background:#f8fbff;
+    box-shadow:0 16px 36px rgba(15,23,42,.12);
+    -webkit-mask-image:none;
+    clip-path:none;
+    -webkit-clip-path:none;
+    height:min(142vw, 560px);
+  }
+
+  #trabajos .works-showcase .works-shot img{
+    display:block !important;
+    width:100% !important;
+    height:100% !important;
+    max-height:none;
+    object-fit:contain !important;
+    object-position:top center;
+    border-radius:24px;
+    transform:none !important;
+    clip-path:none;
+    -webkit-clip-path:none;
+    background:#f8fbff;
+  }
+
+  #trabajos .works-showcase .works-shot::after{
+    top:12px;
+    max-width:calc(100% - 24px);
+  }
+
+  #trabajos .works-showcase .works-dots{
+    display:flex !important;
+    margin-top:14px;
+  }
+
+  #trabajos .works-showcase .works-arrows{
+    position:absolute;
+    left:4px;
+    right:4px;
+    top:calc(50% - 26px);
+    z-index:5;
+    display:flex !important;
+    justify-content:space-between;
+    pointer-events:none;
+  }
+
+  #trabajos .works-showcase .works-arrow{
+    width:58px;
+    height:58px;
+    border-radius:999px;
+    border:1px solid rgba(15,23,42,.12);
+    background:rgba(255,255,255,.94);
+    color:#111827;
+    box-shadow:0 12px 26px rgba(15,23,42,.18);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+    line-height:1;
+    pointer-events:auto;
+    touch-action:manipulation;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  #trabajos .works-showcase .works-arrow[hidden]{
+    opacity:.35;
+    visibility:hidden;
+  }
 }
 
-/* === WORKS ARROWS: DESKTOP OFF (blindado) === */
-@media (min-width: 901px){
-  #trabajos .works-stage .works-arrows{
-    display: none !important;
+@media (max-width:560px){
+  #trabajos .works-showcase-head h3{
+    font-size:28px;
+  }
+
+  #trabajos .works-showcase{
+    padding:14px;
+    margin-left:-2px;
+    margin-right:-2px;
+  }
+
+  #trabajos .works-showcase .works-shot{
+    max-width:min(100%, 330px);
+  }
+
+  #trabajos .works-showcase .works-shot img{
+    max-height:none;
+  }
+
+  #trabajos .works-showcase .works-copy{
+    padding:18px 16px;
+  }
+
+  #trabajos .works-link{
+    width:100%;
+    justify-content:center;
   }
 }
 
-    
+
     /* PARTNERS */
     .partner-row{
       display:flex;
@@ -1090,6 +1661,280 @@ header::after{
       display:inline-flex;
       align-items:center;
       gap:8px;
+    }
+
+    /* TIENDANUBE PARTNER: bloque de transicion post hero */
+    .partner-tn-section{
+      position:relative;
+      overflow:hidden;
+      padding:34px 0 92px;
+      background:
+        linear-gradient(180deg, rgba(239,246,255,.90) 0%, rgba(248,251,255,.98) 62%, rgba(232,241,255,.74) 100%);
+      color:#0f172a;
+    }
+
+    .partner-tn-section::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg, rgba(37,99,235,.08), rgba(124,58,237,.06), transparent 62%);
+      pointer-events:none;
+    }
+
+    .partner-tn-section::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(37,99,235,.22), transparent);
+      pointer-events:none;
+    }
+
+    .partner-tn-section .wrapper{
+      position:relative;
+      z-index:2;
+      padding-bottom:0;
+    }
+
+    .audience-section{
+      position:relative;
+      margin-top:-58px;
+      padding-top:0;
+      background:#fff;
+      border-radius:36px 36px 0 0;
+      box-shadow:0 -22px 58px rgba(37,99,235,.10);
+      z-index:3;
+      overflow:hidden;
+    }
+
+    .audience-section::before{
+      content:"";
+      position:absolute;
+      top:26px;
+      left:50%;
+      width:78px;
+      height:4px;
+      transform:translateX(-50%);
+      border-radius:999px;
+      background:linear-gradient(90deg, rgba(37,99,235,.24), rgba(124,58,237,.22));
+    }
+
+    .audience-section .wrapper{
+      padding-top:72px;
+      border-top:0;
+    }
+
+    .partner-tn-layout{
+      display:grid;
+      grid-template-columns:minmax(0,1.08fr) minmax(280px,.72fr);
+      gap:34px;
+      align-items:center;
+      padding-top:18px;
+      border-top:1px solid rgba(37,99,235,.12);
+    }
+
+    .partner-tn-eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      margin-bottom:14px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:rgba(37,99,235,.08);
+      border:1px solid rgba(37,99,235,.14);
+      color:#1d4ed8;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .partner-tn-dot{
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background:#2563eb;
+      box-shadow:0 0 0 5px rgba(37,99,235,.14);
+      flex:0 0 auto;
+    }
+
+    .partner-tn-copy h2{
+      margin:0;
+      max-width:760px;
+      font-size:clamp(30px,4vw,52px);
+      line-height:1.02;
+      letter-spacing:0;
+      color:#0f172a;
+    }
+
+    .partner-tn-copy h2 span{
+      color:#2563eb;
+      white-space:nowrap;
+    }
+
+    .partner-tn-copy p{
+      margin:16px 0 0;
+      max-width:680px;
+      color:#475569;
+      font-size:16px;
+      line-height:1.7;
+    }
+
+    .partner-tn-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:22px;
+    }
+
+    .partner-tn-primary,
+    .partner-tn-secondary{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:46px;
+      padding:12px 18px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:800;
+      transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .partner-tn-primary{
+      background:#2563eb;
+      color:#fff;
+      box-shadow:0 14px 28px rgba(37,99,235,.22);
+    }
+
+    .partner-tn-secondary{
+      color:#1e293b;
+      background:rgba(255,255,255,.74);
+      border:1px solid rgba(37,99,235,.16);
+    }
+
+    .partner-tn-primary:hover,
+    .partner-tn-secondary:hover{
+      transform:translateY(-2px);
+    }
+
+    .partner-tn-benefits{
+      display:grid;
+      gap:10px;
+      margin-top:20px;
+      max-width:760px;
+    }
+
+    .partner-tn-benefit{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      color:#475569;
+      font-size:14px;
+      line-height:1.45;
+    }
+
+    .partner-tn-check{
+      width:20px;
+      height:20px;
+      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+      background:#e0ecff;
+      color:#1d4ed8;
+      font-size:13px;
+      font-weight:900;
+    }
+
+    .partner-tn-offer{
+      padding:22px;
+      border-radius:22px;
+      background:rgba(255,255,255,.78);
+      border:1px solid rgba(37,99,235,.14);
+      box-shadow:0 18px 44px rgba(15,23,42,.10);
+    }
+
+    .partner-tn-offer-kicker{
+      color:#64748b;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .partner-tn-offer-value{
+      margin-top:6px;
+      font-size:clamp(44px,6vw,76px);
+      line-height:.95;
+      font-weight:900;
+      color:#2563eb;
+    }
+
+    .partner-tn-offer-text{
+      margin-top:12px;
+      color:#334155;
+      font-size:15px;
+      line-height:1.55;
+    }
+
+    .partner-tn-note{
+      margin-top:16px;
+      padding-top:14px;
+      border-top:1px solid rgba(15,23,42,.08);
+      color:#64748b;
+      font-size:13px;
+      line-height:1.5;
+    }
+
+    @media (max-width:900px){
+      .partner-tn-section{
+        padding:26px 0 78px;
+      }
+
+      .partner-tn-layout{
+        grid-template-columns:1fr;
+        gap:24px;
+      }
+
+      .partner-tn-offer{
+        max-width:520px;
+      }
+    }
+
+    @media (max-width:640px){
+      .partner-tn-section::after{
+        height:1px;
+      }
+
+      .audience-section{
+        margin-top:-42px;
+        border-radius:26px 26px 0 0;
+      }
+
+      .audience-section .wrapper{
+        padding-top:58px;
+      }
+
+      .partner-tn-actions{
+        flex-direction:column;
+      }
+
+      .partner-tn-primary,
+      .partner-tn-secondary{
+        width:100%;
+      }
+
+      .partner-tn-benefits{
+        gap:12px;
+      }
+
+      .partner-tn-offer{
+        padding-right:72px;
+      }
     }
 
     /* CONTACTO */
@@ -1164,7 +2009,7 @@ header::after{
   transform: translateY(0) scale(1);
 }
 
-   
+
     /* ===== FONDO SECCIÓN NUESTROS TRABAJOS ===== */
 section#trabajos {
   position: relative;
@@ -1257,195 +2102,10 @@ section#trabajos .wrapper {
     /* ===== Ajuste vertical para la sección STACK ===== */
 #stack {
   margin-top: 10px;     /* probá entre 32px y 56px hasta que lo veas equilibrado */
-  padding-top: 50px;     
-}
-   
-    
-    /* ===== QUIÉN ESTÁ DETRÁS / ABOUT ===== */
-.section-about .about-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-  gap: 40px;
-  align-items: center;
+  padding-top: 50px;
 }
 
-.about-list {
-  margin: 18px 0 0;
-  padding-left: 1.1rem;
-  list-style: disc;
-  color: #4b5563;
-  font-size: 0.98rem;      /* igual que el párrafo principal de la sección */
-  line-height: 1.6;        /* para que respiren mejor */
-}
-
-.about-list li {
-  margin-bottom: 6px;
-  opacity: 0.96;       /* antes seguro estaba en 0.4 / 0.5 */
-}
-
-/* Tarjeta lateral con tus datos */
-.about-card {
-  border-radius: 18px;
-  padding: 18px 18px 20px;
-  background: radial-gradient(circle at top left, #0b63e8 0, #020617 55%);
-  border: 1px solid rgba(148, 163, 184, 0.55);
-  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.8);
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.about-card-avatar {
-  width: 64px;              /* o 56px si la querés un poco más chica */
-  height: 64px;
-  border-radius: 999px;
-  overflow: hidden;
-  border: 2px solid rgba(148, 163, 184, 0.55);
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.55);
-  background: #020617;
-  flex-shrink: 0;
-}
-
-/* ahora la “inicial” es la foto */
-.about-avatar-initials {
-  width: 100%;
-  height: 100%;
-  display: block;
-  border-radius: 999px;
-  object-fit: cover;   /* mantiene bien tu cara sin deformar */
-}
-
-
-.about-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.about-name {
-  font-size: 15px;
-  font-weight: 600;
-  color: #f9fafb;
-}
-
-.about-role {
-  font-size: 12px;
-  color: #cbd5f5;
-}
-
-.about-note {
-  margin: 4px 0 0;
-  font-size: 12px;
-  color: #e5e7eb;
-}
-
-/* Mobile: se apila todo */
-@media (max-width: 767.98px) {
-  .section-about .about-grid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 24px;
-  }
-
-  .about-card {
-    padding: 16px 16px 18px;
-  }
-}
-    
-/* ABOUT – alineación y desplazamiento en desktop */
-@media (min-width: 900px) {
-
-  /* Asegura que ambas columnas arranquen arriba */
-  .section-about .about-grid {
-    align-items: flex-start;
-  }
-
-  /* Baja visualmente la tarjeta un poquito */
-  .about-card {
-    margin-top: 0;                 /* anulamos el margen que no hacía efecto */
-    transform: translateY(40px);   /* probá entre 10px y 20px según lo veas */
-  }
-}
-
-.section-about {
-  margin-top: 40px;
-  padding-top: 32px;
-  border-top: 1px solid rgba(148, 163, 184, 0.35); /* gris muy suave */
-}
-
-    
-/* ===== CONTACTO: ICONOS (SIN CÍRCULO) + EMAIL ===== */
-.contact-social-row{
-  margin-top: 20px;
-  margin-bottom: 12px;     /* aire hacia el email */
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 24px;
-}
-
-.contact-social-item{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-}
-
-.contact-social-icon img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  filter: invert(1);
-  opacity: .95;
-}
-
-
-/* Email debajo para copiar fácil */
-.contact-email-copy{
-  margin-top: 10px;
-  font-size: 0.9rem;
-  color: #e5e7eb;
-  text-align: left;
-}
-
-.contact-email-copy a{
-  color: #e5e7eb;
-  text-decoration: none;
-}
-
-.contact-email-copy a:hover{
-  text-decoration: underline;
-}
-
-@media (max-width: 768px){
-  .contact-social-row{ margin-top: 16px; }
-}
-
-    
-/* ===== Sección de contacto: sin hueco blanco debajo ===== */
-#contacto {
-  margin-bottom: 0;      /* nada de espacio blanco externo */
-  padding-bottom: 72px;  /* respiración interna con fondo oscuro */
-  }
-
-/* ===== CONTACTO: columnas alineadas arriba ===== */
-#contacto .contact-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.3fr);
-  gap: 40px;
-  align-items: flex-start;
-}
-
-/* Botón de envío ancho completo como antes */
-#contact-form button {
-  width: 100%;
-  display: block;
-  margin-top: 24px;
-  padding: 14px 24px;
-  border-radius: 999px;
-}
-
-/* El contacto termina justo antes del footer, sin “hueco blanco” */
+/* Contacto: spacing before footer */
 #contacto {
   margin-bottom: 0;
   padding-bottom: 72px;
@@ -1482,107 +2142,41 @@ text-underline-offset: 3px;
   margin: 0; /* sin espacios extra arriba o abajo */
 }
 
-/* ===== Footer: texto a los lados y fondo oscuro ===== */
-.footer {
-  background: #020617;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 24px 32px;
-  gap: 16px;
-  font-size: 12px;
-  color: #9ca3af;
+/* ===== FOOTER (PRO: pegado pero con aire) ===== */
+.footer{
+  background:#020617;
+  margin:0 !important;
+  padding: 22px 0 24px !important;   /* 👈 aire arriba/abajo */
+  border-top: 1px solid rgba(148,163,184,.14); /* opcional, si querés línea suave */
 }
 
-    .footer span {
-      white-space: nowrap;
-    }
+.footer .footer-inner{
+  max-width: 1100px;     /* mismo ancho que las cards */
+  margin: 0 auto;
+  padding: 0 24px;       /* aire lateral */
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+}
 
-    .footer-links {
-      display: inline-flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 18px;
-    }
+.footer span{
+  margin:0;
+  line-height:1.35;      /* 👈 que respire */
+  color:#9ca3af;
+}
 
-    .footer a {
-      color: #e5e7eb;
-      text-decoration: none;
-    }
-
-    .footer a:hover {
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
-/* Mobile: footer centrado y columnas del contacto en una sola */
-@media (max-width: 768px) {
-  #contacto .contact-grid {
-    grid-template-columns: 1fr;
+/* Mobile */
+@media (max-width: 768px){
+  .footer{ padding: 14px 0 18px !important; }
+  .footer .footer-inner{
+    flex-direction:column;
+    text-align:center;
+    gap:8px;
   }
-      .footer {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .footer-links {
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-    }
-
-
-/* ==== CONTACTO: alinear solo el formulario con el título ==== */
-
-/* 1) Dejamos la grilla sin desplazamientos raros */
-#contacto .contact-grid {
-  align-items: flex-start;  /* columnas arriba */
-  margin-top: 0;           /* importante: resetea el margen que lo subía todo */
 }
 
-/* 2) Subimos SOLO el formulario para que se acerque al h2 */
-#contacto .contact-grid > form {
-  margin-top: -28px;       /* probá -32px; si lo ves muy alto, cambiá a -24px */
-}
-
-/* 3) Opcional: un poco de aire al bloque de texto bajo el título */
-#contacto .contact-grid > div:first-child {
-  margin-top: 8px;         /* que “Contanos en qué estado...” respire bajo el h2 */
-}
-
-/* ==== ICONOS DE REDES SIN CÍRCULO ==== */
-
-.contact-social-row {
-  display: flex;
-  align-items: center;
-  gap: 24px;              /* separa los iconos entre sí */
-margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
-}
-
-.contact-social-item {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* acá sacamos el círculo */
-.contact-social-icon {
-  width: 24px;
-  height: 24px;
-  border: none;
-  border-radius: 0;
-  padding: 0;
-  background: transparent;
-}
-
-/* aseguramos que el PNG ocupe todo sin deformarse */
-.contact-social-icon img {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-/* ====== BOTÓN FLOTANTE ====== */
+ /* ====== BOTÓN FLOTANTE ====== */
 .chat-launcher {
   position: fixed;
   right: 24px;
@@ -1847,7 +2441,7 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   }
 }
 
-    
+
 /* ==== NUESTROS TRABAJOS · Mockups + texto ==== */
 
 /* Layout general de la sección (modo escritorio) */
@@ -1888,52 +2482,6 @@ margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
   transform: translateY(-8px) scale(1.03);
   box-shadow: 0 30px 60px rgba(15, 23, 42, 0.65);
 }
-
-/* ====== MOBILE: carrusel horizontal ====== */
-@media (max-width: 767.98px) {
-
-  /* Una sola columna: texto arriba, mockups abajo */
-  .works-split {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 28px;
-  }
-
-  /* Contenedor scrollable horizontal */
-  .works-shots {
-    justify-content: flex-start;
-    overflow-x: auto;
-    padding: 0 20px 24px;   /* aire a los lados y abajo */
-    margin: 0;             /* quitamos el margen negativo */
-    gap: 18px;
-    scroll-snap-type: x mandatory;
-    scroll-padding: 0 20px; /* para que primera y última centren mejor */
-  }
-
-  .works-shots::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Cada tarjeta ocupa buena parte del ancho, sigue siendo vertical */
-  .works-shot {
-    flex: 0 0 50vw;        /* ancho visible (puedes probar 70–72vw si la querés más grande) */
-    max-width: 280px;      /* límite para que no explote en pantallas grandes */
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
-  }
-
-  .works-shot img {
-    width: 100%;
-    height: auto;          /* respeta el formato vertical del mockup */
-    border-radius: 24px;
-  }
-
-  /* En mobile NO escalamos para que no se corten al crecer */
-  .works-shot.is-active {
-    transform: none;
-    box-shadow: 0 24px 50px rgba(15, 23, 42, 0.55);
-  }
-}
-
 
 /* ====== SERVICIOS · RESETEO (SIN ROMPER ANIMACIÓN) ====== */
 
@@ -2620,7 +3168,7 @@ button.scroll-top-btn.is-visible{
     opacity:.9;
   }
 }
-    
+
 /* ===== HEADER MOBILE: subir un poco + laterales a 10px (sin tocar desktop) ===== */
 @media (max-width: 767.98px){
 
@@ -2646,7 +3194,7 @@ button.scroll-top-btn.is-visible{
   .site-header .logo{
     margin-left: 8px !important;    /* probá 0–6px */
   }
-  
+
   .site-header .menu-toggle{
     margin-left: auto !important;
   }
@@ -2701,14 +3249,417 @@ button.scroll-top-btn.is-visible{
   }
 }
 
-#vs-chat-launcher,
-#vs-chat-widget {
-  display: none !important;
+/* ✅ Grid de campos SOLO dentro del formulario (no rompe tu layout general) */
+#contact-form .contact-grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:12px;
+  margin-top:0;
 }
+
+/* Full width helper si usás grid-column inline (sirve igual) */
+#contact-form .contact-grid > div[style*="grid-column"]{
+  width:100%;
+}
+
+/* ✅ Select igual a inputs (importante para look PRO) */
+select{
+  width:100%;
+  border-radius:10px;
+  border:1px solid #374151;
+  background:#020617;
+  padding:8px 10px;
+  font-size:14px;
+  color:#e5e7eb;
+}
+
+/* ✅ Responsive */
+@media (max-width: 820px){
+  #contact-form .contact-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   CONTACTO (LIMPIO + PRO)
+   ========================= */
+
+/* Sección (no forzamos tamaño; heredá del sitio) */
+.contact-shell{
+  padding:56px 0 48px;
+  font-family:inherit;
+  font-size:inherit;     /* ✅ clave: iguala con el resto del sitio */
+  line-height:inherit;
+  color:inherit;
+}
+
+/* Normaliza textos dentro del bloque */
+.contact-shell p{ margin:0; }
+.contact-shell .section-title{ margin:0 0 10px; }
+.contact-shell h2{ margin:0 0 10px; }
+.contact-shell > .wrapper > p{ margin:0; }
+
+/* Card base (la usan SOLO: form card + redes card) */
+.contact-box{
+  border:1px solid rgba(148,163,184,.18);
+  background:
+    radial-gradient(circle at top left, rgba(255,255,255,.06), transparent 55%),
+    rgba(2,6,23,.78);
+  border-radius:22px;
+  box-shadow: 0 22px 45px rgba(0,0,0,.45);
+}
+
+/* Card del FORM (más grande, como la landing) */
+.contact-form-card{
+  padding:26px;
+  margin-top:18px;
+}
+
+/* Card de REDES */
+.contact-social-card{
+  padding:18px;
+  margin-top:18px;
+
+  display:grid;
+  grid-template-columns: 1fr auto;
+  gap:16px;
+  align-items:center;
+}
+
+/* Textos (más chicos a propósito) */
+.contact-meta{
+  margin-top:12px;
+  font-size:13px;
+  line-height:1.5;
+  color:#9ca3af;
+}
+.contact-microcopy{
+  font-size:13px;
+  line-height:1.5;
+  color:#9ca3af;
+}
+
+/* Grid del form */
+.contact-grid{
+  display:grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  gap:12px 14px;
+  align-items:stretch;     /* ✅ ayuda a que “calcen” parejo */
+  margin-top:18px;
+}
+
+/* spans */
+.contact-span-2{ grid-column: 1 / -1; }
+
+/* labels solo accesibilidad */
+.sr-only{
+  position:absolute !important;
+  width:1px !important;
+  height:1px !important;
+  padding:0 !important;
+  margin:-1px !important;
+  overflow:hidden !important;
+  clip:rect(0,0,0,0) !important;
+  white-space:nowrap !important;
+  border:0 !important;
+}
+
+/* IMPORTANTE: el <form> NO debe ser una card */
+#contact-form{
+  background:transparent;
+  border:0;
+  padding:0;
+  margin:0;
+  display:block;
+}
+
+/* Controles (inputs / selects / textarea) */
+.contact-grid input,
+.contact-grid select,
+.contact-grid textarea{
+  width:100%;
+  box-sizing:border-box;
+  display:block;
+  font:inherit;
+
+  border-radius:10px;
+  border:1px solid rgba(148,163,184,.22);
+  background: rgba(2,6,23,.55);
+  color:#e5e7eb;
+  outline:none;
+}
+
+/* ✅ FIX ALINEACIÓN (Email vs Nombre): altura + padding + line-height homogéneo */
+.contact-grid input,
+.contact-grid select{
+  min-height:44px;
+  padding:10px 12px;
+  line-height:1.2;
+}
+
+/* Select: aire para el chevron */
+.contact-grid select{
+  padding-right:40px;
+}
+
+/* Textarea */
+.contact-grid textarea{
+  min-height:110px;
+  padding:12px;
+  line-height:1.4;
+  resize:vertical;
+}
+
+/* Placeholders */
+.contact-grid input::placeholder,
+.contact-grid textarea::placeholder{
+  color: rgba(229,231,235,.55);
+}
+
+/* Focus */
+.contact-grid input:focus,
+.contact-grid select:focus,
+.contact-grid textarea:focus{
+  border-color: rgba(148,163,184,.42);
+}
+
+/* -------------------------
+   CTA layout (desktop vs mobile)
+   ------------------------- */
+.contact-cta{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.contact-submit{
+  width:340px;          /* ajustá 300–380 si querés */
+  max-width:100%;
+  flex:0 0 auto;
+}
+
+/* OJO: este párrafo ya tiene .contact-microcopy */
+.contact-cta__copy{
+  flex:1;
+  margin:0;
+  text-align:center;
+}
+
+/* Si tu tema fuerza botones a 100%, esto lo pisa SOLO acá */
+.contact-shell .contact-submit{ width:340px; }
+@media (max-width: 920px){
+  .contact-shell .contact-submit{ width:100%; }
+}
+
+/* Mobile: botón arriba full width */
+@media (max-width: 920px){
+  .contact-form-card{ padding:20px; }
+
+  .contact-cta{
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .contact-cta__copy{ text-align:left; }
+
+  .contact-social-card{
+    padding:14px;
+    grid-template-columns:1fr;
+    justify-items:start;
+  }
+
+  .contact-grid{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+  .contact-span-2{ grid-column:auto; }
+
+  .contact-social-row{ justify-content:flex-start; }
+  .contact-footer-line{ justify-content:flex-start; }
+}
+
+/* -------------------------
+   Card redes
+   ------------------------- */
+.contact-social-kicker{
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:#9ca3af;
+  margin:0 0 6px;
+}
+.contact-social-text{
+  margin:0;
+  font-size:14px;
+  line-height:1.5;
+  color:#d1d5db;
+}
+
+.contact-social-row{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:flex-end;
+}
+
+.contact-social-item{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  border:1px solid rgba(148,163,184,.22);
+  background: rgba(2,6,23,.55);
+  transition: transform .12s ease, border-color .12s ease;
+}
+.contact-social-item:hover{
+  transform: translateY(-1px);
+  border-color: rgba(148,163,184,.42);
+}
+.contact-social-icon img{
+  width:22px;
+  height:22px;
+  display:block;
+}
+
+/* Footer line dentro de card redes */
+.contact-footer-line{
+  grid-column: 1 / -1;
+  margin-top:10px;
+  padding-top:10px;
+  border-top:1px solid rgba(148,163,184,.14);
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.contact-email,
+.contact-small-note{
+  margin:0;
+  font-size:13px;
+  line-height:1.5;
+  color:#9ca3af;
+}
+
+.contact-email a,
+.contact-small-note a{
+  color:#e5e7eb;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* =========================
+   CONTACTO — PATCH FINAL (CTA + ICONOS + TIPOS + TITULOS)
+   Pegalo AL FINAL del <style>
+   ========================= */
+
+/* 1) Tipografía consistente SOLO en contacto */
+#contacto.contact-shell{
+  font-size:14px;          /* si tu web es más compacta, bajalo a 13px */
+  line-height:1.5;
+}
+
+/* textos dentro del bloque */
+#contacto.contact-shell p{
+  font-size:14px;
+  color:#d1d5db;
+}
+
+/* 2) Títulos que se te pusieron grises (suele ser opacity heredada por reveal o estilos globales) */
+#contacto.contact-shell .section-title{
+  color:#9ca3af !important;
+  opacity:1 !important;
+}
+#contacto.contact-shell h2{
+  color:#e5e7eb !important;
+  opacity:1 !important;
+}
+#contacto.contact-shell .contact-meta{
+  color:#9ca3af !important;
+  opacity:1 !important;
+}
+
+/* 3) CTA BUTTON — recupera la “píldora” PRO */
+#contacto .contact-submit{
+  appearance:none;
+  -webkit-appearance:none;
+  border:1px solid rgba(148,163,184,.22);
+  background:#f8fafc;
+  color:#0b1220;
+  border-radius:999px;
+  padding:14px 22px;
+  font-weight:600;
+  cursor:pointer;
+  transition: transform .12s ease, filter .12s ease;
+}
+#contacto .contact-submit:hover{
+  transform: translateY(-1px);
+  filter: brightness(0.98);
+}
+
+/* Mantener comportamiento desktop/mobile que ya tenías */
+#contacto .contact-cta .contact-submit{ width:340px !important; }
+@media (max-width: 920px){
+  #contacto .contact-cta .contact-submit{ width:100% !important; }
+}
+
+/* 4) ICONOS — si se te pusieron negros, esto los “blanquea” */
+#contacto .contact-social-icon img{
+  filter: invert(1);
+  opacity:.95;
+}
+
+/* por si algún ícono es SVG inline */
+#contacto .contact-social-item svg{
+  fill:#e5e7eb;
+}
+
+/* 5) Por si algún style global te achata/rompe el grid del CTA */
+#contacto .contact-cta__copy{
+  margin:0 !important;
+  color:#e5e7eb;
+}
+
+/* Separación del mensaje de estado (Gracias...) respecto al CTA */
+#contacto #form-status.form-status{
+  margin-top: 12px;   /* probá 10–16px */
+  margin-bottom: 0;
+  line-height: 1.4;
+}
+
+ /* 🔧 Recorta el aire extra entre la card de redes y el footer */
+#contacto.contact-shell{
+  padding-bottom: 24px !important; /* probá 18–28 */
+}
+#contacto{
+  margin-bottom: 0 !important;
+}
+
+/* ===== FIX: tipografía consistente en el footer ===== */
+.footer{
+  font-size:12px !important;
+  line-height:1.35 !important;
+  color:#9ca3af !important;
+}
+
+.footer span{
+  font-size:inherit !important;
+  line-height:inherit !important;
+  color:inherit !important;
+}
+
+/* por si algún estilo global agranda links */
+.footer a{
+  font-size:inherit !important;
+  line-height:inherit !important;
+}
+
 
 </style>
 
- 
+
 
  <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -2725,16 +3676,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PK8M6BPF"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
- 
- 
+
+
 <!-- ================== HEADER ================== -->
-<header class="site-header">
+<header id="top" class="site-header">
   <div class="header-inner">
     <div class="logo-row">
     <a class="logo" href="/" aria-label="VIACLOUDSTUDIO (Inicio)">
   <img src="/vclouds-logo.png" alt="VIACLOUDSTUDIO" width="1580" height="220" decoding="async" loading="eager">
 </a>
-      
+
 <!-- Botón hamburguesa (label) -->
 <input id="nav-toggle" class="nav-toggle" type="checkbox" aria-hidden="true">
 <label for="nav-toggle" class="menu-toggle" aria-label="Abrir menú" aria-controls="site-nav">
@@ -2743,7 +3694,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <span></span>
 </label>
 
-      
+
         <nav id="site-nav" class="nav">
         <a href="/">Inicio</a>
         <a href="#servicios">Servicios</a>
@@ -2814,325 +3765,73 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  </header>
 
 
-<!-- ====== VIA CLOUD STUDIO | Socio Partner Tiendanube (Mini Hero Full Width) ====== -->
-<section id="partner-tiendanube" class="reveal" style="
-  padding: 56px 0;
-  position: relative;
-  overflow: hidden;
-  background:
-    radial-gradient(1200px 600px at 20% 30%, rgba(120,173,255,.24), rgba(0,0,0,0)),
-    radial-gradient(900px 520px at 85% 20%, rgba(150,120,255,.18), rgba(0,0,0,0)),
-    linear-gradient(135deg, rgba(10,60,255,.40), rgba(110,60,255,.34)),
-    linear-gradient(180deg, rgba(6, 24, 70, .72), rgba(6, 24, 70, .32));
-">
 
-  <!-- CSS puntual para mobile (solo afecta esta sección) -->
-  <style>
-    @media (max-width: 640px){
-      #partner-tiendanube .tn-cta-row{
-        flex-direction: column;
-        align-items: stretch !important;
-        gap: 10px !important;
-      }
-      #partner-tiendanube .tn-cta-primary,
-      #partner-tiendanube .tn-cta-secondary{
-        width: 100% !important;
-        display: flex !important;
-      }
-      #partner-tiendanube .tn-cta-primary{
-        padding: 14px 16px !important;
-        border-radius: 16px !important;
-      }
-      #partner-tiendanube .tn-cta-secondary{
-        padding: 13px 16px !important;
-        border-radius: 16px !important;
-        font-weight: 800 !important; /* menos “pegado” */
-        opacity: .95;
-      }
-    }
-
-/* ====== MÉTRICAS (Quién está detrás) ====== */
-.about-metrics{
-  margin-top: 18px;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-  align-items: stretch;
-  position: relative;
-  z-index: 3; /* para que no las “pise” la sombra de la card */
-}
-
-.about-metric{
-  padding: 14px 14px 12px;
-  border-radius: 16px;
-  background: rgba(255,255,255,.75);
-  border: 1px solid rgba(2,6,23,.08);
-  box-shadow: 0 10px 30px rgba(2,6,23,.06);
-}
-
-.about-metric__num{
-  font-size: clamp(22px, 3vw, 34px);
-  line-height: 1.05;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: #0f172a;
-}
-
-.about-metric__label{
-  margin-top: 6px;
-  font-size: 13px;
-  color: #475569;
-  line-height: 1.35;
-}
-
-.about-metrics__note{
-  grid-column: 1 / -1;
-  margin-top: 6px;
-  font-size: 12px;
-  color: #64748b;
-}
-
-@media (max-width: 768px){
-  .about-metrics{
-    grid-template-columns: 1fr;
-    margin-top: 12px;
-  }
-}
-
-/* ✅ Dejá aire real debajo del grid para que no invada la sombra */
-.section-about .about-grid{
-  padding-bottom: 34px; /* probá 28–44px */
-}
-
-/* ✅ y separá un poco más las métricas */
-.about-metrics{
-  margin-top: 28px; /* antes 18px, subilo */
-}
-
-
-   
-  </style>
-
-  <!-- Detalle decorativo suave (opcional) -->
-  <div aria-hidden="true" style="
-    position:absolute; inset:-2px;
-    background: linear-gradient(90deg, rgba(255,255,255,.06), rgba(255,255,255,0), rgba(255,255,255,.06));
-    opacity:.16;
-    pointer-events:none;
-    transform: rotate(-2deg);
-  "></div>
-
-  <div class="wrapper" style="position: relative; z-index: 1;">
-    <div style="
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap: 26px;
-      flex-wrap: wrap;
-    ">
-
-      <!-- IZQ: texto -->
-      <div style="flex: 1 1 640px; min-width: 280px;">
-        <div style="
-          display:inline-flex;
-          align-items:center;
-          gap:10px;
-          padding: 6px 10px;
-          border-radius: 999px;
-          background: rgba(255,255,255,.10);
-          border: 1px solid rgba(255,255,255,.12);
-          margin-bottom: 14px;
-        ">
-          <span style="
-            width:8px; height:8px; border-radius:99px;
-            background: linear-gradient(135deg, rgba(120,173,255,.98), rgba(150,120,255,.78));
-            box-shadow: 0 0 0 4px rgba(120,173,255,.14);
-            display:inline-block;
-          "></span>
-          <span style="
-            font-size: 11.5px;
-            letter-spacing: .18px;
-            color: rgba(255,255,255,.86);
-            font-weight: 800;
-            text-transform: uppercase;
-          ">VIACLOUDSTUDIO es Socio Partner de Tiendanube</span>
+<section id="partner-tiendanube" class="partner-tn-section reveal">
+  <div class="wrapper">
+    <div class="partner-tn-layout">
+      <div class="partner-tn-copy">
+        <div class="partner-tn-eyebrow">
+          <span class="partner-tn-dot" aria-hidden="true"></span>
+          Socio Partner de Tiendanube
         </div>
 
-        <h2 style="
-          margin: 0 0 12px 0;
-          font-size: clamp(30px, 4.2vw, 58px);
-          line-height: 1.02;
-          letter-spacing: -0.6px;
-          color: rgba(255,255,255,.98);
-          font-weight: 900;
-          font-family: inherit;
-        ">
-          Registrate con nuestro link de socio y obtené
-        <span style="color: rgba(120,173,255,.98); white-space:nowrap;">25%&nbsp;OFF</span>
+        <h2>
+          Lanzá tu tienda con Tiendanube y obtené
+          <span>25% OFF</span>
         </h2>
 
-        <p style="
-          margin: 0 0 18px 0;
-          font-size: 16px;
-          line-height: 1.6;
-          color: rgba(255,255,255,.90);
-          max-width: 70ch;
-          font-family: inherit;
-          text-shadow: 0 1px 10px rgba(0,0,0,.16);
-        ">
-          Creá tu tienda en Tiendanube y empezá a vender 24/7. El descuento aplica
-          <strong style="color: rgba(255,255,255,.94);">al primer mes</strong> de cualquier plan al registrarte desde nuestro enlace oficial.
+        <p>
+          Usá nuestro enlace oficial para crear tu cuenta y empezar con el primer mes bonificado.
+          Si preferís no hacerlo solo, también podemos armarte la tienda lista para vender.
         </p>
 
-        <div class="tn-cta-row" style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+        <div class="partner-tn-actions">
           <a
-            class="tn-cta-primary"
+            class="partner-tn-primary"
             href="https://www.tiendanube.com/partners/via-cloud-studio"
             target="_blank"
             rel="noopener noreferrer"
-            style="
-              display:inline-flex;
-              align-items:center;
-              justify-content:center;
-              gap:10px;
-              padding: 13px 18px;
-              border-radius: 14px;
-              background: linear-gradient(135deg, rgba(120,173,255,.98), rgba(150,120,255,.78));
-              color: rgba(10,18,40,1);
-              text-decoration: none;
-              font-weight: 900;
-              font-size: 14px;
-              letter-spacing: .2px;
-              box-shadow: 0 10px 22px rgba(120,173,255,.18);
-              border: 1px solid rgba(255,255,255,.18);
-              font-family: inherit;
-              transform: translateZ(0);
-            "
           >
-            Crear tienda con 25% OFF <span aria-hidden="true">→</span>
+            Crear tienda con 25% OFF
           </a>
 
-          <a
-            class="tn-cta-secondary"
-            href="#contacto"
-            style="
-              display:inline-flex;
-              align-items:center;
-              justify-content:center;
-              padding: 13px 18px;
-              border-radius: 14px;
-              background: rgba(255,255,255,.08);
-              color: rgba(255,255,255,.92);
-              text-decoration: none;
-              font-weight: 700;
-              letter-spacing: .1px;
-              font-size: 14px;
-              border: 1px solid rgba(255,255,255,.12);
-              font-family: inherit;
-            "
-          >
+          <a class="partner-tn-secondary" href="#contacto">
             Quiero que me la armen
           </a>
         </div>
 
-        <div style="margin-top: 14px; display:flex; gap:10px; flex-wrap:wrap;">
-          <span style="
-            display:inline-flex; align-items:center; gap:8px;
-            padding: 8px 12px;
-            border-radius: 999px;
-            background: rgba(255,255,255,.06);
-            border: 1px solid rgba(255,255,255,.10);
-            color: rgba(255,255,255,.78);
-            font-size: 12.5px;
-            white-space: nowrap;
-            font-family: inherit;
-          ">✅ Pagos + envíos listos</span>
-
-          <span style="
-            display:inline-flex; align-items:center; gap:8px;
-            padding: 8px 12px;
-            border-radius: 999px;
-            background: rgba(255,255,255,.06);
-            border: 1px solid rgba(255,255,255,.10);
-            color: rgba(255,255,255,.78);
-            font-size: 12.5px;
-            white-space: nowrap;
-            font-family: inherit;
-          ">⚡ Setup rápido</span>
-
-          <span style="
-            display:inline-flex; align-items:center; gap:8px;
-            padding: 8px 12px;
-            border-radius: 999px;
-            background: rgba(255,255,255,.045);
-            border: 1px solid rgba(255,255,255,.08);
-            color: rgba(255,255,255,.78);
-            font-size: 12.5px;
-            white-space: nowrap;
-            font-family: inherit;
-          ">📈 Ideal para escalar</span>
-        </div>
-      </div>
-
-      <!-- DER -->
-      <div style="flex: 0 1 360px; min-width: 280px;">
-        <div style="
-          padding: 18px;
-          border-radius: 20px;
-          background: rgba(255,255,255,.045);
-          border: 1px solid rgba(255,255,255,.08);
-        ">
-          <div style="
-            font-weight: 700;
-            color: rgba(255,255,255,.92);
-            font-size: 14px;
-            letter-spacing: .1px;
-            margin-bottom: 12px;
-            font-family: inherit;
-          ">
-            Lo que te llevás con Tiendanube
+        <div class="partner-tn-benefits" aria-label="Beneficios incluidos">
+          <div class="partner-tn-benefit">
+            <span class="partner-tn-check" aria-hidden="true">✓</span>
+            Tienda con carrito, catálogo, checkout, pagos y envíos configurables.
           </div>
-
-          <ul style="
-            margin: 0;
-            padding-left: 18px;
-            color: rgba(255,255,255,.78);
-            line-height: 1.55;
-            font-size: 13.5px;
-            font-family: inherit;
-          ">
-            <li>Tienda lista con carrito, catálogo y checkout.</li>
-            <li>Cobros y medios de pago integrados.</li>
-            <li>Envíos configurables + automatización.</li>
-          </ul>
-
-          <div style="
-            margin-top: 12px;
-            padding: 12px;
-            border-radius: 16px;
-            background: rgba(120,173,255,.12);
-            border: 1px solid rgba(120,173,255,.18);
-            color: rgba(255,255,255,.86);
-            font-size: 12.8px;
-            line-height: 1.45;
-            font-family: inherit;
-          ">
-            <strong>Tip:</strong> si querés que quede “lista para vender”, te la armamos a medida (diseño + estructura + optimización).
+          <div class="partner-tn-benefit">
+            <span class="partner-tn-check" aria-hidden="true">✓</span>
+            Estructura pensada para vender desde mobile, redes y campañas.
           </div>
         </div>
       </div>
 
+      <aside class="partner-tn-offer" aria-label="Descuento Tiendanube">
+        <div class="partner-tn-offer-kicker">Beneficio de partner</div>
+        <div class="partner-tn-offer-value">25% OFF</div>
+        <p class="partner-tn-offer-text">
+          Aplica al primer mes de cualquier plan al registrarte desde el enlace oficial de Via Cloud Studio.
+        </p>
+        <p class="partner-tn-note">
+          Recomendado si querés empezar con una base profesional y después optimizar diseño, estructura y conversión.
+        </p>
+      </aside>
     </div>
   </div>
 </section>
-<!-- ====== /Socio Partner Tiendanube ====== -->
 
 
 
 
 <main>
   <!-- MARCAS -->
- <section class="section reveal">
+ <section class="section reveal audience-section">
   <div class="wrapper">
     <div class="section-title">¿Con quién trabajamos?</div>
     <h2>Desde tu primera tienda online hasta marcas listas para escalar.</h2>
@@ -3196,7 +3895,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </p>
    <div class="pill">Pensado para Meta Ads & Google Ads</div>
         </div>
-        
+
         <div class="service-card">
   <h3>Automatizaciones, newsletter y Chat Nube</h3>
   <p>
@@ -3232,7 +3931,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
           <div class="service-foot">
             <div class="pill pill--strong">Ideal para campañas y lanzamientos</div>
-            <a class="service-cta" href="#contacto">Quiero mi landing →</a>
+            <a class="service-cta" href="/landing">Quiero mi landing →</a>
           </div>
         </div>
       </div>
@@ -3251,86 +3950,89 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="grid-portfolio">
       <!-- SANSAY (DESTACADA) -->
-     <a class="portfolio-link portfolio-link--featured"
-   href="https://sansayaromas.com.ar/"
-   target="_blank"
-   rel="noopener noreferrer">
+     <button class="portfolio-link portfolio-link--featured" type="button" data-case="sansay">
   <div class="portfolio-thumb">
     <img src="/sansay-aromas.png" alt="Mockup tienda Sansay Aromas">
-    <span class="portfolio-pill">Caso destacado</span>
+    <span class="portfolio-pill">Estética premium</span>
 
     <div class="portfolio-overlay">
       <h3>SANSAY AROMAS</h3>
       <p>Sahumerios, velas y rituales · estética premium + navegación clara</p>
+      <span class="portfolio-action">Ver caso</span>
     </div>
   </div>
-</a>
+</button>
 
       <!-- VIA SHOP -->
-      <a class="portfolio-link"
-         href="https://www.via-shop.com/"
-         target="_blank"
-         rel="noopener noreferrer">
+      <button class="portfolio-link" type="button" data-case="viashop">
         <div class="portfolio-thumb">
           <img src="/gadget-viashop.png" alt="Mockup tienda VIA SHOP">
-          <span class="portfolio-pill">Mockup Tienda Nube</span>
+          <span class="portfolio-pill">Lista para vender</span>
 
           <div class="portfolio-overlay">
             <h3>VIA SHOP</h3>
             <p>Hogar, bazar y tecnología · Tienda Nube lista para producción</p>
+            <span class="portfolio-action">Ver caso</span>
           </div>
         </div>
-      </a>
+      </button>
 
       <!-- CASA OADA -->
-      <a class="portfolio-link"
-         href="https://www.casaoada.com.ar/"
-         target="_blank"
-         rel="noopener noreferrer">
+      <button class="portfolio-link" type="button" data-case="casaoada">
         <div class="portfolio-thumb">
           <img src="/ferreteria-oada.png" alt="Mockup tienda CASA OADA">
-          <span class="portfolio-pill">Mockup Tienda Nube</span>
+          <span class="portfolio-pill">Campañas + tráfico</span>
 
           <div class="portfolio-overlay">
             <h3>CASA OADA</h3>
             <p>Ferretería y hogar · Tienda Nube lista para campañas de tráfico pago</p>
+            <span class="portfolio-action">Ver caso</span>
           </div>
         </div>
-      </a>
+      </button>
 
       <!-- FERRE CEPPI -->
-      <a class="portfolio-link"
-         href="https://www.ferreceppi.com/" 
-         target="_blank"
-         rel="noopener noreferrer">
+      <button class="portfolio-link" type="button" data-case="ferreceppi">
         <div class="portfolio-thumb">
           <img src="/ferre-ceppi.png" alt="Mockup tienda Ferre CEPPI">
-          <span class="portfolio-pill">Mockup Tienda Nube</span>
+          <span class="portfolio-pill">Catálogo grande</span>
 
           <div class="portfolio-overlay">
             <h3>FERRE CEPPI</h3>
             <p>Catálogo grande · categorías + usabilidad pensada para búsqueda</p>
+            <span class="portfolio-action">Ver caso</span>
           </div>
         </div>
-      </a>
+      </button>
     </div>
-  
-  <div class="works-split">
+
+  <div class="works-showcase-head">
+    <div>
+      <p class="works-showcase-kicker">Landings, newsletters y automatizaciones</p>
+      <h3>Proyectos digitales listos para campañas, ventas y seguimiento.</h3>
+    </div>
+    <p>
+      Mostramos piezas reales y el trabajo que hay detrás: estructura, lectura mobile,
+      CTAs claros y preparación para conectar con Tienda Nube, Marketing Nube o WhatsApp.
+    </p>
+  </div>
+
+  <div class="works-split works-showcase">
 
    <!-- Mockups verticales -->
  <div class="works-stage" aria-label="Nuestros trabajos (carrusel)">
   <div class="works-shots">
-   <!-- Nueva landing VIACLOUDSTUDIO -->
-  <button class="works-shot is-active" data-project="viacloud" type="button">
+   <!-- Servicio Landing Pages -->
+  <button class="works-shot is-active" data-project="campanas" data-label="Servicio landing" type="button" aria-label="Ver caso Landing pages para campañas">
     <span class="works-float">
     <span class="works-clip">
-    <img src="/via-clod.png" alt="Landing VIACLOUDSTUDIO · diseño y optimización Tienda Nube">
+    <img src="/landing-pages-campanas.webp" alt="Landing pages para campañas · VIA CLOUD STUDIO">
    </span>
    </span>
   </button>
-   
+
   <!-- Landing VIA SHOP -->
-  <button class="works-shot" data-project="landing" type="button">
+  <button class="works-shot" data-project="landing" data-label="Landing venta" type="button" aria-label="Ver caso Landing VIA SHOP">
     <span class="works-float">
     <span class="works-clip">
     <img src="/landing-via.png" alt="Landing VIA SHOP">
@@ -3338,8 +4040,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
    </span>
   </button>
 
+  <!-- Landing Dagger Store -->
+  <button class="works-shot" data-project="dagger" data-label="Tienda Nube" type="button" aria-label="Ver caso Landing Dagger Store">
+    <span class="works-float">
+    <span class="works-clip">
+    <img src="/dagger-landing.webp" alt="Landing Dagger Store dentro de Tienda Nube">
+   </span>
+   </span>
+  </button>
+
   <!-- Newsletter DISTRI HOME -->
-  <button class="works-shot" data-project="newsletter" type="button">
+  <button class="works-shot" data-project="newsletter" data-label="Newsletter" type="button" aria-label="Ver caso Newsletter DISTRI HOME">
     <span class="works-float">
     <span class="works-clip">
     <img src="/distri-home.png" alt="Newsletter DISTRI HOME">
@@ -3347,30 +4058,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
    </span>
   </button>
   </div>
-   
+
   <!-- Flechas: tienen que vivir dentro de works-stage (NO dentro de works-shots) -->
   <div class="works-arrows" aria-hidden="false">
     <button class="works-arrow works-arrow--prev" type="button" aria-label="Anterior">‹</button>
     <button class="works-arrow works-arrow--next" type="button" aria-label="Siguiente">›</button>
   </div>
+  <div class="works-dots" aria-label="Proyectos del carrusel">
+    <button class="works-dot is-active" type="button" data-project="campanas" aria-label="Ver proyecto 1" aria-current="true"></button>
+    <button class="works-dot" type="button" data-project="landing" aria-label="Ver proyecto 2"></button>
+    <button class="works-dot" type="button" data-project="dagger" aria-label="Ver proyecto 3"></button>
+    <button class="works-dot" type="button" data-project="newsletter" aria-label="Ver proyecto 4"></button>
+  </div>
  </div>
 
- 
+
 <!-- Texto que cambia -->
 <div class="works-copy" id="works-copy">
-  <p class="works-tag" id="works-tag">Landing Tienda Nube</p>
-  <h3 id="works-title">Landing VIA SHOP</h3>
+  <div class="works-copy-top">
+  <p class="works-tag" id="works-tag">Landing servicio Tienda Nube</p>
+  <span id="works-count">1 / 4</span>
+  </div>
+  <h3 id="works-title">Landing pages para campañas</h3>
   <p id="works-description">
-    Landing enfocada en servicios de diseño y optimización de Tienda Nube,
-    lista para recibir tráfico de campañas y convertir visitas en consultas.
+    Landing de servicio pensada para explicar una oferta puntual, reducir distracciones y convertir tráfico de campañas en consultas.
   </p>
   <ul class="works-points" id="works-points">
-    <li>Diseño pensado para tráfico desde campañas.</li>
-    <li>Estructura clara: hero, propuesta, servicios, trabajos y contacto.</li>
-    <li>Optimizada para leer bien en mobile.</li>
+    <li>Mensaje directo: una acción principal y CTAs claros.</li>
+    <li>Bloques preparados para explicar problema, solución, proceso y FAQ.</li>
+    <li>Base lista para medir scroll, clicks y envío de formulario.</li>
   </ul>
-  <a id="works-link" class="works-link" href="#contacto">
-    Ver landing en esta página
+  <a id="works-link" class="works-link" href="/landing">
+    Ver servicio de landing
   </a>
 </div>
 </div>
@@ -3399,8 +4118,274 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-    
+
 <!-- QUIÉN ESTÁ DETRÁS -->
+<style>
+  /* Upgrade visual: Quien esta detras */
+  .section-about{
+    position:relative;
+    overflow:hidden;
+    margin-top:0;
+    padding:78px 0 86px;
+    border-top:0;
+    background:
+      radial-gradient(circle at 12% 8%, rgba(37,99,235,.16), transparent 38%),
+      radial-gradient(circle at 88% 18%, rgba(124,58,237,.12), transparent 34%),
+      linear-gradient(180deg, #fff 0%, #f8fbff 100%);
+  }
+
+  .section-about::before{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:38px;
+    width:min(1120px, calc(100% - 32px));
+    height:1px;
+    transform:translateX(-50%);
+    background:linear-gradient(90deg, transparent, rgba(37,99,235,.24), transparent);
+  }
+
+  .section-about .about-grid{
+    position:relative;
+    display:grid;
+    grid-template-columns:minmax(0,1.2fr) minmax(320px,.8fr);
+    gap:34px;
+    align-items:stretch;
+    padding:32px;
+    border-radius:30px;
+    background:rgba(255,255,255,.80);
+    border:1px solid rgba(37,99,235,.12);
+    box-shadow:0 28px 70px rgba(15,23,42,.08);
+    backdrop-filter:blur(14px);
+  }
+
+  .section-about .about-grid > div:first-child{
+    align-self:center;
+  }
+
+  .section-about .section-title{
+    display:inline-flex;
+    margin-bottom:14px;
+    padding:7px 12px;
+    border-radius:999px;
+    background:rgba(37,99,235,.08);
+    border:1px solid rgba(37,99,235,.12);
+    color:#2563eb;
+  }
+
+  .section-about h2{
+    max-width:780px;
+    margin-bottom:16px;
+    font-size:clamp(30px,3.4vw,46px);
+    line-height:1.05;
+    letter-spacing:0;
+  }
+
+  .section-about p{
+    max-width:760px;
+  }
+
+  .about-list{
+    margin:24px 0 0;
+    padding:0;
+    display:grid;
+    gap:10px;
+    list-style:none;
+    color:#475569;
+    font-size:1rem;
+    line-height:1.55;
+  }
+
+  .about-list li{
+    position:relative;
+    margin:0;
+    padding:12px 14px 12px 42px;
+    border-radius:16px;
+    background:rgba(248,250,252,.88);
+    border:1px solid rgba(37,99,235,.10);
+  }
+
+  .about-list li::before{
+    content:"✓";
+    position:absolute;
+    left:14px;
+    top:13px;
+    width:20px;
+    height:20px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:999px;
+    background:#e0ecff;
+    color:#2563eb;
+    font-size:13px;
+    font-weight:900;
+  }
+
+  .about-card{
+    position:relative;
+    overflow:hidden;
+    min-height:100%;
+    border-radius:28px;
+    padding:24px;
+    background:
+      radial-gradient(circle at 32% 24%, rgba(124,58,237,.62), transparent 34%),
+      radial-gradient(circle at 0% 0%, rgba(37,99,235,.88), transparent 42%),
+      linear-gradient(145deg, #07183f 0%, #020617 72%);
+    border:1px solid rgba(148,163,184,.38);
+    box-shadow:0 28px 70px rgba(15,23,42,.35);
+    display:grid;
+    grid-template-columns:minmax(170px,.92fr) minmax(0,1fr);
+    gap:22px;
+    align-items:center;
+    transform:none !important;
+  }
+
+  .about-card::after{
+    content:"";
+    position:absolute;
+    inset:1px;
+    border-radius:inherit;
+    border:1px solid rgba(255,255,255,.08);
+    pointer-events:none;
+  }
+
+  .about-avatar{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:260px;
+    aspect-ratio:1;
+    justify-self:center;
+    border-radius:999px;
+    overflow:hidden;
+    background:linear-gradient(135deg, #1d4ed8, #a855f7);
+    box-shadow:0 20px 44px rgba(2,6,23,.36);
+  }
+
+  .about-avatar-initials{
+    width:100%;
+    height:100%;
+    display:block;
+    border-radius:0;
+    object-fit:cover;
+    object-position:center bottom;
+  }
+
+  .about-meta{
+    position:relative;
+    z-index:1;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .about-name{
+    font-size:18px;
+    font-weight:800;
+    color:#fff;
+  }
+
+  .about-role{
+    font-size:13px;
+    color:#dbeafe;
+    line-height:1.45;
+  }
+
+  .about-note{
+    margin:10px 0 0;
+    font-size:14px;
+    line-height:1.55;
+    color:rgba(226,232,240,.92);
+  }
+
+  .about-metrics{
+    margin-top:22px;
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0,1fr));
+    gap:16px;
+  }
+
+  .about-metric{
+    position:relative;
+    overflow:hidden;
+    min-height:118px;
+    padding:20px;
+    border-radius:22px;
+    background:#fff;
+    border:1px solid rgba(37,99,235,.12);
+    box-shadow:0 18px 48px rgba(15,23,42,.08);
+  }
+
+  .about-metric::before{
+    content:"";
+    position:absolute;
+    inset:0 0 auto;
+    height:4px;
+    background:linear-gradient(90deg, #2563eb, #7c3aed);
+  }
+
+  .about-metric__num{
+    font-size:clamp(36px,4vw,52px);
+    line-height:.95;
+    font-weight:900;
+    letter-spacing:0;
+    color:#0f172a;
+  }
+
+  .about-metric__label{
+    margin-top:12px;
+    color:#475569;
+    font-size:14px;
+    line-height:1.35;
+  }
+
+  .about-metrics__note{
+    grid-column:1 / -1;
+    margin-top:4px;
+    color:#64748b;
+    font-size:13px;
+  }
+
+  @media (max-width:980px){
+    .section-about .about-grid{
+      grid-template-columns:1fr;
+    }
+
+    .about-card{
+      min-height:auto;
+    }
+  }
+
+  @media (max-width:640px){
+    .section-about{
+      padding:58px 0 70px;
+    }
+
+    .section-about .about-grid{
+      padding:20px;
+      border-radius:24px;
+    }
+
+    .about-card{
+      grid-template-columns:1fr;
+      padding:20px;
+    }
+
+    .about-avatar{
+      max-width:230px;
+    }
+
+    .about-metrics{
+      grid-template-columns:1fr;
+    }
+
+    .about-metric{
+      padding-right:82px;
+    }
+  }
+</style>
+
 <section id="about" class="section reveal section-about">
   <div class="wrapper about-grid">
     <div>
@@ -3420,7 +4405,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li>Acompañamiento cercano: WhatsApp, videollamada y checklists claros.</li>
       </ul>
     </div>
-  
+
     <div class="about-card">
       <div class="about-avatar">
         <!-- Podés cambiar por una foto tuya si querés -->
@@ -3446,22 +4431,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="wrapper">
   <div class="about-metrics" aria-label="Métricas de experiencia">
     <div class="about-metric">
-      <div class="about-metric__num" data-target="1" data-prefix="" data-suffix="">0</div>
-      <div class="about-metric__label">Año enfocado en Tienda Nube</div>
+      <div class="about-metric__num" data-target="2" data-prefix="" data-suffix="">0</div>
+      <div class="about-metric__label">Años trabajando con Tienda Nube</div>
     </div>
 
     <div class="about-metric">
-      <div class="about-metric__num" data-target="4" data-prefix="" data-suffix="">0</div>
+      <div class="about-metric__num" data-target="5" data-prefix="" data-suffix="">0</div>
       <div class="about-metric__label">Tiendas publicadas</div>
     </div>
 
     <div class="about-metric">
-      <div class="about-metric__num" data-target="200" data-prefix="+" data-suffix="">0</div>
-      <div class="about-metric__label">Productos cargados</div>
+      <div class="about-metric__num" data-target="250" data-prefix="+" data-suffix="">0</div>
+      <div class="about-metric__label">Productos y variantes configuradas</div>
     </div>
 
     <div class="about-metrics__note">
-      *Métricas reales de proyectos entregados y productos cargados.
+      *Métricas reales de proyectos entregados, productos y variantes configuradas.
     </div>
   </div>
 </div>
@@ -3469,129 +4454,175 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 <!-- /QUIÉN ESTÁ DETRÁS -->
 
-    
- <!-- CONTACTO -->
-<section id="contacto" class="contact-section reveal">
+<!-- CONTACTO -->
+<!-- CONTACTO -->
+<section id="contacto" class="contact-section contact-shell reveal">
   <div class="wrapper">
+
+    <!-- ✅ BLOQUE SUPERIOR SIN CARD -->
     <div class="section-title">Contacto</div>
-    <h2>¿Agendamos una llamada para ver tu caso?</h2>
 
-    <div class="contact-grid">
-      <!-- COLUMNA IZQUIERDA: texto + iconos -->
-      <div>
-        <p>
-          Contanos en qué estado está tu proyecto y qué te gustaría mejorar.
-          Te respondemos con una propuesta clara, sin letra chica.
-        </p>
-        <p style="margin-top:12px;font-size:13px;color:#9ca3af;">
-          Tiempo estimado de respuesta: 24/48 hs hábiles.
-        </p>
+    <h2>Recibí tu Plan + Presupuesto</h2>
+    <p>
+      Contanos en qué etapa estás y qué querés lograr. Te respondo con un
+      <strong>plan de acción + presupuesto estimado</strong>, sin letra chica.
+    </p>
+    <p class="contact-meta">Tiempo estimado de respuesta: 24/48 hs hábiles.</p>
 
-        <!-- ICONOS + EMAIL -->
-        <div class="contact-social-row">
-          <a class="contact-social-item js-whatsapp"
-             href="https://wa.me/5491159288093"
-             target="_blank" rel="noopener noreferrer">
-            <span class="contact-social-icon">
-              <img src="/icon-whatsapp.png" alt="WhatsApp">
-            </span>
-          </a>
+    <!-- ✅ CARD SOLO PARA EL FORM -->
+    <div class="contact-box contact-form-card">
+      <form id="contact-form" method="POST" action="https://formspree.io/f/mzzodepb">
+        <input type="hidden" name="_subject" value="Plan + Presupuesto — Consulta desde Tienda Vía CLOUD" />
+        <input type="hidden" name="source" value="main_landing" />
 
-          <a class="contact-social-item"
-             href="https://instagram.com/manuelrubis"
-             target="_blank" rel="noopener noreferrer">
-            <span class="contact-social-icon">
-              <img src="/icon-instagram.png" alt="Instagram">
-            </span>
-          </a>
+        <div class="contact-grid">
+          <div>
+            <label class="sr-only" for="nombre_marca">Nombre y marca</label>
+            <input id="nombre_marca" type="text" name="nombre_marca"
+                   placeholder="Nombre y marca" autocomplete="name" required />
+          </div>
 
-          <a class="contact-social-item"
-             href="https://www.facebook.com/manuelcmdigital"
-             target="_blank" rel="noopener noreferrer">
-            <span class="contact-social-icon">
-              <img src="/icon-facebook.png" alt="Facebook">
-            </span>
-          </a>
+          <div>
+            <label class="sr-only" for="email">Email</label>
+            <input id="email" type="email" name="email"
+                   placeholder="Email" autocomplete="email" required />
+          </div>
+
+          <div>
+            <label class="sr-only" for="instagram_sitio">Instagram o sitio actual</label>
+            <input id="instagram_sitio" type="text" name="instagram_sitio"
+                   placeholder="Instagram o sitio actual (opcional)" autocomplete="url" />
+          </div>
+
+          <div>
+            <label class="sr-only" for="whatsapp">WhatsApp</label>
+            <input id="whatsapp" type="tel" name="whatsapp"
+                   placeholder="WhatsApp (opcional) · +54 9 ..."
+                   inputmode="tel" autocomplete="tel" />
+          </div>
+
+          <div>
+            <label class="sr-only" for="etapa">Etapa</label>
+            <select id="etapa" name="etapa" required>
+              <option value="" disabled selected hidden>¿En qué etapa estás?</option>
+              <option value="ya_tengo_tienda_optimizacion">Ya tengo Tienda Nube y quiero optimizar</option>
+              <option value="armando_desde_cero">Estoy armando desde cero</option>
+              <option value="migrar_a_tn">Quiero migrar a Tienda Nube</option>
+              <option value="solo_averiguo">Solo estoy averiguando</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="sr-only" for="plazo">Plazo</label>
+            <select id="plazo" name="plazo" required>
+              <option value="" disabled selected hidden>¿Para cuándo querés tenerlo listo?</option>
+              <option value="esta_semana">Esta semana</option>
+              <option value="30_dias">En 30 días</option>
+              <option value="60_90_dias">En 60–90 días</option>
+              <option value="mas_adelante">Más adelante</option>
+            </select>
+          </div>
+
+          <div class="contact-span-2">
+            <label class="sr-only" for="mensaje">Contanos brevemente qué necesitás</label>
+            <textarea id="mensaje" name="mensaje"
+              placeholder="¿Qué vendés? ¿Qué querés mejorar primero (diseño, pagos, envíos, ventas, medición)? ¿Tenés algo ya armado?"
+              autocomplete="off"
+              required></textarea>
+          </div>
+
+          <div class="contact-span-2">
+            <label class="sr-only" for="nivel_inversion">Nivel de inversión</label>
+            <select id="nivel_inversion" name="nivel_inversion">
+              <option value="" selected>Inversión estimada (opcional)</option>
+              <option value="listo_para_invertir">Estoy listo para invertir</option>
+              <option value="quiero_estimacion">Quiero una estimación para decidir</option>
+              <option value="solo_comparando">Solo estoy comparando por ahora</option>
+            </select>
+          </div>
+
+          <div class="contact-span-2">
+           <div class="contact-cta">
+           <button class="contact-submit" type="submit">Recibir plan + presupuesto</button>
+
+           <p class="contact-microcopy contact-cta__copy">
+            Todas las consultas las respondo yo, Manuel.
+          <span class="desktop-break"><br></span>
+         Si estás comparando opciones, igual te respondo con próximos pasos claros
+         </p>
+          </div>
+
+         <p id="form-status" class="form-status" aria-live="polite"></p>
+         </div>
         </div>
+      </form>
+    </div>
 
+    <!-- ✅ CARD SOLO PARA REDES -->
+    <div class="contact-box contact-social-card" aria-label="Conectemos">
+      <div>
+        <div class="contact-social-kicker">CONECTEMOS</div>
+        <p class="contact-social-text">
+          ¿Tenés una idea en mente? Escribime por Instagram o Facebook y lo vemos.
+        </p>
+      </div>
+
+      <div class="contact-social-row">
+        <a class="contact-social-item js-whatsapp"
+           href="https://wa.me/5491159288093"
+           target="_blank" rel="noopener noreferrer">
+          <span class="contact-social-icon">
+            <img src="/icon-whatsapp.png" alt="WhatsApp">
+          </span>
+        </a>
+
+        <a class="contact-social-item"
+           href="https://instagram.com/manuel.viacloud"
+           target="_blank" rel="noopener noreferrer">
+          <span class="contact-social-icon">
+            <img src="/icon-instagram.png" alt="Instagram">
+          </span>
+        </a>
+
+        <a class="contact-social-item"
+           href="https://www.facebook.com/manuel.viacloud"
+           target="_blank" rel="noopener noreferrer">
+          <span class="contact-social-icon">
+            <img src="/icon-facebook.png" alt="Facebook">
+          </span>
+        </a>
+      </div>
+
+      <div class="contact-footer-line">
         <p class="contact-email">
           Email: <a href="mailto:viacloudstudio@gmail.com">viacloudstudio@gmail.com</a>
         </p>
-
         <p class="contact-small-note">
-  Todas las consultas las respondo yo, Manuel. Te leo y vemos juntos
-  qué es lo mejor para tu tienda.
-</p>
-       <p class="contact-small-note">
-  Al enviar este formulario aceptás nuestra <a href="/politicas">Política de Privacidad</a>.
-</p>
-
+          Al enviar este formulario aceptás nuestra <a href="/politicas">Política de Privacidad</a>.
+        </p>
       </div>
+    </div><!-- /contact-footer -->
 
-      <!-- COLUMNA DERECHA: FORMULARIO -->
-      <form id="contact-form"
-      method="POST"
-      action="https://formspree.io/f/mzzodepb">
+  </div><!-- /wrapper -->
+</section>
 
-  <input type="hidden" name="_subject"
-         value="Consulta desde landing VIACLOUDSTUDIO" />
-
-  <div>
-    <label for="contact-nombre">Nombre y marca</label>
-    <input type="text" name="nombre_marca"
-           id="contact-nombre"
-           placeholder="Nombre y marca"
-           autocomplete="name"
-           required />
-  </div>
-
-  <div>
-    <label for="contact-email">Email</label>
-    <input type="email" name="email"
-           id="contact-email"
-           placeholder="Email"
-           autocomplete="email"
-           required />
-  </div>
-
-  <div>
-    <label for="contact-sitio">Instagram o sitio actual</label>
-    <input type="text" name="instagram_sitio"
-           id="contact-sitio"
-           placeholder="Instagram o sitio actual"
-           autocomplete="url" />
-  </div>
-
-  <div>
-    <label for="contact-mensaje">Contanos brevemente qué necesitás</label>
-    <textarea name="mensaje"
-              id="contact-mensaje"
-              placeholder="Contanos brevemente qué necesitás"
-              autocomplete="off"
-              required></textarea>
-  </div>
-
-  <button type="submit">Recibir plan + presupuesto</button>
-
-  <p id="form-status" class="form-status" aria-live="polite"></p>
-     </form>
-    </div> <!-- /contact-grid -->
-  </div> <!-- /wrapper -->
- </section>
 
 <!-- DIVISOR ANTES DEL FOOTER -->
 <div class="footer-full-divider"></div>
 
 <!-- FOOTER -->
 <div class="footer">
-  <span>© 2026 VIA Cloud Studio · Argentina.</span>
-  <span class="footer-links">
-    <a href="/">Inicio</a>
-    <a href="/landing">Landing Pages</a>
-    <a href="/politicas">Política de Privacidad</a>
-  </span>
+  <div class="wrapper footer-inner">
+    <span>© 2026 VIA Cloud Studio · Argentina.</span>
+    <span>
+      <a href="/">Inicio</a> ·
+      <a href="/landing">Landing Pages</a> ·
+      <a href="/politicas">Política de Privacidad</a>
+    </span>
+  </div>
 </div>
-  </main>
+</main>
+
 
 <!-- SCRIPT ANIMACIONES + FORM + MENÚ -->
 <script>
@@ -3666,13 +4697,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (response.ok) {
 
-  // ✅ EVENTO PARA GTM/GA4 (recomendado cuando GA4 está via GTM)
-  window.dataLayer = window.dataLayer || [];
+// ✅ Evento REAL (envío exitoso) + anti-duplicado
+window.dataLayer = window.dataLayer || [];
+
+// Armamos nombres consistentes (sirve para home + landing)
+const formName =
+  (form && form.getAttribute && form.getAttribute("data-form-name")) ||
+  (form && form.id) ||
+  "landing_form";
+
+const leadSource =
+  (form && form.getAttribute && form.getAttribute("data-lead-source")) ||
+  (location.pathname.includes("landing") ? "tn_landing" : "web_home");
+
+// Anti doble-disparo (por listeners duplicados / reintentos)
+if (form && form.dataset && form.dataset.leadSent === "1") {
+  // ya lo enviamos una vez, no vuelvas a trackear
+} else {
+  if (form && form.dataset) form.dataset.leadSent = "1";
+
+  // 1) Evento principal para conversiones (GTM/GA4/Meta)
   window.dataLayer.push({
-    event: 'form_submit',
-    event_category: 'contact',
-    event_label: 'landing_form'
+    event: "lead",
+    form_name: formName,
+    lead_source: leadSource,
+    event_category: "contact",
+    event_label: formName
   });
+
+  // 2) Mantener el evento anterior para no romper triggers viejos
+  window.dataLayer.push({
+    event: "form_submit",
+    form_name: formName,
+    source: leadSource,
+    event_category: "contact",
+    event_label: formName
+  });
+}
 
   setStatus('¡Gracias! Tu consulta fue enviada con éxito. Te responderemos a la brevedad.', 'ok');
   form.reset();
@@ -3721,7 +4782,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 
- 
+
 <script>
   document.addEventListener("DOMContentLoaded", function () {
   const shots    = document.querySelectorAll(".works-shot");
@@ -3730,23 +4791,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const descEl   = document.getElementById("works-description");
   const pointsEl = document.getElementById("works-points");
   const linkEl   = document.getElementById("works-link");
+  const dotsWrap = document.querySelector(".works-dots");
+  const prevBtn  = document.querySelector("#trabajos .works-arrow--prev");
+  const nextBtn  = document.querySelector("#trabajos .works-arrow--next");
+  let dots       = [];
+  let activeProjectIndex = 0;
+  const countEl  = document.getElementById("works-count");
 
   if (!shots.length) return;
 
   const projects = {
-    // VIACLOUDSTUDIO
-  viacloud: {
-    tag: "Landing servicio Tienda Nube",
-    title: "Landing VIA CLOUD STUDIO",
+    // LANDING PAGES PARA CAMPAÑAS
+  campanas: {
+    tag: "Landing pages para campañas",
+    title: "Landing de servicio para convertir",
     description:
-      "Landing propia para presentar el servicio de diseño y optimización de Tienda Nube, pensada para captar leads calientes desde campañas y contenido orgánico.",
+      "Página pensada para una sola acción: explicar una oferta concreta, reducir distracciones y convertir tráfico de campañas en consultas.",
     points: [
-      "Hero con propuesta de valor clara, orientada a emprendedores y marcas que quieren escalar.",
-      "Explica el proceso de trabajo, tipos de proyectos y stack de herramientas en un recorrido simple.",
-      "Incluye CTA principales y formulario de consulta rápido conectado a WhatsApp."
+      "Estructura clara para Meta/Google: problema, propuesta, beneficios, proceso y FAQ.",
+      "CTAs repetidos en puntos clave para no perder intención de contacto.",
+      "Base preparada para medir scroll, clicks y envío de formulario."
     ],
-    link: "#contacto",
-    linkLabel: "Quiero una landing como esta"
+    link: "/landing",
+    linkLabel: "Ver servicio de landing"
   },
 
   // VIA SHOP
@@ -3762,6 +4829,21 @@ document.addEventListener('DOMContentLoaded', () => {
     ],
     link: "#contacto",
     linkLabel: "Ver landing en esta página"
+  },
+
+  // DAGGER STORE
+  dagger: {
+    tag: "Landing dentro de Tienda Nube",
+    title: "Dagger Store",
+    description:
+      "Landing comercial montada dentro de Tienda Nube para una campaña puntual, conectando storytelling, categorías y productos reales de la tienda.",
+    points: [
+      "Hero de campaña con foco en la fecha comercial y beneficios visibles.",
+      "Secciones por intención de compra para ordenar productos y acelerar la decisión.",
+      "Diseño alineado a Tienda Nube, con compra directa, cuotas y stock actualizado."
+    ],
+    link: "#contacto",
+    linkLabel: "Quiero una campaña así"
   },
 
   // DISTRI HOME
@@ -3781,6 +4863,27 @@ document.addEventListener('DOMContentLoaded', () => {
 };
 
 
+  function updateSlideClasses(index) {
+    const total = shots.length;
+    shots.forEach(function (shot, idx) {
+      const offset = (idx - index + total) % total;
+      const isActive = offset === 0;
+      const isNext = offset === 1;
+      const isPrev = offset === total - 1;
+
+      shot.classList.toggle("is-active", isActive);
+      shot.classList.toggle("is-prev", isPrev);
+      shot.classList.toggle("is-next", isNext);
+      shot.classList.toggle("is-hidden", !isActive && !isPrev && !isNext);
+
+      if (isActive) {
+        shot.setAttribute("aria-current", "true");
+      } else {
+        shot.removeAttribute("aria-current");
+      }
+    });
+  }
+
   function setProject(key) {
     const data = projects[key];
     if (!data) return;
@@ -3799,21 +4902,76 @@ document.addEventListener('DOMContentLoaded', () => {
 
     linkEl.href        = data.link;
     linkEl.textContent = data.linkLabel;
+
+    const index = Array.from(shots).findIndex(function (btn) {
+      return btn.getAttribute("data-project") === key;
+    });
+
+    if (countEl && index >= 0) {
+      activeProjectIndex = index;
+      countEl.textContent = `${index + 1} / ${shots.length}`;
+      updateSlideClasses(index);
+    }
+
+    dots.forEach(function (dot) {
+      const active = dot.getAttribute("data-project") === key;
+      dot.classList.toggle("is-active", active);
+      if (active) {
+        dot.setAttribute("aria-current", "true");
+      } else {
+        dot.removeAttribute("aria-current");
+      }
+    });
+  }
+
+  if (dotsWrap) {
+    dotsWrap.innerHTML = "";
+    shots.forEach(function (shot, index) {
+      const dot = document.createElement("button");
+      dot.className = "works-dot";
+      dot.type = "button";
+      dot.dataset.project = shot.getAttribute("data-project") || "";
+      dot.setAttribute("aria-label", `Ver proyecto ${index + 1}`);
+      dotsWrap.appendChild(dot);
+    });
+    dots = Array.from(dotsWrap.querySelectorAll(".works-dot"));
   }
 
   shots.forEach(function (btn) {
     btn.addEventListener("click", function () {
       const key = btn.getAttribute("data-project");
-      // visual
-      shots.forEach(s => s.classList.remove("is-active"));
-      btn.classList.add("is-active");
-      // contenido
       setProject(key);
     });
   });
 
+  dots.forEach(function (dot) {
+    dot.addEventListener("click", function () {
+      const key = dot.getAttribute("data-project");
+      const target = document.querySelector(`.works-shot[data-project="${key}"]`);
+      if (target) target.click();
+    });
+  });
+
+  function goToProject(index) {
+    const normalizedIndex = (index + shots.length) % shots.length;
+    const key = shots[normalizedIndex].getAttribute("data-project");
+    setProject(key);
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", function () {
+      goToProject(activeProjectIndex - 1);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", function () {
+      goToProject(activeProjectIndex + 1);
+    });
+  }
+
   // Estado inicial
-  setProject("viacloud"); // Si querés que arranque en VIACLOUDSTUDIO, cambialo a "viacloud"
+  setProject("campanas");
 });
 </script>
 
@@ -3866,16 +5024,17 @@ document.addEventListener('DOMContentLoaded', () => {
          class="vs-chat-input"
          type="text"
          name="message"
+         aria-label="Escribí tu consulta"
          placeholder="Escribí tu consulta..."
          autocomplete="off"
          required />
 
-  <button type="submit" class="vs-chat-send-btn">➤</button>
+  <button type="submit" class="vs-chat-send-btn" aria-label="Enviar consulta">➤</button>
 </form>
 
 </div>
 <!-- /SOFI · CHAT NUBE -->
-  
+
 <script>
 (function () {
   const launcher = document.getElementById('vs-chat-launcher');
@@ -3898,21 +5057,39 @@ document.addEventListener('DOMContentLoaded', () => {
     'https://wa.me/' + WHATSAPP_PHONE +
     '?text=' + encodeURIComponent(WHATSAPP_TEXT);
 
-  document.addEventListener('DOMContentLoaded', () => {
-  const waLink = document.querySelector('.js-whatsapp');
-  if (!waLink) return;
+(function () {
+  window.dataLayer = window.dataLayer || [];
 
-  waLink.addEventListener('click', () => {
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: 'whatsapp_click',
-      event_category: 'contact',
-      event_label: 'chat_whatsapp',
-      link_url: waLink.href
-    });
-  });
-});
+  function isWhatsAppLink(href) {
+    return /^(https?:\/\/)?(wa\.me|api\.whatsapp\.com|web\.whatsapp\.com)(\/|\?|$)/i.test(href || '');
+  }
 
+  function getWaButtonType(a) {
+    if (a.classList.contains('wa-float')) return 'floating_button';
+    if (a.classList.contains('js-whatsapp')) return 'header_or_footer_icon';
+    return 'unknown_button';
+  }
+
+  document.addEventListener(
+    'click',
+    function (e) {
+      const a = e.target.closest('a');
+      if (!a) return;
+
+      const hrefAttr = a.getAttribute('href') || '';
+      if (!isWhatsAppLink(hrefAttr)) return;
+
+      window.dataLayer.push({
+        event: 'whatsapp_click',
+        event_category: 'contact',
+        event_label: 'chat_whatsapp',
+        link_url: a.href,
+        wa_button: getWaButtonType(a)
+      });
+    },
+    true
+  );
+})();
 
   const faqs = [
     {
@@ -3961,6 +5138,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'vs-chat-wa-btn';
+    btn.setAttribute('data-wa-url', WHATSAPP_URL);
     btn.textContent = 'Seguir por WhatsApp';
     btn.addEventListener('click', function () {
       window.open(WHATSAPP_URL, '_blank');
@@ -4159,7 +5337,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
- 
+
 <!-- Botón flotante "volver arriba" -->
 <button class="scroll-top-btn" aria-label="Volver arriba">
   ↑
@@ -4185,126 +5363,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-    
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  if (!matchMedia("(max-width: 900px)").matches) return;
 
-  const track = document.querySelector("#trabajos .works-shots");
-  const shots = Array.from(document.querySelectorAll("#trabajos .works-shots .works-shot"));
-  if (!track || shots.length < 2) return;
-
-  // Centrar un slide en el carrusel
-  function center(btn, smooth=true){
-    const trackRect = track.getBoundingClientRect();
-    const btnRect = btn.getBoundingClientRect();
-    const delta = (btnRect.left - trackRect.left) - (trackRect.width/2 - btnRect.width/2);
-    track.scrollTo({ left: track.scrollLeft + delta, behavior: smooth ? "smooth" : "auto" });
-  }
-
-  // Al click: centrar (tu JS ya setea is-active + actualiza texto)
-  shots.forEach(btn => {
-    btn.addEventListener("click", () => center(btn, true), { passive:true });
-  });
-
-  // Al finalizar swipe: elegir el más centrado y “clickearlo” para sincronizar texto
-  let t = null;
-  track.addEventListener("scroll", () => {
-    clearTimeout(t);
-    t = setTimeout(() => {
-      const centerX = track.getBoundingClientRect().left + track.clientWidth/2;
-      let best = shots[0], bestD = Infinity;
-
-      shots.forEach(btn => {
-        const r = btn.getBoundingClientRect();
-        const mid = r.left + r.width/2;
-        const d = Math.abs(mid - centerX);
-        if (d < bestD){ bestD = d; best = btn; }
-      });
-
-      if (!best.classList.contains("is-active")) {
-        best.click();          // dispara tu setProject() + is-active
-        center(best, false);   // lo deja perfecto centrado
-      }
-    }, 120);
-  }, { passive:true });
-});
-</script>
-
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  if (!matchMedia("(max-width: 900px)").matches) return;
-
-  const root   = document.querySelector("#trabajos");
-  const track  = root?.querySelector(".works-shots");
-  const shots  = Array.from(root?.querySelectorAll(".works-shots .works-shot") || []);
-  const prevBtn = root?.querySelector(".works-arrow--prev");
-  const nextBtn = root?.querySelector(".works-arrow--next");
-  if (!track || shots.length < 2 || !prevBtn || !nextBtn) return;
-
-  function center(btn, smooth=true){
-    const trackRect = track.getBoundingClientRect();
-    const btnRect = btn.getBoundingClientRect();
-    const delta = (btnRect.left - trackRect.left) - (trackRect.width/2 - btnRect.width/2);
-    track.scrollTo({ left: track.scrollLeft + delta, behavior: smooth ? "smooth" : "auto" });
-  }
-
-  function activeIndex(){
-    const i = shots.findIndex(b => b.classList.contains("is-active"));
-    return i >= 0 ? i : 0;
-  }
-
-  function updateArrows(){
-    const i = activeIndex();
-    prevBtn.hidden = (i === 0);
-    nextBtn.hidden = (i === shots.length - 1);
-  }
-
-  function goTo(i){
-    i = Math.max(0, Math.min(shots.length - 1, i));
-    shots[i].click();          // mantiene tu lógica (texto + is-active)
-    center(shots[i], true);
-    updateArrows();
-  }
-
-  prevBtn.addEventListener("click", () => goTo(activeIndex() - 1));
-  nextBtn.addEventListener("click", () => goTo(activeIndex() + 1));
-
-  // si hacen click directo en una card
-  shots.forEach(btn => btn.addEventListener("click", () => {
-    setTimeout(() => { center(btn, true); updateArrows(); }, 0);
-  }, { passive:true }));
-
-  // si cambian por swipe: detecto la más centrada y la activo
-  let t = null;
-  track.addEventListener("scroll", () => {
-    clearTimeout(t);
-    t = setTimeout(() => {
-      const centerX = track.getBoundingClientRect().left + track.clientWidth/2;
-      let best = 0, bestD = Infinity;
-
-      shots.forEach((btn, idx) => {
-        const r = btn.getBoundingClientRect();
-        const mid = r.left + r.width/2;
-        const d = Math.abs(mid - centerX);
-        if (d < bestD){ bestD = d; best = idx; }
-      });
-
-      if (!shots[best].classList.contains("is-active")) shots[best].click();
-      center(shots[best], false);
-      updateArrows();
-    }, 120);
-  }, { passive:true });
-
-  setTimeout(() => {
-    center(shots[activeIndex()], false);
-    updateArrows();
-  }, 60);
-});
-</script>
-
-  
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const chk   = document.getElementById("nav-toggle");
@@ -4391,18 +5450,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const duration = 850; // ms
     const start = performance.now();
 
-    const flicker = setInterval(() => {
-      const r = Math.max(0, Math.floor(Math.random() * (target + 20)));
-      el.textContent = `${prefix}${r}${suffix}`;
-    }, 50);
-
     function tick(now){
       const p = Math.min(1, (now - start) / duration);
       const eased = 1 - Math.pow(1 - p, 3);
       const val = Math.round(target * eased);
+      el.textContent = `${prefix}${val}${suffix}`;
 
       if(p >= 1){
-        clearInterval(flicker);
         el.textContent = `${prefix}${target}${suffix}`;
         return;
       }
@@ -4432,7 +5486,182 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 </script>
 
- 
- 
+<div class="portfolio-modal" id="portfolio-modal" hidden>
+  <div class="portfolio-modal__panel" role="dialog" aria-modal="true" aria-labelledby="portfolio-modal-title">
+    <div class="portfolio-modal__media">
+      <img id="portfolio-modal-img" src="" alt="">
+    </div>
+
+    <div class="portfolio-modal__content">
+      <button class="portfolio-modal__close" type="button" aria-label="Cerrar caso">&times;</button>
+      <span class="portfolio-modal__tag" id="portfolio-modal-tag"></span>
+      <h3 id="portfolio-modal-title"></h3>
+      <p class="portfolio-modal__summary" id="portfolio-modal-summary"></p>
+
+      <div class="portfolio-modal__grid">
+        <div class="portfolio-modal__block">
+          <span class="portfolio-modal__label">Qué hicimos</span>
+          <ul id="portfolio-modal-work"></ul>
+        </div>
+
+        <div class="portfolio-modal__block">
+          <span class="portfolio-modal__label">Foco del proyecto</span>
+          <p id="portfolio-modal-focus"></p>
+        </div>
+      </div>
+
+      <div class="portfolio-modal__actions">
+        <a class="portfolio-modal__link" id="portfolio-modal-link" href="#" target="_blank" rel="noopener noreferrer">Ver tienda &rarr;</a>
+        <a class="portfolio-modal__secondary" href="#contacto">Quiero algo así</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const cases = {
+      sansay: {
+        tag: 'Caso destacado',
+        title: 'SANSAY AROMAS',
+        image: '/sansay-aromas.png',
+        imageAlt: 'Mockup tienda Sansay Aromas',
+        url: 'https://sansayaromas.com.ar/',
+        summary:
+          'Tienda de sahumerios, velas y rituales trabajada para transmitir calma, marca premium y una experiencia de compra simple desde el primer vistazo.',
+        focus:
+          'Ordenar el universo visual de la marca, reforzar confianza y facilitar que el visitante encuentre productos por intención de compra.',
+        work: [
+          'Diseño visual alineado a un rubro sensorial y premium.',
+          'Jerarquía de categorías para mejorar exploración.',
+          'Presentación de productos pensada para compra rápida.'
+        ]
+      },
+      viashop: {
+        tag: 'Tienda Nube',
+        title: 'VIA SHOP',
+        image: '/gadget-viashop.png',
+        imageAlt: 'Mockup tienda VIA SHOP',
+        url: 'https://www.via-shop.com/',
+        summary:
+          'Proyecto de hogar, bazar y tecnología preparado para una lectura clara de productos y una estructura lista para salir a producción.',
+        focus:
+          'Lograr una tienda práctica, comercial y fácil de recorrer, con categorías entendibles y foco en conversión.',
+        work: [
+          'Estructura comercial para catálogo variado.',
+          'Organización visual de productos y beneficios.',
+          'Base optimizada para campañas y tráfico pago.'
+        ]
+      },
+      casaoada: {
+        tag: 'Ferretería y hogar',
+        title: 'CASA OADA',
+        image: '/ferreteria-oada.png',
+        imageAlt: 'Mockup tienda CASA OADA',
+        url: 'https://www.casaoada.com.ar/',
+        summary:
+          'Tienda orientada a ferretería y hogar, con una estructura pensada para que el usuario llegue rápido a la categoría correcta.',
+        focus:
+          'Reducir fricción en la búsqueda de productos técnicos y preparar la tienda para captar demanda desde campañas.',
+        work: [
+          'Categorías más claras para productos de uso cotidiano.',
+          'Comunicación visual directa para decisión rápida.',
+          'Preparación del recorrido para tráfico de anuncios.'
+        ]
+      },
+      ferreceppi: {
+        tag: 'Catálogo grande',
+        title: 'FERRE CEPPI',
+        image: '/ferre-ceppi.png',
+        imageAlt: 'Mockup tienda Ferre CEPPI',
+        url: 'https://ferreceppi.com/',
+        summary:
+          'Proyecto de catálogo amplio donde la prioridad fue ordenar información, mejorar usabilidad y facilitar búsquedas frecuentes.',
+        focus:
+          'Hacer que una tienda con muchos productos se sienta clara, confiable y fácil de navegar.',
+        work: [
+          'Estructura pensada para navegación por rubros.',
+          'Mejora de lectura en categorías y fichas.',
+          'Experiencia más simple para compradores recurrentes.'
+        ]
+      }
+    };
+
+    const modal = document.getElementById('portfolio-modal');
+    if (!modal) return;
+
+    const title = document.getElementById('portfolio-modal-title');
+    const tag = document.getElementById('portfolio-modal-tag');
+    const summary = document.getElementById('portfolio-modal-summary');
+    const focus = document.getElementById('portfolio-modal-focus');
+    const work = document.getElementById('portfolio-modal-work');
+    const image = document.getElementById('portfolio-modal-img');
+    const link = document.getElementById('portfolio-modal-link');
+    const closeBtn = modal.querySelector('.portfolio-modal__close');
+    const contactLink = modal.querySelector('.portfolio-modal__secondary');
+    let previousTrigger = null;
+
+    function fillCase(data) {
+      title.textContent = data.title;
+      tag.textContent = data.tag;
+      summary.textContent = data.summary;
+      focus.textContent = data.focus;
+      image.src = data.image;
+      image.alt = data.imageAlt;
+      link.href = data.url;
+      work.textContent = '';
+
+      data.work.forEach(function (item) {
+        const li = document.createElement('li');
+        li.textContent = item;
+        work.appendChild(li);
+      });
+    }
+
+    function openCase(trigger) {
+      const data = cases[trigger.dataset.case];
+      if (!data) return;
+
+      previousTrigger = trigger;
+      fillCase(data);
+      modal.hidden = false;
+      document.body.classList.add('portfolio-modal-open');
+      closeBtn.focus();
+    }
+
+    function closeCase() {
+      modal.hidden = true;
+      document.body.classList.remove('portfolio-modal-open');
+
+      if (previousTrigger) {
+        previousTrigger.focus();
+        previousTrigger = null;
+      }
+    }
+
+    document.querySelectorAll('.portfolio-link[data-case]').forEach(function (trigger) {
+      trigger.addEventListener('click', function () {
+        openCase(trigger);
+      });
+    });
+
+    closeBtn.addEventListener('click', closeCase);
+
+    modal.addEventListener('click', function (event) {
+      if (event.target === modal) closeCase();
+    });
+
+    if (contactLink) {
+      contactLink.addEventListener('click', closeCase);
+    }
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && !modal.hidden) closeCase();
+    });
+  })();
+</script>
+
+
+
 </body>
 </html>
