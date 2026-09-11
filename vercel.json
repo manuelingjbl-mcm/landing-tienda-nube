@@ -20,6 +20,11 @@
       "source": "/politicas/",
       "destination": "/politicas",
       "permanent": true
+    },
+    {
+      "source": "/tienda-nube/",
+      "destination": "/tienda-nube",
+      "permanent": true
     }
   ]
 }

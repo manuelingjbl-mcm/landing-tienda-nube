@@ -1,0 +1,4438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+ <link rel="icon" href="/favicon.icon.png" sizes="any">
+ <link rel="apple-touch-icon" href="/favicon.icon.png">
+
+  
+  <meta charset="UTF-8" />
+  <title>Vía Cloud Studio · Diseño y optimización Tienda Nube</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="Diseñamos y optimizamos tiendas Tienda Nube a medida para tu marca. Home, categorías, PDP y landings listas para convertir visitas en ventas." />
+  <link rel="canonical" href="https://www.viacloudstudio.com/tienda-nube" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0056ff" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Vía Cloud Studio · Diseño y optimización Tienda Nube" />
+  <meta property="og:description" content="Diseñamos y optimizamos tiendas Tienda Nube a medida para tu marca: claras, rápidas y listas para vender." />
+  <meta property="og:url" content="https://www.viacloudstudio.com/tienda-nube" />
+  <meta property="og:image" content="https://www.viacloudstudio.com/hero-mobile-mcmdigital.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Vía Cloud Studio · Diseño y optimización Tienda Nube" />
+  <meta name="twitter:description" content="Tiendas Tienda Nube a medida, optimizadas para convertir visitas en ventas." />
+  <meta name="twitter:image" content="https://www.viacloudstudio.com/hero-mobile-mcmdigital.png" />
+  <link rel="preload" as="image" href="/hero-mobile-mcmdigital.png" fetchpriority="high" />
+  <meta name="facebook-domain-verification" content="u8j1ch87vy74yb23zjmipdanqiswpn" />
+
+<style>
+    :root{
+      --azul:#0056ff;
+      --azul-oscuro:#030712;
+      --gris:#f5f5f5;
+      --texto:#111827;
+      --radio:18px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--texto);
+      background:#ffffff;
+      line-height:1.5;
+    }
+ html{
+    scroll-behavior:smooth;
+  }
+    a{text-decoration:none;color:inherit;}
+    img{max-width:100%;display:block;}
+
+    /* CONTAINER */
+    .wrapper{
+      max-width:1120px;
+      margin:0 auto;
+      padding:0 16px 64px;
+    }
+
+  /* HEADER con degradado azul → violeta */
+header{
+  background:
+    radial-gradient(circle at top left, rgba(118,169,250,0.40) 0, transparent 45%),
+    linear-gradient(135deg,#020617 0%, #0033c7 20%, #5b21ff 55%);
+  color:#fff;
+  padding:24px 0 40px;
+  position:relative;
+  overflow:hidden;
+  min-height:100vh; /* el azul ocupa toda la pantalla del home */
+}
+
+/* Textura / foto de fondo con la imagen nueva */
+header::after{
+  content:"";
+  position:absolute;
+  inset:-40%;
+  background:
+    linear-gradient(180deg,rgba(3,7,18,0.80),rgba(3,7,18,0.60)),
+    url("/bg-viacloudstudio-dev.jpg") center/cover no-repeat;
+  opacity:0.45;              /* podés bajar/subir este valor para más o menos foto */
+  mix-blend-mode:soft-light; /* integra la imagen con el degradado */
+  pointer-events:none;
+}
+
+    .header-inner{
+      position:relative;
+      z-index:1;
+      max-width:1320px;
+      margin:0 auto;
+      padding:0 56px;
+    }
+    .logo-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:32px;
+      gap:12px;
+    }
+    .logo{
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:14px;
+    }
+    .nav{
+  display:flex;
+  gap:20px;
+  font-size:14px;
+  opacity:.9;
+}
+
+/* Links de navegación con subrayado animado */
+.nav a{
+  position:relative;
+  cursor:pointer;
+  padding-bottom:4px;
+}
+
+/* Línea oculta por defecto */
+.nav a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:0;
+  height:2px;
+  background:#ffffff;
+  transition:width .22s ease;
+}
+
+/* Al pasar el mouse aparece la línea */
+.nav a:hover::after{
+  width:100%;
+}
+
+
+/* =========================
+   DESKTOP / BASE (DEFAULT)
+========================= */
+
+/* ====== DESKTOP BLINDAJE (>=768): NAV + HERO como el modelo original ====== */
+@media (min-width: 768px){
+
+  /* Ocultar overlay mobile en desktop */
+  .hero-mobile-overlay{ display:none !important; }
+
+  /* Menú: desktop normal (no dropdown) */
+  .menu-toggle{ display:none !important; }
+
+  .nav{
+    position: static !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+
+    display:flex !important;
+    flex-direction: row !important;
+    gap: 20px !important;
+    color: #fff !important;
+  }
+  .nav a{ color:#fff !important; }
+
+  /* HERO layout (grid) */
+  .hero{
+    display:grid !important;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.5fr) !important;
+    column-gap: 64px !important;
+    align-items: center !important;
+    padding: 72px 0 56px !important;
+    gap: 0 !important;
+  }
+
+  /* Limitar ancho de texto */
+  .hero > div:first-child{
+    max-width: 560px;
+  }
+
+  .hero-kicker{
+    display:block !important;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .16em;
+    opacity: .8;
+    margin-bottom: 8px;
+  }
+
+  .hero h1{
+    display:block !important;
+    font-size: clamp(36px, 3.4vw, 56px);
+    line-height: 1.05;
+    margin-bottom: 16px;
+  }
+
+  .hero p{
+    font-size: 15px;
+    max-width: 540px;
+    opacity: .9;
+    margin-bottom: 24px;
+  }
+
+  /* Botón + link en línea */
+  .hero-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    align-items:center;
+  }
+
+  /* Visual derecha */
+  .hero-visual{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .hero-phone{
+    max-width: 660px;
+    margin-top: -70px;
+  }
+
+  /* IMPORTANTE: que nada de mobile transforme la imagen en desktop */
+  .hero-phone img,
+  .hero-img{
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    transform: none !important;
+    transform-origin: center center !important;
+    filter: drop-shadow(0 18px 45px rgba(15,23,42,.7));
+  }
+
+  .hero-badge{
+    margin-top: 16px !important;
+    font-size: 13px !important;
+    padding: 6px 14px !important;
+    border-radius: 999px !important;
+    background: rgba(15,23,42,.85) !important;
+    border: 1px solid rgba(148,163,184,.5) !important;
+    color: #e5e7eb !important;
+    align-self: center !important;
+    white-space: nowrap;
+  }
+}
+
+/* =========================
+   MOBILE ÚNICO (HERO + NAV) – LIMPIO + PERILLAS
+========================= */
+@media (max-width: 767.98px){
+
+  /* ===== Perillas simples (tocá SOLO esto) ===== */
+  :root{
+    /* Imagen */
+    --m-phone-pull: 0px;     /* 0 = contenido debajo. Negativo (-60px) = solapa */
+    --m-img-s: 1.85;         /* zoom leve (1.03 a 1.15) */
+    --m-img-x: 64px;        /* izquierda (-) / derecha (+) */
+    --m-img-y:  -98px;         /* arriba (-) / abajo (+) */
+
+    /* Overlay (título arriba de la imagen) */
+    --m-overlay-y: 15%;      /* 0% / 6% / 12% */
+    --m-title-size: 38px;    /* “Diseñamos…” */
+
+    /* Pill */
+    --m-badge-mt: 182px;
+    --m-badge-mb: 18px;
+
+    /* Contenido */
+    --m-content-mt: 5px;    /* separación desde pill → párrafo/botones */
+  }
+
+  /* ===== Hamburguesa ===== */
+  .menu-toggle{
+    display:inline-flex !important;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    z-index:9001;
+    pointer-events:auto;
+    touch-action:manipulation;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  /* ===== Menú desplegable ===== */
+  .logo-row{ position:relative; }
+  .nav{
+    position:absolute;
+    top:calc(100% + 10px);
+    left:16px;
+    right:16px;
+    z-index:9000;
+
+    background:#ffffff;
+    color:#111827;
+    border-radius:14px;
+    padding:10px 14px;
+
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(-6px);
+    transition:opacity .22s ease, transform .22s ease;
+    box-shadow:0 18px 40px rgba(15,23,42,.35);
+  }
+  .nav a{ color:#111827; }
+  .nav.nav-open{
+    opacity:1;
+    pointer-events:auto;
+    transform:translateY(0);
+  }
+
+  /* ===== HERO base ===== */
+  .hero{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    padding-top:0;
+    padding-bottom:16px;
+    background:none !important;
+    position:relative;
+  }
+
+  .hero-visual{
+    order:1;
+    width:100%;
+    display:flex;               /* 👈 centra pill */
+    flex-direction:column;
+    align-items:center;
+  }
+
+  /* Ocultamos H1 normal (usamos overlay) */
+  .hero-kicker,
+  .hero-content h1{ display:none !important; }
+
+  /* ===== Imagen (reencuadre estable) ===== */
+  .hero-phone{
+    position:relative;
+    width:100%;
+    overflow:visible;            /* 👈 para que el reencuadre no rompa bordes */
+    margin-bottom: var(--m-phone-pull);
+    z-index:0;
+    border-radius:0;         /* opcional (podés borrar si no querés recorte suave) */
+  }
+
+  .hero-phone img,
+  .hero-img{
+    width:100%;
+    height:auto;
+    display:block;
+    filter:none;
+
+    transform: translate(var(--m-img-x), var(--m-img-y)) scale(var(--m-img-s));
+    transform-origin:center top;
+  }
+
+  /* ===== Overlay (kicker + título) ===== */
+  .hero-mobile-overlay{
+    display:flex !important;
+    position:absolute;
+    inset:0;
+    padding:0 24px;
+
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+
+    pointer-events:none;
+    transform:translateY(var(--m-overlay-y));
+  }
+
+  .hero-mobile-kicker{
+    margin:0 0 12px;
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:#fdfcff;
+    text-shadow:0 2px 4px rgba(0,0,0,.85), 0 0 14px rgba(0,0,0,.65);
+    -webkit-text-stroke:.35px rgba(0,0,0,.35);
+  }
+
+  .hero-mobile-title{
+    margin:0;
+    font-size: var(--m-title-size);
+    line-height:1.12;
+    max-width:22rem;
+    color:#fdfcff;
+    text-shadow:0 2px 4px rgba(0,0,0,.85), 0 0 14px rgba(0,0,0,.65);
+    -webkit-text-stroke:.35px rgba(0,0,0,.35);
+  }
+
+  /* ===== Pill ===== */
+  .hero-badge{
+    align-self:center;
+    margin: var(--m-badge-mt) auto var(--m-badge-mb);
+    width:fit-content;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:8px 22px;
+    border-radius:999px;
+    background:rgba(15,23,42,.85);
+    border:1px solid rgba(148,163,184,.5);
+    color:#e5e7eb;
+    font-size:12px;
+    white-space:nowrap;
+    max-width:calc(100vw - 32px);
+  }
+
+  /* ===== Contenido (párrafo + CTA) ===== */
+  .hero-content{
+    order:2;
+    padding:0 20px;
+    margin-top: var(--m-content-mt);
+    position:relative;
+    z-index:1;
+  }
+
+ /* Aire SOLO entre el 1er párrafo y los botones */
+.hero-content{
+  display: flex;
+  flex-direction: column;
+  gap: 14px; /* 👈 acá separás todo hacia abajo */
+}
+
+
+  .hero-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    align-items:center;
+    margin: 0 0 12px;
+  }
+
+  /* CTA pill como desktop */
+  .hero-actions .btn-primary,
+  .hero-actions .btn-primary--hero{
+    background:#fff;
+    color:#111827;
+    border-radius:999px;
+    padding:10px 22px;
+    font-size:13px;
+    font-weight:600;
+    border:0;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+    transition:transform .18s ease, box-shadow .18s ease, background-color .18s ease;
+  }
+  .hero-actions .btn-primary:hover,
+  .hero-actions .btn-primary--hero:hover{
+    transform:translateY(-2px);
+    background:#f3f4ff;
+    box-shadow:0 14px 36px rgba(15,23,42,.35);
+  }
+
+  .hero-actions .btn-primary,
+.hero-actions .btn-primary--hero{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;  /* 👈 centra el texto */
+  text-align: center;       /* 👈 por si fuera <a> */
+  width: 100%;              /* 👈 si querés pill full-width */
+  /* si NO lo querés full-width, sacá width:100% y listo */
+}
+
+  .hero-actions .btn-secondary{
+    font-size:13px;
+    font-weight:600;
+    opacity:.95;
+  }
+
+  .hero-tagline,
+  .hero-content > p:last-of-type{
+    font-size:13px;
+    opacity:.9;
+    margin:0;
+  }
+}
+
+
+
+
+    
+    /* MARCAS */
+    .section{
+      padding:56px 0;
+    }
+    .section-title{
+      font-size:14px;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      color:#6b7280;
+      margin-bottom:16px;
+    }
+    .section h2{
+      font-size:24px;
+      margin-bottom:8px;
+    }
+    .section p{
+      max-width:540px;
+      font-size:14px;
+      color:#4b5563;
+    }
+    .brand-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(90px,1fr));
+      gap:20px;
+      margin-top:32px;
+      font-size:13px;
+      color:#4b5563;
+    }
+    .brand-grid span{
+      border:1px solid #e5e7eb;
+      border-radius:999px;
+      padding:8px 10px;
+      text-align:center;
+      background:#fff;
+    }
+    
+/* Píldoras de tipos de clientes (¿Con quién trabajamos?) */
+.brand-grid span.client-pill{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:18px 32px;              /* más grandes, que respiren */
+  border-radius:999px;
+  border:1px solid transparent;
+  background:
+    linear-gradient(#ffffff,#ffffff) padding-box,
+    linear-gradient(135deg,#2563eb,#7c3aed) border-box;  /* borde azul→violeta */
+  box-shadow:0 18px 45px rgba(15,23,42,.06);
+  font-size:14px;
+  color:#4b5563;
+  max-width:440px;
+  margin:0 auto;
+}
+
+/* Un toque más compactas en mobile */
+@media (max-width:768px){
+  .brand-grid span.client-pill{
+    padding:14px 22px;
+    font-size:13px;
+  }
+}
+
+    /* ===== MOBILE: pills una debajo de la otra ===== */
+@media (max-width: 768px) {
+  .brand-grid {
+    display: flex;              /* forzamos flex en mobile */
+    flex-direction: column;     /* columna: una bajo la otra */
+    align-items: stretch;       /* que ocupen todo el ancho */
+    gap: 16px;                  /* espacio entre cada pill */
+  }
+
+  /* Cada pill ocupa toda la fila */
+  .brand-grid > span,
+  .brand-grid .client-pill {
+    display: block;
+    width: 100%;
+    max-width: 380px;           /* opcional, para que no se vayan muy anchas */
+    margin: 0 auto;
+  }
+}
+
+/* Un toque más compactas en mobile */
+@media (max-width:768px){
+  .client-pill{
+    padding:14px 22px;
+    font-size:13px;
+  }
+}
+
+    /* SERVICIOS */
+    .section-dark{
+      background:#111827;
+      color:#e5e7eb;
+      padding:56px 0;
+    }
+    .services{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:32px;
+      margin-top:24px;
+    }
+    .service-card h3{
+      font-size:18px;
+      margin-bottom:8px;
+    }
+    .service-card p{
+      font-size:14px;
+      color:#d1d5db;
+      margin-bottom:10px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:4px 10px;
+      border-radius:999px;
+      background:rgba(31,41,55,.9);
+      font-size:11px;
+    }
+
+   /* =========================
+   PORTFOLIO — Sansay destacada + 3 (UNIFICADO)
+   (Reemplazar TODO el CSS viejo de Portfolio por este)
+========================= */
+
+/* ===== GRID (layout) ===== */
+.grid-portfolio{
+  margin-top:32px;
+  display:grid;
+  gap:24px;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+/* destacada a lo ancho (soporta ambas clases) */
+.grid-portfolio .portfolio-link.portfolio-featured,
+.grid-portfolio .portfolio-link--featured{
+  grid-column: 1 / -1;
+  width: 100%;
+  justify-self: stretch;
+}
+
+/* 3 normales: 4 columnas cada una */
+.grid-portfolio .portfolio-link:not(.portfolio-featured):not(.portfolio-link--featured){
+  grid-column: span 4;
+  width: 100%;
+  justify-self: stretch;
+}
+
+/* tablet: 2 por fila */
+@media (max-width: 992px){
+  .grid-portfolio .portfolio-link:not(.portfolio-featured):not(.portfolio-link--featured){
+    grid-column: span 6;
+  }
+}
+
+/* mobile: 1 por fila + 100% ancho sí o sí */
+@media (max-width: 800px){
+  .grid-portfolio{
+    grid-template-columns: 1fr;
+    gap:20px;
+  }
+
+  .grid-portfolio .portfolio-link{
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    max-width: none !important;
+    justify-self: stretch !important;
+  }
+}
+
+/* ===== CARD / LINK ===== */
+.portfolio-link{
+  display:block;
+  text-decoration:none;
+  color:inherit;
+  border-radius:24px;
+  overflow:hidden;
+}
+
+/* contenedor imagen + overlay */
+.portfolio-thumb{
+  position:relative;
+  height:240px;
+  background:#050816;
+  border-radius:24px;
+  overflow:hidden;
+  width:100%;
+}
+
+/* destacada un toque más alta */
+.grid-portfolio .portfolio-link.portfolio-featured .portfolio-thumb,
+.grid-portfolio .portfolio-link--featured .portfolio-thumb{
+  height:320px;
+}
+@media (max-width: 800px){
+  .grid-portfolio .portfolio-link.portfolio-featured .portfolio-thumb,
+  .grid-portfolio .portfolio-link--featured .portfolio-thumb{
+    height:260px;
+  }
+}
+
+.portfolio-thumb img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  transform:scale(1.04);
+  transition:transform 400ms ease-out;
+}
+
+/* badge arriba (minimal + animado) */
+.portfolio-pill{
+  position:absolute;
+  top:16px;
+  left:16px;
+  padding:4px 12px;
+  border-radius:999px;
+  font-size:0.75rem;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  background:rgba(0,0,0,0.65);
+  color:#f5f7ff;
+
+  opacity:0;
+  transform:translateY(-6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* En desktop: mostrar pill al hover/focus */
+@media (hover:hover) and (pointer:fine){
+  .portfolio-link:hover .portfolio-thumb img{
+    transform:scale(1.08);
+  }
+
+  .portfolio-link:hover .portfolio-pill,
+  .portfolio-link:focus-within .portfolio-pill{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* En mobile: pill siempre visible */
+@media (hover:none) and (pointer:coarse){
+  .portfolio-pill{
+    opacity:1;
+    transform:none;
+  }
+}
+
+/* overlay inferior con nombre + subtítulo */
+.portfolio-overlay{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  padding:18px 20px 20px;
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,0.78),
+    rgba(0,0,0,0.25),
+    transparent
+  );
+  color:#f5f7ff;
+}
+
+.portfolio-overlay h3{
+  margin:0 0 4px;
+  font-size:1.05rem;
+}
+
+.portfolio-overlay p{
+  margin:0;
+  font-size:0.85rem;
+  color:rgba(235,241,255,0.9);
+}
+
+/* Variante para piezas verticales (landing + newsletter) */
+.portfolio-thumb--tall{
+  height:360px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#050816;
+}
+.portfolio-thumb--tall img{
+  width:auto;
+  height:100%;
+  object-fit:contain;
+}
+@media (max-width: 800px){
+  .portfolio-thumb--tall{ height:320px; }
+}
+
+ 
+/* ===== BLOQUE LANDING + NEWSLETTER (tipo Zurbrand) ===== */
+
+.works-split {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: center;
+}
+
+/* Wrapper de mockups (desktop) */
+.works-shots {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+}
+
+/* Cada tarjeta con la imagen */
+.works-shot {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  border-radius: 26px;
+  overflow: hidden;
+  box-shadow: 0 24px 45px rgba(15, 23, 42, 0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+}
+
+/* Imagen adentro del botón */
+.works-shot img {
+  display: block;
+  width: 290px;      /* vuelve a ser grande en desktop */
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* Estado por defecto: la no activa un poco más atrás */
+.works-shot:not(.is-active) {
+  opacity: 0.7;
+  filter: blur(0.4px);
+  transform: translateY(6px) scale(0.94);
+}
+
+/* Hover desktop: levanta un poco */
+@media (hover: hover) and (pointer: fine) {
+  .works-shot:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 22px 50px rgba(15, 23, 42, 0.7);
+    filter: none;
+    opacity: 1;
+  }
+}
+
+/* La activa: bien nítida y adelante */
+.works-shot.is-active {
+  opacity: 1;
+  filter: none;
+  transform: translateY(0) scale(1);
+  box-shadow: 0 26px 60px rgba(0,0,0,0.65);
+}
+
+/* Columna de texto */
+.works-copy {
+  color: #0f172a;
+}
+
+.works-tag {
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin: 0 0 8px;
+}
+
+.works-copy h3 {
+  margin: 0 0 10px;
+  font-size: 1.35rem;
+}
+
+.works-copy p {
+  margin: 0 0 10px;
+  color: #4b5563;
+}
+
+.works-points {
+  margin: 0 0 16px;
+  padding-left: 18px;
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+
+.works-points li + li {
+  margin-top: 4px;
+}
+
+.works-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid #111827;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: #111827;
+}
+
+.works-link::after {
+  content: "↗";
+  font-size: 0.85rem;
+}
+
+
+/* ===== WORKS (MOBILE): carrusel horizontal + copy arriba (SOLID) ===== */
+@media (max-width: 900px){
+
+  :root{
+    --works-card-w: 92vw;
+    --works-gap: 14px;
+    --works-radius: 26px;
+  }
+
+  .works-split{
+    grid-template-columns: 1fr;
+    gap: 18px;
+    align-items: start;
+  }
+  .works-copy{ order: 1; }
+  .works-shots{ order: 2; }
+
+  #trabajos,
+  #trabajos .wrapper,
+  #trabajos .works-split{
+    overflow: visible !important;
+  }
+
+  /* Carrusel */
+  #trabajos .works-shots{
+    position: relative; /* ancla de flechas */
+
+    display: flex;
+    justify-content: flex-start;
+    gap: var(--works-gap);
+
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch;
+
+    scroll-snap-type: x mandatory;
+
+    padding-left: max(16px, calc((100vw - var(--works-card-w)) / 2)) !important;
+    padding-right: max(16px, calc((100vw - var(--works-card-w)) / 2)) !important;
+
+    padding-top: 26px !important;
+    padding-bottom: 60px !important;
+
+    overscroll-behavior-x: contain;
+    touch-action: pan-x pan-y !important;
+    margin: 0 !important;
+
+    /* vars para centrar flechas SOLO sobre el área útil (sin padding) */
+    --worksTop: 26px;
+    --worksBottom: 60px;
+    --worksArrowShift: 0px; /* + baja / - sube */
+  }
+
+  #trabajos .works-shots::-webkit-scrollbar{ display:none; }
+
+  #trabajos .works-shot{
+    flex: 0 0 var(--works-card-w);
+    scroll-snap-align: center;
+
+    border: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    outline: none !important;
+    overflow: visible !important;
+
+    -webkit-tap-highlight-color: transparent;
+    touch-action: pan-x pan-y !important;
+  }
+
+  #trabajos .works-float{
+    display: block;
+    border-radius: var(--works-radius);
+    box-shadow: none !important;
+    transition: transform .18s ease;
+    transform-origin: center;
+  }
+
+  #trabajos .works-clip{
+    display: block;
+    border-radius: var(--works-radius);
+    overflow: hidden;
+    background: inherit;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    backface-visibility: hidden;
+    transform: translateZ(0);
+
+    aspect-ratio: 8 / 14;
+    max-height: 78vh;
+  }
+
+  #trabajos .works-clip > img{
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    object-fit: contain !important;
+
+    background: transparent !important;
+    transform: translateZ(0);
+
+    clip-path: inset(0 round var(--works-radius));
+    -webkit-clip-path: inset(0 round var(--works-radius));
+  }
+
+  #trabajos .works-shot.is-active .works-float{
+    transform: scale(1.06);
+    position: relative;
+    z-index: 2;
+  }
+
+  #trabajos .works-shot:not(.is-active){
+    opacity: .92;
+  }
+
+  /* ============ ARROWS (MOBILE) ============ */
+  /* wrapper fijo (no scrollea) */
+  #trabajos .works-stage{
+    position: relative;
+
+    /* match con tu padding-top/bottom real del carrusel */
+    --worksTop: 26px;
+    --worksBottom: 60px;
+    --worksArrowShift: 0px; /* + baja / - sube */
+  }
+
+  /* el carrusel sigue scrolleando */
+  #trabajos .works-stage .works-shots{
+    position: relative; /* opcional */
+  }
+
+  /* overlay fijo siempre visible */
+  #trabajos .works-stage .works-arrows{
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 6;
+
+    top: calc(
+      var(--worksTop) + (100% - var(--worksTop) - var(--worksBottom)) / 2 + var(--worksArrowShift)
+    );
+    transform: translateY(-50%);
+
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 12px;
+    pointer-events: none;
+  }
+
+  #trabajos .works-stage .works-arrow{
+    pointer-events: auto;
+    width: 60px;
+    height: 60px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff;
+    color: #111827;
+    border: 1px solid rgba(17,24,39,.14);
+    box-shadow: 0 12px 26px rgba(15,23,42,.22);
+
+    font-size: 26px;
+    line-height: 1;
+    padding-bottom: 2px; /* centra flechita */
+  }
+
+  #trabajos .works-stage .works-arrow--prev{ margin-right: auto; transform: translateX(-26px); }
+  #trabajos .works-stage .works-arrow--next{ margin-left:  auto; transform: translateX( 26px); }
+
+  #trabajos .works-stage .works-arrow[hidden]{ display:none !important; }
+}
+
+/* === WORKS ARROWS: DESKTOP OFF (blindado) === */
+@media (min-width: 901px){
+  #trabajos .works-stage .works-arrows{
+    display: none !important;
+  }
+}
+
+    
+    /* PARTNERS */
+    .partner-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
+      margin-top:20px;
+    }
+    .partner-pill{
+      border-radius:999px;
+      border:1px solid #e5e7eb;
+      padding:8px 14px;
+      font-size:13px;
+      background:#fff;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    /* CONTACTO */
+    .contact-section{
+      background:#020617;
+      color:#e5e7eb;
+      padding:56px 0 40px;
+    }
+    .contact-grid{
+  display:grid;
+  grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr); /* texto izq., formulario der. más amplio */
+  gap:40px;
+  align-items:flex-start;
+  margin-top:24px;
+}
+    .contact-grid p{
+      font-size:14px;
+      color:#d1d5db;
+    }
+    form{
+      background:#020617;
+      border-radius:var(--radio);
+      border:1px solid #1f2937;
+      padding:20px;
+      display:grid;
+      gap:12px;
+    }
+    label{
+      font-size:13px;
+      margin-bottom:2px;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="url"],
+    input[type="search"],
+    input[type="number"],
+    textarea{
+      width:100%;
+      border-radius:10px;
+      border:1px solid #374151;
+      background:#020617;
+      padding:8px 10px;
+      font-size:14px;
+      color:#e5e7eb;
+    }
+    textarea{min-height:90px;resize:vertical;}
+       .form-status{
+      margin-top:8px;
+      font-size:13px;
+      color:#e5e7eb;
+    }
+    .form-status--ok{
+      color:#4ade80;
+    }
+    .form-status--error{
+      color:#f97373;
+    }
+
+    /* ==== REVEAL ON SCROLL ==== */
+    .reveal {
+  opacity: 0;
+  transform: translateY(32px) scale(0.98);  /* más abajo y un poquito más chico */
+  transition:
+    opacity 0.7s ease-out,
+    transform 0.7s ease-out;
+}
+
+/* Cuando el observer agrega la clase */
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+   
+    /* ===== FONDO SECCIÓN NUESTROS TRABAJOS ===== */
+section#trabajos {
+  position: relative;
+  background:
+    radial-gradient(circle at top left,
+      rgba(11, 99, 232, 0.25),
+      transparent 60%),
+    radial-gradient(circle at bottom right,
+      rgba(168, 85, 247, 0.20),
+      transparent 60%),
+    #eef2ff; /* base clarita violeta/azul */
+  padding-top: 64px;
+  padding-bottom: 72px;
+}
+
+/* Por las dudas, que el wrapper NO pise el fondo */
+section#trabajos .wrapper {
+  background: transparent !important;
+}
+
+    /* ===== STACK CON EL QUE TRABAJAMOS ===== */
+
+.stack-pills {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-start;
+}
+
+.stack-pill {
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  border: 1.5px solid rgba(129, 140, 248, 0.65); /* violeta azulado */
+  background:
+    radial-gradient(circle at top left,
+      rgba(129, 140, 248, 0.18),
+      rgba(219, 234, 254, 0.15));
+  color: #111827;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+  white-space: nowrap;
+  transition:
+    background 220ms ease-out,
+    transform 200ms ease-out,
+    box-shadow 220ms ease-out,
+    border-color 200ms ease-out;
+}
+
+/* Pills destacadas: Marketing Nube + Chat Nube */
+.stack-pill--highlight {
+  border-color: rgba(236, 72, 153, 0.75); /* rosa/violeta */
+  background:
+    radial-gradient(circle at top left,
+      rgba(236, 72, 153, 0.20),
+      rgba(129, 140, 248, 0.10));
+}
+
+/* Hover desktop */
+@media (hover: hover) and (pointer: fine) {
+  .stack-pill:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(15, 23, 42, 0.18);
+    border-color: rgba(59, 130, 246, 0.9);
+    background:
+      radial-gradient(circle at top left,
+        rgba(59, 130, 246, 0.25),
+        rgba(226, 232, 255, 0.25));
+  }
+
+  .stack-pill--highlight:hover {
+    border-color: rgba(236, 72, 153, 0.95);
+    background:
+      radial-gradient(circle at top left,
+        rgba(236, 72, 153, 0.30),
+        rgba(129, 140, 248, 0.20));
+  }
+}
+
+/* Responsive: que se acomoden en varias filas y no se corten feo */
+@media (max-width: 768px) {
+  .stack-pills {
+    justify-content: flex-start;
+  }
+  .stack-pill {
+    white-space: normal;
+  }
+}
+
+    /* ===== Ajuste vertical para la sección STACK ===== */
+#stack {
+  margin-top: 10px;     /* probá entre 32px y 56px hasta que lo veas equilibrado */
+  padding-top: 50px;     
+}
+   
+    
+    /* ===== QUIÉN ESTÁ DETRÁS / ABOUT ===== */
+.section-about .about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+}
+
+.about-list {
+  margin: 18px 0 0;
+  padding-left: 1.1rem;
+  list-style: disc;
+  color: #4b5563;
+  font-size: 0.98rem;      /* igual que el párrafo principal de la sección */
+  line-height: 1.6;        /* para que respiren mejor */
+}
+
+.about-list li {
+  margin-bottom: 6px;
+  opacity: 0.96;       /* antes seguro estaba en 0.4 / 0.5 */
+}
+
+/* Tarjeta lateral con tus datos */
+.about-card {
+  border-radius: 18px;
+  padding: 18px 18px 20px;
+  background: radial-gradient(circle at top left, #0b63e8 0, #020617 55%);
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.8);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.about-card-avatar {
+  width: 64px;              /* o 56px si la querés un poco más chica */
+  height: 64px;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 2px solid rgba(148, 163, 184, 0.55);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.55);
+  background: #020617;
+  flex-shrink: 0;
+}
+
+/* ahora la “inicial” es la foto */
+.about-avatar-initials {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 999px;
+  object-fit: cover;   /* mantiene bien tu cara sin deformar */
+}
+
+
+.about-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.about-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+.about-role {
+  font-size: 12px;
+  color: #cbd5f5;
+}
+
+.about-note {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #e5e7eb;
+}
+
+/* Mobile: se apila todo */
+@media (max-width: 767.98px) {
+  .section-about .about-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .about-card {
+    padding: 16px 16px 18px;
+  }
+}
+    
+/* ABOUT – alineación y desplazamiento en desktop */
+@media (min-width: 900px) {
+
+  /* Asegura que ambas columnas arranquen arriba */
+  .section-about .about-grid {
+    align-items: flex-start;
+  }
+
+  /* Baja visualmente la tarjeta un poquito */
+  .about-card {
+    margin-top: 0;                 /* anulamos el margen que no hacía efecto */
+    transform: translateY(40px);   /* probá entre 10px y 20px según lo veas */
+  }
+}
+
+.section-about {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(148, 163, 184, 0.35); /* gris muy suave */
+}
+
+    
+/* ===== CONTACTO: ICONOS (SIN CÍRCULO) + EMAIL ===== */
+.contact-social-row{
+  margin-top: 20px;
+  margin-bottom: 12px;     /* aire hacia el email */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 24px;
+}
+
+.contact-social-item{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.contact-social-icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: invert(1);
+  opacity: .95;
+}
+
+
+/* Email debajo para copiar fácil */
+.contact-email-copy{
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #e5e7eb;
+  text-align: left;
+}
+
+.contact-email-copy a{
+  color: #e5e7eb;
+  text-decoration: none;
+}
+
+.contact-email-copy a:hover{
+  text-decoration: underline;
+}
+
+@media (max-width: 768px){
+  .contact-social-row{ margin-top: 16px; }
+}
+
+    
+/* ===== Sección de contacto: sin hueco blanco debajo ===== */
+#contacto {
+  margin-bottom: 0;      /* nada de espacio blanco externo */
+  padding-bottom: 72px;  /* respiración interna con fondo oscuro */
+  }
+
+/* ===== CONTACTO: columnas alineadas arriba ===== */
+#contacto .contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.3fr);
+  gap: 40px;
+  align-items: flex-start;
+}
+
+/* Botón de envío ancho completo como antes */
+#contact-form button {
+  width: 100%;
+  display: block;
+  margin-top: 24px;
+  padding: 14px 24px;
+  border-radius: 999px;
+}
+
+/* El contacto termina justo antes del footer, sin “hueco blanco” */
+#contacto {
+  margin-bottom: 0;
+  padding-bottom: 72px;
+  background: #020617; /* mismo fondo oscuro del resto */
+}
+
+    /* notita debajo del título de contacto */
+.contact-small-note {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.contact-small-note a{
+color: inherit;
+text-decoration: underline;
+text-underline-offset: 3px;
+}
+
+.contact-small-note a:hover{
+  opacity: .9;
+}
+
+/* ===== Línea divisora antes del footer ===== */
+.footer-full-divider {
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    rgba(14, 165, 233, 0),
+    #0b63e8,
+    rgba(14, 165, 233, 0)
+  );
+  margin: 0; /* sin espacios extra arriba o abajo */
+}
+
+/* ===== Footer: texto a los lados y fondo oscuro ===== */
+.footer {
+  background: #020617;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px 32px;
+  gap: 16px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+    .footer span {
+      white-space: nowrap;
+    }
+
+    .footer-links {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 18px;
+    }
+
+    .footer a {
+      color: #e5e7eb;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+/* Mobile: footer centrado y columnas del contacto en una sola */
+@media (max-width: 768px) {
+  #contacto .contact-grid {
+    grid-template-columns: 1fr;
+  }
+      .footer {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-links {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+
+
+/* ==== CONTACTO: alinear solo el formulario con el título ==== */
+
+/* 1) Dejamos la grilla sin desplazamientos raros */
+#contacto .contact-grid {
+  align-items: flex-start;  /* columnas arriba */
+  margin-top: 0;           /* importante: resetea el margen que lo subía todo */
+}
+
+/* 2) Subimos SOLO el formulario para que se acerque al h2 */
+#contacto .contact-grid > form {
+  margin-top: -28px;       /* probá -32px; si lo ves muy alto, cambiá a -24px */
+}
+
+/* 3) Opcional: un poco de aire al bloque de texto bajo el título */
+#contacto .contact-grid > div:first-child {
+  margin-top: 8px;         /* que “Contanos en qué estado...” respire bajo el h2 */
+}
+
+/* ==== ICONOS DE REDES SIN CÍRCULO ==== */
+
+.contact-social-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;              /* separa los iconos entre sí */
+margin-bottom: 12px;  /* 🔹 NUEVO: espacio hacia el email */
+}
+
+.contact-social-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* acá sacamos el círculo */
+.contact-social-icon {
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+}
+
+/* aseguramos que el PNG ocupe todo sin deformarse */
+.contact-social-icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ====== BOTÓN FLOTANTE ====== */
+.chat-launcher {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: none;
+  background: #0b63e8;            /* azul de la landing */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 30px rgba(11, 99, 232, 0.55);
+  cursor: pointer;
+  z-index: 3000;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+/* sonrisa (la imagen dentro del botón) */
+.chat-launcher img {
+  width: 50px;          /* subílo a 30–32px si la querés más grande */
+  height: 50px;
+  object-fit: contain;
+  display: block;
+}
+
+/* hover de la burbuja */
+.chat-launcher:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 16px 32px rgba(11, 99, 232, 0.7);
+  background: #1b76ff;
+}
+
+
+/* ====== VENTANA DE CHAT ====== */
+.vs-chat-widget {
+  position: fixed;
+  right: 24px;
+  bottom: 96px;
+  width: 360px;
+  max-width: calc(100% - 32px);
+  background: #020617;
+  border-radius: 20px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.9);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.vs-chat-widget.is-open {
+  display: flex;
+}
+
+/* Header */
+.vs-chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: radial-gradient(circle at top left, #0b63e8 0, #020617 45%);
+}
+
+.vs-chat-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vs-chat-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0b63e8, #22c1c3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vs-chat-avatar-icon {
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.vs-chat-header-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.vs-chat-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+.vs-chat-subtitle {
+  font-size: 11px;
+  color: #cbd5f5;
+}
+
+.vs-chat-close {
+  border: none;
+  background: transparent;
+  color: #e5e7eb;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* Body */
+.vs-chat-body {
+  padding: 10px 14px 8px;
+  max-height: 320px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Burbujas */
+.vs-chat-bubble {
+  max-width: 80%;
+  border-radius: 14px;
+  padding: 8px 10px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.vs-chat-bubble--bot {
+  align-self: flex-start;
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+}
+
+.vs-chat-bubble--user {
+  align-self: flex-end;
+  background: #0b63e8;
+  color: #ffffff;
+}
+
+/* FAQs */
+.vs-chat-faqs {
+  padding: 8px 14px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  border-top: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+.vs-chat-faq-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 11px;
+  cursor: pointer;
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  white-space: nowrap;
+}
+
+.vs-chat-faq-btn:hover {
+  background: #0b63e8;
+}
+
+/* Botón interno para ir a WhatsApp */
+.vs-chat-wa-btn {
+  margin-top: 4px;
+  align-self: flex-start;
+  border-radius: 999px;
+  border: none;
+  padding: 6px 12px;
+  font-size: 12px;
+  background: #22c55e;
+  color: #022c22;
+  cursor: pointer;
+}
+
+/* Formulario de texto */
+.vs-chat-form {
+  padding: 8px;
+  border-top: 1px solid rgba(148, 163, 184, 0.35);
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  background: #020617;
+}
+
+.vs-chat-input {
+  flex: 1;
+  border-radius: 999px;
+  border: 1px solid #1f2937;
+  background: #020617;
+  color: #e5e7eb;
+  font-size: 13px;
+  padding: 8px 12px;
+}
+
+.vs-chat-input::placeholder {
+  color: #6b7280;
+}
+
+.vs-chat-send-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: none;
+  background: #0b63e8;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Mobile: que la ventana use casi todo el ancho */
+@media (max-width: 575.98px) {
+  .vs-chat-widget {
+    right: 12px;
+    left: 12px;
+    width: auto;
+    bottom: 86px;
+  }
+
+  .chat-launcher {
+    right: 16px;
+    bottom: 16px;
+  }
+}
+
+/* Indicador "Sofi está escribiendo..." */
+.vs-chat-typing {
+  margin-top: 2px;
+  display: none;                /* se muestra sólo por JS */
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.vs-chat-typing-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: #9ca3af;
+  opacity: 0.3;
+  animation: vs-chat-typing-bounce 1s infinite ease-in-out;
+}
+
+.vs-chat-typing-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.vs-chat-typing-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes vs-chat-typing-bounce {
+  0%, 80%, 100% {
+    transform: translateY(0);
+    opacity: 0.3;
+  }
+  40% {
+    transform: translateY(-3px);
+    opacity: 1;
+  }
+}
+
+    
+/* ==== NUESTROS TRABAJOS · Mockups + texto ==== */
+
+/* Layout general de la sección (modo escritorio) */
+.works-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr);
+  align-items: center;
+  gap: 56px;
+}
+
+/* Contenedor de mockups (escritorio) */
+.works-shots {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+/* Cada mockup */
+.works-shot {
+  border: none;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+}
+
+.works-shot img {
+  display: block;
+  width: 290px;          /* tamaño cómodo en desktop */
+  max-width: 100%;
+  border-radius: 26px;
+  box-shadow: 0 24px 45px rgba(15, 23, 42, 0.45);
+}
+
+/* Activa */
+.works-shot.is-active {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 30px 60px rgba(15, 23, 42, 0.65);
+}
+
+/* ====== MOBILE: carrusel horizontal ====== */
+@media (max-width: 767.98px) {
+
+  /* Una sola columna: texto arriba, mockups abajo */
+  .works-split {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  /* Contenedor scrollable horizontal */
+  .works-shots {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 0 20px 24px;   /* aire a los lados y abajo */
+    margin: 0;             /* quitamos el margen negativo */
+    gap: 18px;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 20px; /* para que primera y última centren mejor */
+  }
+
+  .works-shots::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Cada tarjeta ocupa buena parte del ancho, sigue siendo vertical */
+  .works-shot {
+    flex: 0 0 50vw;        /* ancho visible (puedes probar 70–72vw si la querés más grande) */
+    max-width: 280px;      /* límite para que no explote en pantallas grandes */
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  .works-shot img {
+    width: 100%;
+    height: auto;          /* respeta el formato vertical del mockup */
+    border-radius: 24px;
+  }
+
+  /* En mobile NO escalamos para que no se corten al crecer */
+  .works-shot.is-active {
+    transform: none;
+    box-shadow: 0 24px 50px rgba(15, 23, 42, 0.55);
+  }
+}
+
+
+/* ====== SERVICIOS · RESETEO (SIN ROMPER ANIMACIÓN) ====== */
+
+/* Grid de servicios (genérico, OK) */
+.section-dark .services{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  margin-top: 32px;
+}
+
+/* En desktop, 2 columnas */
+@media (min-width: 992px){
+  .section-dark .services{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Card base genérica (NO forzar opacity/transform acá) */
+.section-dark .service-card{
+  background: #0f172a;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.45);
+  color: #f9fafb;
+}
+
+/* Si querés “reseteo” para otras secciones, excluí Servicios */
+section.section-dark:not(#servicios) .service-card{
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Títulos y texto dentro de la card */
+.section-dark .service-card h3{ margin-bottom: 12px; }
+.section-dark .service-card p{ margin-bottom: 16px; }
+
+
+/* Pill dentro de cada servicio */
+.section-dark .service-card .pill {
+  display: inline-block !important; /* 👈 por si algún .pill global lo ocultaba */
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 1.4;
+
+  background: #111827;
+  color: #e5e7eb;
+  white-space: normal;
+}
+
+
+/* =========================
+   SERVICIOS (FINAL LIMPIO)
+========================= */
+
+/* ==== GRID SERVICIOS ==== */
+#servicios .services{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+/* 2 columnas fijas en desktop (2 y 2) */
+@media (min-width: 900px){
+  #servicios .services{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ==== CARD BASE (UNIFICADO CON REVEAL GLOBAL) ==== */
+#servicios.section-dark .service-card{
+  position: relative;
+  padding: 26px 26px 22px;
+  border-radius: 22px;
+  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.06), transparent 55%),
+              rgba(15, 23, 42, 0.92);
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  overflow: hidden;
+
+  /* transición base (misma lógica que el reveal global, pero afinada para cards) */
+  transition:
+    opacity .85s ease-out,
+    transform .85s cubic-bezier(.22, 1, .36, 1),
+    box-shadow 0.12s ease,
+    border-color 0.12s ease;
+}
+
+/* ✅ Estado inicial SOLO cuando el JS marca la card como "reveal" */
+#servicios.section-dark .service-card.reveal{
+  opacity: 0;
+  transform: translateY(32px) scale(0.98);
+}
+
+/* ✅ Visible (MISMA clase que usa el reveal global) */
+#servicios.section-dark .service-card.reveal.reveal-visible{
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+}
+
+/* Tipografías */
+#servicios.section-dark .service-card h3{
+  font-size: 17px;
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+
+#servicios.section-dark .service-card p{
+  font-size: 13.5px;
+  line-height: 1.52;
+  color: rgba(230,239,255,0.88);
+}
+
+/* brillo interno */
+#servicios.section-dark .service-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: radial-gradient(circle at top right, rgba(180, 255, 255, 0.18), transparent 55%);
+  opacity: 0.6;
+  pointer-events:none;
+}
+
+/* Accent line sutil */
+#servicios.section-dark .service-card{ --acc: rgba(120,210,255,1); }
+
+#servicios.section-dark .service-card::after{
+  content:"";
+  position:absolute;
+  top:0; left:0; right:0;
+  height:2px;
+  opacity:.85;
+  background: linear-gradient(90deg, var(--acc), rgba(255,255,255,0));
+  pointer-events:none;
+}
+
+/* accents por orden */
+#servicios.section-dark .services .service-card:nth-child(1){ --acc: rgba(93,173,255,1); }
+#servicios.section-dark .services .service-card:nth-child(2){ --acc: rgba(167,121,255,1); }
+#servicios.section-dark .services .service-card:nth-child(3){ --acc: rgba(120,255,177,1); }
+#servicios.section-dark .services .service-card:nth-child(4){ --acc: rgba(255,186,120,1); }
+#servicios.section-dark .services .service-card--featured{ --acc: rgba(120,210,255,1); }
+
+/* Hover (solo cuando ya está visible) */
+@media (hover:hover) and (pointer:fine){
+  #servicios.section-dark .service-card.reveal.reveal-visible:hover{
+    transform: translateY(-3px) !important;
+    box-shadow: 0 26px 60px rgba(15, 23, 42, 0.95);
+    border-color: rgba(129, 140, 248, 0.7);
+  }
+}
+
+/* ==== PILL ==== */
+#servicios.section-dark .service-card .pill{
+  display: inline-flex;
+  align-items: center;
+  margin-top: 16px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+
+  white-space: normal;
+  line-height: 1.2;
+  max-width: 100%;
+
+  background: rgba(37, 99, 235, 0.22);
+  color: #c7d2fe;
+  border: 1px solid rgba(129, 140, 248, 0.85);
+  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.75);
+}
+
+/* ==== Equal height “percibida” (solo desktop) ==== */
+@media (min-width: 900px){
+  #servicios.section-dark .service-card:not(.service-card--featured) p{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+
+/* =========================
+   LANDING DESTACADA (FINAL) — FIX línea top + dot mobile
+========================= */
+#servicios.section-dark .service-card--featured{
+  grid-column: 1 / -1;
+  padding: 28px 28px 22px;
+  border-color: rgba(148, 163, 184, 0.55);
+
+  /* ✅ Línea azul EXACTA en el borde superior (no baja con padding) */
+  box-shadow:
+    inset 0 2px 0 rgba(37,99,235,0.95),
+    0 30px 80px rgba(0,0,0,0.55);
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* glow interno SOLO en la destacada (si tu card base ya usa ::before) */
+#servicios.section-dark .service-card--featured::before{
+  opacity: 0.78;
+}
+
+/* ❌ Por las dudas: apagamos cualquier "línea" extra que venga de antes */
+#servicios.section-dark .service-card--featured::after{
+  display:none !important;
+  content:none !important;
+}
+
+/* Desktop: 2 columnas */
+@media (min-width: 900px){
+  #servicios.section-dark .service-card--featured{
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    column-gap: 28px;
+    align-items: start;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px){
+  #servicios.section-dark .service-card--featured{
+    grid-column: auto;
+    padding: 24px 20px;
+    display:block;
+  }
+}
+
+/* =========================
+   Estructura interna
+========================= */
+#servicios.section-dark .service-head{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  margin-bottom: 10px;
+}
+
+/* ✅ FIX “puntito/target” solo en la destacada:
+   resetea pseudo-elementos/outlines que suelen aparecer en mobile */
+#servicios.section-dark .service-card--featured .service-ico{
+  width:36px;
+  height:36px;
+  display:grid;
+  place-items:center;
+  border-radius: 12px;
+
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.06);
+
+  outline: 0 !important;
+  box-shadow: none !important;
+  transform: none !important;
+  overflow:hidden;
+}
+
+#servicios.section-dark .service-card--featured .service-ico::before,
+#servicios.section-dark .service-card--featured .service-ico::after{
+  content: none !important;
+  display: none !important;
+}
+
+#servicios.section-dark .service-card--featured .service-ico > svg{
+  width:18px;
+  height:18px;
+  display:block;
+  fill: rgba(199,210,254,0.95);
+  stroke:none;
+  opacity:.95;
+  transform:none;
+}
+
+/* kicker opcional */
+#servicios.section-dark .service-kicker{
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  opacity: .7;
+  margin-bottom: 6px;
+}
+
+#servicios.section-dark .service-sub{
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: rgba(230,239,255,0.86);
+}
+
+#servicios.section-dark .service-bullets{
+  margin: 14px 0 0;
+  padding-left: 18px;
+  color: rgba(230,239,255,0.90);
+  font-size: 14px;
+}
+#servicios.section-dark .service-bullets li{ margin: 6px 0; }
+
+@media (min-width: 900px){
+  #servicios.section-dark .service-card--featured .service-bullets{
+    margin-top: 6px;
+  }
+}
+
+#servicios.section-dark .service-foot{
+  margin-top: 16px;
+  display:flex;
+  gap: 12px;
+  align-items:center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* CTA botón */
+#servicios.section-dark .service-cta{
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  color: #f5f7ff;
+  font-weight: 600;
+  letter-spacing: .01em;
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+#servicios.section-dark .service-cta:hover{
+  background: rgba(255,255,255,.09);
+  border-color: rgba(255,255,255,.22);
+  box-shadow: 0 14px 34px rgba(0,0,0,.35);
+}
+
+@media (hover:hover) and (pointer:fine){
+  #servicios.section-dark .service-cta:hover{
+    transform: translateY(-1px);
+  }
+}
+
+/* pill fuerte (landing) */
+#servicios.section-dark .pill--strong{
+  background: rgba(37,99,235,0.28);
+  border-color: rgba(129,140,248,0.95);
+  color: #c7d2fe;
+}
+
+/* Mobile: pie apilado */
+@media (max-width: 768px){
+  #servicios.section-dark .service-card--featured .service-foot{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    align-items:stretch;
+  }
+
+  #servicios.section-dark .service-card--featured .service-cta{
+    width:100%;
+    text-align:center;
+  }
+
+  #servicios.section-dark .service-card--featured .pill{
+    white-space: normal;
+  }
+}
+
+/* =========================
+   SERVICIOS — Reveal de CARDS (2da capa)
+========================= */
+
+/* Reveal 2da capa SOLO cards (tuning más rápido y suave) */
+#servicios.section-dark .services .service-card{
+  transition:
+    opacity .32s ease,
+    transform .28s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+#servicios.section-dark .services .service-card.svc-reveal{
+  opacity: 0 !important;
+  transform: translateY(10px) !important;  /* antes 18px */
+}
+
+#servicios.section-dark .services .service-card.svc-visible{
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+ /* ===== HOVER FIX (clases reales: svc-visible) ===== */
+@media (hover:hover) and (pointer:fine){
+  #servicios.section-dark .services .service-card.svc-visible:hover{
+    transform: translateY(-3px) !important;
+    box-shadow: 0 26px 60px rgba(15, 23, 42, 0.95) !important;
+    border-color: rgba(129, 140, 248, 0.7) !important;
+  }
+}
+
+
+/* =========================
+   NAV (checkbox) — ESTABLE
+========================= */
+
+/* Oculta el checkbox (el “puntito”) */
+.nav-toggle{
+  position:absolute;
+  width:1px; height:1px;
+  margin:-1px; padding:0;
+  border:0;
+  opacity:0;
+  overflow:hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 767.98px){
+
+  .logo-row{ position:relative; z-index:9000; }
+
+  /* Botón hamburguesa */
+  .menu-toggle{
+    display:inline-flex !important;
+    width:44px; height:44px;
+    align-items:center; justify-content:center;
+    flex-direction:column;
+    gap:6px;
+    cursor:pointer;
+    position:relative;
+    z-index:9001;
+    -webkit-tap-highlight-color: transparent;
+    user-select:none;
+  }
+  .menu-toggle span{
+    display:block !important;
+    width:22px !important;
+    height:2px !important;
+    background: rgba(255,255,255,.92) !important;
+    border-radius: 2px !important;
+    transform-origin:center;
+    transition: transform .22s ease, opacity .2s ease;
+  }
+
+  /* Dropdown oculto */
+  #site-nav.nav{
+    position:absolute;
+    top: calc(100% + 10px);
+    left:16px;
+    right:16px;
+    padding:14px 16px;
+    border-radius:14px;
+    background:#050b2a;
+    z-index:9000;
+
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+
+    opacity:0;
+    pointer-events:none;
+    transform: translateY(-6px);
+    transition: opacity .22s ease, transform .22s ease;
+  }
+  #site-nav.nav a{
+    color:#fff;
+    text-decoration:none;
+    padding:8px 2px;
+  }
+
+  /* Abierto */
+  .nav-toggle:checked ~ #site-nav.nav{
+    opacity:1;
+    pointer-events:auto;
+    transform: translateY(0);
+  }
+
+  /* Animación a X */
+  .nav-toggle:checked + .menu-toggle span:nth-child(1){
+    transform: translateY(8px) rotate(45deg);
+  }
+  .nav-toggle:checked + .menu-toggle span:nth-child(2){
+    opacity:0;
+  }
+  .nav-toggle:checked + .menu-toggle span:nth-child(3){
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* El hero NO debe capturar taps */
+  .hero-visual,
+  .hero-phone,
+  .hero-phone img,
+  .hero-mobile-overlay{
+    pointer-events:none !important;
+  }
+}
+
+/* ---------- DESKTOP ---------- */
+@media (min-width: 768px){
+
+  .menu-toggle{ display:none !important; }
+
+  #site-nav.nav{
+    position:static !important;
+    opacity:1 !important;
+    pointer-events:auto !important;
+    transform:none !important;
+    background:none !important;
+    padding:0 !important;
+    border-radius:0 !important;
+
+    display:flex !important;
+    flex-direction:row !important;
+    gap:22px !important;
+  }
+}
+
+/* =========================
+   BOTÓN FLOTANTE: VOLVER ARRIBA   (robusto + iOS friendly)
+========================= */
+button.scroll-top-btn{
+  position: fixed;
+  right: 16px;
+  bottom: 110px; /* 👈 desktop/base */
+
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #0b63e8;
+  color: #fff;
+  border: 0;
+
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1;
+
+  cursor: pointer;
+  z-index: 99999;
+
+  box-shadow: 0 18px 45px rgba(11,99,232,.35);
+
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+
+  transition: opacity .18s ease, transform .18s ease, filter .18s ease;
+
+  /* anti “botón raro” mobile */
+  -webkit-appearance: none;
+  appearance: none;
+  touch-action: manipulation;
+}
+
+button.scroll-top-btn.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+@media (hover:hover) and (pointer:fine){
+  button.scroll-top-btn:hover{
+    filter: brightness(1.08);
+    transform: translateY(-2px);
+  }
+}
+
+/* Desktop: apenas más abajo */
+@media (min-width: 769px){
+  button.scroll-top-btn{ bottom: 110px; }
+}
+
+/* Mobile: lo subimos por el chat + safe area */
+@media (max-width: 768px){
+  button.scroll-top-btn{
+    bottom: calc(110px + env(safe-area-inset-bottom));
+    right: 16px;
+  }
+}
+
+
+/* ===== HERO DESKTOP: recuperar estilos originales (CTA pill + tamaños) ===== */
+@media (min-width: 768px){
+
+  /* Botón pill blanco (Agendar...) */
+  .hero-actions .btn-primary,
+  .hero-actions .btn-primary--hero{
+    background:#fff;
+    color:#111827;
+    border-radius:999px;
+    padding:8px 20px;          /* + “pill” */
+    font-size:12px;             /* + grande */
+    font-weight:500;
+    border:0;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+    transition:transform .18s ease, box-shadow .18s ease, background-color .18s ease;
+  }
+  .hero-actions .btn-primary:hover,
+  .hero-actions .btn-primary--hero:hover{
+    transform:translateY(-2px);
+    background:#f3f4ff;         /* hover leve */
+    box-shadow:0 14px 36px rgba(15,23,42,.35);
+  }
+  .hero-actions .btn-primary:active,
+  .hero-actions .btn-primary--hero:active{
+    transform:translateY(0);
+    box-shadow:0 8px 22px rgba(15,23,42,.25);
+  }
+
+  /* “Ver casos reales” más grande */
+  .hero-actions .btn-secondary{
+    font-size:12px;
+    font-weight:500;
+    opacity:.95;
+  }
+  .hero-actions .btn-secondary span{ font-size:18px; }
+
+  /* Las 2 líneas de abajo (tagline) más grandes */
+  .hero-tagline{
+    font-size:12px;
+    opacity:.9;
+    margin-top:14px;
+  }
+
+  /* Fallback por si esas líneas no usan .hero-tagline */
+  .hero-content > p:last-of-type{
+    font-size:14px;
+  }
+}
+
+/* ===== HERO MOBILE: replicar estilos PILL + CTA del desktop ===== */
+@media (max-width: 767.98px){
+
+  /* Pill blanco (Agendar...) */
+  .hero-actions .btn-primary,
+  .hero-actions .btn-primary--hero{
+    background:#fff;
+    color:#111827;
+    border-radius:999px;
+    padding:12px 20px;
+    font-size:14px;
+    font-weight:600;
+    border:0;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+    transition:transform .18s ease, box-shadow .18s ease, background-color .18s ease;
+    width:100%;
+    justify-content:center;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .hero-actions .btn-primary:hover,
+  .hero-actions .btn-primary--hero:hover{
+    transform:translateY(-2px);
+    background:#f3f4ff;
+    box-shadow:0 14px 36px rgba(15,23,42,.35);
+  }
+
+  .hero-actions .btn-primary:active,
+  .hero-actions .btn-primary--hero:active{
+    transform:translateY(0);
+    box-shadow:0 8px 22px rgba(15,23,42,.25);
+  }
+
+  /* “Ver casos reales” */
+  .hero-actions .btn-secondary{
+    font-size:14px;
+    font-weight:500;
+    opacity:.95;
+  }
+  .hero-actions .btn-secondary span{ font-size:18px; }
+
+  /* Tagline (2 líneas de abajo) */
+  .hero-tagline{
+    font-size:14px;
+    opacity:.9;
+    margin-top:12px;
+  }
+  .hero-content > p:last-of-type{
+    font-size:14px;
+    opacity:.9;
+  }
+}
+    
+/* ===== HEADER MOBILE: subir un poco + laterales a 10px (sin tocar desktop) ===== */
+@media (max-width: 767.98px){
+
+  /* laterales del header */
+  .site-header .header-inner{
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  /* sube el bloque logo + hamburguesa */
+  .site-header{
+    padding-top: 10px !important;   /* ajustá 6–12px si querés */
+  }
+
+  /* alineación: logo izq / burger der */
+  .site-header .logo-row{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+  }
+/* Micro-ajuste extra SOLO para el logo (por si algún estilo lo deja pegado) */
+  .site-header .logo{
+    margin-left: 8px !important;    /* probá 0–6px */
+  }
+  
+  .site-header .menu-toggle{
+    margin-left: auto !important;
+  }
+
+  /* dropdown calza con los mismos laterales */
+  #site-nav.nav{
+    left: 10px !important;
+    right: 10px !important;
+  }
+}
+
+/* ===== HERO (MOBILE): chip tono-fondo para el logo ===== */
+@media (max-width: 767.98px){
+  .site-header .logo{
+    display:inline-block;
+    padding: 6px 10px;
+    border-radius: 999px;
+
+    /* mismo azul del hero (ajustá si tu azul exacto es otro) */
+    background: rgba(20, 70, 255, .0);
+
+    /* lo integra con el fondo */
+    backdrop-filter: blur(18px) saturate(105%);
+    -webkit-backdrop-filter: blur(18px) saturate(105px);
+
+    /* mantiene la lectura contra la línea blanca */
+    text-shadow: 0 1px 10px rgba(0,0,0,.35);
+  }
+}
+
+
+/* LOGO IMG (responsive) */
+.site-header .logo{
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;           /* evita “saltos” por baseline */
+  text-decoration: none;
+}
+
+.site-header .logo img{
+  display: block;
+  height: clamp(22px, 3.2vw, 34px); /* responsive */
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* MOBILE tweak: un pelín más chico y con aire */
+@media (max-width: 767.98px){
+  .site-header .logo img{
+    height: 24px;           /* ajustá 22–28px si querés */
+  }
+}
+
+#vs-chat-launcher,
+#vs-chat-widget {
+  display: none !important;
+}
+
+</style>
+
+ 
+
+ <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PK8M6BPF');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PK8M6BPF"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+ 
+ 
+<!-- ================== HEADER ================== -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo-row">
+    <a class="logo" href="/" aria-label="VIACLOUDSTUDIO (Inicio)">
+  <img src="/vclouds-logo.png" alt="VIACLOUDSTUDIO" width="1580" height="220" decoding="async" loading="eager">
+</a>
+      
+<!-- Botón hamburguesa (label) -->
+<input id="nav-toggle" class="nav-toggle" type="checkbox" aria-hidden="true">
+<label for="nav-toggle" class="menu-toggle" aria-label="Abrir menú" aria-controls="site-nav">
+  <span></span>
+  <span></span>
+  <span></span>
+</label>
+
+      
+        <nav id="site-nav" class="nav">
+        <a href="/">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#trabajos">Trabajos</a>
+        <a href="/landing">Landing Pages</a>
+        <a href="#about">Quién está detrás</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </div>
+
+
+<!-- ================== HERO ================== -->
+<section id="hero">
+  <div class="wrapper">
+    <div class="hero reveal">
+      <div class="hero-content">
+        <div class="hero-kicker">Tienda Nube · Estudio especializado</div>
+        <h1>Diseñamos tu tienda online a medida de tu marca.</h1>
+        <p>
+          Creamos y optimizamos tiendas Tienda Nube para que se vean profesionales,
+          carguen rápido y conviertan visitas en ventas. Sin plantillas genéricas.
+        </p>
+        <div class="hero-actions">
+          <a href="#contacto" class="btn-primary btn-primary--hero">
+            Agendar consultoría gratuita
+          </a>
+          <a class="btn-secondary" href="#trabajos">
+            Ver casos reales <span>↗</span>
+          </a>
+        </div>
+        <div class="hero-tagline">
+          Ideal para marcas de moda, hogar, bazar y lifestyle que quieren dar el salto al e-commerce.
+        </div>
+      </div>
+
+      <aside class="hero-visual reveal">
+        <div class="hero-phone">
+          <img
+            src="/hero-mobile-mcmdigital.png"
+            alt="Mockup de tienda online pensada para mobile first"
+            width="1000"
+            height="843"
+            decoding="async"
+            loading="eager"
+            fetchpriority="high"
+          />
+
+          <!-- Overlay SOLO mobile -->
+          <div class="hero-mobile-overlay" aria-hidden="true">
+            <span class="hero-mobile-kicker">
+              Tienda Nube · Estudio especializado
+            </span>
+            <p class="hero-mobile-title">
+              Diseñamos<br>
+              tu tienda online<br>
+              a medida de tu marca.
+            </p>
+          </div>
+        </div>
+
+        <div class="hero-badge">
+          Mobile first · Tienda Nube
+        </div>
+      </aside>
+    </div>
+  </div>
+ </header>
+
+
+<!-- ====== VIA CLOUD STUDIO | Socio Partner Tiendanube (Mini Hero Full Width) ====== -->
+<section id="partner-tiendanube" class="reveal" style="
+  padding: 56px 0;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(1200px 600px at 20% 30%, rgba(120,173,255,.24), rgba(0,0,0,0)),
+    radial-gradient(900px 520px at 85% 20%, rgba(150,120,255,.18), rgba(0,0,0,0)),
+    linear-gradient(135deg, rgba(10,60,255,.40), rgba(110,60,255,.34)),
+    linear-gradient(180deg, rgba(6, 24, 70, .72), rgba(6, 24, 70, .32));
+">
+
+  <!-- CSS puntual para mobile (solo afecta esta sección) -->
+  <style>
+    @media (max-width: 640px){
+      #partner-tiendanube .tn-cta-row{
+        flex-direction: column;
+        align-items: stretch !important;
+        gap: 10px !important;
+      }
+      #partner-tiendanube .tn-cta-primary,
+      #partner-tiendanube .tn-cta-secondary{
+        width: 100% !important;
+        display: flex !important;
+      }
+      #partner-tiendanube .tn-cta-primary{
+        padding: 14px 16px !important;
+        border-radius: 16px !important;
+      }
+      #partner-tiendanube .tn-cta-secondary{
+        padding: 13px 16px !important;
+        border-radius: 16px !important;
+        font-weight: 800 !important; /* menos “pegado” */
+        opacity: .95;
+      }
+    }
+
+/* ====== MÉTRICAS (Quién está detrás) ====== */
+.about-metrics{
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  align-items: stretch;
+  position: relative;
+  z-index: 3; /* para que no las “pise” la sombra de la card */
+}
+
+.about-metric{
+  padding: 14px 14px 12px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.75);
+  border: 1px solid rgba(2,6,23,.08);
+  box-shadow: 0 10px 30px rgba(2,6,23,.06);
+}
+
+.about-metric__num{
+  font-size: clamp(22px, 3vw, 34px);
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+}
+
+.about-metric__label{
+  margin-top: 6px;
+  font-size: 13px;
+  color: #475569;
+  line-height: 1.35;
+}
+
+.about-metrics__note{
+  grid-column: 1 / -1;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+@media (max-width: 768px){
+  .about-metrics{
+    grid-template-columns: 1fr;
+    margin-top: 12px;
+  }
+}
+
+/* ✅ Dejá aire real debajo del grid para que no invada la sombra */
+.section-about .about-grid{
+  padding-bottom: 34px; /* probá 28–44px */
+}
+
+/* ✅ y separá un poco más las métricas */
+.about-metrics{
+  margin-top: 28px; /* antes 18px, subilo */
+}
+
+
+   
+  </style>
+
+  <!-- Detalle decorativo suave (opcional) -->
+  <div aria-hidden="true" style="
+    position:absolute; inset:-2px;
+    background: linear-gradient(90deg, rgba(255,255,255,.06), rgba(255,255,255,0), rgba(255,255,255,.06));
+    opacity:.16;
+    pointer-events:none;
+    transform: rotate(-2deg);
+  "></div>
+
+  <div class="wrapper" style="position: relative; z-index: 1;">
+    <div style="
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 26px;
+      flex-wrap: wrap;
+    ">
+
+      <!-- IZQ: texto -->
+      <div style="flex: 1 1 640px; min-width: 280px;">
+        <div style="
+          display:inline-flex;
+          align-items:center;
+          gap:10px;
+          padding: 6px 10px;
+          border-radius: 999px;
+          background: rgba(255,255,255,.10);
+          border: 1px solid rgba(255,255,255,.12);
+          margin-bottom: 14px;
+        ">
+          <span style="
+            width:8px; height:8px; border-radius:99px;
+            background: linear-gradient(135deg, rgba(120,173,255,.98), rgba(150,120,255,.78));
+            box-shadow: 0 0 0 4px rgba(120,173,255,.14);
+            display:inline-block;
+          "></span>
+          <span style="
+            font-size: 11.5px;
+            letter-spacing: .18px;
+            color: rgba(255,255,255,.86);
+            font-weight: 800;
+            text-transform: uppercase;
+          ">VIACLOUDSTUDIO es Socio Partner de Tiendanube</span>
+        </div>
+
+        <h2 style="
+          margin: 0 0 12px 0;
+          font-size: clamp(30px, 4.2vw, 58px);
+          line-height: 1.02;
+          letter-spacing: -0.6px;
+          color: rgba(255,255,255,.98);
+          font-weight: 900;
+          font-family: inherit;
+        ">
+          Registrate con nuestro link de socio y obtené
+        <span style="color: rgba(120,173,255,.98); white-space:nowrap;">25%&nbsp;OFF</span>
+        </h2>
+
+        <p style="
+          margin: 0 0 18px 0;
+          font-size: 16px;
+          line-height: 1.6;
+          color: rgba(255,255,255,.90);
+          max-width: 70ch;
+          font-family: inherit;
+          text-shadow: 0 1px 10px rgba(0,0,0,.16);
+        ">
+          Creá tu tienda en Tiendanube y empezá a vender 24/7. El descuento aplica
+          <strong style="color: rgba(255,255,255,.94);">al primer mes</strong> de cualquier plan al registrarte desde nuestro enlace oficial.
+        </p>
+
+        <div class="tn-cta-row" style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+          <a
+            class="tn-cta-primary"
+            href="https://www.tiendanube.com/partners/via-cloud-studio"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="
+              display:inline-flex;
+              align-items:center;
+              justify-content:center;
+              gap:10px;
+              padding: 13px 18px;
+              border-radius: 14px;
+              background: linear-gradient(135deg, rgba(120,173,255,.98), rgba(150,120,255,.78));
+              color: rgba(10,18,40,1);
+              text-decoration: none;
+              font-weight: 900;
+              font-size: 14px;
+              letter-spacing: .2px;
+              box-shadow: 0 10px 22px rgba(120,173,255,.18);
+              border: 1px solid rgba(255,255,255,.18);
+              font-family: inherit;
+              transform: translateZ(0);
+            "
+          >
+            Crear tienda con 25% OFF <span aria-hidden="true">→</span>
+          </a>
+
+          <a
+            class="tn-cta-secondary"
+            href="#contacto"
+            style="
+              display:inline-flex;
+              align-items:center;
+              justify-content:center;
+              padding: 13px 18px;
+              border-radius: 14px;
+              background: rgba(255,255,255,.08);
+              color: rgba(255,255,255,.92);
+              text-decoration: none;
+              font-weight: 700;
+              letter-spacing: .1px;
+              font-size: 14px;
+              border: 1px solid rgba(255,255,255,.12);
+              font-family: inherit;
+            "
+          >
+            Quiero que me la armen
+          </a>
+        </div>
+
+        <div style="margin-top: 14px; display:flex; gap:10px; flex-wrap:wrap;">
+          <span style="
+            display:inline-flex; align-items:center; gap:8px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(255,255,255,.06);
+            border: 1px solid rgba(255,255,255,.10);
+            color: rgba(255,255,255,.78);
+            font-size: 12.5px;
+            white-space: nowrap;
+            font-family: inherit;
+          ">✅ Pagos + envíos listos</span>
+
+          <span style="
+            display:inline-flex; align-items:center; gap:8px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(255,255,255,.06);
+            border: 1px solid rgba(255,255,255,.10);
+            color: rgba(255,255,255,.78);
+            font-size: 12.5px;
+            white-space: nowrap;
+            font-family: inherit;
+          ">⚡ Setup rápido</span>
+
+          <span style="
+            display:inline-flex; align-items:center; gap:8px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(255,255,255,.045);
+            border: 1px solid rgba(255,255,255,.08);
+            color: rgba(255,255,255,.78);
+            font-size: 12.5px;
+            white-space: nowrap;
+            font-family: inherit;
+          ">📈 Ideal para escalar</span>
+        </div>
+      </div>
+
+      <!-- DER -->
+      <div style="flex: 0 1 360px; min-width: 280px;">
+        <div style="
+          padding: 18px;
+          border-radius: 20px;
+          background: rgba(255,255,255,.045);
+          border: 1px solid rgba(255,255,255,.08);
+        ">
+          <div style="
+            font-weight: 700;
+            color: rgba(255,255,255,.92);
+            font-size: 14px;
+            letter-spacing: .1px;
+            margin-bottom: 12px;
+            font-family: inherit;
+          ">
+            Lo que te llevás con Tiendanube
+          </div>
+
+          <ul style="
+            margin: 0;
+            padding-left: 18px;
+            color: rgba(255,255,255,.78);
+            line-height: 1.55;
+            font-size: 13.5px;
+            font-family: inherit;
+          ">
+            <li>Tienda lista con carrito, catálogo y checkout.</li>
+            <li>Cobros y medios de pago integrados.</li>
+            <li>Envíos configurables + automatización.</li>
+          </ul>
+
+          <div style="
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 16px;
+            background: rgba(120,173,255,.12);
+            border: 1px solid rgba(120,173,255,.18);
+            color: rgba(255,255,255,.86);
+            font-size: 12.8px;
+            line-height: 1.45;
+            font-family: inherit;
+          ">
+            <strong>Tip:</strong> si querés que quede “lista para vender”, te la armamos a medida (diseño + estructura + optimización).
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- ====== /Socio Partner Tiendanube ====== -->
+
+
+
+
+<main>
+  <!-- MARCAS -->
+ <section class="section reveal">
+  <div class="wrapper">
+    <div class="section-title">¿Con quién trabajamos?</div>
+    <h2>Desde tu primera tienda online hasta marcas listas para escalar.</h2>
+    <p>
+      Acompañamos a emprendimientos que están lanzando su primera tienda en Tienda Nube
+      y también a marcas que ya venden por redes o en local físico y quieren una tienda
+      profesional: clara, rápida y lista para automatizar procesos y escalar ventas.
+    </p>
+
+    <div class="brand-grid">
+      <span class="client-pill">
+        Emprendimientos que dan el salto a su primera tienda online y necesitan ayuda
+        en todo el proceso de creación y puesta a punto.
+      </span>
+      <span class="client-pill">
+        Marcas en crecimiento que ya venden por Instagram, WhatsApp o local físico
+        y buscan una Tienda Nube ordenada y lista para invertir en tráfico pago.
+      </span>
+      <span class="client-pill">
+        Tiendas consolidadas que quieren relanzar su e-commerce, optimizar la experiencia,
+        automatizar tareas y mejorar sus conversiones.
+      </span>
+    </div>
+  </div>
+</section>
+
+  <!-- SERVICIOS -->
+  <section id="servicios" class="section-dark reveal">
+    <div class="wrapper">
+      <div class="section-title">Nuestros servicios</div>
+      <h2>Desde el diseño hasta la optimización para vender más.</h2>
+      <p>
+        No sólo “montamos” tu tienda: la pensamos como parte de tu embudo de ventas,
+        lista para correr campañas en Meta y Google con una base sólida.
+      </p>
+
+      <div class="services">
+        <div class="service-card">
+          <h3>Diseño Tienda Nube a medida</h3>
+          <p>
+            Armado completo de la tienda basado en tu identidad visual.
+            Home, categorías, PDP y página de cómo comprar, todo alineado a tu marca y pensado para guiar al usuario hasta la compra.
+          </p>
+          <div class="pill">Ideal para lanzamientos o relanzos de marca</div>
+        </div>
+
+        <div class="service-card">
+          <h3>Optimización de plantillas</h3>
+          <p>
+            Tomamos tu plantilla actual y la ajustamos: layout, tipografías,
+            jerarquía de información, destacados, banners y fichas de producto. Mejora visual y de conversión sin necesidad de cambiar de tema.
+          </p>
+          <div class="pill">Mejoramos lo que ya tenés sin migrar de tema</div>
+        </div>
+
+        <div class="service-card">
+          <h3>Setup para campañas</h3>
+  <p>
+    Preparación de la tienda para tráfico pago: estructura de categorías,
+    landings de campañas, códigos de seguimiento y buenas prácticas de CRO. Dejá tu Tienda Nube lista para escalar con Meta Ads y Google Ads.
+  </p>
+   <div class="pill">Pensado para Meta Ads & Google Ads</div>
+        </div>
+        
+        <div class="service-card">
+  <h3>Automatizaciones, newsletter y Chat Nube</h3>
+  <p>
+    Configuramos newsletters, flujos básicos de bienvenida y carritos abandonados, y dejamos tu Chat Nube listo con respuestas frecuentes, horarios y derivación a WhatsApp para que atiendas 24/7 sin perder el toque humano.
+  </p>
+  <div class="pill">Ideal para marcas que quieren escalar sin sumar equipo</div>
+  </div>
+
+     <!-- ⭐ Landing destacada (PEGAR ACÁ) -->
+        <div class="service-card service-card--featured" data-accent="landing">
+          <div class="service-head">
+            <span class="service-ico" aria-hidden="true">
+  <svg class="ico-svg ico-svg--fill" viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="9"></circle>
+    <circle cx="12" cy="12" r="5"></circle>
+    <circle cx="12" cy="12" r="1.6"></circle>
+  </svg>
+</span>
+            <div>
+             <div class="service-kicker">LANDING</div>
+              <h3>Landing Page de alta conversión</h3>
+              <p class="service-sub">
+                Una landing 1-página para captar leads o vender un producto. Copy + estructura + medición lista para campañas.
+              </p>
+            </div>
+          </div>
+
+          <ul class="service-bullets">
+            <li>Hero + propuesta clara (sin humo)</li>
+            <li>Formulario + WhatsApp (derivación)</li>
+            <li>Tracking: Meta Pixel + GA4</li>
+          </ul>
+
+          <div class="service-foot">
+            <div class="pill pill--strong">Ideal para campañas y lanzamientos</div>
+            <a class="service-cta" href="#contacto">Quiero mi landing →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ <!-- TRABAJOS -->
+<section id="trabajos" class="section reveal">
+  <div class="wrapper">
+    <div class="section-title">Nuestros trabajos</div>
+    <h2>Algunos tipos de proyectos que podemos desarrollar.</h2>
+    <p>
+      Estas son tiendas reales diseñadas y optimizadas en Tienda Nube. Podemos adaptar
+      el enfoque visual y la estructura a tu rubro y necesidades.
+    </p>
+
+    <div class="grid-portfolio">
+      <!-- SANSAY (DESTACADA) -->
+     <a class="portfolio-link portfolio-link--featured"
+   href="https://sansayaromas.com.ar/"
+   target="_blank"
+   rel="noopener noreferrer">
+  <div class="portfolio-thumb">
+    <img src="/sansay-aromas.png" alt="Mockup tienda Sansay Aromas">
+    <span class="portfolio-pill">Caso destacado</span>
+
+    <div class="portfolio-overlay">
+      <h3>SANSAY AROMAS</h3>
+      <p>Sahumerios, velas y rituales · estética premium + navegación clara</p>
+    </div>
+  </div>
+</a>
+
+      <!-- VIA SHOP -->
+      <a class="portfolio-link"
+         href="https://www.via-shop.com/"
+         target="_blank"
+         rel="noopener noreferrer">
+        <div class="portfolio-thumb">
+          <img src="/gadget-viashop.png" alt="Mockup tienda VIA SHOP">
+          <span class="portfolio-pill">Mockup Tienda Nube</span>
+
+          <div class="portfolio-overlay">
+            <h3>VIA SHOP</h3>
+            <p>Hogar, bazar y tecnología · Tienda Nube lista para producción</p>
+          </div>
+        </div>
+      </a>
+
+      <!-- CASA OADA -->
+      <a class="portfolio-link"
+         href="https://www.casaoada.com.ar/"
+         target="_blank"
+         rel="noopener noreferrer">
+        <div class="portfolio-thumb">
+          <img src="/ferreteria-oada.png" alt="Mockup tienda CASA OADA">
+          <span class="portfolio-pill">Mockup Tienda Nube</span>
+
+          <div class="portfolio-overlay">
+            <h3>CASA OADA</h3>
+            <p>Ferretería y hogar · Tienda Nube lista para campañas de tráfico pago</p>
+          </div>
+        </div>
+      </a>
+
+      <!-- FERRE CEPPI -->
+      <a class="portfolio-link"
+         href="https://www.ferreceppi.com/" 
+         target="_blank"
+         rel="noopener noreferrer">
+        <div class="portfolio-thumb">
+          <img src="/ferre-ceppi.png" alt="Mockup tienda Ferre CEPPI">
+          <span class="portfolio-pill">Mockup Tienda Nube</span>
+
+          <div class="portfolio-overlay">
+            <h3>FERRE CEPPI</h3>
+            <p>Catálogo grande · categorías + usabilidad pensada para búsqueda</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  
+  <div class="works-split">
+
+   <!-- Mockups verticales -->
+ <div class="works-stage" aria-label="Nuestros trabajos (carrusel)">
+  <div class="works-shots">
+   <!-- Nueva landing VIACLOUDSTUDIO -->
+  <button class="works-shot is-active" data-project="viacloud" type="button">
+    <span class="works-float">
+    <span class="works-clip">
+    <img src="/via-clod.png" alt="Landing VIACLOUDSTUDIO · diseño y optimización Tienda Nube">
+   </span>
+   </span>
+  </button>
+   
+  <!-- Landing VIA SHOP -->
+  <button class="works-shot" data-project="landing" type="button">
+    <span class="works-float">
+    <span class="works-clip">
+    <img src="/landing-via.png" alt="Landing VIA SHOP">
+   </span>
+   </span>
+  </button>
+
+  <!-- Newsletter DISTRI HOME -->
+  <button class="works-shot" data-project="newsletter" type="button">
+    <span class="works-float">
+    <span class="works-clip">
+    <img src="/distri-home.png" alt="Newsletter DISTRI HOME">
+    </span>
+   </span>
+  </button>
+  </div>
+   
+  <!-- Flechas: tienen que vivir dentro de works-stage (NO dentro de works-shots) -->
+  <div class="works-arrows" aria-hidden="false">
+    <button class="works-arrow works-arrow--prev" type="button" aria-label="Anterior">‹</button>
+    <button class="works-arrow works-arrow--next" type="button" aria-label="Siguiente">›</button>
+  </div>
+ </div>
+
+ 
+<!-- Texto que cambia -->
+<div class="works-copy" id="works-copy">
+  <p class="works-tag" id="works-tag">Landing Tienda Nube</p>
+  <h3 id="works-title">Landing VIA SHOP</h3>
+  <p id="works-description">
+    Landing enfocada en servicios de diseño y optimización de Tienda Nube,
+    lista para recibir tráfico de campañas y convertir visitas en consultas.
+  </p>
+  <ul class="works-points" id="works-points">
+    <li>Diseño pensado para tráfico desde campañas.</li>
+    <li>Estructura clara: hero, propuesta, servicios, trabajos y contacto.</li>
+    <li>Optimizada para leer bien en mobile.</li>
+  </ul>
+  <a id="works-link" class="works-link" href="#contacto">
+    Ver landing en esta página
+  </a>
+</div>
+</div>
+</section>
+
+  <!-- PARTNERS -->
+  <section class="section" id="stack">
+  <div class="wrapper">
+    <div class="section-title">Stack con el que trabajamos</div>
+    <h2>Preparamos tu tienda para integrarse con las herramientas que ya usás.</h2>
+    <p>
+      Dejamos todo listo para que puedas medir, pautar, automatizar y escalar sin dolores de cabeza:
+      desde la base en Tienda Nube hasta campañas, analítica, newsletters y Chat Nube.
+    </p>
+
+    <div class="stack-pills">
+      <div class="stack-pill">Tienda Nube</div>
+      <div class="stack-pill">Meta Pixel &amp; Conversion API</div>
+      <div class="stack-pill">Google Analytics 4</div>
+      <div class="stack-pill">Google Tag Manager</div>
+      <div class="stack-pill">Google Ads &amp; Merchant Center</div>
+     <div class="stack-pill">Marketing Nube · Newsletters y flujos</div>
+<div class="stack-pill">Chat Nube · Chatbot &amp; WhatsApp</div>
+
+    </div>
+  </div>
+</section>
+
+    
+<!-- QUIÉN ESTÁ DETRÁS -->
+<section id="about" class="section reveal section-about">
+  <div class="wrapper about-grid">
+    <div>
+      <div class="section-title">Quién está detrás</div>
+      <h2>Hola, soy Manu! Voy a trabajar en tu Tienda Nube.</h2>
+      <p>
+        Trabajo todos los días con Tienda Nube, campañas en Meta y Google y la
+        optimización de tiendas como <strong>VIA SHOP</strong> y
+        <strong>CASA OADA</strong>. Mi objetivo con <strong>VIA CLOUD STUDIO</strong> es que tu tienda se vea profesional, cargue rápido y esté lista para vender, no solo para “estar online”.      </p>
+      <p>
+        Cuando me contactás no hablás con una agencia gigante: hablas directo conmigo, reviso tu caso, armamos un plan y te acompaño de punta a punta.
+      </p>
+
+      <ul class="about-list">
+        <li>Armado y optimización de Tienda Nube (estructura, diseño, UX).</li>
+        <li>Integración con campañas en Meta / Google y métricas básicas.</li>
+        <li>Acompañamiento cercano: WhatsApp, videollamada y checklists claros.</li>
+      </ul>
+    </div>
+  
+    <div class="about-card">
+      <div class="about-avatar">
+        <!-- Podés cambiar por una foto tuya si querés -->
+        <img
+  src="/avatar-perfil.png"
+  alt="Manuel Aparicio"
+  class="about-avatar-initials"
+/>
+
+      </div>
+      <div class="about-meta">
+        <div class="about-name">Manuel Aparicio</div>
+        <div class="about-role">Diseño y optimización de Tienda Nube</div>
+        <p class="about-note">
+          Cuando completes el formulario o escribas por WhatsApp
+          vas a hablar directamente conmigo, sin bots ni intermediarios.
+        </p>
+      </div>
+    </div>
+  </div>
+
+<!-- ====== MÉTRICAS (Quién está detrás) ====== -->
+<div class="wrapper">
+  <div class="about-metrics" aria-label="Métricas de experiencia">
+    <div class="about-metric">
+      <div class="about-metric__num" data-target="1" data-prefix="" data-suffix="">0</div>
+      <div class="about-metric__label">Año enfocado en Tienda Nube</div>
+    </div>
+
+    <div class="about-metric">
+      <div class="about-metric__num" data-target="4" data-prefix="" data-suffix="">0</div>
+      <div class="about-metric__label">Tiendas publicadas</div>
+    </div>
+
+    <div class="about-metric">
+      <div class="about-metric__num" data-target="200" data-prefix="+" data-suffix="">0</div>
+      <div class="about-metric__label">Productos cargados</div>
+    </div>
+
+    <div class="about-metrics__note">
+      *Métricas reales de proyectos entregados y productos cargados.
+    </div>
+  </div>
+</div>
+
+</section>
+<!-- /QUIÉN ESTÁ DETRÁS -->
+
+    
+ <!-- CONTACTO -->
+<section id="contacto" class="contact-section reveal">
+  <div class="wrapper">
+    <div class="section-title">Contacto</div>
+    <h2>¿Agendamos una llamada para ver tu caso?</h2>
+
+    <div class="contact-grid">
+      <!-- COLUMNA IZQUIERDA: texto + iconos -->
+      <div>
+        <p>
+          Contanos en qué estado está tu proyecto y qué te gustaría mejorar.
+          Te respondemos con una propuesta clara, sin letra chica.
+        </p>
+        <p style="margin-top:12px;font-size:13px;color:#9ca3af;">
+          Tiempo estimado de respuesta: 24/48 hs hábiles.
+        </p>
+
+        <!-- ICONOS + EMAIL -->
+        <div class="contact-social-row">
+          <a class="contact-social-item js-whatsapp"
+             href="https://wa.me/5491159288093"
+             target="_blank" rel="noopener noreferrer">
+            <span class="contact-social-icon">
+              <img src="/icon-whatsapp.png" alt="WhatsApp">
+            </span>
+          </a>
+
+          <a class="contact-social-item"
+             href="https://instagram.com/manuelrubis"
+             target="_blank" rel="noopener noreferrer">
+            <span class="contact-social-icon">
+              <img src="/icon-instagram.png" alt="Instagram">
+            </span>
+          </a>
+
+          <a class="contact-social-item"
+             href="https://www.facebook.com/manuelcmdigital"
+             target="_blank" rel="noopener noreferrer">
+            <span class="contact-social-icon">
+              <img src="/icon-facebook.png" alt="Facebook">
+            </span>
+          </a>
+        </div>
+
+        <p class="contact-email">
+          Email: <a href="mailto:viacloudstudio@gmail.com">viacloudstudio@gmail.com</a>
+        </p>
+
+        <p class="contact-small-note">
+  Todas las consultas las respondo yo, Manuel. Te leo y vemos juntos
+  qué es lo mejor para tu tienda.
+</p>
+       <p class="contact-small-note">
+  Al enviar este formulario aceptás nuestra <a href="/politicas">Política de Privacidad</a>.
+</p>
+
+      </div>
+
+      <!-- COLUMNA DERECHA: FORMULARIO -->
+      <form id="contact-form"
+      method="POST"
+      action="https://formspree.io/f/mzzodepb">
+
+  <input type="hidden" name="_subject"
+         value="Consulta desde landing VIACLOUDSTUDIO" />
+
+  <div>
+    <label for="contact-nombre">Nombre y marca</label>
+    <input type="text" name="nombre_marca"
+           id="contact-nombre"
+           placeholder="Nombre y marca"
+           autocomplete="name"
+           required />
+  </div>
+
+  <div>
+    <label for="contact-email">Email</label>
+    <input type="email" name="email"
+           id="contact-email"
+           placeholder="Email"
+           autocomplete="email"
+           required />
+  </div>
+
+  <div>
+    <label for="contact-sitio">Instagram o sitio actual</label>
+    <input type="text" name="instagram_sitio"
+           id="contact-sitio"
+           placeholder="Instagram o sitio actual"
+           autocomplete="url" />
+  </div>
+
+  <div>
+    <label for="contact-mensaje">Contanos brevemente qué necesitás</label>
+    <textarea name="mensaje"
+              id="contact-mensaje"
+              placeholder="Contanos brevemente qué necesitás"
+              autocomplete="off"
+              required></textarea>
+  </div>
+
+  <button type="submit">Recibir plan + presupuesto</button>
+
+  <p id="form-status" class="form-status" aria-live="polite"></p>
+     </form>
+    </div> <!-- /contact-grid -->
+  </div> <!-- /wrapper -->
+ </section>
+
+<!-- DIVISOR ANTES DEL FOOTER -->
+<div class="footer-full-divider"></div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span>© 2026 VIA Cloud Studio · Argentina.</span>
+  <span class="footer-links">
+    <a href="/">Inicio</a>
+    <a href="/landing">Landing Pages</a>
+    <a href="/politicas">Política de Privacidad</a>
+  </span>
+</div>
+  </main>
+
+<!-- SCRIPT ANIMACIONES + FORM + MENÚ -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  /* =========================
+     ANIMACIONES SCROLL
+  ========================== */
+  const reveals = document.querySelectorAll('.reveal');
+  if (reveals.length) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    reveals.forEach(el => observer.observe(el));
+  }
+
+  /* =========================
+     FORM -> FORMSPREE (AJAX)
+  ========================== */
+  const form = document.getElementById('contact-form');
+  const statusEl = document.getElementById('form-status');
+  if (!form || !statusEl) return;
+
+  // botón submit (si existe) para bloquear doble envío
+  const submitBtn = form.querySelector('[type="submit"]');
+
+  const setStatus = (msg, type) => {
+    statusEl.textContent = msg;
+    statusEl.className = 'form-status';
+    if (type) statusEl.classList.add(`form-status--${type}`);
+  };
+
+  // Validación mínima
+  if (!form.action) {
+    setStatus('Falta configurar el formulario (action). Contactanos por WhatsApp.', 'error');
+    return;
+  }
+
+  // Evita dobles envíos
+  let isSending = false;
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (isSending) return;
+
+    isSending = true;
+    if (submitBtn) submitBtn.disabled = true;
+
+    setStatus('Enviando tu consulta...', '');
+
+    // Timeout para evitar quedarse colgado
+    const controller = new AbortController();
+    const timeoutMs = 12000;
+    const t = setTimeout(() => controller.abort(), timeoutMs);
+
+    try {
+      const data = new FormData(form);
+
+      const response = await fetch(form.action, {
+        method: (form.method || 'POST').toUpperCase(),
+        headers: { 'Accept': 'application/json' },
+        body: data,
+        signal: controller.signal
+      });
+
+      clearTimeout(t);
+
+      if (response.ok) {
+
+  // ✅ EVENTO PARA GTM/GA4 (recomendado cuando GA4 está via GTM)
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: 'form_submit',
+    event_category: 'contact',
+    event_label: 'landing_form'
+  });
+
+  setStatus('¡Gracias! Tu consulta fue enviada con éxito. Te responderemos a la brevedad.', 'ok');
+  form.reset();
+  return;
+}
+
+
+
+      // ❌ Error con respuesta (Formspree suele devolver JSON)
+      let errText = `Error ${response.status}. Probá de nuevo o escribinos por WhatsApp.`;
+      try {
+        const errJson = await response.json();
+        if (errJson?.errors?.length) {
+          errText = errJson.errors.map(e => e.message).join(' | ');
+        }
+      } catch (_) {
+        // Si no hay JSON, intentamos texto plano
+        try {
+          const errPlain = await response.text();
+          if (errPlain) errText = `${errText} (${errPlain.slice(0, 140)})`;
+        } catch (_) {}
+      }
+
+      setStatus(errText, 'error');
+
+    } catch (error) {
+      clearTimeout(t);
+
+      // 🔎 Diagnóstico PRO
+      const isAbort = error?.name === 'AbortError';
+      const msg =
+        isAbort
+          ? 'Se agotó el tiempo de envío (timeout). Probá de nuevo o escribinos por WhatsApp.'
+          : `No pudimos enviar el formulario (bloqueo de red/CORS/CSP). Probá en incógnito sin extensiones o escribinos por WhatsApp.`;
+
+      setStatus(msg, 'error');
+
+      // Log para ver el error real en consola (F12)
+      console.error('Form submit error:', error);
+    } finally {
+      isSending = false;
+      if (submitBtn) submitBtn.disabled = false;
+    }
+  });
+});
+</script>
+
+
+ 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+  const shots    = document.querySelectorAll(".works-shot");
+  const tagEl    = document.getElementById("works-tag");
+  const titleEl  = document.getElementById("works-title");
+  const descEl   = document.getElementById("works-description");
+  const pointsEl = document.getElementById("works-points");
+  const linkEl   = document.getElementById("works-link");
+
+  if (!shots.length) return;
+
+  const projects = {
+    // VIACLOUDSTUDIO
+  viacloud: {
+    tag: "Landing servicio Tienda Nube",
+    title: "Landing VIA CLOUD STUDIO",
+    description:
+      "Landing propia para presentar el servicio de diseño y optimización de Tienda Nube, pensada para captar leads calientes desde campañas y contenido orgánico.",
+    points: [
+      "Hero con propuesta de valor clara, orientada a emprendedores y marcas que quieren escalar.",
+      "Explica el proceso de trabajo, tipos de proyectos y stack de herramientas en un recorrido simple.",
+      "Incluye CTA principales y formulario de consulta rápido conectado a WhatsApp."
+    ],
+    link: "#contacto",
+    linkLabel: "Quiero una landing como esta"
+  },
+
+  // VIA SHOP
+  landing: {
+    tag: "Landing Tienda Nube",
+    title: "Landing VIA SHOP",
+    description:
+      "Landing enfocada en servicios de diseño y optimización de Tienda Nube, lista para recibir tráfico de campañas y convertir visitas en consultas.",
+    points: [
+      "Hero mobile first con propuesta clara y CTA principal.",
+      "Secciones de servicios, casos y stack de integraciones.",
+      "Formulario de contacto optimizado para leads rápidos."
+    ],
+    link: "#contacto",
+    linkLabel: "Ver landing en esta página"
+  },
+
+  // DISTRI HOME
+  newsletter: {
+    tag: "Newsletter & automatizaciones",
+    title: "Newsletter DISTRI HOME",
+    description:
+      "Newsletter diseñado para Marketing Nube, con foco en productos destacados, ofertas y derivación a la tienda online.",
+    points: [
+      "Diseño mobile first que se lee perfecto en correo.",
+      "Bloques de productos y beneficios claros.",
+      "Listo para integrarse con flujos básicos de bienvenida y promos."
+    ],
+    link: "#contacto",
+    linkLabel: "Ver cómo trabajamos newsletters"
+  }
+};
+
+
+  function setProject(key) {
+    const data = projects[key];
+    if (!data) return;
+
+    tagEl.textContent   = data.tag;
+    titleEl.textContent = data.title;
+    descEl.textContent  = data.description;
+
+    // reconstruimos la lista
+    pointsEl.innerHTML = "";
+    data.points.forEach(function (txt) {
+      const li = document.createElement("li");
+      li.textContent = txt;
+      pointsEl.appendChild(li);
+    });
+
+    linkEl.href        = data.link;
+    linkEl.textContent = data.linkLabel;
+  }
+
+  shots.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      const key = btn.getAttribute("data-project");
+      // visual
+      shots.forEach(s => s.classList.remove("is-active"));
+      btn.classList.add("is-active");
+      // contenido
+      setProject(key);
+    });
+  });
+
+  // Estado inicial
+  setProject("viacloud"); // Si querés que arranque en VIACLOUDSTUDIO, cambialo a "viacloud"
+});
+</script>
+
+<!-- BOTÓN FLOTANTE · SOFI CHAT -->
+<button
+  id="vs-chat-launcher"
+  class="chat-launcher"
+  type="button"
+  aria-label="Abrir chat Sofi"
+>
+  <img src="/smile.png" alt="Chat Sofi">
+</button>
+
+
+
+<div id="vs-chat-widget" class="vs-chat-widget" aria-hidden="true">
+  <div class="vs-chat-header">
+    <div class="vs-chat-header-left">
+      <div class="vs-chat-avatar">
+        <span class="vs-chat-avatar-icon">🤖</span>
+      </div>
+      <div class="vs-chat-header-text">
+        <div class="vs-chat-title">Sofi · Via Cloud Studio</div>
+        <div class="vs-chat-subtitle">Respuestas rápidas sobre tu Tienda Nube</div>
+      <!-- Nuevo: indicador de escritura -->
+      <div class="vs-chat-typing" id="vs-chat-typing" aria-hidden="true">
+        <span class="vs-chat-typing-dot"></span>
+        <span class="vs-chat-typing-dot"></span>
+        <span class="vs-chat-typing-dot"></span>
+      </div>
+    </div>
+  </div>
+  <button class="vs-chat-close" type="button" aria-label="Cerrar chat">×</button>
+</div>
+
+  <div class="vs-chat-body" id="vs-chat-body">
+    <!-- Mensaje de bienvenida se inyecta por JS -->
+  </div>
+
+  <div class="vs-chat-faqs" id="vs-chat-faqs">
+    <!-- Botones FAQ se inyectan por JS -->
+  </div>
+
+ <form id="vs-chat-form"
+      class="vs-chat-form"
+      action="https://formspree.io/f/mzzodepb"
+      method="POST">
+
+  <input id="vs-chat-input"
+         class="vs-chat-input"
+         type="text"
+         name="message"
+         placeholder="Escribí tu consulta..."
+         autocomplete="off"
+         required />
+
+  <button type="submit" class="vs-chat-send-btn">➤</button>
+</form>
+
+</div>
+<!-- /SOFI · CHAT NUBE -->
+  
+<script>
+(function () {
+  const launcher = document.getElementById('vs-chat-launcher');
+  const widget   = document.getElementById('vs-chat-widget');
+  const closeBtn = widget.querySelector('.vs-chat-close');
+  const bodyEl   = document.getElementById('vs-chat-body');
+  const form     = document.getElementById('vs-chat-form');
+  const input    = document.getElementById('vs-chat-input');
+  const faqsEl   = document.getElementById('vs-chat-faqs');
+  const typingEl = document.getElementById('vs-chat-typing');
+
+  /* =========================
+     WHATSAPP CONFIG
+  ========================== */
+
+  const WHATSAPP_PHONE = '5491159288093';
+  const WHATSAPP_TEXT  = 'Hola, vengo desde la web de VIA CLOUD STUDIO 🙂';
+
+  const WHATSAPP_URL =
+    'https://wa.me/' + WHATSAPP_PHONE +
+    '?text=' + encodeURIComponent(WHATSAPP_TEXT);
+
+  document.addEventListener('DOMContentLoaded', () => {
+  const waLink = document.querySelector('.js-whatsapp');
+  if (!waLink) return;
+
+  waLink.addEventListener('click', () => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'whatsapp_click',
+      event_category: 'contact',
+      event_label: 'chat_whatsapp',
+      link_url: waLink.href
+    });
+  });
+});
+
+
+  const faqs = [
+    {
+      id: 'tienda-cero',
+      label: 'Quiero mi primera tienda Nube',
+      answer:
+        '¡Buenísimo! Puedo armar tu tienda completa en Tienda Nube: diseño, estructura y carga inicial. ' +
+        'Si querés ver una propuesta concreta, seguimos por WhatsApp 👇',
+      toWhatsApp: true
+    },
+    {
+      id: 'optimizar',
+      label: 'Ya tengo tienda y quiero optimizar',
+      answer:
+        'Perfecto, reviso tu tienda actual y te propongo mejoras de diseño, velocidad y conversión. ' +
+        'Contame un poco más por WhatsApp y vemos tu caso puntual 👇',
+      toWhatsApp: true
+    },
+    {
+      id: 'precios',
+      label: 'Quiero saber precios',
+      answer:
+        'Los precios dependen de si necesitás armado desde cero, optimización o campañas puntuales. ' +
+        'Te los dejo claros y sin letra chica por WhatsApp 👇',
+      toWhatsApp: true
+    },
+    {
+      id: 'whatsapp-directo',
+      label: 'Hablar directo por WhatsApp',
+      answer: 'Te llevo directo a WhatsApp para seguir la conversación 😊',
+      toWhatsApp: true
+    }
+  ];
+
+  function appendMessage(text, sender) {
+    const bubble = document.createElement('div');
+    bubble.className =
+      'vs-chat-bubble ' +
+      (sender === 'user' ? 'vs-chat-bubble--user' : 'vs-chat-bubble--bot');
+    bubble.textContent = text;
+    bodyEl.appendChild(bubble);
+    bodyEl.scrollTop = bodyEl.scrollHeight;
+  }
+
+  function appendWhatsAppButton() {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'vs-chat-wa-btn';
+    btn.textContent = 'Seguir por WhatsApp';
+    btn.addEventListener('click', function () {
+      window.open(WHATSAPP_URL, '_blank');
+    });
+    bodyEl.appendChild(btn);
+    bodyEl.scrollTop = bodyEl.scrollHeight;
+  }
+
+  // Helpers para "escribiendo..."
+  function showTyping() {
+    if (typingEl) typingEl.style.display = 'flex';
+  }
+
+  function hideTyping() {
+    if (typingEl) typingEl.style.display = 'none';
+  }
+
+  function botReply(text, opts) {
+    const delay = (opts && opts.delay) || 650;
+    const after = opts && opts.after;
+
+    showTyping();
+    setTimeout(function () {
+      hideTyping();
+      appendMessage(text, 'bot');
+      if (typeof after === 'function') after();
+    }, delay);
+  }
+
+  function openWidget() {
+    widget.classList.add('is-open');
+    widget.setAttribute('aria-hidden', 'false');
+
+    if (!bodyEl.dataset.init) {
+      // Primer mensaje instantáneo
+      appendMessage(
+        'Hola 👋 Soy Sofi. Estoy acá para ayudarte con tu Tienda Nube.',
+        'bot'
+      );
+
+      // Segundo mensaje con "escribiendo..."
+      botReply(
+        'Contame en qué etapa está tu tienda o elegí una opción rápida acá abajo 😊',
+        { delay: 900 }
+      );
+
+      bodyEl.dataset.init = '1';
+    }
+  }
+
+  function closeWidget() {
+    widget.classList.remove('is-open');
+    widget.setAttribute('aria-hidden', 'true');
+    hideTyping();
+  }
+
+  launcher.addEventListener('click', function () {
+    // toggle: abrir/cerrar con el mismo botón
+    if (widget.classList.contains('is-open')) {
+      closeWidget();
+    } else {
+      openWidget();
+    }
+  });
+
+  closeBtn.addEventListener('click', closeWidget);
+
+  // Construir los botones FAQ
+  faqs.forEach(function (faq) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'vs-chat-faq-btn';
+    btn.textContent = faq.label;
+
+    btn.addEventListener('click', function () {
+      appendMessage(faq.label, 'user');
+
+      botReply(faq.answer, {
+        delay: 850,
+        after: function () {
+          if (faq.toWhatsApp) {
+            appendWhatsAppButton();
+          }
+        }
+      });
+    });
+
+    faqsEl.appendChild(btn);
+  });
+
+  // Envío manual de mensaje
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const value = input.value.trim();
+    if (!value) return;
+
+    appendMessage(value, 'user');
+    input.value = '';
+
+    botReply(
+      'Gracias por tu mensaje 🙌. Para darte una respuesta más precisa te escribo por WhatsApp.',
+      {
+        delay: 900,
+        after: appendWhatsAppButton
+      }
+    );
+  });
+})();
+</script>
+
+
+   <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Todos los links internos que apuntan a un ID de la misma página
+    const internalLinks = document.querySelectorAll('a[href^="#"]');
+
+    internalLinks.forEach(function (link) {
+      link.addEventListener('click', function (event) {
+        const href = link.getAttribute('href');
+
+        // Si es solo "#" o no hay destino, no hacemos nada
+        if (!href || href === '#') return;
+
+        const targetId = href.substring(1);
+        const targetEl = document.getElementById(targetId);
+        if (!targetEl) return;
+
+        // Evitamos el salto brusco por defecto
+        event.preventDefault();
+
+        // Scroll suave hasta la sección
+        targetEl.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      });
+    });
+  });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const cards = document.querySelectorAll("#servicios.section-dark .services .service-card");
+  if (!cards.length) return;
+
+  // 1) Estado inicial
+  cards.forEach(card => {
+    card.classList.add("svc-reveal");
+    card.classList.remove("svc-visible");
+    card.classList.remove("is-visible");
+  });
+
+  // 2) Delay por fila (izq->der dentro de la misma fila)
+  const tol = 10;
+  const rows = new Map();
+
+  cards.forEach(card => {
+    const top = card.offsetTop;
+    let key = null;
+    for (const k of rows.keys()) {
+      if (Math.abs(k - top) <= tol) { key = k; break; }
+    }
+    if (key === null) key = top;
+    if (!rows.has(key)) rows.set(key, []);
+    rows.get(key).push(card);
+  });
+
+  rows.forEach(row => {
+    row.sort((a,b)=>a.offsetLeft - b.offsetLeft);
+    row.forEach((card,i)=> card.dataset.delay = String(i * 110)); // tu delay actual (ok)
+  });
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+
+      // seteo delay primero
+      entry.target.style.transitionDelay = (entry.target.dataset.delay || "0") + "ms";
+
+      // 👇 clave: próximo frame => animación suave (evita “golpe”)
+      requestAnimationFrame(() => {
+        entry.target.classList.add("svc-visible");
+      });
+
+      obs.unobserve(entry.target);
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: "0px 0px -20% 0px"
+  });
+
+  // 👇 clave: observar en el próximo frame (garantiza que el estado inicial pinte)
+  requestAnimationFrame(() => {
+    cards.forEach(card => observer.observe(card));
+  });
+});
+</script>
+
+ 
+<!-- Botón flotante "volver arriba" -->
+<button class="scroll-top-btn" aria-label="Volver arriba">
+  ↑
+</button>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.querySelector('.scroll-top-btn');
+  if (!btn) return;
+
+  const toggle = () => {
+    const y = window.scrollY || document.documentElement.scrollTop;
+    btn.classList.toggle('is-visible', y > 420);
+  };
+
+  toggle();
+  window.addEventListener('scroll', toggle, { passive: true });
+
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+</script>
+
+    
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  if (!matchMedia("(max-width: 900px)").matches) return;
+
+  const track = document.querySelector("#trabajos .works-shots");
+  const shots = Array.from(document.querySelectorAll("#trabajos .works-shots .works-shot"));
+  if (!track || shots.length < 2) return;
+
+  // Centrar un slide en el carrusel
+  function center(btn, smooth=true){
+    const trackRect = track.getBoundingClientRect();
+    const btnRect = btn.getBoundingClientRect();
+    const delta = (btnRect.left - trackRect.left) - (trackRect.width/2 - btnRect.width/2);
+    track.scrollTo({ left: track.scrollLeft + delta, behavior: smooth ? "smooth" : "auto" });
+  }
+
+  // Al click: centrar (tu JS ya setea is-active + actualiza texto)
+  shots.forEach(btn => {
+    btn.addEventListener("click", () => center(btn, true), { passive:true });
+  });
+
+  // Al finalizar swipe: elegir el más centrado y “clickearlo” para sincronizar texto
+  let t = null;
+  track.addEventListener("scroll", () => {
+    clearTimeout(t);
+    t = setTimeout(() => {
+      const centerX = track.getBoundingClientRect().left + track.clientWidth/2;
+      let best = shots[0], bestD = Infinity;
+
+      shots.forEach(btn => {
+        const r = btn.getBoundingClientRect();
+        const mid = r.left + r.width/2;
+        const d = Math.abs(mid - centerX);
+        if (d < bestD){ bestD = d; best = btn; }
+      });
+
+      if (!best.classList.contains("is-active")) {
+        best.click();          // dispara tu setProject() + is-active
+        center(best, false);   // lo deja perfecto centrado
+      }
+    }, 120);
+  }, { passive:true });
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  if (!matchMedia("(max-width: 900px)").matches) return;
+
+  const root   = document.querySelector("#trabajos");
+  const track  = root?.querySelector(".works-shots");
+  const shots  = Array.from(root?.querySelectorAll(".works-shots .works-shot") || []);
+  const prevBtn = root?.querySelector(".works-arrow--prev");
+  const nextBtn = root?.querySelector(".works-arrow--next");
+  if (!track || shots.length < 2 || !prevBtn || !nextBtn) return;
+
+  function center(btn, smooth=true){
+    const trackRect = track.getBoundingClientRect();
+    const btnRect = btn.getBoundingClientRect();
+    const delta = (btnRect.left - trackRect.left) - (trackRect.width/2 - btnRect.width/2);
+    track.scrollTo({ left: track.scrollLeft + delta, behavior: smooth ? "smooth" : "auto" });
+  }
+
+  function activeIndex(){
+    const i = shots.findIndex(b => b.classList.contains("is-active"));
+    return i >= 0 ? i : 0;
+  }
+
+  function updateArrows(){
+    const i = activeIndex();
+    prevBtn.hidden = (i === 0);
+    nextBtn.hidden = (i === shots.length - 1);
+  }
+
+  function goTo(i){
+    i = Math.max(0, Math.min(shots.length - 1, i));
+    shots[i].click();          // mantiene tu lógica (texto + is-active)
+    center(shots[i], true);
+    updateArrows();
+  }
+
+  prevBtn.addEventListener("click", () => goTo(activeIndex() - 1));
+  nextBtn.addEventListener("click", () => goTo(activeIndex() + 1));
+
+  // si hacen click directo en una card
+  shots.forEach(btn => btn.addEventListener("click", () => {
+    setTimeout(() => { center(btn, true); updateArrows(); }, 0);
+  }, { passive:true }));
+
+  // si cambian por swipe: detecto la más centrada y la activo
+  let t = null;
+  track.addEventListener("scroll", () => {
+    clearTimeout(t);
+    t = setTimeout(() => {
+      const centerX = track.getBoundingClientRect().left + track.clientWidth/2;
+      let best = 0, bestD = Infinity;
+
+      shots.forEach((btn, idx) => {
+        const r = btn.getBoundingClientRect();
+        const mid = r.left + r.width/2;
+        const d = Math.abs(mid - centerX);
+        if (d < bestD){ bestD = d; best = idx; }
+      });
+
+      if (!shots[best].classList.contains("is-active")) shots[best].click();
+      center(shots[best], false);
+      updateArrows();
+    }, 120);
+  }, { passive:true });
+
+  setTimeout(() => {
+    center(shots[activeIndex()], false);
+    updateArrows();
+  }, 60);
+});
+</script>
+
+  
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const chk   = document.getElementById("nav-toggle");
+  const nav   = document.getElementById("site-nav");
+  const label = document.querySelector('label[for="nav-toggle"]');
+
+  if (!chk || !nav || !label) return;
+
+  const closeMenu = () => {
+    chk.checked = false;
+    // opcional: accesibilidad
+    label.setAttribute("aria-label", "Abrir menú");
+  };
+
+  const openMenu = () => {
+    chk.checked = true;
+    label.setAttribute("aria-label", "Cerrar menú");
+  };
+
+  // Sync por si se abre/cierra tocando el label
+  chk.addEventListener("change", () => (chk.checked ? openMenu() : closeMenu()));
+
+  // 1) Click en links => cerrar
+  nav.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener("click", () => closeMenu(), { passive: true });
+  });
+
+  // 2) Click/tap afuera => cerrar
+  document.addEventListener("pointerdown", (e) => {
+    if (!chk.checked) return;
+    const t = e.target;
+    if (!nav.contains(t) && !label.contains(t) && t !== chk) closeMenu();
+  });
+
+  // 3) Escape => cerrar
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMenu();
+  });
+
+  // 4) Si pasa a desktop => cerrar (evita estados raros)
+  window.addEventListener("resize", () => {
+    if (window.matchMedia("(min-width: 768px)").matches) closeMenu();
+  }, { passive: true });
+});
+</script>
+
+<script>
+(function () {
+  function getHeaderOffset() {
+    const header = document.querySelector("header");
+    if (!header) return 0;
+    const pos = getComputedStyle(header).position;
+    if (pos !== "sticky" && pos !== "fixed") return 0;
+    return Math.ceil(header.getBoundingClientRect().height);
+  }
+
+  function jumpToHashWithOffset() {
+    if (!location.hash) return;
+
+    const id = decodeURIComponent(location.hash.slice(1));
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    const y = target.getBoundingClientRect().top + window.pageYOffset - getHeaderOffset();
+    window.scrollTo({ top: y, behavior: "auto" });
+  }
+
+  window.addEventListener("load", function () {
+    // espera un pelín por fonts/imagenes
+    setTimeout(jumpToHashWithOffset, 80);
+  });
+})();
+</script>
+
+<script>
+(function(){
+  const metrics = document.querySelectorAll('.about-metric__num');
+  if(!metrics.length) return;
+
+  function animateMetric(el){
+    const target = parseInt(el.dataset.target || '0', 10);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const duration = 850; // ms
+    const start = performance.now();
+
+    const flicker = setInterval(() => {
+      const r = Math.max(0, Math.floor(Math.random() * (target + 20)));
+      el.textContent = `${prefix}${r}${suffix}`;
+    }, 50);
+
+    function tick(now){
+      const p = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = Math.round(target * eased);
+
+      if(p >= 1){
+        clearInterval(flicker);
+        el.textContent = `${prefix}${target}${suffix}`;
+        return;
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  let fired = false;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting && !fired){
+        fired = true;
+
+        // ✅ delay escalonado
+        metrics.forEach((el, i) => {
+          setTimeout(() => animateMetric(el), i * 140); // 0ms, 140ms, 280ms
+        });
+
+        io.disconnect();
+      }
+    });
+  }, { threshold: 0.35 });
+
+  const anchor = document.getElementById('about-metrics') || metrics[0];
+  io.observe(anchor);
+})();
+</script>
+
+ 
+ 
+</body>
+</html>

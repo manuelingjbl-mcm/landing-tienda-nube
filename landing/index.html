@@ -554,6 +554,21 @@
       gap: 10px;
       font-size: 12px;
     }
+    .footer-links{
+      display:inline-flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap: 14px;
+      flex-wrap:wrap;
+    }
+    .footer-links a{
+      color: rgba(234,240,255,.82);
+      text-decoration: none;
+    }
+    .footer-links a:hover{
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
 
     /* Reveal on scroll (fail-safe) */
     .reveal{ opacity: 1; transform: none; }
@@ -1229,11 +1244,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- TOP -->
   <div class="topbar">
     <div class="wrap inner">
-      <a class="brand" href="#top" aria-label="VIACLOUDSTUDIO (Inicio)">
+      <a class="brand" href="/" aria-label="VIACLOUDSTUDIO (Inicio)">
         <img src="/vclouds-logo.png" alt="VIACLOUDSTUDIO" width="1580" height="220" loading="eager" decoding="async">
       </a>
 
       <div class="nav">
+  <a class="pill" href="/">Inicio</a>
+  <a class="pill" href="/tienda-nube">Tienda Nube</a>
   <a class="pill js-cta" data-cta="faq" data-loc="nav" href="#faq">FAQ</a>
   <a class="btn btn-primary js-cta" data-cta="quiero_landing" data-loc="nav" href="#contacto">Quiero mi landing</a>
 </div>
@@ -1614,8 +1631,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <footer class="footer">
   <div class="wrap inner">
-    <div>© 2026 Vía Cloud Studio · Landing pages para campañas.</div>
-    <div>Hecho en Argentina · pensado para convertir.</div>
+    <div>© 2026 VIA Cloud Studio · Argentina.</div>
+    <div class="footer-links">
+      <a href="/">Inicio</a>
+      <a href="/tienda-nube">Tienda Nube</a>
+      <a href="/politicas">Política de Privacidad</a>
+    </div>
   </div>
 </footer>
 
