@@ -3656,6 +3656,408 @@ select{
   line-height:inherit !important;
 }
 
+/* =========================
+   TIENDA NUBE RESPONSIVE PRO
+   Ajustes de encuadre sin tocar tracking ni formularios.
+   ========================= */
+@media (min-width: 768px) and (max-width: 1024px){
+  header.site-header{
+    min-height: auto;
+    padding-bottom: 48px;
+  }
+
+  .site-header .wrapper{
+    padding-bottom: 24px;
+  }
+
+  .hero{
+    grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr) !important;
+    column-gap: 30px !important;
+    padding: 50px 0 44px !important;
+    align-items: center !important;
+  }
+
+  .hero h1{
+    font-size: clamp(34px, 5vw, 48px) !important;
+    line-height: 1.06;
+  }
+
+  .hero p{
+    font-size: 14px;
+    line-height: 1.55;
+    margin-bottom: 18px;
+  }
+
+  .hero-phone{
+    max-width: 500px;
+    margin-top: -18px;
+  }
+
+  .hero-badge{
+    margin-top: 8px !important;
+  }
+
+  .partner-tn-section{
+    padding-top: 42px;
+  }
+}
+
+@media (max-width: 767.98px){
+  header.site-header{
+    min-height: auto;
+    padding: 10px 0 38px !important;
+  }
+
+  header.site-header::after{
+    inset: -18% -44% -8%;
+    opacity: .38;
+    background-position: center top;
+  }
+
+  .site-header .wrapper{
+    padding: 0 14px;
+  }
+
+  .hero{
+    min-height: auto;
+    padding: 8px 0 0 !important;
+    gap: 0 !important;
+  }
+
+  .hero-visual{
+    position: relative;
+    min-height: 330px;
+    height: clamp(330px, 48vh, 430px);
+    overflow: hidden;
+    justify-content: flex-start;
+    border-radius: 0;
+  }
+
+  .hero-phone{
+    width: 100%;
+    height: 100%;
+    margin: 0 !important;
+    overflow: hidden;
+  }
+
+  .hero-phone img,
+  .hero-img{
+    width: 126% !important;
+    max-width: none !important;
+    height: 100% !important;
+    object-fit: cover;
+    object-position: 58% 18%;
+    transform: none !important;
+    transform-origin: center center !important;
+  }
+
+  .hero-mobile-overlay{
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+    padding: 76px 18px 0;
+    transform: none !important;
+  }
+
+  .hero-mobile-kicker{
+    margin-bottom: 10px;
+    font-size: 10px;
+    line-height: 1.35;
+  }
+
+  .hero-mobile-title{
+    max-width: 16rem;
+    font-size: clamp(30px, 8.8vw, 38px) !important;
+    line-height: 1.06;
+  }
+
+  .hero-badge{
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    z-index: 2;
+    width: auto;
+    max-width: calc(100vw - 36px);
+    margin: 0 !important;
+    padding: 7px 16px;
+    font-size: 11px !important;
+    transform: translateX(-50%);
+  }
+
+  .hero-content{
+    padding: 18px 18px 0;
+    gap: 12px;
+  }
+
+  .hero-content > p{
+    max-width: none;
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: rgba(255,255,255,.92);
+  }
+
+  .hero-actions{
+    gap: 10px;
+    margin: 0 0 4px;
+  }
+
+  .hero-actions .btn-primary,
+  .hero-actions .btn-primary--hero{
+    min-height: 44px;
+    padding: 11px 18px;
+    font-size: 13px;
+  }
+
+  .hero-actions .btn-secondary{
+    font-size: 13px;
+  }
+
+  .hero-tagline{
+    max-width: none;
+    margin: 0;
+    font-size: 12.5px !important;
+    line-height: 1.45;
+    color: rgba(255,255,255,.90);
+  }
+
+  .partner-tn-section{
+    padding: 34px 0 64px;
+  }
+
+  .partner-tn-section .wrapper{
+    padding: 0 18px 52px;
+  }
+
+  .partner-tn-layout{
+    gap: 20px;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .partner-tn-eyebrow{
+    margin-bottom: 12px;
+    padding: 6px 10px;
+    font-size: 10px;
+    letter-spacing: .07em;
+  }
+
+  .partner-tn-copy h2{
+    font-size: clamp(28px, 8vw, 36px);
+    line-height: 1.08;
+  }
+
+  .partner-tn-copy p{
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 1.58;
+  }
+
+  .partner-tn-actions{
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .partner-tn-primary,
+  .partner-tn-secondary{
+    min-height: 44px;
+    padding: 11px 16px;
+    font-size: 13px;
+  }
+
+  .partner-tn-benefit{
+    font-size: 13px;
+  }
+
+  .partner-tn-offer{
+    padding: 18px;
+    border-radius: 18px;
+  }
+}
+
+@media (max-width: 390px){
+  .hero-visual{
+    min-height: 306px;
+    height: clamp(306px, 42vh, 360px);
+  }
+
+  .hero-mobile-overlay{
+    padding-top: 68px;
+  }
+
+  .hero-mobile-title{
+    font-size: 29px !important;
+  }
+
+  .hero-content{
+    padding-top: 14px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 980px){
+  .site-header .header-inner{
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+  }
+
+  .site-header .logo img{
+    height: 24px;
+  }
+
+  #site-nav.nav{
+    gap: 14px !important;
+  }
+
+  #site-nav.nav a{
+    white-space: nowrap;
+    font-size: 12px;
+    line-height: 1.1;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 860px){
+  .site-header .header-inner{
+    padding-left: 28px !important;
+    padding-right: 28px !important;
+  }
+
+  #site-nav.nav{
+    gap: 11px !important;
+  }
+
+  #site-nav.nav a{
+    font-size: 11px;
+  }
+}
+
+/* Ajuste de padding hero: desktop alinea con logo/contacto; tablet alinea copy con logo. */
+@media (min-width: 1025px){
+  .site-header .wrapper{
+    max-width: min(1240px, calc(100% - 80px));
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1024px){
+  .site-header .hero > div:first-child{
+    box-sizing: border-box;
+    padding-left: 40px;
+  }
+}
+
+@media (min-width: 861px) and (max-width: 980px){
+  .site-header .hero > div:first-child{
+    box-sizing: border-box;
+    padding-left: 24px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 860px){
+  .site-header .hero > div:first-child{
+    box-sizing: border-box;
+    padding-left: 12px;
+  }
+}
+
+@media (max-width: 767.98px){
+  .hero-visual{
+    min-height: 0;
+    height: auto;
+    overflow: visible;
+    padding-top: 0;
+  }
+
+  .hero-phone{
+    display: flex;
+    justify-content: flex-end;
+    overflow: visible;
+    height: auto;
+  }
+
+  .hero-phone img,
+  .hero-img{
+    width: min(100%, 430px) !important;
+    height: auto !important;
+    max-width: 100% !important;
+    object-fit: contain;
+    object-position: center center;
+    margin: 46px 0 0 auto;
+  }
+
+  .hero-mobile-overlay{
+    padding-top: 78px;
+  }
+
+  .hero-badge{
+    position: static;
+    transform: none !important;
+    margin: 8px auto 0 !important;
+  }
+
+  .hero-content{
+    padding-top: 18px;
+  }
+}
+
+@media (max-width: 390px){
+  .hero-phone img,
+  .hero-img{
+    margin-top: 50px;
+  }
+
+  .hero-mobile-overlay{
+    padding-top: 76px;
+  }
+
+  .hero-badge{
+    margin-top: 6px !important;
+  }
+}
+
+@media (max-width: 899px){
+  #servicios.section-dark .service-card--featured{
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+}
+
+/* Ajuste fino: presencia del mockup hero solo en mobile. */
+@media (max-width: 767.98px){
+  .hero-visual{
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    overflow: hidden;
+  }
+
+  .hero-phone{
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .hero-phone img,
+  .hero-img{
+    width: 158vw !important;
+    max-width: none !important;
+    margin: 16px -48vw 0 auto;
+  }
+
+  .hero-mobile-kicker{
+    margin-bottom: 14px;
+  }
+
+  .hero-content{
+    padding-top: 30px;
+  }
+}
+
+@media (max-width: 390px){
+  .hero-phone img,
+  .hero-img{
+    width: 158vw !important;
+    margin: 18px -48vw 0 auto;
+  }
+}
+
 
 </style>
 
