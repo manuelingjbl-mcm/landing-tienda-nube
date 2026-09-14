@@ -4020,6 +4020,285 @@ select{
   }
 }
 
+/* Rediseño Socio Partner Silver */
+.partner-tn-section{
+  padding: 52px 0 108px;
+  background:
+    linear-gradient(180deg, rgba(237,246,255,.98) 0%, rgba(248,251,255,1) 50%, rgba(232,241,255,.82) 100%);
+}
+
+.partner-tn-section::before{
+  background:
+    linear-gradient(90deg, rgba(37,99,235,.10), rgba(124,58,237,.08), transparent 62%),
+    linear-gradient(180deg, rgba(255,255,255,.18), transparent 42%);
+}
+
+.partner-tn-section .wrapper{
+  max-width: 1240px;
+}
+
+.partner-tn-layout{
+  grid-template-columns: minmax(0, 1.05fr) minmax(340px, .7fr);
+  gap: 42px;
+  align-items: stretch;
+  padding-top: 28px;
+  border-top: 1px solid rgba(37,99,235,.13);
+}
+
+.partner-tn-copy{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.partner-tn-eyebrow{
+  margin-bottom: 18px;
+  background: rgba(37,99,235,.09);
+  border-color: rgba(37,99,235,.18);
+  color: #0f55d8;
+}
+
+.partner-tn-copy h2{
+  max-width: 820px;
+  font-size: clamp(38px, 4.15vw, 58px);
+  line-height: 1;
+}
+
+.partner-tn-copy p{
+  max-width: 720px;
+  margin-top: 18px;
+  font-size: 17px;
+  line-height: 1.68;
+}
+
+.partner-tn-actions{
+  margin-top: 26px;
+}
+
+.partner-tn-primary,
+.partner-tn-secondary{
+  min-height: 48px;
+  padding: 13px 20px;
+}
+
+.partner-tn-primary{
+  background: linear-gradient(135deg, #2563eb, #174ad8);
+  box-shadow: 0 18px 34px rgba(37,99,235,.24);
+}
+
+.partner-tn-steps{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+  max-width: 850px;
+  margin-top: 28px;
+}
+
+.partner-tn-step{
+  min-height: 118px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.62);
+  border: 1px solid rgba(37,99,235,.14);
+  box-shadow: 0 14px 34px rgba(15,23,42,.06);
+}
+
+.partner-tn-step-number{
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  margin-bottom: 12px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.partner-tn-step strong{
+  display: block;
+  color: #0f172a;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.partner-tn-step span:last-child{
+  display: block;
+  margin-top: 7px;
+  color: #526174;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.partner-tn-proof{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 100%;
+  padding: 28px;
+  border-radius: 26px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.96), rgba(241,247,255,.88));
+  border: 1px solid rgba(37,99,235,.15);
+  box-shadow: 0 22px 58px rgba(15,23,42,.12);
+}
+
+.partner-tn-proof::before{
+  content: "";
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 0;
+  height: 3px;
+  border-radius: 0 0 999px 999px;
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
+}
+
+.partner-tn-seal-wrap{
+  padding: 10px 0 2px;
+}
+
+.partner-tn-seal{
+  width: min(100%, 330px);
+  height: auto;
+}
+
+.partner-tn-proof-copy{
+  padding-top: 18px;
+  border-top: 1px solid rgba(15,23,42,.08);
+}
+
+.partner-tn-proof-copy strong{
+  display: block;
+  color: #0f172a;
+  font-size: 22px;
+  line-height: 1.16;
+}
+
+.partner-tn-proof-copy p{
+  margin: 10px 0 0;
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.58;
+}
+
+.partner-tn-discount{
+  padding-top: 18px;
+  border-top: 1px solid rgba(15,23,42,.08);
+}
+
+.partner-tn-offer-kicker{
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.partner-tn-offer-value{
+  margin-top: 7px;
+  font-size: clamp(50px, 5vw, 76px);
+}
+
+.partner-tn-offer-text{
+  max-width: 360px;
+}
+
+.partner-tn-note{
+  margin-top: 14px;
+  padding-top: 14px;
+}
+
+@media (max-width: 1024px){
+  .partner-tn-section{
+    padding: 44px 0 92px;
+  }
+
+  .partner-tn-layout{
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .partner-tn-proof{
+    max-width: none;
+  }
+
+  .partner-tn-seal{
+    width: min(100%, 300px);
+  }
+}
+
+@media (max-width: 767.98px){
+  .partner-tn-section{
+    padding: 36px 0 74px;
+  }
+
+  .partner-tn-section .wrapper{
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .partner-tn-layout{
+    gap: 22px;
+  }
+
+  .partner-tn-copy h2{
+    font-size: clamp(30px, 8vw, 38px);
+    line-height: 1.06;
+  }
+
+  .partner-tn-copy p{
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+
+  .partner-tn-actions{
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 11px;
+    margin-top: 24px;
+  }
+
+  .partner-tn-primary,
+  .partner-tn-secondary{
+    width: 100%;
+    min-height: 48px;
+    padding: 13px 18px;
+    font-size: 13.5px;
+  }
+
+  .partner-tn-steps{
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .partner-tn-step{
+    min-height: auto;
+    padding: 14px 60px 14px 14px;
+  }
+
+  .partner-tn-proof{
+    padding: 22px 60px 22px 22px;
+    border-radius: 22px;
+  }
+
+  .partner-tn-proof-copy strong{
+    font-size: 20px;
+  }
+
+  .partner-tn-seal{
+    width: min(100%, 276px);
+  }
+}
+
 /* Ajuste fino: presencia del mockup hero solo en mobile. */
 @media (max-width: 767.98px){
   .hero-visual{
@@ -4174,17 +4453,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="partner-tn-copy">
         <div class="partner-tn-eyebrow">
           <span class="partner-tn-dot" aria-hidden="true"></span>
-          Socio Partner de Tiendanube
+          Agencia partner acreditada
         </div>
 
         <h2>
-          Lanzá tu tienda con Tiendanube y obtené
+          Lanzá tu tienda con Tiendanube y empezá con
           <span>25% OFF</span>
         </h2>
 
         <p>
-          Usá nuestro enlace oficial para crear tu cuenta y empezar con el primer mes bonificado.
-          Si preferís no hacerlo solo, también podemos armarte la tienda lista para vender.
+          Formamos parte del ecosistema oficial de partners de Tiendanube. Usá nuestro enlace
+          para crear tu cuenta con el beneficio activo y, si querés avanzar acompañado,
+          podemos ayudarte a dejar la tienda lista para vender.
         </p>
 
         <div class="partner-tn-actions">
@@ -4202,27 +4482,52 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </a>
         </div>
 
-        <div class="partner-tn-benefits" aria-label="Beneficios incluidos">
-          <div class="partner-tn-benefit">
-            <span class="partner-tn-check" aria-hidden="true">✓</span>
-            Tienda con carrito, catálogo, checkout, pagos y envíos configurables.
+        <div class="partner-tn-steps" aria-label="Cómo activar el beneficio">
+          <div class="partner-tn-step">
+            <span class="partner-tn-step-number">1</span>
+            <strong>Entrás desde nuestro enlace</strong>
+            <span>El beneficio se activa al iniciar el registro desde Via Cloud Studio.</span>
           </div>
-          <div class="partner-tn-benefit">
-            <span class="partner-tn-check" aria-hidden="true">✓</span>
-            Estructura pensada para vender desde mobile, redes y campañas.
+          <div class="partner-tn-step">
+            <span class="partner-tn-step-number">2</span>
+            <strong>Creás tu cuenta en Tiendanube</strong>
+            <span>Empezás con el descuento aplicado para dar el primer paso.</span>
+          </div>
+          <div class="partner-tn-step">
+            <span class="partner-tn-step-number">3</span>
+            <strong>Avanzás solo o con ayuda</strong>
+            <span>Podés configurar tu tienda o pedirnos la implementación completa.</span>
           </div>
         </div>
       </div>
 
-      <aside class="partner-tn-offer" aria-label="Descuento Tiendanube">
-        <div class="partner-tn-offer-kicker">Beneficio de partner</div>
-        <div class="partner-tn-offer-value">25% OFF</div>
-        <p class="partner-tn-offer-text">
-          Aplica al primer mes de cualquier plan al registrarte desde el enlace oficial de Via Cloud Studio.
-        </p>
-        <p class="partner-tn-note">
-          Recomendado si querés empezar con una base profesional y después optimizar diseño, estructura y conversión.
-        </p>
+      <aside class="partner-tn-proof" aria-label="Acreditación Tiendanube Partner Silver">
+        <div class="partner-tn-seal-wrap">
+          <img
+            class="partner-tn-seal"
+            src="/assets-v2/tiendanube-partner-silver.png"
+            alt="Tiendanube Partner Silver"
+          >
+        </div>
+
+        <div class="partner-tn-proof-copy">
+          <strong>Nivel Silver alcanzado</strong>
+          <p>
+            Alcanzamos nuestra primera insignia oficial como agencia partner de Tiendanube.
+            Esto acredita que podemos operar dentro de su programa de partners.
+          </p>
+        </div>
+
+        <div class="partner-tn-discount">
+          <div class="partner-tn-offer-kicker">Beneficio desde el enlace oficial</div>
+          <div class="partner-tn-offer-value">25% OFF</div>
+          <p class="partner-tn-offer-text">
+            Aplica al primer mes de cualquier plan al registrarte desde el enlace de Via Cloud Studio.
+          </p>
+          <p class="partner-tn-note">
+            Ideal para empezar con una base profesional y optimizar diseño, estructura y conversión desde el inicio.
+          </p>
+        </div>
       </aside>
     </div>
   </div>
