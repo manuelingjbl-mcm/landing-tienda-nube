@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="VIA Cloud Tools: herramientas internas para simplificar la gestión, automatización y operación de proyectos.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://www.viacloudstudio.com/herramientas">
+<link rel="icon" href="/favicon.icon.png" sizes="any">
+<link rel="apple-touch-icon" href="/favicon.icon.png">
+<title>VIA Cloud Tools</title>
+<style>
+:root{color-scheme:dark;--ink:#0D1526;--surface:#172239;--surface-soft:#1B2944;--line:#2C3D61;--text:#F4F7FF;--muted:#B6C2DA;--blue:#2D5BFF;--violet:#7B5CFF;}
+*{box-sizing:border-box}html{min-height:100%;background:var(--ink)}body{min-width:0;min-height:100vh;margin:0;display:flex;flex-direction:column;overflow-x:hidden;background:radial-gradient(70% 42% at 86% 7%,rgba(53,73,200,.18),transparent 64%),var(--ink);color:var(--text);font-family:"Plus Jakarta Sans",Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;}
+a{color:inherit;text-decoration:none}.skip-link{position:absolute;z-index:100;top:-48px;left:14px;padding:9px 12px;border-radius:8px;background:#fff;color:#0C1834;font-weight:700}.skip-link:focus{top:14px}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(8,10,18,.72);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)}.topbar__inner,.tools-shell,.footer__inner{width:min(1120px,calc(100% - 40px));margin:0 auto}.topbar__inner{min-height:76px;padding:12px 0;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;min-width:0}.brand img{display:block;width:150px;height:auto}.nav{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap;font-size:13px}.nav-pill,.nav-cta{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:10px 12px;border:1px solid rgba(255,255,255,.14);color:#EAF0FF;white-space:nowrap;transition:transform .18s ease,filter .18s ease,background .18s ease}.nav-pill{border-radius:999px;background:rgba(255,255,255,.06)}.nav-pill[aria-current="page"]{background:rgba(80,104,204,.2);border-color:rgba(157,177,255,.42)}.nav-cta{border-radius:12px;background:linear-gradient(135deg,var(--blue) 0%,#1F2CFF 45%,var(--violet) 100%);border-color:rgba(255,255,255,.18);box-shadow:0 18px 40px rgba(45,91,255,.25)}.nav-pill:hover,.nav-cta:hover{transform:translateY(-1px);filter:brightness(1.08)}.nav-pill:focus-visible,.nav-cta:focus-visible,.tool-card:focus-visible{outline:2px solid #9FB7FF;outline-offset:3px}
+main{flex:1}.tools-shell{padding:76px 0 84px}.eyebrow{display:inline-flex;align-items:center;gap:8px;margin:0 0 15px;color:#B9C8FF;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.eyebrow::before{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#36A7FF,var(--violet));box-shadow:0 0 0 5px rgba(71,111,255,.12);content:""}.hero{max-width:720px;margin-bottom:42px}.hero h1{max-width:650px;margin:0;letter-spacing:-.04em;font-size:clamp(34px,5vw,54px);line-height:1.04}.hero p{max-width:650px;margin:18px 0 0;color:var(--muted);font-size:17px;line-height:1.6}.section-heading{margin:0 0 16px;font-size:14px;font-weight:800;color:#D9E2FA}.tools-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:stretch}.tool-card,.future-card{min-height:276px;border:1px solid var(--line);border-radius:18px;padding:26px;display:flex;flex-direction:column}.tool-card{background:linear-gradient(145deg,rgba(35,51,87,.92),rgba(21,32,55,.98));box-shadow:0 20px 44px rgba(0,0,0,.16);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}.tool-card:hover{transform:translateY(-3px);border-color:#4D6CB9;box-shadow:0 24px 50px rgba(0,0,0,.24)}.tool-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.tool-icon{width:50px;height:50px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,var(--blue),#4A23FF);box-shadow:0 14px 30px rgba(36,61,255,.28);font-size:22px}.badge{padding:6px 9px;border:1px solid rgba(178,198,255,.24);border-radius:999px;background:rgba(177,197,255,.08);color:#CAD8FF;font-size:12px;font-weight:700}.tool-card h2{margin:25px 0 9px;font-size:23px;letter-spacing:-.02em}.tool-card p{max-width:460px;margin:0;color:var(--muted);font-size:15px;line-height:1.55}.tool-meta{margin-top:18px;color:#C6D4F6;font-size:13px}.tool-action{display:inline-flex;align-items:center;gap:8px;margin-top:auto;padding-top:25px;color:#fff;font-size:14px;font-weight:800}.tool-action::after{content:"→";font-size:18px;line-height:1}.future-card{justify-content:center;background:rgba(255,255,255,.025);border-style:dashed;color:var(--muted)}.future-card h2{margin:0 0 8px;font-size:18px;color:#D9E2FA}.future-card p{max-width:300px;margin:0;font-size:14px;line-height:1.55}
+.footer{padding:26px 0;background:#070A12;color:rgba(234,240,255,.7);border-top:1px solid rgba(255,255,255,.08)}.footer__inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;font-size:12px}.footer__links{display:inline-flex;align-items:center;justify-content:flex-end;gap:14px;flex-wrap:wrap}.footer a{color:rgba(234,240,255,.82)}.footer a:hover{text-decoration:underline;text-underline-offset:3px}
+@media (max-width:720px){.topbar__inner,.tools-shell,.footer__inner{width:calc(100% - 28px)}.topbar__inner{align-items:flex-start;flex-direction:column}.nav{justify-content:flex-start}.tools-shell{padding:48px 0 56px}.hero{margin-bottom:32px}.hero p{font-size:16px}.tools-grid{grid-template-columns:1fr}.tool-card,.future-card{min-height:0}.footer__links{justify-content:flex-start}}@media (max-width:430px){.nav{gap:8px}.nav-pill,.nav-cta{min-height:38px;padding:9px 11px}.tool-card,.future-card{padding:22px}.hero h1{font-size:34px}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#tools-main">Ir a VIA Cloud Tools</a>
+<header class="topbar">
+  <div class="topbar__inner">
+    <a class="brand" href="https://www.viacloudstudio.com/" aria-label="VIACLOUDSTUDIO (Inicio)"><img src="/assets-v2/logo-via-cloud-blanco.png" alt="VIACLOUDSTUDIO" width="1580" height="220" decoding="async"></a>
+    <nav class="nav" aria-label="Navegación de VIA Cloud Tools">
+      <a class="nav-pill" href="https://www.viacloudstudio.com/">Inicio</a>
+      <a class="nav-pill" href="/herramientas/" aria-current="page">Herramientas</a>
+      <a class="nav-cta" href="/tienda-nube">Soluciones Tienda Nube</a>
+    </nav>
+  </div>
+</header>
+<main id="tools-main">
+  <div class="tools-shell">
+    <section class="hero" aria-labelledby="tools-title">
+      <p class="eyebrow">VIA Cloud Tools</p>
+      <h1 id="tools-title">Herramientas para trabajar más simple.</h1>
+      <p>Un espacio de VIA Cloud para centralizar herramientas de gestión, automatización y operación de proyectos.</p>
+    </section>
+    <section aria-labelledby="tools-available">
+      <h2 class="section-heading" id="tools-available">Herramientas disponibles</h2>
+      <div class="tools-grid">
+        <a class="tool-card" href="/herramientas/priceflow/" aria-label="Abrir PriceFlow">
+          <div class="tool-top"><span class="tool-icon" aria-hidden="true">🏷️</span><span class="badge">Tienda Nube</span></div>
+          <h2>PriceFlow</h2>
+          <p>Actualizá precios de forma masiva, aplicá diferentes reglas de ajuste y generá un nuevo CSV listo para importar.</p>
+          <span class="tool-meta">Procesamiento 100% local · Sin subir archivos</span>
+          <span class="tool-action">Abrir PriceFlow</span>
+        </a>
+        <div class="future-card">
+          <h2>Próximamente</h2>
+          <p>Nuevas herramientas VIA Cloud para acompañar la operación de tus proyectos.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="footer"><div class="footer__inner"><span>© VIA Cloud Studio · Herramientas internas.</span><div class="footer__links"><a href="https://www.viacloudstudio.com/">Inicio</a><a href="/tienda-nube">Tienda Nube</a></div></div></footer>
+</body>
+</html>

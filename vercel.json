@@ -25,6 +25,16 @@
       "source": "/tienda-nube/",
       "destination": "/tienda-nube",
       "permanent": true
+    },
+    {
+      "source": "/herramientas/",
+      "destination": "/herramientas",
+      "permanent": true
+    },
+    {
+      "source": "/herramientas/priceflow/",
+      "destination": "/herramientas/priceflow",
+      "permanent": true
     }
   ]
 }
