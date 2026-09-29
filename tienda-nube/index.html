@@ -16,12 +16,17 @@
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Vía Cloud Studio · Diseño y optimización Tienda Nube" />
 <meta property="og:description" content="Diseñamos y optimizamos tiendas Tienda Nube a medida para tu marca. Home, categorías, PDP y landings listas para convertir visitas en ventas." />
-<meta property="og:image" content="https://www.viacloudstudio.com/hero-mobile-mcmdigital.png" />
+<meta property="og:image" content="https://www.viacloudstudio.com/assets-v2/og-tienda-nube-silver-square.png" />
+<meta property="og:image:secure_url" content="https://www.viacloudstudio.com/assets-v2/og-tienda-nube-silver-square.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="1200" />
+<meta property="og:image:alt" content="Vía Cloud Studio - Diseño y optimización Tienda Nube con beneficio 25% OFF" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Vía Cloud Studio · Diseño y optimización Tienda Nube" />
 <meta name="twitter:description" content="Diseñamos y optimizamos tiendas Tienda Nube a medida para tu marca. Home, categorías, PDP y landings listas para convertir visitas en ventas." />
-<meta name="twitter:image" content="https://www.viacloudstudio.com/hero-mobile-mcmdigital.png" />
+<meta name="twitter:image" content="https://www.viacloudstudio.com/assets-v2/og-tienda-nube-silver-square.png" />
 <link rel="preload" as="image" href="/hero-mobile-mcmdigital.png" fetchpriority="high" />
 
 <meta name="facebook-domain-verification" content="u8j1ch87vy74yb23zjmipdanqiswpn" />
@@ -4347,6 +4352,361 @@ select{
   }
 }
 
+/* ===== CASOS REALES · carrusel editorial ===== */
+#trabajos .portfolio-editorial{
+  position:relative;
+  margin-top:38px;
+}
+
+#trabajos .portfolio-editorial__bar{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:24px;
+  margin:0 0 18px;
+}
+
+#trabajos .portfolio-editorial__eyebrow{
+  margin:0 0 6px;
+  color:#2563eb;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+#trabajos .portfolio-editorial__hint{
+  margin:0;
+  color:#64748b;
+  font-size:14px;
+  line-height:1.5;
+}
+
+#trabajos .portfolio-editorial__nav{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex:0 0 auto;
+}
+
+#trabajos .portfolio-editorial__count{
+  min-width:68px;
+  color:#334155;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-align:center;
+}
+
+#trabajos .portfolio-editorial__arrow{
+  width:46px;
+  height:46px;
+  display:inline-grid;
+  place-items:center;
+  border:1px solid rgba(37,99,235,.16);
+  border-radius:999px;
+  background:rgba(255,255,255,.78);
+  color:#0f172a;
+  box-shadow:0 10px 26px rgba(15,23,42,.08);
+  cursor:pointer;
+  font:inherit;
+  font-size:25px;
+  line-height:1;
+  transition:transform .2s ease,background .2s ease,box-shadow .2s ease;
+}
+
+@media (hover:hover) and (pointer:fine){
+  #trabajos .portfolio-editorial__arrow:hover{
+    transform:translateY(-2px);
+    background:#0f172a;
+    color:#fff;
+    box-shadow:0 14px 30px rgba(15,23,42,.18);
+  }
+}
+
+#trabajos .portfolio-editorial__viewport{
+  position:relative;
+  overflow:hidden;
+  border-radius:30px;
+  background:#07152e;
+  box-shadow:0 28px 60px rgba(15,23,42,.18);
+  touch-action:pan-y;
+}
+
+#trabajos .portfolio-editorial__track{
+  display:flex;
+  transform:translateX(0);
+  will-change:transform;
+}
+
+#trabajos .portfolio-editorial__track.is-ready{
+  transition:transform 560ms cubic-bezier(.22,.8,.24,1);
+}
+
+#trabajos .portfolio-editorial__slide{
+  position:relative;
+  flex:0 0 100%;
+  min-height:520px;
+  overflow:hidden;
+  isolation:isolate;
+}
+
+#trabajos .portfolio-editorial__slide::before{
+  position:absolute;
+  z-index:1;
+  inset:0;
+  background:linear-gradient(90deg,rgba(2,6,23,.88) 0%,rgba(2,6,23,.58) 38%,rgba(2,6,23,.12) 72%,rgba(2,6,23,.24) 100%);
+  content:"";
+}
+
+#trabajos .portfolio-editorial__slide::after{
+  position:absolute;
+  z-index:2;
+  inset:0;
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:inherit;
+  pointer-events:none;
+  content:"";
+}
+
+#trabajos .portfolio-editorial__image{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  transform:scale(1.015);
+}
+
+#trabajos .portfolio-editorial__slide--syrcop .portfolio-editorial__image{
+  object-position:center 53%;
+}
+
+#trabajos .portfolio-editorial__content{
+  position:relative;
+  z-index:3;
+  min-height:520px;
+  max-width:700px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:flex-end;
+  padding:42px;
+  color:#fff;
+}
+
+#trabajos .portfolio-editorial__topline{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:auto;
+}
+
+#trabajos .portfolio-editorial__pill{
+  display:inline-flex;
+  align-items:center;
+  min-height:31px;
+  padding:7px 11px;
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:999px;
+  background:rgba(15,23,42,.42);
+  box-shadow:0 10px 24px rgba(2,6,23,.16);
+  backdrop-filter:blur(10px);
+  color:#f8fbff;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+
+#trabajos .portfolio-editorial__number{
+  color:rgba(255,255,255,.76);
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.09em;
+}
+
+#trabajos .portfolio-editorial__content h3{
+  max-width:620px;
+  margin:0 0 12px;
+  color:#fff;
+  font-size:clamp(32px,4.2vw,58px);
+  line-height:.98;
+  letter-spacing:-.04em;
+  text-wrap:balance;
+}
+
+#trabajos .portfolio-editorial__content p{
+  max-width:560px;
+  margin:0;
+  color:rgba(248,250,252,.92);
+  font-size:clamp(15px,1.4vw,18px);
+  line-height:1.55;
+  text-shadow:0 2px 20px rgba(2,6,23,.35);
+}
+
+#trabajos .portfolio-editorial__case-button{
+  min-height:44px;
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  margin-top:24px;
+  padding:11px 16px;
+  border:1px solid rgba(255,255,255,.24);
+  border-radius:999px;
+  background:#fff;
+  color:#0f172a;
+  box-shadow:0 14px 30px rgba(2,6,23,.22);
+  cursor:pointer;
+  font:inherit;
+  font-size:14px;
+  font-weight:800;
+  transition:transform .2s ease,background .2s ease,color .2s ease;
+}
+
+#trabajos .portfolio-editorial__case-button::after{
+  content:"↗";
+  font-size:16px;
+  line-height:1;
+}
+
+@media (hover:hover) and (pointer:fine){
+  #trabajos .portfolio-editorial__case-button:hover{
+    transform:translateY(-2px);
+    background:#2563eb;
+    color:#fff;
+  }
+}
+
+#trabajos .portfolio-editorial__gesture{
+  position:absolute;
+  right:42px;
+  bottom:43px;
+  z-index:3;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  color:rgba(255,255,255,.72);
+  font-size:12px;
+  font-weight:700;
+}
+
+#trabajos .portfolio-editorial__gesture::before{
+  width:20px;
+  height:1px;
+  background:currentColor;
+  box-shadow:10px 0 0 -4px currentColor,-10px 0 0 -4px currentColor;
+  content:"";
+}
+
+#trabajos .portfolio-editorial__dots{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:18px;
+}
+
+#trabajos .portfolio-editorial__dot{
+  width:8px;
+  height:8px;
+  padding:0;
+  border:0;
+  border-radius:999px;
+  background:rgba(37,99,235,.26);
+  cursor:pointer;
+  transition:width .25s ease,background .25s ease;
+}
+
+#trabajos .portfolio-editorial__dot[aria-current="true"]{
+  width:30px;
+  background:#2563eb;
+}
+
+#trabajos .portfolio-editorial__arrow:focus-visible,
+#trabajos .portfolio-editorial__case-button:focus-visible,
+#trabajos .portfolio-editorial__dot:focus-visible,
+#trabajos .portfolio-editorial__viewport:focus-visible{
+  outline:3px solid #2563eb;
+  outline-offset:4px;
+}
+
+@media (max-width:800px){
+  #trabajos .portfolio-editorial{
+    margin-top:30px;
+  }
+
+  #trabajos .portfolio-editorial__bar{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:16px;
+  }
+
+  #trabajos .portfolio-editorial__nav{
+    width:100%;
+    justify-content:flex-end;
+  }
+
+  #trabajos .portfolio-editorial__viewport{
+    border-radius:24px;
+  }
+
+  #trabajos .portfolio-editorial__slide,
+  #trabajos .portfolio-editorial__content{
+    min-height:500px;
+  }
+
+  #trabajos .portfolio-editorial__slide::before{
+    background:linear-gradient(0deg,rgba(2,6,23,.92) 0%,rgba(2,6,23,.58) 47%,rgba(2,6,23,.14) 100%);
+  }
+
+  #trabajos .portfolio-editorial__content{
+    justify-content:flex-end;
+    padding:24px;
+  }
+
+  #trabajos .portfolio-editorial__content h3{
+    max-width:310px;
+    font-size:clamp(31px,10vw,44px);
+  }
+
+  #trabajos .portfolio-editorial__content p{
+    max-width:360px;
+    font-size:15px;
+  }
+
+  #trabajos .portfolio-editorial__gesture{
+    display:none;
+  }
+}
+
+@media (max-width:430px){
+  #trabajos .portfolio-editorial__slide,
+  #trabajos .portfolio-editorial__content{
+    min-height:470px;
+  }
+
+  #trabajos .portfolio-editorial__content{
+    padding:20px;
+  }
+
+  #trabajos .portfolio-editorial__arrow{
+    width:44px;
+    height:44px;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  #trabajos .portfolio-editorial__track,
+  #trabajos .portfolio-editorial__arrow,
+  #trabajos .portfolio-editorial__case-button,
+  #trabajos .portfolio-editorial__dot{
+    transition:none !important;
+  }
+}
+
 
 </style>
 
@@ -4672,69 +5032,92 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  <!-- TRABAJOS -->
 <section id="trabajos" class="section reveal">
   <div class="wrapper">
-    <div class="section-title">Nuestros trabajos</div>
-    <h2>Algunos tipos de proyectos que podemos desarrollar.</h2>
+    <div class="section-title">Casos reales</div>
+    <h2>Tiendas diseñadas y optimizadas para vender mejor.</h2>
     <p>
-      Estas son tiendas reales diseñadas y optimizadas en Tienda Nube. Podemos adaptar
-      el enfoque visual y la estructura a tu rubro y necesidades.
+      Cada proyecto necesita una estructura, una experiencia y una identidad propias.
+      Conocé algunos de los casos en los que trabajamos con Tienda Nube.
     </p>
 
-    <div class="grid-portfolio">
-      <!-- SANSAY (DESTACADA) -->
-     <button class="portfolio-link portfolio-link--featured" type="button" data-case="sansay">
-  <div class="portfolio-thumb">
-    <img src="/sansay-aromas.png" alt="Mockup tienda Sansay Aromas">
-    <span class="portfolio-pill">Estética premium</span>
-
-    <div class="portfolio-overlay">
-      <h3>SANSAY AROMAS</h3>
-      <p>Sahumerios, velas y rituales · estética premium + navegación clara</p>
-      <span class="portfolio-action">Ver caso</span>
-    </div>
-  </div>
-</button>
-
-      <!-- VIA SHOP -->
-      <button class="portfolio-link" type="button" data-case="viashop">
-        <div class="portfolio-thumb">
-          <img src="/gadget-viashop.png" alt="Mockup tienda VIA SHOP">
-          <span class="portfolio-pill">Lista para vender</span>
-
-          <div class="portfolio-overlay">
-            <h3>VIA SHOP</h3>
-            <p>Hogar, bazar y tecnología · Tienda Nube lista para producción</p>
-            <span class="portfolio-action">Ver caso</span>
-          </div>
+    <div class="portfolio-editorial" data-portfolio-carousel role="region" aria-roledescription="carrusel" aria-label="Casos reales de Tienda Nube">
+      <div class="portfolio-editorial__bar">
+        <div>
+          <p class="portfolio-editorial__eyebrow">Portfolio VIA Cloud</p>
+          <p class="portfolio-editorial__hint">Explorá cada caso para conocer el enfoque detrás de la tienda.</p>
         </div>
-      </button>
-
-      <!-- CASA OADA -->
-      <button class="portfolio-link" type="button" data-case="casaoada">
-        <div class="portfolio-thumb">
-          <img src="/ferreteria-oada.png" alt="Mockup tienda CASA OADA">
-          <span class="portfolio-pill">Campañas + tráfico</span>
-
-          <div class="portfolio-overlay">
-            <h3>CASA OADA</h3>
-            <p>Ferretería y hogar · Tienda Nube lista para campañas de tráfico pago</p>
-            <span class="portfolio-action">Ver caso</span>
-          </div>
+        <div class="portfolio-editorial__nav" aria-label="Navegación de casos">
+          <button class="portfolio-editorial__arrow" type="button" data-portfolio-prev aria-label="Caso anterior">‹</button>
+          <span class="portfolio-editorial__count" data-portfolio-count aria-live="polite">01 / 05</span>
+          <button class="portfolio-editorial__arrow" type="button" data-portfolio-next aria-label="Caso siguiente">›</button>
         </div>
-      </button>
+      </div>
 
-      <!-- FERRE CEPPI -->
-      <button class="portfolio-link" type="button" data-case="ferreceppi">
-        <div class="portfolio-thumb">
-          <img src="/ferre-ceppi.png" alt="Mockup tienda Ferre CEPPI">
-          <span class="portfolio-pill">Catálogo grande</span>
+      <div class="portfolio-editorial__viewport" data-portfolio-viewport tabindex="0" aria-label="Usá las flechas izquierda y derecha para navegar los casos">
+        <div class="portfolio-editorial__track" data-portfolio-track>
+          <article class="portfolio-editorial__slide">
+            <img class="portfolio-editorial__image" src="/sansay-aromas.png" alt="Tienda de Sansay Aromas" loading="lazy">
+            <div class="portfolio-editorial__content">
+              <div class="portfolio-editorial__topline"><span class="portfolio-editorial__pill">Estética premium</span><span class="portfolio-editorial__number">01</span></div>
+              <h3>SANSAY AROMAS</h3>
+              <p>Sahumerios, velas y rituales · estética cuidada + navegación clara</p>
+              <button class="portfolio-editorial__case-button" type="button" data-case="sansay">Ver caso</button>
+            </div>
+            <span class="portfolio-editorial__gesture" aria-hidden="true">Deslizá para explorar</span>
+          </article>
 
-          <div class="portfolio-overlay">
-            <h3>FERRE CEPPI</h3>
-            <p>Catálogo grande · categorías + usabilidad pensada para búsqueda</p>
-            <span class="portfolio-action">Ver caso</span>
-          </div>
+          <article class="portfolio-editorial__slide">
+            <img class="portfolio-editorial__image" src="/dagger-store.png" alt="Producto de Dagger Store" loading="lazy">
+            <div class="portfolio-editorial__content">
+              <div class="portfolio-editorial__topline"><span class="portfolio-editorial__pill">Optimización continua</span><span class="portfolio-editorial__number">02</span></div>
+              <h3>DAGGER STORE</h3>
+              <p>Bazar y hogar · fichas premium + estructura comercial más clara</p>
+              <button class="portfolio-editorial__case-button" type="button" data-case="dagger">Ver caso</button>
+            </div>
+            <span class="portfolio-editorial__gesture" aria-hidden="true">Deslizá para explorar</span>
+          </article>
+
+          <article class="portfolio-editorial__slide portfolio-editorial__slide--syrcop">
+            <img class="portfolio-editorial__image" src="/syrcop-bambulab.webp" alt="Impresora 3D de SYRCOP" loading="lazy">
+            <div class="portfolio-editorial__content">
+              <div class="portfolio-editorial__topline"><span class="portfolio-editorial__pill">Tienda técnica</span><span class="portfolio-editorial__number">03</span></div>
+              <h3>SYRCOP</h3>
+              <p>Impresión 3D, insumos y arquitectura preparada para escalar</p>
+              <button class="portfolio-editorial__case-button" type="button" data-case="syrcop">Ver caso</button>
+            </div>
+            <span class="portfolio-editorial__gesture" aria-hidden="true">Deslizá para explorar</span>
+          </article>
+
+          <article class="portfolio-editorial__slide">
+            <img class="portfolio-editorial__image" src="/ferreteria-oada.png" alt="Tienda Casa Oada" loading="lazy">
+            <div class="portfolio-editorial__content">
+              <div class="portfolio-editorial__topline"><span class="portfolio-editorial__pill">Lista para vender</span><span class="portfolio-editorial__number">04</span></div>
+              <h3>CASA OADA</h3>
+              <p>Ferretería y hogar · Tienda Nube lista para producción</p>
+              <button class="portfolio-editorial__case-button" type="button" data-case="casaoada">Ver caso</button>
+            </div>
+            <span class="portfolio-editorial__gesture" aria-hidden="true">Deslizá para explorar</span>
+          </article>
+
+          <article class="portfolio-editorial__slide">
+            <img class="portfolio-editorial__image" src="/ferre-ceppi.png" alt="Tienda Ferre CEPPI" loading="lazy">
+            <div class="portfolio-editorial__content">
+              <div class="portfolio-editorial__topline"><span class="portfolio-editorial__pill">Catálogo grande</span><span class="portfolio-editorial__number">05</span></div>
+              <h3>FERRE CEPPI</h3>
+              <p>Categorías, usabilidad y estructura pensada para búsqueda</p>
+              <button class="portfolio-editorial__case-button" type="button" data-case="ferreceppi">Ver caso</button>
+            </div>
+            <span class="portfolio-editorial__gesture" aria-hidden="true">Deslizá para explorar</span>
+          </article>
         </div>
-      </button>
+      </div>
+
+      <div class="portfolio-editorial__dots" aria-label="Seleccionar caso">
+        <button class="portfolio-editorial__dot" type="button" data-portfolio-dot="0" aria-label="Ver Sansay Aromas" aria-current="true"></button>
+        <button class="portfolio-editorial__dot" type="button" data-portfolio-dot="1" aria-label="Ver Dagger Store"></button>
+        <button class="portfolio-editorial__dot" type="button" data-portfolio-dot="2" aria-label="Ver SYRCOP"></button>
+        <button class="portfolio-editorial__dot" type="button" data-portfolio-dot="3" aria-label="Ver Casa Oada"></button>
+        <button class="portfolio-editorial__dot" type="button" data-portfolio-dot="4" aria-label="Ver Ferre CEPPI"></button>
+      </div>
     </div>
 
   <div class="works-showcase-head">
@@ -6256,67 +6639,83 @@ document.addEventListener("DOMContentLoaded", () => {
   (function () {
     const cases = {
       sansay: {
-        tag: 'Caso destacado',
+        tag: 'Estética premium',
         title: 'SANSAY AROMAS',
         image: '/sansay-aromas.png',
-        imageAlt: 'Mockup tienda Sansay Aromas',
+        imageAlt: 'Tienda de Sansay Aromas',
         url: 'https://sansayaromas.com.ar/',
         summary:
-          'Tienda de sahumerios, velas y rituales trabajada para transmitir calma, marca premium y una experiencia de compra simple desde el primer vistazo.',
+          'Marca visual y emocional donde se trabajó especialmente la presentación de producto, la estética de las fichas y la experiencia general de Tienda Nube.',
         focus:
-          'Ordenar el universo visual de la marca, reforzar confianza y facilitar que el visitante encuentre productos por intención de compra.',
+          'Construir una experiencia cuidada, clara y coherente con el universo sensorial de la marca.',
         work: [
-          'Diseño visual alineado a un rubro sensorial y premium.',
-          'Jerarquía de categorías para mejorar exploración.',
-          'Presentación de productos pensada para compra rápida.'
+          'Presentación visual de productos y fichas.',
+          'Navegación clara para explorar el catálogo.',
+          'Experiencia alineada a una marca de estética premium.'
         ]
       },
-      viashop: {
-        tag: 'Tienda Nube',
-        title: 'VIA SHOP',
-        image: '/gadget-viashop.png',
-        imageAlt: 'Mockup tienda VIA SHOP',
-        url: 'https://www.via-shop.com/',
+      dagger: {
+        tag: 'Optimización continua',
+        title: 'DAGGER STORE',
+        image: '/dagger-store.png',
+        imageAlt: 'Producto de Dagger Store',
+        url: 'https://daggerstore.ar/',
         summary:
-          'Proyecto de hogar, bazar y tecnología preparado para una lectura clara de productos y una estructura lista para salir a producción.',
+          'Tienda de bazar y hogar con trabajo continuo sobre fichas, experiencia visual, estructura comercial y presentación de catálogo.',
         focus:
-          'Lograr una tienda práctica, comercial y fácil de recorrer, con categorías entendibles y foco en conversión.',
+          'Hacer más clara la lectura comercial del catálogo y reforzar la presentación de cada producto.',
         work: [
-          'Estructura comercial para catálogo variado.',
-          'Organización visual de productos y beneficios.',
-          'Base optimizada para campañas y tráfico pago.'
+          'Optimización continua de fichas de producto.',
+          'Mejoras en estructura y experiencia visual.',
+          'Presentación de catálogo con criterio comercial.'
+        ]
+      },
+      syrcop: {
+        tag: 'Tienda técnica',
+        title: 'SYRCOP',
+        image: '/syrcop-bambulab.webp',
+        imageAlt: 'Impresora 3D de SYRCOP',
+        url: 'https://syrcop.mitiendanube.com/',
+        summary:
+          'Proyecto de Tienda Nube para impresión 3D, impresoras profesionales, accesorios e insumos.',
+        focus:
+          'Desarrollar una arquitectura preparada para un catálogo amplio y futuras integraciones.',
+        work: [
+          'Arquitectura inicial para productos técnicos.',
+          'Organización pensada para impresoras, accesorios e insumos.',
+          'Base preparada para acompañar el crecimiento del catálogo.'
         ]
       },
       casaoada: {
-        tag: 'Ferretería y hogar',
+        tag: 'Lista para vender',
         title: 'CASA OADA',
         image: '/ferreteria-oada.png',
-        imageAlt: 'Mockup tienda CASA OADA',
+        imageAlt: 'Tienda Casa Oada',
         url: 'https://www.casaoada.com.ar/',
         summary:
-          'Tienda orientada a ferretería y hogar, con una estructura pensada para que el usuario llegue rápido a la categoría correcta.',
+          'Proyecto de estructura y optimización comercial para una tienda de ferretería y hogar lista para producción.',
         focus:
-          'Reducir fricción en la búsqueda de productos técnicos y preparar la tienda para captar demanda desde campañas.',
+          'Crear una base comercial clara para que cada visitante encuentre rápido lo que necesita.',
         work: [
-          'Categorías más claras para productos de uso cotidiano.',
-          'Comunicación visual directa para decisión rápida.',
-          'Preparación del recorrido para tráfico de anuncios.'
+          'Estructura de tienda para ferretería y hogar.',
+          'Organización comercial de categorías y productos.',
+          'Recorrido de compra preparado para salir a producción.'
         ]
       },
       ferreceppi: {
         tag: 'Catálogo grande',
         title: 'FERRE CEPPI',
         image: '/ferre-ceppi.png',
-        imageAlt: 'Mockup tienda Ferre CEPPI',
+        imageAlt: 'Tienda Ferre CEPPI',
         url: 'https://ferreceppi.com/',
         summary:
-          'Proyecto de catálogo amplio donde la prioridad fue ordenar información, mejorar usabilidad y facilitar búsquedas frecuentes.',
+          'Tienda con catálogo amplio donde se trabajó especialmente arquitectura, categorías, experiencia de navegación, fichas y estructura comercial.',
         focus:
-          'Hacer que una tienda con muchos productos se sienta clara, confiable y fácil de navegar.',
+          'Hacer que un catálogo grande se sienta ordenado, claro y fácil de recorrer.',
         work: [
-          'Estructura pensada para navegación por rubros.',
-          'Mejora de lectura en categorías y fichas.',
-          'Experiencia más simple para compradores recurrentes.'
+          'Arquitectura de categorías para mejorar la búsqueda.',
+          'Usabilidad y navegación de catálogo.',
+          'Estructura comercial para fichas de producto.'
         ]
       }
     };
@@ -6333,6 +6732,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const link = document.getElementById('portfolio-modal-link');
     const closeBtn = modal.querySelector('.portfolio-modal__close');
     const contactLink = modal.querySelector('.portfolio-modal__secondary');
+    const modalPanel = modal.querySelector('.portfolio-modal__panel');
     let previousTrigger = null;
 
     function fillCase(data) {
@@ -6373,7 +6773,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    document.querySelectorAll('.portfolio-link[data-case]').forEach(function (trigger) {
+    document.querySelectorAll('.portfolio-editorial__case-button[data-case]').forEach(function (trigger) {
       trigger.addEventListener('click', function () {
         openCase(trigger);
       });
@@ -6390,7 +6790,173 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape' && !modal.hidden) closeCase();
+      if (modal.hidden) return;
+
+      if (event.key === 'Escape') {
+        closeCase();
+        return;
+      }
+
+      if (event.key !== 'Tab' || !modalPanel) return;
+
+      const focusable = Array.from(modalPanel.querySelectorAll(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )).filter(function (element) {
+        return !element.hidden;
+      });
+
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+
+    const carousel = document.querySelector('[data-portfolio-carousel]');
+    if (!carousel) return;
+
+    const viewport = carousel.querySelector('[data-portfolio-viewport]');
+    const track = carousel.querySelector('[data-portfolio-track]');
+    const prev = carousel.querySelector('[data-portfolio-prev]');
+    const next = carousel.querySelector('[data-portfolio-next]');
+    const count = carousel.querySelector('[data-portfolio-count]');
+    const dots = Array.from(carousel.querySelectorAll('[data-portfolio-dot]'));
+    const slides = track ? Array.from(track.children) : [];
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!viewport || !track || slides.length < 2) return;
+
+    const total = slides.length;
+    const firstClone = slides[0].cloneNode(true);
+    const lastClone = slides[total - 1].cloneNode(true);
+
+    [firstClone, lastClone].forEach(function (clone) {
+      clone.setAttribute('aria-hidden', 'true');
+      clone.dataset.portfolioClone = 'true';
+      clone.querySelectorAll('button, a, [tabindex]').forEach(function (element) {
+        element.setAttribute('tabindex', '-1');
+        if (element.tagName === 'BUTTON') element.disabled = true;
+      });
+    });
+
+    track.insertBefore(lastClone, slides[0]);
+    track.appendChild(firstClone);
+
+    let position = 1;
+    let moving = false;
+    let pointerStartX = null;
+    let pointerId = null;
+
+    function activeIndex() {
+      return (position - 1 + total) % total;
+    }
+
+    function updateControls() {
+      const active = activeIndex();
+      if (count) count.textContent = String(active + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+      dots.forEach(function (dot, index) {
+        dot.setAttribute('aria-current', index === active ? 'true' : 'false');
+      });
+    }
+
+    function render(animate) {
+      if (animate && !reduceMotion) {
+        track.classList.add('is-ready');
+      } else {
+        track.classList.remove('is-ready');
+      }
+      track.style.transform = 'translateX(-' + (position * 100) + '%)';
+      updateControls();
+    }
+
+    function move(direction) {
+      if (moving) return;
+
+      if (reduceMotion) {
+        position = ((activeIndex() + direction + total) % total) + 1;
+        render(false);
+        return;
+      }
+
+      moving = true;
+      position += direction;
+      render(true);
+    }
+
+    function goTo(index) {
+      if (moving || index < 0 || index >= total) return;
+      const targetPosition = index + 1;
+      if (targetPosition === position) return;
+      position = targetPosition;
+      moving = !reduceMotion;
+      render(!reduceMotion);
+    }
+
+    track.addEventListener('transitionend', function (event) {
+      if (event.propertyName !== 'transform') return;
+
+      if (position === 0) {
+        position = total;
+        render(false);
+      } else if (position === total + 1) {
+        position = 1;
+        render(false);
+      }
+
+      moving = false;
+    });
+
+    if (prev) prev.addEventListener('click', function () { move(-1); });
+    if (next) next.addEventListener('click', function () { move(1); });
+
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        goTo(Number(dot.dataset.portfolioDot));
+      });
+    });
+
+    viewport.addEventListener('keydown', function (event) {
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        move(-1);
+      } else if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        move(1);
+      }
+    });
+
+    viewport.addEventListener('pointerdown', function (event) {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      pointerStartX = event.clientX;
+      pointerId = event.pointerId;
+      if (viewport.setPointerCapture) viewport.setPointerCapture(pointerId);
+    });
+
+    viewport.addEventListener('pointerup', function (event) {
+      if (pointerStartX === null || event.pointerId !== pointerId) return;
+      const distance = event.clientX - pointerStartX;
+      pointerStartX = null;
+      pointerId = null;
+
+      if (Math.abs(distance) < 42) return;
+      move(distance < 0 ? 1 : -1);
+    });
+
+    viewport.addEventListener('pointercancel', function () {
+      pointerStartX = null;
+      pointerId = null;
+    });
+
+    render(false);
+    window.requestAnimationFrame(function () {
+      track.classList.add('is-ready');
     });
   })();
 </script>
