@@ -2582,12 +2582,12 @@ section.section-dark:not(#servicios) .service-card{
    SERVICIOS (FINAL LIMPIO)
 ========================= */
 
-/* ==== GRID SERVICIOS ==== */
+/* ==== SERVICIOS · ETAPAS DE TRABAJO ==== */
 #servicios .services{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
-  margin-top: 24px;
+  gap: 22px;
+  margin-top: 34px;
 }
 
 /* 2 columnas fijas en desktop (2 y 2) */
@@ -2600,12 +2600,16 @@ section.section-dark:not(#servicios) .service-card{
 /* ==== CARD BASE (UNIFICADO CON REVEAL GLOBAL) ==== */
 #servicios.section-dark .service-card{
   position: relative;
-  padding: 26px 26px 22px;
+  display: flex;
+  flex-direction: column;
+  min-height: 264px;
+  padding: 26px 28px 24px;
   border-radius: 22px;
-  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.06), transparent 55%),
-              rgba(15, 23, 42, 0.92);
-  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(148, 163, 184, 0.28);
+  background:
+    radial-gradient(circle at top left, rgba(99, 102, 241, 0.045), transparent 58%),
+    linear-gradient(145deg, rgba(20, 29, 46, 0.98), rgba(13, 20, 33, 0.98));
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.24);
+  border: 1px solid rgba(148, 163, 184, 0.19);
   overflow: hidden;
 
   /* transición base (misma lógica que el reveal global, pero afinada para cards) */
@@ -2630,15 +2634,16 @@ section.section-dark:not(#servicios) .service-card{
 
 /* Tipografías */
 #servicios.section-dark .service-card h3{
-  font-size: 17px;
-  line-height: 1.25;
-  margin-bottom: 10px;
+  font-size: 22px;
+  line-height: 1.18;
+  margin: 10px 0 14px;
 }
 
 #servicios.section-dark .service-card p{
-  font-size: 13.5px;
-  line-height: 1.52;
+  font-size: 14px;
+  line-height: 1.58;
   color: rgba(230,239,255,0.88);
+  margin: 0;
 }
 
 /* brillo interno */
@@ -2646,8 +2651,8 @@ section.section-dark:not(#servicios) .service-card{
   content:"";
   position:absolute;
   inset:0;
-  background: radial-gradient(circle at top right, rgba(180, 255, 255, 0.18), transparent 55%);
-  opacity: 0.6;
+  background: radial-gradient(circle at top right, rgba(96, 165, 250, 0.09), transparent 58%);
+  opacity: 0.45;
   pointer-events:none;
 }
 
@@ -2666,47 +2671,97 @@ section.section-dark:not(#servicios) .service-card{
 
 /* accents por orden */
 #servicios.section-dark .services .service-card:nth-child(1){ --acc: rgba(93,173,255,1); }
-#servicios.section-dark .services .service-card:nth-child(2){ --acc: rgba(167,121,255,1); }
-#servicios.section-dark .services .service-card:nth-child(3){ --acc: rgba(120,255,177,1); }
-#servicios.section-dark .services .service-card:nth-child(4){ --acc: rgba(255,186,120,1); }
+#servicios.section-dark .services .service-card:nth-child(2){ --acc: rgba(79,141,255,1); }
+#servicios.section-dark .services .service-card:nth-child(3){ --acc: rgba(134,112,255,1); }
+#servicios.section-dark .services .service-card:nth-child(4){ --acc: rgba(108,91,255,1); }
 #servicios.section-dark .services .service-card--featured{ --acc: rgba(120,210,255,1); }
 
 /* Hover (solo cuando ya está visible) */
 @media (hover:hover) and (pointer:fine){
   #servicios.section-dark .service-card.reveal.reveal-visible:hover{
     transform: translateY(-3px) !important;
-    box-shadow: 0 26px 60px rgba(15, 23, 42, 0.95);
-    border-color: rgba(129, 140, 248, 0.7);
+    box-shadow: 0 18px 36px rgba(2, 6, 23, 0.34);
+    border-color: rgba(129, 140, 248, 0.42);
   }
 }
 
-/* ==== PILL ==== */
-#servicios.section-dark .service-card .pill{
-  display: inline-flex;
-  align-items: center;
-  margin-top: 16px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: 12px;
-  letter-spacing: 0.02em;
-
-  white-space: normal;
-  line-height: 1.2;
-  max-width: 100%;
-
-  background: rgba(37, 99, 235, 0.22);
-  color: #c7d2fe;
-  border: 1px solid rgba(129, 140, 248, 0.85);
-  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.75);
+/* Etapa editorial y CTA textual: las cuatro opciones tienen el mismo peso. */
+#servicios.section-dark .service-stage{
+  position: relative;
+  z-index: 1;
+  color: rgba(191, 219, 254, 0.88);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
 }
 
-/* ==== Equal height “percibida” (solo desktop) ==== */
-@media (min-width: 900px){
-  #servicios.section-dark .service-card:not(.service-card--featured) p{
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+#servicios.section-dark .service-card h3,
+#servicios.section-dark .service-card p,
+#servicios.section-dark .service-card .service-cta{
+  position: relative;
+  z-index: 1;
+}
+
+#servicios.section-dark .service-cta{
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 24px;
+  color: #dbeafe;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color .18s ease, transform .18s ease;
+}
+
+#servicios.section-dark .service-cta:hover{
+  color: #ffffff;
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+#servicios.section-dark .service-cta:focus-visible{
+  outline: 2px solid #93c5fd;
+  outline-offset: 5px;
+  border-radius: 3px;
+}
+
+@media (hover:hover) and (pointer:fine){
+  #servicios.section-dark .service-cta:hover{
+    transform: translateX(3px);
+  }
+}
+
+@media (max-width: 640px){
+  #servicios .services{
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    margin-top: 28px;
+  }
+
+  #servicios.section-dark .service-card{
+    min-height: 0;
+    padding: 24px 22px 22px;
+  }
+
+  #servicios.section-dark .service-card h3{
+    font-size: 20px;
+    margin: 9px 0 12px;
+  }
+
+  #servicios.section-dark .service-cta{
+    padding-top: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  #servicios.section-dark .service-card,
+  #servicios.section-dark .service-cta{
+    transition: none;
   }
 }
 
@@ -2841,8 +2896,8 @@ section.section-dark:not(#servicios) .service-card{
   flex-wrap: wrap;
 }
 
-/* CTA botón */
-#servicios.section-dark .service-cta{
+/* CTA botón de la tarjeta destacada histórica */
+#servicios.section-dark .service-card--featured .service-cta{
   text-decoration: none;
   padding: 10px 14px;
   border-radius: 12px;
@@ -2855,14 +2910,14 @@ section.section-dark:not(#servicios) .service-card{
   transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
-#servicios.section-dark .service-cta:hover{
+#servicios.section-dark .service-card--featured .service-cta:hover{
   background: rgba(255,255,255,.09);
   border-color: rgba(255,255,255,.22);
   box-shadow: 0 14px 34px rgba(0,0,0,.35);
 }
 
 @media (hover:hover) and (pointer:fine){
-  #servicios.section-dark .service-cta:hover{
+  #servicios.section-dark .service-card--featured .service-cta:hover{
     transform: translateY(-1px);
   }
 }
@@ -2919,8 +2974,8 @@ section.section-dark:not(#servicios) .service-card{
 @media (hover:hover) and (pointer:fine){
   #servicios.section-dark .services .service-card.svc-visible:hover{
     transform: translateY(-3px) !important;
-    box-shadow: 0 26px 60px rgba(15, 23, 42, 0.95) !important;
-    border-color: rgba(129, 140, 248, 0.7) !important;
+    box-shadow: 0 18px 36px rgba(2, 6, 23, 0.34) !important;
+    border-color: rgba(129, 140, 248, 0.42) !important;
   }
 }
 
@@ -4954,78 +5009,55 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- SERVICIOS -->
   <section id="servicios" class="section-dark reveal">
     <div class="wrapper">
-      <div class="section-title">Nuestros servicios</div>
-      <h2>Desde el diseño hasta la optimización para vender más.</h2>
+      <div class="section-title">Servicios para Tienda Nube</div>
+      <h2>Desde crear tu tienda hasta optimizar lo que ya está funcionando.</h2>
       <p>
-        No sólo “montamos” tu tienda: la pensamos como parte de tu embudo de ventas,
-        lista para correr campañas en Meta y Google con una base sólida.
+        No todas las marcas necesitan empezar desde cero. Diseñamos, reorganizamos,
+        configuramos y conectamos Tienda Nube según la etapa real de cada negocio.
       </p>
 
       <div class="services">
         <div class="service-card">
-          <h3>Diseño Tienda Nube a medida</h3>
+          <div class="service-stage">01 · Crear</div>
+          <h3>Diseño de Tienda Nube a medida</h3>
           <p>
-            Armado completo de la tienda basado en tu identidad visual.
-            Home, categorías, PDP y página de cómo comprar, todo alineado a tu marca y pensado para guiar al usuario hasta la compra.
+            Diseñamos la tienda desde tu marca, catálogo y objetivos comerciales. Trabajamos estructura,
+            navegación, categorías, experiencia mobile y presentación de producto para que comprar sea
+            simple y la tienda tenga identidad propia.
           </p>
-          <div class="pill">Ideal para lanzamientos o relanzos de marca</div>
+          <a class="service-cta" href="#contacto">Diseñar mi tienda <span aria-hidden="true">→</span></a>
         </div>
 
         <div class="service-card">
-          <h3>Optimización de plantillas</h3>
+          <div class="service-stage">02 · Mejorar</div>
+          <h3>Optimización de tienda existente</h3>
           <p>
-            Tomamos tu plantilla actual y la ajustamos: layout, tipografías,
-            jerarquía de información, destacados, banners y fichas de producto. Mejora visual y de conversión sin necesidad de cambiar de tema.
+            Si tu tienda ya está online pero se siente desordenada, genérica o difícil de navegar,
+            mejoramos su estructura visual y comercial: Home, categorías, fichas, jerarquías,
+            responsive y puntos de conversión.
           </p>
-          <div class="pill">Mejoramos lo que ya tenés sin migrar de tema</div>
+          <a class="service-cta" href="#contacto">Optimizar mi tienda <span aria-hidden="true">→</span></a>
         </div>
 
         <div class="service-card">
-          <h3>Setup para campañas</h3>
-  <p>
-    Preparación de la tienda para tráfico pago: estructura de categorías,
-    landings de campañas, códigos de seguimiento y buenas prácticas de CRO. Dejá tu Tienda Nube lista para escalar con Meta Ads y Google Ads.
-  </p>
-   <div class="pill">Pensado para Meta Ads & Google Ads</div>
+          <div class="service-stage">03 · Lanzar</div>
+          <h3>Configuración y puesta a punto</h3>
+          <p>
+            Dejamos la tienda preparada para operar: configuración general, dominio, medios de pago,
+            envíos, catálogo y ajustes esenciales antes de salir a vender. También revisamos que la
+            experiencia funcione correctamente en desktop y mobile.
+          </p>
+          <a class="service-cta" href="#contacto">Preparar mi tienda <span aria-hidden="true">→</span></a>
         </div>
 
         <div class="service-card">
-  <h3>Automatizaciones, newsletter y Chat Nube</h3>
-  <p>
-    Configuramos newsletters, flujos básicos de bienvenida y carritos abandonados, y dejamos tu Chat Nube listo con respuestas frecuentes, horarios y derivación a WhatsApp para que atiendas 24/7 sin perder el toque humano.
-  </p>
-  <div class="pill">Ideal para marcas que quieren escalar sin sumar equipo</div>
-  </div>
-
-     <!-- ⭐ Landing destacada (PEGAR ACÁ) -->
-        <div class="service-card service-card--featured" data-accent="landing">
-          <div class="service-head">
-            <span class="service-ico" aria-hidden="true">
-  <svg class="ico-svg ico-svg--fill" viewBox="0 0 24 24" aria-hidden="true">
-    <circle cx="12" cy="12" r="9"></circle>
-    <circle cx="12" cy="12" r="5"></circle>
-    <circle cx="12" cy="12" r="1.6"></circle>
-  </svg>
-</span>
-            <div>
-             <div class="service-kicker">LANDING</div>
-              <h3>Landing Page de alta conversión</h3>
-              <p class="service-sub">
-                Una landing 1-página para captar leads o vender un producto. Copy + estructura + medición lista para campañas.
-              </p>
-            </div>
-          </div>
-
-          <ul class="service-bullets">
-            <li>Hero + propuesta clara (sin humo)</li>
-            <li>Formulario + WhatsApp (derivación)</li>
-            <li>Tracking: Meta Pixel + GA4</li>
-          </ul>
-
-          <div class="service-foot">
-            <div class="pill pill--strong">Ideal para campañas y lanzamientos</div>
-            <a class="service-cta" href="/landing">Quiero mi landing →</a>
-          </div>
+          <div class="service-stage">04 · Automatizar</div>
+          <h3>Automatizaciones e integraciones</h3>
+          <p>
+            Conectamos la tienda con los procesos que la hacen más eficiente: formularios, newsletters,
+            captación de leads, seguimiento, flujos de WhatsApp, n8n e integraciones según cada proyecto.
+          </p>
+          <a class="service-cta" href="#contacto">Automatizar procesos <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </div>
