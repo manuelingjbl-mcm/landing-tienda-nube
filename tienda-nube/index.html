@@ -4136,6 +4136,24 @@ select{
   max-width: 1240px;
 }
 
+/* Grilla horizontal maestra: coincide con el Hero en desktop y se extiende
+   únicamente a los contenidos posteriores de Tienda Nube. */
+@media (min-width: 1025px){
+  :root{
+    --tienda-nube-content-width: min(1240px, calc(100% - 80px));
+  }
+
+  .partner-tn-section .wrapper,
+  main > .audience-section > .wrapper,
+  main > #servicios > .wrapper,
+  main > #trabajos > .wrapper,
+  main > #stack > .wrapper,
+  main > #about > .wrapper,
+  main > #contacto > .wrapper{
+    max-width: var(--tienda-nube-content-width);
+  }
+}
+
 .partner-tn-layout{
   grid-template-columns: minmax(0, 1.05fr) minmax(340px, .7fr);
   gap: 42px;
