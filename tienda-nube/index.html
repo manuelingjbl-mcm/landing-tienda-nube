@@ -5584,73 +5584,185 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       padding-right:82px;
     }
   }
+
+  /* Experiencia aplicada en Tienda Nube */
+  .section-about{
+    padding:72px 0 76px;
+  }
+
+  .section-about::before{
+    top:34px;
+    width:min(1240px, calc(100% - 32px));
+  }
+
+  .section-about .about-experience{
+    position:relative;
+  }
+
+  .section-about h2{
+    margin:0;
+  }
+
+  .section-about .about-intro{
+    max-width:760px;
+    margin:16px 0 0;
+    color:#475569;
+    font-size:1rem;
+    line-height:1.65;
+  }
+
+  .section-about .about-metrics{
+    margin-top:32px;
+    grid-template-columns:repeat(3, minmax(0,1fr));
+    gap:16px;
+  }
+
+  .section-about .about-metric{
+    min-height:136px;
+    padding:22px;
+  }
+
+  .section-about .about-metric__num{
+    font-size:clamp(42px,4.5vw,60px);
+  }
+
+  .about-trust{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    margin-top:22px;
+    padding:20px 22px;
+    border:1px solid rgba(37,99,235,.13);
+    border-radius:20px;
+    background:rgba(255,255,255,.72);
+    box-shadow:0 14px 34px rgba(15,23,42,.05);
+  }
+
+  .about-trust__title{
+    margin:0;
+    color:#172554;
+    font-size:1rem;
+    font-weight:800;
+  }
+
+  .about-trust__copy{
+    max-width:680px;
+    margin:5px 0 0;
+    color:#64748b;
+    font-size:.94rem;
+    line-height:1.5;
+  }
+
+  .about-cta{
+    display:inline-flex;
+    flex:0 0 auto;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    min-height:44px;
+    padding:10px 18px;
+    border-radius:999px;
+    background:#2563eb;
+    color:#fff;
+    font-size:.9rem;
+    font-weight:800;
+    text-decoration:none;
+    box-shadow:0 14px 30px rgba(37,99,235,.22);
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+
+  .about-cta:hover{
+    background:#1d4ed8;
+    box-shadow:0 18px 34px rgba(37,99,235,.28);
+    transform:translateY(-1px);
+  }
+
+  .about-cta:focus-visible{
+    outline:2px solid #1d4ed8;
+    outline-offset:4px;
+  }
+
+  @media (max-width:980px){
+    .about-trust{
+      align-items:flex-start;
+    }
+  }
+
+  @media (max-width:640px){
+    .section-about{
+      padding:58px 0 64px;
+    }
+
+    .section-about .about-metrics{
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:12px;
+    }
+
+    .section-about .about-metric{
+      min-height:124px;
+      padding:18px;
+    }
+
+    .section-about .about-metric:last-child{
+      grid-column:1 / -1;
+    }
+
+    .about-trust{
+      flex-direction:column;
+      gap:16px;
+      padding:18px;
+    }
+
+    .about-cta{
+      width:100%;
+    }
+  }
+
+  @media (max-width:420px){
+    .section-about .about-metrics{
+      grid-template-columns:1fr;
+    }
+
+    .section-about .about-metric:last-child{
+      grid-column:auto;
+    }
+  }
 </style>
 
 <section id="about" class="section reveal section-about">
-  <div class="wrapper about-grid">
-    <div>
-      <div class="section-title">Quién está detrás</div>
-      <h2>Hola, soy Manu! Voy a trabajar en tu Tienda Nube.</h2>
-      <p>
-        Trabajo todos los días con Tienda Nube, campañas en Meta y Google y la
-        optimización de tiendas como <strong>VIA SHOP</strong> y
-        <strong>CASA OADA</strong>. Mi objetivo con <strong>VIA CLOUD STUDIO</strong> es que tu tienda se vea profesional, cargue rápido y esté lista para vender, no solo para “estar online”.      </p>
-      <p>
-        Cuando me contactás no hablás con una agencia gigante: hablas directo conmigo, reviso tu caso, armamos un plan y te acompaño de punta a punta.
+  <div class="wrapper">
+    <div class="about-experience">
+      <div class="section-title">Experiencia en Tienda Nube</div>
+      <h2>Experiencia real trabajando sobre tiendas que tienen que vender.</h2>
+      <p class="about-intro">
+        Diseño, optimización, carga de catálogo y preparación técnica para construir tiendas claras, medibles y listas para crecer.
       </p>
 
-      <ul class="about-list">
-        <li>Armado y optimización de Tienda Nube (estructura, diseño, UX).</li>
-        <li>Integración con campañas en Meta / Google y métricas básicas.</li>
-        <li>Acompañamiento cercano: WhatsApp, videollamada y checklists claros.</li>
-      </ul>
-    </div>
-
-    <div class="about-card">
-      <div class="about-avatar">
-        <!-- Podés cambiar por una foto tuya si querés -->
-        <img
-  src="/avatar-perfil.png"
-  alt="Manuel Aparicio"
-  class="about-avatar-initials"
-/>
-
+      <div class="about-metrics" id="about-metrics" aria-label="Métricas de experiencia en Tienda Nube">
+        <article class="about-metric">
+          <div class="about-metric__num" data-target="3" data-prefix="" data-suffix="">0</div>
+          <div class="about-metric__label">Años trabajando con Tienda Nube</div>
+        </article>
+        <article class="about-metric">
+          <div class="about-metric__num" data-target="6" data-prefix="" data-suffix="">0</div>
+          <div class="about-metric__label">Tiendas publicadas</div>
+        </article>
+        <article class="about-metric">
+          <div class="about-metric__num" data-target="300" data-prefix="+" data-suffix="">0</div>
+          <div class="about-metric__label">Productos y variantes configurados</div>
+        </article>
       </div>
-      <div class="about-meta">
-        <div class="about-name">Manuel Aparicio</div>
-        <div class="about-role">Diseño y optimización de Tienda Nube</div>
-        <p class="about-note">
-          Cuando completes el formulario o escribas por WhatsApp
-          vas a hablar directamente conmigo, sin bots ni intermediarios.
-        </p>
+
+      <div class="about-trust">
+        <div>
+          <p class="about-trust__title">Trabajo directo, sin intermediarios.</p>
+          <p class="about-trust__copy">Revisamos tu tienda, definimos prioridades y avanzamos sobre lo que realmente necesita tu proyecto.</p>
+        </div>
+        <a class="about-cta" href="#contacto">Quiero revisar mi tienda <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </div>
-
-<!-- ====== MÉTRICAS (Quién está detrás) ====== -->
-<div class="wrapper">
-  <div class="about-metrics" aria-label="Métricas de experiencia">
-    <div class="about-metric">
-      <div class="about-metric__num" data-target="2" data-prefix="" data-suffix="">0</div>
-      <div class="about-metric__label">Años trabajando con Tienda Nube</div>
-    </div>
-
-    <div class="about-metric">
-      <div class="about-metric__num" data-target="5" data-prefix="" data-suffix="">0</div>
-      <div class="about-metric__label">Tiendas publicadas</div>
-    </div>
-
-    <div class="about-metric">
-      <div class="about-metric__num" data-target="250" data-prefix="+" data-suffix="">0</div>
-      <div class="about-metric__label">Productos y variantes configuradas</div>
-    </div>
-
-    <div class="about-metrics__note">
-      *Métricas reales de proyectos entregados, productos y variantes configuradas.
-    </div>
-  </div>
-</div>
-
 </section>
 <!-- /QUIÉN ESTÁ DETRÁS -->
 
