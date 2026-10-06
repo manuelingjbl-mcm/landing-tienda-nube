@@ -2075,78 +2075,104 @@ section#trabajos .wrapper {
 }
 
     /* ===== STACK CON EL QUE TRABAJAMOS ===== */
-
-.stack-pills {
-  margin-top: 24px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: flex-start;
-}
-
-.stack-pill {
-  padding: 8px 18px;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  border: 1.5px solid rgba(129, 140, 248, 0.65); /* violeta azulado */
-  background:
-    radial-gradient(circle at top left,
-      rgba(129, 140, 248, 0.18),
-      rgba(219, 234, 254, 0.15));
-  color: #111827;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
-  white-space: nowrap;
-  transition:
-    background 220ms ease-out,
-    transform 200ms ease-out,
-    box-shadow 220ms ease-out,
-    border-color 200ms ease-out;
-}
-
-/* Pills destacadas: Marketing Nube + Chat Nube */
-.stack-pill--highlight {
-  border-color: rgba(236, 72, 153, 0.75); /* rosa/violeta */
-  background:
-    radial-gradient(circle at top left,
-      rgba(236, 72, 153, 0.20),
-      rgba(129, 140, 248, 0.10));
-}
-
-/* Hover desktop */
-@media (hover: hover) and (pointer: fine) {
-  .stack-pill:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 14px 32px rgba(15, 23, 42, 0.18);
-    border-color: rgba(59, 130, 246, 0.9);
-    background:
-      radial-gradient(circle at top left,
-        rgba(59, 130, 246, 0.25),
-        rgba(226, 232, 255, 0.25));
-  }
-
-  .stack-pill--highlight:hover {
-    border-color: rgba(236, 72, 153, 0.95);
-    background:
-      radial-gradient(circle at top left,
-        rgba(236, 72, 153, 0.30),
-        rgba(129, 140, 248, 0.20));
-  }
-}
-
-/* Responsive: que se acomoden en varias filas y no se corten feo */
-@media (max-width: 768px) {
-  .stack-pills {
-    justify-content: flex-start;
-  }
-  .stack-pill {
-    white-space: normal;
-  }
-}
-
-    /* ===== Ajuste vertical para la sección STACK ===== */
 #stack {
-  margin-top: 10px;     /* probá entre 32px y 56px hasta que lo veas equilibrado */
+  margin-top: 10px;
   padding-top: 50px;
+  overflow: hidden;
+}
+
+#stack .wrapper{
+  padding-bottom: 40px;
+}
+
+.stack-intro{
+  margin: 24px 0 0;
+  color: #64748b;
+  font-size: .88rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+
+.stack-marquee{
+  position: relative;
+  margin-top: 16px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+
+.stack-marquee__track{
+  display: flex;
+  width: max-content;
+  animation: stack-marquee-scroll 36s linear infinite;
+  will-change: transform;
+}
+
+.stack-marquee__group{
+  display: flex;
+  gap: 12px;
+  padding-right: 12px;
+}
+
+.stack-card{
+  flex: 0 0 clamp(240px, 22vw, 310px);
+  min-height: 88px;
+  padding: 15px 17px;
+  border: 1px solid rgba(129, 140, 248, .38);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(255,255,255,.98), rgba(239,246,255,.84));
+  box-shadow: 0 10px 24px rgba(15, 23, 42, .07);
+  display: grid;
+  align-content: center;
+  gap: 5px;
+}
+
+.stack-card__name{
+  color: #172554;
+  font-size: .94rem;
+  font-weight: 750;
+  line-height: 1.25;
+}
+
+.stack-card__description{
+  color: #64748b;
+  font-size: .8rem;
+  line-height: 1.4;
+}
+
+@keyframes stack-marquee-scroll{
+  to { transform: translateX(-50%); }
+}
+
+@media (hover: hover) and (pointer: fine){
+  .stack-marquee:hover .stack-marquee__track{
+    animation-play-state: paused;
+  }
+}
+
+@media (max-width: 768px){
+  .stack-card{
+    flex-basis: clamp(230px, 70vw, 280px);
+    min-height: 84px;
+    padding: 14px 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .stack-marquee{
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .stack-marquee__track{
+    width: max-content;
+    animation: none;
+  }
+
+  .stack-marquee__group[aria-hidden="true"]{
+    display: none;
+  }
 }
 
 /* Contacto: spacing before footer */
@@ -5169,8 +5195,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <h3>Proyectos digitales listos para campañas, ventas y seguimiento.</h3>
     </div>
     <p>
-      Mostramos piezas reales y el trabajo que hay detrás: estructura, lectura mobile,
-      CTAs claros y preparación para conectar con Tienda Nube, Marketing Nube o WhatsApp.
+      Diseñamos proyectos preparados para captar, medir y convertir. Desde landings integradas en
+      Tienda Nube hasta newsletters y automatizaciones.
     </p>
   </div>
 
@@ -5233,16 +5259,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- Texto que cambia -->
 <div class="works-copy" id="works-copy">
   <div class="works-copy-top">
-  <p class="works-tag" id="works-tag">Landing servicio Tienda Nube</p>
+  <p class="works-tag" id="works-tag">Servicio · Landing pages para campañas</p>
   <span id="works-count">1 / 4</span>
   </div>
-  <h3 id="works-title">Landing pages para campañas</h3>
+  <h3 id="works-title">Landing de servicio para convertir</h3>
   <p id="works-description">
-    Landing de servicio pensada para explicar una oferta puntual, reducir distracciones y convertir tráfico de campañas en consultas.
+    Página pensada para una sola acción: explicar una oferta concreta, reducir distracciones y convertir tráfico de campañas en consultas.
   </p>
   <ul class="works-points" id="works-points">
-    <li>Mensaje directo: una acción principal y CTAs claros.</li>
-    <li>Bloques preparados para explicar problema, solución, proceso y FAQ.</li>
+    <li>Estructura clara para Meta/Google: problema, propuesta, beneficios, proceso y FAQ.</li>
+    <li>CTAs repetidos en puntos clave para no perder intención de contacto.</li>
     <li>Base lista para medir scroll, clicks y envío de formulario.</li>
   </ul>
   <a id="works-link" class="works-link" href="/landing">
@@ -5258,19 +5284,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="section-title">Stack con el que trabajamos</div>
     <h2>Preparamos tu tienda para integrarse con las herramientas que ya usás.</h2>
     <p>
-      Dejamos todo listo para que puedas medir, pautar, automatizar y escalar sin dolores de cabeza:
-      desde la base en Tienda Nube hasta campañas, analítica, newsletters y Chat Nube.
+      Conectamos medición, publicidad y automatización para que tu tienda no funcione aislada.
+      Dejamos preparada la base para analizar resultados, optimizar campañas y escalar procesos.
     </p>
+    <p class="stack-intro">Algunas de las herramientas con las que trabajamos</p>
 
-    <div class="stack-pills">
-      <div class="stack-pill">Tienda Nube</div>
-      <div class="stack-pill">Meta Pixel &amp; Conversion API</div>
-      <div class="stack-pill">Google Analytics 4</div>
-      <div class="stack-pill">Google Tag Manager</div>
-      <div class="stack-pill">Google Ads &amp; Merchant Center</div>
-     <div class="stack-pill">Marketing Nube · Newsletters y flujos</div>
-<div class="stack-pill">Chat Nube · Chatbot &amp; WhatsApp</div>
-
+    <div class="stack-marquee" aria-label="Herramientas con las que trabajamos">
+      <div class="stack-marquee__track">
+        <div class="stack-marquee__group">
+          <article class="stack-card"><span class="stack-card__name">Tienda Nube</span><span class="stack-card__description">Base de la tienda e integraciones</span></article>
+          <article class="stack-card"><span class="stack-card__name">Meta Ads + Pixel &amp; Conversion API</span><span class="stack-card__description">Campañas, medición y optimización</span></article>
+          <article class="stack-card"><span class="stack-card__name">Google Analytics 4</span><span class="stack-card__description">Tráfico, eventos y conversiones</span></article>
+          <article class="stack-card"><span class="stack-card__name">Google Tag Manager</span><span class="stack-card__description">Gestión centralizada del tracking</span></article>
+          <article class="stack-card"><span class="stack-card__name">Google Ads &amp; Merchant Center</span><span class="stack-card__description">Campañas, catálogo y productos</span></article>
+          <article class="stack-card"><span class="stack-card__name">Google Search Console</span><span class="stack-card__description">Indexación, visibilidad y rendimiento orgánico</span></article>
+          <article class="stack-card"><span class="stack-card__name">Marketing Nube</span><span class="stack-card__description">Newsletters, segmentos y automatizaciones</span></article>
+          <article class="stack-card"><span class="stack-card__name">Chat Nube</span><span class="stack-card__description">Chatbot, atención y WhatsApp</span></article>
+          <article class="stack-card"><span class="stack-card__name">n8n</span><span class="stack-card__description">Automatizaciones, leads y conexión entre plataformas</span></article>
+        </div>
+        <div class="stack-marquee__group" aria-hidden="true">
+          <article class="stack-card"><span class="stack-card__name">Tienda Nube</span><span class="stack-card__description">Base de la tienda e integraciones</span></article>
+          <article class="stack-card"><span class="stack-card__name">Meta Ads + Pixel &amp; Conversion API</span><span class="stack-card__description">Campañas, medición y optimización</span></article>
+          <article class="stack-card"><span class="stack-card__name">Google Analytics 4</span><span class="stack-card__description">Tráfico, eventos y conversiones</span></article>
+          <article class="stack-card"><span class="stack-card__name">Google Tag Manager</span><span class="stack-card__description">Gestión centralizada del tracking</span></article>
+          <article class="stack-card"><span class="stack-card__name">Google Ads &amp; Merchant Center</span><span class="stack-card__description">Campañas, catálogo y productos</span></article>
+          <article class="stack-card"><span class="stack-card__name">Google Search Console</span><span class="stack-card__description">Indexación, visibilidad y rendimiento orgánico</span></article>
+          <article class="stack-card"><span class="stack-card__name">Marketing Nube</span><span class="stack-card__description">Newsletters, segmentos y automatizaciones</span></article>
+          <article class="stack-card"><span class="stack-card__name">Chat Nube</span><span class="stack-card__description">Chatbot, atención y WhatsApp</span></article>
+          <article class="stack-card"><span class="stack-card__name">n8n</span><span class="stack-card__description">Automatizaciones, leads y conexión entre plataformas</span></article>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -5963,7 +6006,7 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
   const projects = {
     // LANDING PAGES PARA CAMPAÑAS
   campanas: {
-    tag: "Landing pages para campañas",
+    tag: "Servicio · Landing pages para campañas",
     title: "Landing de servicio para convertir",
     description:
       "Página pensada para una sola acción: explicar una oferta concreta, reducir distracciones y convertir tráfico de campañas en consultas.",
@@ -5978,7 +6021,7 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
 
   // VIA SHOP
   landing: {
-    tag: "Landing Tienda Nube",
+    tag: "Caso real · Landing interna en Tienda Nube",
     title: "Landing VIA SHOP",
     description:
       "Landing enfocada en servicios de diseño y optimización de Tienda Nube, lista para recibir tráfico de campañas y convertir visitas en consultas.",
@@ -5988,12 +6031,12 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
       "Formulario de contacto optimizado para leads rápidos."
     ],
     link: "#contacto",
-    linkLabel: "Ver landing en esta página"
+    linkLabel: "Quiero una landing para mi tienda"
   },
 
   // DAGGER STORE
   dagger: {
-    tag: "Landing dentro de Tienda Nube",
+    tag: "Caso real · Landing de campaña en Tienda Nube",
     title: "Dagger Store",
     description:
       "Landing comercial montada dentro de Tienda Nube para una campaña puntual, conectando storytelling, categorías y productos reales de la tienda.",
@@ -6003,12 +6046,12 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
       "Diseño alineado a Tienda Nube, con compra directa, cuotas y stock actualizado."
     ],
     link: "#contacto",
-    linkLabel: "Quiero una campaña así"
+    linkLabel: "Quiero una landing para mi campaña"
   },
 
   // DISTRI HOME
   newsletter: {
-    tag: "Newsletter & automatizaciones",
+    tag: "Caso real · Newsletter & automatizaciones",
     title: "Newsletter DISTRI HOME",
     description:
       "Newsletter diseñado para Marketing Nube, con foco en productos destacados, ofertas y derivación a la tienda online.",
@@ -6018,7 +6061,7 @@ if (form && form.dataset && form.dataset.leadSent === "1") {
       "Listo para integrarse con flujos básicos de bienvenida y promos."
     ],
     link: "#contacto",
-    linkLabel: "Ver cómo trabajamos newsletters"
+    linkLabel: "Quiero newsletters para mi tienda"
   }
 };
 
