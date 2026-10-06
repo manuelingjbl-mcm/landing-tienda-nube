@@ -1222,6 +1222,1076 @@ html{ scroll-behavior: smooth; }
   color: rgba(234,240,255,.60);
 }
 
+/* ===== DIAGNÓSTICO · POR QUÉ EL TRÁFICO NO CONVIERTE ===== */
+.conversion-diagnosis{
+  padding-top:48px;
+  padding-bottom:46px;
+}
+
+.conversion-diagnosis .section-sub{ max-width:76ch; }
+
+.conversion-journey{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(22px,3vw,44px);
+  margin-top:28px;
+  padding-top:4px;
+}
+
+.conversion-journey::before{
+  content:"";
+  position:absolute;
+  top:22px;
+  left:11%;
+  right:11%;
+  height:1px;
+  background:linear-gradient(90deg,rgba(45,91,255,.14),rgba(45,91,255,.65) 21%,rgba(123,92,255,.64) 78%,rgba(123,92,255,.14));
+  box-shadow:0 0 14px rgba(75,99,255,.20);
+  transform:scaleX(1);
+  transform-origin:left center;
+}
+
+.conversion-stage{
+  position:relative;
+  min-width:0;
+  padding-top:52px;
+}
+
+.conversion-stage__station{
+  position:absolute;
+  top:0;
+  left:50%;
+  z-index:1;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 10px;
+  color:#253469;
+  background:#fff;
+  font-size:10px;
+  font-weight:850;
+  letter-spacing:.12em;
+  transform:translateX(-50%);
+  white-space:nowrap;
+}
+
+.conversion-stage__node{
+  width:14px;
+  height:14px;
+  border:3px solid #f7f9ff;
+  border-radius:50%;
+  background:linear-gradient(135deg,#2d5bff,#7b5cff);
+  box-shadow:0 0 0 1px rgba(45,91,255,.38),0 0 0 6px rgba(74,101,255,.08),0 0 18px rgba(69,91,255,.26);
+}
+
+.conversion-stage__issue{
+  position:relative;
+  min-height:151px;
+  padding:18px 2px 4px 22px;
+  border-top:1px solid rgba(25,42,100,.16);
+}
+
+.conversion-stage__issue::before{
+  content:"";
+  position:absolute;
+  top:18px;
+  bottom:5px;
+  left:0;
+  width:2px;
+  border-radius:999px;
+  background:linear-gradient(180deg,#2d5bff,rgba(123,92,255,.22));
+}
+
+.conversion-stage__eyebrow{
+  margin-bottom:8px;
+  color:#4965cf;
+  font-size:10px;
+  font-weight:850;
+  letter-spacing:.12em;
+}
+
+.conversion-stage h3{
+  margin:0 0 7px;
+  color:var(--ink);
+  font-size:clamp(17px,1.55vw,21px);
+  letter-spacing:-.025em;
+}
+
+.conversion-stage p{
+  margin:0;
+  color:rgba(12,15,26,.66);
+  font-size:13px;
+  line-height:1.55;
+}
+
+html.js .conversion-journey.reveal-visible::before{
+  animation:conversion-rail-in .7s cubic-bezier(.2,.8,.2,1) both;
+}
+
+html.js .conversion-journey .conversion-stage{
+  opacity:0;
+  transform:translateY(12px);
+  transition:opacity .42s ease,transform .42s ease;
+}
+
+html.js .conversion-journey.reveal-visible .conversion-stage{
+  opacity:1;
+  transform:translateY(0);
+}
+
+html.js .conversion-journey.reveal-visible .conversion-stage:nth-child(2){ transition-delay:.12s; }
+html.js .conversion-journey.reveal-visible .conversion-stage:nth-child(3){ transition-delay:.24s; }
+
+@keyframes conversion-rail-in{
+  from{ transform:scaleX(0); opacity:.2; }
+  to{ transform:scaleX(1); opacity:1; }
+}
+
+@keyframes conversion-rail-in-vertical{
+  from{ transform:scaleY(0); opacity:.2; }
+  to{ transform:scaleY(1); opacity:1; }
+}
+
+@media (max-width:760px){
+  .conversion-diagnosis{
+    padding-top:42px;
+    padding-bottom:40px;
+  }
+
+  .conversion-journey{
+    grid-template-columns:1fr;
+    gap:0;
+    margin-top:24px;
+    padding:0 0 0 32px;
+  }
+
+  .conversion-journey::before{
+    top:10px;
+    bottom:22px;
+    left:7px;
+    right:auto;
+    width:1px;
+    height:auto;
+    transform:scaleY(1);
+    transform-origin:center top;
+  }
+
+  html.js .conversion-journey.reveal-visible::before{
+    animation-name:conversion-rail-in-vertical;
+  }
+
+  .conversion-stage{
+    padding:0 0 21px;
+  }
+
+  .conversion-stage:last-child{ padding-bottom:0; }
+
+  .conversion-stage__station{
+    position:relative;
+    top:auto;
+    left:-32px;
+    display:flex;
+    width:calc(100% + 32px);
+    padding:0 0 11px 23px;
+    background:transparent;
+    transform:none;
+  }
+
+  .conversion-stage__node{
+    position:absolute;
+    top:0;
+    left:0;
+    width:15px;
+    height:15px;
+  }
+
+  .conversion-stage__issue{
+    min-height:0;
+    padding:0 0 0 17px;
+    border-top:0;
+  }
+
+  .conversion-stage__issue::before{
+    top:0;
+    bottom:0;
+    width:1px;
+    background:linear-gradient(180deg,rgba(45,91,255,.44),rgba(123,92,255,.08));
+  }
+
+  .conversion-stage__eyebrow{ margin-bottom:6px; }
+  .conversion-stage h3{ font-size:19px; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  html.js .conversion-journey.reveal,
+  html.js .conversion-journey .conversion-stage{
+    opacity:1;
+    transform:none;
+    transition:none;
+  }
+
+  .conversion-journey::before,
+  html.js .conversion-journey.reveal-visible::before{ animation:none; }
+}
+
+/* ===== HERO · LANDING PAGES ===== */
+.landing-hero{
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:minmax(0,1.04fr) minmax(380px,.96fr);
+  gap:clamp(28px,5vw,72px);
+  align-items:center;
+  min-height:clamp(590px,calc(100vh - 76px),720px);
+  padding:clamp(36px,5vw,68px) 0 clamp(46px,5.5vw,76px);
+}
+
+.landing-hero .hero-copy{
+  max-width:650px;
+  margin:0;
+  padding:0;
+  text-align:left;
+}
+
+.landing-hero .hero-copy .kicker{
+  justify-content:flex-start;
+  margin:0 0 14px;
+}
+
+.landing-hero .hero-copy h1.hero-title{
+  width:auto;
+  max-width:15ch !important;
+  margin:0 0 18px !important;
+  text-align:left;
+  font-size:clamp(42px,4.45vw,66px);
+}
+
+.landing-hero .hero-copy h1.hero-title .hero-line--top{
+  white-space:normal;
+}
+
+.landing-hero .hero-copy .lead{
+  max-width:58ch;
+  margin:0 0 22px;
+  font-size:clamp(15px,1.2vw,17px);
+}
+
+.landing-hero .hero-ctas{
+  justify-content:flex-start;
+  margin:0;
+}
+
+.landing-hero__signals{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  margin:28px 0 0;
+  padding:0;
+  list-style:none;
+}
+
+.landing-hero__signal{
+  position:relative;
+  min-width:0;
+  padding:0 0 0 22px;
+  color:rgba(234,240,255,.64);
+  font-size:12px;
+  line-height:1.45;
+}
+
+.landing-hero__signal::before{
+  content:"";
+  position:absolute;
+  top:3px;
+  left:0;
+  width:13px;
+  height:13px;
+  border:1px solid rgba(161,182,255,.72);
+  border-radius:50%;
+  background:radial-gradient(circle at 34% 30%, #fff 0 12%, #8facff 16% 35%, #4566ff 40% 100%);
+  box-shadow:0 0 0 4px rgba(100,126,255,.10);
+}
+
+.landing-hero__signal strong{
+  display:block;
+  margin-bottom:3px;
+  color:#fff;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.01em;
+}
+
+.landing-hero__visual{
+  position:relative;
+  min-height:430px;
+  isolation:isolate;
+}
+
+.landing-hero__glow{
+  position:absolute;
+  z-index:-1;
+  inset:8% 2% 6% 12%;
+  border-radius:45%;
+  background:radial-gradient(circle at 42% 44%, rgba(77,111,255,.46), rgba(124,92,255,.22) 38%, transparent 72%);
+  filter:blur(18px);
+  opacity:.86;
+  animation:landing-hero-glow 8s ease-in-out infinite alternate;
+}
+
+.landing-browser{
+  position:absolute;
+  top:4%;
+  right:2%;
+  width:min(100%,535px);
+  aspect-ratio:1.36;
+  overflow:hidden;
+  border:1px solid rgba(202,216,255,.36);
+  border-radius:22px;
+  background:#f8faff;
+  box-shadow:0 32px 72px rgba(0,0,0,.38),0 0 0 8px rgba(255,255,255,.035);
+  transform:perspective(1100px) rotateY(-4deg) rotateX(1.4deg);
+  transform-origin:center right;
+  animation:landing-browser-float 6s ease-in-out infinite;
+}
+
+.landing-browser__bar{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  height:30px;
+  padding:0 12px;
+  background:#101937;
+}
+
+.landing-browser__bar span{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:rgba(255,255,255,.52);
+}
+
+.landing-browser__bar::after{
+  content:"viacloud.studio/landing";
+  width:42%;
+  margin-left:6px;
+  padding:4px 9px;
+  border-radius:999px;
+  color:rgba(235,241,255,.64);
+  background:rgba(255,255,255,.10);
+  font-size:7px;
+}
+
+.landing-browser__canvas{
+  position:relative;
+  height:calc(100% - 30px);
+  padding:clamp(20px,3.2vw,34px);
+  overflow:hidden;
+  background:linear-gradient(126deg,#071b52 0%,#142fb2 44%,#5a36e5 100%);
+}
+
+.landing-browser__canvas::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 76% 24%,rgba(255,255,255,.28),transparent 23%),linear-gradient(120deg,transparent 48%,rgba(255,255,255,.07) 49% 52%,transparent 53%);
+}
+
+.landing-browser__nav,
+.landing-browser__eyebrow,
+.landing-browser__headline,
+.landing-browser__copy,
+.landing-browser__button,
+.landing-browser__cards{
+  position:relative;
+}
+
+.landing-browser__nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  color:rgba(255,255,255,.86);
+  font-size:7px;
+  font-weight:800;
+  letter-spacing:.08em;
+}
+
+.landing-browser__nav::after{
+  content:"INICIO  ·  PROCESO  ·  CONTACTO";
+  color:rgba(255,255,255,.48);
+  font-size:5px;
+}
+
+.landing-browser__eyebrow{
+  margin-top:13%;
+  color:#bec9ff;
+  font-size:6px;
+  font-weight:800;
+  letter-spacing:.14em;
+}
+
+.landing-browser__headline{
+  width:62%;
+  margin-top:7px;
+  color:#fff;
+  font-size:clamp(17px,2.1vw,27px);
+  font-weight:900;
+  line-height:1.02;
+  letter-spacing:-.05em;
+}
+
+.landing-browser__copy{
+  width:49%;
+  margin-top:10px;
+  color:rgba(235,240,255,.73);
+  font-size:6px;
+  line-height:1.55;
+}
+
+.landing-browser__button{
+  display:inline-block;
+  margin-top:13px;
+  padding:7px 11px;
+  border-radius:999px;
+  color:#122063;
+  background:#fff;
+  font-size:6px;
+  font-weight:900;
+}
+
+.landing-browser__cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:6px;
+  margin-top:13%;
+}
+
+.landing-browser__cards span{
+  height:27px;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:5px;
+  background:rgba(255,255,255,.12);
+}
+
+.landing-mobile{
+  position:absolute;
+  right:-1%;
+  bottom:1%;
+  z-index:2;
+  width:clamp(126px,25%,164px);
+  padding:6px;
+  border:1px solid rgba(255,255,255,.56);
+  border-radius:25px;
+  background:#08112d;
+  box-shadow:0 26px 48px rgba(0,0,0,.4);
+  transform:rotate(5deg);
+  animation:landing-mobile-float 5.5s ease-in-out infinite;
+}
+
+.landing-mobile__screen{
+  min-height:250px;
+  padding:13px 10px;
+  overflow:hidden;
+  border-radius:19px;
+  background:linear-gradient(155deg,#edf4ff 0%,#dce8ff 45%,#f9fbff 46%);
+}
+
+.landing-mobile__speaker{
+  width:34px;
+  height:4px;
+  margin:0 auto 16px;
+  border-radius:999px;
+  background:#0e1938;
+}
+
+.landing-mobile__tag{
+  color:#4055bd;
+  font-size:6px;
+  font-weight:900;
+  letter-spacing:.1em;
+}
+
+.landing-mobile__title{
+  margin-top:8px;
+  color:#111b43;
+  font-size:13px;
+  font-weight:900;
+  line-height:1.04;
+  letter-spacing:-.05em;
+}
+
+.landing-mobile__image{
+  height:66px;
+  margin-top:13px;
+  border-radius:10px;
+  background:linear-gradient(135deg,#182969 0%,#3760e9 46%,#8c59f7 100%);
+}
+
+.landing-mobile__line{
+  height:5px;
+  margin-top:9px;
+  border-radius:999px;
+  background:#c4d0ed;
+}
+
+.landing-mobile__line--short{ width:62%; }
+
+.landing-mobile__cta{
+  height:22px;
+  margin-top:14px;
+  border-radius:999px;
+  background:#245de8;
+}
+
+.landing-hero__badge,
+.landing-hero__flow{
+  position:absolute;
+  z-index:3;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 10px;
+  border:1px solid rgba(190,205,255,.27);
+  border-radius:999px;
+  color:#e8eeff;
+  background:rgba(9,16,41,.70);
+  box-shadow:0 14px 30px rgba(0,0,0,.22);
+  backdrop-filter:blur(10px);
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.08em;
+  animation:landing-badge-in .6s both;
+}
+
+.landing-hero__badge::before{
+  content:"";
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#86a2ff;
+  box-shadow:0 0 0 4px rgba(134,162,255,.13);
+}
+
+.landing-hero__badge--mobile{ top:5%; left:-2%; }
+.landing-hero__badge--events{ top:48%; left:-7%; animation-delay:.14s; }
+.landing-hero__flow{ right:17%; bottom:2%; color:rgba(235,240,255,.75); font-size:8px; letter-spacing:.04em; animation-delay:.24s; }
+
+@keyframes landing-browser-float{
+  0%,100%{ transform:perspective(1100px) rotateY(-4deg) rotateX(1.4deg) translateY(0); }
+  50%{ transform:perspective(1100px) rotateY(-4deg) rotateX(1.4deg) translateY(-4px); }
+}
+
+@keyframes landing-mobile-float{
+  0%,100%{ transform:rotate(5deg) translateY(0); }
+  50%{ transform:rotate(5deg) translateY(-5px); }
+}
+
+@keyframes landing-hero-glow{
+  from{ transform:scale(.94); opacity:.64; }
+  to{ transform:scale(1.04); opacity:1; }
+}
+
+@keyframes landing-badge-in{
+  from{ opacity:0; transform:translateY(7px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+
+@media (max-width:1050px){
+  .landing-hero{
+    grid-template-columns:minmax(0,1fr) minmax(330px,.82fr);
+    gap:32px;
+    min-height:0;
+  }
+  .landing-hero__visual{ min-height:390px; }
+  .landing-hero__badge--events{ left:-3%; }
+}
+
+@media (max-width:820px){
+  .landing-hero{
+    grid-template-columns:1fr;
+    gap:30px;
+    padding:36px 0 46px;
+  }
+  .landing-hero .hero-copy{ max-width:690px; }
+  .landing-hero__visual{
+    width:min(94%,560px);
+    min-height:420px;
+    margin:0 auto;
+  }
+  .landing-hero__badge--mobile{ left:-4%; }
+}
+
+@media (max-width:640px){
+  .landing-hero{
+    gap:26px;
+    padding:30px 0 38px;
+  }
+  .landing-hero .hero-copy,
+  .landing-hero .hero-copy h1.hero-title,
+  .landing-hero .hero-copy .lead{ text-align:left; }
+  .landing-hero .hero-copy .kicker{ justify-content:flex-start; }
+  .landing-hero .hero-copy h1.hero-title{
+    max-width:13ch !important;
+    font-size:clamp(38px,11vw,50px);
+  }
+  .landing-hero .hero-copy h1.hero-title .pill-tilt{
+    display:inline-flex;
+    width:auto;
+    margin-left:.22em !important;
+  }
+  .landing-hero .hero-ctas{ flex-direction:column; }
+  .landing-hero__signals{
+    grid-template-columns:1fr;
+    gap:13px;
+    margin-top:24px;
+  }
+  .landing-hero__signal{ padding-left:23px; }
+  .landing-hero__visual{
+    width:94%;
+    min-height:330px;
+  }
+  .landing-browser{
+    top:5%;
+    right:0;
+    width:94%;
+    border-radius:17px;
+  }
+  .landing-mobile{
+    right:-1%;
+    bottom:0;
+    width:31%;
+  }
+  .landing-mobile__screen{ min-height:202px; }
+  .landing-hero__badge--mobile{ top:0; left:-4%; }
+  .landing-hero__badge--events{ display:none; }
+  .landing-hero__flow{ right:19%; bottom:0; font-size:7px; }
+}
+
+@media (max-width:430px){
+  .landing-hero__flow{ display:none; }
+  .landing-hero__visual{ min-height:300px; }
+  .landing-mobile__screen{ min-height:180px; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .landing-hero__glow,
+  .landing-browser,
+  .landing-mobile,
+  .landing-hero__badge,
+  .landing-hero__flow{ animation:none; }
+}
+
+/* ===== HERO · REFINAMIENTO DE PROPORCIONES Y MOCKUP ===== */
+.topbar .brand img{
+  width:158px;
+  opacity:1;
+  filter:brightness(1.12) contrast(1.08) drop-shadow(0 2px 10px rgba(122,150,255,.18));
+}
+
+.landing-hero{
+  grid-template-columns:minmax(0,.9fr) minmax(430px,1.1fr);
+  gap:clamp(30px,4vw,58px);
+  min-height:clamp(540px,calc(100vh - 78px),640px);
+  padding:clamp(28px,3.5vw,48px) 0 clamp(34px,4.5vw,58px);
+}
+
+.landing-hero .hero-copy h1.hero-title{
+  max-width:16.5ch !important;
+  margin:0 0 14px !important;
+  font-size:clamp(39px,3.72vw,57px);
+  line-height:.98 !important;
+}
+
+.landing-hero .hero-copy h1.hero-title .hero-line--bottom{
+  margin-top:.08em !important;
+}
+
+.landing-hero .hero-copy h1.hero-title .pill-tilt{
+  padding:.09em .42em;
+  margin-left:.12em;
+  font-size:.78em;
+  line-height:.96;
+  transform:translateY(-.02em);
+}
+
+.landing-hero .hero-copy h1.hero-title .pill-tilt::before{
+  border-color:rgba(124,153,255,.42);
+  box-shadow:0 7px 18px rgba(0,0,0,.22);
+  transform:translateY(.06em) rotate(-1.4deg) skewX(-7deg) scaleX(1.01);
+}
+
+.landing-hero .hero-copy h1.hero-title .pill-tilt::after{
+  opacity:.56;
+  transform:translateY(.06em) rotate(-1.4deg) skewX(-7deg) scaleX(1.01);
+}
+
+.landing-hero .hero-copy .lead{
+  margin-bottom:18px;
+  font-size:clamp(14px,1.05vw,16px);
+  line-height:1.5;
+}
+
+.landing-hero__signals{
+  gap:10px;
+  margin-top:20px;
+}
+
+.landing-hero__signal{
+  padding-left:19px;
+  font-size:11px;
+  line-height:1.38;
+}
+
+.landing-hero__signal::before{
+  width:11px;
+  height:11px;
+  box-shadow:0 0 0 3px rgba(100,126,255,.10);
+}
+
+.landing-hero__signal strong{
+  margin-bottom:2px;
+  font-size:11px;
+}
+
+.landing-hero__visual{
+  min-height:440px;
+}
+
+.landing-hero__glow{
+  inset:4% -4% 2% 1%;
+  background:radial-gradient(circle at 48% 46%,rgba(74,112,255,.43),rgba(128,89,255,.19) 38%,transparent 71%);
+  filter:blur(22px);
+}
+
+.landing-browser{
+  top:1%;
+  right:-2%;
+  width:min(107%,590px);
+  aspect-ratio:1.27;
+  border:1px solid rgba(218,228,255,.56);
+  border-radius:20px;
+  box-shadow:0 38px 80px rgba(0,0,0,.46),0 0 0 7px rgba(255,255,255,.045),inset 0 1px 0 rgba(255,255,255,.26);
+  transform:perspective(1200px) rotateY(-3deg) rotateX(1deg);
+}
+
+.landing-browser::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:4;
+  pointer-events:none;
+  background:linear-gradient(115deg,rgba(255,255,255,.12),transparent 18% 72%,rgba(255,255,255,.06));
+}
+
+.landing-browser__bar{
+  height:34px;
+  padding:0 14px;
+  background:linear-gradient(180deg,#17203f,#0b1230);
+  box-shadow:inset 0 -1px 0 rgba(255,255,255,.08);
+}
+
+.landing-browser__bar span{ width:7px; height:7px; }
+.landing-browser__bar span:nth-child(1){ background:#ff7b8c; }
+.landing-browser__bar span:nth-child(2){ background:#ffd16c; }
+.landing-browser__bar span:nth-child(3){ background:#68de9d; }
+
+.landing-browser__bar::after{
+  width:34%;
+  margin-left:9px;
+  padding:5px 10px;
+  color:rgba(235,241,255,.72);
+  font-size:7px;
+}
+
+.landing-browser__canvas{
+  height:calc(100% - 34px);
+  padding:clamp(20px,2.7vw,30px);
+  background:#f7f9ff;
+}
+
+.landing-browser__canvas::before{
+  background:radial-gradient(circle at 78% 20%,rgba(104,107,255,.22),transparent 24%),linear-gradient(180deg,rgba(223,230,255,.72),transparent 28%);
+}
+
+.landing-browser__nav{
+  color:#19265d;
+  font-size:7px;
+}
+
+.landing-browser__nav::after{
+  color:#68739f;
+  font-size:5px;
+}
+
+.landing-browser__hero{
+  position:relative;
+  display:grid;
+  grid-template-columns:1.02fr .78fr;
+  min-height:52%;
+  margin-top:5%;
+  padding:clamp(14px,2vw,22px);
+  overflow:hidden;
+  border-radius:12px;
+  background:linear-gradient(128deg,#10266d 0%,#244bd2 51%,#7043e4 100%);
+  box-shadow:0 12px 24px rgba(27,55,150,.18);
+}
+
+.landing-browser__hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(115deg,transparent 44%,rgba(255,255,255,.12) 45% 47%,transparent 48%),radial-gradient(circle at 85% 16%,rgba(255,255,255,.28),transparent 24%);
+}
+
+.landing-browser__hero-copy,
+.landing-browser__hero-art{ position:relative; z-index:1; }
+
+.landing-browser__eyebrow{
+  margin-top:0;
+  color:#cbd4ff;
+  font-size:6px;
+}
+
+.landing-browser__headline{
+  width:100%;
+  margin-top:8px;
+  color:#fff;
+  font-size:clamp(17px,2vw,25px);
+}
+
+.landing-browser__copy{
+  width:89%;
+  margin-top:9px;
+  color:rgba(241,245,255,.77);
+  font-size:6px;
+}
+
+.landing-browser__button{
+  margin-top:11px;
+  padding:7px 11px;
+  color:#17317f;
+  box-shadow:0 7px 14px rgba(0,0,0,.16);
+}
+
+.landing-browser__hero-art{
+  min-height:100%;
+}
+
+.landing-browser__hero-art span,
+.landing-browser__hero-art i,
+.landing-browser__hero-art b{
+  position:absolute;
+  display:block;
+  border-radius:50%;
+}
+
+.landing-browser__hero-art span{
+  width:74%;
+  aspect-ratio:1;
+  right:-4%;
+  bottom:-22%;
+  border:10px solid rgba(255,255,255,.15);
+  background:linear-gradient(145deg,rgba(255,255,255,.50),rgba(255,255,255,.08));
+  box-shadow:inset 0 0 0 14px rgba(11,34,118,.22);
+}
+
+.landing-browser__hero-art i{
+  width:32%;
+  aspect-ratio:1;
+  top:13%;
+  left:8%;
+  background:#fff;
+  box-shadow:0 12px 22px rgba(3,10,65,.2);
+}
+
+.landing-browser__hero-art b{
+  width:48%;
+  height:14%;
+  bottom:16%;
+  left:-2%;
+  border-radius:999px;
+  background:rgba(255,255,255,.75);
+}
+
+.landing-browser__cards{
+  position:relative;
+  z-index:1;
+  gap:7px;
+  margin-top:12px;
+}
+
+.landing-browser__cards span{
+  height:31px;
+  border:1px solid #dde4fa;
+  border-radius:7px;
+  background:linear-gradient(145deg,#fff,#edf2ff);
+  box-shadow:0 5px 10px rgba(21,39,104,.06);
+}
+
+.landing-browser__cards span::after{
+  content:"";
+  display:block;
+  width:48%;
+  height:3px;
+  margin:9px 0 0 8px;
+  border-radius:999px;
+  background:#b6c3ee;
+}
+
+.landing-browser__form{
+  position:relative;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-top:10px;
+  padding:8px 10px;
+  border:1px solid #e1e6f7;
+  border-radius:7px;
+  color:#202d63;
+  background:#fff;
+  box-shadow:0 5px 12px rgba(21,39,104,.06);
+}
+
+.landing-browser__form b{ display:block; font-size:6px; }
+.landing-browser__form span{ display:block; margin-top:2px; color:#7c89b2; font-size:5px; }
+.landing-browser__form i{ padding:5px 7px; border-radius:999px; color:#fff; background:#2f5ee7; font-size:5px; font-style:normal; font-weight:900; }
+
+.landing-mobile{
+  right:-3%;
+  bottom:-1%;
+  width:clamp(142px,26%,174px);
+  padding:7px;
+  border:1px solid rgba(255,255,255,.75);
+  border-radius:29px;
+  background:linear-gradient(145deg,#242d4d,#060b1d 60%);
+  box-shadow:0 34px 56px rgba(0,0,0,.46),inset 0 1px 0 rgba(255,255,255,.25);
+  transform:rotate(4deg);
+}
+
+.landing-mobile__screen{
+  min-height:273px;
+  padding:14px 11px;
+  border-radius:22px;
+  background:linear-gradient(155deg,#f9fbff 0%,#e7edff 49%,#fff 50%);
+}
+
+.landing-mobile__speaker{
+  width:40px;
+  height:5px;
+  margin-bottom:17px;
+  box-shadow:0 1px 2px rgba(255,255,255,.25);
+}
+
+.landing-mobile__title{ font-size:14px; }
+
+.landing-mobile__image{
+  height:74px;
+  border:1px solid rgba(255,255,255,.55);
+  box-shadow:0 10px 16px rgba(31,54,141,.16);
+}
+
+.landing-mobile__cta{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:24px;
+  color:#fff;
+  font-size:5px;
+  font-weight:900;
+  letter-spacing:.06em;
+  box-shadow:0 8px 14px rgba(36,93,232,.25);
+}
+
+.landing-mobile__steps{
+  display:flex;
+  gap:4px;
+  justify-content:center;
+  margin-top:10px;
+}
+
+.landing-mobile__steps span{ width:4px; height:4px; border-radius:50%; background:#b4c1e8; }
+.landing-mobile__steps span:first-child{ width:12px; border-radius:999px; background:#335fe5; }
+
+.landing-hero__badge--mobile{ top:3%; left:-1%; }
+.landing-hero__badge--events{ top:52%; left:-5%; }
+.landing-hero__flow{ right:15%; bottom:-1%; }
+
+@media (max-width:1100px){
+  .landing-hero{
+    grid-template-columns:minmax(0,.9fr) minmax(385px,1.1fr);
+    gap:30px;
+  }
+  .landing-hero .hero-copy h1.hero-title{ font-size:clamp(38px,4vw,52px); }
+  .landing-browser{ width:104%; }
+}
+
+@media (max-width:820px){
+  .landing-hero{
+    grid-template-columns:1fr;
+    gap:24px;
+    min-height:0;
+    padding:30px 0 42px;
+  }
+  .landing-hero .hero-copy{ max-width:680px; }
+  .landing-hero .hero-copy h1.hero-title{ max-width:18ch !important; }
+  .landing-hero__visual{ width:min(92%,620px); min-height:430px; }
+  .landing-browser{ width:100%; right:0; }
+}
+
+@media (max-width:640px){
+  .topbar .brand img{ width:142px; }
+  .landing-hero{
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
+    grid-template-areas:
+      "kicker"
+      "title"
+      "lead"
+      "ctas"
+      "visual"
+      "signals";
+    gap:0;
+    padding:28px 0 36px;
+  }
+  .landing-hero .hero-copy{ display:contents; }
+  .landing-hero .hero-copy .kicker{ grid-area:kicker; }
+  .landing-hero .hero-copy h1.hero-title{ grid-area:title; }
+  .landing-hero .hero-copy .lead{ grid-area:lead; }
+  .landing-hero .hero-ctas{ grid-area:ctas; }
+  .landing-hero .hero-copy h1.hero-title{
+    max-width:14.5ch !important;
+    margin-bottom:13px !important;
+    font-size:clamp(37px,10.4vw,47px);
+  }
+  .landing-hero .hero-copy h1.hero-title .pill-tilt{
+    display:inline-flex;
+    width:auto;
+    margin-left:.1em !important;
+  }
+  .landing-hero .hero-copy .lead{ margin-bottom:17px; }
+  .landing-hero__signals{ grid-area:signals; gap:10px; margin-top:18px; }
+  .landing-hero__visual{ grid-area:visual; width:92%; min-height:335px; margin-top:22px; }
+  .landing-browser{ width:100%; right:0; }
+  .landing-browser__form{ margin-top:8px; }
+  .landing-mobile{ right:-4%; width:31%; }
+  .landing-mobile__screen{ min-height:205px; }
+  .landing-mobile__image{ height:56px; }
+  .landing-hero__badge--mobile{ top:0; left:-4%; }
+  .landing-hero__badge--events{ display:none; }
+  .landing-hero__flow{ right:17%; bottom:-2%; }
+}
+
+@media (max-width:430px){
+  .topbar .brand img{ width:128px; }
+  .landing-hero .hero-copy h1.hero-title{ font-size:clamp(35px,10.2vw,43px); }
+  .landing-hero__visual{ min-height:300px; }
+  .landing-mobile__screen{ min-height:180px; }
+  .landing-browser__cards span{ height:23px; }
+  .landing-browser__form{ padding:6px 8px; }
+}
+
 </style>
     
 <!-- Google Tag Manager -->
@@ -1260,112 +2330,122 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- HERO (dark) -->
   <header class="hero" id="top">
     <div class="wrap hero-pad">
-      <div class="hero-stack">
-  <!-- TITULO FULL WIDTH (sin card) -->
-  <div class="hero-copy reveal">
-    <div class="kicker">
-      <span class="dot"></span>
-      Landing pages para campañas · 1 acción, 0 distracciones
-    </div>
+      <div class="landing-hero">
+        <div class="hero-copy reveal">
+          <div class="kicker">
+            <span class="dot"></span>
+            Landing pages para campañas · 1 acción, 0 distracciones
+          </div>
 
-    <h1 class="hero-title">
-  <span class="hero-line hero-line--top">
-    Una landing
-    <span class="pill-tilt"><span class="pill-text">no es una web.</span></span>
-  </span>
+          <h1 class="hero-title">
+            <span class="hero-line hero-line--top">
+              Una landing <span class="pill-tilt"><span class="pill-text">no es una web.</span></span>
+            </span>
+            <span class="hero-line hero-line--bottom">Es una página diseñada para convertir.</span>
+          </h1>
 
-  <span class="hero-line hero-line--bottom">
-    Es una página diseñada para convertir.
-  </span>
-</h1>
+          <p class="lead">
+            Si invertís en anuncios y no convertís, muchas veces el problema no es el anuncio: es lo que pasa después del click. Diseñamos una landing enfocada en una sola acción, con estructura clara, CTA fuerte y medición lista para optimizar.
+          </p>
 
+          <div class="hero-ctas">
+            <a class="btn btn-primary js-cta" data-cta="quiero_landing" data-loc="hero" href="#contacto">Quiero mi landing</a>
+            <a class="btn js-cta" data-cta="que_incluye" data-loc="hero" href="#incluye">Qué incluye</a>
+          </div>
 
+          <ul class="landing-hero__signals" aria-label="Beneficios de la landing">
+            <li class="landing-hero__signal">
+              <strong>Meta / Google Ads</strong>
+              Pensada para tráfico de campañas.
+            </li>
+            <li class="landing-hero__signal">
+              <strong>Copy + estructura</strong>
+              Una acción principal y sin distracciones.
+            </li>
+            <li class="landing-hero__signal">
+              <strong>Medición lista</strong>
+              Scroll, CTA y envío de formulario.
+            </li>
+          </ul>
+        </div>
 
+        <div class="landing-hero__visual reveal" aria-label="Mockup conceptual de una landing para campañas">
+          <div class="landing-hero__glow" aria-hidden="true"></div>
+          <div class="landing-hero__badge landing-hero__badge--mobile">MOBILE FIRST</div>
+          <div class="landing-hero__badge landing-hero__badge--events">EVENTOS LISTOS</div>
 
+          <div class="landing-browser" aria-hidden="true">
+            <div class="landing-browser__bar"><span></span><span></span><span></span></div>
+            <div class="landing-browser__canvas">
+              <div class="landing-browser__nav">VÍA / LANDING</div>
+              <div class="landing-browser__hero">
+                <div class="landing-browser__hero-copy">
+                  <div class="landing-browser__eyebrow">CAMPAÑA · CONVERSIÓN</div>
+                  <div class="landing-browser__headline">Una página clara. Una acción.</div>
+                  <div class="landing-browser__copy">Una propuesta enfocada, beneficios concretos y un siguiente paso visible.</div>
+                  <div class="landing-browser__button">QUIERO AVANZAR</div>
+                </div>
+                <div class="landing-browser__hero-art"><span></span><i></i><b></b></div>
+              </div>
+              <div class="landing-browser__cards"><span></span><span></span><span></span></div>
+              <div class="landing-browser__form">
+                <div><b>¿Listo para avanzar?</b><span>Contanos tu objetivo</span></div>
+                <i>ENVIAR</i>
+              </div>
+            </div>
+          </div>
 
+          <div class="landing-mobile" aria-hidden="true">
+            <div class="landing-mobile__screen">
+              <div class="landing-mobile__speaker"></div>
+              <div class="landing-mobile__tag">MOBILE FIRST</div>
+              <div class="landing-mobile__title">Todo lo que importa, sin distracciones.</div>
+              <div class="landing-mobile__image"></div>
+              <div class="landing-mobile__line"></div>
+              <div class="landing-mobile__line landing-mobile__line--short"></div>
+              <div class="landing-mobile__cta">QUIERO AVANZAR</div>
+              <div class="landing-mobile__steps"><span></span><span></span><span></span></div>
+            </div>
+          </div>
 
-    <p class="lead">
-      Si invertís en anuncios y no convertís, muchas veces el problema no es el anuncio:
-      es lo que pasa <strong>después del clic</strong>.
-      Armamos una landing enfocada en una sola acción, con estructura clara, CTA fuerte y medición lista para optimizar.
-    </p>
-
-    <div class="hero-ctas">
-  <a class="btn btn-primary js-cta" data-cta="quiero_landing" data-loc="hero" href="#contacto">Quiero mi landing</a>
-  <a class="btn js-cta" data-cta="que_incluye" data-loc="hero" href="#incluye">Qué incluye</a>
-  <a class="btn js-cta" data-cta="como_trabajamos" data-loc="hero" href="#proceso">Cómo trabajamos</a>
-</div>
-
-
-  <!-- TRÁFICO FRÍO FULL WIDTH (debajo) -->
-  <aside class="hero-side hero-side--wide reveal">
-    <div>
-      <div class="side-title">Hecha para tráfico frío</div>
-
-      <ul class="checklist">
-        <li>
-          <span class="tick" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M20 7L10 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </span>
-          <span>Ideal para Meta/Google cuando necesitás que el usuario entienda y actúe en segundos.</span>
-        </li>
-
-        <li>
-          <span class="tick" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M20 7L10 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </span>
-          <span>Copy + estructura alineados al anuncio (1 objetivo → 1 CTA → 1 conversión).</span>
-        </li>
-
-        <li>
-          <span class="tick" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M20 7L10 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </span>
-          <span>Eventos listos para optimizar: scroll, click de CTA y envío de formulario.</span>
-        </li>
-      </ul>
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="side-actions">
-  <a class="btn js-cta" data-cta="porque_no_convierte" data-loc="header" href="#por-que">Por qué no convierte</a>
-  <a class="btn js-cta" data-cta="hablemos" data-loc="header" href="#contacto">Hablemos</a>
-</div>
-  </aside>
+          <div class="landing-hero__flow" aria-hidden="true">Anuncio <span>→</span> Landing <span>→</span> Lead</div>
+        </div>
       </div>
     </div>
   </header>
 
   <!-- POR QUÉ NO CONVIERTE (light) -->
-  <section class="section light" id="por-que">
+  <section class="section light conversion-diagnosis" id="por-que">
     <div class="wrap">
       <h2 class="section-title reveal">Por qué tu tráfico no convierte</h2>
-      <p class="section-sub reveal">Lo típico: el usuario llega, no entiende, se distrae o no confía. Una landing elimina fricción.</p>
+      <p class="section-sub reveal">El usuario hace click, pero algo se rompe en el recorrido. Estos son tres de los puntos donde más suele perderse la intención.</p>
 
-      <div class="grid-3">
-        <article class="card reveal">
-          <div class="badge">Problema</div>
-          <h3>Demasiadas opciones</h3>
-          <p>Menús, secciones infinitas y varios CTAs → más decisiones… y menos conversiones.</p>
+      <div class="conversion-journey reveal" aria-label="Recorrido de conversión: anuncio, landing y acción">
+        <article class="conversion-stage">
+          <div class="conversion-stage__station"><span class="conversion-stage__node" aria-hidden="true"></span>ANUNCIO</div>
+          <div class="conversion-stage__issue">
+            <div class="conversion-stage__eyebrow">01 · MENSAJE</div>
+            <h3>Mensaje desalineado</h3>
+            <p>El anuncio promete una cosa y la landing comunica otra. Cuando no hay continuidad, la confianza se pierde en segundos.</p>
+          </div>
         </article>
 
-        <article class="card reveal">
-          <div class="badge">Problema</div>
-          <h3>Mensaje desalineado</h3>
-          <p>El anuncio promete A y la página habla de B. Rebote en segundos.</p>
+        <article class="conversion-stage">
+          <div class="conversion-stage__station"><span class="conversion-stage__node" aria-hidden="true"></span>LANDING</div>
+          <div class="conversion-stage__issue">
+            <div class="conversion-stage__eyebrow">02 · FRICCIÓN</div>
+            <h3>Demasiadas decisiones</h3>
+            <p>Menús, secciones infinitas y varios CTAs compiten por la atención. Una landing debe guiar hacia una acción principal.</p>
+          </div>
         </article>
 
-        <article class="card reveal">
-          <div class="badge">Problema</div>
-          <h3>Sin medición real</h3>
-          <p>Si no medís scroll/click/form, optimizás “a ciegas” y el presupuesto se va.</p>
+        <article class="conversion-stage">
+          <div class="conversion-stage__station"><span class="conversion-stage__node" aria-hidden="true"></span>ACCIÓN</div>
+          <div class="conversion-stage__issue">
+            <div class="conversion-stage__eyebrow">03 · MEDICIÓN</div>
+            <h3>Sin medición real</h3>
+            <p>Si no sabemos dónde abandona el usuario, qué CTA toca o si empieza el formulario, terminamos optimizando a ciegas.</p>
+          </div>
         </article>
       </div>
     </div>
