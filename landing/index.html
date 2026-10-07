@@ -2295,6 +2295,101 @@ html.js .conversion-journey.reveal-visible .conversion-stage:nth-child(3){ trans
 /* ===== HERO VISUAL · COMPOSICIÓN UNIFICADA EN MOBILE ===== */
 .landing-hero__composition{ display:contents; }
 
+/* ===== NAVEGACIÓN MOBILE · patrón compartido con Home y Tienda Nube ===== */
+.landing-nav-toggle{
+  position:absolute;
+  width:1px;
+  height:1px;
+  margin:-1px;
+  overflow:hidden;
+  opacity:0;
+  clip:rect(0 0 0 0);
+  clip-path:inset(50%);
+}
+
+.landing-menu-toggle{ display:none; }
+
+@media (max-width:820px){
+  .topbar .inner{ position:relative; }
+
+  .landing-menu-toggle{
+    display:inline-flex;
+    width:44px;
+    height:44px;
+    margin-left:auto;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:6px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:10px;
+    background:rgba(255,255,255,.06);
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  .landing-menu-toggle span{
+    display:block;
+    width:21px;
+    height:2px;
+    border-radius:999px;
+    background:rgba(255,255,255,.92);
+    transform-origin:center;
+    transition:transform .18s ease, opacity .18s ease;
+  }
+
+  #landing-site-nav.nav{
+    position:absolute;
+    top:calc(100% + 8px);
+    right:0;
+    left:0;
+    z-index:51;
+    display:grid;
+    gap:6px;
+    padding:10px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:14px;
+    background:rgba(8,10,18,.97);
+    box-shadow:0 18px 40px rgba(0,0,0,.35);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transform:translateY(-6px);
+    transition:opacity .18s ease, transform .18s ease, visibility .18s ease;
+  }
+
+  #landing-site-nav.nav .pill,
+  #landing-site-nav.nav .btn{
+    width:100%;
+    min-height:44px;
+    justify-content:flex-start;
+    padding:0 14px;
+    border-radius:10px;
+    font-size:14px;
+  }
+
+  #landing-site-nav.nav .btn-primary{ justify-content:center; }
+
+  #landing-nav-toggle:checked ~ #landing-site-nav.nav{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    transform:translateY(0);
+  }
+
+  #landing-nav-toggle:checked + .landing-menu-toggle span:nth-child(1){
+    transform:translateY(8px) rotate(45deg);
+  }
+
+  #landing-nav-toggle:checked + .landing-menu-toggle span:nth-child(2){ opacity:0; }
+
+  #landing-nav-toggle:checked + .landing-menu-toggle span:nth-child(3){
+    transform:translateY(-8px) rotate(-45deg);
+  }
+}
+
 @keyframes landing-browser-float-unified{
   0%,100%{ transform:perspective(1200px) rotateY(-3deg) rotateX(1deg) translateY(0); }
   50%{ transform:perspective(1200px) rotateY(-3deg) rotateX(1deg) translateY(-4px); }
@@ -2331,14 +2426,15 @@ html.js .conversion-journey.reveal-visible .conversion-stage:nth-child(3){ trans
     right:0;
     width:100%;
     aspect-ratio:1.27;
-    animation-name:landing-browser-float-unified;
+    /* El canvas usa scale(): sin una flotación anidada no hay jitter al hacer scroll. */
+    animation:none;
   }
 
   .landing-mobile{
     right:-3%;
     bottom:-1%;
     width:162px;
-    animation-name:landing-mobile-float-unified;
+    animation:none;
   }
 
   .landing-mobile__screen{ min-height:273px; }
@@ -2393,13 +2489,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <img src="/vclouds-logo.png" alt="VIACLOUDSTUDIO" width="1580" height="220" loading="eager" decoding="async">
       </a>
 
-      <div class="nav">
-  <a class="pill" href="/">Inicio</a>
-  <a class="pill" href="/tienda-nube">Tienda Nube</a>
-  <a class="pill js-cta" data-cta="faq" data-loc="nav" href="#faq">FAQ</a>
-  <a class="btn btn-primary js-cta" data-cta="quiero_landing" data-loc="nav" href="#contacto">Quiero mi landing</a>
-</div>
- </div>
+      <input id="landing-nav-toggle" class="landing-nav-toggle" type="checkbox" aria-hidden="true">
+      <label for="landing-nav-toggle" class="landing-menu-toggle" aria-label="Abrir menú" aria-controls="landing-site-nav" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </label>
+
+      <nav id="landing-site-nav" class="nav" aria-label="Navegación principal">
+        <a class="pill" href="/">Inicio</a>
+        <a class="pill" href="/tienda-nube">Tienda Nube</a>
+        <a class="pill js-cta" data-cta="faq" data-loc="nav" href="#faq">FAQ</a>
+        <a class="btn btn-primary js-cta" data-cta="quiero_landing" data-loc="nav" href="#contacto">Quiero mi landing</a>
+      </nav>
+    </div>
   </div>
 
   <!-- HERO (dark) -->
@@ -2889,6 +2990,41 @@ document.addEventListener('DOMContentLoaded', () => {
     // pequeño delay para que cargue layout/fonts
     setTimeout(() => goToHash(id), 50);
   }
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const toggle = document.getElementById('landing-nav-toggle');
+  const menu = document.getElementById('landing-site-nav');
+  const control = document.querySelector('label[for="landing-nav-toggle"]');
+  if (!toggle || !menu || !control) return;
+
+  const syncControl = () => {
+    control.setAttribute('aria-expanded', String(toggle.checked));
+    control.setAttribute('aria-label', toggle.checked ? 'Cerrar menú' : 'Abrir menú');
+  };
+  const closeMenu = () => {
+    toggle.checked = false;
+    syncControl();
+  };
+
+  toggle.addEventListener('change', syncControl);
+  menu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+
+  document.addEventListener('pointerdown', event => {
+    if (toggle.checked && !menu.contains(event.target) && !control.contains(event.target)) closeMenu();
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeMenu();
+  });
+
+  window.matchMedia('(min-width:821px)').addEventListener('change', event => {
+    if (event.matches) closeMenu();
+  });
+
+  syncControl();
 });
 </script>
 
