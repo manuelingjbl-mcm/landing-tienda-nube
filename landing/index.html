@@ -2292,6 +2292,81 @@ html.js .conversion-journey.reveal-visible .conversion-stage:nth-child(3){ trans
   .landing-browser__form{ padding:6px 8px; }
 }
 
+/* ===== HERO VISUAL · COMPOSICIÓN UNIFICADA EN MOBILE ===== */
+.landing-hero__composition{ display:contents; }
+
+@keyframes landing-browser-float-unified{
+  0%,100%{ transform:perspective(1200px) rotateY(-3deg) rotateX(1deg) translateY(0); }
+  50%{ transform:perspective(1200px) rotateY(-3deg) rotateX(1deg) translateY(-4px); }
+}
+
+@keyframes landing-mobile-float-unified{
+  0%,100%{ transform:rotate(4deg) translateY(0); }
+  50%{ transform:rotate(4deg) translateY(-5px); }
+}
+
+@media (max-width:820px){
+  .landing-hero__visual{
+    width:min(92%,620px);
+    min-height:0;
+    aspect-ratio:620 / 488;
+    margin-left:auto;
+    margin-right:auto;
+    container-type:inline-size;
+  }
+
+  .landing-hero__composition{
+    position:absolute;
+    top:0;
+    left:0;
+    display:block;
+    width:620px;
+    height:488px;
+    transform:scale(calc(100cqw / 620px));
+    transform-origin:top left;
+  }
+
+  .landing-browser{
+    top:0;
+    right:0;
+    width:100%;
+    aspect-ratio:1.27;
+    animation-name:landing-browser-float-unified;
+  }
+
+  .landing-mobile{
+    right:-3%;
+    bottom:-1%;
+    width:162px;
+    animation-name:landing-mobile-float-unified;
+  }
+
+  .landing-mobile__screen{ min-height:273px; }
+  .landing-mobile__image{ height:74px; }
+
+  .landing-hero__badge--mobile{
+    top:3%;
+    left:-1%;
+  }
+
+  .landing-hero__badge--events{
+    top:52%;
+    left:-5%;
+    display:inline-flex;
+  }
+
+  .landing-hero__flow{
+    right:15%;
+    bottom:-1%;
+    display:inline-flex;
+  }
+}
+
+@media (max-width:820px) and (prefers-reduced-motion:reduce){
+  .landing-browser,
+  .landing-mobile{ animation:none; }
+}
+
 </style>
     
 <!-- Google Tag Manager -->
@@ -2370,45 +2445,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <div class="landing-hero__visual reveal" aria-label="Mockup conceptual de una landing para campañas">
-          <div class="landing-hero__glow" aria-hidden="true"></div>
-          <div class="landing-hero__badge landing-hero__badge--mobile">MOBILE FIRST</div>
-          <div class="landing-hero__badge landing-hero__badge--events">EVENTOS LISTOS</div>
+          <div class="landing-hero__composition">
+            <div class="landing-hero__glow" aria-hidden="true"></div>
+            <div class="landing-hero__badge landing-hero__badge--mobile">MOBILE FIRST</div>
+            <div class="landing-hero__badge landing-hero__badge--events">EVENTOS LISTOS</div>
 
-          <div class="landing-browser" aria-hidden="true">
-            <div class="landing-browser__bar"><span></span><span></span><span></span></div>
-            <div class="landing-browser__canvas">
-              <div class="landing-browser__nav">VÍA / LANDING</div>
-              <div class="landing-browser__hero">
-                <div class="landing-browser__hero-copy">
-                  <div class="landing-browser__eyebrow">CAMPAÑA · CONVERSIÓN</div>
-                  <div class="landing-browser__headline">Una página clara. Una acción.</div>
-                  <div class="landing-browser__copy">Una propuesta enfocada, beneficios concretos y un siguiente paso visible.</div>
-                  <div class="landing-browser__button">QUIERO AVANZAR</div>
+            <div class="landing-browser" aria-hidden="true">
+              <div class="landing-browser__bar"><span></span><span></span><span></span></div>
+              <div class="landing-browser__canvas">
+                <div class="landing-browser__nav">VÍA / LANDING</div>
+                <div class="landing-browser__hero">
+                  <div class="landing-browser__hero-copy">
+                    <div class="landing-browser__eyebrow">CAMPAÑA · CONVERSIÓN</div>
+                    <div class="landing-browser__headline">Una página clara. Una acción.</div>
+                    <div class="landing-browser__copy">Una propuesta enfocada, beneficios concretos y un siguiente paso visible.</div>
+                    <div class="landing-browser__button">QUIERO AVANZAR</div>
+                  </div>
+                  <div class="landing-browser__hero-art"><span></span><i></i><b></b></div>
                 </div>
-                <div class="landing-browser__hero-art"><span></span><i></i><b></b></div>
-              </div>
-              <div class="landing-browser__cards"><span></span><span></span><span></span></div>
-              <div class="landing-browser__form">
-                <div><b>¿Listo para avanzar?</b><span>Contanos tu objetivo</span></div>
-                <i>ENVIAR</i>
+                <div class="landing-browser__cards"><span></span><span></span><span></span></div>
+                <div class="landing-browser__form">
+                  <div><b>¿Listo para avanzar?</b><span>Contanos tu objetivo</span></div>
+                  <i>ENVIAR</i>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="landing-mobile" aria-hidden="true">
-            <div class="landing-mobile__screen">
-              <div class="landing-mobile__speaker"></div>
-              <div class="landing-mobile__tag">MOBILE FIRST</div>
-              <div class="landing-mobile__title">Todo lo que importa, sin distracciones.</div>
-              <div class="landing-mobile__image"></div>
-              <div class="landing-mobile__line"></div>
-              <div class="landing-mobile__line landing-mobile__line--short"></div>
-              <div class="landing-mobile__cta">QUIERO AVANZAR</div>
-              <div class="landing-mobile__steps"><span></span><span></span><span></span></div>
+            <div class="landing-mobile" aria-hidden="true">
+              <div class="landing-mobile__screen">
+                <div class="landing-mobile__speaker"></div>
+                <div class="landing-mobile__tag">MOBILE FIRST</div>
+                <div class="landing-mobile__title">Todo lo que importa, sin distracciones.</div>
+                <div class="landing-mobile__image"></div>
+                <div class="landing-mobile__line"></div>
+                <div class="landing-mobile__line landing-mobile__line--short"></div>
+                <div class="landing-mobile__cta">QUIERO AVANZAR</div>
+                <div class="landing-mobile__steps"><span></span><span></span><span></span></div>
+              </div>
             </div>
-          </div>
 
-          <div class="landing-hero__flow" aria-hidden="true">Anuncio <span>→</span> Landing <span>→</span> Lead</div>
+            <div class="landing-hero__flow" aria-hidden="true">Anuncio <span>→</span> Landing <span>→</span> Lead</div>
+          </div>
         </div>
       </div>
     </div>
